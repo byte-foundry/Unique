@@ -1,14 +1,18 @@
 // @flow
 import React from 'react';
-import StepView from '../stepView/StepView';
-import WordView from '../wordView/WordView';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 
+import TemplateChoice from '../templateChoice/TemplateChoice';
+import ParamChoice from '../paramChoice/ParamChoice';
+
 const App = () => (
-  <div className="App">
-    <WordView />
-    <StepView />
-  </div>
+  <main className="App">
+    <Switch>
+      <Route exact path="/" component={TemplateChoice} />
+      <Route path="/template/:template" component={ParamChoice} />
+    </Switch>
+  </main>
 );
 
 export default App;
