@@ -11,7 +11,8 @@ const StepView = (props) => {
         {choices.map(choice => (
           <div
             className="choice"
-            onClick={props.previewChoice(choice.values)}
+            key={choice.name}
+            onClick={() => props.previewChoice(choice.values)}
             role="option"
             aria-checked="false"
             aria-selected="false"
@@ -19,11 +20,11 @@ const StepView = (props) => {
           >
             {choice.name}
           </div>
-        ))};
+        ))}
       </div>
       <div className="description">
-        <h2>{props.step.title}</h2>
-        <p>{props.step.description}</p>
+        <h2>{props.step.description.title}</h2>
+        <p>{props.step.description.subtitle}</p>
       </div>
     </div>
   );
@@ -32,18 +33,21 @@ const StepView = (props) => {
 StepView.propTypes = {
   step: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      subtitle: PropTypes.string.isRequired,
+    }),
     choices: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
     })),
   }),
-  previewChoice: PropTypes.function.isRequired,
+  previewChoice: PropTypes.func.isRequired,
 };
 
 StepView.defaultProps = {
   step: {
-    name: '',
+    title: '',
     description: {
       title: 'default title',
       subtitle: 'default subtitle',

@@ -7,12 +7,12 @@ import WordView from '../wordView/WordView';
 
 const ParamChoice = (props) => {
   const template = props.match.params.template;
-  const steps = require(`../../data/choices-${template}.json`);
+  const { steps } = require(`../../data/choices-${template}.json`);
   const word = 'Hello Prototypo';
   const previewChoice = (choice) => {
     // make change here
     console.log(choice);
-  }
+  };
   return (
     <div className="ParamChoice">
       <WordView word={word} />
