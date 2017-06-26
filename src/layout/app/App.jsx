@@ -10,7 +10,7 @@ const App = () => (
   <main className="App">
     <Switch>
       <Route exact path="/" component={TemplateChoice} />
-      <Route path="/template/:template" component={ParamChoice} />
+      <Route path="/template/:template/:step" component={ParamChoice} />
     </Switch>
   </main>
 );

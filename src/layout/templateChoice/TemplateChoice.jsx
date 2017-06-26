@@ -7,16 +7,16 @@ const TemplateChoice = () => (
   <div className="TemplateChoice">
     <ul>
       <li>
-        <Link to="/template/elzevir">Elzevir</Link>
+        <Link to="/template/elzevir/1">Elzevir</Link>
       </li>
       <li>
-        <Link to="/template/fell">Fell</Link>
+        <Link to="/template/fell/1">Fell</Link>
       </li>
       <li>
-        <Link to="/template/grotesk">Grotesk</Link>
+        <Link to="/template/grotesk/1">Grotesk</Link>
       </li>
       <li>
-        <Link to="/template/spectral">Spectral</Link>
+        <Link to="/template/spectral/1">Spectral</Link>
       </li>
     </ul>
   </div>

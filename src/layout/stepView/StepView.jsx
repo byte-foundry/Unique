@@ -7,6 +7,7 @@ const StepView = (props) => {
   const choices = props.step.choices;
   return (
     <div className="StepView">
+      <div className="back" onClick={() => props.goBack()}>Back</div>
       <div className="choices">
         {choices.map(choice => (
           <div
