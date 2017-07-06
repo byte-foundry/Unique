@@ -1,3 +1,23 @@
 .TemplateChoice {
-  
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.TemplateChoice .template-wrapper {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-around;
+  margin-top: 20%;
+}
+
+.TemplateChoice .template {
+  display: inline;
+  padding: 50px;
+  background-color: #ddd;
+  cursor: pointer;
 }

@@ -1,0 +1,26 @@
+.FinalView {
+  position: relative;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+.FinalView h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'peasy';
+  font-size: 15rem;
+  line-height: 15rem;
+  margin: 0;
+  font-weight: normal;
+}
+
+.FinalView .back {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid black;
+  display: inline-block;
+  cursor: pointer;
+}

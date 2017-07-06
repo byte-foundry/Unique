@@ -1,25 +1,48 @@
 // @flow
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './TemplateChoice.css';
 
-const TemplateChoice = () => (
-  <div className="TemplateChoice">
-    <ul>
-      <li>
-        <Link to="/template/elzevir/1">Elzevir</Link>
-      </li>
-      <li>
-        <Link to="/template/fell/1">Fell</Link>
-      </li>
-      <li>
-        <Link to="/template/grotesk/1">Grotesk</Link>
-      </li>
-      <li>
-        <Link to="/template/spectral/1">Spectral</Link>
-      </li>
-    </ul>
-  </div>
-);
+const openFont = (fontName, history, createFont) => {
+  createFont(fontName);
+  history.push(`/template/${fontName}/1`);
+};
+const TemplateChoice = props =>
+  (<div className="TemplateChoice">
+    <div className="template-wrapper">
+      <div
+        role="button"
+        className="template"
+        onClick={() => openFont('ELZEVIR', props.history, props.createFont)}
+        tabIndex="0"
+      >
+        Elzevir
+      </div>
+      <div
+        role="button"
+        className="template"
+        onClick={() => openFont('GROTESK', props.history, props.createFont)}
+        tabIndex="0"
+      >
+        Grotesk
+      </div>
+      <div
+        role="button"
+        className="template"
+        onClick={() => openFont('FELL', props.history, props.createFont)}
+        tabIndex="0"
+      >
+        Fell
+      </div>
+      <div
+        role="button"
+        className="template"
+        onClick={() => openFont('SPECTRAL', props.history, props.createFont)}
+        tabIndex="0"
+      >
+        Spectral
+      </div>
+    </div>
+
+  </div>);
 
 export default TemplateChoice;

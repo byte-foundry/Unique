@@ -3,3 +3,43 @@
   width: 100%;
   height: 70%;
 }
+
+.StepView .choices {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-around;
+}
+
+
+.StepView .description {
+  text-align: center;
+}
+
+.StepView .back {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid black;
+}
+
+
+
+.StepView .choice {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+}
+
+.StepView .choice:focus {
+  outline: none;
+}
+
+.StepView .choice span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

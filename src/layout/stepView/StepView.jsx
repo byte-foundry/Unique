@@ -7,19 +7,28 @@ const StepView = (props) => {
   const choices = props.step.choices;
   return (
     <div className="StepView">
-      <div className="back" onClick={() => props.goBack()}>Back</div>
+      <div
+        className="back"
+        role="button"
+        tabIndex="0"
+        onClick={() => props.goBack()}
+      >
+        Back
+      </div>
       <div className="choices">
         {choices.map(choice => (
           <div
             className="choice"
             key={choice.name}
-            onClick={() => props.previewChoice(choice.values)}
+            onClick={() => props.selectChoice(choice.values)}
+            onMouseOver={() => props.previewChoice(choice.values)}
+            onMouseLeave={() => props.resetValues()}
             role="option"
             aria-checked="false"
             aria-selected="false"
             tabIndex={0}
           >
-            {choice.name}
+            <span>{choice.name}</span>
           </div>
         ))}
       </div>
@@ -44,6 +53,7 @@ StepView.propTypes = {
     })),
   }),
   previewChoice: PropTypes.func.isRequired,
+  goBack: PropTypes.func.isRequired,
 };
 
 StepView.defaultProps = {

@@ -1,9 +1,7 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  withRouter,
-} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './ParamChoice.css';
 import StepView from '../stepView/StepView';
 import WordView from '../wordView/WordView';
@@ -19,22 +17,31 @@ class ParamChoice extends React.Component {
       step: props.match.params.step,
     };
     this.previewChoice = (choice) => {
-      // make change here
+      props.changeParams(choice, false);
+    };
+    this.selectChoice = (choice) => {
+      props.changeParams(choice);
       if (this.state.step < this.steps.length) {
         props.history.push(`/template/${this.template}/${parseInt(this.state.step, 10) + 1}`);
+      } else {
+        props.history.push(`/final/${this.template}/${parseInt(this.state.step, 10)}`);
       }
     };
     this.goBack = () => {
       // make change here
       if (this.state.step > 1) {
         props.history.push(`/template/${this.template}/${parseInt(this.state.step, 10) - 1}`);
+      } else {
+        props.history.push('/');
       }
     };
   }
 
   componentWillReceiveProps(newProps) {
     const step = newProps.match.params.step;
-    this.setState({ step });
+    this.setState({
+      step,
+    });
   }
 
   render() {
@@ -45,6 +52,8 @@ class ParamChoice extends React.Component {
           step={this.steps[this.state.step - 1]}
           goBack={this.goBack}
           previewChoice={this.previewChoice}
+          resetValues={this.props.resetValues}
+          selectChoice={this.selectChoice}
         />
         <StepList steps={this.steps} template={this.template} />
       </div>

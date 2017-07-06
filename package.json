@@ -7,7 +7,8 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
-    "react-router-transition": "^0.1.1"
+    "react-router-transition": "^0.1.1",
+    "prototypo-library":  "byte-foundry/prototypo-library#master"
   },
   "devDependencies": {
     "eslint": "3.19.0",

@@ -30,11 +30,11 @@
 						},
 						{
 							"param": "ascender",
-							"value": 200
+							"value": 80
 						},
 						{
 							"param": "descender",
-							"value": 200
+							"value": -200
 						},
 						{
 							"param": "slant",
@@ -75,7 +75,7 @@
 						},
 						{
 							"param": "descender",
-							"value": 400
+							"value": -400
 						},
 						{
 							"param": "slant",
@@ -150,7 +150,7 @@
 					"image": "bla.jpg",
 					"values": [{
 							"param": "serifWidth",
-							"value": 200
+							"value": 80
 						},
 						{
 							"param": "midWidth",
@@ -158,7 +158,7 @@
 						},
 						{
 							"param": "serifHeight",
-							"value": 100
+							"value": 50
 						},
 						{
 							"param": "serifMedian",
@@ -166,7 +166,7 @@
 						},
 						{
 							"param": "serifCurve",
-							"value": 100
+							"value": 50
 						},
 						{
 							"param": "serifRoundness",
