@@ -8,6 +8,7 @@ const openFont = (fontName, history, createFont) => {
 };
 const TemplateChoice = props =>
   (<div className="TemplateChoice">
+    <h1>Choose a template</h1>
     <div className="template-wrapper">
       <div
         role="button"

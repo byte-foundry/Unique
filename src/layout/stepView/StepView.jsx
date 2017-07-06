@@ -7,17 +7,12 @@ const StepView = (props) => {
   const choices = props.step.choices;
   return (
     <div className="StepView">
-      <div
-        className="back"
-        role="button"
-        tabIndex="0"
-        onClick={() => props.goBack()}
-      >
+      <div className="back" role="button" tabIndex="0" onClick={() => props.goBack()}>
         Back
       </div>
       <div className="choices">
-        {choices.map(choice => (
-          <div
+        {choices.map(choice =>
+          (<div
             className="choice"
             key={choice.name}
             onClick={() => props.selectChoice(choice.values)}
@@ -29,8 +24,18 @@ const StepView = (props) => {
             tabIndex={0}
           >
             <span>{choice.name}</span>
-          </div>
-        ))}
+          </div>),
+        )}
+      </div>
+      <div
+        className="nextStep"
+        onClick={() => props.selectChoice()}
+        role="option"
+        aria-checked="false"
+        aria-selected="false"
+        tabIndex={0}
+      >
+        I'm good like this
       </div>
       <div className="description">
         <h2>{props.step.description.title}</h2>
@@ -47,10 +52,12 @@ StepView.propTypes = {
       title: PropTypes.string.isRequired,
       subtitle: PropTypes.string.isRequired,
     }),
-    choices: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-    })),
+    choices: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+      }),
+    ),
   }),
   previewChoice: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
@@ -65,6 +72,5 @@ StepView.defaultProps = {
     },
   },
 };
-
 
 export default StepView;

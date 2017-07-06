@@ -24,7 +24,13 @@
   border: 1px solid black;
 }
 
-
+.StepView .nextStep {
+  margin: 20px auto;
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid black;
+}
 
 .StepView .choice {
   position: relative;

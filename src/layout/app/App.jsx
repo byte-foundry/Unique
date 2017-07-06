@@ -14,14 +14,11 @@ class App extends React.Component {
     this.state = {};
     this.prototypoFontFactory = new Ptypo();
     this.createFont = (name) => {
-      this.prototypoFontFactory.createFont('peasy', templateNames[name]).then((font) => {
-        this.setState({ font, values: { ...font.values } });
-        console.log(font.values);
-      });
+      this.prototypoFontFactory
+        .createFont('peasy', templateNames[name])
+        .then(font => this.setState({ font, values: { ...font.values } }));
     };
-    this.resetValues = () => {
-      this.state.font.changeParams(this.state.values);
-    };
+    this.resetValues = () => this.state.font.changeParams(this.state.values);
     this.changeParams = (choices, saveChanges = true) => {
       const newParams = {};
       choices.forEach((param) => {
@@ -29,7 +26,6 @@ class App extends React.Component {
       });
       this.state.font.changeParams(newParams);
       if (saveChanges) {
-        console.log('saving changes');
         this.setState({ values: { ...this.state.font.values } });
       }
     };

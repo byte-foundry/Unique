@@ -20,7 +20,9 @@ class ParamChoice extends React.Component {
       props.changeParams(choice, false);
     };
     this.selectChoice = (choice) => {
-      props.changeParams(choice);
+      if (choice) {
+        props.changeParams(choice);
+      }
       if (this.state.step < this.steps.length) {
         props.history.push(`/template/${this.template}/${parseInt(this.state.step, 10) + 1}`);
       } else {
