@@ -1,3 +1,15 @@
 .StepList {
-  
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-around;
+  margin-top: 20px;
+}
+
+.StepList div {
+  padding: 20px 30px;
+  background: #ddd;
+  border: 1px solid black;
 }
