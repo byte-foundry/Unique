@@ -1,0 +1,34 @@
+.StepView {
+  background: #ddd;
+  width: 100%;
+  height: 70%;
+}
+
+.StepView .choices {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-around;
+}
+
+
+.StepView .description {
+  text-align: center;
+}
+
+.StepView .back {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid black;
+}
+
+.StepView .nextStep {
+  margin: 20px auto;
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid black;
+}
+

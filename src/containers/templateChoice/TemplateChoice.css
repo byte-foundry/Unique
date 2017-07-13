@@ -19,10 +19,3 @@
   align-content: space-around;
   margin-top: 10%;
 }
-
-.TemplateChoice .template {
-  display: inline;
-  padding: 50px;
-  background-color: #ddd;
-  cursor: pointer;
-}

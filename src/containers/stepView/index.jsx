@@ -1,42 +1,28 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
+import Choice from '../../components/choice/';
+import Button from '../../components/button/';
 import './StepView.css';
 
 const StepView = (props) => {
   const choices = props.step.choices;
   return (
     <div className="StepView">
-      <div className="back" role="button" tabIndex="0" onClick={() => props.goBack()}>
-        Back
-      </div>
+      <Button className="back" label="Back" onClick={props.goBack} />
       <div className="choices">
         {choices.map(choice =>
-          (<div
-            className="choice"
-            key={choice.name}
-            onClick={() => props.selectChoice(choice.values)}
-            onMouseOver={() => props.previewChoice(choice.values)}
-            onMouseLeave={() => props.resetValues()}
-            role="option"
-            aria-checked="false"
-            aria-selected="false"
-            tabIndex={0}
-          >
-            <span>{choice.name}</span>
-          </div>),
+          (
+            <Choice
+              name={choice.name}
+              values={choice.values}
+              selectChoice={props.selectChoice}
+              previewChoice={props.previewChoice}
+              resetValues={props.resetValues}
+            />),
         )}
       </div>
-      <div
-        className="nextStep"
-        onClick={() => props.selectChoice()}
-        role="option"
-        aria-checked="false"
-        aria-selected="false"
-        tabIndex={0}
-      >
-        I'm good like this
-      </div>
+      <Button className="nextStep" label="I'm good like this" onClick={props.selectChoice} />
       <div className="description">
         <h2>{props.step.description.title}</h2>
         <p>{props.step.description.subtitle}</p>
@@ -60,6 +46,8 @@ StepView.propTypes = {
     ),
   }),
   previewChoice: PropTypes.func.isRequired,
+  selectChoice: PropTypes.func.isRequired,
+  resetValues: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
 };
 

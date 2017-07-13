@@ -4,9 +4,9 @@ import { Switch, Route } from 'react-router-dom';
 import Ptypo, { templateNames } from 'prototypo-library';
 import './App.css';
 
-import TemplateChoice from '../templateChoice/TemplateChoice';
-import ParamChoice from '../paramChoice/ParamChoice';
-import FinalView from '../finalView/FinalView';
+import TemplateChoice from '../templateChoice/';
+import ParamChoice from '../paramChoice/';
+import FinalView from '../finalView/';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,13 +18,13 @@ class App extends React.Component {
         .createFont('peasy', templateNames[name])
         .then(font => this.setState({ font, values: { ...font.values } }));
     };
-    this.resetValues = () => this.state.font.changeParams(this.state.values);
+    this.resetValues = () => this.state.font.changeParams(this.state.values, 30, 0.02);
     this.changeParams = (choices, saveChanges = true) => {
       const newParams = {};
       choices.forEach((param) => {
         newParams[param.param] = param.value;
       });
-      this.state.font.changeParams(newParams);
+      this.state.font.changeParams(newParams, 30, 0.02);
       if (saveChanges) {
         this.setState({ values: { ...this.state.font.values } });
       }
