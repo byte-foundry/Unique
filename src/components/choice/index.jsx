@@ -25,7 +25,7 @@ Choice.propTypes = {
   selectChoice: PropTypes.func.isRequired,
   previewChoice: PropTypes.func.isRequired,
   resetValues: PropTypes.func.isRequired,
-  values: PropTypes.object.isRequired,
+  values: PropTypes.array.isRequired,
 };
 
 export default Choice;

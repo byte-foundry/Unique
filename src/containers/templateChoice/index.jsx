@@ -2,6 +2,10 @@
 import React from 'react';
 import './TemplateChoice.css';
 import Template from '../../components/template/';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { createFont } from '../../data/font';
 
 class TemplateChoice extends React.Component {
   constructor(props) {
@@ -26,4 +30,7 @@ class TemplateChoice extends React.Component {
   }
 }
 
-export default TemplateChoice;
+const mapStateToProps = () => ({});
+const mapDispatchToProps = dispatch => bindActionCreators({ createFont }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(TemplateChoice);

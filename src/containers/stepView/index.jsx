@@ -19,6 +19,7 @@ const StepView = (props) => {
               selectChoice={props.selectChoice}
               previewChoice={props.previewChoice}
               resetValues={props.resetValues}
+              key={choice.name}
             />),
         )}
       </div>

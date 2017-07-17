@@ -9,6 +9,8 @@ import StepView from '../stepView/';
 import WordView from '../wordView/';
 import StepList from '../stepList/';
 
+import { changeParams, resetValues } from '../../data/font';
+
 class ParamChoice extends React.Component {
   constructor(props) {
     super(props);
@@ -78,6 +80,8 @@ const mapStateToProps = state => ({
   step: state.routing.location.pathname.split('/')[3],
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
+  changeParams,
+  resetValues,
   stepBack: (template, step) => push(`/template/${template}/${parseInt(step, 10) - 1}`),
   stepForward: (template, step) => push(`/template/${template}/${parseInt(step, 10) + 1}`),
   goFinal: (template, step) => push(`/final/${template}/${parseInt(step, 10)}`),
