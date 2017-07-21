@@ -1,200 +1,104 @@
 {
-	"steps": [{
-			"title": "Base look",
-			"description": {
-				"title": "Which base look do you want?",
-				"subtitle": "bla bla bla pourquoi"
-			},
-			"choices": [{
-					"name": "1",
-					"image": "bla.jpg",
-					"values": [{
-							"param": "thickness",
-							"value": 30
-						},
-						{
-							"param": "_contrast",
-							"value": -1
-						},
-						{
-							"param": "aperture",
-							"value": 1
-						},
-						{
-							"param": "curviness",
-							"value": 0.6
-						},
-						{
-							"param": "xHeight",
-							"value": 300
-						},
-						{
-							"param": "ascender",
-							"value": 80
-						},
-						{
-							"param": "descender",
-							"value": -200
-						},
-						{
-							"param": "slant",
-							"value": 0
-						},
-						{
-							"param": "width",
-							"value": 0.8
-						}
-					]
-				},
-				{
-					"name": "2",
-					"image": "bla.jpg",
-					"values": [{
-							"param": "thickness",
-							"value": 110
-						},
-						{
-							"param": "_contrast",
-							"value": -0.5
-						},
-						{
-							"param": "aperture",
-							"value": 1.5
-						},
-						{
-							"param": "curviness",
-							"value": 0.6
-						},
-						{
-							"param": "xHeight",
-							"value": 450
-						},
-						{
-							"param": "ascender",
-							"value": 300
-						},
-						{
-							"param": "descender",
-							"value": -400
-						},
-						{
-							"param": "slant",
-							"value": 0.1
-						},
-						{
-							"param": "width",
-							"value": 1.2
-						}
-					]
-				}
-			]
-		},
-		{
-			"title": "serifs",
-			"description": {
-				"title": "Which style of serifs do you want?",
-				"subtitle": "bla bla bla serifs"
-			},
-			"choices": [{
-					"name": "None",
-					"image": "bla.jpg",
-					"values": [{
-							"param": "serifWidth",
-							"value": 0
-						},
-						{
-							"param": "midWidth",
-							"value": 0
-						},
-						{
-							"param": "serifHeight",
-							"value": 0
-						},
-						{
-							"param": "serifMedian",
-							"value": 0
-						},
-						{
-							"param": "serifCurve",
-							"value": 0
-						},
-						{
-							"param": "serifRoundness",
-							"value": 0
-						},
-						{
-							"param": "serifArc",
-							"value": 0
-						},
-						{
-							"param": "serifTerminal",
-							"value": 0
-						},
-						{
-							"param": "serifTermionalCurve",
-							"value": 0
-						},
-						{
-							"param": "spurHeight",
-							"value": 0
-						},
-						{
-							"param": "serifRotate",
-							"value": 0
-						}
-
-					]
-				},
-				{
-					"name": "Big",
-					"image": "bla.jpg",
-					"values": [{
-							"param": "serifWidth",
-							"value": 80
-						},
-						{
-							"param": "midWidth",
-							"value": 1.5
-						},
-						{
-							"param": "serifHeight",
-							"value": 50
-						},
-						{
-							"param": "serifMedian",
-							"value": 1.5
-						},
-						{
-							"param": "serifCurve",
-							"value": 50
-						},
-						{
-							"param": "serifRoundness",
-							"value": 1.8
-						},
-						{
-							"param": "serifArc",
-							"value": 0.6
-						},
-						{
-							"param": "serifTerminal",
-							"value": 2
-						},
-						{
-							"param": "serifTermionalCurve",
-							"value": 2
-						},
-						{
-							"param": "spurHeight",
-							"value": 3
-						},
-						{
-							"param": "serifRotate",
-							"value": 2
-						}
-					]
-				}
-			]
-		}
-	]
+   "baseValues":{
+      "spacing":0,
+      "diacriticHeight":80,
+      "opticThickness":0.95,
+      "smallCapDelta":1,
+      "_scThickness":0.9,
+      "_scWidth":0.7,
+      "xHeight":520,
+      "capDelta":230,
+      "ascender":230,
+      "descender":-250,
+      "crossbar":1,
+      "width":1,
+      "slant":0,
+      "overshoot":10,
+      "thickness":115,
+      "_contrast":-1,
+      "_contrastExtremity":-1,
+      "aperture":1,
+      "apertureTop":1,
+      "apertureBottom":1,
+      "curviness":0.6,
+      "serifWidth":0.01,
+      "midWidth":1,
+      "serifHeight":5,
+      "serifMedian":1,
+      "serifCurve":0,
+      "serifRoundness":1,
+      "serifArc":0,
+      "serifTerminal":0,
+      "serifTerminalCurve":1,
+      "spurHeight":0,
+      "serifRotate":0,
+      "serifBall":1
+   },
+   "steps":[
+      {
+         "name":"graisse",
+         "description":"",
+         "choices":[
+            {
+               "id":"5d0ee3b3",
+               "name":"light",
+               "db":"graisselight",
+               "values":{
+                  "thickness":52.73846153846154
+               }
+            },
+            {
+               "id":"e31e85ad",
+               "name":"merdium",
+               "db":"graissemerdium",
+               "values":{
+                 "thickness":100
+               }
+            },
+            {
+               "id":"48e57734",
+               "name":"bold",
+               "db":"graissebold",
+               "values":{
+                  "thickness":160.5
+               }
+            }
+         ]
+      },
+      {
+         "name":"serif",
+         "description":"",
+         "choices":[
+            {
+               "id":"86eea45a",
+               "name":"sans",
+               "db":"serifsans",
+               "values":{
+                 "serifWidth":0,
+                 "serifHeight":0,
+                 "serifMedian":0
+               }
+            },
+            {
+               "id":"86541b67",
+               "name":"mec",
+               "db":"serifmec",
+               "values":{
+                  "serifWidth":73.10865384615384,
+                  "serifHeight":71.5
+               }
+            },
+            {
+               "id":"db06e20f",
+               "name":"tri",
+               "db":"seriftri",
+               "values":{
+                  "serifWidth":86.95134615384615,
+                  "serifHeight":52.692780769230765,
+                  "serifMedian":0.44000000000000006
+               }
+            }
+         ]
+      }
+   ]
 }

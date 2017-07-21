@@ -78,16 +78,12 @@ export const resetValues = () => (dispatch, getState) => {
 
 export const changeParams = (choices, saveChanges = true) => (dispatch, getState) => {
   const { font } = getState().font;
-  const newParams = {};
   dispatch({
     type: CHANGE_PARAMS_REQUESTED,
   });
-  choices.forEach((param) => {
-    newParams[param.param] = param.value;
-  });
-  font.changeParams(newParams);
+  font.changeParams(choices);
   dispatch({
     type: CHANGE_PARAMS,
-    newParams: saveChanges ? newParams : undefined,
+    newParams: saveChanges ? choices : undefined,
   });
 };

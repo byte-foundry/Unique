@@ -25,7 +25,7 @@ class ParamChoice extends React.Component {
     };
     this.selectChoice = (choice) => {
       if (choice) {
-        props.changeParams(choice);
+        props.changeParams(choice, true);
       }
       if (this.state.step < this.steps.length) {
         props.stepForward(this.state.template, this.state.step);

@@ -25,8 +25,8 @@ const StepView = (props) => {
       </div>
       <Button className="nextStep" label="I'm good like this" onClick={props.selectChoice} />
       <div className="description">
-        <h2>{props.step.description.title}</h2>
-        <p>{props.step.description.subtitle}</p>
+        <h2>{props.step.name}</h2>
+        <p>{props.step.description}</p>
       </div>
     </div>
   );
@@ -34,11 +34,8 @@ const StepView = (props) => {
 
 StepView.propTypes = {
   step: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      subtitle: PropTypes.string.isRequired,
-    }),
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     choices: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,

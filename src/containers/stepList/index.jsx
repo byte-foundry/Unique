@@ -11,7 +11,7 @@ const StepList = props => (
   <div className="StepList">
     <Link key="template" to="/"><div>Template choice</div></Link>
     {props.steps.map((step, index) => (
-      <Step index={index} title={step.title} template={props.template} key={step.title} />
+      <Step index={index} title={step.name} template={props.template} key={step.name} />
     ))}
   </div>
 );
