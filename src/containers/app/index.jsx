@@ -25,9 +25,9 @@ class App extends React.Component {
     return (
       <main className="App">
         <Switch>
-          <Route exact path="/" render={props => <TemplateChoice {...props} />} />
-          <Route path="/template/:template/:step" render={() => <ParamChoice />} />
-          <Route exact path="/final/:template/:step" component={FinalView} />
+          <Route exact path="/" component={TemplateChoice} />
+          <Route exact path="/customize" component={ParamChoice} />
+          <Route exact path="/final" component={FinalView} />
         </Switch>
       </main>
     );

@@ -10,22 +10,28 @@ const StepList = props => (
   <div className="StepList">
     <Link key="template" to="/"><div>Template choice</div></Link>
     {props.steps.map((step, index) => (
-      <Step index={index} title={step.name} template={props.template} key={step.name} />
+      <Step index={index} title={step.name} key={step.name} />
     ))}
   </div>
 );
 
 
 StepList.propTypes = {
-  template: PropTypes.string.isRequired,
-};
-
-StepList.defaultProps = {
-  template: 'elzevir',
+  steps: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      choices: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+        }),
+      ),
+    }),
+  ).isRequired,
 };
 
 const mapStateToProps = state => ({
-  template: state.routing.location.pathname.split('/')[2],
+  steps: state.font.currentPreset.steps,
 });
 
 export default connect(mapStateToProps, null)(StepList);

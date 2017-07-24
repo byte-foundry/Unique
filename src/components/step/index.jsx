@@ -1,19 +1,29 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Button from '../button/';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { goToStep } from '../../data/font';
 import './Step.css';
 
 const Step = props => (
-  <Link key={`step-${props.index + 1}`}to={`/template/${props.template}/${props.index + 1}`}><Button label={props.title} /></Link>
+  <div
+    role="button"
+    className="Step"
+    onClick={() => props.goToStep(props.index + 1)}
+    tabIndex="0"
+  >
+    {props.title}
+  </div>
 );
-
 
 Step.propTypes = {
   index: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  template: PropTypes.string.isRequired,
+  goToStep: PropTypes.func.isRequired,
 };
 
-export default Step;
+const mapDispatchToProps = dispatch => bindActionCreators({ goToStep }, dispatch);
+
+
+export default connect(null, mapDispatchToProps)(Step);

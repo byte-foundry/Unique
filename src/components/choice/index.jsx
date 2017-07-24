@@ -7,25 +7,26 @@ const Choice = props => (
   <div
     className="Choice"
     key={props.name}
-    onClick={() => props.selectChoice(props.values)}
-    onMouseOver={() => props.previewChoice(props.values)}
+    onClick={() => props.changeParams(props.choice, true)}
+    onMouseOver={() => props.changeParams(props.choice, false)}
     onMouseLeave={() => props.resetValues()}
     role="option"
     aria-checked="false"
     aria-selected="false"
     tabIndex={0}
   >
-    <span>{props.name}</span>
+    <span>{props.choice.name}</span>
   </div>
 );
 
 
 Choice.propTypes = {
   name: PropTypes.string.isRequired,
-  selectChoice: PropTypes.func.isRequired,
-  previewChoice: PropTypes.func.isRequired,
+  changeParams: PropTypes.func.isRequired,
   resetValues: PropTypes.func.isRequired,
-  values: PropTypes.array.isRequired,
+  choice: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Choice;

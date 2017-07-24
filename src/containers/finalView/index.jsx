@@ -14,9 +14,7 @@ const FinalView = props =>
   </div>);
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-  goBack: () => push(
-          `/template/${ownProps.match.params.template}/${parseInt(ownProps.match.params.step, 10)}`,
-        ),
+  goBack: () => push('/customize'),
 }, dispatch);
 
 FinalView.propTypes = {
