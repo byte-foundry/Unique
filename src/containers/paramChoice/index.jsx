@@ -1,5 +1,7 @@
 // @flow
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './ParamChoice.css';
 import StepView from '../stepView/';
 import WordView from '../wordView/';
@@ -12,5 +14,9 @@ const ParamChoice = () => (
     <StepList />
   </div>);
 
-export default ParamChoice;
+const mapStateToProps = state => ({
+  steps: state.font.currentPreset.steps,
+});
+
+export default withRouter(connect(mapStateToProps)(ParamChoice));
 

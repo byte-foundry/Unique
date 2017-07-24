@@ -14,16 +14,21 @@ const TemplateChoice = props => (
     <div className="template-wrapper">
       {props.presets.map(font => <Template key={`${font.preset}${font.variant}`} font={font} createFont={props.createFont} />)}
     </div>
+    {props.isCreating
+    ? (<h2>Creating font...</h2>)
+    : false}
   </div>
 );
 
 const mapStateToProps = state => ({
   presets: state.font.presets,
+  isCreating: state.font.isCreating,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({ createFont }, dispatch);
 
 TemplateChoice.propTypes = {
   createFont: PropTypes.func.isRequired,
+  isCreating: PropTypes.bool.isRequired,
   presets: PropTypes.arrayOf(
     PropTypes.shape({
       preset: PropTypes.string.isRequired,

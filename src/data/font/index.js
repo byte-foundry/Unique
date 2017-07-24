@@ -40,12 +40,12 @@ export default (state = initialState, action) => {
         currentPreset: action.selectedFont,
         step: 1,
         currentParams: action.values,
+        isCreating: false,
       };
 
     case IMPORT_PRESETS_REQUESTED:
       return {
         ...state,
-        isCreating: true,
       };
 
     case IMPORT_PRESETS:
