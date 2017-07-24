@@ -13,8 +13,6 @@ const FinalView = props =>
     <h1>Congrats!</h1>
   </div>);
 
-const mapStateToProps = state => ({});
-
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
   goBack: () => push(
           `/template/${ownProps.match.params.template}/${parseInt(ownProps.match.params.step, 10)}`,
@@ -26,4 +24,4 @@ FinalView.propTypes = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(FinalView);
+export default connect(null, mapDispatchToProps)(FinalView);

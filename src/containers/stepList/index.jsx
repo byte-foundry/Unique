@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import Step from '../../components/step/';
 import './StepList.css';
 
@@ -28,7 +27,6 @@ StepList.defaultProps = {
 const mapStateToProps = state => ({
   template: state.routing.location.pathname.split('/')[2],
 });
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(StepList);
+export default connect(mapStateToProps, null)(StepList);
 

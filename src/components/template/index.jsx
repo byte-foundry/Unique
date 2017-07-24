@@ -7,10 +7,10 @@ const Template = props => (
   <div
     role="button"
     className="Template"
-    onClick={() => props.openFont(props.name.toUpperCase())}
+    onClick={() => props.openFont(props.font)}
     tabIndex="0"
   >
-    {props.name}
+    {props.font.preset} {props.font.variant}
   </div>
 );
 

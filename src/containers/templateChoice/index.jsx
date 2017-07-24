@@ -1,18 +1,24 @@
 // @flow
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import './TemplateChoice.css';
 import Template from '../../components/template/';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
-import { createFont } from '../../data/font';
+import { createFont, selectFont } from '../../data/font';
+
+const context = require.context('../../data/presets', true, /^(.*\.(json$))[^.]*$/igm);
+const presets = {};
+context.keys().forEach((filename) => { presets[filename] = context(filename); });
 
 class TemplateChoice extends React.Component {
   constructor(props) {
     super(props);
-    this.openFont = (fontName) => {
-      props.createFont(fontName);
-      props.history.push(`/template/${fontName}/1`);
+    this.openFont = (font) => {
+      props.createFont(font);
+      props.history.push(`/template/${font.template}/1`);
+      props.selectFont(font);
     };
   }
   render() {
@@ -20,17 +26,21 @@ class TemplateChoice extends React.Component {
       <div className="TemplateChoice">
         <h1>Choose a template</h1>
         <div className="template-wrapper">
-          <Template name="Elzevir" openFont={this.openFont} />
-          <Template name="Grotesk" openFont={this.openFont} />
-          <Template name="Fell" openFont={this.openFont} />
-          <Template name="Spectral" openFont={this.openFont} />
+          {this.props.presets.map(font => <Template key={`${font.preset}${font.variant}`} font={font} openFont={this.openFont} />)}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = () => ({});
-const mapDispatchToProps = dispatch => bindActionCreators({ createFont }, dispatch);
+const mapStateToProps = state => ({
+  presets: state.font.presets,
+});
+const mapDispatchToProps = dispatch => bindActionCreators({ createFont, selectFont }, dispatch);
+
+TemplateChoice.propTypes = {
+  createFont: PropTypes.func.isRequired,
+  selectFont: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TemplateChoice);
