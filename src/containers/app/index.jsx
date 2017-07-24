@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { importPresets } from '../../data/font';
@@ -38,4 +39,4 @@ App.propTypes = {
   importPresets: PropTypes.func.isRequired,
 };
 const mapDispatchToProps = dispatch => bindActionCreators({ importPresets }, dispatch);
-export default connect(null, mapDispatchToProps)(App);
+export default withRouter(connect(null, mapDispatchToProps)(App));

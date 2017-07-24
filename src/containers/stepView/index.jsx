@@ -15,9 +15,9 @@ const StepView = props =>
       {props.step.choices.map(choice =>
         (<Choice
           choice={choice}
-          changeParams={props.changeParams}
-          resetValues={props.resetValues}
           key={choice.name}
+          resetValues={props.resetValues}
+          changeParams={props.changeParams}
         />),
       )}
     </div>
@@ -31,14 +31,18 @@ const StepView = props =>
 const mapStateToProps = state => ({
   step: state.font.currentPreset.steps[state.font.step - 1],
 });
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ stepForward, stepBackward, resetValues, changeParams }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  stepForward,
+  stepBackward,
+  resetValues,
+  changeParams,
+}, dispatch);
 
 StepView.propTypes = {
   stepForward: PropTypes.func.isRequired,
   stepBackward: PropTypes.func.isRequired,
-  resetValues: PropTypes.func.isRequired,
   changeParams: PropTypes.func.isRequired,
+  resetValues: PropTypes.func.isRequired,
   step: PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,

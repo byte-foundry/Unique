@@ -21,7 +21,6 @@ const Choice = props => (
 
 
 Choice.propTypes = {
-  name: PropTypes.string.isRequired,
   changeParams: PropTypes.func.isRequired,
   resetValues: PropTypes.func.isRequired,
   choice: PropTypes.shape({

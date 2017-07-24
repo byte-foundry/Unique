@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { push } from 'react-router-redux';
+import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,7 +14,7 @@ const FinalView = props =>
     <h1>Congrats!</h1>
   </div>);
 
-const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+const mapDispatchToProps = dispatch => bindActionCreators({
   goBack: () => push('/customize'),
 }, dispatch);
 
@@ -22,4 +23,4 @@ FinalView.propTypes = {
 };
 
 
-export default connect(null, mapDispatchToProps)(FinalView);
+export default withRouter(connect(null, mapDispatchToProps)(FinalView));

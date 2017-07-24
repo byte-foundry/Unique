@@ -130,10 +130,11 @@ export const selectFont = font => dispatch => dispatch({ type: SELECT_FONT, font
 export const stepForward = () => (dispatch, getState) => {
   let { step } = getState().font;
   const { currentPreset } = getState().font;
-  step += 1;
-  dispatch({ type: STEP_FORWARD, step });
-  if (step - 1 === currentPreset.steps.lenth) {
+  if (step === currentPreset.steps.length) {
     dispatch(push('/final'));
+  } else {
+    step += 1;
+    dispatch({ type: STEP_FORWARD, step });
   }
 };
 
@@ -163,18 +164,22 @@ export const resetValues = () => (dispatch, getState) => {
 };
 
 export const changeParams = (choice, saveChanges) => (dispatch, getState) => {
-  const { font, step, currentPreset } = getState().font;
+  let { step } = getState().font;
+  const { font, currentPreset } = getState().font;
   dispatch({
     type: CHANGE_PARAMS_REQUESTED,
   });
-  font.changeParams(choice);
+  font.changeParams(choice.values);
   dispatch({
     type: CHANGE_PARAMS,
-    newParams: saveChanges ? choice : undefined,
+    newParams: saveChanges ? choice.values : undefined,
   });
-  if (step === currentPreset.steps.lenth) {
-    dispatch(push('/final'));
-  } else {
-    stepForward();
+  if (saveChanges) {
+    if (step === currentPreset.steps.length) {
+      dispatch(push('/final'));
+    } else {
+      step += 1;
+      dispatch({ type: STEP_FORWARD, step });
+    }
   }
 };
