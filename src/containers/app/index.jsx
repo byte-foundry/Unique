@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { importPresets } from '../../data/font';
 import './App.css';
 
+import DefineNeed from '../defineNeed/';
 import TemplateChoice from '../templateChoice/';
 import ParamChoice from '../paramChoice/';
 import FinalView from '../finalView/';
@@ -26,7 +27,8 @@ class App extends React.Component {
     return (
       <main className="App">
         <Switch>
-          <Route exact path="/" component={TemplateChoice} />
+          <Route exact path="/" component={DefineNeed} />
+          <Route exact path="/select" component={TemplateChoice} />
           <Route exact path="/customize" component={ParamChoice} />
           <Route exact path="/final" component={FinalView} />
         </Switch>

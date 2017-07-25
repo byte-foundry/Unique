@@ -1,0 +1,26 @@
+.DefineNeed {
+  
+}
+
+.DefineNeed .needs {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-around;
+  margin-top: 10%;
+}
+
+.DefineNeed h1 {
+  margin: 80px;
+}
+
+.DefineNeed .needs .choice {
+  width: 60%;
+  padding: 40px 80px;
+  text-align: center;
+  background: #ddd;
+  margin-bottom: 60px;
+  cursor: pointer;
+}

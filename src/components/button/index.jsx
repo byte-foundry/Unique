@@ -7,7 +7,7 @@ import './Button.css';
 const Button = props => (
   <div
     role="button"
-    className={`button ${props.className}`}
+    className={`Button ${props.className}`}
     onClick={() => props.onClick()}
     tabIndex="0"
   >

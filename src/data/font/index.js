@@ -6,6 +6,7 @@ export const CREATE = 'font/CREATE';
 export const IMPORT_PRESETS_REQUESTED = 'font/IMPORT_PRESETS_REQUESTED';
 export const IMPORT_PRESETS = 'font/IMPORT_PRESETS';
 export const SELECT_FONT = 'font/SELECT_FONT';
+export const DEFINE_NEED = 'font/DEFINE_NEED';
 export const STEP_FORWARD = 'font/STEP_FORWARD';
 export const STEP_BACKWARD = 'font/STEP_BACKWARD';
 export const CHANGE_STEP = 'font/CHANGE_STEP';
@@ -23,6 +24,7 @@ const initialState = {
   isCreating: false,
   stepBaseValues: {},
   choicesMade: [],
+  need: '',
 };
 
 const prototypoFontFactory = new Ptypo();
@@ -44,6 +46,12 @@ export default (state = initialState, action) => {
         initialValues: action.initialValues,
         isCreating: false,
         stepBaseValues: action.stepBaseValues,
+      };
+
+    case DEFINE_NEED:
+      return {
+        ...state,
+        need: action.need,
       };
 
     case IMPORT_PRESETS_REQUESTED:
@@ -148,6 +156,14 @@ export const importPresets = presets => (dispatch) => {
 };
 
 export const selectFont = font => dispatch => dispatch({ type: SELECT_FONT, font });
+
+export const defineNeed = need => (dispatch) => {
+  dispatch({
+    type: DEFINE_NEED,
+    need,
+  });
+  dispatch(push('/select'));
+};
 
 export const stepForward = () => (dispatch, getState) => {
   let { step } = getState().font;
