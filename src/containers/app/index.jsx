@@ -18,9 +18,9 @@ const presets = {};
 
 class App extends React.Component {
   constructor(props) {
+    super(props);
     context.keys().forEach((filename) => { presets[filename] = context(filename); });
     props.importPresets(presets);
-    super(props);
   }
   render() {
     return (

@@ -8,19 +8,36 @@ import PropTypes from 'prop-types';
 import './FinalView.css';
 import Button from '../../components/button/';
 
-const FinalView = props =>
-  (<div className="FinalView">
-    <Button className="back" label="Back" onClick={() => props.goBack()} />
-    <h1>Congrats!</h1>
-  </div>);
+class FinalView extends React.Component {
+  constructor(props) {
+    super(props);
+    if (props.step === 0) {
+      props.redirectToHome();
+    }
+  }
+  render() {
+    return (
+      <div className="FinalView">
+        <Button className="back" label="Back" onClick={() => this.props.goBack()} />
+        <h1>Congrats!</h1>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  step: state.font.step,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   goBack: () => push('/customize'),
+  redirectToHome: () => push('/'),
 }, dispatch);
 
 FinalView.propTypes = {
   goBack: PropTypes.func.isRequired,
+  redirectToHome: PropTypes.func.isRequired,
+  step: PropTypes.number.isRequired,
 };
 
-
-export default withRouter(connect(null, mapDispatchToProps)(FinalView));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FinalView));
