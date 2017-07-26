@@ -1,6 +1,9 @@
 .Template {
   display: inline;
-  padding: 50px;
+  padding: 10px 20px;
+  margin: 30px 50px;
+  font-size: 69px;
+  text-align: center;
   background-color: #ddd;
   cursor: pointer;
 }

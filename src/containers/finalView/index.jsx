@@ -19,13 +19,14 @@ class FinalView extends React.Component {
     return (
       <div className="FinalView">
         <Button className="back" label="Back" onClick={() => this.props.goBack()} />
-        <h1>Congrats!</h1>
+        <h1 style={{ fontFamily: this.props.fontName }}>Congrats!</h1>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
+  fontName: state.font.currentPreset.preset + state.font.currentPreset.variant,
   step: state.font.step,
 });
 
@@ -38,6 +39,11 @@ FinalView.propTypes = {
   goBack: PropTypes.func.isRequired,
   redirectToHome: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
+  fontName: PropTypes.string,
+};
+
+FinalView.defaultProps = {
+  fontName: 'ptypo',
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FinalView));

@@ -21,15 +21,23 @@ const DefineNeed = props => (
         Website
       </div>
     </div>
+    {props.isLoading
+    ? (<h2>Creating font...</h2>)
+    : false}
   </div>
 );
+
+const mapStateToProps = state => ({
+  isLoading: state.font.isLoading,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   defineNeed,
 }, dispatch);
 
 DefineNeed.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
   defineNeed: PropTypes.func.isRequired,
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(DefineNeed));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DefineNeed));

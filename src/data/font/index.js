@@ -5,6 +5,8 @@ export const CREATE_REQUESTED = 'font/CREATE_REQUESTED';
 export const CREATE = 'font/CREATE';
 export const IMPORT_PRESETS_REQUESTED = 'font/IMPORT_PRESETS_REQUESTED';
 export const IMPORT_PRESETS = 'font/IMPORT_PRESETS';
+export const LOAD_PRESETS_REQUESTED = 'font/LOAD_PRESETS_REQUESTED';
+export const LOAD_PRESETS = 'font/LOAD_PRESETS';
 export const SELECT_FONT = 'font/SELECT_FONT';
 export const DEFINE_NEED = 'font/DEFINE_NEED';
 export const STEP_FORWARD = 'font/STEP_FORWARD';
@@ -21,7 +23,7 @@ const initialState = {
   presets: [],
   currentPreset: {},
   step: 0,
-  isCreating: false,
+  isLoading: false,
   stepBaseValues: {},
   choicesMade: [],
   need: '',
@@ -31,10 +33,23 @@ const prototypoFontFactory = new Ptypo();
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case LOAD_PRESETS_REQUESTED:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case LOAD_PRESETS:
+      return {
+        ...state,
+        isLoading: false,
+        presets: action.presets,
+      };
+
     case CREATE_REQUESTED:
       return {
         ...state,
-        isCreating: true,
+        isLoading: true,
       };
 
     case CREATE:
@@ -44,7 +59,7 @@ export default (state = initialState, action) => {
         currentPreset: action.selectedFont,
         step: 1,
         initialValues: action.initialValues,
-        isCreating: false,
+        isLoading: false,
         stepBaseValues: action.stepBaseValues,
       };
 
@@ -69,6 +84,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         font: action.font,
+        currentPreset: action.selectedFont,
+        step: 1,
+        initialValues: action.initialValues,
+        isLoading: false,
+        stepBaseValues: action.stepBaseValues,
       };
 
     case CHANGE_PARAMS_REQUESTED:
@@ -155,14 +175,49 @@ export const importPresets = presets => (dispatch) => {
   });
 };
 
-export const selectFont = font => dispatch => dispatch({ type: SELECT_FONT, font });
+export const loadPresets = () => (dispatch, getState) => {
+  dispatch({
+    type: LOAD_PRESETS_REQUESTED,
+  });
+  const { presets } = getState().font;
+  const promiseArray = [];
+  presets.forEach((preset, index) => {
+    promiseArray.push(new Promise((resolve) => {
+      prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[preset.template.toUpperCase()]).then(
+        (createdFont) => {
+          createdFont.changeParams(preset.baseValues);
+          resolve(true);
+          presets[index].font = createdFont;
+        });
+    }));
+  });
+  Promise.all(promiseArray).then(() => {
+    dispatch({
+      type: LOAD_PRESETS,
+      presets,
+    });
+    dispatch(push('/select'));
+  });
+};
+
+
+export const selectFont = font => (dispatch) => {
+  dispatch({
+    type: SELECT_FONT,
+    font: font.font,
+    selectedFont: font,
+    initialValues: { ...font.baseValues },
+    stepBaseValues: { ...font.baseValues },
+  });
+  dispatch(push('/customize'));
+};
 
 export const defineNeed = need => (dispatch) => {
   dispatch({
     type: DEFINE_NEED,
     need,
   });
-  dispatch(push('/select'));
+  dispatch(loadPresets());
 };
 
 export const stepForward = () => (dispatch, getState) => {

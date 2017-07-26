@@ -1,5 +1,5 @@
 {  
-   "project":"WTF",
+   "preset":"WTF",
    "variant":"Font",
    "template": "spectral",
    "baseValues":{  

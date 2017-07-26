@@ -7,10 +7,11 @@ const Template = props => (
   <div
     role="button"
     className="Template"
-    onClick={() => props.createFont(props.font)}
+    onClick={() => props.selectFont(props.font)}
     tabIndex="0"
+    style={{ fontFamily: `${props.font.preset}${props.font.variant}` }}
   >
-    {props.font.preset} {props.font.variant}
+    Hamburgefonstiv - Abc 123
   </div>
 );
 
@@ -20,7 +21,7 @@ Template.propTypes = {
     preset: PropTypes.string.isRequired,
     variant: PropTypes.string.isRequired,
   }).isRequired,
-  createFont: PropTypes.func.isRequired,
+  selectFont: PropTypes.func.isRequired,
 };
 
 export default Template;
