@@ -19,7 +19,46 @@ class FinalView extends React.Component {
     return (
       <div className="FinalView">
         <Button className="back" label="Back" onClick={() => this.props.goBack()} />
-        <h1 style={{ fontFamily: this.props.fontName }}>Congrats!</h1>
+        <h3>Hooray !</h3>
+        <h3 className="subtitle"> You have created the perfect bespoke font for your project</h3>
+        <div className="specimen" style={{ fontFamily: this.props.fontName }}>
+          <div className="left">
+            <h2>Hamburgefonstiv - Abc 123</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.
+            </p>
+            <p>
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </p>
+          </div>
+          <div className="right">
+            <p>0123456789</p>
+            <p>abcdefghijklmnopqrstuvwxyz</p>
+            <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+            <p>The quick brown fox jumps over the lazy dog</p>
+            <p>Buvez de ce whisky que le patron juge fameux</p>
+          </div>
+        </div>
+        <form>
+          <input type="email" placeholder="your email" />
+          <button type="button">Download</button>
+        </form>
       </div>
     );
   }
