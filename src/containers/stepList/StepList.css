@@ -1,15 +1,28 @@
 .StepList {
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  align-content: space-around;
-  margin-top: 20px;
+  width: 100%;
+  background-color: #ccc;
+  height: 100%;
+  padding: 40px;
 }
 
-.StepList div {
-  padding: 20px 30px;
-  background: #ddd;
-  border: 1px solid black;
+.StepList .bubble {
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.StepList a {
+  color: black;
+  text-decoration: none;
+}
+
+.StepList .bubble.past {
+  background-color: #aaa;
+}
+
+.StepList .bubble.active {
+  background-color: black;
 }

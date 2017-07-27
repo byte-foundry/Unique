@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './ParamChoice.css';
 import StepView from '../stepView/';
-import WordView from '../wordView/';
 import StepList from '../stepList/';
 
 class ParamChoice extends React.Component {
@@ -20,9 +19,12 @@ class ParamChoice extends React.Component {
   render() {
     return (
       <div className="ParamChoice">
-        <WordView word="Spectral" />
-        <StepView />
-        <StepList />
+        <div className="left">
+          <StepView />
+        </div>
+        <div className="right">
+          <StepList />
+        </div>
       </div>
     );
   }

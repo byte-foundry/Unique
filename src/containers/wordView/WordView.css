@@ -1,9 +1,4 @@
 .WordView {
-  padding-top: 5%;
-  padding-bottom: 5%;
-  height: 20vh;
-  min-height: 20vh;
-  max-height: 20vh;
 }
 
 .WordView .text {

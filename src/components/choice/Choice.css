@@ -3,19 +3,16 @@
   display: block;
   cursor: pointer;
   user-select: none;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
   border: 2px solid black;
+  padding: 10px 20px;
+  font-size: 69px;
+  margin-top: 20px;
 }
 
 .Choice:focus {
   outline: none;
 }
 
-.Choice span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.Choice.selected {
+  border-color: red;
 }
