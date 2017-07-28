@@ -16,19 +16,36 @@ class StepView extends React.Component {
       choice: {},
     };
     this.markChoiceActive = (choice) => {
-      this.setState({ choice });
+      if (choice === this.state.choice) {
+        this.setState({ choice: {} });
+      } else this.setState({ choice });
     };
+  }
+  componentWillMount() {
+    this.setChoiceSelected(this.props);
+  }
+  componentWillReceiveProps(newProps) {
+    this.setChoiceSelected(newProps);
+  }
+  setChoiceSelected(props) {
+    if (props.choicesMade[props.step]) {
+      this.setState({
+        choice: props.stepValues.choices.find(
+          choice => choice.name === props.choicesMade[props.step].name,
+        ),
+      });
+    }
   }
   render() {
     return (
       <div className="StepView">
         <WordView word="Hamburgefonstiv - Abc 123" />
         <div className="description">
-          <h2>{this.props.step.name}:</h2>
-          <p>{this.props.step.description}</p>
+          <h2>{this.props.stepValues.name}:</h2>
+          <p>{this.props.stepValues.description}</p>
         </div>
         <div className="choices">
-          {this.props.step.choices.map((choice, index) =>
+          {this.props.stepValues.choices.map((choice, index) =>
             (<Choice
               choice={choice}
               key={choice.name}
@@ -41,13 +58,17 @@ class StepView extends React.Component {
         <div className="actions">
           <Button
             className="nextStep"
-            label="I'm good like this"
+            label="Keep as default"
             onClick={this.props.stepForward}
           />
           <Button
             className="nextStep"
             label="OK"
-            onClick={() => { this.props.selectChoice(this.state.choice); }}
+            onClick={() => (
+              Object.keys(this.state.choice).length > 0
+              ? this.props.selectChoice(this.state.choice)
+              : this.props.stepForward()
+            )}
           />
         </div>
       </div>
@@ -56,7 +77,9 @@ class StepView extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  step: state.font.currentPreset.steps[state.font.step - 1],
+  stepValues: state.font.currentPreset.steps[state.font.step - 1],
+  step: state.font.step,
+  choicesMade: state.font.choicesMade,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
   stepForward,
@@ -66,7 +89,13 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 StepView.propTypes = {
   stepForward: PropTypes.func.isRequired,
   selectChoice: PropTypes.func.isRequired,
-  step: PropTypes.shape({
+  step: PropTypes.number.isRequired,
+  choicesMade: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  stepValues: PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     choices: PropTypes.arrayOf(

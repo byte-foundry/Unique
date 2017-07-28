@@ -8,14 +8,15 @@ import Step from '../../components/step/';
 import { goToStep } from '../../data/font';
 import './StepList.css';
 
-const getStepsDone = (steps, index, choicesMade) => steps.map((step, i) => {
-  if (i < index) {
+
+const getStepsDone = (steps, index, choicesMade) => choicesMade.map((choice, i) => {
+  if (i > 0) {
     return (<Step
       index={i}
-      title={step.name}
-      key={step.name}
-      current={index - i === 1}
-      choice={choicesMade[i + 1] ? choicesMade[i + 1].name : 'no choice'}
+      title={steps[i - 1].name}
+      key={steps[i - 1].name}
+      current={index === i}
+      choice={choice.name}
     />);
   }
 });

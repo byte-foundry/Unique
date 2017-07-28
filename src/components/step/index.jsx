@@ -10,7 +10,7 @@ const Step = props => (
   <div
     role="button"
     className="Step"
-    onClick={() => props.goToStep(props.index + 1)}
+    onClick={() => props.goToStep(props.index)}
     tabIndex="0"
   >
     {`${props.current ? '> ' : ''}${props.title}${props.choice ? `: ${props.choice}` : ''}`}
