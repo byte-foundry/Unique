@@ -7,7 +7,8 @@ const Choice = props => (
   <div
     className={`Choice ${props.selected ? 'selected' : ''}`}
     key={props.choice.name}
-    onClick={() => props.selectChoice(props.choice)}
+    onClick={() => props.markChoiceActive(props.choice)}
+    onDoubleClick={() => props.selectChoice(props.choice)}
     role="option"
     aria-checked="false"
     aria-selected="false"
@@ -21,6 +22,7 @@ const Choice = props => (
 
 Choice.propTypes = {
   selectChoice: PropTypes.func.isRequired,
+  markChoiceActive: PropTypes.func.isRequired,
   choice: PropTypes.shape({
     name: PropTypes.string.isRequired,
   }).isRequired,
