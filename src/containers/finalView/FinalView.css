@@ -25,6 +25,7 @@
 
 .FinalView .specimen {
   display: flex;
+  font-size: 22px;
 }
 
 .FinalView .specimen .left {

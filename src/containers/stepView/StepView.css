@@ -7,7 +7,9 @@
 }
 
 
-.StepView .description {}
+.StepView .description {
+  margin-left: 100px;
+}
 
 .StepView .actions {
   display: flex;
