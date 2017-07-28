@@ -10,16 +10,10 @@ export const LOAD_PRESETS = 'font/LOAD_PRESETS';
 export const SELECT_FONT_REQUESTED = 'font/SELECT_FONT_REQUESTED';
 export const SELECT_FONT = 'font/SELECT_FONT';
 export const DEFINE_NEED = 'font/DEFINE_NEED';
-export const STEP_FORWARD = 'font/STEP_FORWARD';
-export const STEP_BACKWARD = 'font/STEP_BACKWARD';
 export const CHANGE_STEP = 'font/CHANGE_STEP';
-export const PREVIEW_CHOICE_REQUESTED = 'font/PREVIEW_CHOICE_REQUESTED';
-export const PREVIEW_CHOICE = 'font/PREVIEW_CHOICE';
+export const UPDATE_VALUES = 'font/UPDATE_VALUES';
 export const SELECT_CHOICE_REQUESTED = 'font/SELECT_CHOICE_REQUESTED';
 export const SELECT_CHOICE = 'font/SELECT_CHOICE';
-export const RESET_PARAMS_REQUESTED = 'font/RESET_PARAMS_REQUESTED';
-export const RESET_PARAMS = 'font/RESET_PARAMS';
-
 const initialState = {
   font: {},
   initialValues: {},
@@ -30,6 +24,7 @@ const initialState = {
   stepBaseValues: {},
   choicesMade: [],
   choicesFonts: [],
+  currentParams: {},
   need: '',
 };
 
@@ -101,6 +96,7 @@ export default (state = initialState, action) => {
         stepBaseValues: action.stepBaseValues,
         choicesMade: [],
         choicesFonts: action.choicesFonts,
+        currentParams: {},
       };
 
     case SELECT_CHOICE_REQUESTED:
@@ -117,59 +113,21 @@ export default (state = initialState, action) => {
           ...action.savedParams,
         },
         choicesMade: action.choicesMade,
-        choicesFonts: action.choicesFonts,
       };
 
-    case PREVIEW_CHOICE_REQUESTED:
-      return {
-        ...state,
-      };
-
-    case PREVIEW_CHOICE:
-      return {
-        ...state,
-        font: action.font,
-        currentParams: {
-          ...state.currentParams,
-          ...action.savedParams,
-        },
-        choicesMade: action.choicesMade,
-      };
-
-    case RESET_PARAMS_REQUESTED:
-      return {
-        ...state,
-      };
-
-    case RESET_PARAMS:
-      return {
-        ...state,
-        font: action.font,
-      };
-    case STEP_FORWARD:
-      return {
-        ...state,
-        step: action.step,
-        stepBaseValues: action.stepBaseValues,
-        font: action.font,
-        choicesFonts: action.choicesFonts,
-      };
-    case STEP_BACKWARD:
-      return {
-        ...state,
-        step: action.step,
-        stepBaseValues: action.stepBaseValues,
-        font: action.font,
-        choicesFonts: action.choicesFonts,
-      };
     case CHANGE_STEP:
       return {
         ...state,
         step: action.step,
-        stepBaseValues: action.stepBaseValues,
+      };
+
+    case UPDATE_VALUES:
+      return {
+        ...state,
         font: action.font,
         choicesFonts: action.choicesFonts,
       };
+
     default:
       return state;
   }
@@ -260,7 +218,7 @@ export const selectFont = font => (dispatch, getState) => {
           createdFont.changeParams(font.baseValues);
           createdFont.changeParams(font.steps[0].choices[i].values);
           resolve(true);
-          choicesFonts.push(createdFont);
+          choicesFonts[i] = createdFont;
         });
     }));
   }
@@ -285,131 +243,79 @@ export const defineNeed = need => (dispatch) => {
   dispatch(loadPresets());
 };
 
-export const stepForward = () => (dispatch, getState) => {
-  let { step } = getState().font;
-  const { currentPreset, font, choicesMade, initialValues, choicesFonts } = getState().font;
-  if (step === currentPreset.steps.length) {
-    dispatch(push('/final'));
-  } else {
-    step += 1;
-    if (choicesMade[step] && Object.keys(choicesMade[step]).length > 0) {
-      const valuesToReset = {};
-      Object.keys(choicesMade[step]).forEach((key) => {
-        if (key !== 'name') {
-          valuesToReset[key] = initialValues[key];
-        }
-      });
-      font.changeParams(valuesToReset);
-    }
-    currentPreset.steps[step - 1].choices.forEach((choice, index) => {
-      choicesFonts[index].changeParams(choice.values);
-    });
-    dispatch({
-      type: STEP_FORWARD,
-      step,
-      font,
-      stepBaseValues: { ...font.values },
-      choicesFonts,
-    });
-  }
-};
-
-
-export const stepBackward = () => (dispatch, getState) => {
-  let { step } = getState().font;
-  const { font, choicesMade, initialValues, choicesFonts, currentPreset } = getState().font;
-  step -= 1;
-  if (choicesMade[step] && Object.keys(choicesMade[step]).length > 0) {
-    const valuesToReset = {};
-    Object.keys(choicesMade[step]).forEach((key) => {
-      if (key !== 'name') {
-        valuesToReset[key] = initialValues[key];
-      }
-    });
-    font.changeParams(valuesToReset);
-  }
+const updateStepValues = step => (dispatch, getState) => {
+  const { choicesFonts, font, currentPreset, currentParams, stepBaseValues } = getState().font;
+  const stepToUpdate = step || getState().font.step;
+  currentPreset.steps[stepToUpdate - 1].choices.forEach((choice, index) => {
+    choicesFonts[index].changeParams({ ...stepBaseValues, ...currentParams, ...choice.values });
+  });
+  font.changeParams(currentParams);
   dispatch({
-    type: STEP_BACKWARD,
-    step,
+    type: UPDATE_VALUES,
     font,
-    stepBaseValues: { ...font.values },
     choicesFonts,
   });
-  if (step === 0) {
-    dispatch(push('/'));
-  } else {
-    currentPreset.steps[step - 1].choices.forEach((choice, index) => {
-      choicesFonts[index].changeParams(choice.values);
-    });
-  }
+};
+
+const updateFont = () => (dispatch, getState) => {
+  const { font, currentParams, choicesFonts } = getState().font;
+  font.changeParams(currentParams);
+  dispatch({
+    type: UPDATE_VALUES,
+    font,
+    choicesFonts,
+  });
 };
 
 export const goToStep = step => (dispatch, getState) => {
-  const { font, choicesMade, initialValues, choicesFonts, currentPreset } = getState().font;
-  if (choicesMade[step] && Object.keys(choicesMade[step]).length > 0) {
-    const valuesToReset = {};
-    Object.keys(choicesMade[step]).forEach((key) => {
-      if (key !== 'name') {
-        valuesToReset[key] = initialValues[key];
-      }
-    });
-    font.changeParams(valuesToReset);
+  const { currentPreset } = getState().font;
+  switch (step) {
+    case 0:
+      dispatch(push('/'));
+      break;
+    case currentPreset.steps.length + 1:
+      dispatch(updateFont());
+      dispatch(push('/final'));
+      break;
+    default:
+      dispatch(updateStepValues(step));
+      dispatch({
+        type: CHANGE_STEP,
+        step,
+      });
+      break;
   }
-  currentPreset.steps[step - 1].choices.forEach((choice, index) => {
-    choicesFonts[index].changeParams(choice.values);
-  });
-  dispatch({
-    type: CHANGE_STEP,
-    step,
-    font,
-    stepBaseValues: { ...font.values },
-    choicesFonts,
-  });
 };
 
-export const resetValues = () => (dispatch, getState) => {
-  const { font, stepBaseValues } = getState().font;
+export const stepForward = () => (dispatch, getState) => {
+  const { font, choicesMade } = getState().font;
+  let { step } = getState().font;
+  choicesMade[step] = {};
+  choicesMade[step].name = 'No choice';
   dispatch({
-    type: RESET_PARAMS_REQUESTED,
-  });
-  font.changeParams(stepBaseValues);
-  dispatch({
-    type: RESET_PARAMS,
+    type: SELECT_CHOICE,
     font,
+    savedParams: {},
+    choicesMade,
   });
+  dispatch(goToStep(step += 1));
 };
 
 export const selectChoice = choice => (dispatch, getState) => {
-  const { font, choicesMade, step, choicesFonts } = getState().font;
+  const { font, choicesMade } = getState().font;
+  let { step } = getState().font;
   dispatch({
     type: SELECT_CHOICE_REQUESTED,
     params: choice.values,
   });
-  font.changeParams(choice.values);
   choicesMade[step] = choice.values;
   choicesMade[step].name = choice.name;
-  choicesFonts.forEach(choiceFont => choiceFont.changeParams(choice.values));
   dispatch({
     type: SELECT_CHOICE,
     font,
     savedParams: choice.values,
     choicesMade,
-    choicesFonts,
   });
-  dispatch(stepForward());
+  dispatch(goToStep(step += 1));
 };
 
-export const previewChoice = choice => (dispatch, getState) => {
-  const { font, choicesMade } = getState().font;
-  dispatch({
-    type: PREVIEW_CHOICE_REQUESTED,
-    params: choice.values,
-  });
-  font.changeParams(choice.values);
-  dispatch({
-    type: PREVIEW_CHOICE,
-    font,
-    savedParams: {},
-    choicesMade,
-  });
-};
