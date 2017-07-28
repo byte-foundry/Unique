@@ -244,10 +244,25 @@ export const defineNeed = need => (dispatch) => {
 };
 
 const updateStepValues = step => (dispatch, getState) => {
-  const { choicesFonts, font, currentPreset, currentParams, stepBaseValues } = getState().font;
+  const {
+    choicesFonts,
+    font,
+    currentPreset,
+    currentParams,
+    stepBaseValues,
+    choicesMade,
+  } = getState().font;
   const stepToUpdate = step || getState().font.step;
   currentPreset.steps[stepToUpdate - 1].choices.forEach((choice, index) => {
-    choicesFonts[index].changeParams({ ...stepBaseValues, ...currentParams, ...choice.values });
+    const stepChoices = { ...choice.values };
+    if (choicesMade[stepToUpdate]) {
+      Object.keys(choicesMade[stepToUpdate]).forEach((key) => {
+        if (!stepChoices[key]) {
+          stepChoices[key] = currentPreset.baseValues[key];
+        }
+      });
+    }
+    choicesFonts[index].changeParams({ ...stepBaseValues, ...currentParams, ...stepChoices });
   });
   font.changeParams(currentParams);
   dispatch({
