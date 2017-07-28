@@ -59,7 +59,7 @@ class StepView extends React.Component {
         <div className="actions">
           <Button
             className="nextStep"
-            label="Keep as default"
+            label="Skip"
             onClick={this.props.stepForward}
           />
           <Button

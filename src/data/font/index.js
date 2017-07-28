@@ -303,14 +303,23 @@ export const goToStep = step => (dispatch, getState) => {
 };
 
 export const stepForward = () => (dispatch, getState) => {
-  const { font, choicesMade } = getState().font;
+  const { font, choicesMade, currentPreset } = getState().font;
   let { step } = getState().font;
+  const paramsToReset = {};
+  if (choicesMade[step]) {
+    Object.keys(choicesMade[step]).forEach((key) => {
+      if (key !== 'name') {
+        paramsToReset[key] = currentPreset.baseValues[key];
+      }
+    });
+    font.changeParams(paramsToReset);
+  }
   choicesMade[step] = {};
   choicesMade[step].name = 'No choice';
   dispatch({
     type: SELECT_CHOICE,
     font,
-    savedParams: {},
+    savedParams: paramsToReset,
     choicesMade,
   });
   dispatch(goToStep(step += 1));
