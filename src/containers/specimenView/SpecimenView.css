@@ -1,10 +1,10 @@
-.FinalView {
+.SpecimenView {
   position: relative;
   display: block;
   padding: 50px;
 }
 
-.FinalView h1 {
+.SpecimenView h1 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -16,23 +16,23 @@
   font-weight: normal;
 }
 
-.FinalView .back {
+.SpecimenView .back {
   padding: 20px;
   border: 1px solid black;
   display: inline-block;
   cursor: pointer;
 }
 
-.FinalView .specimen {
+.SpecimenView .specimen {
   display: flex;
   font-size: 22px;
 }
 
-.FinalView .specimen .left {
+.SpecimenView .specimen .left {
   width: 50%;
   margin-right: 50px;
 }
 
-.FinalView .specimen h2, .FinalView .specimen h3 {
+.SpecimenView .specimen h2, .SpecimenView .specimen h3 {
   font-weight: normal;
 }

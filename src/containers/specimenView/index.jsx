@@ -5,10 +5,10 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import './FinalView.css';
+import './SpecimenView.css';
 import Button from '../../components/button/';
 
-class FinalView extends React.Component {
+class SpecimenView extends React.Component {
   constructor(props) {
     super(props);
     if (props.step === 0) {
@@ -17,7 +17,7 @@ class FinalView extends React.Component {
   }
   render() {
     return (
-      <div className="FinalView">
+      <div className="SpecimenView">
         <Button className="back" label="Back" onClick={() => this.props.goBack()} />
         <h3>Hooray !</h3>
         <h3 className="subtitle"> You have created the perfect bespoke font for your project</h3>
@@ -74,15 +74,15 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   redirectToHome: () => push('/'),
 }, dispatch);
 
-FinalView.propTypes = {
+SpecimenView.propTypes = {
   goBack: PropTypes.func.isRequired,
   redirectToHome: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
   fontName: PropTypes.string,
 };
 
-FinalView.defaultProps = {
+SpecimenView.defaultProps = {
   fontName: 'ptypo',
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FinalView));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpecimenView));

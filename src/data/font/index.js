@@ -287,7 +287,7 @@ export const goToStep = step => (dispatch, getState) => {
       break;
     case currentPreset.steps.length + 1:
       dispatch(updateFont());
-      dispatch(push('/final'));
+      dispatch(push('/specimen'));
       break;
     default:
       dispatch(updateStepValues(step));
