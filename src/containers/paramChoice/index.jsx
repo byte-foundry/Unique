@@ -11,12 +11,14 @@ import StepList from '../stepList/';
 
 class ParamChoice extends React.Component {
   componentWillMount() {
-    console.log(this.props.step);
     if (this.props.step === 0) {
       this.props.redirectToHome();
     }
   }
-  render() {
+  renderParamChoice() {
+    if (this.props.step === 0) {
+      return false;
+    }
     return (
       <div className="ParamChoice">
         <div className="left">
@@ -27,6 +29,9 @@ class ParamChoice extends React.Component {
         </div>
       </div>
     );
+  }
+  render() {
+    return this.renderParamChoice();
   }
 }
 
