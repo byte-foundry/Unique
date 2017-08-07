@@ -10,10 +10,10 @@ import StepView from '../stepView/';
 import StepList from '../stepList/';
 
 class ParamChoice extends React.Component {
-  constructor(props) {
-    super(props);
-    if (props.step === 0) {
-      props.redirectToHome();
+  componentWillMount() {
+    console.log(this.props.step);
+    if (this.props.step === 0) {
+      this.props.redirectToHome();
     }
   }
   render() {
