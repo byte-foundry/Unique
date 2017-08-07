@@ -108,10 +108,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         font: action.font,
-        currentParams: {
-          ...state.currentParams,
-          ...action.savedParams,
-        },
+        currentParams: action.currentParams ? action.currentParams : state.currentParams,
         choicesMade: action.choicesMade,
       };
 
@@ -264,7 +261,7 @@ const updateStepValues = step => (dispatch, getState) => {
     }
     choicesFonts[index].changeParams({ ...stepBaseValues, ...currentParams, ...stepChoices });
   });
-  font.changeParams(currentParams);
+  font.changeParams({ ...stepBaseValues, ...currentParams });
   dispatch({
     type: UPDATE_VALUES,
     font,
@@ -273,8 +270,8 @@ const updateStepValues = step => (dispatch, getState) => {
 };
 
 const updateFont = () => (dispatch, getState) => {
-  const { font, currentParams, choicesFonts } = getState().font;
-  font.changeParams(currentParams);
+  const { font, currentParams, choicesFonts, stepBaseValues } = getState().font;
+  font.changeParams({ ...stepBaseValues, ...currentParams });
   dispatch({
     type: UPDATE_VALUES,
     font,
@@ -303,8 +300,25 @@ export const goToStep = step => (dispatch, getState) => {
 };
 
 export const stepForward = () => (dispatch, getState) => {
-  const { font, choicesMade, currentPreset } = getState().font;
+  const { font, choicesMade } = getState().font;
   let { step } = getState().font;
+  choicesMade[step] = {};
+  choicesMade[step].name = 'No choice';
+  dispatch({
+    type: SELECT_CHOICE,
+    font,
+    choicesMade,
+  });
+  dispatch(goToStep(step += 1));
+};
+
+export const selectChoice = choice => (dispatch, getState) => {
+  const { font, choicesMade, currentPreset } = getState().font;
+  let { step, currentParams } = getState().font;
+  dispatch({
+    type: SELECT_CHOICE_REQUESTED,
+    params: choice.values,
+  });
   const paramsToReset = {};
   if (choicesMade[step]) {
     Object.keys(choicesMade[step]).forEach((key) => {
@@ -312,32 +326,18 @@ export const stepForward = () => (dispatch, getState) => {
         paramsToReset[key] = currentPreset.baseValues[key];
       }
     });
-    font.changeParams(paramsToReset);
   }
-  choicesMade[step] = {};
-  choicesMade[step].name = 'No choice';
-  dispatch({
-    type: SELECT_CHOICE,
-    font,
-    savedParams: paramsToReset,
-    choicesMade,
-  });
-  dispatch(goToStep(step += 1));
-};
-
-export const selectChoice = choice => (dispatch, getState) => {
-  const { font, choicesMade } = getState().font;
-  let { step } = getState().font;
-  dispatch({
-    type: SELECT_CHOICE_REQUESTED,
-    params: choice.values,
-  });
+  currentParams = {
+    ...currentParams,
+    ...paramsToReset,
+    ...choice.values,
+  };
   choicesMade[step] = choice.values;
   choicesMade[step].name = choice.name;
   dispatch({
     type: SELECT_CHOICE,
     font,
-    savedParams: choice.values,
+    currentParams,
     choicesMade,
   });
   dispatch(goToStep(step += 1));
