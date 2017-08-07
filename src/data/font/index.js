@@ -194,7 +194,7 @@ export const selectFont = font => (dispatch, getState) => {
     type: SELECT_FONT_REQUESTED,
   });
   presets.forEach((preset) => {
-    if (preset.font.fontName !== font.font.fontName) {
+    if (preset.font.delete && (preset.font.fontName !== font.font.fontName)) {
       preset.font.delete();
     }
   });
