@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.16.2",
     "prop-types": "^15.5.10",
     "prototypo-library": "^1.0.6",
     "react": "^15.5.4",
@@ -11,6 +12,7 @@
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
     "react-router-transition": "^0.1.1",
+    "react-stripe-checkout": "^2.6.3",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0"
   },

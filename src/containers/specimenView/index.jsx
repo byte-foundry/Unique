@@ -7,13 +7,26 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './SpecimenView.css';
 import Button from '../../components/button/';
+import { storeEmail } from '../../data/user';
 
 class SpecimenView extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      email: '',
+    };
     if (props.step === 0) {
       props.redirectToHome();
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    this.setState({ email: event.target.value });
+  }
+  handleSubmit(event) {
+    this.props.storeEmail(this.state.email);
+    event.preventDefault();
   }
   render() {
     return (
@@ -55,9 +68,9 @@ class SpecimenView extends React.Component {
             <p>Buvez de ce whisky que le patron juge fameux</p>
           </div>
         </div>
-        <form>
-          <input type="email" placeholder="your email" />
-          <button type="button">Download</button>
+        <form onSubmit={this.handleSubmit}>
+          <input type="email" placeholder="your email" name="email" onChange={this.handleChange} />
+          <button type="submit">Download</button>
         </form>
       </div>
     );
@@ -72,9 +85,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   goBack: () => push('/customize'),
   redirectToHome: () => push('/'),
+  storeEmail,
 }, dispatch);
 
 SpecimenView.propTypes = {
+  storeEmail: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
   redirectToHome: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,

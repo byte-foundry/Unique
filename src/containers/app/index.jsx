@@ -12,6 +12,7 @@ import DefineNeed from '../defineNeed/';
 import TemplateChoice from '../templateChoice/';
 import ParamChoice from '../paramChoice/';
 import SpecimenView from '../specimenView/';
+import ExportTypes from '../exportTypes/';
 
 const context = require.context('../../data/presets', true, /^(.*\.(json$))[^.]*$/igm);
 const presets = {};
@@ -31,6 +32,7 @@ class App extends React.Component {
           <Route exact path="/select" component={TemplateChoice} />
           <Route exact path="/customize" component={ParamChoice} />
           <Route exact path="/specimen" component={SpecimenView} />
+          <Route exact path="/export" component={ExportTypes} />
         </Switch>
       </main>
     );
