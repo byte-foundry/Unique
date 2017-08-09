@@ -11,7 +11,6 @@ const choices = [
   {
     type: 'download',
     title: 'Download your font',
-    checkoutTitle: 'Font download',
     description: (<span>
       <p>
         Télécharger une font,
@@ -27,7 +26,6 @@ const choices = [
   {
     type: 'host',
     title: 'Host as a responsive font',
-    checkoutTitle: 'Font hosting service',
     description: (<span>
       <p>
         Les avantages d&apos;utiliser une font en responsive et pourquoi c&apos;est cool
@@ -42,7 +40,6 @@ const choices = [
   {
     type: 'prototypo',
     title: 'Refine it with Prototypo',
-    checkoutTitle: 'Protypo subscription',
     description: (<span>
       <p>
         Prototypo c&apos;est super cool

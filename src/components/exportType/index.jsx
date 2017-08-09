@@ -26,7 +26,7 @@ const ExportType = props => (
       <div className="description">
         {props.choice.description}
         <Checkout
-          title={props.choice.checkoutTitle}
+          title="Prototypo Lite"
           amount={props.choice.price}
           description={props.choice.paymentDescription}
         >
@@ -53,7 +53,6 @@ ExportType.propTypes = {
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     paymentDescription: PropTypes.string.isRequired,
-    checkoutTitle: PropTypes.string.isRequired,
   }).isRequired,
   selectChoice: PropTypes.func.isRequired,
   removeChoice: PropTypes.func.isRequired,

@@ -1,4 +1,5 @@
 import Ptypo, { templateNames } from 'prototypo-library';
+import saveAs from 'save-as';
 import { push } from 'react-router-redux';
 
 export const CREATE_REQUESTED = 'font/CREATE_REQUESTED';
@@ -199,7 +200,9 @@ export const selectFont = font => (dispatch, getState) => {
     }
   });
   choicesFonts.forEach((choiceFont) => {
-    choiceFont.delete();
+    if (choiceFont.delete) {
+      choiceFont.delete();
+    }
   });
   let maxStep = 0;
   font.steps.forEach((step) => {
@@ -341,5 +344,13 @@ export const selectChoice = choice => (dispatch, getState) => {
     choicesMade,
   });
   dispatch(goToStep(step += 1));
+};
+
+export const download = () => (dispatch, getState) => {
+  const { font } = getState().font;
+  font.getArrayBuffer().then((data) => {
+    const blob = new Blob([data], { type: 'application/x-font-opentype' });
+    saveAs(blob, `${font.fontName}.otf`);
+  });
 };
 

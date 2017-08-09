@@ -44,6 +44,16 @@ export const storeExportType = exportType => (dispatch) => {
 
 export const afterPayment = () => (dispatch, getState) => {
   const { exportType } = getState().user;
-  dispatch(push('/'));
+  switch (exportType) {
+    case 'host':
+      break;
+    case 'download':
+      dispatch(push('/success'));
+      break;
+    case 'prototypo':
+      break;
+    default:
+      break;
+  }
 };
 
