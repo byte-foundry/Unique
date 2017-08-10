@@ -15,9 +15,6 @@ class SpecimenView extends React.Component {
     this.state = {
       email: '',
     };
-    if (props.step === 0) {
-      props.redirectToHome();
-    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -84,15 +81,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   goBack: () => push('/customize'),
-  redirectToHome: () => push('/'),
   storeEmail,
 }, dispatch);
 
 SpecimenView.propTypes = {
   storeEmail: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
-  redirectToHome: PropTypes.func.isRequired,
-  step: PropTypes.number.isRequired,
   fontName: PropTypes.string,
 };
 

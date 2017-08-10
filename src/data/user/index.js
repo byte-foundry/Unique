@@ -2,10 +2,12 @@ import { push } from 'react-router-redux';
 
 export const STORE_USER_EMAIL = 'user/STORE_USER_EMAIL';
 export const STORE_EXPORT_TYPE = 'user/STORE_EXPORT_TYPE';
+export const PAYMENT_SUCCESSFUL = 'user/PAYMENT_SUCCESSFUL';
 
 const initialState = {
   email: '',
   exportType: undefined,
+  hasPayed: false,
 };
 
 export default (state = initialState, action) => {
@@ -20,6 +22,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         exportType: action.exportType,
+      };
+
+    case PAYMENT_SUCCESSFUL:
+      return {
+        ...state,
+        hasPayed: true,
       };
 
     default:
@@ -44,6 +52,9 @@ export const storeExportType = exportType => (dispatch) => {
 
 export const afterPayment = () => (dispatch, getState) => {
   const { exportType } = getState().user;
+  dispatch({
+    type: PAYMENT_SUCCESSFUL,
+  });
   switch (exportType) {
     case 'host':
       break;
