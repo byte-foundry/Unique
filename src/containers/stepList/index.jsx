@@ -8,18 +8,20 @@ import Step from '../../components/step/';
 import { goToStep } from '../../data/font';
 import './StepList.css';
 
-
-const getStepsDone = (steps, index, choicesMade) => choicesMade.map((choice, i) => {
-  if (i > 0) {
-    return (<Step
-      index={i}
-      title={steps[i - 1].name}
-      key={steps[i - 1].name}
-      current={index === i}
-      choice={choice.name}
-    />);
-  }
-});
+const getStepsDone = (steps, index, choicesMade) =>
+  choicesMade.map((choice, i) => {
+    if (i > 0) {
+      return (
+        <Step
+          index={i}
+          title={steps[i - 1].name}
+          key={steps[i - 1].name}
+          current={index === i}
+          choice={choice.name}
+        />
+      );
+    }
+  });
 
 const StepList = props => (
   <div className="StepList">
@@ -37,7 +39,6 @@ const StepList = props => (
     {getStepsDone(props.steps, props.step, props.choicesMade)}
   </div>
 );
-
 
 StepList.propTypes = {
   step: PropTypes.number.isRequired,
@@ -70,4 +71,3 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({ goToStep }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepList);
-

@@ -24,7 +24,7 @@ const TemplateChoice = props => (
 );
 
 const mapStateToProps = state => ({
-  presets: state.font.presets,
+  presets: state.presets.presets,
   isLoading: state.font.isLoading,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({ selectFont, redirectToHome: () => push('/') }, dispatch);

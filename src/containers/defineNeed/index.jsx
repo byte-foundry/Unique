@@ -28,7 +28,7 @@ const DefineNeed = props => (
 );
 
 const mapStateToProps = state => ({
-  isLoading: state.font.isLoading,
+  isLoading: state.presets.isLoading,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

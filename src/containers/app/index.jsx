@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { importPresets } from '../../data/font';
+import { importPresets } from '../../data/presets';
 import './App.css';
 
 import ProtectedRoute from '../../components/protectedRoute/';
@@ -26,7 +26,7 @@ class App extends React.Component {
     props.importPresets(presets);
   }
   hasSelectedFont() {
-    return this.props.selectedFont;
+    return this.props.selectedFont !== '';
   }
   hasSuccessfulPayment() {
     return this.props.hasPayed === true;
@@ -80,11 +80,16 @@ class App extends React.Component {
 
 App.propTypes = {
   importPresets: PropTypes.func.isRequired,
-  selectedFont: PropTypes.string.isRequired,
+  selectedFont: PropTypes.string,
   userEmail: PropTypes.string.isRequired,
   hasPayed: PropTypes.bool.isRequired,
   need: PropTypes.string.isRequired,
 };
+
+App.defaultProps = {
+  selectedFont: '',
+};
+
 const mapStateToProps = state => ({
   selectedFont: state.font.currentPreset.preset,
   userEmail: state.user.email,

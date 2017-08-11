@@ -14,9 +14,11 @@ const ProtectedRoute = ({ component: Component, requirement, ...rest }) => (
 );
 
 ProtectedRoute.propTypes = {
-  component: PropTypes.element.isRequired,
+  component: PropTypes.func.isRequired,
   requirement: PropTypes.bool.isRequired,
-  location: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 ProtectedRoute.defaultProps = {};

@@ -1,13 +1,10 @@
 import Ptypo, { templateNames } from 'prototypo-library';
 import saveAs from 'save-as';
 import { push } from 'react-router-redux';
+import { loadPresets } from '../presets';
 
 export const CREATE_REQUESTED = 'font/CREATE_REQUESTED';
 export const CREATE = 'font/CREATE';
-export const IMPORT_PRESETS_REQUESTED = 'font/IMPORT_PRESETS_REQUESTED';
-export const IMPORT_PRESETS = 'font/IMPORT_PRESETS';
-export const LOAD_PRESETS_REQUESTED = 'font/LOAD_PRESETS_REQUESTED';
-export const LOAD_PRESETS = 'font/LOAD_PRESETS';
 export const SELECT_FONT_REQUESTED = 'font/SELECT_FONT_REQUESTED';
 export const SELECT_FONT = 'font/SELECT_FONT';
 export const DEFINE_NEED = 'font/DEFINE_NEED';
@@ -18,7 +15,6 @@ export const SELECT_CHOICE = 'font/SELECT_CHOICE';
 const initialState = {
   font: {},
   initialValues: {},
-  presets: [],
   currentPreset: {},
   step: 0,
   isLoading: false,
@@ -33,19 +29,6 @@ const prototypoFontFactory = new Ptypo();
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case LOAD_PRESETS_REQUESTED:
-      return {
-        ...state,
-        isLoading: true,
-      };
-
-    case LOAD_PRESETS:
-      return {
-        ...state,
-        isLoading: false,
-        presets: action.presets,
-      };
-
     case CREATE_REQUESTED:
       return {
         ...state,
@@ -67,17 +50,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         need: action.need,
-      };
-
-    case IMPORT_PRESETS_REQUESTED:
-      return {
-        ...state,
-      };
-
-    case IMPORT_PRESETS:
-      return {
-        ...state,
-        presets: action.presetsArray,
       };
 
     case SELECT_FONT_REQUESTED:
@@ -149,48 +121,9 @@ export const createFont = font => (dispatch) => {
     });
 };
 
-export const importPresets = presets => (dispatch) => {
-  dispatch({
-    type: IMPORT_PRESETS_REQUESTED,
-  });
-  const presetsArray = [];
-  Object.keys(presets).forEach((key) => {
-    presetsArray.push(presets[key]);
-  });
-  dispatch({
-    type: IMPORT_PRESETS,
-    presetsArray,
-  });
-};
-
-export const loadPresets = () => (dispatch, getState) => {
-  dispatch({
-    type: LOAD_PRESETS_REQUESTED,
-  });
-  const { presets } = getState().font;
-  const promiseArray = [];
-  presets.forEach((preset, index) => {
-    promiseArray.push(new Promise((resolve) => {
-      prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[preset.template.toUpperCase()]).then(
-        (createdFont) => {
-          createdFont.changeParams(preset.baseValues);
-          resolve(true);
-          presets[index].font = createdFont;
-        });
-    }));
-  });
-  Promise.all(promiseArray).then(() => {
-    dispatch({
-      type: LOAD_PRESETS,
-      presets,
-    });
-    dispatch(push('/select'));
-  });
-};
-
-
 export const selectFont = font => (dispatch, getState) => {
-  const { presets, choicesFonts } = getState().font;
+  const { choicesFonts } = getState().font;
+  const { presets } = getState().presets;
   dispatch({
     type: SELECT_FONT_REQUESTED,
   });
