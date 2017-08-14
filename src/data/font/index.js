@@ -193,15 +193,15 @@ export const defineNeed = need => (dispatch) => {
   dispatch(loadPresets());
 };
 
-const updateStepValues = step => (dispatch, getState) => {
+const updateStepValues = (step, font) => (dispatch, getState) => {
   const {
     choicesFonts,
-    font,
     currentPreset,
     currentParams,
     stepBaseValues,
     choicesMade,
   } = getState().font;
+  const curFont = font || getState().font.font;
   const stepToUpdate = step || getState().font.step;
   currentPreset.steps[stepToUpdate - 1].choices.forEach((choice, index) => {
     const stepChoices = { ...choice.values };
@@ -214,10 +214,10 @@ const updateStepValues = step => (dispatch, getState) => {
     }
     choicesFonts[index].changeParams({ ...stepBaseValues, ...currentParams, ...stepChoices });
   });
-  font.changeParams({ ...stepBaseValues, ...currentParams });
+  curFont.changeParams({ ...stepBaseValues, ...currentParams });
   dispatch({
     type: UPDATE_VALUES,
-    font,
+    font: curFont,
     choicesFonts,
   });
 };
@@ -310,7 +310,7 @@ export const reloadFonts = () => (dispatch, getState) => {
   const { currentPreset, currentParams, baseValues, step } = getState().font;
   // create userFont
   prototypoFontFactory
-    .createFont('peasy', templateNames[currentPreset.template.toUpperCase()])
+    .createFont(`${currentPreset.preset}${currentPreset.variant}`, templateNames[currentPreset.template.toUpperCase()])
     .then((createdFont) => {
       createdFont.changeParams({ ...baseValues, ...currentParams });
       currentPreset.font = createdFont;
@@ -348,7 +348,7 @@ export const reloadFonts = () => (dispatch, getState) => {
       currentPreset,
       font: currentPreset.font,
     });
-    dispatch(updateStepValues(step));
+    dispatch(updateStepValues(step, currentPreset.font));
     dispatch(setStable());
   });
 };
