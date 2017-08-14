@@ -2,6 +2,7 @@ import Ptypo, { templateNames } from 'prototypo-library';
 import saveAs from 'save-as';
 import { push } from 'react-router-redux';
 import { loadPresets } from '../presets';
+import { setUnstable, setStable } from '../ui';
 
 export const CREATE_REQUESTED = 'font/CREATE_REQUESTED';
 export const CREATE = 'font/CREATE';
@@ -12,10 +13,14 @@ export const CHANGE_STEP = 'font/CHANGE_STEP';
 export const UPDATE_VALUES = 'font/UPDATE_VALUES';
 export const SELECT_CHOICE_REQUESTED = 'font/SELECT_CHOICE_REQUESTED';
 export const SELECT_CHOICE = 'font/SELECT_CHOICE';
+export const RELOAD_FONTS = 'font/RELOAD_FONTS';
+
 const initialState = {
   font: {},
   initialValues: {},
-  currentPreset: {},
+  currentPreset: {
+    font: {},
+  },
   step: 0,
   isLoading: false,
   stepBaseValues: {},
@@ -98,6 +103,14 @@ export default (state = initialState, action) => {
         choicesFonts: action.choicesFonts,
       };
 
+    case RELOAD_FONTS:
+      return {
+        ...state,
+        currentPreset: action.currentPreset,
+        choicesFonts: action.choicesFonts,
+        font: action.font,
+      };
+
     default:
       return state;
   }
@@ -107,8 +120,9 @@ export const createFont = font => (dispatch) => {
   dispatch({
     type: CREATE_REQUESTED,
   });
-  prototypoFontFactory.createFont('peasy', templateNames[font.template.toUpperCase()]).then(
-    (createdFont) => {
+  prototypoFontFactory
+    .createFont('peasy', templateNames[font.template.toUpperCase()])
+    .then((createdFont) => {
       createdFont.changeParams(font.baseValues);
       dispatch({
         type: CREATE,
@@ -122,13 +136,13 @@ export const createFont = font => (dispatch) => {
 };
 
 export const selectFont = font => (dispatch, getState) => {
-  const { choicesFonts } = getState().font;
+  const { choicesFonts = [] } = getState().font;
   const { presets } = getState().presets;
   dispatch({
     type: SELECT_FONT_REQUESTED,
   });
   presets.forEach((preset) => {
-    if (preset.font.delete && (preset.font.fontName !== font.font.fontName)) {
+    if (preset.font.delete && preset.font.fontName !== font.font.fontName) {
       preset.font.delete();
     }
   });
@@ -145,15 +159,18 @@ export const selectFont = font => (dispatch, getState) => {
   });
   const promiseArray = [];
   for (let i = 0; i < maxStep; i += 1) {
-    promiseArray.push(new Promise((resolve) => {
-      prototypoFontFactory.createFont(`choiceFont${i}`, templateNames[font.template.toUpperCase()]).then(
-        (createdFont) => {
-          createdFont.changeParams(font.baseValues);
-          createdFont.changeParams(font.steps[0].choices[i].values);
-          resolve(true);
-          choicesFonts[i] = createdFont;
-        });
-    }));
+    promiseArray.push(
+      new Promise((resolve) => {
+        prototypoFontFactory
+          .createFont(`choiceFont${i}`, templateNames[font.template.toUpperCase()])
+          .then((createdFont) => {
+            createdFont.changeParams(font.baseValues);
+            createdFont.changeParams(font.steps[0].choices[i].values);
+            resolve(true);
+            choicesFonts[i] = createdFont;
+          });
+      }),
+    );
   }
   Promise.all(promiseArray).then(() => {
     dispatch({
@@ -245,7 +262,7 @@ export const stepForward = () => (dispatch, getState) => {
     font,
     choicesMade,
   });
-  dispatch(goToStep(step += 1));
+  dispatch(goToStep((step += 1)));
 };
 
 export const selectChoice = choice => (dispatch, getState) => {
@@ -276,7 +293,7 @@ export const selectChoice = choice => (dispatch, getState) => {
     currentParams,
     choicesMade,
   });
-  dispatch(goToStep(step += 1));
+  dispatch(goToStep((step += 1)));
 };
 
 export const download = () => (dispatch, getState) => {
@@ -287,3 +304,51 @@ export const download = () => (dispatch, getState) => {
   });
 };
 
+export const reloadFonts = () => (dispatch, getState) => {
+  dispatch(setUnstable());
+
+  const { currentPreset, currentParams, baseValues, step } = getState().font;
+  // create userFont
+  prototypoFontFactory
+    .createFont('peasy', templateNames[currentPreset.template.toUpperCase()])
+    .then((createdFont) => {
+      createdFont.changeParams({ ...baseValues, ...currentParams });
+      currentPreset.font = createdFont;
+    });
+  // create choiceFonts
+  const choicesFonts = [];
+  let maxStep = 0;
+  currentPreset.steps.forEach((s) => {
+    if (s.choices.length > maxStep) {
+      maxStep = s.choices.length;
+    }
+  });
+  const promiseArray = [];
+  for (let i = 0; i < maxStep; i += 1) {
+    promiseArray.push(
+      new Promise((resolve) => {
+        prototypoFontFactory
+          .createFont(`choiceFont${i}`, templateNames[currentPreset.template.toUpperCase()])
+          .then((createdFont) => {
+            createdFont.changeParams({
+              ...baseValues,
+              ...currentParams,
+              ...currentPreset.steps[step - 1].choices[i].values,
+            });
+            choicesFonts[i] = createdFont;
+            resolve(true);
+          });
+      }),
+    );
+  }
+  Promise.all(promiseArray).then(() => {
+    dispatch({
+      type: RELOAD_FONTS,
+      choicesFonts,
+      currentPreset,
+      font: currentPreset.font,
+    });
+    dispatch(updateStepValues(step));
+    dispatch(setStable());
+  });
+};

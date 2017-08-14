@@ -1,0 +1,11 @@
+.UnstableView {
+    width: 100vw;
+    height: 100vh;
+}
+
+.UnstableView h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

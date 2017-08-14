@@ -1,5 +1,6 @@
 import Ptypo, { templateNames } from 'prototypo-library';
 import { push } from 'react-router-redux';
+import { setUnstable, setStable } from '../ui';
 
 export const IMPORT_PRESETS_REQUESTED = 'presets/IMPORT_PRESETS_REQUESTED';
 export const IMPORT_PRESETS = 'presets/IMPORT_PRESETS';
@@ -80,5 +81,11 @@ export const loadPresets = () => (dispatch, getState) => {
       presets,
     });
     dispatch(push('/select'));
+    dispatch(setStable());
   });
+};
+
+export const reloadPresets = () => (dispatch) => {
+  dispatch(setUnstable());
+  dispatch(loadPresets());
 };
