@@ -6,12 +6,12 @@ import createHistory from 'history/createBrowserHistory';
 import rootReducer from './index';
 
 export const history = createHistory();
-const namespace = 'peasy';
-const enhancers = [];
-const middleware = [thunk, routerMiddleware(history), save({
+const saveLoadConfig = {
   states: ['font', 'user'],
-  namespace,
-})];
+  namespace: 'peasy',
+};
+const enhancers = [];
+const middleware = [thunk, routerMiddleware(history), save(saveLoadConfig)];
 
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
@@ -23,6 +23,6 @@ if (process.env.NODE_ENV === 'development') {
 
 const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
 
-const store = createStore(rootReducer, load({ namespace }), composedEnhancers);
+const store = createStore(rootReducer, load(saveLoadConfig), composedEnhancers);
 
 export default store;
