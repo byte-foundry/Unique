@@ -9,6 +9,8 @@ import './SpecimenView.css';
 import Button from '../../components/button/';
 import { storeEmail } from '../../data/user';
 
+const isEmail = string => new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(string);
+
 class SpecimenView extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,9 @@ class SpecimenView extends React.Component {
     this.setState({ email: event.target.value });
   }
   handleSubmit(event) {
-    this.props.storeEmail(this.state.email);
+    if (isEmail(this.state.email)) {
+      this.props.storeEmail(this.state.email);
+    }
     event.preventDefault();
   }
   render() {
