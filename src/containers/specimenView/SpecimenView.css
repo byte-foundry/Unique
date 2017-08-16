@@ -28,6 +28,11 @@
   font-size: 22px;
 }
 
+.SpecimenView .StepList {
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
 .SpecimenView .specimen .left {
   width: 50%;
   margin-right: 50px;

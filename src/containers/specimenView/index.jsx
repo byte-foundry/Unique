@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './SpecimenView.css';
+import StepList from '../stepList/';
 import Button from '../../components/button/';
 import { storeEmail } from '../../data/user';
 
@@ -68,6 +69,7 @@ class SpecimenView extends React.Component {
             <p>The quick brown fox jumps over the lazy dog</p>
             <p>Buvez de ce whisky que le patron juge fameux</p>
           </div>
+          <StepList />
         </div>
         <form onSubmit={this.handleSubmit}>
           <input type="email" placeholder="your email" name="email" onChange={this.handleChange} />
