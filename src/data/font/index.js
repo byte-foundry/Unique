@@ -24,7 +24,7 @@ const initialState = {
   step: 0,
   isLoading: false,
   stepBaseValues: {},
-  choicesMade: [],
+  choicesMade: [null],
   choicesFonts: [],
   currentParams: {},
   need: '',
@@ -72,7 +72,7 @@ export default (state = initialState, action) => {
         initialValues: action.initialValues,
         isLoading: false,
         stepBaseValues: action.stepBaseValues,
-        choicesMade: [],
+        choicesMade: [null],
         choicesFonts: action.choicesFonts,
         currentParams: {},
       };
