@@ -8,7 +8,7 @@ import Step from '../../components/step/';
 import { goToStep } from '../../data/font';
 import './StepList.css';
 
-const getStepsDone = (steps, index, choicesMade) =>
+const getStepsDone = (steps, index, choicesMade, fontName) =>
   choicesMade.map((choice, i) => {
     if (i > 0) {
       return (
@@ -21,6 +21,7 @@ const getStepsDone = (steps, index, choicesMade) =>
         />
       );
     }
+    return (<Link key="template" to="/"><div className="Step">Template: {fontName}</div></Link>);
   });
 
 const StepList = props => (
@@ -35,8 +36,7 @@ const StepList = props => (
       />
     ))}
     <h2>Choices made:</h2>
-    <Link key="template" to="/"><div className="Step">Template: {props.fontName}</div></Link>
-    {getStepsDone(props.steps, props.step, props.choicesMade)}
+    {getStepsDone(props.steps, props.step, props.choicesMade, props.fontName)}
   </div>
 );
 
