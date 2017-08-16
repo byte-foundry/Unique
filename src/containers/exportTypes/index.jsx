@@ -11,17 +11,9 @@ const choices = [
   {
     type: 'download',
     title: 'Download your font',
-    description: (<span>
-      <p>
-        Télécharger une font,
-        l&apos;utiliser sur son ordinateur, indesign, toshop ou la remodifier
-      </p>
-      <p>
-        La mettre sur son serveur, la vendre, etc
-      </p>
-    </span>),
     price: 15,
     paymentDescription: 'One time payment',
+    direct: true,
   },
   {
     type: 'host',
@@ -68,13 +60,13 @@ class ExportTypes extends React.Component {
   }
   render() {
     return (
-      <div className={`ExportTypes ${this.state.chosenType ? 'expanded' : ''}`}>
+      <div className={`ExportTypes ${this.state.chosenType && !this.state.chosenType.direct ? 'expanded' : ''}`}>
         <h1>{this.state.chosenType
           ? this.state.chosenType.title
           : 'What do you want to do with your font?'
         }</h1>
         <div className="needs">
-          {this.state.chosenType
+          {this.state.chosenType && !this.state.chosenType.direct
           ? (
             <ExportType
               choice={this.state.chosenType}

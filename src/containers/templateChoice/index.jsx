@@ -14,12 +14,12 @@ const TemplateChoice = props => (
   <div className="TemplateChoice">
     <h1>Pick something that you like and edit it!</h1>
     <Button label="Back" onClick={() => props.redirectToHome()} />
-    <div className="template-wrapper">
-      {props.presets.map(font => <Template key={`${font.preset}${font.variant}`} font={font} selectFont={props.selectFont} />)}
-    </div>
     {props.isLoading
     ? (<h2>Loading font...</h2>)
     : false}
+    <div className="template-wrapper">
+      {props.presets.map(font => <Template key={`${font.preset}${font.variant}`} font={font} selectFont={props.selectFont} />)}
+    </div>
   </div>
 );
 
