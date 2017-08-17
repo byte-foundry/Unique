@@ -10,7 +10,7 @@ const Step = props => (
   <div
     role="button"
     className="Step"
-    onClick={() => props.goToStep(props.index)}
+    onClick={() => props.goToStep(props.index, props.specimen)}
     tabIndex="0"
   >
     {`${props.current ? '> ' : ''}${props.title}${props.choice ? `: ${props.choice}` : ''}`}
@@ -23,10 +23,12 @@ Step.propTypes = {
   goToStep: PropTypes.func.isRequired,
   current: PropTypes.bool.isRequired,
   choice: PropTypes.string,
+  specimen: PropTypes.bool,
 };
 
 Step.defaultProps = {
   choice: 'no choice',
+  specimen: false,
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({ goToStep }, dispatch);

@@ -74,7 +74,7 @@ ExportType.propTypes = {
   storeExportType: PropTypes.func.isRequired,
   choice: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    description: PropTypes.element.isRequired,
+    description: PropTypes.element,
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     paymentDescription: PropTypes.string.isRequired,

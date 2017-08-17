@@ -102,7 +102,7 @@ App.propTypes = {
   selectedFont: PropTypes.string,
   userEmail: PropTypes.string.isRequired,
   hasPayed: PropTypes.bool.isRequired,
-  selectedFontChangeParams: PropTypes.func.isRequired,
+  selectedFontChangeParams: PropTypes.func,
   hasPresets: PropTypes.bool.isRequired,
   pathname: PropTypes.string.isRequired,
   need: PropTypes.string.isRequired,
@@ -113,6 +113,7 @@ App.propTypes = {
 
 App.defaultProps = {
   selectedFont: '',
+  selectedFontChangeParams: undefined,
 };
 
 const mapStateToProps = state => ({

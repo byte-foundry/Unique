@@ -69,7 +69,7 @@ class SpecimenView extends React.Component {
             <p>The quick brown fox jumps over the lazy dog</p>
             <p>Buvez de ce whisky que le patron juge fameux</p>
           </div>
-          <StepList />
+          <StepList specimen />
         </div>
         <form onSubmit={this.handleSubmit}>
           <input type="email" placeholder="your email" name="email" onChange={this.handleChange} />

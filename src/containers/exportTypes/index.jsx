@@ -1,8 +1,10 @@
 // @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { storeExportType } from '../../data/user';
 import ExportType from '../../components/exportType/';
 import './ExportTypes.css';
 
@@ -54,6 +56,9 @@ class ExportTypes extends React.Component {
   }
   selectChoice(type) {
     this.setState({ chosenType: type });
+    if (type.type === 'download') {
+      this.props.storeExportType(type.type);
+    }
   }
   removeChoice() {
     this.setState({ chosenType: undefined });
@@ -91,8 +96,10 @@ class ExportTypes extends React.Component {
 
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ storeExportType }, dispatch);
 
-ExportTypes.propTypes = {};
+ExportTypes.propTypes = {
+  storeExportType: PropTypes.func.isRequired,
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ExportTypes));

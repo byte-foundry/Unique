@@ -8,7 +8,7 @@ import Step from '../../components/step/';
 import { goToStep } from '../../data/font';
 import './StepList.css';
 
-const getStepsDone = (steps, index, choicesMade, fontName) =>
+const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
   choicesMade.map((choice, i) =>
     (i === 0
       ? (
@@ -25,13 +25,14 @@ const getStepsDone = (steps, index, choicesMade, fontName) =>
           key={steps[i - 1].name}
           current={index === i}
           choice={choice.name}
+          specimen={isSpecimen}
         />
       )),
   );
 
 const StepList = props =>
   (<div className="StepList">
-    {props.steps.map((step, index) =>
+    {!props.specimen && props.steps.map((step, index) =>
       (<div
         className={`bubble ${props.step > index + 1 ? 'past' : ''} ${props.step === index + 1
           ? 'active'
@@ -42,8 +43,8 @@ const StepList = props =>
         role="button"
       />),
     )}
-    <h2>Choices made:</h2>    
-    {getStepsDone(props.steps, props.step, props.choicesMade, props.fontName)}
+    <h2>Choices made:</h2>
+    {getStepsDone(props.steps, props.step, props.choicesMade, props.fontName, props.specimen)}
   </div>);
 
 StepList.propTypes = {
@@ -65,6 +66,11 @@ StepList.propTypes = {
     }),
   ).isRequired,
   fontName: PropTypes.string.isRequired,
+  specimen: PropTypes.bool,
+};
+
+StepList.defaultProps = {
+  specimen: false,
 };
 
 const mapStateToProps = state => ({

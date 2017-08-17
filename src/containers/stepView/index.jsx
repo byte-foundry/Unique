@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { stepForward, selectChoice } from '../../data/font';
+import { stepForward, stepBack, selectChoice } from '../../data/font';
 import Choice from '../../components/choice/';
 import WordView from '../wordView/';
 import Button from '../../components/button/';
@@ -58,19 +58,27 @@ class StepView extends React.Component {
         </div>
         <div className="actions">
           <Button
-            className="nextStep"
-            label="Skip"
-            onClick={this.props.stepForward}
+            className="previousStep"
+            label="Back"
+            onClick={this.props.stepBack}
           />
-          <Button
-            className="nextStep"
-            label="OK"
-            onClick={() => (
-              Object.keys(this.state.choice).length > 0
-              ? this.props.selectChoice(this.state.choice)
-              : this.props.stepForward()
-            )}
-          />
+          {
+            Object.keys(this.state.choice || {}).length > 0
+              ? (
+                <Button
+                  className="nextStep"
+                  label="OK"
+                  onClick={() => this.props.selectChoice(this.state.choice)}
+                />
+                )
+              : (
+                <Button
+                  className="nextStep"
+                  label="I like it that way"
+                  onClick={this.props.stepForward}
+                />
+                )
+          }
         </div>
       </div>
     );
@@ -84,11 +92,13 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
   stepForward,
+  stepBack,
   selectChoice,
 }, dispatch);
 
 StepView.propTypes = {
   stepForward: PropTypes.func.isRequired,
+  stepBack: PropTypes.func.isRequired,
   selectChoice: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
   choicesMade: PropTypes.arrayOf(

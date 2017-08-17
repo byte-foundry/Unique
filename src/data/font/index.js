@@ -232,7 +232,7 @@ const updateFont = () => (dispatch, getState) => {
   });
 };
 
-export const goToStep = step => (dispatch, getState) => {
+export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
   const { currentPreset } = getState().font;
   switch (step) {
     case 0:
@@ -248,6 +248,9 @@ export const goToStep = step => (dispatch, getState) => {
         type: CHANGE_STEP,
         step,
       });
+      if (isSpecimen) {
+        dispatch(push('/customize'));
+      }
       break;
   }
 };
@@ -263,6 +266,11 @@ export const stepForward = () => (dispatch, getState) => {
     choicesMade,
   });
   dispatch(goToStep((step += 1)));
+};
+
+export const stepBack = () => (dispatch, getState) => {
+  let { step } = getState().font;
+  dispatch(goToStep((step -= 1)));
 };
 
 export const selectChoice = choice => (dispatch, getState) => {
