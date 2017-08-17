@@ -15,7 +15,7 @@ const Choice = props => (
     tabIndex={0}
     style={{ fontFamily: `choiceFont${props.index}` }}
   >
-    Hamburgefonstiv - Abc 123
+    {props.text}
   </div>
 );
 
@@ -28,6 +28,11 @@ Choice.propTypes = {
   }).isRequired,
   index: PropTypes.number.isRequired,
   selected: PropTypes.bool.isRequired,
+  text: PropTypes.string,
+};
+
+Choice.defaultProps = {
+  text: 'Hamburgefonstiv - Abc 123',
 };
 
 export default Choice;

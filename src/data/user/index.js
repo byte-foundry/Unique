@@ -2,12 +2,14 @@ import { push } from 'react-router-redux';
 
 export const STORE_USER_EMAIL = 'user/STORE_USER_EMAIL';
 export const STORE_EXPORT_TYPE = 'user/STORE_EXPORT_TYPE';
+export const STORE_CHOSEN_WORD = 'user/STORE_CHOSEN_WORD';
 export const PAYMENT_SUCCESSFUL = 'user/PAYMENT_SUCCESSFUL';
 
 const initialState = {
   email: '',
   exportType: undefined,
   hasPayed: false,
+  chosenWord: 'Hamburgefonstiv - Abc 123',
 };
 
 export default (state = initialState, action) => {
@@ -30,6 +32,12 @@ export default (state = initialState, action) => {
         hasPayed: true,
       };
 
+    case STORE_CHOSEN_WORD:
+      return {
+        ...state,
+        chosenWord: action.chosenWord,
+      };
+
     default:
       return state;
   }
@@ -49,6 +57,14 @@ export const storeExportType = exportType => (dispatch) => {
     exportType,
   });
 };
+
+export const storeChosenWord = chosenWord => (dispatch) => {
+  dispatch({
+    type: STORE_CHOSEN_WORD,
+    chosenWord,
+  });
+};
+
 
 export const afterPayment = () => (dispatch, getState) => {
   const { exportType } = getState().user;

@@ -18,7 +18,7 @@ const TemplateChoice = props => (
     ? (<h2>Loading font...</h2>)
     : false}
     <div className="template-wrapper">
-      {props.presets.map(font => <Template key={`${font.preset}${font.variant}`} font={font} selectFont={props.selectFont} />)}
+      {props.presets.map(font => <Template key={`${font.preset}${font.variant}`} font={font} selectFont={props.selectFont} text={props.chosenWord} />)}
     </div>
   </div>
 );
@@ -26,6 +26,7 @@ const TemplateChoice = props => (
 const mapStateToProps = state => ({
   presets: state.presets.presets,
   isLoading: state.font.isLoading,
+  chosenWord: state.user.chosenWord,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({ selectFont, redirectToHome: () => push('/') }, dispatch);
 
@@ -39,6 +40,11 @@ TemplateChoice.propTypes = {
       variant: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  chosenWord: PropTypes.string,
+};
+
+TemplateChoice.defaultProps = {
+  chosenWord: 'Hamburgefonstiv - Abc 123',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TemplateChoice);

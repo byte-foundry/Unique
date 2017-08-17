@@ -39,7 +39,7 @@ class StepView extends React.Component {
   render() {
     return (
       <div className="StepView">
-        <WordView word="Hamburgefonstiv - Abc 123" />
+        <WordView word={this.props.chosenWord} />
         <div className="description">
           <h2>{this.props.stepValues.name}:</h2>
           <p>{this.props.stepValues.description}</p>
@@ -53,6 +53,7 @@ class StepView extends React.Component {
               selectChoice={this.props.selectChoice}
               index={index}
               selected={this.state.choice === choice}
+              text={this.props.chosenWord}
             />),
           )}
         </div>
@@ -89,6 +90,7 @@ const mapStateToProps = state => ({
   stepValues: state.font.currentPreset.steps[state.font.step - 1],
   step: state.font.step,
   choicesMade: state.font.choicesMade,
+  chosenWord: state.user.chosenWord,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
   stepForward,
@@ -115,6 +117,7 @@ StepView.propTypes = {
       }),
     ),
   }).isRequired,
+  chosenWord: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);

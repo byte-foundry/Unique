@@ -11,7 +11,7 @@ const Template = props => (
     tabIndex="0"
     style={{ fontFamily: `${props.font.preset}${props.font.variant}` }}
   >
-    Hamburgefonstiv - Abc 123
+    {props.text}
   </div>
 );
 
@@ -22,6 +22,11 @@ Template.propTypes = {
     variant: PropTypes.string.isRequired,
   }).isRequired,
   selectFont: PropTypes.func.isRequired,
+  text: PropTypes.string,
+};
+
+Template.defaultProps = {
+  text: 'Hamburgefonstiv - Abc 123',
 };
 
 export default Template;
