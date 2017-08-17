@@ -23,7 +23,7 @@ const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
           index={i}
           title={steps[i - 1].name}
           key={steps[i - 1].name}
-          current={index === i}
+          current={index === i && !isSpecimen}
           choice={choice.name}
           specimen={isSpecimen}
         />
