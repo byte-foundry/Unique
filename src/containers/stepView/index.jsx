@@ -34,7 +34,7 @@ class StepView extends React.Component {
           choice => choice.name === props.choicesMade[props.step].name,
         ),
       });
-    }
+    } else this.setState({ choice: {} });
   }
   render() {
     return (
