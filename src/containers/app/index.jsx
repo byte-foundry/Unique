@@ -42,9 +42,23 @@ class App extends React.Component {
     return this.props.selectedFont !== '';
   }
   hasSuccessfulPayment() {
+    if (
+      this.props.hasPayed === true &&
+      !(typeof this.props.selectedFontChangeParams === typeof Function)
+    ) {
+      this.props.reloadFonts();
+      return true;
+    }
     return this.props.hasPayed === true;
   }
   hasMailRegistered() {
+    if (
+      this.props.userEmail !== '' &&
+      !(typeof this.props.selectedFontChangeParams === typeof Function)
+    ) {
+      this.props.reloadFonts();
+      return true;
+    }
     return this.props.userEmail !== '';
   }
   hasSelectedNeed() {
