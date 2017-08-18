@@ -49,6 +49,7 @@
 }
 
 .StepView .choiceMore.selected {
+  border-style: solid;
   border-color: red;
   font-family: 'sliderFont';
   font-size: 69px;
