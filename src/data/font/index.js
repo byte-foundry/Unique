@@ -26,6 +26,7 @@ const initialState = {
   stepBaseValues: {},
   choicesMade: [null],
   choicesFonts: [],
+  sliderFont: {},
   currentParams: {},
   need: '',
 };
@@ -75,6 +76,7 @@ export default (state = initialState, action) => {
         choicesMade: [null],
         choicesFonts: action.choicesFonts,
         currentParams: {},
+        sliderFont: action.sliderFont,
       };
 
     case SELECT_CHOICE_REQUESTED:
@@ -101,6 +103,7 @@ export default (state = initialState, action) => {
         ...state,
         font: action.font,
         choicesFonts: action.choicesFonts,
+        sliderFont: action.sliderFont,
       };
 
     case RELOAD_FONTS:
@@ -109,6 +112,7 @@ export default (state = initialState, action) => {
         currentPreset: action.currentPreset,
         choicesFonts: action.choicesFonts,
         font: action.font,
+        sliderFont: action.sliderFont,
       };
 
     default:
@@ -172,6 +176,18 @@ export const selectFont = font => (dispatch, getState) => {
       }),
     );
   }
+  let sliderFont = {};
+  promiseArray.push(
+      new Promise((resolve) => {
+        prototypoFontFactory
+          .createFont('sliderFont', templateNames[font.template.toUpperCase()])
+          .then((createdFont) => {
+            createdFont.changeParams(font.baseValues);
+            sliderFont = createdFont;
+            resolve(true);
+          });
+      }),
+    );
   Promise.all(promiseArray).then(() => {
     dispatch({
       type: SELECT_FONT,
@@ -180,6 +196,7 @@ export const selectFont = font => (dispatch, getState) => {
       initialValues: { ...font.baseValues },
       stepBaseValues: { ...font.baseValues },
       choicesFonts,
+      sliderFont,
     });
     dispatch(push('/customize'));
   });
@@ -200,6 +217,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     currentParams,
     stepBaseValues,
     choicesMade,
+    sliderFont,
   } = getState().font;
   const curFont = font || getState().font.font;
   const stepToUpdate = step || getState().font.step;
@@ -214,21 +232,25 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     }
     choicesFonts[index].changeParams({ ...stepBaseValues, ...currentParams, ...stepChoices });
   });
+  sliderFont.changeParams({ ...stepBaseValues, ...currentParams });
   curFont.changeParams({ ...stepBaseValues, ...currentParams });
   dispatch({
     type: UPDATE_VALUES,
     font: curFont,
     choicesFonts,
+    sliderFont,
   });
 };
 
 const updateFont = () => (dispatch, getState) => {
-  const { font, currentParams, choicesFonts, stepBaseValues } = getState().font;
+  const { font, currentParams, choicesFonts, stepBaseValues, sliderFont } = getState().font;
   font.changeParams({ ...stepBaseValues, ...currentParams });
+  sliderFont.changeParams({ ...stepBaseValues, ...currentParams });
   dispatch({
     type: UPDATE_VALUES,
     font,
     choicesFonts,
+    sliderFont,
   });
 };
 
@@ -312,6 +334,11 @@ export const download = () => (dispatch, getState) => {
   });
 };
 
+export const updateSliderFont = (newParams) => (dispatch, getState) => {
+  const { sliderFont } = getState().font;
+  sliderFont.changeParam(newParams.name, parseFloat(newParams.value));
+};
+
 export const reloadFonts = () => (dispatch, getState) => {
   dispatch(setUnstable());
 
@@ -349,12 +376,28 @@ export const reloadFonts = () => (dispatch, getState) => {
       }),
     );
   }
+  let sliderFont = {};
+  promiseArray.push(
+      new Promise((resolve) => {
+        prototypoFontFactory
+          .createFont('sliderFont', templateNames[currentPreset.template.toUpperCase()])
+          .then((createdFont) => {
+            createdFont.changeParams({
+              ...baseValues,
+              ...currentParams,
+            });
+            sliderFont = createdFont;
+            resolve(true);
+          });
+      }),
+    );
   Promise.all(promiseArray).then(() => {
     dispatch({
       type: RELOAD_FONTS,
       choicesFonts,
       currentPreset,
       font: currentPreset.font,
+      sliderFont,
     });
     dispatch(updateStepValues(step, currentPreset.font));
     dispatch(setStable());

@@ -31,3 +31,25 @@
   padding: 10px 20px;
   border: 1px solid black;
 }
+
+
+.StepView .choiceMore {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+  border: 1px dashed black;
+  padding: 10px 20px;
+  font-size: 40px;
+  margin-top: 20px;
+}
+
+.StepView .choiceMore:focus {
+  outline: none;
+}
+
+.StepView .choiceMore.selected {
+  border-color: red;
+  font-family: 'sliderFont';
+  font-size: 69px;
+}

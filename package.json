@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "history": "^4.6.3",
+    "lodash.debounce": "^4.0.8",
     "prop-types": "^15.5.10",
     "prototypo-library": "^1.0.10",
     "react": "^15.5.4",
