@@ -3,6 +3,8 @@ import saveAs from 'save-as';
 import { push } from 'react-router-redux';
 import { loadPresets } from '../presets';
 import { setUnstable, setStable } from '../ui';
+import { storeChosenWord } from '../user';
+import { DEFAULT_UI_WORD } from '../constants';
 
 export const CREATE_REQUESTED = 'font/CREATE_REQUESTED';
 export const CREATE = 'font/CREATE';
@@ -203,6 +205,9 @@ export const selectFont = font => (dispatch, getState) => {
 };
 
 export const defineNeed = need => (dispatch) => {
+  if (need !== 'logo') {
+    dispatch(storeChosenWord(DEFAULT_UI_WORD));
+  }
   dispatch({
     type: DEFINE_NEED,
     need,

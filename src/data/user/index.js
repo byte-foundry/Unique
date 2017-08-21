@@ -1,4 +1,5 @@
 import { push } from 'react-router-redux';
+import { DEFAULT_UI_WORD } from '../constants';
 
 export const STORE_USER_EMAIL = 'user/STORE_USER_EMAIL';
 export const STORE_EXPORT_TYPE = 'user/STORE_EXPORT_TYPE';
@@ -9,7 +10,7 @@ const initialState = {
   email: '',
   exportType: undefined,
   hasPayed: false,
-  chosenWord: 'Hamburgefonstiv - Abc 123',
+  chosenWord: DEFAULT_UI_WORD,
 };
 
 export default (state = initialState, action) => {

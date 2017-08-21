@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { DEFAULT_UI_WORD } from '../../data/constants';
 import './WordView.css';
 
 const WordView = props => (
@@ -19,7 +20,7 @@ WordView.propTypes = {
 };
 
 WordView.defaultProps = {
-  word: 'Hello prototypo',
+  word: DEFAULT_UI_WORD,
   fontName: 'ptypo',
 };
 
