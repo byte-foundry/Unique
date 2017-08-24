@@ -4,6 +4,7 @@ class ContentEditable extends React.Component {
   constructor() {
     super();
     this.emitChange = this.emitChange.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
   }
 
   render() {
@@ -15,6 +16,7 @@ class ContentEditable extends React.Component {
         ...props,
         ref: e => (this.htmlEl = e),
         onInput: this.emitChange,
+        onKeyDown: this.onKeyDown,
         onBlur: this.props.onBlur || this.emitChange,
         contentEditable: !this.props.disabled,
         dangerouslySetInnerHTML: { __html: html },
@@ -42,6 +44,14 @@ class ContentEditable extends React.Component {
       // rerendering) did not update the DOM. So we update it manually now.
       this.htmlEl.innerHTML = this.props.html;
     }
+  }
+
+  onKeyDown(evt) {
+    if (evt.keyCode === 13) {
+      evt.preventDefault();
+      return false;
+    }
+    return true;
   }
 
   emitChange(evt) {
