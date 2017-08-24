@@ -7,7 +7,7 @@ import { setUnstable, setStable } from '../ui';
 import { storeChosenWord } from '../user';
 import { DEFAULT_UI_WORD } from '../constants';
 import { GRAPHQL_API } from '../constants';
-import { getSelectedCount, updateSelectedCount, getPresetExportedCount, updatePresetExportedCount } from '../queries';
+import { getSelectedCount, updateSelectedCount, getPresetExportedCount, updatePresetExportedCount, getSpecialChoiceSelectedCount } from '../queries';
 
 export const CREATE_REQUESTED = 'font/CREATE_REQUESTED';
 export const CREATE = 'font/CREATE';
@@ -305,6 +305,9 @@ export const stepForward = () => (dispatch, getState) => {
     choicesMade,
   });
   dispatch(goToStep((step += 1)));
+  request(GRAPHQL_API, getSpecialChoiceSelectedCount('No choice'))
+  .then(data => request(GRAPHQL_API, updateSelectedCount('Choice', data.allChoices[0].id, data.allChoices[0].selected + 1)))
+  .catch(error => console.log(error));
 };
 
 export const stepBack = () => (dispatch, getState) => {
@@ -341,9 +344,15 @@ export const selectChoice = choice => (dispatch, getState) => {
     choicesMade,
   });
   dispatch(goToStep((step += 1)));
-  request(GRAPHQL_API, getSelectedCount('Choice', choice.id))
+  if (choice.name === 'custom') {
+    request(GRAPHQL_API, getSpecialChoiceSelectedCount('custom'))
+      .then(data => request(GRAPHQL_API, updateSelectedCount('Choice', data.allChoices[0].id, data.allChoices[0].selected + 1)))
+      .catch(error => console.log(error));
+  } else {
+    request(GRAPHQL_API, getSelectedCount('Choice', choice.id))
       .then(data => request(GRAPHQL_API, updateSelectedCount('Choice', choice.id, data.Choice.selected + 1)))
       .catch(error => console.log(error));
+  }
 };
 
 export const download = () => (dispatch, getState) => {
@@ -353,7 +362,7 @@ export const download = () => (dispatch, getState) => {
     saveAs(blob, `${font.fontName}.otf`);
   });
   request(GRAPHQL_API, getPresetExportedCount(font.id))
-      .then(data => request(GRAPHQL_API, updateSelectedCount(font.id, data.Preset.exported + 1)))
+      .then(data => request(GRAPHQL_API, updatePresetExportedCount(font.id, data.Preset.exported + 1)))
       .catch(error => console.log(error));
 };
 

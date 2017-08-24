@@ -77,6 +77,17 @@ export const updateSelectedCount = (type, id, count) => `
 `;
 
 
+export const getSpecialChoiceSelectedCount = name => `
+{
+    allChoices(filter: {name_contains: "${name}"}) {
+      id
+      selected
+    }
+  }
+  
+`;
+
+
 export const getPresetExportedCount = id => `
     query {
         Preset (id: "${id}") {
