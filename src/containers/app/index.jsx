@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { request } from 'graphql-request';
 import { importPresets, reloadPresets } from '../../data/presets';
 import { reloadFonts } from '../../data/font';
+import { GRAPHQL_API } from '../../data/constants';
+import { getAllPresets } from '../../data/queries';
 import './App.css';
 
 import ProtectedRoute from '../../components/protectedRoute/';
@@ -19,16 +22,12 @@ import Success from '../success/';
 
 import UnstableView from '../unstableView';
 
-const context = require.context('../../data/presets', true, /^(.*\.(json$))[^.]*$/gim);
-const presets = {};
-
 class App extends React.Component {
   constructor(props) {
     super(props);
-    context.keys().forEach((filename) => {
-      presets[filename] = context(filename);
-    });
-    props.importPresets(presets);
+    request(GRAPHQL_API, getAllPresets)
+      .then(data => props.importPresets(data.allPresets))
+      .catch(error => console.log(error));
   }
   hasSelectedFont() {
     if (

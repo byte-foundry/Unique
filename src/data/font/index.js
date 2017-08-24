@@ -1,10 +1,13 @@
 import Ptypo, { templateNames } from 'prototypo-library';
 import saveAs from 'save-as';
 import { push } from 'react-router-redux';
+import { request } from 'graphql-request';
 import { loadPresets } from '../presets';
 import { setUnstable, setStable } from '../ui';
 import { storeChosenWord } from '../user';
 import { DEFAULT_UI_WORD } from '../constants';
+import { GRAPHQL_API } from '../constants';
+import { getSelectedCount, updateSelectedCount, getPresetExportedCount, updatePresetExportedCount } from '../queries';
 
 export const CREATE_REQUESTED = 'font/CREATE_REQUESTED';
 export const CREATE = 'font/CREATE';
@@ -191,6 +194,9 @@ export const selectFont = font => (dispatch, getState) => {
       }),
     );
   Promise.all(promiseArray).then(() => {
+    request(GRAPHQL_API, getSelectedCount('Preset', font.id))
+      .then(data => request(GRAPHQL_API, updateSelectedCount('Preset', font.id, data.Preset.selected + 1)))
+      .catch(error => console.log(error));
     dispatch({
       type: SELECT_FONT,
       font: font.font,
@@ -201,6 +207,9 @@ export const selectFont = font => (dispatch, getState) => {
       sliderFont,
     });
     dispatch(push('/customize'));
+    request(GRAPHQL_API, getSelectedCount('Step', font.steps[0].id))
+      .then(data => request(GRAPHQL_API, updateSelectedCount('Step', font.steps[0].id, data.Step.selected + 1)))
+      .catch(error => console.log(error));
   });
 };
 
@@ -226,6 +235,9 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
   } = getState().font;
   const curFont = font || getState().font.font;
   const stepToUpdate = step || getState().font.step;
+  console.log('==========UPDATESTEPVALUES============');
+  console.log(stepToUpdate);
+  console.log('====================================');
   currentPreset.steps[stepToUpdate - 1].choices.forEach((choice, index) => {
     const stepChoices = { ...choice.values };
     if (choicesMade[stepToUpdate]) {
@@ -239,6 +251,9 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
   });
   sliderFont.changeParams({ ...stepBaseValues, ...currentParams });
   curFont.changeParams({ ...stepBaseValues, ...currentParams });
+  request(GRAPHQL_API, getSelectedCount('Step', currentPreset.steps[stepToUpdate - 1].id))
+      .then(data => request(GRAPHQL_API, updateSelectedCount('Step', currentPreset.steps[stepToUpdate - 1].id, data.Step.selected + 1)))
+      .catch(error => console.log(error));
   dispatch({
     type: UPDATE_VALUES,
     font: curFont,
@@ -329,6 +344,9 @@ export const selectChoice = choice => (dispatch, getState) => {
     choicesMade,
   });
   dispatch(goToStep((step += 1)));
+  request(GRAPHQL_API, getSelectedCount('Choice', choice.id))
+      .then(data => request(GRAPHQL_API, updateSelectedCount('Choice', choice.id, data.Choice.selected + 1)))
+      .catch(error => console.log(error));
 };
 
 export const download = () => (dispatch, getState) => {
@@ -337,6 +355,9 @@ export const download = () => (dispatch, getState) => {
     const blob = new Blob([data], { type: 'application/x-font-opentype' });
     saveAs(blob, `${font.fontName}.otf`);
   });
+  request(GRAPHQL_API, getPresetExportedCount(font.id))
+      .then(data => request(GRAPHQL_API, updateSelectedCount(font.id, data.Preset.exported + 1)))
+      .catch(error => console.log(error));
 };
 
 export const updateSliderFont = (newParams) => (dispatch, getState) => {
