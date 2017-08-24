@@ -34,7 +34,6 @@ export const storePreset = preset => `
 export const getAllPresets = `
     query {allPresets {
     id
-    name
     preset
     variant
     template
@@ -60,7 +59,6 @@ export const getAllPresets = `
 export const getSelectedCount = (type, id) => `
     query {
         ${type} (id: "${id}") {
-            name
             selected
         }
     }
@@ -82,7 +80,6 @@ export const updateSelectedCount = (type, id, count) => `
 export const getPresetExportedCount = id => `
     query {
         Preset (id: "${id}") {
-            name
             exported
         }
     }

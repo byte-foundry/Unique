@@ -235,9 +235,6 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
   } = getState().font;
   const curFont = font || getState().font.font;
   const stepToUpdate = step || getState().font.step;
-  console.log('==========UPDATESTEPVALUES============');
-  console.log(stepToUpdate);
-  console.log('====================================');
   currentPreset.steps[stepToUpdate - 1].choices.forEach((choice, index) => {
     const stepChoices = { ...choice.values };
     if (choicesMade[stepToUpdate]) {
