@@ -22,14 +22,17 @@ class WordView extends React.Component {
           <ContentEditable
             html={`<span>${this.state.word}</span>`}
             disabled={false}
-            onChange={(event) => { this.props.storeChosenWord(event.target.value.replace(/<\/?span[^>]*>/g, '')); }}
+            onChange={(event) => {
+              this.props.storeChosenWord(
+                event.target.value.replace(/<\/?span[^>]*>/g, '').replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, ''),
+              );
+            }}
           />
         </p>
       </div>
     );
   }
 }
-
 
 WordView.propTypes = {
   word: PropTypes.string,
@@ -42,12 +45,12 @@ WordView.defaultProps = {
   fontName: 'ptypo',
 };
 const mapDispatchToProps = dispatch =>
-bindActionCreators(
-  {
-    storeChosenWord,
-  },
-  dispatch,
-);
+  bindActionCreators(
+    {
+      storeChosenWord,
+    },
+    dispatch,
+  );
 const mapStateToProps = state => ({
   fontName: state.font.currentPreset.preset + state.font.currentPreset.variant,
 });
