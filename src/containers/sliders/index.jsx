@@ -5,24 +5,25 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
+import { params } from '../../data/labels';
 import './Sliders.css';
 
 const getBaseParams = (values, choices, controls) => {
-  const params = [];
+  const customParams = [];
   const keys = {};
   choices.forEach((choice) => {
     Object.keys(choice.values).forEach((key) => {
       if (!keys[key] && key !== 'manualChanges' && key !== 'name') {
-        params.push({ name: key, initialValue: values[key] });
+        customParams.push({ name: params[key].title, initialValue: values[key], key });
         keys[key] = true;
       }
     });
   });
 
-  params.forEach((param) => {
+  customParams.forEach((param) => {
     controls.forEach((control) => {
       control.parameters.forEach((controlParam) => {
-        if (param.name === controlParam.name) {
+        if (param.key === controlParam.name) {
           param.minValue = controlParam.minAdvised;
           param.maxValue = controlParam.maxAdvised;
           param.step = controlParam.step;
@@ -30,7 +31,7 @@ const getBaseParams = (values, choices, controls) => {
       });
     });
   });
-  return params;
+  return customParams;
 };
 
 class Sliders extends React.Component {
@@ -50,6 +51,10 @@ class Sliders extends React.Component {
   }
 
   onSliderChange(e, name) {
+    console.log('============name===============');
+    console.log(name);
+    console.log('====================================');
+    console.log(this.state.values);
     const values = this.state.values;
     values[name] = e.target.value;
     this.setState({ values });
@@ -71,7 +76,7 @@ class Sliders extends React.Component {
               max={param.maxValue}
               step={param.step}
               defaultValue={param.initialValue}
-              onChange={(event) => { event.persist(); this.onSliderChange(event, param.name); }}
+              onChange={(event) => { event.persist(); this.onSliderChange(event, param.key); }}
             />
           </div>),
         )}
