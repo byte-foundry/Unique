@@ -247,7 +247,9 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     choicesFonts[index].changeParams({ ...stepBaseValues, ...currentParams, ...stepChoices });
   });
   sliderFont.changeParams({ ...stepBaseValues, ...currentParams });
-  curFont.changeParams({ ...stepBaseValues, ...currentParams });
+  if (curFont.changeParams) {
+    curFont.changeParams({ ...stepBaseValues, ...currentParams });
+  }
   request(GRAPHQL_API, getSelectedCount('Step', currentPreset.steps[stepToUpdate - 1].id))
       .then(data => request(GRAPHQL_API, updateSelectedCount('Step', currentPreset.steps[stepToUpdate - 1].id, data.Step.selected + 1)))
       .catch(error => console.log(error));
