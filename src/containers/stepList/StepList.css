@@ -25,3 +25,7 @@
 .StepList .bubble.active {
   background-color: black;
 }
+
+.StepList .finish {
+  display: inline-block;
+}

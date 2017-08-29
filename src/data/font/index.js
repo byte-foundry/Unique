@@ -19,6 +19,7 @@ export const UPDATE_VALUES = 'font/UPDATE_VALUES';
 export const SELECT_CHOICE_REQUESTED = 'font/SELECT_CHOICE_REQUESTED';
 export const SELECT_CHOICE = 'font/SELECT_CHOICE';
 export const RELOAD_FONTS = 'font/RELOAD_FONTS';
+export const FINISH_EDITING = 'font/FINISH_EDITING';
 
 const initialState = {
   font: {},
@@ -89,6 +90,13 @@ export default (state = initialState, action) => {
         ...state,
       };
 
+    case FINISH_EDITING:
+      return {
+        ...state,
+        step: action.step,
+        choicesMade: action.choicesMade,
+      };
+
     case SELECT_CHOICE:
       return {
         ...state,
@@ -117,6 +125,7 @@ export default (state = initialState, action) => {
         currentPreset: action.currentPreset,
         choicesFonts: action.choicesFonts,
         font: action.font,
+        step: action.step,
         sliderFont: action.sliderFont,
       };
 
@@ -357,6 +366,27 @@ export const selectChoice = choice => (dispatch, getState) => {
   }
 };
 
+export const finishEditing = () => (dispatch, getState) => {
+  const { choicesMade, currentPreset, step } = getState().font;
+  const stepLength = currentPreset.steps.length;
+  for (let index = step; index < stepLength + 1; index += 1) {
+    if (!choicesMade[index]) {
+      choicesMade[index] = {};
+      choicesMade[index].name = 'No choice';
+    }
+  }
+  request(GRAPHQL_API, getSpecialChoiceSelectedCount('No choice'))
+  .then(data => request(GRAPHQL_API, updateSelectedCount('Choice', data.allChoices[0].id, data.allChoices[0].selected + ((stepLength + 1) - step))))
+  .catch(error => console.log(error));
+  dispatch(updateFont());
+  dispatch(push('/specimen'));
+  dispatch({
+    type: FINISH_EDITING,
+    step: stepLength,
+    choicesMade,
+  });
+};
+
 export const download = () => (dispatch, getState) => {
   const { font } = getState().font;
   font.getArrayBuffer().then((data) => {
@@ -377,6 +407,7 @@ export const reloadFonts = () => (dispatch, getState) => {
   dispatch(setUnstable());
 
   const { currentPreset, currentParams, baseValues, step } = getState().font;
+  let currentStep = step;
   // create userFont
   prototypoFontFactory
     .createFont(`${currentPreset.preset}${currentPreset.variant}`, templateNames[currentPreset.template.toUpperCase()])
@@ -399,12 +430,17 @@ export const reloadFonts = () => (dispatch, getState) => {
         prototypoFontFactory
           .createFont(`choiceFont${i}`, templateNames[currentPreset.template.toUpperCase()])
           .then((createdFont) => {
-            createdFont.changeParams({
-              ...baseValues,
-              ...currentParams,
-              ...currentPreset.steps[step - 1].choices[i].values,
-            });
-            choicesFonts[i] = createdFont;
+            if (!currentPreset.steps[currentStep - 1]) {
+              currentStep = currentPreset.steps.length - 1;
+            }
+            if (currentPreset.steps[currentStep - 1].choices[i]) {
+              createdFont.changeParams({
+                ...baseValues,
+                ...currentParams,
+                ...currentPreset.steps[currentStep - 1].choices[i].values,
+              });
+              choicesFonts[i] = createdFont;
+            }
             resolve(true);
           });
       }),
@@ -432,8 +468,9 @@ export const reloadFonts = () => (dispatch, getState) => {
       currentPreset,
       font: currentPreset.font,
       sliderFont,
+      step: currentStep,
     });
-    dispatch(updateStepValues(step, currentPreset.font));
+    dispatch(updateStepValues(currentStep, currentPreset.font));
     dispatch(setStable());
   });
 };

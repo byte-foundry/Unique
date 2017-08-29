@@ -9,3 +9,8 @@
   cursor: pointer;
   display: inline;
 }
+
+.Button:focus {
+  outline: none;
+  user-select: none;
+}
