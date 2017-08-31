@@ -41,7 +41,7 @@ class Sliders extends React.Component {
       params: getBaseParams(props.currentFontValues, props.choices, props.controls),
       values: {},
     };
-    this.onSliderChange = debounce(this.onSliderChange, 100).bind(this);
+    this.onSliderChange = debounce(this.onSliderChange, 10).bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -51,10 +51,6 @@ class Sliders extends React.Component {
   }
 
   onSliderChange(e, name) {
-    console.log('============name===============');
-    console.log(name);
-    console.log('====================================');
-    console.log(this.state.values);
     const values = this.state.values;
     values[name] = e.target.value;
     this.setState({ values });

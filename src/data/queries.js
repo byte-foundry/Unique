@@ -107,3 +107,43 @@ export const updatePresetExportedCount = (id, count) => `
         }
     }
 `;
+
+export const findUser = email => `
+    query {
+        User (
+            email: "${email}"
+        )
+        {
+            id
+        }
+    }
+`;
+
+
+export const createUser = (email, presetId, choicesMade) => `
+    mutation {
+        createUser (
+            email: "${email}"
+            projects: [
+                {
+                    presetId: "${presetId}",
+                    choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, "\\\"")}"
+                }
+            ]
+        )
+        {
+            id
+        }
+    }
+`;
+
+
+export const addProjectToUser = (userId, presetId, choicesMade) => `
+    mutation{
+        createProject(
+            userId:"${userId}",
+            presetId: "${presetId}",
+            choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, "\\\"")}"
+        ) {createdAt}
+    }
+`;

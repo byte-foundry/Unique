@@ -1,5 +1,7 @@
 import { push } from 'react-router-redux';
-import { DEFAULT_UI_WORD } from '../constants';
+import { request } from 'graphql-request';
+import { findUser, createUser, addProjectToUser } from '../queries';
+import { DEFAULT_UI_WORD, GRAPHQL_API } from '../constants';
 
 export const STORE_USER_EMAIL = 'user/STORE_USER_EMAIL';
 export const STORE_EXPORT_TYPE = 'user/STORE_EXPORT_TYPE';
@@ -11,6 +13,7 @@ const initialState = {
   exportType: undefined,
   hasPayed: false,
   chosenWord: DEFAULT_UI_WORD,
+  graphqlID: undefined,
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +22,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         email: action.email,
+        graphqlID: action.graphqlID,
       };
 
     case STORE_EXPORT_TYPE:
@@ -44,12 +48,34 @@ export default (state = initialState, action) => {
   }
 };
 
-export const storeEmail = email => (dispatch) => {
-  dispatch({
-    type: STORE_USER_EMAIL,
-    email,
-  });
-  dispatch(push('/export'));
+export const storeEmail = email => (dispatch, getState) => {
+  const { currentPreset, choicesMade } = getState().font;
+  request(GRAPHQL_API, findUser(email))
+    .then((data) => {
+      if (data.User) {
+        request(GRAPHQL_API, addProjectToUser(data.User.id, currentPreset.id, choicesMade))
+          .then(() => {})
+          .catch(error => console.log(error));
+        dispatch({
+          type: STORE_USER_EMAIL,
+          email,
+          graphqlID: data.User.id,
+        });
+        dispatch(push('/export'));
+      } else {
+        request(GRAPHQL_API, createUser(email, currentPreset.id, choicesMade))
+          .then((res) => {
+            dispatch({
+              type: STORE_USER_EMAIL,
+              email,
+              graphqlID: res.createUser.id,
+            });
+            dispatch(push('/export'));
+          })
+          .catch(error => console.log(error));
+      }
+    })
+    .catch(error => console.log(error));
 };
 
 export const storeExportType = exportType => (dispatch) => {
@@ -65,7 +91,6 @@ export const storeChosenWord = chosenWord => (dispatch) => {
     chosenWord,
   });
 };
-
 
 export const afterPayment = () => (dispatch, getState) => {
   const { exportType } = getState().user;
@@ -84,4 +109,3 @@ export const afterPayment = () => (dispatch, getState) => {
       break;
   }
 };
-
