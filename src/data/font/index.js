@@ -403,6 +403,11 @@ export const updateSliderFont = (newParams) => (dispatch, getState) => {
   sliderFont.changeParam(newParams.name, parseFloat(newParams.value));
 };
 
+export const resetSliderFont = () => (dispatch, getState) => {
+  const { currentParams, stepBaseValues, sliderFont } = getState().font;
+  sliderFont.changeParams({ ...stepBaseValues, ...currentParams });
+};
+
 export const reloadFonts = () => (dispatch, getState) => {
   dispatch(setUnstable());
 

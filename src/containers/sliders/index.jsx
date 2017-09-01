@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
+import { resetSliderFont } from '../../data/font';
 import { params } from '../../data/labels';
 import './Sliders.css';
 
@@ -50,6 +51,10 @@ class Sliders extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    this.props.resetSliderFont();
+  }
+
   onSliderChange(e, name) {
     const values = this.state.values;
     values[name] = e.target.value;
@@ -87,10 +92,11 @@ const mapStateToProps = state => ({
   controls: state.font.currentPreset.font.json.controls,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ resetSliderFont }, dispatch);
 
 Sliders.propTypes = {
   onUpdate: PropTypes.func.isRequired,
+  resetSliderFont: PropTypes.func.isRequired,
 };
 
 Sliders.defaultProps = {};
