@@ -18,7 +18,7 @@ class StepView extends React.Component {
     };
 
     this.markChoiceActive = (choice) => {
-      if (choice === this.state.choice) {
+      if (choice.name === this.state.choice.name) {
         this.setState({ choice: {} });
       } else this.setState({ choice });
     };
