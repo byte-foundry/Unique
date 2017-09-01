@@ -64,7 +64,7 @@ class StepView extends React.Component {
     }
     this.setState({
       choice,
-      mostSelected: isMostSelected(this.props.stepValues.choices),
+      mostSelected: isMostSelected(props.stepValues.choices),
     });
   }
   render() {
