@@ -7,7 +7,7 @@ import { setUnstable, setStable } from '../ui';
 import { storeChosenWord } from '../user';
 import { DEFAULT_UI_WORD } from '../constants';
 import { GRAPHQL_API } from '../constants';
-import { getSelectedCount, updateSelectedCount, getPresetExportedCount, updatePresetExportedCount, getSpecialChoiceSelectedCount } from '../queries';
+import { getSelectedCount, updateSelectedCount, getSpecialChoiceSelectedCount } from '../queries';
 
 export const CREATE_REQUESTED = 'font/CREATE_REQUESTED';
 export const CREATE = 'font/CREATE';
@@ -393,9 +393,6 @@ export const download = () => (dispatch, getState) => {
     const blob = new Blob([data], { type: 'application/x-font-opentype' });
     saveAs(blob, `${font.fontName}.otf`);
   });
-  request(GRAPHQL_API, getPresetExportedCount(font.id))
-      .then(data => request(GRAPHQL_API, updatePresetExportedCount(font.id, data.Preset.exported + 1)))
-      .catch(error => console.log(error));
 };
 
 export const updateSliderFont = (newParams) => (dispatch, getState) => {
@@ -477,5 +474,6 @@ export const reloadFonts = () => (dispatch, getState) => {
     });
     dispatch(updateStepValues(currentStep, currentPreset.font));
     dispatch(setStable());
+    dispatch(push('/start'));
   });
 };

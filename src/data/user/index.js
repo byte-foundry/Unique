@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 import { request } from 'graphql-request';
-import { findUser, createUser, addProjectToUser } from '../queries';
+import { findUser, createUser, addProjectToUser, getPresetExportedCount, updatePresetExportedCount, } from '../queries';
 import { DEFAULT_UI_WORD, GRAPHQL_API } from '../constants';
 
 export const STORE_USER_EMAIL = 'user/STORE_USER_EMAIL';
@@ -94,9 +94,13 @@ export const storeChosenWord = chosenWord => (dispatch) => {
 
 export const afterPayment = () => (dispatch, getState) => {
   const { exportType } = getState().user;
+  const { id } = getState().font.currentPreset;
   dispatch({
     type: PAYMENT_SUCCESSFUL,
   });
+  request(GRAPHQL_API, getPresetExportedCount(id))
+  .then(data => request(GRAPHQL_API, updatePresetExportedCount(id, data.Preset.exported + 1)))
+  .catch(error => console.log(error));
   switch (exportType) {
     case 'host':
       break;

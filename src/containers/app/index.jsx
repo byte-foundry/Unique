@@ -19,6 +19,7 @@ import ParamChoice from '../paramChoice/';
 import SpecimenView from '../specimenView/';
 import ExportTypes from '../exportTypes/';
 import Success from '../success/';
+import Start from '../start/';
 
 import UnstableView from '../unstableView';
 
@@ -74,6 +75,7 @@ class App extends React.Component {
           ? <UnstableView />
           : <Switch>
             <Route exact path="/" component={DefineNeed} />
+            <Route exact path="/start" component={Start} />
             <ProtectedRoute
               exact
               requirement={this.hasSelectedNeed()}

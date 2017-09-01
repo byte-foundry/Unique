@@ -86,6 +86,5 @@ export const loadPresets = () => (dispatch, getState) => {
 };
 
 export const reloadPresets = () => (dispatch) => {
-  dispatch(setUnstable());
   dispatch(loadPresets());
 };
