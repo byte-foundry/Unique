@@ -16,3 +16,14 @@
 .Choice.selected {
   border-color: red;
 }
+
+.Choice .mostSelected {
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  font-size: 14px;
+  font-family: 'Sans-Serif';
+  transform: rotate(45deg);
+  background: #ddd;
+  border: 2px solid #333;
+}

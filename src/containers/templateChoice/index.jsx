@@ -10,6 +10,18 @@ import Button from '../../components/button/';
 
 import { selectFont } from '../../data/font';
 
+const isMostSelected = (presets, font) => {
+  let most = presets[0].id;
+  let value = 0;
+  presets.forEach((preset) => {
+    if (preset.selected > value) {
+      value = preset.selected;
+      most = preset.id;
+    }
+  });
+  return font.id === most && value > 0;
+};
+
 const TemplateChoice = props => (
   <div className="TemplateChoice">
     <h1>Pick something that you like and edit it!</h1>
@@ -18,7 +30,7 @@ const TemplateChoice = props => (
     ? (<h2>Loading font...</h2>)
     : false}
     <div className="template-wrapper">
-      {props.presets.map(font => <Template key={`${font.preset}${font.variant}`} font={font} selectFont={props.selectFont} text={props.chosenWord} />)}
+      {props.presets.map(font => <Template key={`${font.preset}${font.variant}`} font={font} selectFont={props.selectFont} text={props.chosenWord} mostSelected={isMostSelected(props.presets, font)} />)}
     </div>
   </div>
 );

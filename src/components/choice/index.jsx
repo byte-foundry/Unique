@@ -16,6 +16,7 @@ const Choice = props => (
     style={{ fontFamily: `choiceFont${props.index}` }}
   >
     {props.text}
+    {props.mostSelected ? <span className="mostSelected">Most selected</span> : false}
   </div>
 );
 
@@ -29,10 +30,12 @@ Choice.propTypes = {
   index: PropTypes.number.isRequired,
   selected: PropTypes.bool.isRequired,
   text: PropTypes.string,
+  mostSelected: PropTypes.bool,
 };
 
 Choice.defaultProps = {
   text: 'Hamburgefonstiv - Abc 123',
+  mostSelected: false,
 };
 
 export default Choice;

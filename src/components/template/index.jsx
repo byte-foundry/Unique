@@ -12,6 +12,7 @@ const Template = props => (
     style={{ fontFamily: `${props.font.preset}${props.font.variant}` }}
   >
     {props.text}
+    {props.mostSelected ? <span className="mostSelected">Most selected</span> : false}
   </div>
 );
 
@@ -23,10 +24,12 @@ Template.propTypes = {
   }).isRequired,
   selectFont: PropTypes.func.isRequired,
   text: PropTypes.string,
+  mostSelected: PropTypes.bool,
 };
 
 Template.defaultProps = {
   text: 'Hamburgefonstiv - Abc 123',
+  mostSelected: false,
 };
 
 export default Template;

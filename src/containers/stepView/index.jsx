@@ -10,6 +10,18 @@ import Sliders from '../sliders/';
 import Button from '../../components/button/';
 import './StepView.css';
 
+const isMostSelected = (choices) => {
+  let most = choices[0].id;
+  let value = 0;
+  choices.forEach((choice) => {
+    if (choice.selected > value) {
+      value = choice.selected;
+      most = choice.id;
+    }
+  });
+  return value > 0 && most;
+};
+
 class StepView extends React.Component {
   constructor(props) {
     super(props);
@@ -50,7 +62,10 @@ class StepView extends React.Component {
         choice = props.stepValues.choices.find(c => c.name === props.choicesMade[props.step].name);
       }
     }
-    this.setState({ choice });
+    this.setState({
+      choice,
+      mostSelected: isMostSelected(this.props.stepValues.choices),
+    });
   }
   render() {
     return (
@@ -74,6 +89,7 @@ class StepView extends React.Component {
               index={index}
               selected={this.state.choice === choice}
               text={this.props.chosenWord}
+              mostSelected={this.state.mostSelected === choice.id}
             />),
           )}
           <div

@@ -1,9 +1,21 @@
 .Template {
   display: inline;
+  position: relative;
   padding: 10px 20px;
   margin: 30px 50px;
   font-size: 69px;
   text-align: center;
   background-color: #ddd;
   cursor: pointer;
+}
+
+.Template .mostSelected {
+  position: absolute;
+  top: 5px;
+  right: -20px;
+  font-size: 14px;
+  font-family: 'Sans-Serif';
+  transform: rotate(45deg);
+  background: #ddd;
+  border: 2px solid #333;
 }

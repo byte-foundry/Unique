@@ -37,6 +37,7 @@ export const getAllPresets = `
     preset
     variant
     template
+    selected
     needs {
         id
         name
@@ -46,11 +47,13 @@ export const getAllPresets = `
         id
         name
         description
+        selected
         choices {
         id
         db
         name
         values
+        selected
         }
     }
     }}
