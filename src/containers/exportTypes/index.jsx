@@ -3,9 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { storeExportType } from '../../data/user';
 import ExportType from '../../components/exportType/';
+import Button from '../../components/button/';
+
 import './ExportTypes.css';
 
 
@@ -70,6 +73,7 @@ class ExportTypes extends React.Component {
           ? this.state.chosenType.title
           : 'What do you want to do with your font?'
         }</h1>
+        <Button className="back" label="Back" onClick={() => this.props.goBack()} />
         <div className="needs">
           {this.state.chosenType && !this.state.chosenType.direct
           ? (
@@ -96,9 +100,10 @@ class ExportTypes extends React.Component {
 
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators({ storeExportType }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ storeExportType, goBack: () => push('/specimen'), }, dispatch);
 
 ExportTypes.propTypes = {
+  goBack: PropTypes.func.isRequired,
   storeExportType: PropTypes.func.isRequired,
 };
 

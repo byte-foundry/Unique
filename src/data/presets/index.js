@@ -11,6 +11,14 @@ const initialState = {
   isLoading: false,
 };
 
+const templates = {
+  elzevir: 'ELZEVIR',
+  venus: 'GROTESK',
+  'john-fell': 'FELL',
+  gfnt: 'SPECTRAL',
+  antique: 'ANTIQUE',
+};
+
 const prototypoFontFactory = new Ptypo();
 
 export default (state = initialState, action) => {
@@ -67,7 +75,7 @@ export const loadPresets = () => (dispatch, getState) => {
   const promiseArray = [];
   presets.forEach((preset, index) => {
     promiseArray.push(new Promise((resolve) => {
-      prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[preset.template.toUpperCase()]).then(
+      prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[templates[preset.template]]).then(
         (createdFont) => {
           createdFont.changeParams(preset.baseValues);
           resolve(true);

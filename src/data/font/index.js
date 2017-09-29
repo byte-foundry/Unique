@@ -37,6 +37,15 @@ const initialState = {
   need: '',
 };
 
+const templates = {
+  elzevir: 'ELZEVIR',
+  venus: 'GROTESK',
+  'john-fell': 'FELL',
+  gfnt: 'SPECTRAL',
+  antique: 'ANTIQUE',
+};
+
+
 const prototypoFontFactory = new Ptypo();
 
 export default (state = initialState, action) => {
@@ -139,7 +148,7 @@ export const createFont = font => (dispatch) => {
     type: CREATE_REQUESTED,
   });
   prototypoFontFactory
-    .createFont('peasy', templateNames[font.template.toUpperCase()])
+    .createFont('peasy', templateNames[templates[font.template]])
     .then((createdFont) => {
       createdFont.changeParams(font.baseValues);
       dispatch({
@@ -180,7 +189,7 @@ export const selectFont = font => (dispatch, getState) => {
     promiseArray.push(
       new Promise((resolve) => {
         prototypoFontFactory
-          .createFont(`choiceFont${i}`, templateNames[font.template.toUpperCase()])
+          .createFont(`choiceFont${i}`, templateNames[templates[font.template]])
           .then((createdFont) => {
             createdFont.changeParams(font.baseValues);
             createdFont.changeParams(font.steps[0].choices[i].values);
@@ -194,7 +203,7 @@ export const selectFont = font => (dispatch, getState) => {
   promiseArray.push(
       new Promise((resolve) => {
         prototypoFontFactory
-          .createFont('sliderFont', templateNames[font.template.toUpperCase()])
+          .createFont('sliderFont', templateNames[templates[font.template]])
           .then((createdFont) => {
             createdFont.changeParams(font.baseValues);
             sliderFont = createdFont;
@@ -412,7 +421,7 @@ export const reloadFonts = () => (dispatch, getState) => {
   let currentStep = step;
   // create userFont
   prototypoFontFactory
-    .createFont(`${currentPreset.preset}${currentPreset.variant}`, templateNames[currentPreset.template.toUpperCase()])
+    .createFont(`${currentPreset.preset}${currentPreset.variant}`, templateNames[templates[currentPreset.template]])
     .then((createdFont) => {
       createdFont.changeParams({ ...baseValues, ...currentParams });
       currentPreset.font = createdFont;
@@ -430,7 +439,7 @@ export const reloadFonts = () => (dispatch, getState) => {
     promiseArray.push(
       new Promise((resolve) => {
         prototypoFontFactory
-          .createFont(`choiceFont${i}`, templateNames[currentPreset.template.toUpperCase()])
+          .createFont(`choiceFont${i}`, templateNames[templates[currentPreset.template]])
           .then((createdFont) => {
             if (!currentPreset.steps[currentStep - 1]) {
               currentStep = currentPreset.steps.length - 1;
@@ -452,7 +461,7 @@ export const reloadFonts = () => (dispatch, getState) => {
   promiseArray.push(
       new Promise((resolve) => {
         prototypoFontFactory
-          .createFont('sliderFont', templateNames[currentPreset.template.toUpperCase()])
+          .createFont('sliderFont', templateNames[templates[currentPreset.template]])
           .then((createdFont) => {
             createdFont.changeParams({
               ...baseValues,

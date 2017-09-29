@@ -38,10 +38,7 @@ export const getAllPresets = `
     variant
     template
     selected
-    needs {
-        id
-        name
-    }
+    needs
     baseValues
     steps {
         id
@@ -50,7 +47,6 @@ export const getAllPresets = `
         selected
         choices {
         id
-        db
         name
         values
         selected

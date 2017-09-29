@@ -17,6 +17,7 @@ class SpecimenView extends React.Component {
     super(props);
     this.state = {
       email: '',
+      shouldChangeEmail: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,6 +30,12 @@ class SpecimenView extends React.Component {
       this.props.storeEmail(this.state.email);
     }
     event.preventDefault();
+  }
+  changeEmail() {
+    this.setState({ shouldChangeEmail: true });
+  }
+  sendEmail() {
+    this.props.storeEmail(this.props.email);
   }
   render() {
     return (
@@ -71,10 +78,19 @@ class SpecimenView extends React.Component {
           </div>
           <StepList specimen />
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="email" placeholder="your email" name="email" onChange={this.handleChange} />
-          <button type="submit">Download</button>
-        </form>
+        {this.props.email === '' || !this.props.email || this.state.shouldChangeEmail
+        ? (
+          <form onSubmit={this.handleSubmit}>
+            <input type="email" placeholder="your email" name="email" onChange={this.handleChange} />
+            <button type="submit">Download</button>
+          </form>
+        )
+        : (
+          <div>
+            <p>You are currently registered as {this.props.email}.</p><br />
+            <Button label="Change email" onClick={() => this.changeEmail()} /><Button label="Download your font" onClick={() => this.sendEmail()} />
+          </div>
+        )}
       </div>
     );
   }
@@ -83,6 +99,7 @@ class SpecimenView extends React.Component {
 const mapStateToProps = state => ({
   fontName: state.font.currentPreset.preset + state.font.currentPreset.variant,
   step: state.font.step,
+  email: state.user.email,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -94,10 +111,12 @@ SpecimenView.propTypes = {
   storeEmail: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
   fontName: PropTypes.string,
+  email: PropTypes.string,
 };
 
 SpecimenView.defaultProps = {
   fontName: 'ptypo',
+  email: '',
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpecimenView));
