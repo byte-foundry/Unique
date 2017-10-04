@@ -83,7 +83,7 @@ class StepView extends React.Component {
           {this.props.stepValues.choices.map((choice, index) =>
             (<Choice
               choice={choice}
-              key={choice.name}
+              key={`${choice.name}${choice.id}`}
               markChoiceActive={this.markChoiceActive}
               selectChoice={this.props.selectChoice}
               index={index}
