@@ -1,1 +1,10 @@
-"extends": "airbnb"
+{   
+    "extends": "airbnb",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "Intercom": true
+    }
+}

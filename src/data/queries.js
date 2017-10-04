@@ -132,6 +132,9 @@ export const createUser = (email, presetId, choicesMade) => `
         )
         {
             id
+            projects {
+                id
+            }
         }
     }
 `;
@@ -143,6 +146,42 @@ export const addProjectToUser = (userId, presetId, choicesMade) => `
             userId:"${userId}",
             presetId: "${presetId}",
             choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, "\\\"")}"
-        ) {createdAt}
+        ) {
+            id
+            createdAt
+            user {
+                projects {
+                    id
+                }
+            }
+        }
+    }
+`;
+
+export const getBoughtProjects = userId => `
+    query {
+        allProjects(
+            filter: {
+                bought: false,
+                user: {
+                    id: "${userId}"
+                }
+            }
+        )
+        {
+            id
+        }
+  }
+`;
+
+export const updateProjectBought = projectId => `
+    mutation {
+        updateProject (
+            id: "${projectId}"
+            bought: true
+        )
+        {
+            id
+        }
     }
 `;

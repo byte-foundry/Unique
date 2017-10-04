@@ -24,11 +24,15 @@ import Start from '../start/';
 import UnstableView from '../unstableView';
 
 class App extends React.Component {
+  /* global Intercom*/
   constructor(props) {
     super(props);
     request(GRAPHQL_API, getAllPresets)
       .then(data => props.importPresets(data.allPresets))
       .catch(error => console.log(error));
+    if (props.userEmail !== '') {
+      Intercom('update', { email: props.userEmail });
+    }
   }
   hasSelectedFont() {
     if (

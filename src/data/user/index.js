@@ -1,6 +1,14 @@
 import { push } from 'react-router-redux';
 import { request } from 'graphql-request';
-import { findUser, createUser, addProjectToUser, getPresetExportedCount, updatePresetExportedCount, } from '../queries';
+import {
+  findUser,
+  createUser,
+  addProjectToUser,
+  getPresetExportedCount,
+  updatePresetExportedCount,
+  updateProjectBought,
+  getBoughtProjects,
+} from '../queries';
 import { DEFAULT_UI_WORD, GRAPHQL_API } from '../constants';
 
 export const STORE_USER_EMAIL = 'user/STORE_USER_EMAIL';
@@ -14,6 +22,7 @@ const initialState = {
   hasPayed: false,
   chosenWord: DEFAULT_UI_WORD,
   graphqlID: undefined,
+  currentProject: undefined,
 };
 
 export default (state = initialState, action) => {
@@ -23,6 +32,7 @@ export default (state = initialState, action) => {
         ...state,
         email: action.email,
         graphqlID: action.graphqlID,
+        currentProject: action.projectID,
       };
 
     case STORE_EXPORT_TYPE:
@@ -49,18 +59,27 @@ export default (state = initialState, action) => {
 };
 
 export const storeEmail = email => (dispatch, getState) => {
+  /* global Intercom*/
   const { currentPreset, choicesMade } = getState().font;
   request(GRAPHQL_API, findUser(email))
     .then((data) => {
       if (data.User) {
         request(GRAPHQL_API, addProjectToUser(data.User.id, currentPreset.id, choicesMade))
-          .then(() => {})
+          .then((res) => {
+            const metadata = {
+              unique_preset: res.createProject.id,
+              choices_made: choicesMade.map((choice, index) => { if (index !== 0) return choice.name; return currentPreset.preset + currentPreset.variant; }).toString(),
+            };
+            Intercom('update', { unique_finished_fonts: res.createProject.user.projects.length });
+            Intercom('trackEvent', 'unique-finished-font', metadata);
+            dispatch({
+              type: STORE_USER_EMAIL,
+              email,
+              graphqlID: data.User.id,
+              projectID: res.createProject.id,
+            });
+          })
           .catch(error => console.log(error));
-        dispatch({
-          type: STORE_USER_EMAIL,
-          email,
-          graphqlID: data.User.id,
-        });
         dispatch(push('/export'));
       } else {
         request(GRAPHQL_API, createUser(email, currentPreset.id, choicesMade))
@@ -69,7 +88,15 @@ export const storeEmail = email => (dispatch, getState) => {
               type: STORE_USER_EMAIL,
               email,
               graphqlID: res.createUser.id,
+              projectID: res.createUser.projects[0].id,
             });
+            const metadata = {
+              unique_preset: res.createUser.projects[0].id,
+              choices_made: choicesMade.map((choice, index) => { if (index !== 0) return choice.name; return currentPreset.preset + currentPreset.variant; }).toString(),
+            };
+            Intercom('trackEvent', 'unique-finished-font', metadata);
+            Intercom('update', { email });
+            Intercom('update', { unique_finished_fonts: 1 });
             dispatch(push('/export'));
           })
           .catch(error => console.log(error));
@@ -93,14 +120,31 @@ export const storeChosenWord = chosenWord => (dispatch) => {
 };
 
 export const afterPayment = () => (dispatch, getState) => {
-  const { exportType } = getState().user;
+  /* global Intercom*/
+  const { exportType, graphqlID, currentProject } = getState().user;
   const { id } = getState().font.currentPreset;
+  const { choicesMade, currentPreset } = getState().font;
   dispatch({
     type: PAYMENT_SUCCESSFUL,
   });
   request(GRAPHQL_API, getPresetExportedCount(id))
-  .then(data => request(GRAPHQL_API, updatePresetExportedCount(id, data.Preset.exported + 1)))
-  .catch(error => console.log(error));
+    .then(data => request(GRAPHQL_API, updatePresetExportedCount(id, data.Preset.exported + 1)))
+    .catch(error => console.log(error));
+  request(GRAPHQL_API, updateProjectBought(currentProject))
+    .then(() =>
+      request(GRAPHQL_API, getBoughtProjects(graphqlID))
+        .then((res) => {
+          const metadata = {
+            unique_preset: id,
+            choices_made: choicesMade.map((choice, index) => { if (index !== 0) return choice.name; return currentPreset.preset + currentPreset.variant; }).toString(),
+          };
+          Intercom('trackEvent', 'unique-bought-font', metadata);
+          Intercom('update', { unique_bought_fonts: res.allProjects.length });
+        })
+        .catch(error => console.log(error)),
+    )
+    .catch(error => console.log(error));
+
   switch (exportType) {
     case 'host':
       break;
