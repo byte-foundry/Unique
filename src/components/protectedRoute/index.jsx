@@ -7,7 +7,7 @@ const ProtectedRoute = ({ component: Component, requirement, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      (requirement
+      (requirement()
         ? <Component {...props} />
         : <Redirect to={{ pathname: '/', state: { from: props.location } }} />)}
   />
@@ -15,7 +15,7 @@ const ProtectedRoute = ({ component: Component, requirement, ...rest }) => (
 
 ProtectedRoute.propTypes = {
   component: PropTypes.func.isRequired,
-  requirement: PropTypes.bool.isRequired,
+  requirement: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,

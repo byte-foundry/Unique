@@ -5225,9 +5225,9 @@ prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8,
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
 
-prototypo-library@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/prototypo-library/-/prototypo-library-1.0.11.tgz#ee2abb9aef2f90432046b8528007d361ab8cb1c3"
+prototypo-library@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/prototypo-library/-/prototypo-library-1.0.12.tgz#368b3bc6a58e59f3785e554ddd02593d06dc335d"
   dependencies:
     babel "^6.23.0"
     babel-core "^6.25.0"

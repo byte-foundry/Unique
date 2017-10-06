@@ -36,7 +36,7 @@ const TemplateChoice = props => (
 );
 
 const mapStateToProps = state => ({
-  presets: state.presets.presets,
+  presets: state.presets.importedPresets,
   isLoading: state.font.isLoading,
   chosenWord: state.user.chosenWord,
 });

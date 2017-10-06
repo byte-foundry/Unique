@@ -35,41 +35,53 @@ class App extends React.Component {
     }
   }
   hasSelectedFont() {
+    console.log('=========hasSelectedFont=======');
+    console.log(typeof this.props.selectedFontLoaded);
+    console.log(typeof this.props.selectedFontLoaded === 'object');
+    console.log('====================================');
     if (
       this.props.selectedFont !== '' &&
       (this.props.pathname === '/customize' || this.props.pathname === '/specimen') &&
-      !(typeof this.props.selectedFontChangeParams === typeof Function)
+      !(typeof this.props.selectedFontLoaded === 'object')
     ) {
+      console.log('font selected but not loaded');
       this.props.reloadFonts();
       return true;
     }
+    console.log(`font selected: ${this.props.selectedFont !== ''}`);
     return this.props.selectedFont !== '';
   }
   hasSuccessfulPayment() {
     if (
       this.props.hasPayed === true &&
-      !(typeof this.props.selectedFontChangeParams === typeof Function)
+      !(typeof this.props.selectedFontLoaded === 'object')
     ) {
+      console.log('Payment successful but font not loaded');
       this.props.reloadFonts();
       return true;
     }
+    console.log(`Payment: ${this.props.hasPayed === true}`);
     return this.props.hasPayed === true;
   }
   hasMailRegistered() {
     if (
       this.props.userEmail !== '' &&
-      !(typeof this.props.selectedFontChangeParams === typeof Function)
+      !(typeof this.props.selectedFontLoaded === 'object')
     ) {
+      console.log('Mail registered but font not loaded');
       this.props.reloadFonts();
       return true;
     }
+    console.log(`Mail registered: ${this.props.userEmail !== ''}`);
     return this.props.userEmail !== '';
   }
   hasSelectedNeed() {
     if (this.props.need !== '' && this.props.pathname === '/select' && !this.props.hasPresets) {
+      console.log('Has selected need but do not have presets');
       this.props.reloadPresets();
       return true;
     }
+    console.log(`Need selected: ${this.props.need !== ''}`);
     return this.props.need !== '';
   }
   render() {
@@ -82,31 +94,31 @@ class App extends React.Component {
             <Route exact path="/start" component={Start} />
             <ProtectedRoute
               exact
-              requirement={this.hasSelectedNeed()}
+              requirement={() => this.hasSelectedNeed()}
               path="/select"
               component={TemplateChoice}
             />
             <ProtectedRoute
               exact
-              requirement={this.hasSelectedFont()}
+              requirement={() => this.hasSelectedFont()}
               path="/customize"
               component={ParamChoice}
             />
             <ProtectedRoute
               exact
-              requirement={this.hasSelectedFont()}
+              requirement={() => this.hasSelectedFont()}
               path="/specimen"
               component={SpecimenView}
             />
             <ProtectedRoute
               exact
-              requirement={this.hasMailRegistered()}
+              requirement={() => this.hasMailRegistered()}
               path="/export"
               component={ExportTypes}
             />
             <ProtectedRoute
               exact
-              requirement={this.hasSuccessfulPayment()}
+              requirement={() => this.hasSuccessfulPayment()}
               path="/success"
               component={Success}
             />
@@ -121,7 +133,9 @@ App.propTypes = {
   selectedFont: PropTypes.string,
   userEmail: PropTypes.string.isRequired,
   hasPayed: PropTypes.bool.isRequired,
-  selectedFontChangeParams: PropTypes.func,
+  selectedFontLoaded: PropTypes.shape({
+    fontName: PropTypes.string.isRequired,
+  }),
   hasPresets: PropTypes.bool.isRequired,
   pathname: PropTypes.string.isRequired,
   need: PropTypes.string.isRequired,
@@ -132,17 +146,17 @@ App.propTypes = {
 
 App.defaultProps = {
   selectedFont: '',
-  selectedFontChangeParams: undefined,
+  selectedFontLoaded: undefined,
 };
 
 const mapStateToProps = state => ({
   pathname: state.routing.location.pathname,
   selectedFont: state.font.currentPreset.preset,
-  selectedFontChangeParams: state.font.currentPreset.font.changeParams,
+  selectedFontLoaded: state.createdFonts.fonts[state.font.fontName],
   userEmail: state.user.email,
   hasPayed: state.user.hasPayed,
   need: state.font.need,
-  hasPresets: state.presets.presets.length > 1,
+  hasPresets: state.presets.importedPresets.length > 1,
   unstableUi: state.ui.unstable,
 });
 const mapDispatchToProps = dispatch =>
