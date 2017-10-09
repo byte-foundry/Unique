@@ -163,6 +163,7 @@ export const createFont = font => (dispatch) => {
 };
 
 export const selectFont = font => (dispatch, getState) => {
+  console.log('===============SELECT FONT===============');
   const { choicesFontsName = [] } = getState().font;
   const { loadedPresetsName } = getState().presets;
   const { fonts } = getState().createdFonts;
@@ -186,6 +187,7 @@ export const selectFont = font => (dispatch, getState) => {
   });
   const promiseArray = [];
   for (let i = 0; i < maxStep; i += 1) {
+    console.log(`Creating choiceFont${i} from template ${templateNames[templates[font.template]]}`);
     promiseArray.push(
       new Promise((resolve) => {
         prototypoFontFactory
@@ -194,6 +196,11 @@ export const selectFont = font => (dispatch, getState) => {
             createdFont.changeParams(font.baseValues);
             createdFont.changeParams(font.steps[0].choices[i].values);
             resolve(true);
+            console.log(`Changing params for choiceFont${i}`);
+            console.log({
+              ...font.baseValues,
+              ...font.steps[0].choices[i].values,
+            });
             dispatch(storeCreatedFont(createdFont, `choiceFont${i}`));
             choicesFontsName[i] = `choiceFont${i}`;
           });
@@ -231,6 +238,7 @@ export const selectFont = font => (dispatch, getState) => {
       .then(data => request(GRAPHQL_API, updateSelectedCount('Step', font.steps[0].id, data.Step.selected + 1)))
       .catch(error => console.log(error));
   });
+  console.log('===============END SELECT FONT===============');  
 };
 
 export const defineNeed = need => (dispatch) => {
@@ -245,6 +253,8 @@ export const defineNeed = need => (dispatch) => {
 };
 
 const updateStepValues = (step, font) => (dispatch, getState) => {
+
+  console.log('========updateStepValues===========');
   const {
     choicesFontsName,
     currentPreset,
@@ -253,7 +263,10 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     choicesMade,
     sliderFontName,
   } = getState().font;
+  console.log(choicesFontsName);
+  
   const { fonts } = getState().createdFonts;
+  console.log(fonts);
   const curFontName = font || getState().font.fontName;
   const stepToUpdate = step || getState().font.step;
   currentPreset.steps[stepToUpdate - 1].choices.forEach((choice, index) => {
@@ -265,6 +278,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
         }
       });
     }
+    console.log(fonts[choicesFontsName[index]]);
     fonts[choicesFontsName[index]].changeParams(
       { ...stepBaseValues, ...currentParams, ...stepChoices }
     );
@@ -282,6 +296,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     choicesFontsName,
     sliderFontName,
   });
+  console.log('====================================');
 };
 
 const updateFont = () => (dispatch, getState) => {

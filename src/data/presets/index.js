@@ -1,6 +1,6 @@
 import Ptypo, { templateNames } from 'prototypo-library';
 import { push } from 'react-router-redux';
-import { setStable } from '../ui';
+import { setUnstable, setStable } from '../ui';
 import { storeCreatedFont } from '../createdFonts';
 
 export const IMPORT_PRESETS_REQUESTED = 'presets/IMPORT_PRESETS_REQUESTED';
@@ -69,13 +69,19 @@ export const importPresets = presets => (dispatch) => {
   });
 };
 
-export const loadPresets = () => (dispatch, getState) => {
+export const loadPresets = (reloading = false) => (dispatch, getState) => {
+  console.log('========LOAD PRESETS=======');
+  if (reloading) {
+    dispatch(setUnstable());
+  }
   dispatch({
     type: LOAD_PRESETS_REQUESTED,
   });
   const { importedPresets } = getState().presets;
+  console.log('> imported presets');
+  console.log(importedPresets);
   const promiseArray = [];
-  const loadedPresetsName =  [];
+  const loadedPresetsName = [];
   importedPresets.forEach((preset, index) => {
     promiseArray.push(new Promise((resolve) => {
       prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[templates[preset.template]]).then(
@@ -88,6 +94,7 @@ export const loadPresets = () => (dispatch, getState) => {
     }));
   });
   Promise.all(promiseArray).then(() => {
+    console.log('> All presets loaded');
     dispatch({
       type: LOAD_PRESETS,
       loadedPresetsName,
@@ -95,8 +102,9 @@ export const loadPresets = () => (dispatch, getState) => {
     dispatch(push('/select'));
     dispatch(setStable());
   });
+  console.log('======END LOAD PRESETS=======');
 };
 
 export const reloadPresets = () => (dispatch) => {
-  dispatch(loadPresets());
+  dispatch(loadPresets(true));
 };

@@ -7,7 +7,7 @@ import rootReducer from './index';
 
 export const history = createHistory();
 const saveLoadConfig = {
-  states: ['font', 'user'],
+  states: ['font', 'user', 'presets'],
   namespace: 'peasy',
 };
 const enhancers = [];

@@ -23,6 +23,7 @@ export default (state = initialState, action) => {
 
 export const storeCreatedFont = (createdFont, fontName) => (dispatch, getState) => {
   const { fonts } = getState().createdFonts;
+  console.log(`> Created ${fontName}`);
   dispatch({
     type: STORE_CREATED_FONT,
     fonts: {
@@ -34,6 +35,7 @@ export const storeCreatedFont = (createdFont, fontName) => (dispatch, getState) 
 
 export const deleteCreatedFont = fontName => (dispatch, getState) => {
   const { fonts } = getState().createdFonts;
+  console.log(`> Deleted ${fontName}`);
   delete fonts[fontName];
   dispatch({
     type: DELETE_CREATED_FONT,
