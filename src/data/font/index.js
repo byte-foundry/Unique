@@ -108,7 +108,6 @@ export default (state = initialState, action) => {
     case SELECT_CHOICE:
       return {
         ...state,
-        fontName: action.fontName,
         currentParams: action.currentParams ? action.currentParams : state.currentParams,
         choicesMade: action.choicesMade,
       };
@@ -122,9 +121,6 @@ export default (state = initialState, action) => {
     case UPDATE_VALUES:
       return {
         ...state,
-        fontName: action.fontName,
-        choicesFontsName: action.choicesFontsName,
-        sliderFontName: action.sliderFontName,
       };
 
     case RELOAD_FONTS:
@@ -163,10 +159,9 @@ export const createFont = font => (dispatch) => {
 };
 
 export const selectFont = font => (dispatch, getState) => {
-  console.log('===============SELECT FONT===============');
+  console.log('============SELECT FONT============');
   const { choicesFontsName = [] } = getState().font;
   const { loadedPresetsName } = getState().presets;
-  const { fonts } = getState().createdFonts;
   dispatch({
     type: SELECT_FONT_REQUESTED,
   });
@@ -264,7 +259,6 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     sliderFontName,
   } = getState().font;
   console.log(choicesFontsName);
-  
   const { fonts } = getState().createdFonts;
   console.log(fonts);
   const curFontName = font || getState().font.fontName;
@@ -280,7 +274,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     }
     console.log(fonts[choicesFontsName[index]]);
     fonts[choicesFontsName[index]].changeParams(
-      { ...stepBaseValues, ...currentParams, ...stepChoices }
+      { ...stepBaseValues, ...currentParams, ...stepChoices },
     );
   });
   fonts[sliderFontName].changeParams({ ...stepBaseValues, ...currentParams });
@@ -292,9 +286,6 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
       .catch(error => console.log(error));
   dispatch({
     type: UPDATE_VALUES,
-    fontName: curFontName,
-    choicesFontsName,
-    sliderFontName,
   });
   console.log('====================================');
 };
@@ -303,7 +294,6 @@ const updateFont = () => (dispatch, getState) => {
   const {
     fontName,
     currentParams,
-    choicesFontsName,
     stepBaseValues,
     sliderFontName,
   } = getState().font;
@@ -312,9 +302,6 @@ const updateFont = () => (dispatch, getState) => {
   fonts[sliderFontName].changeParams({ ...stepBaseValues, ...currentParams });
   dispatch({
     type: UPDATE_VALUES,
-    fontName,
-    choicesFontsName,
-    sliderFontName,
   });
 };
 
@@ -342,13 +329,12 @@ export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
 };
 
 export const stepForward = () => (dispatch, getState) => {
-  const { font, choicesMade } = getState().font;
+  const { choicesMade } = getState().font;
   let { step } = getState().font;
   choicesMade[step] = {};
   choicesMade[step].name = 'No choice';
   dispatch({
     type: SELECT_CHOICE,
-    font,
     choicesMade,
   });
   dispatch(goToStep((step += 1)));
@@ -363,7 +349,7 @@ export const stepBack = () => (dispatch, getState) => {
 };
 
 export const selectChoice = choice => (dispatch, getState) => {
-  const { fontName, choicesMade, currentPreset } = getState().font;
+  const { choicesMade, currentPreset } = getState().font;
   let { step, currentParams } = getState().font;
   dispatch({
     type: SELECT_CHOICE_REQUESTED,
@@ -386,7 +372,6 @@ export const selectChoice = choice => (dispatch, getState) => {
   choicesMade[step].name = choice.name;
   dispatch({
     type: SELECT_CHOICE,
-    fontName,
     currentParams,
     choicesMade,
   });
