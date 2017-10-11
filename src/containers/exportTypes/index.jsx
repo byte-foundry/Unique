@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { storeExportType } from '../../data/user';
-import ExportType from '../../components/exportType/';
+import { ExportType, ExportToPrototypo } from '../../components/exportType/';
 import Button from '../../components/button/';
 
 import './ExportTypes.css';
@@ -37,6 +37,7 @@ const choices = [
   {
     type: 'prototypo',
     title: 'Refine it with Prototypo',
+    component: <ExportToPrototypo />,
     description: (<span>
       <p>
         Prototypo c&apos;est super cool

@@ -185,3 +185,59 @@ export const updateProjectBought = projectId => `
         }
     }
 `;
+
+export const getPrototypoUser = userEmail => `
+    query {
+        User (
+            email: "${userEmail}"
+        ) {
+            id
+            firstName
+        }
+    }
+`;
+
+export const authenticateUser = (email, password) => `
+    mutation {
+        authenticateEmailUser(
+            email:"${email}"
+            password:"${password}"
+        )
+        {
+            token
+        }
+    }
+`;
+
+export const signupUser = (email, password, firstName, lastName) => `
+mutation {
+    signupEmailUser(
+        email:"${email}"
+        password:"${password}"
+        firstName:"${firstName}"
+        lastName:"${lastName}"
+    )
+    {
+        id
+    }
+}
+`;
+
+export const sendFontToPrototypo = (prototypoUserId, familyName, template, variantName, values) => `
+    mutation {
+        createFamily(
+            ownerId:"${prototypoUserId}"
+            name:"${familyName}"
+            template:"${template}"
+            variants: [
+                {
+                    name: "${variantName}"
+                    values: "${JSON.stringify(values).replace(/"/g, "\\\"")}"
+                }    
+            ]
+    )
+    {
+        id
+    }
+}
+`;
