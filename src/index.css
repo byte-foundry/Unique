@@ -1,5 +1,22 @@
+@font-face {
+  font-family: duA5LDxD8w;
+  src: url(fonts/sngl-st-rg.woff2) format("woff2"),
+    url(fonts/sngl-st-rg.woff) format("woff");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: duA5LDxD8w;
+  src: url(fonts/sngl-st-b.woff2) format("woff2"),
+    url(fonts/sngl-st-b.woff) format("woff");
+  font-style: normal;
+  font-weight: 700;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: duA5LDxD8w, sans-serif;
+  color: #501286;
+  background-color: #fff;
 }

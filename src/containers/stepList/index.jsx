@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import Step from '../../components/step/';
 import Button from '../../components/button/';
-import { goToStep, finishEditing } from '../../data/font';
+import { goToStep } from '../../data/font';
 import './StepList.css';
 
 const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
@@ -46,9 +46,6 @@ const StepList = props =>
     )}
     <h2>Choices made:</h2>
     {getStepsDone(props.steps, props.step, props.choicesMade, props.fontName, props.specimen)}
-    {!props.specimen
-    ? <Button className="finish" label="Finish" onClick={props.finishEditing} />
-      : false}
   </div>);
 
 StepList.propTypes = {
@@ -71,7 +68,6 @@ StepList.propTypes = {
   ).isRequired,
   fontName: PropTypes.string.isRequired,
   specimen: PropTypes.bool,
-  finishEditing: PropTypes.func.isRequired,
 };
 
 StepList.defaultProps = {
@@ -85,6 +81,6 @@ const mapStateToProps = state => ({
   choicesMade: state.font.choicesMade,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ goToStep, finishEditing }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ goToStep }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepList);

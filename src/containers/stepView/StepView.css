@@ -7,10 +7,14 @@
 }
 
 
-.StepView .description {
+.StepView h3 {
+  display: inline-block;
   margin-left: 100px;
+  padding-bottom: 4px;
+  font-size: 1rem;
+  color: #CAB8DA;
+  border-bottom: 2px solid #CAB8DA;
 }
-
 .StepView .actions {
   display: flex;
   flex-direction: row;
@@ -20,28 +24,31 @@
 .StepView .back {
   cursor: pointer;
   display: inline-block;
-  padding: 10px 20px;
-  border: 1px solid black;
+}
+
+.StepView .finish {
+  float: right;
+  margin-right: 100px;
 }
 
 .StepView .nextStep, .StepView .previousStep {
   margin: 20px auto;
   cursor: pointer;
   display: inline-block;
-  padding: 10px 20px;
-  border: 1px solid black;
+}
+
+.StepView .nextStep .left {
+  margin-right: 20px;
+}
+
+.StepView .previousStep .left {
+  margin-right: 20px;
 }
 
 
 .StepView .choiceMore {
   position: relative;
-  display: block;
-  cursor: pointer;
-  user-select: none;
-  border: 1px dashed black;
-  padding: 10px 20px;
-  font-size: 40px;
-  margin-top: 20px;
+  display: none;
 }
 
 .StepView .choiceMore:focus {
@@ -49,8 +56,16 @@
 }
 
 .StepView .choiceMore.selected {
-  border-style: solid;
-  border-color: red;
+  display: block;
+  position: relative;
+  width: 60%;
+  padding: 20px 40px;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 1px 3px  rgba(80,18,134,0.14), 0 1px 2px rgba(80,18,134,0.18);
+  margin-bottom: 30px;
+  cursor: pointer;
+  outline-color: #501286;
   font-family: 'sliderFont';
   font-size: 69px;
 }

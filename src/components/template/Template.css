@@ -1,21 +1,25 @@
 .Template {
-  display: inline;
   position: relative;
-  padding: 10px 20px;
-  margin: 30px 50px;
+  width: 60%;
+  padding: 20px 40px;
   font-size: 69px;
   text-align: center;
-  background-color: #ddd;
+  background: #fff;
+  box-shadow: 0 1px 3px  rgba(80,18,134,0.14), 0 1px 2px rgba(80,18,134,0.18);
+  margin-bottom: 60px;
   cursor: pointer;
+  outline-color: #501286;
 }
 
 .Template .mostSelected {
   position: absolute;
-  top: 5px;
-  right: -20px;
+  top: 0px;
+  right: -35px;
   font-size: 14px;
-  font-family: 'Sans-Serif';
+  font-family: duA5LDxD8w, 'Sans-Serif';
   transform: rotate(45deg);
-  background: #ddd;
-  border: 2px solid #333;
+  background: #fff;
+  border-radius: 5px;
+  padding: 4px 8px;
+  border: 2px solid #501286;
 }

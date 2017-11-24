@@ -1,14 +1,33 @@
 .Button {
-  font-size: 18px;
-  background-color: #333;
+  font-size: 1rem;
+  background-color: #501286;
+  border: 2px solid #501286;
   color: #fff;
-  border: none;
   border-radius: 8px;
-  padding: 20px 40px;
-  font-weight: 700;
+  padding: 10px 30px;
   cursor: pointer;
   display: inline;
+  transition: all .3s ease;
 }
+
+.Button:hover {
+  background-color: #fff;
+  color: #501286;
+  border: 2px solid #501286;
+}
+
+.Button.hollow {
+  background-color: #fff;
+  color: #501286;
+  border: 2px solid #501286;
+}
+
+.Button.hollow:hover {
+  background-color: #501286;
+  color: #fff;
+  border: 2px solid #501286;
+}
+
 
 .Button:focus {
   outline: none;

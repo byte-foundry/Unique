@@ -8,24 +8,40 @@
   justify-content: space-around;
   align-items: center;
   align-content: space-around;
-  margin-top: 10%;
+  margin-top: 40px;
 }
 
 .DefineNeed h1 {
+  display: inline-block;
   margin: 80px;
+  margin-left: 120px;
+  margin-bottom: 0;
+  padding-bottom: 4px;
+  font-size: 1rem;
+  color: #CAB8DA;
+  border-bottom: 2px solid #CAB8DA;
 }
 
 .DefineNeed h2 {
+  display: block;
   margin: 80px;
+  margin-left: 120px;
+  margin-bottom: 0;
+  padding-bottom: 4px;
+  font-size: 1rem;
+  color: #CAB8DA;
+  text-align: center;
 }
 
 .DefineNeed .needs .choice {
   width: 60%;
   padding: 40px 80px;
   text-align: center;
-  background: #ddd;
+  background: #fff;
+  box-shadow: 0 1px 3px  rgba(80,18,134,0.14), 0 1px 2px rgba(80,18,134,0.18);
   margin-bottom: 60px;
   cursor: pointer;
+  outline-color: #501286;
 }
 
 
@@ -34,7 +50,7 @@
   height: 70px;
   width: 500px;
   font-size: 18px;
-  background-color: #eee;
+  background-color: rgba(80,18,134,0.08);
   border: none;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -45,7 +61,7 @@
 .DefineNeed form button {
   height: 70px;
   font-size: 18px;
-  background-color: #333;
+  background-color: #501286;
   color: #fff;
   border: none;
   border-top-right-radius: 8px;

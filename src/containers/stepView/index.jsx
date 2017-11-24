@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { stepForward, stepBack, selectChoice, updateSliderFont } from '../../data/font';
+import { stepForward, stepBack, selectChoice, updateSliderFont, finishEditing } from '../../data/font';
 import Choice from '../../components/choice/';
 import WordView from '../wordView/';
 import Sliders from '../sliders/';
@@ -70,14 +70,13 @@ class StepView extends React.Component {
   render() {
     return (
       <div className="StepView">
+        <h3>Current state</h3>
         <WordView word={this.props.chosenWord} />
+        <Button className="finish" label="Finish" onClick={this.props.finishEditing} />
         <div className="description">
-          <h2>
+          <h3>
             {this.props.stepValues.name}:
-          </h2>
-          <p>
-            {this.props.stepValues.description}
-          </p>
+          </h3>
         </div>
         <div className="choices">
           {this.props.stepValues.choices.map((choice, index) =>
@@ -104,25 +103,35 @@ class StepView extends React.Component {
           >
             {this.state.choice && this.state.choice.name === 'custom'
               ? this.props.chosenWord
-              : 'More'}
+              : ''}
           </div>
           {this.state.choice && this.state.choice.name === 'custom'
             ? <Sliders onUpdate={this.onUpdate} />
             : false}
         </div>
         <div className="actions">
-          <Button className="previousStep" label="Back" onClick={this.props.stepBack} />
-          {Object.keys(this.state.choice || {}).length > 0
-            ? <Button
-              className="nextStep"
-              label="OK"
+          <span className="previousStep">
+            <Button className="left" label="Back" onClick={this.props.stepBack} />
+            <Button
+              className="hollow"
+              label={this.state.choice && this.state.choice.name === 'custom'
+              ? 'Remove custom choice'
+              : 'More accuracy'}
+              onClick={() => this.markChoiceActive({ name: 'custom', values: {} })}
+            />
+          </span>
+          <span className="nextStep">
+            <Button
+              className="hollow left"
+              label="Skip"
+              onClick={this.props.stepForward}
+            />
+            <Button
+              className=""
+              label="Next step"
               onClick={() => this.props.selectChoice(this.state.choice)}
             />
-            : <Button
-              className="nextStep"
-              label="I like it that way"
-              onClick={this.props.stepForward}
-            />}
+          </span>
         </div>
       </div>
     );
@@ -142,6 +151,7 @@ const mapDispatchToProps = dispatch =>
       stepBack,
       selectChoice,
       updateSliderFont,
+      finishEditing,
     },
     dispatch,
   );
@@ -150,6 +160,7 @@ StepView.propTypes = {
   stepForward: PropTypes.func.isRequired,
   stepBack: PropTypes.func.isRequired,
   selectChoice: PropTypes.func.isRequired,
+  finishEditing: PropTypes.func.isRequired,
   updateSliderFont: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
   choicesMade: PropTypes.arrayOf(
