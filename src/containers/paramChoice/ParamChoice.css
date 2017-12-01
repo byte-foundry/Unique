@@ -1,19 +1,7 @@
 .ParamChoice {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  align-content: stretch;
-  height: 100%;
 }
 
 .ParamChoice .left {
-  max-width: 75%;
-  width: 75%;
-  height: 100%;
 }
 .ParamChoice .right {
-  max-width: 25%;
-  width: 25%;
 }

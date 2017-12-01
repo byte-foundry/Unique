@@ -20,3 +20,7 @@ body {
   color: #501286;
   background-color: #fff;
 }
+
+::selection {
+  background: #e9d8fa;
+}

@@ -9,7 +9,10 @@ import { importPresets, reloadPresets } from '../../data/presets';
 import { reloadFonts } from '../../data/font';
 import { GRAPHQL_API } from '../../data/constants';
 import { getAllPresets } from '../../data/queries';
+import './bootstrap-reboot.css';
+import './bootstrap-grid.css';
 import './App.css';
+import logo from './logo.svg';
 
 import ProtectedRoute from '../../components/protectedRoute/';
 
@@ -91,6 +94,7 @@ class App extends React.Component {
   render() {
     return (
       <main className="App">
+        <img src={logo} className="App-logo" alt="logo" />
         {this.props.unstableUi
           ? <UnstableView />
           : <Switch>

@@ -44,7 +44,8 @@ const StepList = props =>
         role="button"
       />),
     )}
-    <h2>Choices made:</h2>
+    <br/>
+    <h3>Choices made:</h3>
     {getStepsDone(props.steps, props.step, props.choicesMade, props.fontName, props.specimen)}
   </div>);
 

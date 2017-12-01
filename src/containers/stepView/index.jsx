@@ -69,10 +69,10 @@ class StepView extends React.Component {
   }
   render() {
     return (
-      <div className="StepView">
-        <h3>Current state</h3>
+      <div className="StepView container">
+        <h3 className="currentState">Current state</h3>
         <WordView word={this.props.chosenWord} />
-        <Button className="finish" label="Finish" onClick={this.props.finishEditing} />
+        <Button className="finish" label="I'm done" onClick={this.props.finishEditing} />
         <div className="description">
           <h3>
             {this.props.stepValues.name}:

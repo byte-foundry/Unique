@@ -1,7 +1,7 @@
 .Choice {
   position: relative;
-  width: 60%;
-  padding: 20px 40px;
+  width: 100%;
+  padding: 0px 40px;
   font-size: 69px;
   text-align: center;
   background: #fff;
@@ -9,6 +9,7 @@
   margin-bottom: 30px;
   cursor: pointer;
   outline-color: #501286;
+  border: 1px solid transparent;
 }
 
 .Choice:focus {
@@ -16,7 +17,7 @@
 }
 
 .Choice.selected {
-  border-color: red;
+  border-color: #501286;
 }
 
 .Choice .mostSelected {

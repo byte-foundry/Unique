@@ -14,10 +14,14 @@ const redirectToProject = (step, choicesLength, redirectToLocation) => {
 };
 
 const Start = (props) => (
-  <div className="Start">
-    <h1>Welcome back!</h1>
-    <div className="choices">
-      <div className="choice">
+  <div className="Start container">
+    <div className="row">
+      <div className="col-sm-12">
+          <h1>Welcome back!</h1>
+      </div>
+    </div>    
+    <div className="choices row">
+      <div className="choice col-md-6">
         <div
           className="card"
           onClick={() => redirectToProject(props.step, props.choicesLength, props.redirectToLocation)}
@@ -30,7 +34,7 @@ const Start = (props) => (
           <div className="title">Resume your project</div>
         </div>
       </div>
-      <div className="choice">
+      <div className="choice col-md-6">
         <div
           className="card"
           onClick={() => props.redirectToHome()}

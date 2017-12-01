@@ -2,3 +2,11 @@
   position: relative;
   display: block;
 }
+
+.App .App-logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 100px;
+  height: auto;
+}

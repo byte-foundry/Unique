@@ -15,6 +15,7 @@ class ContentEditable extends React.Component {
       {
         ...props,
         ref: e => (this.htmlEl = e),
+        spellCheck: false,
         onInput: this.emitChange,
         onKeyDown: this.onKeyDown,
         onBlur: this.props.onBlur || this.emitChange,

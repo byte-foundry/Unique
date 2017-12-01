@@ -1,15 +1,10 @@
 .Start .choices {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    align-content: space-around;
-    margin-top: 10%;
   }
   
   
   .Start h1, .Start h2 {
     margin: 80px;
+    margin-left: 0;
   }
 
 

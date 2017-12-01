@@ -34,12 +34,16 @@ class DefineNeed extends React.Component {
   }
   render() {
     return (
-      <div className="DefineNeed">
-        <h1>Which need ?</h1>
-        <div className="needs">
+      <div className="DefineNeed container">
+        <div className="row">
+          <div className="col-sm-12">
+            <h1>Which need ?</h1>
+          </div>
+        </div>
+        <div className="needs row">
           <div
             role="button"
-            className="choice"
+            className="choice col-sm-12"
             onClick={() => this.toggleLogoNeed()}
             tabIndex="0"
           >
@@ -61,7 +65,7 @@ class DefineNeed extends React.Component {
           }
           <div
             role="button"
-            className="choice"
+            className="choice col-sm-12"
             onClick={() => this.props.defineNeed('text')}
             tabIndex="0"
           >
@@ -69,7 +73,7 @@ class DefineNeed extends React.Component {
           </div>
           <div
             role="button"
-            className="choice"
+            className="choice col-sm-12"
             onClick={() => this.props.defineNeed('website')}
             tabIndex="0"
           >

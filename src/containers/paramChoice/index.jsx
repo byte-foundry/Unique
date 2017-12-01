@@ -9,12 +9,14 @@ import StepView from '../stepView/';
 import StepList from '../stepList/';
 
 const ParamChoice = () => (
-  <div className="ParamChoice">
-    <div className="left">
+  <div className="ParamChoice container-fluid">
+    <div className="row">
+    <div className="left col-sm-10">
       <StepView />
     </div>
-    <div className="right">
+    <div className="right col-sm-2">
       <StepList />
+    </div>
     </div>
   </div>
 );

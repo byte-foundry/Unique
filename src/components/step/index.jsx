@@ -9,11 +9,11 @@ import './Step.css';
 const Step = props => (
   <div
     role="button"
-    className="Step"
+    className={`Step ${props.current ? 'current' : ''}`}
     onClick={() => props.goToStep(props.index, props.specimen)}
     tabIndex="0"
   >
-    {`${props.current ? '> ' : ''}${props.title}${props.choice ? `: ${props.choice}` : ''}`}
+    {`${props.title}${props.choice ? `: ${props.choice}` : ''}`}
   </div>
 );
 

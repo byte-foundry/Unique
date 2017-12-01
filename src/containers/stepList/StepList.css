@@ -1,29 +1,40 @@
 .StepList {
-  background-color: #ccc;
-  height: 100%;
-  padding: 40px;
+  background-color: white;
+  padding-top: 30px;
+  padding-right: 30px;
+  color: #CAB8DA;
 }
 
 .StepList .bubble {
-  width: 25px;
-  height: 25px;
+  width: 8px;
+  height: 8px;
   background-color: white;
+  border: 1px solid #501286;
   border-radius: 50%;
   margin-right: 10px;
   display: inline-block;
 }
 
+.StepList h3 {
+  display: inline-block;
+  margin-top: 50px;
+  padding-bottom: 4px;
+  font-size: 1rem;
+  color: #CAB8DA;
+  border-bottom: 2px solid #CAB8DA;
+}
+
 .StepList a {
-  color: black;
+  color: #CAB8DA;
   text-decoration: none;
 }
 
 .StepList .bubble.past {
-  background-color: #aaa;
+  background-color: #501286;
 }
 
 .StepList .bubble.active {
-  background-color: black;
+  background-color: #501286;
 }
 
 .StepList .finish {

@@ -23,11 +23,23 @@ const isMostSelected = (presets, font) => {
 };
 
 const TemplateChoice = props => (
-  <div className="TemplateChoice">
+  <div className="TemplateChoice container">
     <Button label="Back" onClick={() => props.redirectToHome()} />
-    <h1>Pick something that you like and edit it!</h1>   
+    <div className="row">
+      <div className="col-sm-12">
+        <h1>Pick something that you like and edit it!</h1>   
+      </div>
+    </div>
     <div className="template-wrapper">
-      {props.presets.map(font => <Template key={`${font.preset}${font.variant}`} font={font} selectFont={props.selectFont} text={props.chosenWord} mostSelected={isMostSelected(props.presets, font)} />)}
+      {props.presets.map((font) => {
+        return (
+          <div className="row">
+            <div className="col-sm-12">
+              <Template key={`${font.preset}${font.variant}`} font={font} selectFont={props.selectFont} text={props.chosenWord} mostSelected={isMostSelected(props.presets, font)} />
+            </div>
+          </div>
+        );
+      })}
     </div>
     {props.isLoading
     ? (<h2>Loading font...</h2>)
