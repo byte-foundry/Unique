@@ -17,6 +17,9 @@
 .DefineNeed h2 {
   text-align: center;
   margin-top: 60px;
+  border-bottom: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 

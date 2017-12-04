@@ -278,7 +278,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     );
   });
   fonts[sliderFontName].changeParams({ ...stepBaseValues, ...currentParams });
-  if (fonts[curFontName].changeParams) {
+  if (fonts[curFontName] && fonts[curFontName].changeParams) {
     fonts[curFontName].changeParams({ ...stepBaseValues, ...currentParams });
   }
   request(GRAPHQL_API, getSelectedCount('Step', currentPreset.steps[stepToUpdate - 1].id))
@@ -350,7 +350,18 @@ export const stepBack = () => (dispatch, getState) => {
 
 export const selectChoice = choice => (dispatch, getState) => {
   const { choicesMade, currentPreset } = getState().font;
-  let { step, currentParams } = getState().font;
+  let { step, currentParams } = getState().font;  
+  console.log('===============SELECT CHOICE===================');
+  console.log(choice);
+  if (!choice.name) {
+    console.log('no choice selected')
+    choice = {
+      name: 'No choice',
+      values: {},
+    };
+    console.log(choice);
+  }  
+  console.log('===============================================');
   dispatch({
     type: SELECT_CHOICE_REQUESTED,
     params: choice.values,
@@ -368,7 +379,7 @@ export const selectChoice = choice => (dispatch, getState) => {
     ...paramsToReset,
     ...choice.values,
   };
-  choicesMade[step] = choice.values;
+  choicesMade[step] = choice.values || {};
   choicesMade[step].name = choice.name;
   dispatch({
     type: SELECT_CHOICE,
@@ -376,8 +387,8 @@ export const selectChoice = choice => (dispatch, getState) => {
     choicesMade,
   });
   dispatch(goToStep((step += 1)));
-  if (choice.name === 'custom') {
-    request(GRAPHQL_API, getSpecialChoiceSelectedCount('custom'))
+  if (choice.name === 'Custom' || choice.name === 'No choice') {
+    request(GRAPHQL_API, getSpecialChoiceSelectedCount(choice.name))
       .then(data => request(GRAPHQL_API, updateSelectedCount('Choice', data.allChoices[0].id, data.allChoices[0].selected + 1)))
       .catch(error => console.log(error));
   } else {

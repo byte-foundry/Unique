@@ -30,7 +30,7 @@ class StepView extends React.Component {
     };
 
     this.markChoiceActive = (choice) => {
-      if (choice.name === this.state.choice.name) {
+      if (this.state.choice && choice.name === this.state.choice.name) {
         this.setState({ choice: {} });
       } else this.setState({ choice });
     };
@@ -52,7 +52,7 @@ class StepView extends React.Component {
   setChoiceSelected(props) {
     let choice = {};
     if (props.choicesMade[props.step]) {
-      if (props.choicesMade[props.step].name === 'custom') {
+      if (props.choicesMade[props.step].name === 'Custom') {
         choice = {
           name: props.choicesMade[props.step].name,
           values: { ...props.choicesMade[props.step] },
@@ -70,13 +70,13 @@ class StepView extends React.Component {
   render() {
     return (
       <div className="StepView container">
-        <Button className="back" label="" isBack onClick={this.props.stepBack} />
+        <Button className="back" label="" mode="isBack" onClick={this.props.stepBack} />
         <h3 className="currentState">Current state</h3>
         <WordView word={this.props.chosenWord} />
         <Button className="finish" label="I'm done" onClick={this.props.finishEditing} />
         <div className="description">
           <h3>
-            {this.props.stepValues.name}:
+            {this.props.stepValues.description}:
           </h3>
         </div>
         <div className="choices">
@@ -93,20 +93,20 @@ class StepView extends React.Component {
             />),
           )}
           <div
-            className={`choiceMore ${this.state.choice && this.state.choice.name === 'custom'
+            className={`choiceMore ${this.state.choice && this.state.choice.name === 'Custom'
               ? 'selected'
               : ''}`}
             role="option"
             aria-checked="false"
             aria-selected="false"
             tabIndex={0}
-            onClick={() => this.markChoiceActive({ name: 'custom', values: {} })}
+            onClick={() => this.markChoiceActive({ name: 'Custom', values: {} })}
           >
-            {this.state.choice && this.state.choice.name === 'custom'
+            {this.state.choice && this.state.choice.name === 'Custom'
               ? this.props.chosenWord
               : ''}
           </div>
-          {this.state.choice && this.state.choice.name === 'custom'
+          {this.state.choice && this.state.choice.name === 'Custom'
             ? <Sliders onUpdate={this.onUpdate} />
             : false}
         </div>
@@ -114,10 +114,11 @@ class StepView extends React.Component {
           <span className="previousStep">
             <Button
               className="hollow"
-              label={this.state.choice && this.state.choice.name === 'custom'
+              mode="isConfigure"
+              label={this.state.choice && this.state.choice.name === 'Custom'
               ? 'Remove custom choice'
               : 'More accuracy'}
-              onClick={() => this.markChoiceActive({ name: 'custom', values: {} })}
+              onClick={() => this.markChoiceActive({ name: 'Custom', values: {} })}
             />
           </span>
           <span className="nextStep">

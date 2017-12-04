@@ -34,7 +34,7 @@ const ExportTypeComponent = props => (
     ) : (
       <div>
         {props.expanded ? (
-          <Button className="ExportBack" label="" isBack onClick={props.removeChoice} />
+          <Button className="ExportBack" label="" mode="isBack" onClick={props.removeChoice} />
         ) : (
           false
         )}

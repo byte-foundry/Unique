@@ -1,10 +1,10 @@
 .Button {
-  font-size: 1rem;
+  font-size: 0.8rem;
   background-color: #501286;
   border: 2px solid #501286;
   color: #fff;
-  border-radius: 8px;
-  padding: 10px 30px;
+  border-radius: 5px;
+  padding: 5px 20px;
   cursor: pointer;
   display: inline;
   transition: all .3s ease;
@@ -34,9 +34,17 @@
 }
 
 .Button.isBack img  {
-  width: 40px;
+  width: 30px;
   height: auto;
 }
+
+.Button.isConfigure img  {
+  width: 10px;
+  height: auto;
+  margin-right: 5px;
+  display: inline-block;
+}
+
 
 
 .Button:focus {
