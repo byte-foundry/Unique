@@ -28,6 +28,16 @@
   border: 2px solid #501286;
 }
 
+.Button.isBack {
+  background: none;
+  border: none;
+}
+
+.Button.isBack img  {
+  width: 40px;
+  height: auto;
+}
+
 
 .Button:focus {
   outline: none;

@@ -70,6 +70,7 @@ class StepView extends React.Component {
   render() {
     return (
       <div className="StepView container">
+        <Button className="back" label="" isBack onClick={this.props.stepBack} />
         <h3 className="currentState">Current state</h3>
         <WordView word={this.props.chosenWord} />
         <Button className="finish" label="I'm done" onClick={this.props.finishEditing} />
@@ -111,7 +112,6 @@ class StepView extends React.Component {
         </div>
         <div className="actions">
           <span className="previousStep">
-            <Button className="left" label="Back" onClick={this.props.stepBack} />
             <Button
               className="hollow"
               label={this.state.choice && this.state.choice.name === 'custom'
