@@ -7,3 +7,10 @@
 .Step.current {
   color: #501286;
 }
+
+.Step img {
+  display: inline-block;
+  width: 10px;
+  height: auto;
+  margin-left: 5px;
+}

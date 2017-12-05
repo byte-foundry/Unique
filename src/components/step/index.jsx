@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { goToStep } from '../../data/font';
+import pencilIcon from './pencil.svg';
 import './Step.css';
 
 const Step = props => (
@@ -13,7 +14,14 @@ const Step = props => (
     onClick={() => props.goToStep(props.index, props.specimen)}
     tabIndex="0"
   >
-    {`${props.title}${props.choice ? `: ${props.choice}` : ''}`}
+    <span>
+      {`${props.title}${props.choice ? `: ${props.choice}` : ''}`}
+      {
+        !props.specimen && !props.current
+        ? (<img src={pencilIcon} alt="icon-edit" />)
+        : false
+      }
+    </span>
   </div>
 );
 

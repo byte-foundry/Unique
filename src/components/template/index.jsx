@@ -7,7 +7,7 @@ const Template = props => (
   <div
     role="button"
     className="Template"
-    onClick={() => props.selectFont(props.font)}
+    onClick={() => (!props.isLoading ? props.selectFont(props.font) : false)}
     tabIndex="0"
     style={{ fontFamily: `${props.font.preset}${props.font.variant}` }}
   >
@@ -25,6 +25,7 @@ Template.propTypes = {
   selectFont: PropTypes.func.isRequired,
   text: PropTypes.string,
   mostSelected: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 Template.defaultProps = {

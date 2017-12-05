@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Step from '../../components/step/';
 import Button from '../../components/button/';
 import { goToStep } from '../../data/font';
+import pencilIcon from '../../components/step/pencil.svg';
 import './StepList.css';
 
 const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
@@ -16,6 +17,10 @@ const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
         <Link key="template" to="/">
           <div className="Step">
             Template: {fontName}
+            {!isSpecimen
+              ? (<img src={pencilIcon} alt="icon-edit" />)
+              : false
+            }
           </div>
         </Link>
       )
@@ -33,18 +38,19 @@ const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
 
 const StepList = props =>
   (<div className="StepList">
-    {!props.specimen && props.steps.map((step, index) =>
-      (<div
-        className={`bubble ${props.step > index + 1 ? 'past' : ''} ${props.step === index + 1
-          ? 'active'
-          : ''}`}
-        onClick={() => props.goToStep(index + 1)}
-        tabIndex="0"
-        key={`bubble-${step.name}`}
-        role="button"
-      />),
-    )}
-    <br/>
+    <div className="bubbles">
+      {!props.specimen && props.steps.map((step, index) =>
+        (<div
+          className={`bubble ${props.step > index + 1 ? 'past' : ''} ${props.step === index + 1
+            ? 'active'
+            : ''}`}
+          onClick={() => props.goToStep(index + 1)}
+          tabIndex="0"
+          key={`bubble-${step.name}`}
+          role="button"
+        />),
+      )}
+    </div>
     <h3>Choices made:</h3>
     {getStepsDone(props.steps, props.step, props.choicesMade, props.fontName, props.specimen)}
   </div>);

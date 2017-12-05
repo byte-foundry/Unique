@@ -69,71 +69,73 @@ class StepView extends React.Component {
   }
   render() {
     return (
-      <div className="StepView container">
+      <div className="StepView">
         <Button className="back" label="" mode="isBack" onClick={this.props.stepBack} />
-        <h3 className="currentState">Current state</h3>
-        <WordView word={this.props.chosenWord} />
-        <Button className="finish" label="I'm done" onClick={this.props.finishEditing} />
-        <div className="description">
-          <h3>
-            {this.props.stepValues.description}:
-          </h3>
-        </div>
-        <div className="choices">
-          {this.props.stepValues.choices.map((choice, index) =>
-            (<Choice
-              choice={choice}
-              key={`${choice.name}${choice.id}`}
-              markChoiceActive={this.markChoiceActive}
-              selectChoice={this.props.selectChoice}
-              index={index}
-              selected={this.state.choice === choice}
-              text={this.props.chosenWord}
-              mostSelected={this.state.mostSelected === choice.id}
-            />),
-          )}
-          <div
-            className={`choiceMore ${this.state.choice && this.state.choice.name === 'Custom'
-              ? 'selected'
-              : ''}`}
-            role="option"
-            aria-checked="false"
-            aria-selected="false"
-            tabIndex={0}
-            onClick={() => this.markChoiceActive({ name: 'Custom', values: {} })}
-          >
-            {this.state.choice && this.state.choice.name === 'Custom'
-              ? this.props.chosenWord
-              : ''}
+        <div className="container">
+          <h3 className="currentState">Current state</h3>
+          <WordView word={this.props.chosenWord} />
+          <Button className="finish" label="I'm done" onClick={this.props.finishEditing} />
+          <div className="description">
+            <h3>
+              {this.props.stepValues.description}:
+            </h3>
           </div>
-          {this.state.choice && this.state.choice.name === 'Custom'
-            ? <Sliders onUpdate={this.onUpdate} />
-            : false}
-        </div>
-        <div className="actions">
-          <span className="previousStep">
-            <Button
-              className="hollow"
-              mode="isConfigure"
-              label={this.state.choice && this.state.choice.name === 'Custom'
-              ? 'Remove custom choice'
-              : 'More accuracy'}
+          <div className="choices">
+            {this.props.stepValues.choices.map((choice, index) =>
+              (<Choice
+                choice={choice}
+                key={`${choice.name}${choice.id}`}
+                markChoiceActive={this.markChoiceActive}
+                selectChoice={this.props.selectChoice}
+                index={index}
+                selected={this.state.choice === choice}
+                text={this.props.chosenWord}
+                mostSelected={this.state.mostSelected === choice.id}
+              />),
+            )}
+            <div
+              className={`choiceMore ${this.state.choice && this.state.choice.name === 'Custom'
+                ? 'selected'
+                : ''}`}
+              role="option"
+              aria-checked="false"
+              aria-selected="false"
+              tabIndex={0}
               onClick={() => this.markChoiceActive({ name: 'Custom', values: {} })}
-            />
-          </span>
-          <span className="nextStep">
-            <Button
-              className="hollow left"
-              label="Skip"
-              onClick={this.props.stepForward}
-            />
-            <Button
-              className=""
-              label="Next step"
-              onClick={() => this.props.selectChoice(this.state.choice)}
-            />
-          </span>
-        </div>
+            >
+              {this.state.choice && this.state.choice.name === 'Custom'
+                ? this.props.chosenWord
+                : ''}
+            </div>
+            {this.state.choice && this.state.choice.name === 'Custom'
+              ? <Sliders onUpdate={this.onUpdate} />
+              : false}
+          </div>
+          <div className="actions">
+            <span className="previousStep">
+              <Button
+                className="hollow"
+                mode="isConfigure"
+                label={this.state.choice && this.state.choice.name === 'Custom'
+                ? 'Remove custom choice'
+                : 'More accuracy'}
+                onClick={() => this.markChoiceActive({ name: 'Custom', values: {} })}
+              />
+            </span>
+            <span className="nextStep">
+              <Button
+                className="hollow left"
+                label="Skip"
+                onClick={this.props.stepForward}
+              />
+              <Button
+                className=""
+                label="Next step"
+                onClick={() => this.props.selectChoice(this.state.choice)}
+              />
+            </span>
+          </div>
+        </div>        
       </div>
     );
   }

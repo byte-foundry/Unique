@@ -18,27 +18,33 @@
   text-align: center;
   margin-top: 60px;
   border-bottom: none;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 
-.DefineNeed .needs .choice {
-  width: 100%;
-  padding: 20px 80px;
-  text-align: center;
-  background: #fff;
-  box-shadow: 0 1px 3px  rgba(80,18,134,0.14), 0 1px 2px rgba(80,18,134,0.18);
-  margin-bottom: 30px;
-  cursor: pointer;
-  outline-color: #501286;
+.DefineNeed .needs .card {}
+
+.DefineNeed .needs .card .image {
+  height: 200px;
+  background-color: #c7b5d8;
 }
 
+.DefineNeed .needs .card .title {
+  background-color: #501286;
+  color: white;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 20px 40px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+
+.DefineNeed form {}
 
 .DefineNeed form input {
-  margin-bottom: 60px;
+  margin-top: 10px;
   height: 70px;
-  width: 500px;
+  width: 75%;
   font-size: 18px;
   background-color: rgba(80,18,134,0.08);
   border: none;
@@ -49,6 +55,8 @@
 }
 
 .DefineNeed form button {
+  margin-top: 10px;
+  width: 25%;
   height: 70px;
   font-size: 18px;
   background-color: #501286;
@@ -64,4 +72,9 @@
 
 .DefineNeed form input:focus {
   outline: none;
+}
+
+@keyframes translateTop {
+  from {transform: translateY(-120%)}
+  to {transform: translateY(0%)}
 }

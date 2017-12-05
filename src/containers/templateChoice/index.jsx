@@ -23,27 +23,29 @@ const isMostSelected = (presets, font) => {
 };
 
 const TemplateChoice = props => (
-  <div className="TemplateChoice container">
+  <div className="TemplateChoice">
     <Button label="Back" className="back" mode="isBack" onClick={() => props.redirectToHome()} />
-    <div className="row">
-      <div className="col-sm-12">
-        <h1>Pick something that you like and edit it!</h1>
+    <div className="container">
+      <div className="row">
+        <div className="col-sm-12">
+          <h1>Pick something that you like and edit it!</h1>
+        </div>
       </div>
-    </div>
-    <div className="template-wrapper">
-      {props.presets.map((font) => {
-        return (
-          <div className="row" key={`${font.preset}${font.variant}`}>
-            <div className="col-sm-12">
-              <Template font={font} selectFont={props.selectFont} text={props.chosenWord} mostSelected={isMostSelected(props.presets, font)} />
+      <div className="template-wrapper">
+        {props.presets.map((font) => {
+          return (
+            <div className="row" key={`${font.preset}${font.variant}`}>
+              <div className="col-sm-12">
+                <Template font={font} selectFont={props.selectFont} text={props.chosenWord} mostSelected={isMostSelected(props.presets, font)} isLoading={props.isLoading} />
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+      {props.isLoading
+      ? (<h2>Loading font...</h2>)
+      : false}
     </div>
-    {props.isLoading
-    ? (<h2>Loading font...</h2>)
-    : false}
   </div>
 );
 

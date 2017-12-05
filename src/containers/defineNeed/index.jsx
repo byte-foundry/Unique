@@ -29,7 +29,9 @@ class DefineNeed extends React.Component {
     if (this.state.word !== '') {
       this.props.storeChosenWord(this.state.word);
     }
-    this.props.defineNeed('logo');
+    if (!this.props.isLoading) {
+      this.props.defineNeed('logo');
+    }
     event.preventDefault();
   }
   render() {
@@ -37,19 +39,23 @@ class DefineNeed extends React.Component {
       <div className="DefineNeed container">
         <div className="row">
           <div className="col-sm-12">
-            <h1>Which need ?</h1>
+            <h1>What kind of need do you have?</h1>
           </div>
         </div>
         <div className="needs row">
-          <div
-            role="button"
-            className="choice col-sm-12"
-            onClick={() => this.toggleLogoNeed()}
-            tabIndex="0"
-          >
-            Logo
-          </div>
-          {this.state.logoNeedOpened
+          <div className="col-sm-12 col-md-4">
+            <div
+              className="card"
+              onClick={() => this.toggleLogoNeed()}
+              role="button"
+              tabIndex="0"
+            >
+              <div className="image" />
+              <div className="title">
+                Logo
+              </div>
+            </div>
+            {this.state.logoNeedOpened
             ? (
               <form onSubmit={this.handleSubmit}>
                 <input
@@ -58,26 +64,37 @@ class DefineNeed extends React.Component {
                   name="text"
                   onChange={this.handleChange}
                 />
-                <button type="submit">Select template</button>
+                <button type="submit">Go</button>
               </form>
               )
             : false
-          }
-          <div
-            role="button"
-            className="choice col-sm-12"
-            onClick={() => this.props.defineNeed('text')}
-            tabIndex="0"
-          >
-            Text
+            }
           </div>
-          <div
-            role="button"
-            className="choice col-sm-12"
-            onClick={() => this.props.defineNeed('website')}
-            tabIndex="0"
-          >
-            Website
+          <div className="col-sm-12 col-md-4">
+            <div
+              className="card"
+              onClick={() => (!this.props.isLoading ? this.props.defineNeed('text') : false)}
+              role="button"
+              tabIndex="0"
+            >
+              <div className="image" />
+              <div className="title">
+                Text
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-12 col-md-4">
+            <div
+              className="card"
+              onClick={() => (!this.props.isLoading ? this.props.defineNeed('website') : false)}
+              role="button"
+              tabIndex="0"
+            >
+              <div className="image" />
+              <div className="title">
+                Website
+              </div>
+            </div>
           </div>
         </div>
         {this.props.isLoading ? <h2>Creating font...</h2> : false}
