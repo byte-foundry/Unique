@@ -9,6 +9,9 @@ import './SpecimenView.css';
 import StepList from '../stepList/';
 import Button from '../../components/button/';
 import { storeEmail } from '../../data/user';
+import desktopBackground from './desktop.svg';
+import tabletBackground from './tablet.svg';
+import mobileBackground from './mobile.svg';
 
 const isEmail = string => new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(string);
 
@@ -25,69 +28,105 @@ const logoSpecimen = (fontName, word) => (
   </div>
 );
 
-const textSpecimen = (fontName) => (
-  <div className="specimen row" style={{ fontFamily: fontName }}>
-    <div className="col-sm-12 col-md-6">
-      <h2>Hamburgefonstiv - Abc 123</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-        ea commodo consequat.
-      </p>
-      <p>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-        nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-        ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-        nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
-    </div>
-    <div className="col-sm-12 col-md-3">
-      <p>0123456789</p>
-      <p>abcdefghijklmnopqrstuvwxyz</p>
-      <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-      <p>The quick brown fox jumps over the lazy dog</p>
-      <p>Buvez de ce whisky que le patron juge fameux</p>
-    </div>
-    <div className="col-sm-12 col-md-3">
-      <StepList specimen />
-    </div>
-  </div>
-);
-
-const websiteSpecimen = (fontName) => (
+const textSpecimen = fontName => (
   <div className="specimen row" style={{ fontFamily: fontName }}>
     <div className="col-sm-12 col-md-6">
       <div className="uppercase">A B C D E F G H I</div>
       <div className="uppercase">J K L M N O P Q R</div>
       <div className="uppercase">S T U V W X Y Z</div>
-      <div className="lowercase">a b c d e f g h i j k l m n o p q r s t u v w x y z</div>
+      <div className="lowercase">
+        a b c d e f g h i j k l m n o p q r s t u v w x y z
+      </div>
       <div className="lowercase">1 2 3 4 5 6 7 8 9 0 . . . ( & ! ? )</div>
       <div className="text1">
-        There is a theory which states that  if ever anyone discovers exactly
-        what the Universe is for and why it is here,
-        it will instantly disappear and be replaced by something even more bizarre and inexplicable.
-        There is another theory which states that this has already happened.
+        There is a theory which states that if ever anyone discovers exactly
+        what the Universe is for and why it is here, it will instantly disappear
+        and be replaced by something even more bizarre and inexplicable. There
+        is another theory which states that this has already happened.
       </div>
       <div className="text2">
-        Twelve voices were shouting in anger, and they were all alike. No question, now,
-        what had happened to the faces of the pigs.
-        The creatures outside looked from pig to man, and from man to pig, and from pig to man again;
-        but already it was impossible to say which was which.
+        Twelve voices were shouting in anger, and they were all alike. No
+        question, now, what had happened to the faces of the pigs. The creatures
+        outside looked from pig to man, and from man to pig, and from pig to man
+        again; but already it was impossible to say which was which.
       </div>
     </div>
     <div className="col-sm-12 col-md-6">
       <StepList specimen />
+    </div>
+  </div>
+);
+
+const websiteSpecimen = fontName => (
+  <div className="specimen website" style={{ fontFamily: fontName }}>
+    <div className="templates">
+      <div className="row">
+        <div className="col-sm-12">
+          <div className="template desktop-wrapper" style={{ backgroundImage: `url(${desktopBackground})` }}>
+            <span className="text">
+              There is a theory which states that if ever anyone discovers exactly
+              what the Universe is for and why it is here, it will instantly disappear
+              and be replaced by something even more bizarre and inexplicable. There
+              is another theory which states that this has already happened.
+              <br />
+              Twelve voices were shouting in anger, and they were all alike. No
+              question, now, what had happened to the faces of the pigs. The creatures
+              outside looked from pig to man, and from man to pig, and from pig to man
+              again; but already it was impossible to say which was which.
+              <br />
+              The trouble with most forms of transport, he thought, is basically one
+              of them not being worth all the bother. On Earth—when there had been an Earth,
+              before it was demolished to make way for a new hyperspace bypass—the problem had been with cars.
+              The disadvantages involved in pulling lots of black sticky slime from out of the ground where it
+              had been safely hidden out of harm's way, turning it into tar to cover the land with, smoke to fill
+              the air with and pouring the rest into the sea, all seemed to outweigh the advantages of being able
+              to get more quickly from one place to another—particularly when the place you arrived at had probably become,
+              as a result of this, very similar to the place you had left, i.e. covered with tar, full of smoke and short of fish.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-sm-12 col-md-12 col-lg-6">
+          <div className="template tablet-wrapper" style={{ backgroundImage: `url(${tabletBackground})` }}>
+            <span className="text">
+              There is a theory which states that if ever anyone discovers exactly
+              what the Universe is for and why it is here, it will instantly disappear
+              and be replaced by something even more bizarre and inexplicable. There
+              is another theory which states that this has already happened.
+              <br />
+              Twelve voices were shouting in anger, and they were all alike. No
+              question, now, what had happened to the faces of the pigs. The creatures
+              outside looked from pig to man, and from man to pig, and from pig to man
+              again; but already it was impossible to say which was which.
+              <br />
+              The trouble with most forms of transport, he thought, is basically one
+              of them not being worth all the bother. On Earth—when there had been an Earth,
+              before it was demolished to make way for a new hyperspace bypass—the problem had been with cars.
+            </span>
+          </div>
+        </div>
+        <div className="col-sm-12 col-md-12 col-lg-6">
+          <div className="template mobile-wrapper" style={{ backgroundImage: `url(${mobileBackground})` }}>
+            <span className="text">
+              There is a theory which states that if ever anyone discovers exactly
+              what the Universe is for and why it is here, it will instantly disappear
+              and be replaced by something even more bizarre and inexplicable. There
+              is another theory which states that this has already happened.
+              <br />
+              Twelve voices were shouting in anger, and they were all alike. No
+              question, now, what had happened to the faces of the pigs. The creatures
+              outside looked from pig to man, and from man to pig, and from pig to man
+              again; but already it was impossible to say which was which.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="row">
+      <div className="col-sm-12">
+        <StepList specimen />
+      </div>
     </div>
   </div>
 );

@@ -15,7 +15,7 @@ const redirectToProject = (step, choicesLength, redirectToLocation) => {
 
 const Start = (props) => (
   <div className="Start container">
-    <div className="row">
+    <div className="row templates">
       <div className="col-sm-12">
           <h1>Welcome back!</h1>
       </div>
