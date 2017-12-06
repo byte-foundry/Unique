@@ -55,12 +55,12 @@ class ExportTypes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chosenType: undefined,
+      chosenType: undefined
     };
   }
   selectChoice(type) {
     this.setState({ chosenType: type });
-    if (type.type === 'download') {
+    if (type.type === "download") {
       this.props.storeExportType(type.type);
     }
   }
@@ -69,30 +69,52 @@ class ExportTypes extends React.Component {
   }
   render() {
     return (
-      <div className={`ExportTypes ${this.state.chosenType && !this.state.chosenType.direct ? 'expanded' : ''}`}>
-        <h1>{this.state.chosenType
-          ? this.state.chosenType.title
-          : 'What do you want to do with your font?'
-        }</h1>
-        <Button className="back" label="Back" onClick={() => this.props.goBack()} />
-        <div className="needs">
-          {this.state.chosenType && !this.state.chosenType.direct
-          ? (
-            <ExportType
-              choice={this.state.chosenType}
-              expanded
-              selectChoice={() => this.selectChoice(this.state.chosenType)}
-              removeChoice={() => this.removeChoice()}
-            />
-          )
-          : choices.map(choice => (
-            <ExportType
-              choice={choice}
-              key={choice.title}
-              selectChoice={() => this.selectChoice(choice)}
-              removeChoice={() => this.removeChoice()}
-            />
-          ))}
+      <div
+        className={`ExportTypes ${
+          this.state.chosenType && !this.state.chosenType.direct
+            ? 'expanded'
+            : ''
+        }`}
+      >
+        <Button
+          className="back"
+          label="Back"
+          mode="isBack"
+          onClick={() => this.props.goBack()}
+        />
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <h1>
+                {this.state.chosenType
+                  ? this.state.chosenType.title
+                  : 'What do you want to do with your font?'}
+              </h1>
+            </div>
+          </div>
+          <div className="needs row">
+            {this.state.chosenType && !this.state.chosenType.direct ? (
+              <div className="col-sm-12 col-md-4">
+                <ExportType
+                  choice={this.state.chosenType}
+                  expanded
+                  selectChoice={() => this.selectChoice(this.state.chosenType)}
+                  removeChoice={() => this.removeChoice()}
+                />
+              </div>
+            ) : (
+              choices.map(choice => (
+                <div className="col-sm-12 col-md-4">
+                  <ExportType
+                    choice={choice}
+                    key={choice.title}
+                    selectChoice={() => this.selectChoice(choice)}
+                    removeChoice={() => this.removeChoice()}
+                  />
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
     );

@@ -3,13 +3,14 @@
 }
 
 .ExportTypes .needs {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  align-content: space-around;
-  margin-top: 10%;
 }
+
+.ExportTypes .back {
+  position: absolute;
+  top: 55px;
+  left: 45px;
+}
+
 
 .ExportTypes.expanded .needs {
   display: block;
@@ -17,5 +18,8 @@
 }
 
 .ExportTypes h1 {
-  margin: 80px;
+  margin: 0;
+  padding-top: 80px;
+  margin-bottom: 40px;
+  margin-top: 0;
 }

@@ -183,9 +183,14 @@ class SpecimenView extends React.Component {
           </form>
         )
         : (
-          <div>
+          <div className="export">
             <p>You are currently registered as {this.props.email}.</p><br />
-            <Button label="Change email" onClick={() => this.changeEmail()} /><Button label="Download your font" onClick={() => this.sendEmail()} />
+            <Button
+              className="hollow"
+              label="Change email"
+              onClick={() => this.changeEmail()}
+            />
+            <Button label="Download your font" onClick={() => this.sendEmail()} />
           </div>
         )}</div>
       </div>

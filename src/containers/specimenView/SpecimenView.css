@@ -44,6 +44,14 @@
   left: 45px;
 }
 
+.SpecimenView .export .hollow {
+  margin-right: 20px;
+}
+
+.SpecimenView .export p {
+  color: #c7b5d8
+}
+
 .SpecimenView .specimen {
   font-size: 22px;
 }
