@@ -10,6 +10,7 @@
   cursor: pointer;
   outline-color: #501286;
   border: 1px solid transparent;
+  user-select: none;
 }
 
 .Choice:focus {

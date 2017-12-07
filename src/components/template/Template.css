@@ -9,6 +9,7 @@
   margin-bottom: 60px;
   cursor: pointer;
   outline-color: #501286;
+  user-select: none;
 }
 
 .Template .mostSelected {

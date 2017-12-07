@@ -20,6 +20,7 @@ export const SELECT_CHOICE_REQUESTED = 'font/SELECT_CHOICE_REQUESTED';
 export const SELECT_CHOICE = 'font/SELECT_CHOICE';
 export const RELOAD_FONTS = 'font/RELOAD_FONTS';
 export const FINISH_EDITING = 'font/FINISH_EDITING';
+export const CLEAR_IS_LOADING = 'font/CLEAR_IS_LOADING';
 
 const initialState = {
   fontName: '',
@@ -123,6 +124,12 @@ export default (state = initialState, action) => {
         ...state,
       };
 
+    case CLEAR_IS_LOADING:
+      return {
+        ...state,
+        isLoading: false,
+      };
+
     case RELOAD_FONTS:
       return {
         ...state,
@@ -166,11 +173,6 @@ export const selectFont = font => (dispatch, getState) => {
     type: SELECT_FONT_REQUESTED,
   });
   const selectedFontName = `${font.preset}${font.variant}`;
-  loadedPresetsName.forEach((preset) => {
-    if (preset !== selectedFontName) {
-      dispatch(deleteCreatedFont(preset));
-    }
-  });
   choicesFontsName.forEach((choiceFont) => {
     dispatch(deleteCreatedFont(choiceFont));
   });
@@ -218,7 +220,8 @@ export const selectFont = font => (dispatch, getState) => {
   Promise.all(promiseArray).then(() => {
     request(GRAPHQL_API, getSelectedCount('Preset', font.id))
       .then(data => request(GRAPHQL_API, updateSelectedCount('Preset', font.id, data.Preset.selected + 1)))
-      .catch(error => console.log(error));
+      .catch(error => console.log(error));    
+    dispatch(push('/customize'));
     dispatch({
       type: SELECT_FONT,
       fontName: selectedFontName,
@@ -228,7 +231,11 @@ export const selectFont = font => (dispatch, getState) => {
       choicesFontsName,
       sliderFontName,
     });
-    dispatch(push('/customize'));
+    loadedPresetsName.forEach((preset) => {
+      if (preset !== selectedFontName) {
+        dispatch(deleteCreatedFont(preset));
+      }
+    });
     request(GRAPHQL_API, getSelectedCount('Step', font.steps[0].id))
       .then(data => request(GRAPHQL_API, updateSelectedCount('Step', font.steps[0].id, data.Step.selected + 1)))
       .catch(error => console.log(error));
@@ -302,6 +309,12 @@ const updateFont = () => (dispatch, getState) => {
   fonts[sliderFontName].changeParams({ ...stepBaseValues, ...currentParams });
   dispatch({
     type: UPDATE_VALUES,
+  });
+};
+
+export const clearFontIsLoading = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_IS_LOADING,
   });
 };
 

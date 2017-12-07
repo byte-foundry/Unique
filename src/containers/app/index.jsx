@@ -79,10 +79,12 @@ class App extends React.Component {
     return this.props.userEmail !== '';
   }
   hasSelectedNeed() {
+    console.log('=========HAS SELECTED NEED ============');
     console.log(this.props.hasPresetsLoaded);
     console.log(this.props.need);
     console.log(this.props.pathname);
     console.log(typeof this.props.hasPresetsLoaded === 'object');
+    console.log('========================================');
     if (this.props.need !== '' && this.props.pathname === '/select' && !(typeof this.props.hasPresetsLoaded === 'object')) {
       console.log('Has selected need but do not have presets loaded');
       this.props.reloadPresets();
@@ -167,7 +169,9 @@ const mapStateToProps = state => ({
   userEmail: state.user.email,
   hasPayed: state.user.hasPayed,
   need: state.font.need,
-  hasPresetsLoaded: state.createdFonts.fonts[state.presets.loadedPresetsName[0]],
+  hasPresetsLoaded: state.font.fontName
+  ? state.createdFonts.fonts[state.font.fontName]
+  : state.createdFonts.fonts[state.presets.loadedPresetsName[0]],
   unstableUi: state.ui.unstable,
 });
 const mapDispatchToProps = dispatch =>

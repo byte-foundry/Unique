@@ -2,6 +2,7 @@ import Ptypo, { templateNames } from 'prototypo-library';
 import { push } from 'react-router-redux';
 import { setUnstable, setStable } from '../ui';
 import { storeCreatedFont } from '../createdFonts';
+import { clearFontIsLoading } from '../font';
 
 export const IMPORT_PRESETS_REQUESTED = 'presets/IMPORT_PRESETS_REQUESTED';
 export const IMPORT_PRESETS = 'presets/IMPORT_PRESETS';
@@ -99,6 +100,7 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
       type: LOAD_PRESETS,
       loadedPresetsName,
     });
+    dispatch(clearFontIsLoading());
     dispatch(push('/select'));
     dispatch(setStable());
   });
