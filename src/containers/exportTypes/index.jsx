@@ -55,12 +55,12 @@ class ExportTypes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      chosenType: undefined
+      chosenType: undefined,
     };
   }
   selectChoice(type) {
     this.setState({ chosenType: type });
-    if (type.type === "download") {
+    if (type.type === 'download') {
       this.props.storeExportType(type.type);
     }
   }
@@ -104,10 +104,9 @@ class ExportTypes extends React.Component {
               </div>
             ) : (
               choices.map(choice => (
-                <div className="col-sm-12 col-md-4">
+                <div className="col-sm-12 col-md-4" key={choice.title}>
                   <ExportType
-                    choice={choice}
-                    key={choice.title}
+                    choice={choice}                    
                     selectChoice={() => this.selectChoice(choice)}
                     removeChoice={() => this.removeChoice()}
                   />

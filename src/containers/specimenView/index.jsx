@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import './SpecimenView.css';
 import StepList from '../stepList/';
 import Button from '../../components/button/';
+import CustomLogo from '../../components/customLogo';
 import { storeEmail } from '../../data/user';
 import desktopBackground from './desktop.svg';
 import tabletBackground from './tablet.svg';
@@ -15,12 +16,17 @@ import mobileBackground from './mobile.svg';
 
 const isEmail = string => new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(string);
 
-const logoSpecimen = (fontName, word) => (
-  <div className="specimen row" style={{ fontFamily: fontName }}>
+const logoSpecimen = (fontName, word, isCustomLogo, setCustomLogo) => (
+  <div className="specimen row">
     <div className="col-sm-12 col-md-8">
       <div className="logo">
-        {word}
+        {isCustomLogo ? <CustomLogo word={word} fontName={fontName} /> : <span style={{ fontFamily: fontName }}>{ word }</span>}
       </div>
+      <Button
+        className=""
+        label="Customize it"
+        onClick={() => setCustomLogo()}
+      />
     </div>
     <div className="col-sm-12 col-md-3">
       <StepList specimen />
@@ -137,9 +143,14 @@ class SpecimenView extends React.Component {
     this.state = {
       email: '',
       shouldChangeEmail: false,
+      isCustomLogo: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setCustomLogo = this.setCustomLogo.bind(this);
+  }
+  setCustomLogo() {
+    this.setState({ isCustomLogo: !this.state.isCustomLogo });
   }
   handleChange(event) {
     this.setState({ email: event.target.value });
@@ -165,7 +176,7 @@ class SpecimenView extends React.Component {
         {(() => {
           switch (this.props.need) {
             case 'logo':
-              return logoSpecimen(this.props.fontName, this.props.word);
+              return logoSpecimen(this.props.fontName, this.props.word, this.state.isCustomLogo, this.setCustomLogo);
             case 'text':
               return textSpecimen(this.props.fontName);
             case 'website':

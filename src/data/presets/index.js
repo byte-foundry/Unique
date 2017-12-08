@@ -48,6 +48,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         importedPresets: action.presetsArray,
+        isLoading: false,
       };
 
     default:
