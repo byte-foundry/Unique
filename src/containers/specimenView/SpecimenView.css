@@ -62,6 +62,12 @@
   text-align: center;
 }
 
+.SpecimenView .specimen .logo .logo-unstyled {
+  font-size: 85px;
+}
+
+
+
 
 .SpecimenView .specimen.website .templates {
   display: block;

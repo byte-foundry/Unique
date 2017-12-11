@@ -16,16 +16,39 @@ import mobileBackground from './mobile.svg';
 
 const isEmail = string => new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(string);
 
-const logoSpecimen = (fontName, word, isCustomLogo, setCustomLogo) => (
+const logoSpecimen = (
+  fontName,
+  word,
+  isCustomLogo,
+  showControls,
+  setCustomLogo,
+  removeCustomLogo,
+  validateCustomLogo,
+) => (
   <div className="specimen row">
     <div className="col-sm-12 col-md-8">
       <div className="logo">
-        {isCustomLogo ? <CustomLogo word={word} fontName={fontName} /> : <span style={{ fontFamily: fontName }}>{ word }</span>}
+        {isCustomLogo
+        ? <CustomLogo word={word} fontName={fontName} shouldShowControls={showControls} />
+        : <span className="logo-unstyled" style={{ fontFamily: fontName }}>{ word }</span>}
       </div>
+      {
+        isCustomLogo && showControls
+        ? (
+          <Button
+            className="hollow"
+            label="cancel"
+            onClick={() => removeCustomLogo()}
+          />
+        )
+        : null
+      }
       <Button
         className=""
-        label="Customize it"
-        onClick={() => setCustomLogo()}
+        label={isCustomLogo && showControls ? 'Set customization' : 'Customize it'}
+        onClick={() => {
+          return isCustomLogo ? validateCustomLogo() : setCustomLogo();
+        }}
       />
     </div>
     <div className="col-sm-12 col-md-3">
@@ -144,13 +167,25 @@ class SpecimenView extends React.Component {
       email: '',
       shouldChangeEmail: false,
       isCustomLogo: false,
+      showCustomLogoControls: true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setCustomLogo = this.setCustomLogo.bind(this);
+    this.removeCustomLogo = this.removeCustomLogo.bind(this);
+    this.validateCustomLogo = this.validateCustomLogo.bind(this);
   }
   setCustomLogo() {
     this.setState({ isCustomLogo: !this.state.isCustomLogo });
+  }
+  removeCustomLogo() {
+    this.setState({
+      isCustomLogo: !this.state.isCustomLogo,
+      showCustomLogoControls: true,
+     });
+  }
+  validateCustomLogo() {
+    this.setState({ showCustomLogoControls: !this.state.showCustomLogoControls });
   }
   handleChange(event) {
     this.setState({ email: event.target.value });
@@ -176,7 +211,15 @@ class SpecimenView extends React.Component {
         {(() => {
           switch (this.props.need) {
             case 'logo':
-              return logoSpecimen(this.props.fontName, this.props.word, this.state.isCustomLogo, this.setCustomLogo);
+              return logoSpecimen(
+                this.props.fontName,
+                this.props.word,
+                this.state.isCustomLogo,
+                this.state.showCustomLogoControls,
+                this.setCustomLogo,
+                this.removeCustomLogo,
+                this.validateCustomLogo,
+              );
             case 'text':
               return textSpecimen(this.props.fontName);
             case 'website':
