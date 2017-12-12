@@ -39,16 +39,16 @@ const ExportTypeComponent = props => (
           false
         )}
         <div
-          className={`ExportType ${props.expanded ? 'expanded' : ''}`}
+          className={`ExportType ${props.expanded ? 'expanded row' : ''}`}
           role="button"
           tabIndex="0"
           onClick={props.expanded ? () => {} : props.selectChoice}
         >
-          <div className="card">
+          <div className={`card ${props.expanded ? 'col-sm-12 col-md-6' : ''}`}>
             <div className="image" />
             <div className="title">{props.choice.title}</div>
           </div>
-          <div className="description">
+          <div className={`description ${props.expanded ? 'col-sm-12 col-md-6' : ''}`}>
             {props.choice.description}
             {props.choice.component ? { ...props.choice.component } : false}
             <Button
@@ -163,48 +163,50 @@ class ExportToPrototypoComponent extends React.Component {
       <div>
         {Object.keys(this.props.prototypoAccount).length > 0 ? (
           <div>
-            Account found as {this.props.prototypoAccount.firstName}
-            Please log-in to export
+            <p>
+              Account found as {this.props.prototypoAccount.firstName} <br />
+              Please log-in to export
+            </p>
             <form onSubmit={this.handleSubmitWithAccount}>
               <label htmlFor="email">
-                email:
+                email:{' '}
                 <input
                   name="email"
                   type="text"
                   value={this.state.email}
                   onChange={this.handleEmailChange}
                 />
-              </label>{' '}
+              </label>
               <br />
               <label htmlFor="password">
-                password:
+                password:{' '}
                 <input
                   name="password"
                   type="password"
                   value={this.state.password}
                   onChange={this.handlePasswordChange}
                 />
-              </label>{' '}
+              </label>
               <br />
               <label htmlFor="family">
-                family name:
+                family name:{' '}
                 <input
                   name="family"
                   type="text"
                   value={this.state.family}
                   onChange={this.handleFamilyChange}
                 />
-              </label>{' '}
+              </label>
               <br />
               <label htmlFor="variant">
-                variant name:
+                variant name: {' '}
                 <input
                   name="variant"
                   type="text"
                   value={this.state.variant}
                   onChange={this.handleVariantChange}
                 />
-              </label>{' '}
+              </label>
               <br />
               <input type="submit" value="Export to prototypo" />
             </form>
@@ -214,64 +216,64 @@ class ExportToPrototypoComponent extends React.Component {
             <div>No account found. Register</div>
             <form onSubmit={this.handleSubmitNoAccount}>
               <label htmlFor="email">
-                email:
+                email:{' '}
                 <input
                   name="email"
                   type="text"
                   value={this.state.email}
                   onChange={this.handleEmailChange}
                 />
-              </label>{' '}
+              </label>
               <br />
               <label htmlFor="password">
-                password:
+                password:{' '}
                 <input
                   name="password"
                   type="password"
                   value={this.state.password}
                   onChange={this.handlePasswordChange}
                 />
-              </label>{' '}
+              </label>
               <br />
               <label htmlFor="firstName">
-                first Name:
+                first Name:{' '}
                 <input
                   name="firstName"
                   type="text"
                   value={this.state.firstName}
                   onChange={this.handleFirstNameChange}
                 />
-              </label>{' '}
+              </label>
               <br />
               <label htmlFor="lastName">
-                last Name:
+                last Name:{' '}
                 <input
                   name="lastName"
                   type="text"
                   value={this.state.lastName}
                   onChange={this.handleLastNameChange}
                 />
-              </label>{' '}
+              </label>
               <br />
               <label htmlFor="family">
-                family name:
+                family name:{' '}
                 <input
                   name="family"
                   type="text"
                   value={this.state.family}
                   onChange={this.handleFamilyChange}
                 />
-              </label>{' '}
+              </label>
               <br />
               <label htmlFor="variant">
-                variant name:
+                variant name:{' '}
                 <input
                   name="variant"
                   type="text"
                   value={this.state.variant}
                   onChange={this.handleVariantChange}
                 />
-              </label>{' '}
+              </label>
               <br />
               <input type="submit" value="Export to prototypo" />
             </form>

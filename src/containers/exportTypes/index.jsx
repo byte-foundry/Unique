@@ -94,7 +94,7 @@ class ExportTypes extends React.Component {
           </div>
           <div className="needs row">
             {this.state.chosenType && !this.state.chosenType.direct ? (
-              <div className="col-sm-12 col-md-4">
+              <div className="col-sm-12">
                 <ExportType
                   choice={this.state.chosenType}
                   expanded
