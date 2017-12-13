@@ -12,6 +12,7 @@ import {
   authenticateUser,
   signupUser,
   sendFontToPrototypo,
+  connectToGraphCool,
 } from '../queries';
 import { DEFAULT_UI_WORD, GRAPHQL_API, GRAPHQL_PROTOTYPO_API } from '../constants';
 
@@ -20,6 +21,7 @@ export const STORE_EXPORT_TYPE = 'user/STORE_EXPORT_TYPE';
 export const STORE_CHOSEN_WORD = 'user/STORE_CHOSEN_WORD';
 export const STORE_PROTOTYPO_USER = 'user/STORE_PROTOTYPO_USER';
 export const PAYMENT_SUCCESSFUL = 'user/PAYMENT_SUCCESSFUL';
+export const CONNECT_TO_GRAPHCOOL = 'user/CONNECT_TO_GRAPHCOOL';
 
 const initialState = {
   email: '',
@@ -64,7 +66,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         prototypoUser: action.prototypoUser,
-      }
+      };
+
+    case CONNECT_TO_GRAPHCOOL:
+      return {
+        ...state,
+      };
 
     default:
       return state;
@@ -227,6 +234,16 @@ export const exportFontToPrototypoWithAccount = (email, password, familyName, va
   .catch(error => console.log(error));
   console.log('====================================');
 };
+
+export const loginToGraphCool = auth0Token => (dispatch) => {
+  console.log('=========CONNECTING TO GRAPHCOOL DATABASE============');
+  request(GRAPHQL_API, connectToGraphCool(auth0Token))
+  .then((data) => {
+    console.log(data);
+  })
+  .catch(error => console.log(error));
+  console.log('====================================');
+}
 
 export const exportFontToPrototypoWithoutAccount = (email, password, familyName, variantName, firstName, lastName) => (dispatch, getState) => {
   console.log('=========EXPORT TO PROTOTYPO WITHOUT ACCOUNT============');

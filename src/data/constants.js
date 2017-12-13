@@ -9,3 +9,6 @@ export const GRAPHQL_API = 'https://api.graph.cool/simple/v1/cj6maa0ib2tud01656t
 export const GRAPHQL_PROTOTYPO_API = process.env.NODE_ENV === 'production'
 ? 'https://api.graph.cool/simple/v1/prototypo-new-dev'
 : 'https://api.graph.cool/simple/v1/prototypo';
+export const AUTH0_DOMAIN = 'unique-app.eu.auth0.com';
+export const AUTH0_CLIENTID = 'Hru5wP21LkffTwCMrWvahSf2tPsPvHoQ';
+export const AUTH0_CALLBACKURL = 'http://localhost:3000/callback';

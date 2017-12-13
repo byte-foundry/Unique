@@ -525,6 +525,6 @@ export const reloadFonts = () => (dispatch, getState) => {
     });
     dispatch(updateStepValues(currentStep, `${currentPreset.preset}${currentPreset.variant}`));
     dispatch(setStable());
-    dispatch(push('/start'));
+    dispatch(push('/restart'));
   });
 };

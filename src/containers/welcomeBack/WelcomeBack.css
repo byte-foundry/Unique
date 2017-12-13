@@ -1,24 +1,24 @@
-.Start .choices {
+.WelcomeBack .choices {
   }
   
   
-  .Start h1, .Start h2 {
+  .WelcomeBack h1, .WelcomeBack h2 {
     margin: 80px;
     margin-left: 0;
   }
 
 
-  .Start .card {
+  .WelcomeBack .card {
     cursor: pointer;
     outline: none;
   }
   
-  .Start .card .image {
+  .WelcomeBack .card .image {
     height: 200px;
     background-color: #c7b5d8;
   }
   
-  .Start .card .title {
+  .WelcomeBack .card .title {
     background-color: #501286;
     color: white;
     border-bottom-left-radius: 8px;

@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { request } from 'graphql-request';
@@ -9,6 +10,7 @@ import { importPresets, reloadPresets } from '../../data/presets';
 import { reloadFonts } from '../../data/font';
 import { GRAPHQL_API } from '../../data/constants';
 import { getAllPresets } from '../../data/queries';
+import Auth from '../../components/auth';
 import './bootstrap-reboot.css';
 import './bootstrap-grid.css';
 import './App.css';
@@ -22,7 +24,9 @@ import ParamChoice from '../paramChoice/';
 import SpecimenView from '../specimenView/';
 import ExportTypes from '../exportTypes/';
 import Success from '../success/';
-import Start from '../start/';
+import WelcomeBack from '../welcomeBack/';
+import Library from '../library/';
+import Button from '../../components/button';
 
 import UnstableView from '../unstableView';
 
@@ -36,6 +40,9 @@ class App extends React.Component {
     if (props.userEmail !== '') {
       Intercom('update', { email: props.userEmail });
     }
+    this.handleAuthentication = this.handleAuthentication.bind(this);
+    this.login = this.login.bind(this);
+    this.auth = new Auth();
   }
   hasSelectedFont() {
     console.log('=========hasSelectedFont=======');
@@ -78,6 +85,21 @@ class App extends React.Component {
     console.log(`Mail registered: ${this.props.userEmail !== ''}`);
     return this.props.userEmail !== '';
   }
+  isLoggedIn() {
+    return this.auth.isAuthenticated;
+  }
+  login() {
+    this.auth.login();
+  }
+
+  logout() {
+    this.auth.logout();
+  }
+  handleAuthentication(nextState, replace){
+    if (/access_token|id_token|error/.test(nextState.location.hash)) {
+      this.auth.handleAuthentication();
+    }
+  }
   hasSelectedNeed() {
     console.log('=========HAS SELECTED NEED ============');
     console.log(this.props.hasPresetsLoaded);
@@ -94,19 +116,76 @@ class App extends React.Component {
     return this.props.need !== '';
   }
   render() {
+    const { isAuthenticated } = this.auth;
     return (
       <main className="App">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img
+          src={logo}
+          className="App-logo"
+          alt="logo"
+          onClick={() => {
+            this.props.goToHome();
+          }}
+        />
+        {
+          !isAuthenticated() && (
+            <div className="loginlogout">
+              <Button
+                className=""
+                label="Log in"
+                onClick={() => {
+                  this.login();
+                }}
+              />
+            </div>
+          )
+        }
+        {
+          isAuthenticated() && (
+            <div className="loginlogout">
+              <span
+                className="goToFonts"
+                onClick={() => {
+                  this.props.goToLibrary();
+                }}
+                role="button"
+                tabIndex="0"
+              >
+                My fonts
+              </span>
+              <Button
+                className=""
+                label="Log out"
+                onClick={() => {
+                  this.logout();
+                }}
+              />
+            </div>
+          )
+        }
         {this.props.unstableUi
           ? <UnstableView />
           : <Switch>
-            <Route exact path="/" component={DefineNeed} />
-            <Route exact path="/start" component={Start} />
+            <Route exact path="/" render={props => <DefineNeed auth={this.auth} {...props} />} />
+            <Route exact path="/restart" component={WelcomeBack} />
+            <Route
+              path="/callback"
+              render={(props) => {
+                this.handleAuthentication(props);
+                return <div>loading</div>;
+              }}
+            />
             <ProtectedRoute
               exact
               requirement={() => this.hasSelectedNeed()}
               path="/select"
               component={TemplateChoice}
+            />
+            <ProtectedRoute
+              exact
+              requirement={() => this.isLoggedIn()}
+              path="/library"
+              component={Library}
             />
             <ProtectedRoute
               exact
@@ -154,6 +233,8 @@ App.propTypes = {
   reloadPresets: PropTypes.func.isRequired,
   reloadFonts: PropTypes.func.isRequired,
   unstableUi: PropTypes.bool.isRequired,
+  goToHome: PropTypes.func.isRequired,
+  goToLibrary: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
@@ -175,5 +256,11 @@ const mapStateToProps = state => ({
   unstableUi: state.ui.unstable,
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ importPresets, reloadPresets, reloadFonts }, dispatch);
+  bindActionCreators({
+    importPresets,
+    reloadPresets,
+    reloadFonts,
+    goToHome: () => push('/'),
+    goToLibrary: () => push('/library'),
+  }, dispatch);
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

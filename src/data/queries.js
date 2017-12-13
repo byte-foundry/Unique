@@ -139,6 +139,24 @@ export const createUser = (email, presetId, choicesMade) => `
     }
 `;
 
+export const connectToGraphCool = auth0token => `
+    mutation {
+        createUser (
+            authProvider: {
+                auth0: {
+                    idToken: "${auth0token}"
+                }
+            }
+        )
+        {
+            id
+            projects {
+                id
+            }
+        }
+    }
+`;
+
 
 export const addProjectToUser = (userId, presetId, choicesMade) => `
     mutation{

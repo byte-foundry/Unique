@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import './Start.css';
+import './WelcomeBack.css';
 
 const redirectToProject = (step, choicesLength, redirectToLocation) => {
   if (step <= choicesLength) {
@@ -13,8 +13,8 @@ const redirectToProject = (step, choicesLength, redirectToLocation) => {
   } else redirectToLocation('/specimen');
 };
 
-const Start = (props) => (
-  <div className="Start container">
+const WelcomeBack = (props) => (
+  <div className="WelcomeBack container">
     <div className="row templates">
       <div className="col-sm-12">
           <h1>Welcome back!</h1>
@@ -61,11 +61,11 @@ const mapStateToProps = state => ({
   choicesLength: state.font.currentPreset.steps.length,
 });
 
-Start.propTypes = {
+WelcomeBack.propTypes = {
   step: PropTypes.number.isRequired,
   redirectToHome: PropTypes.func.isRequired,
   redirectToLocation: PropTypes.func.isRequired,
   choicesLength: PropTypes.number.isRequired,
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Start));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WelcomeBack));
