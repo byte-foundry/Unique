@@ -1,0 +1,42 @@
+types: ./types.graphql
+functions: 
+  authenticate:
+    handler:
+      code:
+        src: ./src/auth0/auth0Authentication.js
+        environment:
+          AUTH0_DOMAIN: ${env:AUTH0_DOMAIN}
+          AUTH0_API_IDENTIFIER: ${env:AUTH0_API_IDENTIFIER}
+    type: resolver
+    schema: ./src/auth0/auth0Authentication.graphql
+
+permissions:
+- operation: Choice.read
+- operation: Choice.create
+- operation: Choice.update
+- operation: Choice.delete
+- operation: File.read
+- operation: File.create
+- operation: File.update
+- operation: File.delete
+- operation: Preset.read
+- operation: Preset.create
+- operation: Preset.update
+- operation: Preset.delete
+- operation: Project.read
+- operation: Project.create
+- operation: Project.update
+- operation: Project.delete
+- operation: Step.read
+- operation: Step.create
+- operation: Step.update
+- operation: Step.delete
+- operation: User.read
+- operation: User.create
+- operation: User.update
+- operation: User.delete
+- operation: ChoiceOnStep.*
+- operation: PresetOnStep.*
+- operation: ProjectOnPreset.*
+- operation: UserOnProject.*
+rootTokens: []
