@@ -43,29 +43,28 @@ const verifyToken = token =>
   })
 
 //Retrieves the Graphcool user record using the Auth0 user id
-const getGraphcoolUser = (auth0UserId, api) =>
+const getGraphcoolUser = (email, api) =>
   api
     .request(
       `
-        query getUser($auth0UserId: String!){
-          User(auth0UserId: $auth0UserId){
+        query getUser($email: String!){
+          User(email: $email){
             id
             email
           }
         }
       `,
-      { auth0UserId }
+      { email }
     )
     .then(queryResult => queryResult.User)
 
 //Creates a new User record.
-const createGraphCoolUser = (auth0UserId, email, api) =>
+const createGraphCoolUser = (email, api) =>
   api
     .request(
       `
-        mutation createUser($auth0UserId: String!, $email: String) {
+        mutation createUser($email: String!) {
           createUser(
-            auth0UserId: $auth0UserId
             email: $email
           ){
             id
@@ -73,7 +72,7 @@ const createGraphCoolUser = (auth0UserId, email, api) =>
           }
         }
       `,
-      { auth0UserId, email }
+      { email }
     )
     .then(queryResult => queryResult.createUser)
 
@@ -96,16 +95,12 @@ export default async event => {
     const decodedToken = await verifyToken(accessToken)
     const graphcool = fromEvent(event)
     const api = graphcool.api('simple/v1')
-
-    let graphCoolUser = await getGraphcoolUser(decodedToken.sub, api)
+    // fetch email if scope includes it
+    const email = await fetchAuth0Email(accessToken)
+    let graphCoolUser = await getGraphcoolUser(email, api)
     //If the user doesn't exist, a new record is created.
     if (graphCoolUser === null) {
-      // fetch email if scope includes it
-      let email = null
-      if (decodedToken.scope.includes('email')) {
-        email = await fetchAuth0Email(accessToken)
-      }
-      graphCoolUser = await createGraphCoolUser(decodedToken.sub, email, api)
+      graphCoolUser = await createGraphCoolUser(email, api)
     }
 
     // custom exp does not work yet, see https://github.com/graphcool/graphcool-lib/issues/19

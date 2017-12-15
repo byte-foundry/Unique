@@ -139,20 +139,14 @@ export const createUser = (email, presetId, choicesMade) => `
     }
 `;
 
-export const connectToGraphCool = auth0token => `
+export const connectToGraphCool = accessToken => `
     mutation {
-        createUser (
-            authProvider: {
-                auth0: {
-                    idToken: "${auth0token}"
-                }
-            }
+        authenticateUser (
+            accessToken: "${accessToken}"
         )
         {
             id
-            projects {
-                id
-            }
+            email
         }
     }
 `;
@@ -256,6 +250,19 @@ export const sendFontToPrototypo = (prototypoUserId, familyName, template, varia
     )
     {
         id
+    }
+}
+`;
+
+export const getUserProjects = graphQLID => `
+query {
+    User(
+        id: "${graphQLID}"
+    )
+    {
+        projects(orderBy: createdAt_ASC) {
+            id
+        }
     }
 }
 `;

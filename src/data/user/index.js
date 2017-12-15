@@ -13,6 +13,7 @@ import {
   signupUser,
   sendFontToPrototypo,
   connectToGraphCool,
+  getUserProjects,
 } from '../queries';
 import { DEFAULT_UI_WORD, GRAPHQL_API, GRAPHQL_PROTOTYPO_API } from '../constants';
 
@@ -31,6 +32,7 @@ const initialState = {
   graphqlID: undefined,
   currentProject: undefined,
   prototypoUser: {},
+  projects: [],
 };
 
 export default (state = initialState, action) => {
@@ -42,6 +44,7 @@ export default (state = initialState, action) => {
         graphqlID: action.graphqlID,
         currentProject: action.projectID,
         prototypoUser: action.prototypoUser,
+        projects: action.projects,
       };
 
     case STORE_EXPORT_TYPE:
@@ -71,6 +74,9 @@ export default (state = initialState, action) => {
     case CONNECT_TO_GRAPHCOOL:
       return {
         ...state,
+        graphqlID: action.graphqlID,
+        email: action.email,
+        projects: action.projects,
       };
 
     default:
@@ -82,6 +88,7 @@ export const storeEmail = email => (dispatch, getState) => {
   console.log('========STORE EMAIL========');
   /* global Intercom*/
   const { currentPreset, choicesMade } = getState().font;
+  const { projects } = getState().user;
   request(GRAPHQL_API, findUser(email))
     .then((data) => {
       if (data.User) {
@@ -95,12 +102,14 @@ export const storeEmail = email => (dispatch, getState) => {
             Intercom('trackEvent', 'unique-finished-font', metadata);
             request(GRAPHQL_PROTOTYPO_API, getPrototypoUser(email))
             .then((response) => {
+              projects.push({ id: res.createdProject.id });
               dispatch({
                 type: STORE_USER_EMAIL,
                 email,
                 graphqlID: data.User.id,
                 projectID: res.createProject.id,
                 prototypoUser: response.User ? response.User : {},
+                projects,
               });
               console.log({
                 type: STORE_USER_EMAIL,
@@ -119,12 +128,14 @@ export const storeEmail = email => (dispatch, getState) => {
           .then((res) => {
             request(GRAPHQL_PROTOTYPO_API, getPrototypoUser(email))
             .then((response) => {
+              projects.push(res.createUser.projects[0].id);
               dispatch({
                 type: STORE_USER_EMAIL,
                 email,
                 graphqlID: res.createUser.id,
                 projectID: res.createUser.projects[0].id,
                 prototypoUser: response.User ? response.User : {},
+                projects,
               });
               console.log({
                 type: STORE_USER_EMAIL,
@@ -235,15 +246,26 @@ export const exportFontToPrototypoWithAccount = (email, password, familyName, va
   console.log('====================================');
 };
 
-export const loginToGraphCool = auth0Token => (dispatch) => {
+export const loginToGraphCool = (accessToken, userEmail) => (dispatch) => {
   console.log('=========CONNECTING TO GRAPHCOOL DATABASE============');
-  request(GRAPHQL_API, connectToGraphCool(auth0Token))
+  request(GRAPHQL_API, connectToGraphCool(accessToken))
   .then((data) => {
     console.log(data);
+    request(GRAPHQL_API, getUserProjects(data.authenticateUser.id))
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: CONNECT_TO_GRAPHCOOL,
+        email: data.authenticateUser.email,
+        graphqlID: data.authenticateUser.id,
+        projects: res.User.projects,
+      });
+    })
+    .catch(error => console.log(error));    
+    Intercom('update', { email: data.authenticateUser.email });
   })
   .catch(error => console.log(error));
-  console.log('====================================');
-}
+};
 
 export const exportFontToPrototypoWithoutAccount = (email, password, familyName, variantName, firstName, lastName) => (dispatch, getState) => {
   console.log('=========EXPORT TO PROTOTYPO WITHOUT ACCOUNT============');

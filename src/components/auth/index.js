@@ -3,6 +3,7 @@ import {
   AUTH0_CLIENTID,
   AUTH0_CALLBACKURL,
   AUTH0_DOMAIN,
+  AUTH0_API,
 } from '../../data/constants';
 import { loginToGraphCool } from '../../data/user';
 import store, { history } from '../../data/create-store';
@@ -10,11 +11,12 @@ import store, { history } from '../../data/create-store';
 export default class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
+      audience: AUTH0_API,
       domain: AUTH0_DOMAIN,
       clientID: AUTH0_CLIENTID,
       redirectUri: AUTH0_CALLBACKURL,
-      responseType: 'token id_token',
-      scope: 'openid',
+      responseType: 'token',
+      scope: 'openid email',
     });
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -28,10 +30,10 @@ export default class Auth {
 
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
+      if (authResult && authResult.accessToken) {
         this.setSession(authResult);
         console.log(authResult);
-        store.dispatch(loginToGraphCool(authResult.idToken));
+        store.dispatch(loginToGraphCool(authResult.accessToken));
         history.replace('/');
       } else if (err) {
         history.replace('/');
@@ -47,7 +49,6 @@ export default class Auth {
       (authResult.expiresIn * 1000) + new Date().getTime(),
     );
     localStorage.setItem('access_token', authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
     // navigate to the home route
     history.replace('/');
@@ -56,7 +57,6 @@ export default class Auth {
   logout() {
     // Clear access token and ID token from local storage
     localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // navigate to the home route
     history.replace('/');

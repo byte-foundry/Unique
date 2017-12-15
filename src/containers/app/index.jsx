@@ -220,7 +220,7 @@ class App extends React.Component {
 App.propTypes = {
   importPresets: PropTypes.func.isRequired,
   selectedFont: PropTypes.string,
-  userEmail: PropTypes.string.isRequired,
+  userEmail: PropTypes.string,
   hasPayed: PropTypes.bool.isRequired,
   selectedFontLoaded: PropTypes.shape({
     fontName: PropTypes.string.isRequired,
@@ -240,6 +240,7 @@ App.propTypes = {
 App.defaultProps = {
   selectedFont: '',
   selectedFontLoaded: undefined,
+  userEmail: '',
   hasPresetsLoaded: undefined,
 };
 
