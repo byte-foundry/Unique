@@ -102,7 +102,7 @@ export const storeEmail = email => (dispatch, getState) => {
             Intercom('trackEvent', 'unique-finished-font', metadata);
             request(GRAPHQL_PROTOTYPO_API, getPrototypoUser(email))
             .then((response) => {
-              projects.push({ id: res.createdProject.id });
+              projects.push({ id: res.createProject.id });
               dispatch({
                 type: STORE_USER_EMAIL,
                 email,
