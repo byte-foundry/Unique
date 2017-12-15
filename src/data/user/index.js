@@ -33,6 +33,7 @@ const initialState = {
   currentProject: undefined,
   prototypoUser: {},
   projects: [],
+  projectID: undefined,
 };
 
 export default (state = initialState, action) => {
@@ -89,6 +90,7 @@ export const storeEmail = email => (dispatch, getState) => {
   /* global Intercom*/
   const { currentPreset, choicesMade } = getState().font;
   const { projects } = getState().user;
+
   request(GRAPHQL_API, findUser(email))
     .then((data) => {
       if (data.User) {

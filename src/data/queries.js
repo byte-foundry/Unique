@@ -55,6 +55,36 @@ export const getAllPresets = `
     }}
 `;
 
+export const getPreset = id => `
+{
+    Project(id: "${id}") {
+      id
+      choicesMade
+      preset {
+        id
+        preset
+        variant
+        template
+        selected
+        needs
+        baseValues
+        steps {
+          id
+          name
+          description
+          selected
+          choices {
+            id
+            name
+            values
+            selected
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const getSelectedCount = (type, id) => `
     query {
         ${type} (id: "${id}") {

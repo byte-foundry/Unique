@@ -7,7 +7,7 @@ import { setUnstable, setStable } from '../ui';
 import { storeChosenWord } from '../user';
 import { DEFAULT_UI_WORD, GRAPHQL_API } from '../constants';
 import { storeCreatedFont, deleteCreatedFont } from '../createdFonts';
-import { getSelectedCount, updateSelectedCount, getSpecialChoiceSelectedCount } from '../queries';
+import { getSelectedCount, updateSelectedCount, getSpecialChoiceSelectedCount, getPreset } from '../queries';
 
 export const CREATE_REQUESTED = 'font/CREATE_REQUESTED';
 export const CREATE = 'font/CREATE';
@@ -21,6 +21,7 @@ export const SELECT_CHOICE = 'font/SELECT_CHOICE';
 export const RELOAD_FONTS = 'font/RELOAD_FONTS';
 export const FINISH_EDITING = 'font/FINISH_EDITING';
 export const CLEAR_IS_LOADING = 'font/CLEAR_IS_LOADING';
+export const LOAD_FONT_DATA = 'font/LOAD_FONT_DATA';
 
 const initialState = {
   fontName: '',
@@ -138,6 +139,15 @@ export default (state = initialState, action) => {
         fontName: action.fontName,
         step: action.step,
         sliderFontName: action.sliderFontName,
+      };
+
+    case LOAD_FONT_DATA:
+      return {
+        ...state,
+        currentPrese: action.currentPreset,
+        currentParams: action.currentParams,
+        baseValues: action.baseValues,
+        step: action.step,
       };
 
     default:
@@ -453,11 +463,10 @@ export const resetSliderFont = () => (dispatch, getState) => {
   fonts[sliderFontName].changeParams({ ...stepBaseValues, ...currentParams });
 };
 
-export const reloadFonts = () => (dispatch, getState) => {
+export const reloadFonts = (restart = true) => (dispatch, getState) => {
   dispatch(setUnstable());
 
   const { currentPreset, currentParams, baseValues, step } = getState().font;
-  const { fonts } = getState().createdFonts;
   let currentStep = step;
   // create userFont
   prototypoFontFactory
@@ -525,6 +534,39 @@ export const reloadFonts = () => (dispatch, getState) => {
     });
     dispatch(updateStepValues(currentStep, `${currentPreset.preset}${currentPreset.variant}`));
     dispatch(setStable());
-    dispatch(push('/restart'));
+    if (restart) dispatch(push('/restart')); else dispatch(push('/specimen'));
   });
 };
+
+export const loadProject = projectId => (dispatch) => {
+  dispatch(setUnstable());
+  // fetch preset and project infos
+  console.log('===========Loading preset infos ============')
+  request(GRAPHQL_API, getPreset(projectId))
+  .then((data) => {
+    console.log(data.Project);
+    const baseValues = data.Project.preset.baseValues;
+    const currentPreset = data.Project.preset;
+    const step = currentPreset.steps.length;
+    const currentParams = {};
+    data.Project.choicesMade.forEach(((choice, index) => {
+      if (choice !== null) {
+        Object.keys(choice).forEach((key) => {
+          if (key !== 'name') {
+            currentParams[key] = data.Project.choicesMade[index][key];
+          }
+        });
+      }
+    }));
+    dispatch({
+      type: LOAD_FONT_DATA,
+      currentPreset,
+      currentParams,
+      baseValues,
+      step,
+    });
+    dispatch(reloadFonts(false));
+  })
+  .catch(error => console.log(error));
+};
+

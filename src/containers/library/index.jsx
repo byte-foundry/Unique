@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '../../components/button/';
+import { loadProject } from '../../data/font';
 import './Library.css';
 
 const Library = props => (
@@ -18,7 +19,7 @@ const Library = props => (
       <div className="row">
         <div className="col-sm-12">
           <ul>
-            {props.projects.map(project => <li key={project.id}>{project.id}</li>)}
+            {props.projects.map(project => <li role="button" tabIndex="0" onClick={() => props.loadProject(project.id)} key={project.id}>{project.id}</li>)}
           </ul>
           <Button
             className=""
@@ -39,12 +40,14 @@ Library.propTypes = {
     }),
   ).isRequired,
   goToHome: PropTypes.func.isRequired,
+  loadProject: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
   projects: state.user.projects,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
   goToHome: () => push('/'),
+  loadProject,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Library);
