@@ -197,7 +197,7 @@ class App extends React.Component {
               exact
               requirement={() => this.hasSelectedFont()}
               path="/specimen"
-              component={SpecimenView}
+              component={props => <SpecimenView auth={this.auth} {...props} />}
             />
             <ProtectedRoute
               exact

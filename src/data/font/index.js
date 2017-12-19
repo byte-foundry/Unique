@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 import { request } from 'graphql-request';
 import { loadPresets } from '../presets';
 import { setUnstable, setStable } from '../ui';
-import { storeChosenWord } from '../user';
+import { storeChosenWord, updateProjectId } from '../user';
 import { DEFAULT_UI_WORD, GRAPHQL_API } from '../constants';
 import { storeCreatedFont, deleteCreatedFont } from '../createdFonts';
 import { getSelectedCount, updateSelectedCount, getSpecialChoiceSelectedCount, getPreset } from '../queries';
@@ -565,6 +565,7 @@ export const loadProject = projectId => (dispatch) => {
       baseValues,
       step,
     });
+    dispatch(updateProjectId(projectId));
     dispatch(reloadFonts(false));
   })
   .catch(error => console.log(error));

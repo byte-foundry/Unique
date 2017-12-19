@@ -149,16 +149,10 @@ export const findUser = email => `
 `;
 
 
-export const createUser = (email, presetId, choicesMade) => `
+export const createUser = (email) => `
     mutation {
         createUser (
             email: "${email}"
-            projects: [
-                {
-                    presetId: "${presetId}",
-                    choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, "\\\"")}"
-                }
-            ]
         )
         {
             id
@@ -285,14 +279,14 @@ export const sendFontToPrototypo = (prototypoUserId, familyName, template, varia
 `;
 
 export const getUserProjects = graphQLID => `
-query {
-    User(
-        id: "${graphQLID}"
-    )
-    {
-        projects(orderBy: createdAt_ASC) {
-            id
+    query {
+        User(
+            id: "${graphQLID}"
+        )
+        {
+            projects(orderBy: createdAt_ASC) {
+                id
+            }
         }
     }
-}
 `;

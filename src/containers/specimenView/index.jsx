@@ -9,7 +9,7 @@ import './SpecimenView.css';
 import StepList from '../stepList/';
 import Button from '../../components/button/';
 import CustomLogo from '../../components/customLogo';
-import { storeEmail } from '../../data/user';
+import { storeEmail, storeProject } from '../../data/user';
 import desktopBackground from './desktop.svg';
 import tabletBackground from './tablet.svg';
 import mobileBackground from './mobile.svg';
@@ -160,6 +160,45 @@ const websiteSpecimen = fontName => (
   </div>
 );
 
+const renderValidateLoggedIn = storeProj => (
+  <div>
+    <Button
+      className=""
+      label="Download"
+      onClick={() => {
+        storeProj();
+      }}
+    />
+  </div>
+);
+
+const renderValidateNotLoggedIn = (
+  email,
+  shouldChangeEmail,
+  handleSubmit,
+  handleChange,
+  changeEmail,
+  sendEmail,
+) =>
+  email === '' || !email || shouldChangeEmail
+  ? (
+    <form onSubmit={handleSubmit}>
+      <input type="email" placeholder="your email" name="email" onChange={handleChange} />
+      <button type="submit">Download</button>
+    </form>
+  )
+  : (
+    <div className="export">
+      <p>You are currently registered as {email}.</p><br />
+      <Button
+        className="hollow"
+        label="Change email"
+        onClick={() => changeEmail()}
+      />
+      <Button label="Download your font" onClick={() => sendEmail()} />
+    </div>
+  );
+
 class SpecimenView extends React.Component {
   constructor(props) {
     super(props);
@@ -168,6 +207,7 @@ class SpecimenView extends React.Component {
       shouldChangeEmail: false,
       isCustomLogo: false,
       showCustomLogoControls: true,
+      shouldContinueUnregistered: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -182,10 +222,12 @@ class SpecimenView extends React.Component {
     this.setState({
       isCustomLogo: !this.state.isCustomLogo,
       showCustomLogoControls: true,
-     });
+    });
   }
   validateCustomLogo() {
-    this.setState({ showCustomLogoControls: !this.state.showCustomLogoControls });
+    this.setState({
+      showCustomLogoControls: !this.state.showCustomLogoControls,
+    });
   }
   handleChange(event) {
     this.setState({ email: event.target.value });
@@ -203,50 +245,78 @@ class SpecimenView extends React.Component {
     this.props.storeEmail(this.props.email);
   }
   render() {
+    const { isAuthenticated, login } = this.props.auth;
     return (
       <div className="SpecimenView">
-        <Button className="back" mode="isBack" label="Back" onClick={() => this.props.goBack()} />
+        <Button
+          className="back"
+          mode="isBack"
+          label="Back"
+          onClick={() => this.props.goBack()}
+        />
         <div className="container">
-        <h3>Hooray ! You have created the perfect bespoke font for your project</h3>
-        {(() => {
-          switch (this.props.need) {
-            case 'logo':
-              return logoSpecimen(
-                this.props.fontName,
-                this.props.word,
-                this.state.isCustomLogo,
-                this.state.showCustomLogoControls,
-                this.setCustomLogo,
-                this.removeCustomLogo,
-                this.validateCustomLogo,
-              );
-            case 'text':
-              return textSpecimen(this.props.fontName);
-            case 'website':
-              return websiteSpecimen(this.props.fontName);
-            default: 
-              return textSpecimen(this.props.fontName);
-          }
-        })()}
-        <h3>If you like your work, download it!</h3>
-        {this.props.email === '' || !this.props.email || this.state.shouldChangeEmail
-        ? (
-          <form onSubmit={this.handleSubmit}>
-            <input type="email" placeholder="your email" name="email" onChange={this.handleChange} />
-            <button type="submit">Download</button>
-          </form>
-        )
-        : (
-          <div className="export">
-            <p>You are currently registered as {this.props.email}.</p><br />
-            <Button
-              className="hollow"
-              label="Change email"
-              onClick={() => this.changeEmail()}
-            />
-            <Button label="Download your font" onClick={() => this.sendEmail()} />
-          </div>
-        )}</div>
+          <h3>
+            Hooray ! You have created the perfect bespoke font for your project
+          </h3>
+          {(() => {
+            switch (this.props.need) {
+              case "logo":
+                return logoSpecimen(
+                  this.props.fontName,
+                  this.props.word,
+                  this.state.isCustomLogo,
+                  this.state.showCustomLogoControls,
+                  this.setCustomLogo,
+                  this.removeCustomLogo,
+                  this.validateCustomLogo,
+                );
+              case "text":
+                return textSpecimen(this.props.fontName);
+              case "website":
+                return websiteSpecimen(this.props.fontName);
+              default:
+                return textSpecimen(this.props.fontName);
+            }
+          })()}
+          <h3>If you like your work, download it!</h3>
+          {isAuthenticated() ? (
+            renderValidateLoggedIn(this.props.storeProject)
+          ) : (
+            <div>
+              <p>You are not logged in.</p>
+              <p>
+                Do you want to log in / create an account to save your project?
+              </p>
+              <p>
+                <Button
+                  className=""
+                  label="Log in"
+                  onClick={() => {
+                    login('/specimen');
+                  }}
+                />
+              </p>
+              <p>You can also continue without an account</p>
+              {this.state.shouldContinueUnregistered ? (
+                renderValidateNotLoggedIn(
+                  this.props.email,
+                  this.state.shouldChangeEmail,
+                  this.handleSubmit,
+                  this.handleChange,
+                  this.changeEmail,
+                  this.sendEmail,
+                )
+              ) : (
+                <Button
+                  label="Continue unregistered"
+                  onClick={() =>
+                    this.setState({ shouldContinueUnregistered: true })
+                  }
+                />
+              )}
+            </div>
+          )}
+        </div>
       </div>
     );
   }
@@ -263,15 +333,21 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   goBack: () => push('/customize'),
   storeEmail,
+  storeProject,
 }, dispatch);
 
 SpecimenView.propTypes = {
   storeEmail: PropTypes.func.isRequired,
+  storeProject: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
   fontName: PropTypes.string,
   email: PropTypes.string,
   need: PropTypes.string.isRequired,
   word: PropTypes.string.isRequired,
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 SpecimenView.defaultProps = {

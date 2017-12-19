@@ -24,8 +24,10 @@ export default class Auth {
     this.isAuthenticated = this.isAuthenticated.bind(this);
   }
 
-  login() {
-    this.auth0.authorize();
+  login(redirectTo = '/') {
+    this.auth0.authorize({
+      state: redirectTo,
+    });
   }
 
   handleAuthentication() {
@@ -34,9 +36,9 @@ export default class Auth {
         this.setSession(authResult);
         console.log(authResult);
         store.dispatch(loginToGraphCool(authResult.accessToken));
-        history.replace('/');
+        history.replace(authResult.state);
       } else if (err) {
-        history.replace('/');
+        history.replace(authResult.state);
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
