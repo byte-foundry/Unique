@@ -261,6 +261,7 @@ export const defineNeed = need => (dispatch) => {
     type: DEFINE_NEED,
     need,
   });
+  dispatch(updateProjectId(undefined));
   dispatch(loadPresets());
 };
 
@@ -538,36 +539,43 @@ export const reloadFonts = (restart = true) => (dispatch, getState) => {
   });
 };
 
-export const loadProject = projectId => (dispatch) => {
-  dispatch(setUnstable());
-  // fetch preset and project infos
-  console.log('===========Loading preset infos ============')
-  request(GRAPHQL_API, getPreset(projectId))
-  .then((data) => {
-    console.log(data.Project);
-    const baseValues = data.Project.preset.baseValues;
-    const currentPreset = data.Project.preset;
-    const step = currentPreset.steps.length;
-    const currentParams = {};
-    data.Project.choicesMade.forEach(((choice, index) => {
-      if (choice !== null) {
-        Object.keys(choice).forEach((key) => {
-          if (key !== 'name') {
-            currentParams[key] = data.Project.choicesMade[index][key];
-          }
-        });
-      }
-    }));
-    dispatch({
-      type: LOAD_FONT_DATA,
-      currentPreset,
-      currentParams,
-      baseValues,
-      step,
-    });
-    dispatch(updateProjectId(projectId));
-    dispatch(reloadFonts(false));
-  })
-  .catch(error => console.log(error));
+export const loadProject = loadedProjectID => (dispatch, getState) => {
+  const { projectID } = getState().user;
+  console.log(projectID)
+  console.log(loadedProjectID)
+  if (projectID === loadedProjectID) {
+    dispatch(push('/specimen'));
+  } else {
+    dispatch(setUnstable());
+    // fetch preset and project infos
+    console.log('===========Loading preset infos ============')
+    request(GRAPHQL_API, getPreset(loadedProjectID))
+    .then((data) => {
+      console.log(data.Project);
+      const baseValues = data.Project.preset.baseValues;
+      const currentPreset = data.Project.preset;
+      const step = currentPreset.steps.length;
+      const currentParams = {};
+      data.Project.choicesMade.forEach(((choice, index) => {
+        if (choice !== null) {
+          Object.keys(choice).forEach((key) => {
+            if (key !== 'name') {
+              currentParams[key] = data.Project.choicesMade[index][key];
+            }
+          });
+        }
+      }));
+      dispatch({
+        type: LOAD_FONT_DATA,
+        currentPreset,
+        currentParams,
+        baseValues,
+        step,
+      });
+      dispatch(updateProjectId(loadedProjectID));
+      dispatch(reloadFonts(false));
+    })
+    .catch(error => console.log(error));
+  }
 };
 

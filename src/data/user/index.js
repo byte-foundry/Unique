@@ -51,7 +51,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         exportType: action.exportType,
-        projectID: undefined,
       };
 
     case PAYMENT_SUCCESSFUL:
