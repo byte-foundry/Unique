@@ -3,23 +3,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Choice.css';
 
-const Choice = props => (
-  <div
-    className={`Choice ${props.selected ? 'selected' : ''}`}
-    key={props.choice.name}
-    onClick={() => props.markChoiceActive(props.choice)}
-    onDoubleClick={() => props.selectChoice(props.choice)}
-    role="option"
-    aria-checked="false"
-    aria-selected="false"
-    tabIndex={0}
-    style={{ fontFamily: `choiceFont${props.index}` }}
-  >
-    {props.text}
-    {props.mostSelected ? <span className="mostSelected">Most selected</span> : false}
-  </div>
-);
-
+class Choice extends React.Component {
+  render() {
+    return (
+      <div
+        className={`Choice ${this.props.selected ? 'selected' : ''}`}
+        key={this.props.choice.name}
+        onClick={() => this.props.markChoiceActive(this.props.choice)}
+        onDoubleClick={() => this.props.selectChoice(this.props.choice)}
+        role="option"
+        aria-checked="false"
+        aria-selected="false"
+        tabIndex={0}
+        style={{ fontFamily: `choiceFont${this.props.index}` }}
+      >
+        {this.props.text}
+        {this.props.mostSelected ? (
+          <span className="mostSelected">Most selected</span>
+        ) : (
+          false
+        )}
+      </div>
+    );
+  }
+}
 
 Choice.propTypes = {
   selectChoice: PropTypes.func.isRequired,

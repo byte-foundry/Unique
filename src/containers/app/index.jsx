@@ -6,6 +6,8 @@ import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { request } from 'graphql-request';
+import { ShortcutManager } from 'react-shortcuts';
+import keymap from '../../data/keymap';
 import { importPresets, reloadPresets } from '../../data/presets';
 import { reloadFonts } from '../../data/font';
 import { GRAPHQL_API } from '../../data/constants';
@@ -30,6 +32,7 @@ import Button from '../../components/button';
 
 import UnstableView from '../unstableView';
 
+
 class App extends React.Component {
   /* global Intercom*/
   constructor(props) {
@@ -43,6 +46,11 @@ class App extends React.Component {
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.login = this.login.bind(this);
     this.auth = new Auth();
+    this.shortcutManager = new ShortcutManager(keymap);
+    console.log(keymap);
+  }
+  getChildContext() {
+    return { shortcuts: this.shortcutManager };
   }
   hasSelectedFont() {
     console.log('=========hasSelectedFont=======');
@@ -243,6 +251,11 @@ App.defaultProps = {
   userEmail: '',
   hasPresetsLoaded: undefined,
 };
+
+App.childContextTypes = {
+  shortcuts: PropTypes.object.isRequired,
+};
+
 
 const mapStateToProps = state => ({
   pathname: state.routing.location.pathname,
