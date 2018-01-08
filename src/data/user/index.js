@@ -145,6 +145,7 @@ export const storeEmail = email => (dispatch, getState) => {
   request(GRAPHQL_API, findUser(email))
     .then((data) => {
       if (data.User) {
+        console.log('> User found on Unique graphcool, checking if prototypo user exists');
         request(GRAPHQL_PROTOTYPO_API, getPrototypoUser(email))
         .then((response) => {
           dispatch({
@@ -159,6 +160,7 @@ export const storeEmail = email => (dispatch, getState) => {
       } else {
         request(GRAPHQL_API, createUser(email, currentPreset.id, choicesMade))
           .then((res) => {
+            console.log('> User created on Unique, checking if prototypo user exists');
             request(GRAPHQL_PROTOTYPO_API, getPrototypoUser(email))
             .then((response) => {
               dispatch({

@@ -5,7 +5,7 @@ import './UnstableView.css';
 
 const UnstableView = () => (
   <div className="UnstableView">
-    <h1>Recreating your fonts</h1>
+    <h1>Recreating your project</h1>
   </div>
 );
 

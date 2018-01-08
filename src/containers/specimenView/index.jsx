@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Shortcuts } from 'react-shortcuts';
 import './SpecimenView.css';
 import StepList from '../stepList/';
 import Button from '../../components/button/';
@@ -214,6 +215,10 @@ class SpecimenView extends React.Component {
     this.setCustomLogo = this.setCustomLogo.bind(this);
     this.removeCustomLogo = this.removeCustomLogo.bind(this);
     this.validateCustomLogo = this.validateCustomLogo.bind(this);
+    this.handleShortcuts = this.handleShortcuts.bind(this);
+  }
+  componentDidMount() {
+    this.specimenViewWrapper.focus();
   }
   setCustomLogo() {
     this.setState({ isCustomLogo: !this.state.isCustomLogo });
@@ -244,80 +249,94 @@ class SpecimenView extends React.Component {
   sendEmail() {
     this.props.storeEmail(this.props.email);
   }
+  handleShortcuts(action) {
+    switch (action) {
+      case 'STEP_BACK':
+        this.props.goBack();
+        break;
+      default:
+        break;
+    }
+  }
   render() {
     const { isAuthenticated, login } = this.props.auth;
     return (
-      <div className="SpecimenView">
-        <Button
-          className="back"
-          mode="isBack"
-          label="Back"
-          onClick={() => this.props.goBack()}
-        />
-        <div className="container">
-          <h3>
-            Hooray ! You have created the perfect bespoke font for your project
-          </h3>
-          {(() => {
-            switch (this.props.need) {
-              case "logo":
-                return logoSpecimen(
-                  this.props.fontName,
-                  this.props.word,
-                  this.state.isCustomLogo,
-                  this.state.showCustomLogoControls,
-                  this.setCustomLogo,
-                  this.removeCustomLogo,
-                  this.validateCustomLogo,
-                );
-              case "text":
-                return textSpecimen(this.props.fontName);
-              case "website":
-                return websiteSpecimen(this.props.fontName);
-              default:
-                return textSpecimen(this.props.fontName);
-            }
-          })()}
-          <h3>If you like your work, download it!</h3>
-          {isAuthenticated() ? (
-            renderValidateLoggedIn(this.props.storeProject)
-          ) : (
-            <div>
-              <p>You are not logged in.</p>
-              <p>
-                Do you want to log in / create an account to save your project?
-              </p>
-              <p>
-                <Button
-                  className=""
-                  label="Log in"
-                  onClick={() => {
-                    login('/specimen');
-                  }}
-                />
-              </p>
-              <p>You can also continue without an account</p>
-              {this.state.shouldContinueUnregistered ? (
-                renderValidateNotLoggedIn(
-                  this.props.email,
-                  this.state.shouldChangeEmail,
-                  this.handleSubmit,
-                  this.handleChange,
-                  this.changeEmail,
-                  this.sendEmail,
-                )
-              ) : (
-                <Button
-                  label="Continue unregistered"
-                  onClick={() =>
-                    this.setState({ shouldContinueUnregistered: true })
-                  }
-                />
-              )}
-            </div>
-          )}
+      <Shortcuts
+        name="CHOICES"
+        handler={this.handleShortcuts}
+      >
+        <div className="SpecimenView" ref={(c) => { this.specimenViewWrapper = c; }} tabIndex="-1">
+          <Button
+            className="back"
+            mode="isBack"
+            label="Back"
+            onClick={() => this.props.goBack()}
+          />
+          <div className="container">
+            <h3>
+              Hooray ! You have created the perfect bespoke font for your project
+            </h3>
+            {(() => {
+              switch (this.props.need) {
+                case "logo":
+                  return logoSpecimen(
+                    this.props.fontName,
+                    this.props.word,
+                    this.state.isCustomLogo,
+                    this.state.showCustomLogoControls,
+                    this.setCustomLogo,
+                    this.removeCustomLogo,
+                    this.validateCustomLogo,
+                  );
+                case "text":
+                  return textSpecimen(this.props.fontName);
+                case "website":
+                  return websiteSpecimen(this.props.fontName);
+                default:
+                  return textSpecimen(this.props.fontName);
+              }
+            })()}
+            <h3>If you like your work, download it!</h3>
+            {isAuthenticated() ? (
+              renderValidateLoggedIn(this.props.storeProject)
+            ) : (
+              <div>
+                <p>You are not logged in.</p>
+                <p>
+                  Do you want to log in / create an account to save your project?
+                </p>
+                <p>
+                  <Button
+                    className=""
+                    label="Log in"
+                    onClick={() => {
+                      login('/specimen');
+                    }}
+                  />
+                </p>
+                <p>You can also continue without an account</p>
+                {this.state.shouldContinueUnregistered ? (
+                  renderValidateNotLoggedIn(
+                    this.props.email,
+                    this.state.shouldChangeEmail,
+                    this.handleSubmit,
+                    this.handleChange,
+                    this.changeEmail,
+                    this.sendEmail,
+                  )
+                ) : (
+                  <Button
+                    label="Continue unregistered"
+                    onClick={() =>
+                      this.setState({ shouldContinueUnregistered: true })
+                    }
+                  />
+                )}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </Shortcuts>
     );
   }
 }

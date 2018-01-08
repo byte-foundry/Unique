@@ -10,6 +10,11 @@
   cursor: pointer;
   outline-color: #501286;
   user-select: none;
+  border: 1px solid transparent;
+}
+
+.Template.selected {
+  border-color: #501286;
 }
 
 .Template .mostSelected {

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Shortcuts } from 'react-shortcuts';
 import './TemplateChoice.css';
 import Template from '../../components/template/';
 import Button from '../../components/button/';
@@ -22,32 +23,101 @@ const isMostSelected = (presets, font) => {
   return font.id === most && value > 0;
 };
 
-const TemplateChoice = props => (
-  <div className="TemplateChoice">
-    <Button label="Back" className="back" mode="isBack" onClick={() => props.redirectToHome()} />
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-12">
-          <h1>Pick something that you like and edit it!</h1>
-        </div>
-      </div>
-      <div className="template-wrapper">
-        {props.presets.map((font) => {
-          return (
-            <div className="row" key={`${font.preset}${font.variant}`}>
+class TemplateChoice extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      templateIndex: -1,
+    }
+    this.handleShortcuts = this.handleShortcuts.bind(this);
+  }
+  componentDidMount() {
+    this.templateChoiceWrapper.focus();
+  }
+  handleShortcuts(action, event) {
+    switch (action) {
+      case 'CHOICE_PREVIOUS':
+        if (this.state.templateIndex !== -1) {
+          if (this.state.templateIndex === 0) {
+            this.setState({ templateIndex: this.props.presets.length - 1 });
+            break;
+          } else {
+            this.setState({ templateIndex: this.state.templateIndex - 1 });
+            break;
+          }
+        } else {
+          this.setState({ templateIndex: this.props.presets.length - 1 });
+          break;
+        }
+      case 'CHOICE_NEXT':
+        if (this.state.templateIndex !== -1) {
+          if (this.state.templateIndex === this.props.presets.length - 1) {
+            this.setState({ templateIndex: 0 });
+            break;
+          } else {
+            this.setState({ templateIndex: this.state.templateIndex + 1 });
+            break;
+          }
+        } else {
+          this.setState({ templateIndex: 0 });
+          break;
+        }
+      case 'CHOICE_SELECT':
+        if (this.state.templateIndex !== -1 && !this.props.isLoading) {
+          this.props.selectFont(this.props.presets[this.state.templateIndex]);
+        }
+        break;
+      case 'STEP_BACK':
+        this.props.redirectToHome();
+        break;
+      default:
+        break;
+    }
+  }
+  render() {
+    return (
+      <Shortcuts
+        name="CHOICES"
+        handler={this.handleShortcuts}
+      >
+        <div className="TemplateChoice" ref={(c) => { this.templateChoiceWrapper = c; }} tabIndex="-1">
+          <Button label="Back" className="back" mode="isBack" onClick={() => this.props.redirectToHome()} />
+          <div className="container">
+            <div className="row">
               <div className="col-sm-12">
-                <Template font={font} selectFont={props.selectFont} text={props.chosenWord} mostSelected={isMostSelected(props.presets, font)} isLoading={props.isLoading} />
+                <h1>Pick something that you like and edit it!</h1>
               </div>
             </div>
-          );
-        })}
-      </div>
-      {props.isLoading
-      ? (<h2>Loading font...</h2>)
-      : false}
-    </div>
-  </div>
-);
+            <div className="template-wrapper">
+              {this.props.presets.map((font) => {
+                return (
+                  <div className="row" key={`${font.preset}${font.variant}`}>
+                    <div className="col-sm-12">
+                      <Template
+                        font={font}
+                        selectFont={this.props.selectFont}
+                        selected={
+                          this.state.templateIndex !== -1
+                          &&
+                          `${this.props.presets[this.state.templateIndex].preset}${this.props.presets[this.state.templateIndex].variant}` === `${font.preset}${font.variant}`}
+                        text={this.props.chosenWord}
+                        mostSelected={isMostSelected(this.props.presets, font)}
+                        isLoading={this.props.isLoading}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {this.props.isLoading
+            ? (<h2>Loading font...</h2>)
+            : false}
+          </div>
+        </div>
+      </Shortcuts>
+    );
+  }
+} 
 
 const mapStateToProps = state => ({
   presets: state.presets.importedPresets,

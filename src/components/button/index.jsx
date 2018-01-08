@@ -6,7 +6,7 @@ import backIcon from './return.svg';
 import settingsIcon from './settings.svg';
 
 const Button = props => (
-  <div
+  <span
     role="button"
     className={`Button ${props.className} ${props.mode}`}
     onClick={() => props.onClick()}
@@ -22,7 +22,7 @@ const Button = props => (
           return props.label;
       }
     })()}
-  </div>
+  </span>
 );
 
 
