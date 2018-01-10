@@ -17,10 +17,17 @@ const Library = props => (
         </div>
       </div>
       <div className="row">
+        {props.projects.map(project => (
+          <div className="col-sm-3 project" role="button" tabIndex="0" onClick={() => props.loadProject(project.id)} key={project.id}>            
+            <div className="description">
+              {project.preset.steps.map((step, index) => (
+                <span>{step.name}: {project.choicesMade[index + 1].name}<br /></span>
+              ))}
+            </div>
+            <div className="title">{project.name}</div>
+          </div>
+        ))}
         <div className="col-sm-12">
-          <ul>
-            {props.projects.map(project => <li role="button" tabIndex="0" onClick={() => props.loadProject(project.id)} key={project.id}>{project.id}</li>)}
-          </ul>
           <Button
             className=""
             label="Create a new one"
@@ -37,6 +44,7 @@ Library.propTypes = {
   projects: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
     }),
   ).isRequired,
   goToHome: PropTypes.func.isRequired,

@@ -25,6 +25,7 @@ export const PAYMENT_SUCCESSFUL = 'user/PAYMENT_SUCCESSFUL';
 export const CONNECT_TO_GRAPHCOOL = 'user/CONNECT_TO_GRAPHCOOL';
 export const STORE_PROJECT = 'user/STORE_PROJECT';
 export const STORE_PROJECT_ID = 'user/STORE_PROJECT_ID';
+export const LOGOUT = 'user/LOGOUT';
 
 const initialState = {
   email: '',
@@ -77,6 +78,7 @@ export default (state = initialState, action) => {
         graphqlID: action.graphqlID,
         email: action.email,
         projects: action.projects,
+        prototypoUser: action.prototypoUser,
       };
 
     case STORE_PROJECT:
@@ -84,6 +86,19 @@ export default (state = initialState, action) => {
         ...state,
         projectID: action.projectID,
         projects: action.projects,
+      };
+
+    case LOGOUT:
+      return {
+        ...state,
+        email: '',
+        exportType: undefined,
+        hasPayed: false,
+        chosenWord: DEFAULT_UI_WORD,
+        graphqlID: undefined,
+        prototypoUser: {},
+        projects: [],
+        projectID: undefined,
       };
 
     case STORE_PROJECT_ID:
@@ -135,6 +150,12 @@ export const updateProjectId = projectID => (dispatch) => {
   dispatch({
     type: STORE_PROJECT_ID,
     projectID,
+  });
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: LOGOUT,
   });
 };
 
@@ -282,14 +303,21 @@ export const loginToGraphCool = (accessToken) => (dispatch) => {
     request(GRAPHQL_API, getUserProjects(data.authenticateUser.id))
     .then((res) => {
       console.log(res);
-      dispatch({
-        type: CONNECT_TO_GRAPHCOOL,
-        email: data.authenticateUser.email,
-        graphqlID: data.authenticateUser.id,
-        projects: res.User.projects,
-      });
+      console.log('> User connected on Unique, checking if prototypo user exists');
+      request(GRAPHQL_PROTOTYPO_API, getPrototypoUser(data.authenticateUser.email))
+      .then((response) => {
+        console.log(response)
+        dispatch({
+          type: CONNECT_TO_GRAPHCOOL,
+          email: data.authenticateUser.email,
+          graphqlID: data.authenticateUser.id,
+          projects: res.User.projects,
+          prototypoUser: response.User ? response.User : {},
+        });
+      })
+      .catch(error => console.log(error));
     })
-    .catch(error => console.log(error));    
+    .catch(error => console.log(error));
     Intercom('update', { email: data.authenticateUser.email });
   })
   .catch(error => console.log(error));

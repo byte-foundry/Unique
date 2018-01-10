@@ -97,6 +97,7 @@ export default async event => {
     const api = graphcool.api('simple/v1')
     // fetch email if scope includes it
     const email = await fetchAuth0Email(accessToken)
+    console.log(email);
     let graphCoolUser = await getGraphcoolUser(email, api)
     //If the user doesn't exist, a new record is created.
     if (graphCoolUser === null) {

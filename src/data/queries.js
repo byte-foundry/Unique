@@ -60,6 +60,7 @@ export const getPreset = id => `
     Project(id: "${id}") {
       id
       choicesMade
+      name
       preset {
         id
         preset
@@ -158,6 +159,7 @@ export const createUser = (email) => `
             id
             projects {
                 id
+                name
             }
         }
     }
@@ -188,6 +190,7 @@ export const addProjectToUser = (userId, presetId, choicesMade) => `
             user {
                 projects {
                     id
+                    name
                 }
             }
         }
@@ -206,6 +209,7 @@ export const getBoughtProjects = userId => `
         )
         {
             id
+            name
         }
   }
 `;
@@ -228,7 +232,6 @@ export const getPrototypoUser = userEmail => `
             email: "${userEmail}"
         ) {
             id
-            firstName
         }
     }
 `;
@@ -286,6 +289,13 @@ export const getUserProjects = graphQLID => `
         {
             projects(orderBy: createdAt_ASC) {
                 id
+                name
+                choicesMade
+                preset {
+                    steps {
+                        name
+                    }
+                }
             }
         }
     }

@@ -3,6 +3,27 @@
     padding-top: 100px;
 }
 
-.Library ul li{
+
+.Library .project{
+    display: inline-block;
     cursor: pointer;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+
+.Library .project .description {
+    padding: 10px 20px;
+    min-height: 80px;
+    background-color: #c7b5d8;
+}
+
+.Library .project .title {
+    background-color: #501286;
+    color: white;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 20px 40px;
+    font-size: 18px;
+    font-weight: 700;
 }

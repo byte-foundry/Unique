@@ -5,7 +5,7 @@ import {
   AUTH0_DOMAIN,
   AUTH0_API,
 } from '../../data/constants';
-import { loginToGraphCool } from '../../data/user';
+import { loginToGraphCool, logout } from '../../data/user';
 import store, { history } from '../../data/create-store';
 
 export default class Auth {
@@ -61,6 +61,7 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('expires_at');
     // navigate to the home route
+    store.dispatch(logout());
     history.replace('/');
   }
 

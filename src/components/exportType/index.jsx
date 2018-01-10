@@ -51,13 +51,6 @@ const ExportTypeComponent = props => (
           <div className={`description ${props.expanded ? 'col-sm-12 col-md-6' : ''}`}>
             {props.choice.description}
             {props.choice.component ? { ...props.choice.component } : false}
-            <Button
-              className="select"
-              label="Go for it"
-              onClick={() => {
-                props.storeExportType(props.choice.type);
-              }}
-            />
           </div>
         </div>
       </div>
@@ -159,6 +152,7 @@ class ExportToPrototypoComponent extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         {Object.keys(this.props.prototypoAccount).length > 0 ? (
@@ -301,7 +295,6 @@ const ExportToPrototypoComponentMapDispatchToProps = dispatch =>
 ExportToPrototypoComponent.propTypes = {
   prototypoAccount: PropTypes.shape({
     id: PropTypes.string,
-    firstName: PropTypes.string,
   }).isRequired,
   exportFontToPrototypoWithAccount: PropTypes.func.isRequired,
   exportFontToPrototypoWithoutAccount: PropTypes.func.isRequired,
