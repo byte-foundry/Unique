@@ -47,7 +47,6 @@ class App extends React.Component {
     this.login = this.login.bind(this);
     this.auth = new Auth();
     this.shortcutManager = new ShortcutManager(keymap);
-    console.log(keymap);
   }
   getChildContext() {
     return { shortcuts: this.shortcutManager };

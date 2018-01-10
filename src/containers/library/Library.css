@@ -3,6 +3,10 @@
     padding-top: 100px;
 }
 
+.Library h1 {
+    display: inline-block;
+    margin-bottom: 30px;
+}
 
 .Library .project{
     display: inline-block;
@@ -26,4 +30,11 @@
     padding: 20px 40px;
     font-size: 18px;
     font-weight: 700;
+}
+
+.Library .create {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 15px 30px;
+    font-size: 1rem;
 }

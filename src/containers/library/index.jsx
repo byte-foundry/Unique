@@ -21,7 +21,7 @@ const Library = props => (
           <div className="col-sm-3 project" role="button" tabIndex="0" onClick={() => props.loadProject(project.id)} key={project.id}>            
             <div className="description">
               {project.preset.steps.map((step, index) => (
-                <span>{step.name}: {project.choicesMade[index + 1].name}<br /></span>
+                <span key={`${project.id}${step.name}`}>{step.name}: {project.choicesMade[index + 1].name}<br /></span>
               ))}
             </div>
             <div className="title">{project.name}</div>
@@ -29,7 +29,7 @@ const Library = props => (
         ))}
         <div className="col-sm-12">
           <Button
-            className=""
+            className="create"
             label="Create a new one"
             mode=""
             onClick={() => props.goToHome()}

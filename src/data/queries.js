@@ -178,18 +178,26 @@ export const connectToGraphCool = accessToken => `
 `;
 
 
-export const addProjectToUser = (userId, presetId, choicesMade) => `
+export const addProjectToUser = (userId, presetId, choicesMade, name) => `
     mutation{
         createProject(
             userId:"${userId}",
             presetId: "${presetId}",
             choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, "\\\"")}"
+            name: "${name}"
         ) {
             id
             createdAt
+            name
             user {
                 projects {
                     id
+                    name
+                }
+            }
+            choicesMade
+            preset {
+                steps {
                     name
                 }
             }

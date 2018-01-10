@@ -161,13 +161,13 @@ const websiteSpecimen = fontName => (
   </div>
 );
 
-const renderValidateLoggedIn = storeProj => (
+const renderValidateLoggedIn = (storeProj, fontName) => (
   <div>
     <Button
       className=""
       label="Download"
       onClick={() => {
-        storeProj();
+        storeProj(fontName);
       }}
     />
   </div>
@@ -196,6 +196,7 @@ const renderValidateNotLoggedIn = (
         label="Change email"
         onClick={() => changeEmail()}
       />
+
       <Button label="Download your font" onClick={() => sendEmail()} />
     </div>
   );
@@ -209,6 +210,7 @@ class SpecimenView extends React.Component {
       isCustomLogo: false,
       showCustomLogoControls: true,
       shouldContinueUnregistered: false,
+      fontName: undefined,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -239,7 +241,7 @@ class SpecimenView extends React.Component {
   }
   handleSubmit(event) {
     if (isEmail(this.state.email)) {
-      this.props.storeEmail(this.state.email);
+      this.props.storeEmail(this.state.email, this.state.fontName);
     }
     event.preventDefault();
   }
@@ -297,8 +299,17 @@ class SpecimenView extends React.Component {
               }
             })()}
             <h3>If you like your work, download it!</h3>
+            <p>What would be the name of your font?</p>
+            <form action="">
+              <input
+                type="text"
+                placeholder="Your font name"
+                name="fontname"
+                onChange={e => this.setState({ fontName: e.target.value })}
+              />
+            </form>
             {isAuthenticated() ? (
-              renderValidateLoggedIn(this.props.storeProject)
+              renderValidateLoggedIn(this.props.storeProject, this.state.fontName)
             ) : (
               <div>
                 <p>You are not logged in.</p>

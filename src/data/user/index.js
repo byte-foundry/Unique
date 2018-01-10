@@ -112,7 +112,7 @@ export default (state = initialState, action) => {
   }
 };
 
-export const storeProject = () => (dispatch, getState) => {
+export const storeProject = fontName => (dispatch, getState) => {
   console.log('========STORE PROJECT========');
   const { currentPreset, choicesMade } = getState().font;
   const { projectID, graphqlID } = getState().user;
@@ -123,7 +123,7 @@ export const storeProject = () => (dispatch, getState) => {
       dispatch(push('/export'));
     } else {
       console.log('project not found, saving it on database');
-      request(GRAPHQL_API, addProjectToUser(graphqlID, currentPreset.id, choicesMade))
+      request(GRAPHQL_API, addProjectToUser(graphqlID, currentPreset.id, choicesMade, fontName))
       .then((res) => {
         const metadata = {
           unique_preset: res.createProject.id,
@@ -159,7 +159,7 @@ export const logout = () => (dispatch) => {
   });
 };
 
-export const storeEmail = email => (dispatch, getState) => {
+export const storeEmail = (email, fontName) => (dispatch, getState) => {
   console.log('========STORE EMAIL========');
   /* global Intercom*/
   const { currentPreset, choicesMade } = getState().font;
@@ -175,7 +175,7 @@ export const storeEmail = email => (dispatch, getState) => {
             graphqlID: data.User.id,
             prototypoUser: response.User ? response.User : {},
           });
-          dispatch(storeProject());
+          dispatch(storeProject(fontName));
         })
         .catch(error => console.log(error));
       } else {
@@ -201,7 +201,7 @@ export const storeEmail = email => (dispatch, getState) => {
             };
             Intercom('update', { email, unique_finished_fonts: 1 });
             setTimeout(() => Intercom('trackEvent', 'unique-finished-font', metadata), 1500);
-            dispatch(storeProject());
+            dispatch(storeProject(fontName));
           })
           .catch(error => console.log(error));
       }
