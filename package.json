@@ -9,7 +9,7 @@
     "history": "^4.6.3",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.5.10",
-    "prototypo-library": "1.0.16",
+    "prototypo-library": "1.1.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-input-range": "^1.2.2",

@@ -1,4 +1,4 @@
-import Ptypo, { templateNames } from 'prototypo-library';
+import { templateNames } from 'prototypo-library';
 import saveAs from 'save-as';
 import { push } from 'react-router-redux';
 import { request } from 'graphql-request';
@@ -6,7 +6,7 @@ import { loadPresets } from '../presets';
 import { setUnstable, setStable } from '../ui';
 import { storeChosenWord, updateProjectInfos } from '../user';
 import { DEFAULT_UI_WORD, GRAPHQL_API } from '../constants';
-import { storeCreatedFont, deleteCreatedFont } from '../createdFonts';
+import { storeCreatedFont, deleteCreatedFont, createPrototypoFactory } from '../createdFonts';
 import { getSelectedCount, updateSelectedCount, getSpecialChoiceSelectedCount, getPreset } from '../queries';
 
 export const CREATE_REQUESTED = 'font/CREATE_REQUESTED';
@@ -48,7 +48,7 @@ const templates = {
 };
 
 
-const prototypoFontFactory = new Ptypo('b1f4fb23-7784-456e-840b-f37f5a647b1c');
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case CREATE_REQUESTED:
@@ -159,7 +159,8 @@ export const createFont = font => (dispatch) => {
   dispatch({
     type: CREATE_REQUESTED,
   });
-  prototypoFontFactory
+  dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+    prototypoFontFactory
     .createFont('peasy', templateNames[templates[font.template]])
     .then((createdFont) => {
       createdFont.changeParams(font.baseValues);
@@ -173,6 +174,7 @@ export const createFont = font => (dispatch) => {
       });
       dispatch(push('/customize'));
     });
+  });
 };
 
 export const selectFont = font => (dispatch, getState) => {
@@ -197,7 +199,8 @@ export const selectFont = font => (dispatch, getState) => {
     console.log(`Creating choiceFont${i} from template ${templateNames[templates[font.template]]}`);
     promiseArray.push(
       new Promise((resolve) => {
-        prototypoFontFactory
+        dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+          prototypoFontFactory
           .createFont(`choiceFont${i}`, templateNames[templates[font.template]])
           .then((createdFont) => {
             createdFont.changeParams(font.baseValues);
@@ -211,13 +214,15 @@ export const selectFont = font => (dispatch, getState) => {
             dispatch(storeCreatedFont(createdFont, `choiceFont${i}`));
             choicesFontsName[i] = `choiceFont${i}`;
           });
+        });
       }),
     );
   }
   let sliderFontName = '';
   promiseArray.push(
       new Promise((resolve) => {
-        prototypoFontFactory
+        dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+          prototypoFontFactory
           .createFont('sliderFont', templateNames[templates[font.template]])
           .then((createdFont) => {
             createdFont.changeParams(font.baseValues);
@@ -225,6 +230,7 @@ export const selectFont = font => (dispatch, getState) => {
             dispatch(storeCreatedFont(createdFont, 'sliderFont'));
             resolve(true);
           });
+        });
       }),
     );
   Promise.all(promiseArray).then(() => {
@@ -470,12 +476,14 @@ export const reloadFonts = (restart = true) => (dispatch, getState) => {
   const { currentPreset, currentParams, baseValues, step } = getState().font;
   let currentStep = step;
   // create userFont
-  prototypoFontFactory
+  dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+    prototypoFontFactory
     .createFont(`${currentPreset.preset}${currentPreset.variant}`, templateNames[templates[currentPreset.template]])
     .then((createdFont) => {
       dispatch(storeCreatedFont(createdFont, `${currentPreset.preset}${currentPreset.variant}`));
       createdFont.changeParams({ ...baseValues, ...currentParams });
     });
+  });
   // create choiceFonts
   const choicesFontsName = [];
   let maxStep = 0;
@@ -488,7 +496,8 @@ export const reloadFonts = (restart = true) => (dispatch, getState) => {
   for (let i = 0; i < maxStep; i += 1) {
     promiseArray.push(
       new Promise((resolve) => {
-        prototypoFontFactory
+        dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+          prototypoFontFactory
           .createFont(`choiceFont${i}`, templateNames[templates[currentPreset.template]])
           .then((createdFont) => {
             if (!currentPreset.steps[currentStep - 1]) {
@@ -505,13 +514,15 @@ export const reloadFonts = (restart = true) => (dispatch, getState) => {
             }
             resolve(true);
           });
+        });
       }),
     );
   }
   let sliderFontName = '';
   promiseArray.push(
       new Promise((resolve) => {
-        prototypoFontFactory
+        dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+          prototypoFontFactory
           .createFont('sliderFont', templateNames[templates[currentPreset.template]])
           .then((createdFont) => {
             createdFont.changeParams({
@@ -522,6 +533,7 @@ export const reloadFonts = (restart = true) => (dispatch, getState) => {
             sliderFontName = 'sliderFont';
             resolve(true);
           });
+        });
       }),
     );
   Promise.all(promiseArray).then(() => {

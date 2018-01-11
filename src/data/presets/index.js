@@ -1,7 +1,7 @@
-import Ptypo, { templateNames } from 'prototypo-library';
+import { templateNames } from 'prototypo-library';
 import { push } from 'react-router-redux';
 import { setUnstable, setStable } from '../ui';
-import { storeCreatedFont } from '../createdFonts';
+import { storeCreatedFont, createPrototypoFactory } from '../createdFonts';
 import { clearFontIsLoading } from '../font';
 
 export const IMPORT_PRESETS_REQUESTED = 'presets/IMPORT_PRESETS_REQUESTED';
@@ -21,8 +21,6 @@ const templates = {
   gfnt: 'SPECTRAL',
   antique: 'ANTIQUE',
 };
-
-const prototypoFontFactory = new Ptypo('b1f4fb23-7784-456e-840b-f37f5a647b1c');
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -86,13 +84,15 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
   const loadedPresetsName = [];
   importedPresets.forEach((preset, index) => {
     promiseArray.push(new Promise((resolve) => {
-      prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[templates[preset.template]]).then(
-        (createdFont) => {
-          createdFont.changeParams(preset.baseValues);
-          resolve(true);
-          loadedPresetsName[index] = `${preset.preset}${preset.variant}`;
-          dispatch(storeCreatedFont(createdFont, `${preset.preset}${preset.variant}`));
-        });
+      dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+        prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[templates[preset.template]]).then(
+          (createdFont) => {
+            createdFont.changeParams(preset.baseValues);
+            resolve(true);
+            loadedPresetsName[index] = `${preset.preset}${preset.variant}`;
+            dispatch(storeCreatedFont(createdFont, `${preset.preset}${preset.variant}`));
+          });
+      });
     }));
   });
   Promise.all(promiseArray).then(() => {
