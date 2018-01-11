@@ -205,6 +205,32 @@ export const addProjectToUser = (userId, presetId, choicesMade, name) => `
     }
 `;
 
+export const updateProject = (projectId, choicesMade, name) => `
+    mutation{
+        updateProject(
+            id:"${projectId}"
+            choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, "\\\"")}"
+            name: "${name}"
+        ) {
+            id
+            createdAt
+            name
+            user {
+                projects {
+                    id
+                    name
+                }
+            }
+            choicesMade
+            preset {
+                steps {
+                    name
+                }
+            }
+        }
+    }
+`;
+
 export const getBoughtProjects = userId => `
     query {
         allProjects(

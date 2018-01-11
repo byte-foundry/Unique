@@ -14,6 +14,7 @@ import {
   sendFontToPrototypo,
   connectToGraphCool,
   getUserProjects,
+  updateProject,
 } from '../queries';
 import { DEFAULT_UI_WORD, GRAPHQL_API, GRAPHQL_PROTOTYPO_API } from '../constants';
 
@@ -119,12 +120,22 @@ export default (state = initialState, action) => {
 export const storeProject = fontName => (dispatch, getState) => {
   console.log('========STORE PROJECT========');
   const { currentPreset, choicesMade } = getState().font;
+  console.log(choicesMade);
   const { projectID, graphqlID } = getState().user;
   request(GRAPHQL_API, getUserProjects(graphqlID))
   .then((data) => {
     if (data.User.projects.find(project => project.id === projectID)) {
-      console.log('project already found on database');
-      dispatch(push('/export'));
+      console.log('project already found on database. updating it');
+      request(GRAPHQL_API, updateProject(projectID, choicesMade, fontName))
+      .then((res) => {
+        dispatch({
+          type: STORE_PROJECT,
+          projectID: res.updateProject.id,
+          projects: res.updateProject.user.projects,
+          projectName: fontName,
+        });
+        dispatch(push('/export'));
+      });
     } else {
       console.log('project not found, saving it on database');
       request(GRAPHQL_API, addProjectToUser(graphqlID, currentPreset.id, choicesMade, fontName))
