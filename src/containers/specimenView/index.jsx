@@ -210,7 +210,7 @@ class SpecimenView extends React.Component {
       isCustomLogo: false,
       showCustomLogoControls: true,
       shouldContinueUnregistered: false,
-      fontName: undefined,
+      fontName: props.projectName,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -303,6 +303,7 @@ class SpecimenView extends React.Component {
             <form action="">
               <input
                 type="text"
+                value={this.state.fontName}
                 placeholder="Your font name"
                 name="fontname"
                 onChange={e => this.setState({ fontName: e.target.value })}
@@ -358,6 +359,7 @@ const mapStateToProps = state => ({
   email: state.user.email,
   need: state.font.need,
   word: state.user.chosenWord,
+  projectName: state.user.projectName,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -378,11 +380,13 @@ SpecimenView.propTypes = {
     isAuthenticated: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired,
   }).isRequired,
+  projectName: PropTypes.string,
 };
 
 SpecimenView.defaultProps = {
   fontName: 'ptypo',
   email: '',
+  projectName: '',
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpecimenView));

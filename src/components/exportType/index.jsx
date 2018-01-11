@@ -152,13 +152,12 @@ class ExportToPrototypoComponent extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         {Object.keys(this.props.prototypoAccount).length > 0 ? (
           <div>
             <p>
-              Account found as {this.props.prototypoAccount.firstName} <br />
+              We found a Protoypo account under your email.<br />
               Please log-in to export
             </p>
             <form onSubmit={this.handleSubmitWithAccount}>

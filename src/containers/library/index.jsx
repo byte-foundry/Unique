@@ -18,7 +18,7 @@ const Library = props => (
       </div>
       <div className="row">
         {props.projects.map(project => (
-          <div className="col-sm-3 project" role="button" tabIndex="0" onClick={() => props.loadProject(project.id)} key={project.id}>            
+          <div className="col-sm-3 project" role="button" tabIndex="0" onClick={() => props.loadProject(project.id, project.name)} key={project.id}>            
             <div className="description">
               {project.preset.steps.map((step, index) => (
                 <span key={`${project.id}${step.name}`}>{step.name}: {project.choicesMade[index + 1].name}<br /></span>

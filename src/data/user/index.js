@@ -24,7 +24,7 @@ export const STORE_PROTOTYPO_USER = 'user/STORE_PROTOTYPO_USER';
 export const PAYMENT_SUCCESSFUL = 'user/PAYMENT_SUCCESSFUL';
 export const CONNECT_TO_GRAPHCOOL = 'user/CONNECT_TO_GRAPHCOOL';
 export const STORE_PROJECT = 'user/STORE_PROJECT';
-export const STORE_PROJECT_ID = 'user/STORE_PROJECT_ID';
+export const STORE_PROJECT_INFOS = 'user/STORE_PROJECT_INFOS';
 export const LOGOUT = 'user/LOGOUT';
 
 const initialState = {
@@ -36,6 +36,7 @@ const initialState = {
   prototypoUser: {},
   projects: [],
   projectID: undefined,
+  projectName: undefined,
 };
 
 export default (state = initialState, action) => {
@@ -86,6 +87,7 @@ export default (state = initialState, action) => {
         ...state,
         projectID: action.projectID,
         projects: action.projects,
+        projectName: action.projectName,
       };
 
     case LOGOUT:
@@ -99,12 +101,14 @@ export default (state = initialState, action) => {
         prototypoUser: {},
         projects: [],
         projectID: undefined,
+        projectName: undefined,
       };
 
-    case STORE_PROJECT_ID:
+    case STORE_PROJECT_INFOS:
       return {
         ...state,
         projectID: action.projectID,
+        projectName: action.projectName,
       };
 
     default:
@@ -138,6 +142,7 @@ export const storeProject = fontName => (dispatch, getState) => {
           type: STORE_PROJECT,
           projectID: res.createProject.id,
           projects: res.createProject.user.projects,
+          projectName: fontName,
         });
         dispatch(push('/export'));
       });
@@ -146,10 +151,11 @@ export const storeProject = fontName => (dispatch, getState) => {
   .catch(error => console.log(error));
 };
 
-export const updateProjectId = projectID => (dispatch) => {
+export const updateProjectInfos = (projectID, projectName) => (dispatch) => {
   dispatch({
-    type: STORE_PROJECT_ID,
+    type: STORE_PROJECT_INFOS,
     projectID,
+    projectName,
   });
 };
 

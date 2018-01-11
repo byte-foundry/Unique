@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 import { request } from 'graphql-request';
 import { loadPresets } from '../presets';
 import { setUnstable, setStable } from '../ui';
-import { storeChosenWord, updateProjectId } from '../user';
+import { storeChosenWord, updateProjectInfos } from '../user';
 import { DEFAULT_UI_WORD, GRAPHQL_API } from '../constants';
 import { storeCreatedFont, deleteCreatedFont } from '../createdFonts';
 import { getSelectedCount, updateSelectedCount, getSpecialChoiceSelectedCount, getPreset } from '../queries';
@@ -261,7 +261,7 @@ export const defineNeed = need => (dispatch) => {
     type: DEFINE_NEED,
     need,
   });
-  dispatch(updateProjectId(undefined));
+  dispatch(updateProjectInfos(undefined, undefined));
   dispatch(loadPresets());
 };
 
@@ -539,10 +539,12 @@ export const reloadFonts = (restart = true) => (dispatch, getState) => {
   });
 };
 
-export const loadProject = loadedProjectID => (dispatch, getState) => {
+export const loadProject = (loadedProjectID, loadedProjectName) => (dispatch, getState) => {
   const { projectID } = getState().user;
+  console.log('> Loading project')
   console.log(projectID)
   console.log(loadedProjectID)
+  console.log(loadedProjectName)
   if (projectID === loadedProjectID) {
     dispatch(push('/specimen'));
   } else {
@@ -572,7 +574,7 @@ export const loadProject = loadedProjectID => (dispatch, getState) => {
         baseValues,
         step,
       });
-      dispatch(updateProjectId(loadedProjectID));
+      dispatch(updateProjectInfos(loadedProjectID, loadedProjectName));
       dispatch(reloadFonts(false));
     })
     .catch(error => console.log(error));
