@@ -82,14 +82,19 @@ export const createPrototypoFactory = () => (dispatch, getState) => {
   console.log('> Creating Prototypo factory....');
   const createdPrototypoLoadingPromise = new Promise((resolve) => {
     const createdPrototypoFontFactory = new Ptypo('b1f4fb23-7784-456e-840b-f37f5a647b1c');
-    createdPrototypoFontFactory.init().then(() => {
-      console.log('> Prototypo factory created !');
-      dispatch({
-        type: SET_PROTOTYPO_LOADED,
-        prototypoFontFactory: createdPrototypoFontFactory,
-      });
-      resolve(createdPrototypoFontFactory);
+    dispatch({
+      type: SET_PROTOTYPO_LOADED,
+      prototypoFontFactory: createdPrototypoFontFactory,
     });
+    resolve(createdPrototypoFontFactory);
+    // createdPrototypoFontFactory.init().then(() => {
+    //   console.log('> Prototypo factory created !');
+    //   dispatch({
+    //     type: SET_PROTOTYPO_LOADED,
+    //     prototypoFontFactory: createdPrototypoFontFactory,
+    //   });
+    //   resolve(createdPrototypoFontFactory);
+    // });
   });
   dispatch({
     type: SET_PROTOTYPO_LOADING,

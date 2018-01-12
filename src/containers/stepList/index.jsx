@@ -36,8 +36,9 @@ const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
       )),
   );
 
-const StepList = props =>
-  (<div className="StepList">
+const StepList = (props) => {
+  console.log(props)
+  return (<div className="StepList">
     <div className="bubbles">
       {!props.specimen && props.steps.map((step, index) =>
         (<div
@@ -54,6 +55,7 @@ const StepList = props =>
     <h3>Choices made:</h3>
     {getStepsDone(props.steps, props.step, props.choicesMade, props.fontName, props.specimen)}
   </div>);
+}
 
 StepList.propTypes = {
   step: PropTypes.number.isRequired,

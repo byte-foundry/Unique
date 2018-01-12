@@ -22,6 +22,7 @@ export const RELOAD_FONTS = 'font/RELOAD_FONTS';
 export const FINISH_EDITING = 'font/FINISH_EDITING';
 export const CLEAR_IS_LOADING = 'font/CLEAR_IS_LOADING';
 export const LOAD_FONT_DATA = 'font/LOAD_FONT_DATA';
+export const ADD_CHOICE_FONT = 'font/ADD_CHOICE_FONT';
 
 const initialState = {
   fontName: '',
@@ -95,6 +96,12 @@ export default (state = initialState, action) => {
         sliderFontName: action.sliderFontName,
       };
 
+    case ADD_CHOICE_FONT:
+      return {
+        ...state,
+        choicesFontsName: action.choicesFontsName,
+      };
+
     case SELECT_CHOICE_REQUESTED:
       return {
         ...state,
@@ -144,7 +151,7 @@ export default (state = initialState, action) => {
     case LOAD_FONT_DATA:
       return {
         ...state,
-        currentPrese: action.currentPreset,
+        currentPreset: action.currentPreset,
         currentParams: action.currentParams,
         baseValues: action.baseValues,
         step: action.step,
@@ -297,9 +304,29 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
       });
     }
     console.log(fonts[choicesFontsName[index]]);
-    fonts[choicesFontsName[index]].changeParams(
-      { ...stepBaseValues, ...currentParams, ...stepChoices },
-    );
+    if (fonts[choicesFontsName[index]]){
+      fonts[choicesFontsName[index]].changeParams(
+        { ...stepBaseValues, ...currentParams, ...stepChoices },
+      );
+    } else {
+      dispatch(setUnstable());
+      dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+        prototypoFontFactory
+        .createFont(`choiceFont${index}`, templateNames[templates[getState().font.currentPreset.template]])
+        .then((createdFont) => {
+          createdFont.changeParams(
+            { ...stepBaseValues, ...currentParams, ...stepChoices },
+          );
+          dispatch(storeCreatedFont(createdFont, `choiceFont${index}`));
+          choicesFontsName[index] = `choiceFont${index}`;
+          dispatch({
+            type: ADD_CHOICE_FONT,
+            choicesFontsName,
+          });
+          dispatch(setStable());
+        });
+      });
+    }
   });
   fonts[sliderFontName].changeParams({ ...stepBaseValues, ...currentParams });
   if (fonts[curFontName] && fonts[curFontName].changeParams) {
@@ -477,6 +504,11 @@ export const reloadFonts = (restart = true) => (dispatch, getState) => {
   let currentStep = step;
   // create userFont
   dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+    console.log('...')
+    console.log('templateNames')
+    console.log(templateNames)
+    console.log(currentPreset)
+    console.log(templateNames[templates[currentPreset.template]]);
     prototypoFontFactory
     .createFont(`${currentPreset.preset}${currentPreset.variant}`, templateNames[templates[currentPreset.template]])
     .then((createdFont) => {
@@ -568,6 +600,7 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (dispatch, ge
       console.log(data.Project);
       const baseValues = data.Project.preset.baseValues;
       const currentPreset = data.Project.preset;
+      console.log(currentPreset)
       const step = currentPreset.steps.length;
       const currentParams = {};
       data.Project.choicesMade.forEach(((choice, index) => {

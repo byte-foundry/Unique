@@ -190,7 +190,7 @@ class App extends React.Component {
             />
             <ProtectedRoute
               exact
-              requirement={() => this.isLoggedIn()}
+              requirement={() => isAuthenticated()}
               path="/library"
               component={Library}
             />
