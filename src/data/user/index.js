@@ -63,6 +63,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         hasPayed: true,
+        projects: action.projects,
       };
 
     case STORE_CHOSEN_WORD:
@@ -249,13 +250,19 @@ export const storeChosenWord = chosenWord => (dispatch) => {
 
 export const afterPayment = () => (dispatch, getState) => {
   /* global Intercom*/
-  const { exportType, graphqlID, projectID } = getState().user;
+  const { exportType, graphqlID, projectID, projects } = getState().user;
   const { id } = getState().font.currentPreset;
   const { choicesMade, currentPreset } = getState().font;
+  dispatch(setFontBought(id));
+  console.log('Setting project bought')
+  console.log(projects)
+  projects.find(project => project.id === projectID).bought = true;
+  console.log(projects)
+
   dispatch({
     type: PAYMENT_SUCCESSFUL,
+    projects,
   });
-  dispatch(setFontBought());
   request(GRAPHQL_API, getPresetExportedCount(id))
     .then(data => request(GRAPHQL_API, updatePresetExportedCount(id, data.Preset.exported + 1)))
     .catch(error => console.log(error));
