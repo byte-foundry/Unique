@@ -26,7 +26,7 @@ const Library = props => {
                   <span key={`${project.id}${step.name}`}>{step.name}: {project.choicesMade[index + 1].name}<br /></span>
                 ))}
               </div>
-              <div className="title">{project.name}</div>
+              <div className="title">{project.name || 'Undefined'}</div>
             </div>
           ))}
           <div className="col-sm-12">

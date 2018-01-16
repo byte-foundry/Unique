@@ -6,6 +6,7 @@
 
 .ExportType .card {
   cursor: pointer;
+  margin-bottom: 15px;
 }
 
 .ExportType .card  .image {

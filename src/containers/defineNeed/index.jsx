@@ -37,6 +37,7 @@ class DefineNeed extends React.Component {
   render() {
     return (
       <div className="DefineNeed container">
+        {this.props.isLoading ? <h2>Creating font...</h2> : false}
         <div className="row">
           <div className="col-sm-12">
             <h1>What kind of need do you have?</h1>
@@ -97,7 +98,7 @@ class DefineNeed extends React.Component {
             </div>
           </div>
         </div>
-        {this.props.isLoading ? <h2>Creating font...</h2> : false}
+        
       </div>
     );
   }

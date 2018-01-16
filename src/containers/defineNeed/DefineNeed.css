@@ -21,7 +21,9 @@
 }
 
 
-.DefineNeed .needs .card {}
+.DefineNeed .needs .card {
+  margin-bottom: 15px;
+}
 
 .DefineNeed .needs .card .image {
   height: 200px;
@@ -42,7 +44,7 @@
 .DefineNeed form {}
 
 .DefineNeed form input {
-  margin-top: 10px;
+  margin-top: 5px;
   height: 70px;
   width: 75%;
   font-size: 18px;
@@ -52,10 +54,11 @@
   border-bottom-left-radius: 8px;
   padding-left: 30px;
   user-select: none;
+  margin-bottom: 15px;
 }
 
 .DefineNeed form button {
-  margin-top: 10px;
+  margin-top: 5px;
   width: 25%;
   height: 70px;
   font-size: 18px;
