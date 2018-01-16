@@ -61,6 +61,7 @@ export const getPreset = id => `
       id
       choicesMade
       name
+      bought
       preset {
         id
         preset
@@ -192,6 +193,7 @@ export const addProjectToUser = (userId, presetId, choicesMade, name) => `
             user {
                 projects {
                     id
+                    bought
                     name
                     choicesMade
                     preset {
@@ -226,6 +228,7 @@ export const updateProject = (projectId, choicesMade, name) => `
                     id
                     name
                     choicesMade
+                    bought
                     preset {
                         steps {
                             name
@@ -337,6 +340,7 @@ export const getUserProjects = graphQLID => `
                 id
                 name
                 choicesMade
+                bought
                 preset {
                     steps {
                         name

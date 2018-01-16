@@ -23,6 +23,7 @@ export const FINISH_EDITING = 'font/FINISH_EDITING';
 export const CLEAR_IS_LOADING = 'font/CLEAR_IS_LOADING';
 export const LOAD_FONT_DATA = 'font/LOAD_FONT_DATA';
 export const ADD_CHOICE_FONT = 'font/ADD_CHOICE_FONT';
+export const SET_FONT_BOUGHT = 'font/SET_FONT_BOUGHT'
 
 const initialState = {
   fontName: '',
@@ -38,6 +39,7 @@ const initialState = {
   sliderFontName: '',
   currentParams: {},
   need: '',
+  alreadyBought: false,
 };
 
 const templates = {
@@ -102,6 +104,12 @@ export default (state = initialState, action) => {
         choicesFontsName: action.choicesFontsName,
       };
 
+    case SET_FONT_BOUGHT:
+      return {
+        ...state,
+        alreadyBought: true,
+      };
+
     case SELECT_CHOICE_REQUESTED:
       return {
         ...state,
@@ -155,6 +163,7 @@ export default (state = initialState, action) => {
         currentParams: action.currentParams,
         baseValues: action.baseValues,
         step: action.step,
+        alreadyBought: action.bought,
       };
 
     default:
@@ -276,6 +285,12 @@ export const defineNeed = need => (dispatch) => {
   });
   dispatch(updateProjectInfos(undefined, undefined));
   dispatch(loadPresets());
+};
+
+export const setFontBought = () => (dispatch) => {
+  dispatch({
+    type: SET_FONT_BOUGHT,
+  });
 };
 
 const updateStepValues = (step, font) => (dispatch, getState) => {
@@ -618,6 +633,7 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (dispatch, ge
         currentParams,
         baseValues,
         step,
+        bought: data.Project.bought,
       });
       dispatch(updateProjectInfos(loadedProjectID, loadedProjectName));
       dispatch(reloadFonts(false));

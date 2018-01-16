@@ -16,6 +16,9 @@ import {
   getUserProjects,
   updateProject,
 } from '../queries';
+import {
+  setFontBought,
+} from '../font';
 import { DEFAULT_UI_WORD, GRAPHQL_API, GRAPHQL_PROTOTYPO_API } from '../constants';
 
 export const STORE_USER_EMAIL = 'user/STORE_USER_EMAIL';
@@ -252,6 +255,7 @@ export const afterPayment = () => (dispatch, getState) => {
   dispatch({
     type: PAYMENT_SUCCESSFUL,
   });
+  dispatch(setFontBought());
   request(GRAPHQL_API, getPresetExportedCount(id))
     .then(data => request(GRAPHQL_API, updatePresetExportedCount(id, data.Preset.exported + 1)))
     .catch(error => console.log(error));

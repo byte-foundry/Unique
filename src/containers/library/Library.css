@@ -32,6 +32,20 @@
     font-weight: 700;
 }
 
+.Library .project .bought-icon {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background-color: orange;
+}
+
+.Library .project .bought-icon.isBought {
+    background-color: green;
+}
 .Library .create {
     display: inline-block;
     margin-top: 15px;

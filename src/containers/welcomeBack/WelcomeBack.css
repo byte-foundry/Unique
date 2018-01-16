@@ -11,6 +11,7 @@
   .WelcomeBack .card {
     cursor: pointer;
     outline: none;
+    margin-bottom: 15px;
   }
   
   .WelcomeBack .card .image {
