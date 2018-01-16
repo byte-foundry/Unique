@@ -128,6 +128,7 @@ export const storeProject = fontName => (dispatch, getState) => {
       console.log('project already found on database. updating it');
       request(GRAPHQL_API, updateProject(projectID, choicesMade, fontName))
       .then((res) => {
+        console.log(res)
         dispatch({
           type: STORE_PROJECT,
           projectID: res.updateProject.id,
@@ -147,6 +148,7 @@ export const storeProject = fontName => (dispatch, getState) => {
             return currentPreset.preset + currentPreset.variant;
           }).toString(),
         };
+        console.log(res)
         Intercom('update', { unique_finished_fonts: res.createProject.user.projects.length });
         Intercom('trackEvent', 'unique-finished-font', metadata);
         dispatch({

@@ -193,6 +193,12 @@ export const addProjectToUser = (userId, presetId, choicesMade, name) => `
                 projects {
                     id
                     name
+                    choicesMade
+                    preset {
+                        steps {
+                            name
+                        }
+                    }
                 }
             }
             choicesMade
@@ -219,6 +225,12 @@ export const updateProject = (projectId, choicesMade, name) => `
                 projects {
                     id
                     name
+                    choicesMade
+                    preset {
+                        steps {
+                            name
+                        }
+                    }
                 }
             }
             choicesMade
