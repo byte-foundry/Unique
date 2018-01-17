@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { storeExportType,
   exportFontToPrototypoWithAccount,
   exportFontToPrototypoWithoutAccount,
@@ -14,23 +15,41 @@ import './ExportType.css';
 const ExportTypeComponent = props => (
   <div>
     {props.choice.direct ? (
-      <Checkout
-        title="Prototypo Lite"
-        amount={props.choice.price}
-        description={props.choice.paymentDescription}
-      >
-        <div
-          className={`ExportType ${props.expanded ? 'expanded' : ''}`}
-          role="button"
-          tabIndex="0"
-          onClick={props.expanded ? () => {} : props.selectChoice}
-        >
-          <div className="card">
-            <div className="image" />
-            <div className="title">{props.choice.title}</div>
+      <div>
+        {props.alreadyBought ? (
+          <div className="ExportType">
+            <div
+              className="card"
+              role="button"
+              tabIndex="0"
+              onClick={() => { props.downloadFont(); }}
+            >
+              <div className="image" />
+              <div className="title">{props.choice.title}</div>
+            </div>
           </div>
-        </div>
-      </Checkout>
+          )
+          : (
+            <Checkout
+              title="Prototypo Lite"
+              amount={props.choice.price}
+              description={props.choice.paymentDescription}
+            >
+              <div
+                className={`ExportType ${props.expanded ? 'expanded' : ''}`}
+                role="button"
+                tabIndex="0"
+                onClick={props.expanded ? () => {} : props.selectChoice}
+              >
+                <div className="card">
+                  <div className="image" />
+                  <div className="title">{props.choice.title}</div>
+                </div>
+              </div>
+            </Checkout>
+          )
+        }
+      </div>
     ) : (
       <div>
         {props.expanded ? (
@@ -60,7 +79,10 @@ const ExportTypeComponent = props => (
 
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators({ storeExportType }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  storeExportType,
+  downloadFont: () => push('/success'),
+}, dispatch);
 
 ExportTypeComponent.propTypes = {
   storeExportType: PropTypes.func.isRequired,
@@ -75,11 +97,14 @@ ExportTypeComponent.propTypes = {
   }).isRequired,
   selectChoice: PropTypes.func.isRequired,
   removeChoice: PropTypes.func.isRequired,
+  downloadFont: PropTypes.func.isRequired,
   expanded: PropTypes.bool,
+  alreadyBought: PropTypes.bool,
 };
 
 ExportTypeComponent.defaultProps = {
   expanded: false,
+  alreadyBought: false,
 };
 
 export const ExportType = connect(mapStateToProps, mapDispatchToProps)(ExportTypeComponent);

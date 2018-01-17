@@ -109,6 +109,7 @@ class ExportTypes extends React.Component {
                     choice={choice}                    
                     selectChoice={() => this.selectChoice(choice)}
                     removeChoice={() => this.removeChoice()}
+                    alreadyBought={this.props.alreadyBought}
                   />
                 </div>
               ))
@@ -120,13 +121,14 @@ class ExportTypes extends React.Component {
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({ alreadyBought: state.font.alreadyBought });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ storeExportType, goBack: () => push('/specimen'), }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ storeExportType, goBack: () => push('/specimen') }, dispatch);
 
 ExportTypes.propTypes = {
   goBack: PropTypes.func.isRequired,
   storeExportType: PropTypes.func.isRequired,
+  alreadyBought: PropTypes.bool.isRequired,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ExportTypes));
