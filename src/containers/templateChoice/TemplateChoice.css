@@ -2,6 +2,7 @@
   position: relative;
   display: block;
   padding-top: 120px;
+  min-height: 100vh;
 }
 
 .TemplateChoice h1 {

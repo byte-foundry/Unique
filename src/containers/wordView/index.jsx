@@ -27,6 +27,8 @@ class WordView extends React.Component {
                 event.target.value.replace(/<\/?span[^>]*>/g, '').replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, ''),
               );
             }}
+            onBlur={this.props.onBlur}
+            onFocus={this.props.onFocus}
           />
         </p>
       </div>
@@ -38,6 +40,8 @@ WordView.propTypes = {
   word: PropTypes.string,
   fontName: PropTypes.string,
   storeChosenWord: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  onFocus: PropTypes.func.isRequired,
 };
 
 WordView.defaultProps = {

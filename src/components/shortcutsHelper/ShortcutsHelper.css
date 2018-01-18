@@ -1,0 +1,27 @@
+.ShortcutsHelper {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fafafa;
+    color: white;
+    padding: 5px 10px;
+}
+.ShortcutsHelper ul {
+    list-style-type: none;
+}
+
+.ShortcutsHelper li {
+    float: left;
+    margin-right: 15px;
+}
+
+.ShortcutsHelper li .key {
+    color: #888;
+    padding-left: 8px;
+}
+
+.ShortcutsHelper li .name {
+    color: #333;
+}

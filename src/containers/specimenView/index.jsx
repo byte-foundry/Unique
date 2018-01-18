@@ -9,6 +9,7 @@ import { Shortcuts } from 'react-shortcuts';
 import './SpecimenView.css';
 import StepList from '../stepList/';
 import Button from '../../components/button/';
+import ShortcutsHelper from '../../components/shortcutsHelper';
 import CustomLogo from '../../components/customLogo';
 import { storeEmail, storeProject } from '../../data/user';
 import desktopBackground from './desktop.svg';
@@ -180,11 +181,20 @@ const renderValidateNotLoggedIn = (
   handleChange,
   changeEmail,
   sendEmail,
+  onFocus,
+  onBlur,
 ) =>
   email === '' || !email || shouldChangeEmail
   ? (
     <form onSubmit={handleSubmit}>
-      <input type="email" placeholder="your email" name="email" onChange={handleChange} />
+      <input
+        type="email"
+        placeholder="your email"
+        name="email"
+        onChange={handleChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      />
       <button type="submit">Download</button>
     </form>
   )
@@ -211,6 +221,7 @@ class SpecimenView extends React.Component {
       showCustomLogoControls: true,
       shouldContinueUnregistered: false,
       fontName: props.projectName,
+      isInputFocused: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -218,9 +229,17 @@ class SpecimenView extends React.Component {
     this.removeCustomLogo = this.removeCustomLogo.bind(this);
     this.validateCustomLogo = this.validateCustomLogo.bind(this);
     this.handleShortcuts = this.handleShortcuts.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
   }
   componentDidMount() {
     this.specimenViewWrapper.focus();
+  }
+  onFocus() {
+    this.setState({ isInputFocused: true });
+  }
+  onBlur() {
+    this.setState({ isInputFocused: false });
   }
   setCustomLogo() {
     this.setState({ isCustomLogo: !this.state.isCustomLogo });
@@ -252,12 +271,14 @@ class SpecimenView extends React.Component {
     this.props.storeEmail(this.props.email);
   }
   handleShortcuts(action) {
-    switch (action) {
-      case 'STEP_BACK':
-        this.props.goBack();
-        break;
-      default:
-        break;
+    if (!this.state.isInputFocused) {
+      switch (action) {
+        case 'STEP_BACK':
+          this.props.goBack();
+          break;
+        default:
+          break;
+      }
     }
   }
   render() {
@@ -266,6 +287,7 @@ class SpecimenView extends React.Component {
       <Shortcuts
         name="CHOICES"
         handler={this.handleShortcuts}
+        isolate
       >
         <div className="SpecimenView" ref={(c) => { this.specimenViewWrapper = c; }} tabIndex="-1">
           <Button
@@ -289,6 +311,8 @@ class SpecimenView extends React.Component {
                     this.setCustomLogo,
                     this.removeCustomLogo,
                     this.validateCustomLogo,
+                    this.onFocus,
+                    this.onBlur,
                   );
                 case "text":
                   return textSpecimen(this.props.fontName);
@@ -306,7 +330,14 @@ class SpecimenView extends React.Component {
                 value={this.state.fontName}
                 placeholder="Your font name"
                 name="fontname"
-                onChange={e => this.setState({ fontName: e.target.value })}
+                onChange={(e) => {
+                  this.setState({ fontName: e.target.value });
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+
               />
             </form>
             {isAuthenticated() ? (
@@ -335,6 +366,8 @@ class SpecimenView extends React.Component {
                     this.handleChange,
                     this.changeEmail,
                     this.sendEmail,
+                    this.onFocus,
+                    this.onBlur,
                   )
                 ) : (
                   <Button
@@ -348,6 +381,7 @@ class SpecimenView extends React.Component {
             )}
           </div>
         </div>
+        <ShortcutsHelper shortcuts={[{ name: 'Back to editing', key: 'Backspace' }]} />
       </Shortcuts>
     );
   }

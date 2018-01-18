@@ -19,6 +19,7 @@ class ContentEditable extends React.Component {
         onInput: this.emitChange,
         onKeyDown: this.onKeyDown,
         onBlur: this.props.onBlur || this.emitChange,
+        onFocus: this.props.onFocus || this.emitChange,
         contentEditable: !this.props.disabled,
         dangerouslySetInnerHTML: { __html: html },
       },

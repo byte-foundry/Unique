@@ -28,6 +28,7 @@ class StepView extends React.Component {
     super(props);
     this.state = {
       choice: props.choicesMade[props.step],
+      isInputFocused: false,
     };
 
     this.markChoiceActive = (choice) => {
@@ -43,6 +44,8 @@ class StepView extends React.Component {
       this.setState({ choice: currentParams });
       return true;
     };
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
     this.handleShortcuts = this.handleShortcuts.bind(this);
   }  
   componentWillMount() {
@@ -53,6 +56,12 @@ class StepView extends React.Component {
   }
   componentWillReceiveProps(newProps) {
     this.setChoiceSelected(newProps);
+  }
+  onFocus() {
+    this.setState({ isInputFocused: true });
+  }
+  onBlur() {
+    this.setState({ isInputFocused: false });
   }
   setChoiceSelected(props) {
     let choice = {};
@@ -73,64 +82,66 @@ class StepView extends React.Component {
     });
   }
   handleShortcuts(action, event) {
-    switch (action) {
-      case 'CHOICE_PREVIOUS':
-        if (this.state.choice) {
-          if (this.state.choice.name === 'Custom') {
-            this.setState({
-              choice: this.props.stepValues.choices[this.props.stepValues.choices.length - 1]
-            });
-            break;
-          }
-          const choiceIndex = this.props.stepValues.choices.findIndex(
-            choice => choice.name === this.state.choice.name);
-          if (choiceIndex === 0) {
+    if (!this.state.isInputFocused) {
+      switch (action) {
+        case 'CHOICE_PREVIOUS':
+          if (this.state.choice) {
+            if (this.state.choice.name === 'Custom') {
+              this.setState({
+                choice: this.props.stepValues.choices[this.props.stepValues.choices.length - 1]
+              });
+              break;
+            }
+            const choiceIndex = this.props.stepValues.choices.findIndex(
+              choice => choice.name === this.state.choice.name);
+            if (choiceIndex === 0) {
+              this.setState({ choice: { name: 'Custom', values: {} } });
+              break;
+            } else {
+              this.setState({ choice: this.props.stepValues.choices[choiceIndex - 1] });
+              break;
+            }
+          } else {
             this.setState({ choice: { name: 'Custom', values: {} } });
             break;
-          } else {
-            this.setState({ choice: this.props.stepValues.choices[choiceIndex - 1] });
-            break;
           }
-        } else {
-          this.setState({ choice: { name: 'Custom', values: {} } });
-          break;
-        }
-      case 'CHOICE_NEXT':
-        if (this.state.choice) {
-          if (this.state.choice.name === 'Custom') {
+        case 'CHOICE_NEXT':
+          if (this.state.choice) {
+            if (this.state.choice.name === 'Custom') {
+              this.setState({ choice: this.props.stepValues.choices[0] });
+              break;
+            }
+            const choiceIndex = this.props.stepValues.choices.findIndex(
+              choice => choice.name === this.state.choice.name);
+            if (choiceIndex + 1 >= this.props.stepValues.choices.length) {
+              this.setState({ choice: { name: 'Custom', values: {} } });
+              break;
+            } else {
+              this.setState({ choice: this.props.stepValues.choices[choiceIndex + 1] });
+              break;
+            }
+          } else {
             this.setState({ choice: this.props.stepValues.choices[0] });
             break;
           }
-          const choiceIndex = this.props.stepValues.choices.findIndex(
-            choice => choice.name === this.state.choice.name);
-          if (choiceIndex + 1 >= this.props.stepValues.choices.length) {
-            this.setState({ choice: { name: 'Custom', values: {} } });
-            break;
-          } else {
-            this.setState({ choice: this.props.stepValues.choices[choiceIndex + 1] });
-            break;
-          }
-        } else {
-          this.setState({ choice: this.props.stepValues.choices[0] });
+        case 'CHOICE_CUSTOM':
+          this.markChoiceActive({ name: 'Custom', values: {} });
           break;
-        }
-      case 'CHOICE_CUSTOM':
-        this.markChoiceActive({ name: 'Custom', values: {} });
-        break;
-      case 'CHOICE_SELECT':
-        this.props.selectChoice(this.state.choice);
-        break;
-      case 'STEP_BACK':
-        this.props.stepBack();
-        break;
-      case 'STEP_FORWARD':
-        this.props.stepForward();
-        break;
-      case 'FINISH_FONT':
-        this.props.finishEditing();
-        break;
-      default:
-        break;
+        case 'CHOICE_SELECT':
+          this.props.selectChoice(this.state.choice);
+          break;
+        case 'STEP_BACK':
+          this.props.stepBack();
+          break;
+        case 'STEP_FORWARD':
+          this.props.stepForward();
+          break;
+        case 'FINISH_FONT':
+          this.props.finishEditing();
+          break;
+        default:
+          break;
+      }
     }
   }
   render() {
@@ -143,7 +154,11 @@ class StepView extends React.Component {
           <Button className="back" label="" mode="isBack" onClick={this.props.stepBack} />
           <div className="container">
             <h3 className="currentState">Current state</h3>
-            <WordView word={this.props.chosenWord} />
+            <WordView
+              word={this.props.chosenWord}
+              onFocus={this.onFocus}
+              onBlur={this.onBlur}
+            />
             <Button className="finish" label="I'm done" onClick={this.props.finishEditing} />
             <div className="description">
               <h3>

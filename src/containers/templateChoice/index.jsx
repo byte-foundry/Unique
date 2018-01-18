@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Shortcuts } from 'react-shortcuts';
 import './TemplateChoice.css';
+import ShortcutsHelper from '../../components/shortcutsHelper';
 import Template from '../../components/template/';
 import Button from '../../components/button/';
 
@@ -114,6 +115,14 @@ class TemplateChoice extends React.Component {
             : false}
           </div>
         </div>
+        <ShortcutsHelper
+          shortcuts={[
+            { name: 'Select previous choice', key: 'up' },
+            { name: 'Select next choice', key: 'down' },
+            { name: 'Validate choice selected', key: 'enter' },
+            { name: 'Step back', key: 'b, backspace, left' },
+          ]}
+        />
       </Shortcuts>
     );
   }
