@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { request } from 'graphql-request';
 import { ShortcutManager } from 'react-shortcuts';
 import keymap from '../../data/keymap';
+import { createPrototypoFactory } from '../../data/createdFonts';
 import { importPresets, reloadPresets } from '../../data/presets';
 import { reloadFonts } from '../../data/font';
 import { GRAPHQL_API } from '../../data/constants';
@@ -47,6 +48,10 @@ class App extends React.Component {
     this.login = this.login.bind(this);
     this.auth = new Auth();
     this.shortcutManager = new ShortcutManager(keymap);
+    console.log(props);
+    if (!props.isPrototypoLoaded && !props.isPrototypoLoading) {
+      props.createPrototypoFactory();
+    }
   }
   getChildContext() {
     return { shortcuts: this.shortcutManager };
@@ -246,6 +251,9 @@ App.propTypes = {
   goToHome: PropTypes.func.isRequired,
   goToLibrary: PropTypes.func.isRequired,
   shouldLogout: PropTypes.bool.isRequired,
+  createPrototypoFactory: PropTypes.func.isRequired,
+  isPrototypoLoaded: PropTypes.bool.isRequired,
+  isPrototypoLoading: PropTypes.bool.isRequired,
 };
 
 App.defaultProps = {
@@ -272,6 +280,8 @@ const mapStateToProps = state => ({
   : state.createdFonts.fonts[state.presets.loadedPresetsName[0]],
   unstableUi: state.ui.unstable,
   shouldLogout: state.user.shouldLogout,
+  isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
+  isPrototypoLoading: state.createdFonts.isPrototypoLoading,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
@@ -280,5 +290,6 @@ const mapDispatchToProps = dispatch =>
     reloadFonts,
     goToHome: () => push('/'),
     goToLibrary: () => push('/library'),
+    createPrototypoFactory,
   }, dispatch);
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
