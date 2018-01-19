@@ -41,6 +41,7 @@ const initialState = {
   projects: [],
   projectID: undefined,
   projectName: undefined,
+  shouldLogout: false,
 };
 
 export default (state = initialState, action) => {
@@ -85,6 +86,7 @@ export default (state = initialState, action) => {
         email: action.email,
         projects: action.projects,
         prototypoUser: action.prototypoUser,
+        shouldLogout: action.shouldLogout,
       };
 
     case STORE_PROJECT:
@@ -107,6 +109,7 @@ export default (state = initialState, action) => {
         projects: [],
         projectID: undefined,
         projectName: undefined,
+        shouldLogout: false,
       };
 
     case STORE_PROJECT_INFOS:
@@ -343,6 +346,7 @@ export const loginToGraphCool = (accessToken) => (dispatch) => {
           graphqlID: data.authenticateUser.id,
           projects: res.User.projects,
           prototypoUser: response.User ? response.User : {},
+          shouldLogout: false,
         });
       })
       .catch(error => console.log(error));
@@ -350,7 +354,17 @@ export const loginToGraphCool = (accessToken) => (dispatch) => {
     .catch(error => console.log(error));
     Intercom('update', { email: data.authenticateUser.email });
   })
-  .catch(error => console.log(error));
+  .catch((error) => {
+    console.log(error);
+    dispatch({
+      type: CONNECT_TO_GRAPHCOOL,
+      email: undefined,
+      graphqlID: undefined,
+      projects: [],
+      prototypoUser: {},
+      shouldLogout: true,
+    });
+  });
 };
 
 export const exportFontToPrototypoWithoutAccount = (email, password, familyName, variantName, firstName, lastName) => (dispatch, getState) => {

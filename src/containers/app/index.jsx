@@ -51,6 +51,9 @@ class App extends React.Component {
   getChildContext() {
     return { shortcuts: this.shortcutManager };
   }
+  componentWillReceiveProps(newProps) {
+    if (newProps.shouldLogout) this.auth.logout();
+  }
   hasSelectedFont() {
     console.log('=========hasSelectedFont=======');
     console.log(typeof this.props.selectedFontLoaded);
@@ -242,6 +245,7 @@ App.propTypes = {
   unstableUi: PropTypes.bool.isRequired,
   goToHome: PropTypes.func.isRequired,
   goToLibrary: PropTypes.func.isRequired,
+  shouldLogout: PropTypes.bool.isRequired,
 };
 
 App.defaultProps = {
@@ -267,6 +271,7 @@ const mapStateToProps = state => ({
   ? state.createdFonts.fonts[state.font.fontName]
   : state.createdFonts.fonts[state.presets.loadedPresetsName[0]],
   unstableUi: state.ui.unstable,
+  shouldLogout: state.user.shouldLogout,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
