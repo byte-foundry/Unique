@@ -296,7 +296,7 @@ export const setFontBought = () => (dispatch) => {
 };
 
 const updateStepValues = (step, font) => (dispatch, getState) => {
-  const { chosenWord } = getState().user;
+  let { chosenWord } = getState().user;
   console.log('========updateStepValues===========');
   const {
     choicesFontsName,
@@ -324,7 +324,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     if (fonts[choicesFontsName[index]]){
       fonts[choicesFontsName[index]].changeParams(
         { ...stepBaseValues, ...currentParams, ...stepChoices },
-        chosenWord
+        chosenWord,
       );
     } else {
       dispatch(setUnstable());
@@ -334,7 +334,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
         .then((createdFont) => {
           createdFont.changeParams(
             { ...stepBaseValues, ...currentParams, ...stepChoices },
-            chosenWord
+            chosenWord,
           );
           dispatch(storeCreatedFont(createdFont, `choiceFont${index}`));
           choicesFontsName[index] = `choiceFont${index}`;
@@ -349,6 +349,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
   });
   fonts[sliderFontName].changeParams({ ...stepBaseValues, ...currentParams }, chosenWord);
   if (fonts[curFontName] && fonts[curFontName].changeParams) {
+    chosenWord = step === currentPreset.steps.length ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&' : chosenWord;
     fonts[curFontName].changeParams({ ...stepBaseValues, ...currentParams }, chosenWord);
   }
   request(GRAPHQL_API, getSelectedCount('Step', currentPreset.steps[stepToUpdate - 1].id))
