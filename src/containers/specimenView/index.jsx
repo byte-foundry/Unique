@@ -231,6 +231,8 @@ class SpecimenView extends React.Component {
     this.handleShortcuts = this.handleShortcuts.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
+    this.changeEmail = this.changeEmail.bind(this);
+    this.sendEmail = this.sendEmail.bind(this);
   }
   componentDidMount() {
     this.specimenViewWrapper.focus();

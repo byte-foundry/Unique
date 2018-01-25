@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import FlipMove from 'react-flip-move';
 import { Shortcuts } from 'react-shortcuts';
 import { stepForward, stepBack, selectChoice, updateSliderFont, finishEditing } from '../../data/font';
 import Choice from '../../components/choice/';
@@ -32,9 +33,7 @@ class StepView extends React.Component {
     };
 
     this.markChoiceActive = (choice) => {
-      if (this.state.choice && choice.name === this.state.choice.name) {
-        this.setState({ choice: {} });
-      } else this.setState({ choice });
+      this.setState({ choice });
     };
 
     this.onUpdate = (updatedParam) => {
@@ -95,14 +94,20 @@ class StepView extends React.Component {
             const choiceIndex = this.props.stepValues.choices.findIndex(
               choice => choice.name === this.state.choice.name);
             if (choiceIndex === 0) {
-              this.setState({ choice: { name: 'Custom', values: {} } });
+              //this.setState({ choice: { name: 'Custom', values: {} } });
+              this.setState({
+                choice: this.props.stepValues.choices[this.props.stepValues.choices.length - 1]
+              });
               break;
             } else {
               this.setState({ choice: this.props.stepValues.choices[choiceIndex - 1] });
               break;
             }
           } else {
-            this.setState({ choice: { name: 'Custom', values: {} } });
+            //this.setState({ choice: { name: 'Custom', values: {} } });
+            this.setState({
+              choice: this.props.stepValues.choices[this.props.stepValues.choices.length - 1]
+            });
             break;
           }
         case 'CHOICE_NEXT':
@@ -114,7 +119,8 @@ class StepView extends React.Component {
             const choiceIndex = this.props.stepValues.choices.findIndex(
               choice => choice.name === this.state.choice.name);
             if (choiceIndex + 1 >= this.props.stepValues.choices.length) {
-              this.setState({ choice: { name: 'Custom', values: {} } });
+              //this.setState({ choice: { name: 'Custom', values: {} } });
+              this.setState({ choice: this.props.stepValues.choices[0] });
               break;
             } else {
               this.setState({ choice: this.props.stepValues.choices[choiceIndex + 1] });
@@ -166,18 +172,29 @@ class StepView extends React.Component {
               </h3>
             </div>
             <div className="choices">
-              {this.props.stepValues.choices.map((choice, index) =>
-                (<Choice
-                  choice={choice}
-                  key={`${choice.name}${choice.id}`}
-                  markChoiceActive={this.markChoiceActive}
-                  selectChoice={this.props.selectChoice}
-                  index={index}
-                  selected={this.state.choice === choice}
-                  text={this.props.chosenWord}
-                  mostSelected={this.state.mostSelected === choice.id}
-                />),
-              )}
+              <FlipMove
+                duration={200}
+                easing="ease"
+                appearAnimation={this.props.step === 1 ? 'accordionHorizontal' : undefined}
+                enterAnimation={this.props.step > 1 ? 'accordionHorizontal' : undefined}
+                leaveAnimation="accordionHorizontal"
+                staggerDurationBy="20"
+                staggerDelayBy="40"
+                maintainContainerHeight
+              >
+                {this.props.stepValues.choices.map((choice, index) =>
+                  (<Choice
+                    choice={choice}
+                    key={`${choice.name}${choice.id}`}
+                    markChoiceActive={this.markChoiceActive}
+                    selectChoice={this.props.selectChoice}
+                    index={index}
+                    selected={this.state.choice === choice}
+                    text={this.props.chosenWord}
+                    mostSelected={this.state.mostSelected === choice.id}
+                  />),
+                )}
+              </FlipMove>
               <div
                 className={`choiceMore ${this.state.choice && this.state.choice.name === 'Custom'
                   ? 'selected'
@@ -186,7 +203,8 @@ class StepView extends React.Component {
                 aria-checked="false"
                 aria-selected="false"
                 tabIndex={0}
-                onClick={() => this.markChoiceActive({ name: 'Custom', values: {} })}
+                key={`choiceCustom`}
+                onDoubleClick={() => this.props.selectChoice(this.state.choice)}
               >
                 {this.state.choice && this.state.choice.name === 'Custom'
                   ? this.props.chosenWord

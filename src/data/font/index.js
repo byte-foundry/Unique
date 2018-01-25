@@ -361,7 +361,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
   console.log('====================================');
 };
 
-const updateFont = () => (dispatch, getState) => {
+const updateFont = (isSpecimen = false) => (dispatch, getState) => {
   let { chosenWord } = getState().user;
   const {
     fontName,
@@ -372,7 +372,7 @@ const updateFont = () => (dispatch, getState) => {
     step,
   } = getState().font;
   const { fonts } = getState().createdFonts;
-  chosenWord = step === currentPreset.steps.length ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&' : chosenWord;
+  chosenWord = (step === currentPreset.steps.length) || isSpecimen ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&' : chosenWord;
   fonts[fontName].changeParams({ ...stepBaseValues, ...currentParams }, chosenWord);
   fonts[sliderFontName].changeParams({ ...stepBaseValues, ...currentParams }, chosenWord);
   dispatch({
@@ -393,7 +393,7 @@ export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
       dispatch(push('/'));
       break;
     case currentPreset.steps.length + 1:
-      dispatch(updateFont());
+      dispatch(updateFont(true));
       dispatch(push('/specimen'));
       break;
     default:
@@ -491,7 +491,7 @@ export const finishEditing = () => (dispatch, getState) => {
   request(GRAPHQL_API, getSpecialChoiceSelectedCount('No choice'))
   .then(data => request(GRAPHQL_API, updateSelectedCount('Choice', data.allChoices[0].id, data.allChoices[0].selected + ((stepLength + 1) - step))))
   .catch(error => console.log(error));
-  dispatch(updateFont());
+  dispatch(updateFont(true));
   dispatch(push('/specimen'));
   dispatch({
     type: FINISH_EDITING,

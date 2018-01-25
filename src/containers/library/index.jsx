@@ -3,6 +3,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
+import FlipMove from 'react-flip-move';
 import PropTypes from 'prop-types';
 import Button from '../../components/button/';
 import { loadProject } from '../../data/font';
@@ -19,17 +20,26 @@ const Library = props => {
           </div>
         </div>
         <div className="row">
-          {props.projects.map(project => (
-            <div className="col-sm-3 project" role="button" tabIndex="0" onClick={() => props.loadProject(project.id, project.name)} key={project.id}>
-              <span className={`bought-icon ${project.bought ? 'isBought' : ''}`} />
-              <div className="description">
-                {project.preset.steps.map((step, index) => (
-                  <span key={`${project.id}${step.name}`}>{step.name}: {project.choicesMade[index + 1].name}<br /></span>
-                ))}
+          <FlipMove
+            duration={100}
+            easing="ease"
+            appearAnimation="elevator"
+            leaveAnimation="elevator"
+            staggerDurationBy="10"
+            staggerDelayBy="20"
+          >
+            {props.projects.map(project => (
+              <div className="col-sm-3 project" role="button" tabIndex="0" onClick={() => props.loadProject(project.id, project.name)} key={project.id}>
+                <span className={`bought-icon ${project.bought ? 'isBought' : ''}`} />
+                <div className="description">
+                  {project.preset.steps.map((step, index) => (
+                    <span key={`${project.id}${step.name}`}>{project.choicesMade[index + 1] ? `${step.name}: ${project.choicesMade[index + 1].name}` : ''}<br /></span>
+                  ))}
+                </div>
+                <div className="title">{project.name || 'Undefined'}</div>
               </div>
-              <div className="title">{project.name || 'Undefined'}</div>
-            </div>
-          ))}
+            ))}
+          </FlipMove>
           <div className="col-sm-12">
             <Button
               className="create"

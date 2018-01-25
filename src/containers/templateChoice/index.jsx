@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import FlipMove from 'react-flip-move';
 import { Shortcuts } from 'react-shortcuts';
 import './TemplateChoice.css';
 import ShortcutsHelper from '../../components/shortcutsHelper';
@@ -90,25 +91,35 @@ class TemplateChoice extends React.Component {
               </div>
             </div>
             <div className="template-wrapper">
-              {this.props.presets.map((font) => {
-                return (
-                  <div className="row" key={`${font.preset}${font.variant}`}>
-                    <div className="col-sm-12">
-                      <Template
-                        font={font}
-                        selectFont={this.props.selectFont}
-                        selected={
-                          this.state.templateIndex !== -1
-                          &&
-                          `${this.props.presets[this.state.templateIndex].preset}${this.props.presets[this.state.templateIndex].variant}` === `${font.preset}${font.variant}`}
-                        text={this.props.chosenWord}
-                        mostSelected={isMostSelected(this.props.presets, font)}
-                        isLoading={this.props.isLoading}
-                      />
+              <FlipMove
+                duration={200}
+                easing="ease"
+                appearAnimation="accordionHorizontal"
+                enterAnimation="accordionHorizontal"
+                leaveAnimation="accordionHorizontal"
+                staggerDurationBy="20"
+                staggerDelayBy="40"
+              >
+                {this.props.presets.map((font) => {
+                  return (
+                    <div className="row" key={`${font.preset}${font.variant}`}>
+                      <div className="col-sm-12">
+                        <Template
+                          font={font}
+                          selectFont={this.props.selectFont}
+                          selected={
+                            this.state.templateIndex !== -1
+                            &&
+                            `${this.props.presets[this.state.templateIndex].preset}${this.props.presets[this.state.templateIndex].variant}` === `${font.preset}${font.variant}`}
+                          text={this.props.chosenWord}
+                          mostSelected={isMostSelected(this.props.presets, font)}
+                          isLoading={this.props.isLoading}
+                        />
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </FlipMove>
             </div>
             {this.props.isLoading
             ? (<h2>Loading font...</h2>)

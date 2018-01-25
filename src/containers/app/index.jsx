@@ -17,7 +17,7 @@ import Auth from "../../components/auth";
 import "./bootstrap-reboot.css";
 import "./bootstrap-grid.css";
 import "./App.css";
-import logo from "./logo.svg";
+import logoUrl, { ReactComponent as Logo } from './logo.svg';
 
 import ProtectedRoute from "../../components/protectedRoute/";
 
@@ -141,11 +141,10 @@ class App extends React.Component {
         <header className="App-header">
           <h1
             className="App-logo-wrapper"
-            onClick={() => {
-              this.props.goToHome();
-            }}
           >
-            <img src={logo} className="App-logo" alt="logo" />
+            <Logo onClick={() => {
+                this.props.goToHome();
+              }}/>
           </h1>
           <div className="App-loader-wrapper">
             <p>Loading..Please wait</p>
