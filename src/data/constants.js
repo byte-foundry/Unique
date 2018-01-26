@@ -11,9 +11,9 @@ export const GRAPHQL_PROTOTYPO_API = process.env.NODE_ENV === 'production'
 : 'https://api.graph.cool/simple/v1/prototypo';
 export const AUTH0_DOMAIN = 'unique-app.eu.auth0.com';
 export const AUTH0_API = process.env.NODE_ENV === 'production'
-? 'http://localhost:3000'
-: 'http://peasy-poc.netlify.com';
+? 'http://peasy-poc.netlify.com'
+: 'http://localhost:3000';
 export const AUTH0_CLIENTID = 'i4KEy4mGBQIp4Yd55QC4Z1fa35qeIKN7';
 export const AUTH0_CALLBACKURL = process.env.NODE_ENV === 'production'
-? 'http://localhost:3000/callback'
-: 'http://peasy-poc.netlify.com';
+? 'http://peasy-poc.netlify.com'
+: 'http://localhost:3000/callback';
