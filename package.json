@@ -11,6 +11,7 @@
     "prop-types": "^15.5.10",
     "prototypo-library": "1.2.3",
     "react": "^15.5.4",
+    "react-color": "^2.13.8",
     "react-dom": "^15.5.4",
     "react-flip-move": "^3.0.0",
     "react-input-range": "^1.2.2",
