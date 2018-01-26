@@ -233,6 +233,12 @@ class App extends React.Component {
               path="/success"
               component={Success}
             />
+            <ProtectedRoute
+              exact
+              requirement={() => true}
+              path="/ptyposuccess"
+              component={Success}
+            />
           </Switch>
         </div>
       </main>

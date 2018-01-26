@@ -321,7 +321,7 @@ export const exportFontToPrototypoWithAccount = (email, password, familyName, va
         },
       ),
     )
-    .then(() => dispatch(push('/success')))
+    .then(() => dispatch(push('/ptyposuccess')))
     .catch(error => console.log(error));
   })
   .catch(error => console.log(error));
@@ -401,7 +401,7 @@ export const exportFontToPrototypoWithoutAccount = (email, password, familyName,
             firstName,
           },
         });
-        dispatch(push('/success'));
+        dispatch(push('/ptyposuccess'));
       })
       .catch(error => console.log(error));
     })
