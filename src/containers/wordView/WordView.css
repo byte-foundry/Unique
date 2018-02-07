@@ -10,6 +10,11 @@
     text-align: center;
     font-family: 'peasy';
     font-weight: normal;
+    border: 1px solid transparent;
+}
+
+.WordView .text.selected {
+    border-color: #501286;
 }
 
 .WordView .text span:focus {

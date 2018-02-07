@@ -32,7 +32,7 @@ const logoSpecimen = (
       <div className="logo">
         {isCustomLogo
         ? <CustomLogo word={word} fontName={fontName} shouldShowControls={showControls} />
-        : <span className="logo-unstyled" style={{ fontFamily: fontName }}>{ word }</span>}
+        : <span className="logo-unstyled" style={{ fontFamily: `'${fontName}'` }}>{ word }</span>}
       </div>
       {
         isCustomLogo && showControls
@@ -60,7 +60,7 @@ const logoSpecimen = (
 );
 
 const textSpecimen = fontName => (
-  <div className="specimen row" style={{ fontFamily: fontName }}>
+  <div className="specimen row" style={{ fontFamily: `'${fontName}'` }}>
     <div className="col-sm-12 col-md-6">
       <div className="uppercase">A B C D E F G H I</div>
       <div className="uppercase">J K L M N O P Q R</div>
@@ -89,7 +89,7 @@ const textSpecimen = fontName => (
 );
 
 const websiteSpecimen = fontName => (
-  <div className="specimen website" style={{ fontFamily: fontName }}>
+  <div className="specimen website" style={{ fontFamily: `'${fontName}'` }}>
     <div className="templates">
       <div className="row">
         <div className="col-sm-12">

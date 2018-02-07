@@ -222,13 +222,11 @@ export const selectFont = font => (dispatch, getState) => {
           .createFont(`choiceFont${i}`, templateNames[templates[font.template]])
           .then((createdFont) => {
             createdFont.changeParams(font.baseValues, chosenWord);
-            createdFont.changeParams(font.steps[0].choices[i].values, chosenWord);
+            if (font.steps[0].choices[i]) {
+              createdFont.changeParams(font.steps[0].choices[i].values, chosenWord);
+            }
             resolve(true);
             console.log(`Changing params for choiceFont${i}`);
-            console.log({
-              ...font.baseValues,
-              ...font.steps[0].choices[i].values,
-            });
             dispatch(storeCreatedFont(createdFont, `choiceFont${i}`));
             choicesFontsName[i] = `choiceFont${i}`;
           });

@@ -18,7 +18,7 @@ class WordView extends React.Component {
   render() {
     return (
       <div className="WordView">
-        <p className="text" style={{ fontFamily: this.props.fontName }}>
+        <p className={`text ${this.props.selected ? 'selected' : ' '}`} style={{ fontFamily: `'${this.props.fontName}'` }}>
           <ContentEditable
             html={`<span>${this.state.word}</span>`}
             disabled={false}
@@ -29,6 +29,8 @@ class WordView extends React.Component {
             }}
             onBlur={this.props.onBlur}
             onFocus={this.props.onFocus}
+            onClick={this.props.onClick}
+            onDoubleClick={this.props.onDoubleClick}
           />
         </p>
       </div>
@@ -42,11 +44,15 @@ WordView.propTypes = {
   storeChosenWord: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
   onFocus: PropTypes.func.isRequired,
+  selected: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
+  onDoubleClick: PropTypes.func.isRequired,
 };
 
 WordView.defaultProps = {
   word: DEFAULT_UI_WORD,
   fontName: 'ptypo',
+  selected: false,
 };
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

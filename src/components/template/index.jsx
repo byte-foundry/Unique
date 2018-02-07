@@ -9,7 +9,7 @@ const Template = props => (
     className={`Template ${props.selected ? 'selected' : ''}`}
     onClick={() => (!props.isLoading ? props.selectFont(props.font) : false)}
     tabIndex="0"
-    style={{ fontFamily: `${props.font.preset}${props.font.variant}` }}
+    style={{ fontFamily: `'${props.font.preset}${props.font.variant}'` }}
   >
     {props.text}
     {props.mostSelected ? <span className="mostSelected">Most selected</span> : false}

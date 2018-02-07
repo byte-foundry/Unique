@@ -83,6 +83,8 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
   const promiseArray = [];
   const loadedPresetsName = [];
   importedPresets.forEach((preset, index) => {
+    console.log('Creating preset')
+    console.log(preset)
     promiseArray.push(new Promise((resolve) => {
       dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
         prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[templates[preset.template]]).then(
