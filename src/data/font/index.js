@@ -24,6 +24,7 @@ export const CLEAR_IS_LOADING = 'font/CLEAR_IS_LOADING';
 export const LOAD_FONT_DATA = 'font/LOAD_FONT_DATA';
 export const ADD_CHOICE_FONT = 'font/ADD_CHOICE_FONT';
 export const SET_FONT_BOUGHT = 'font/SET_FONT_BOUGHT'
+export const RESET_STEP = 'font/RESET_STEP';
 
 const initialState = {
   fontName: '',
@@ -164,6 +165,13 @@ export default (state = initialState, action) => {
         baseValues: action.baseValues,
         step: action.step,
         alreadyBought: action.bought,
+      };
+    
+    case RESET_STEP:
+      return {
+        ...state,
+        currentParams: action.currentParams,
+        choicesMade: action.choicesMade,
       };
 
     default:
@@ -357,6 +365,33 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     type: UPDATE_VALUES,
   });
   console.log('====================================');
+};
+
+export const resetStep = () => (dispatch, getState) => {
+  const { currentPreset, stepBaseValues, choicesMade, step, fontName } = getState().font;
+  let { currentParams } = getState().font;
+  const { chosenWord } = getState().user;
+  const { fonts } = getState().createdFonts;
+  const paramsToReset = {};
+  Object.keys(choicesMade[step]).forEach((key) => {
+    if (key !== 'name') {
+      paramsToReset[key] = stepBaseValues[key];
+    }
+  });
+  fonts[fontName].changeParams(paramsToReset, chosenWord);
+  choicesMade[step] = {
+    name: 'No choice',
+    values: {},
+  };
+  currentParams = {
+    ...currentParams,
+    ...paramsToReset,
+  };
+  dispatch({
+    type: RESET_STEP,
+    choicesMade,
+    currentParams,
+  });
 };
 
 const updateFont = (isSpecimen = false) => (dispatch, getState) => {

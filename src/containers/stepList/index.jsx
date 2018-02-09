@@ -56,18 +56,22 @@ const StepList = (props) => {
     <h3>Choices made:</h3>
     {getStepsDone(props.steps, props.step, props.choicesMade, props.fontName, props.specimen)}
 
-    <h3>Settings</h3>
-    <p>
-      Font size: 
-      <input
-        type="range"
-        min={10}
-        max={150}
-        step={1}
-        defaultValue={props.fontSize}
-        onChange={(event) => { event.persist(); props.changeFontSize(event.target.value); }}
-      />
-    </p>
+    {!props.specimen && (
+      <div>
+        <h3>Settings</h3>
+         <p>
+           Font size: 
+           <input
+             type="range"
+             min={10}
+             max={150}
+             step={1}
+             defaultValue={props.fontSize}
+             onChange={(event) => { event.persist(); props.changeFontSize(event.target.value); }}
+           />
+         </p>
+      </div>
+   )}   
   </div>);
 }
 
@@ -104,7 +108,7 @@ const mapStateToProps = state => ({
   steps: state.font.currentPreset.steps,
   step: state.font.step,
   choicesMade: state.font.choicesMade,
-  fontSize: state.user.fontSize,
+  fontSize: parseInt(state.user.fontSize),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ goToStep, changeFontSize }, dispatch);

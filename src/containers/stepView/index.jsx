@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import FlipMove from 'react-flip-move';
 import { Shortcuts } from 'react-shortcuts';
-import { stepForward, stepBack, selectChoice, updateSliderFont, finishEditing } from '../../data/font';
+import { stepForward, stepBack, selectChoice, updateSliderFont, finishEditing, resetStep } from '../../data/font';
 import Choice from '../../components/choice/';
 import WordView from '../wordView/';
 import Sliders from '../sliders/';
@@ -240,6 +240,11 @@ class StepView extends React.Component {
                   onClick={this.props.stepForward}
                 />
                 <Button
+                  className="hollow left"
+                  label="Reset step"
+                  onClick={this.props.resetStep}
+                />
+                <Button
                   className=""
                   label="Next step"
                   onClick={() => this.props.selectChoice(this.state.choice)}
@@ -258,7 +263,7 @@ const mapStateToProps = state => ({
   step: state.font.step,
   choicesMade: state.font.choicesMade,
   chosenWord: state.user.chosenWord,
-  fontSize: state.user.fontSize,
+  fontSize: parseInt(state.user.fontSize),
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -268,6 +273,7 @@ const mapDispatchToProps = dispatch =>
       selectChoice,
       updateSliderFont,
       finishEditing,
+      resetStep,
     },
     dispatch,
   );
@@ -279,6 +285,7 @@ StepView.propTypes = {
   selectChoice: PropTypes.func.isRequired,
   finishEditing: PropTypes.func.isRequired,
   updateSliderFont: PropTypes.func.isRequired,
+  resetStep: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
   choicesMade: PropTypes.arrayOf(
     PropTypes.shape({
