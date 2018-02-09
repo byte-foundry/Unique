@@ -18,7 +18,7 @@ class WordView extends React.Component {
   render() {
     return (
       <div className="WordView">
-        <p className={`text ${this.props.selected ? 'selected' : ' '}`} style={{ fontFamily: `'${this.props.fontName}'` }}>
+        <p className={`text ${this.props.selected ? 'selected' : ' '}`} style={{ fontFamily: `'${this.props.fontName}'`, fontSize: `${this.props.fontSize}px` }}>
           <ContentEditable
             html={`<span>${this.state.word}</span>`}
             disabled={false}
@@ -47,6 +47,7 @@ WordView.propTypes = {
   selected: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   onDoubleClick: PropTypes.func.isRequired,
+  fontSize: PropTypes.number.isRequired,
 };
 
 WordView.defaultProps = {

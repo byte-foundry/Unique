@@ -170,6 +170,7 @@ class StepView extends React.Component {
               selected={this.state.choice && this.state.choice.name === 'No choice'}
               onClick={() => this.markChoiceActive({ name: 'No choice', values: {} })}
               onDoubleClick={() => this.props.selectChoice({ name: 'No choice', values: {} })}
+              fontSize={this.props.fontSize}
             />
             <Button className="finish" label="I'm done" onClick={this.props.finishEditing} />
             <div className="description">
@@ -198,6 +199,7 @@ class StepView extends React.Component {
                     selected={this.state.choice === choice}
                     text={this.props.chosenWord}
                     mostSelected={this.state.mostSelected === choice.id}
+                    fontSize={this.props.fontSize}
                   />),
                 )}
               </FlipMove>
@@ -256,6 +258,7 @@ const mapStateToProps = state => ({
   step: state.font.step,
   choicesMade: state.font.choicesMade,
   chosenWord: state.user.chosenWord,
+  fontSize: state.user.fontSize,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -270,6 +273,7 @@ const mapDispatchToProps = dispatch =>
   );
 
 StepView.propTypes = {
+  fontSize: PropTypes.number.isRequired,
   stepForward: PropTypes.func.isRequired,
   stepBack: PropTypes.func.isRequired,
   selectChoice: PropTypes.func.isRequired,

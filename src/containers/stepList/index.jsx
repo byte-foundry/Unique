@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Step from '../../components/step/';
 import Button from '../../components/button/';
 import { goToStep } from '../../data/font';
+import { changeFontSize } from '../../data/user';
 import pencilIcon from '../../components/step/pencil.svg';
 import './StepList.css';
 
@@ -54,11 +55,26 @@ const StepList = (props) => {
     </div>
     <h3>Choices made:</h3>
     {getStepsDone(props.steps, props.step, props.choicesMade, props.fontName, props.specimen)}
+
+    <h3>Settings</h3>
+    <p>
+      Font size: 
+      <input
+        type="range"
+        min={10}
+        max={150}
+        step={1}
+        defaultValue={props.fontSize}
+        onChange={(event) => { event.persist(); props.changeFontSize(event.target.value); }}
+      />
+    </p>
   </div>);
 }
 
 StepList.propTypes = {
   step: PropTypes.number.isRequired,
+  fontSize: PropTypes.number.isRequired,
+  changeFontSize: PropTypes.func.isRequired,
   steps: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -88,8 +104,9 @@ const mapStateToProps = state => ({
   steps: state.font.currentPreset.steps,
   step: state.font.step,
   choicesMade: state.font.choicesMade,
+  fontSize: state.user.fontSize,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ goToStep }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ goToStep, changeFontSize }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepList);

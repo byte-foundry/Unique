@@ -29,6 +29,7 @@ export const PAYMENT_SUCCESSFUL = 'user/PAYMENT_SUCCESSFUL';
 export const CONNECT_TO_GRAPHCOOL = 'user/CONNECT_TO_GRAPHCOOL';
 export const STORE_PROJECT = 'user/STORE_PROJECT';
 export const STORE_PROJECT_INFOS = 'user/STORE_PROJECT_INFOS';
+export const CHANGE_FONT_SIZE = 'user/CHANGE_FONT_SIZE';
 export const LOGOUT = 'user/LOGOUT';
 
 const initialState = {
@@ -42,6 +43,7 @@ const initialState = {
   projectID: undefined,
   projectName: undefined,
   shouldLogout: false,
+  fontSize: 70,
 };
 
 export default (state = initialState, action) => {
@@ -118,6 +120,12 @@ export default (state = initialState, action) => {
         projectID: action.projectID,
         projectName: action.projectName,
       };
+  
+    case CHANGE_FONT_SIZE:
+      return {
+        ...state,
+        fontSize: action.fontSize,
+      };
 
     default:
       return state;
@@ -182,6 +190,13 @@ export const updateProjectInfos = (projectID, projectName) => (dispatch) => {
 export const logout = () => (dispatch) => {
   dispatch({
     type: LOGOUT,
+  });
+};
+
+export const changeFontSize = (fontSize) => (dispatch) => {
+  dispatch({
+    type: CHANGE_FONT_SIZE,
+    fontSize,
   });
 };
 
