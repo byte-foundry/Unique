@@ -301,6 +301,18 @@ export const setFontBought = () => (dispatch) => {
   });
 };
 
+export const updateSubset = () => (dispatch, getState) => {
+  const { chosenWord } = getState().user;
+  const {
+    fontName,
+    step,
+  } = getState().font;
+  if (step && fontName) {
+    dispatch(updateStepValues(step, fontName));
+    dispatch(updateFont());
+  }
+};
+
 const updateStepValues = (step, font) => (dispatch, getState) => {
   let { chosenWord } = getState().user;
   console.log('========updateStepValues===========');
@@ -395,7 +407,7 @@ export const resetStep = () => (dispatch, getState) => {
   });
 };
 
-const updateFont = (isSpecimen = false) => (dispatch, getState) => {
+export const updateFont = (isSpecimen = false) => (dispatch, getState) => {
   let { chosenWord } = getState().user;
   const {
     fontName,

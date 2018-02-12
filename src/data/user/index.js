@@ -18,6 +18,7 @@ import {
 } from '../queries';
 import {
   setFontBought,
+  updateSubset,
 } from '../font';
 import { DEFAULT_UI_WORD, GRAPHQL_API, GRAPHQL_PROTOTYPO_API } from '../constants';
 
@@ -262,8 +263,9 @@ export const storeExportType = exportType => (dispatch) => {
 export const storeChosenWord = chosenWord => (dispatch) => {
   dispatch({
     type: STORE_CHOSEN_WORD,
-    chosenWord,
+    chosenWord: chosenWord.length > 1 ? chosenWord.trim().replace(/&nbsp;/i, '') : 'Hamburgefonstiv',
   });
+  dispatch(updateSubset());
 };
 
 export const afterPayment = () => (dispatch, getState) => {

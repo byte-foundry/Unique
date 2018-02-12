@@ -171,7 +171,6 @@ class StepView extends React.Component {
               onClick={() => this.markChoiceActive(this.state.choice)}
               onDoubleClick={() => this.props.selectChoice(this.state.choice)}
             />
-            <Button className="finish" label="I'm done" onClick={this.props.finishEditing} />
             <div className="description">
               <h3>
                 {this.props.stepValues.description}:
