@@ -17,7 +17,7 @@ import Auth from "../../components/auth";
 import "./bootstrap-reboot.css";
 import "./bootstrap-grid.css";
 import "./App.css";
-import logoUrl, { ReactComponent as Logo } from './logo.svg';
+import { ReactComponent as Logo } from './logo.svg';
 
 import ProtectedRoute from "../../components/protectedRoute/";
 
@@ -30,8 +30,6 @@ import Success from "../success/";
 import WelcomeBack from "../welcomeBack/";
 import Library from "../library/";
 import Button from "../../components/button";
-
-import UnstableView from "../unstableView";
 
 class App extends React.Component {
   /* global Intercom*/

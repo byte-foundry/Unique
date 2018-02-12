@@ -15,11 +15,11 @@ class Choice extends React.Component {
         aria-checked="false"
         aria-selected="false"
         tabIndex={0}
-        style={{ fontFamily: `choiceFont${this.props.index}`, fontSize: `${this.props.fontSize}px` }}
+        style={{ fontFamily: `choiceFont${this.props.index}` }}
       >
         {this.props.text}
         {this.props.mostSelected ? (
-          <span className="mostSelected" style={{fontSize: `${this.props.fontSize / 4}px` }}>Most selected</span>
+          <span className="mostSelected">Most selected</span>
         ) : (
           false
         )}
@@ -38,7 +38,6 @@ Choice.propTypes = {
   selected: PropTypes.bool.isRequired,
   text: PropTypes.string,
   mostSelected: PropTypes.bool,
-  fontSize: PropTypes.number.isRequired,
 };
 
 Choice.defaultProps = {

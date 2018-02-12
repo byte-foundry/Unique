@@ -368,7 +368,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
 };
 
 export const resetStep = () => (dispatch, getState) => {
-  const { currentPreset, stepBaseValues, choicesMade, step, fontName } = getState().font;
+  const { stepBaseValues, choicesMade, step, fontName } = getState().font;
   let { currentParams } = getState().font;
   const { chosenWord } = getState().user;
   const { fonts } = getState().createdFonts;
