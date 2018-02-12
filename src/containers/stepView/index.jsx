@@ -168,8 +168,8 @@ class StepView extends React.Component {
               onFocus={this.onFocus}
               onBlur={this.onBlur}
               selected={this.state.choice && this.state.choice.name === 'No choice'}
-              onClick={() => this.markChoiceActive({ name: 'No choice', values: {} })}
-              onDoubleClick={() => this.props.selectChoice({ name: 'No choice', values: {} })}
+              onClick={() => this.markChoiceActive(this.state.choice)}
+              onDoubleClick={() => this.props.selectChoice(this.state.choice)}
               fontSize={this.props.fontSize}
             />
             <Button className="finish" label="I'm done" onClick={this.props.finishEditing} />

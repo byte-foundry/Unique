@@ -383,6 +383,7 @@ export const resetStep = () => (dispatch, getState) => {
     name: 'No choice',
     values: {},
   };
+  console.log(choicesMade)
   currentParams = {
     ...currentParams,
     ...paramsToReset,
@@ -467,7 +468,7 @@ export const selectChoice = choice => (dispatch, getState) => {
   let { step, currentParams } = getState().font;  
   console.log('===============SELECT CHOICE===================');
   console.log(choice);
-  if (!choice.name) {
+  if (!choice || !choice.name) {
     console.log('no choice selected')
     choice = {
       name: 'No choice',
