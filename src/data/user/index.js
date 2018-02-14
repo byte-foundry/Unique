@@ -263,7 +263,7 @@ export const storeExportType = exportType => (dispatch) => {
 export const storeChosenWord = chosenWord => (dispatch) => {
   dispatch({
     type: STORE_CHOSEN_WORD,
-    chosenWord: chosenWord.length > 1 ? chosenWord.trim().replace(/&nbsp;/i, '') : 'Hamburgefonstiv',
+    chosenWord: chosenWord.length > 1 ? chosenWord.trim().replace(/&nbsp;/ig, '') : 'Hamburgefonstiv',
   });
   dispatch(updateSubset());
 };

@@ -46,6 +46,7 @@ class StepView extends React.Component {
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.handleShortcuts = this.handleShortcuts.bind(this);
+    this.setChoiceSelected = this.setChoiceSelected.bind(this);
   }  
   componentWillMount() {
     this.setChoiceSelected(this.props);
@@ -55,7 +56,6 @@ class StepView extends React.Component {
   }
   componentWillReceiveProps(newProps) {
     this.setChoiceSelected(newProps);
-    console.log(newProps)
   }
   onFocus() {
     this.setState({ isInputFocused: true });
@@ -244,7 +244,7 @@ class StepView extends React.Component {
                 <Button
                   className=""
                   label="Next step"
-                  onClick={() => this.props.selectChoice(this.state.choice)}
+                  onClick={() => this.state.choice ? this.props.selectChoice(this.state.choice) : this.props.stepForward()}
                 />
               </span>
             </div>

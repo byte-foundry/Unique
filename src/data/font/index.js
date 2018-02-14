@@ -471,7 +471,7 @@ export const resetStep = () => (dispatch, getState) => {
   };
   dispatch({
     type: RESET_STEP,
-    choicesMade,
+    choicesMade: [...choicesMade],
     currentParams
   });
 };
@@ -549,6 +549,9 @@ export const stepForward = () => (dispatch, getState) => {
   let { step } = getState().font;
   choicesMade[step] = {};
   choicesMade[step].name = "No choice";
+  console.log('> STEP FORWARD')
+  console.log(choicesMade);
+  console.log(step);
   const paramsToReset = {};
   // TODO: Trouver un moyen de récup les params pour les reset
 
