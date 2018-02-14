@@ -456,13 +456,25 @@ export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
 };
 
 export const stepForward = () => (dispatch, getState) => {
-  const { choicesMade } = getState().font;
+  const { choicesMade, currentParams, stepBaseValues, currentPreset } = getState().font;
   let { step } = getState().font;
   choicesMade[step] = {};
   choicesMade[step].name = 'No choice';
+  const paramsToReset = {};
+  // TODO: Trouver un moyen de récup les params pour les reset
+  
+  // Object.keys(currentPreset.steps[step - 1]).forEach((key) => {
+  //   if (key !== 'name') {
+  //     paramsToReset[key] = stepBaseValues[key];
+  //   }
+  // });
   dispatch({
     type: SELECT_CHOICE,
     choicesMade,
+    currentParams: {
+      ...currentParams,
+      ...paramsToReset,
+    },
   });
   dispatch(goToStep((step += 1)));
   request(GRAPHQL_API, getSpecialChoiceSelectedCount('No choice'))
