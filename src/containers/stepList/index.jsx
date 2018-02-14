@@ -11,7 +11,7 @@ import pencilIcon from '../../components/step/pencil.svg';
 import './StepList.css';
 
 const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
-  choicesMade.map((choice, i) =>
+  steps.map((step, i) =>
     (i === 0
       ? (
         <Link key="template" to="/">
@@ -30,7 +30,7 @@ const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
           title={steps[i - 1].name}
           key={steps[i - 1].name}
           current={index === i && !isSpecimen}
-          choice={choice.name}
+          choice={choicesMade[i-1] ? choicesMade[i-1].name : undefined}
           specimen={isSpecimen}
         />
       )),

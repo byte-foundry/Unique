@@ -35,7 +35,7 @@ Step.propTypes = {
 };
 
 Step.defaultProps = {
-  choice: 'No choice',
+  choice: undefined,
   specimen: false,
 };
 
