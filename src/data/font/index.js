@@ -493,14 +493,18 @@ export const updateFont = (isSpecimen = false) => (dispatch, getState) => {
       : chosenWord;
   console.log(fonts)
   console.log(fontName)
-  fonts[fontName].changeParams(
-    { ...stepBaseValues, ...currentParams },
-    chosenWord
-  );
-  fonts[sliderFontName].changeParams(
-    { ...stepBaseValues, ...currentParams },
-    chosenWord
-  );
+  if (fonts[fontName]) {
+    fonts[fontName].changeParams(
+      { ...stepBaseValues, ...currentParams },
+      chosenWord
+    );
+  }
+  if(fonts[sliderFontName]) {
+    fonts[sliderFontName].changeParams(
+      { ...stepBaseValues, ...currentParams },
+      chosenWord
+    );
+  }
   dispatch({
     type: UPDATE_VALUES
   });
