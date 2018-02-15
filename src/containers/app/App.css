@@ -21,7 +21,6 @@
 	width: 100%;
 	opacity: 0;
 	cursor: default;
-	pointer-events: none;
 }
 
 .App-logo-wrapper {
@@ -103,7 +102,9 @@
 
 .loaded .App-logo-wrapper{
 	transform-origin: 50% 0;
+	bottom: 0px;
 	animation: animLoadedLogo 1s cubic-bezier(0.7,0,0.3,1) forwards;
+	cursor: pointer;
 }
 
 .loaded .App-logo-wrapper svg .cls-2 {
