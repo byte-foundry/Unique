@@ -8,14 +8,14 @@ import './ParamChoice.css';
 import StepView from '../stepView/';
 import StepList from '../stepList/';
 
-const ParamChoice = () => (
+const ParamChoice = (props) => (
   <div className="ParamChoice container-fluid">
     <div className="row">
       <div className="left col-sm-10">
         <StepView />
       </div>
       <div className="right col-sm-2">
-        <StepList />
+        <StepList {...props}/>
       </div>
     </div>
   </div>
@@ -23,12 +23,11 @@ const ParamChoice = () => (
 
 const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
 
-const mapStateToProps = state => ({
-  step: state.font.step,
-});
+const mapStateToProps = state => ({});
 
 ParamChoice.propTypes = {
-  step: PropTypes.number.isRequired,
+  isAuthenticated: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ParamChoice));

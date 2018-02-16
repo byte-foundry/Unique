@@ -7,7 +7,7 @@ class Choice extends React.Component {
   render() {
     return (
       <div
-        className={`Choice ${this.props.selected ? 'selected' : ''}`}
+        className={`Choice ${this.props.selected ? 'selected' : ''} ${this.props.isBlackOnWhite ? '' : 'whiteOnBlack'}`}
         key={this.props.choice.name}
         onClick={() => this.props.markChoiceActive(this.props.choice)}
         onDoubleClick={() => this.props.selectChoice(this.props.choice)}
@@ -39,6 +39,7 @@ Choice.propTypes = {
   selected: PropTypes.bool.isRequired,
   text: PropTypes.string,
   mostSelected: PropTypes.bool,
+  isBlackOnWhite: PropTypes.bool.isRequired,
 };
 
 Choice.defaultProps = {

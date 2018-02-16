@@ -48,22 +48,6 @@
 	transition: fill 1s cubic-bezier(0.7,0,0.3,1);
 }
 
-.App-logo-wrapper svg .dot-1 {
-	animation: animDot 2s ease-in-out infinite;
-}
-
-.App-logo-wrapper svg .dot-2 {
-	transform: translateX(150%);
-	animation: animDot 2s ease-in-out infinite;
-	animation-delay: 0.2s;
-}
-
-.App-logo-wrapper svg .dot-3 {
-	transform: translateX(300%);
-	animation: animDot 2s ease-in-out infinite;
-	animation-delay: 0.4s;
-}
-
 .App-loader-wrapper {
   bottom: 20%;
 }
@@ -111,26 +95,19 @@
 }
 
 .loaded .App-logo-wrapper svg .cls-2 {
-	fill: #000;
+	fill: #FF6359;
 	transform: translateX(0%);
 	animation: inherit;
 }
 
 .loaded .App-logo-wrapper svg .cls-1 {
-	fill:#10051e;
+	fill:#FF6359;
 	animation-delay: 0.4s;
 }
 
 .loaded .App-loader-wrapper {
 	animation: animLoadedLoader 0.5s cubic-bezier(0.7,0,0.3,1) forwards;
 }
-
-.App.loaded .loginlogout {
-  transform-origin: 50% 0;
-  bottom: 0px;
-  animation: animLoadedLoginLogout 0.5s cubic-bezier(0.7,0,0.3,1) forwards;
-}
-
 
 .loaded .App-header {
   animation: animLoadedHeader 1s cubic-bezier(0.7,0,0.3,1) forwards;
@@ -152,13 +129,7 @@
 
 @keyframes animLoadedLogo {
 	to { 
-		transform: translate3d(-39.5%,100%,0) translate3d(0,25px,0) scale3d(0.30,0.30,1); 
-	}
-}
-
-@keyframes animLoadedLoginLogout {
-	to { 
-		transform: translate3d(0,45px,0); 
+		transform: translate3d(-45%,100%,0) translate3d(0,2.5%,0) scale3d(0.30,0.30,1); 
 	}
 }
 
@@ -177,15 +148,6 @@
 	from { 
 		opacity: 0; 
 		transform: translate3d(0,200px,0); 
-	}
-}
-
-@keyframes animDot {
-	from { 
-		opacity: 1;
-	}
-	to {
-		opacity: 0;
 	}
 }
 

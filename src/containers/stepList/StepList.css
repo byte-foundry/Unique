@@ -2,9 +2,26 @@
   background-color: black;
   padding-top: 100px;
   color: white;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
+  position: relative;
   }
 
-.StepList .finish {
-  display: inline-block;
+.StepList .icon-profile, .StepList .icon-menu {
+  height: 35px;
+  width: auto;
+  position: absolute;
+  top: 20px;
+  cursor: pointer;
 }
+
+.StepList .icon-profile {
+  left: 30px;
+  fill: white;
+}
+
+.StepList .icon-menu {
+  right: 30px;
+  fill: #FF6359;
+}
+

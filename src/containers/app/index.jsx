@@ -42,7 +42,6 @@ class App extends React.Component {
       Intercom("update", { email: props.userEmail });
     }
     this.handleAuthentication = this.handleAuthentication.bind(this);
-    this.login = this.login.bind(this);
     this.auth = new Auth();
     this.shortcutManager = new ShortcutManager(keymap);
     console.log(props);
@@ -101,13 +100,6 @@ class App extends React.Component {
   isLoggedIn() {
     return this.auth.isAuthenticated;
   }
-  login() {
-    this.auth.login();
-  }
-
-  logout() {
-    this.auth.logout();
-  }
   handleAuthentication(nextState, replace) {
     if (/access_token|id_token|error/.test(nextState.location.hash)) {
       this.auth.handleAuthentication();
@@ -144,41 +136,6 @@ class App extends React.Component {
                 this.props.goToHome();
               }}/>
           </h1>
-          <div className="App-loader-wrapper">
-            <p>Loading..Please wait</p>
-          </div>
-          {!isAuthenticated() && (
-            <div className="loginlogout">
-              <Button
-                className=""
-                label="Log in"
-                onClick={() => {
-                  this.login();
-                }}
-              />
-            </div>
-          )}
-          {isAuthenticated() && (
-            <div className="loginlogout">
-              <span
-                className="goToFonts"
-                onClick={() => {
-                  this.props.goToLibrary();
-                }}
-                role="button"
-                tabIndex="0"
-              >
-                My fonts
-              </span>
-              <Button
-                className=""
-                label="Log out"
-                onClick={() => {
-                  this.logout();
-                }}
-              />
-            </div>
-          )}
         </header>
         <div className="App-content">
           <Switch>
@@ -211,7 +168,7 @@ class App extends React.Component {
               exact
               requirement={() => this.hasSelectedFont()}
               path="/customize"
-              component={ParamChoice}
+              component={props => <ParamChoice isAuthenticated={this.auth.isAuthenticated} login={this.auth.login} {...props} />}
             />
             <ProtectedRoute
               exact
@@ -261,7 +218,6 @@ App.propTypes = {
   reloadFonts: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   goToHome: PropTypes.func.isRequired,
-  goToLibrary: PropTypes.func.isRequired,
   shouldLogout: PropTypes.bool.isRequired,
   createPrototypoFactory: PropTypes.func.isRequired,
   isPrototypoLoaded: PropTypes.bool.isRequired,
@@ -301,7 +257,6 @@ const mapDispatchToProps = dispatch =>
       reloadPresets,
       reloadFonts,
       goToHome: () => push("/"),
-      goToLibrary: () => push("/library"),
       createPrototypoFactory
     },
     dispatch

@@ -1,16 +1,14 @@
 .Step {
   display: block;
   cursor: pointer;
-  border-top: 1px solid #C7C3D1;
   padding: 20px 40px;
+  background: black;
+  transition: color .3s ease, background .3s ease;
 }
 
 .Step:focus {outline:0;}
 
-.Step:last-of-type {
-  border-bottom: 1px solid #C7C3D1;
-}
-
 .Step.current {
-  color: #FF6359;
+  color: white;
+  background: #FF6359;
 }

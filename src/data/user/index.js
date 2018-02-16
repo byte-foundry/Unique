@@ -31,6 +31,7 @@ export const CONNECT_TO_GRAPHCOOL = 'user/CONNECT_TO_GRAPHCOOL';
 export const STORE_PROJECT = 'user/STORE_PROJECT';
 export const STORE_PROJECT_INFOS = 'user/STORE_PROJECT_INFOS';
 export const CHANGE_FONT_SIZE = 'user/CHANGE_FONT_SIZE';
+export const SWITCH_BLACK_ON_WHITE = 'user/SWITCH_BLACK_ON_WHITE';
 export const LOGOUT = 'user/LOGOUT';
 
 const initialState = {
@@ -45,6 +46,7 @@ const initialState = {
   projectName: undefined,
   shouldLogout: false,
   fontSize: 70,
+  isBlackOnWhite: true,
 };
 
 export default (state = initialState, action) => {
@@ -128,6 +130,12 @@ export default (state = initialState, action) => {
         fontSize: action.fontSize,
       };
 
+    case SWITCH_BLACK_ON_WHITE:
+      return {
+        ...state,
+        isBlackOnWhite: !state.isBlackOnWhite,
+      };
+
     default:
       return state;
   }
@@ -191,6 +199,12 @@ export const updateProjectInfos = (projectID, projectName) => (dispatch) => {
 export const logout = () => (dispatch) => {
   dispatch({
     type: LOGOUT,
+  });
+};
+
+export const switchBlackOnWhite = () => (dispatch) => {
+  dispatch({
+    type: SWITCH_BLACK_ON_WHITE,
   });
 };
 
