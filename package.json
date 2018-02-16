@@ -9,7 +9,7 @@
     "history": "^4.6.3",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.5.10",
-    "prototypo-library": "1.2.6",
+    "prototypo-library": "1.2.9",
     "react": "^15.5.4",
     "react-color": "^2.13.8",
     "react-dom": "^15.5.4",

@@ -31,7 +31,7 @@
 }
 
 .DefineNeed .needs .card .title {
-  background-color: #501286;
+  background-color: #000;
   color: white;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -62,7 +62,7 @@
   width: 25%;
   height: 70px;
   font-size: 18px;
-  background-color: #501286;
+  background-color: #000;
   color: #fff;
   border: none;
   border-top-right-radius: 8px;

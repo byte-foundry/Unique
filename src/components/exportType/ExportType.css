@@ -15,7 +15,7 @@
 }
 
 .ExportType .card  .title {
-  background-color: #501286;
+  background-color: #000;
   color: white;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -54,7 +54,7 @@
 
 .ExportType input[type="submit"] {
   width: 50%;
-  background-color: #501286;
+  background-color: #000;
   color: white;
   cursor: pointer;
   padding: 5px 10px;

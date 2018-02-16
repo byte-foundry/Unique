@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './ParamChoice.css';
-import ShortcutsHelper from '../../components/shortcutsHelper';
 import StepView from '../stepView/';
 import StepList from '../stepList/';
 
@@ -19,17 +18,6 @@ const ParamChoice = () => (
         <StepList />
       </div>
     </div>
-    <ShortcutsHelper
-      shortcuts={[
-        { name: 'Select previous choice', key: 'up' },
-        { name: 'Select next choice', key: 'down' },
-        { name: 'Validate choice selected', key: 'enter' },
-        { name: 'Step back', key: 'b, backspace, left' },
-        { name: 'Skip step', key: 's' },
-        { name: 'Open custom choice', key: 'C' },
-        { name: 'Finish font', key: 'end' },
-      ]}
-    />
   </div>
 );
 

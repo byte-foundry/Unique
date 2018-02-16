@@ -162,20 +162,6 @@ class StepView extends React.Component {
         <div className="StepView" ref={(c) => { this.stepViewWrapper = c; }} tabIndex="-1">
           <Button className="back" label="" mode="isBack" onClick={this.props.stepBack} />
           <div className="container">
-            <h3 className="currentState">Current state</h3>
-            <WordView
-              word={this.props.chosenWord}
-              onFocus={this.onFocus}
-              onBlur={this.onBlur}
-              selected={this.state.choice && this.state.choice.name === 'No choice'}
-              onClick={() => this.markChoiceActive(this.state.choice)}
-              onDoubleClick={() => this.props.selectChoice(this.state.choice)}
-            />
-            <div className="description">
-              <h3>
-                {this.props.stepValues.description}:
-              </h3>
-            </div>
             <div className="choices">
               <FlipMove
                 duration={200}
@@ -233,18 +219,8 @@ class StepView extends React.Component {
               <span className="nextStep">
                 <Button
                   className="hollow left"
-                  label="Skip"
+                  label="Next"
                   onClick={this.props.stepForward}
-                />
-                <Button
-                  className="hollow left"
-                  label="Reset step"
-                  onClick={this.props.resetStep}
-                />
-                <Button
-                  className=""
-                  label="Next step"
-                  onClick={() => this.state.choice ? this.props.selectChoice(this.state.choice) : this.props.stepForward()}
                 />
               </span>
             </div>

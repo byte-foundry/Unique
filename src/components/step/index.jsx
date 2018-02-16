@@ -15,12 +15,7 @@ const Step = props => (
     tabIndex="0"
   >
     <span>
-      {`${props.title}${props.choice ? `: ${props.choice}` : ''}`}
-      {
-        !props.specimen && !props.current
-        ? (<img src={pencilIcon} alt="icon-edit" />)
-        : false
-      }
+      {props.title}
     </span>
   </div>
 );

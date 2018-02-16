@@ -14,7 +14,7 @@
 }
 
 .WordView .text.selected {
-    border-color: #501286;
+    border-color: #000;
 }
 
 .WordView .text span:focus {

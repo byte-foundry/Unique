@@ -9,7 +9,6 @@ import { Shortcuts } from 'react-shortcuts';
 import './SpecimenView.css';
 import StepList from '../stepList/';
 import Button from '../../components/button/';
-import ShortcutsHelper from '../../components/shortcutsHelper';
 import CustomLogo from '../../components/customLogo';
 import { storeEmail, storeProject } from '../../data/user';
 import desktopBackground from './desktop.svg';
@@ -383,7 +382,6 @@ class SpecimenView extends React.Component {
             )}
           </div>
         </div>
-        <ShortcutsHelper shortcuts={[{ name: 'Back to editing', key: 'Backspace' }]} />
       </Shortcuts>
     );
   }

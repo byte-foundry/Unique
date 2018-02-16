@@ -18,8 +18,9 @@ class Choice extends React.Component {
         style={{ fontFamily: `choiceFont${this.props.index}` }}
       >
         {this.props.text}
+        <p className="choiceName">{this.props.choice.name}</p>
         {this.props.mostSelected ? (
-          <span className="mostSelected">Most selected</span>
+          <span className=""/>
         ) : (
           false
         )}

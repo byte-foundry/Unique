@@ -17,7 +17,7 @@ const Button = props => (
         case 'isBack':
           return (<img src={backIcon} alt="Icon back" />);
         case 'isConfigure':
-          return (<span><img src={settingsIcon} alt="Icon back" />{props.label}</span>);
+          return (<span>{props.label}</span>);
         default:
           return props.label;
       }

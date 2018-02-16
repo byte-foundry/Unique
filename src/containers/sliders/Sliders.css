@@ -32,10 +32,10 @@
   transition: background 0.15s ease-in-out;
 }
 .Sliders input[type="range"]::-webkit-slider-thumb:hover {
-  background: #501286;
+  background: #000;
 }
 .Sliders input[type="range"]:active::-webkit-slider-thumb {
-  background: #501286;
+  background: #000;
 }
 .Sliders input[type="range"]::-moz-range-thumb {
   width: 20px;
@@ -48,10 +48,10 @@
   transition: background 0.15s ease-in-out;
 }
 .Sliders input[type="range"]::-moz-range-thumb:hover {
-  background: #501286;
+  background: #000;
 }
 .Sliders input[type="range"]:active::-moz-range-thumb {
-  background: #501286
+  background: #000
 }
 ::-moz-range-track {
   background: #D0D0D0;

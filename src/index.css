@@ -1,14 +1,11 @@
 @font-face {
-  font-family: duA5LDxD8w;
-  src: url(fonts/sngl-st-rg.woff2) format("woff2"),
-    url(fonts/sngl-st-rg.woff) format("woff");
-  font-style: normal;
+  font-family: unique;
+  src: url(fonts/unique_medium.otf) format("opentype");
   font-weight: 400;
 }
 @font-face {
-  font-family: duA5LDxD8w;
-  src: url(fonts/sngl-st-b.woff2) format("woff2"),
-    url(fonts/sngl-st-b.woff) format("woff");
+  font-family: unique;
+  src: url(fonts/unique_bold.otf) format("opentype");
   font-style: normal;
   font-weight: 700;
 }
@@ -16,11 +13,11 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: duA5LDxD8w, sans-serif;
-  color: #501286;
+  font-family: unique, sans-serif;
+  color: #000;
   background-color: #fff;
 }
 
 ::selection {
-  background: #e9d8fa;
+  background: rgba(255, 100, 89, 0.24);
 }

@@ -1,5 +1,6 @@
 .ParamChoice {
     min-height: 100vh;
+    padding: 0;
 }
 
 .ParamChoice .left {

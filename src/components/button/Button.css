@@ -1,7 +1,7 @@
 .Button {
   font-size: 0.8rem;
-  background-color: #501286;
-  border: 2px solid #501286;
+  background-color: #000;
+  border: 2px solid #000;
   color: #fff;
   border-radius: 5px;
   padding: 5px 20px;
@@ -12,20 +12,20 @@
 
 .Button:hover {
   background-color: #fff;
-  color: #501286;
-  border: 2px solid #501286;
+  color: #000;
+  border: 2px solid #000;
 }
 
 .Button.hollow {
   background-color: #fff;
-  color: #501286;
-  border: 2px solid #501286;
+  color: #000;
+  border: 2px solid #000;
 }
 
 .Button.hollow:hover {
-  background-color: #501286;
+  background-color: #000;
   color: #fff;
-  border: 2px solid #501286;
+  border: 2px solid #000;
 }
 
 .Button.isBack {
@@ -38,12 +38,21 @@
   height: auto;
 }
 
-.Button.isConfigure img  {
-  width: 10px;
-  height: auto;
-  margin-right: 5px;
-  display: inline-block;
+.Button.isConfigure {
+  padding-left: 0;
+  padding-right: 0;
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: inherit;
 }
+
+.Button.isConfigure:hover {
+  background-color: #fff;
+  color: black;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
 
 
 

@@ -14,15 +14,7 @@ const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
   steps.map((step, i) =>
     (i === 0
       ? (
-        <Link key="template" to="/">
-          <div className="Step">
-            Template: {fontName}
-            {!isSpecimen
-              ? (<img src={pencilIcon} alt="icon-edit" />)
-              : false
-            }
-          </div>
-        </Link>
+       false
       )
       : (
         <Step
@@ -39,22 +31,7 @@ const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
 const StepList = (props) => {
   console.log(props)
   return (<div className="StepList">
-    <div className="bubbles">
-      {!props.specimen && props.steps.map((step, index) =>
-        (<div
-          className={`bubble ${props.step > index + 1 ? 'past' : ''} ${props.step === index + 1
-            ? 'active'
-            : ''}`}
-          onClick={() => props.goToStep(index + 1)}
-          tabIndex="0"
-          key={`bubble-${step.name}`}
-          role="button"
-        />),
-      )}
-    </div>
-    <h3>Choices made:</h3>
     {getStepsDone(props.steps, props.step, props.choicesMade, props.fontName, props.specimen)}
-    {!props.specimen && (<Button className="finish" label="I'm done" onClick={props.finishEditing} />)}
   </div>);
 }
 
@@ -92,6 +69,6 @@ const mapStateToProps = state => ({
   choicesMade: state.font.choicesMade,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ goToStep, finishEditing }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ goToStep }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepList);
