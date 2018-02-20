@@ -1,4 +1,4 @@
-.StepList {
+.Sidebar {
   background-color: black;
   padding-top: 100px;
   color: white;
@@ -12,21 +12,21 @@
   width: 100%;
 }
 
-.StepList.small {
+.Sidebar.small {
   width: 120px;
 }
 
-.StepList.small .steps {
+.Sidebar.small .steps {
   opacity: 0;
 }
 
-.StepList .steps {
+.Sidebar .steps {
   opacity: 1;
   transition: opacity 0.1s ease;
 }
 
-.StepList .icon-profile,
-.StepList .icon-menu {
+.Sidebar .icon-profile,
+.Sidebar .icon-menu {
   height: 25px;
   width: auto;
   position: absolute;
@@ -34,12 +34,12 @@
   cursor: pointer;
 }
 
-.StepList .icon-profile {
+.Sidebar .icon-profile {
   left: 20px;
   fill: white;
 }
 
-.StepList .icon-menu {
+.Sidebar .icon-menu {
   right: 30px;
   fill: #ff6359;
 }
