@@ -32,6 +32,7 @@ export const STORE_PROJECT = 'user/STORE_PROJECT';
 export const STORE_PROJECT_INFOS = 'user/STORE_PROJECT_INFOS';
 export const CHANGE_FONT_SIZE = 'user/CHANGE_FONT_SIZE';
 export const SWITCH_BLACK_ON_WHITE = 'user/SWITCH_BLACK_ON_WHITE';
+export const SWITCH_GLYPH_MODE = 'user/SWITCH_GLYPH_MODE';
 export const LOGOUT = 'user/LOGOUT';
 
 const initialState = {
@@ -47,6 +48,7 @@ const initialState = {
   shouldLogout: false,
   fontSize: 70,
   isBlackOnWhite: true,
+  isGlyphMode: false,
 };
 
 export default (state = initialState, action) => {
@@ -135,6 +137,12 @@ export default (state = initialState, action) => {
         ...state,
         isBlackOnWhite: !state.isBlackOnWhite,
       };
+    
+    case SWITCH_GLYPH_MODE:
+      return {
+        ...state,
+        isGlyphMode: !state.isGlyphMode,
+      };
 
     default:
       return state;
@@ -205,6 +213,12 @@ export const logout = () => (dispatch) => {
 export const switchBlackOnWhite = () => (dispatch) => {
   dispatch({
     type: SWITCH_BLACK_ON_WHITE,
+  });
+};
+
+export const switchGlyphMode = () => (dispatch) => {
+  dispatch({
+    type: SWITCH_GLYPH_MODE,
   });
 };
 

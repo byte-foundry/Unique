@@ -5,10 +5,11 @@
   min-height: 100vh;
   height: 100%;
   position: relative;
+  border-left: 1px solid white;
   }
 
 .StepList .icon-profile, .StepList .icon-menu {
-  height: 35px;
+  height: 25px;
   width: auto;
   position: absolute;
   top: 20px;
@@ -16,7 +17,7 @@
 }
 
 .StepList .icon-profile {
-  left: 30px;
+  left: 20px;
   fill: white;
 }
 

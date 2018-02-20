@@ -16,14 +16,12 @@ import { ReactComponent as MenuIcon } from "./menu.svg";
 const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
   steps.map(
     (step, i) =>
-      i === 0 ? (
-        false
-      ) : (
+      (
         <Step
           index={i}
-          title={steps[i - 1].name}
-          key={steps[i - 1].name}
-          current={index === i && !isSpecimen}
+          title={steps[i].name}
+          key={steps[i].name}
+          current={index === i + 1 && !isSpecimen}
           choice={choicesMade[i - 1] ? choicesMade[i - 1].name : undefined}
           specimen={isSpecimen}
         />

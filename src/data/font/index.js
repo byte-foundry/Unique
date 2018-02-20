@@ -216,6 +216,7 @@ export const selectFont = font => (dispatch, getState) => {
   const { choicesFontsName = [] } = getState().font;
   const { loadedPresetsName } = getState().presets;
   const { chosenWord } = getState().user;
+  const selectedFont = {...font};
   dispatch({
     type: SELECT_FONT_REQUESTED
   });
@@ -224,13 +225,38 @@ export const selectFont = font => (dispatch, getState) => {
     dispatch(deleteCreatedFont(choiceFont));
   });
   let maxStep = 0;
-  font.steps.forEach(step => {
+  font.steps.forEach((step, index) => {
     if (step.choices.length > maxStep) {
       maxStep = step.choices.length;
     }
-  });
+    // Create default choices
+    const defaultStepParams = {};    
+    step.choices.forEach(choice => {
+      Object.keys(choice.values).forEach(key => {
+        if (key !== "name") {
+          defaultStepParams[key] = font.baseValues[key];
+        }
+      });
+    });
+    selectedFont.steps[index].choices.push ({
+      name: 'Default',
+      values: defaultStepParams,
+      id: `default${step.name}`
+    });
+
+    // Sort choices
+    let stepParams = {}
+    step.choices.forEach(choice => {stepParams = {...stepParams, ...choice.values}});
+    const {glyphSpecialProps, manualChanges, name,  glyphComponentChoice, ...params}  = stepParams;
+    const paramToSort = Object.keys(params)[0];    
+
+    step.choices.sort(function (a, b) {
+      return a.values[paramToSort] - b.values[paramToSort];
+    });
+  });  
+
   const promiseArray = [];
-  for (let i = 0; i < maxStep; i += 1) {
+  for (let i = 0; i < maxStep + 1; i += 1) {
     console.log(
       `Creating choiceFont${i} from template ${
         templateNames[templates[font.template]]
@@ -289,7 +315,7 @@ export const selectFont = font => (dispatch, getState) => {
     dispatch({
       type: SELECT_FONT,
       fontName: selectedFontName,
-      selectedFont: font,
+      selectedFont,
       initialValues: { ...font.baseValues },
       stepBaseValues: { ...font.baseValues },
       choicesFontsName,

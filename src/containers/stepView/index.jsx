@@ -13,7 +13,7 @@ import {
   finishEditing,
   resetStep
 } from "../../data/font";
-import { switchBlackOnWhite } from "../../data/user";
+import { switchBlackOnWhite, switchGlyphMode } from "../../data/user";
 import Choice from "../../components/choice/";
 import WordView from "../wordView/";
 import Sliders from "../sliders/";
@@ -22,6 +22,7 @@ import "./StepView.css";
 
 import { ReactComponent as Back } from "./back.svg";
 import { ReactComponent as Next } from "./next.svg";
+import { ReactComponent as Finish } from "./finish.svg";
 import { ReactComponent as BackgroundIcon } from "./background.svg";
 import { ReactComponent as GlyphIcon } from "./glyph.svg";
 
@@ -180,7 +181,9 @@ class StepView extends React.Component {
     return (
       <Shortcuts name="CHOICES" handler={this.handleShortcuts}>
         <div
-          className={`StepView ${this.props.isBlackOnWhite ? '' : 'whiteOnBlack'}`}
+          className={`StepView ${
+            this.props.isBlackOnWhite ? "" : "whiteOnBlack"
+          }`}
           ref={c => {
             this.stepViewWrapper = c;
           }}
@@ -193,41 +196,40 @@ class StepView extends React.Component {
                 this.props.stepBack();
               }}
             />
-            <div className="choices">
-              <FlipMove
-                duration={200}
-                easing="ease"
-                appearAnimation={
-                  this.props.step === 1 ? "accordionHorizontal" : undefined
-                }
-                enterAnimation={
-                  this.props.step > 1 ? "accordionHorizontal" : undefined
-                }
-                leaveAnimation="accordionHorizontal"
-                staggerDurationBy="20"
-                staggerDelayBy="40"
-                maintainContainerHeight
-              >
-                {this.props.stepValues.choices.map((choice, index) => (
-                  <Choice
-                    choice={choice}
-                    key={`${choice.name}${choice.id}`}
-                    markChoiceActive={this.markChoiceActive}
-                    selectChoice={this.props.selectChoice}
-                    index={index}
-                    selected={this.state.choice === choice}
-                    text={this.props.chosenWord}
-                    mostSelected={this.state.mostSelected === choice.id}
-                    isBlackOnWhite={this.props.isBlackOnWhite}
-                  />
-                ))}
-              </FlipMove>
+            <FlipMove
+              className="choices row"
+              duration={300}
+              delay={200}
+              staggerDelayBy={100}
+              easing="ease-out"
+              appearAnimation={
+                undefined
+              }
+              enterAnimation={
+                "fade"
+              }
+              leaveAnimation={"none"}
+            >
+              {this.props.stepValues.choices.map((choice, index) => (
+                <Choice
+                  choice={choice}
+                  key={`${choice.name}${choice.id}`}
+                  markChoiceActive={this.markChoiceActive}
+                  selectChoice={this.props.selectChoice}
+                  index={index}
+                  selected={this.state.choice === choice}
+                  text={this.props.chosenWord}
+                  mostSelected={this.state.mostSelected === choice.id}
+                  isBlackOnWhite={this.props.isBlackOnWhite}
+                  isGlyphMode={this.props.isGlyphMode}
+                />
+              ))}
               <div
                 className={`Choice choiceMore ${
                   this.state.choice && this.state.choice.name === "Custom"
                     ? "selected"
                     : ""
-                }`}
+                } col-sm-${this.props.isGlyphMode ? '4 glyphMode' : '12'}`}
                 role="option"
                 aria-checked="false"
                 aria-selected="false"
@@ -235,23 +237,31 @@ class StepView extends React.Component {
                 key={`choiceCustom`}
                 onDoubleClick={() => this.props.selectChoice(this.state.choice)}
               >
-                {this.state.choice && this.state.choice.name === "Custom"
-                  ? this.props.chosenWord
-                  : ""}
+                {this.props.isGlyphMode ? 'n' : this.props.chosenWord}
                 <p className="choiceName">Custom</p>
               </div>
-              {this.state.choice && this.state.choice.name === "Custom" ? (
-                <Sliders onUpdate={this.onUpdate} />
-              ) : (
-                false
-              )}
-            </div>
+            </FlipMove>            
+            {this.state.choice && this.state.choice.name === "Custom" ? (
+              <Sliders onUpdate={this.onUpdate} />
+            ) : (
+              false
+            )}
             <Next
-              className="icon-next"
+              className={`icon-next ${
+                !(this.state.choice && this.state.choice.name) ? "disabled" : ""
+              }`}
               onClick={() => {
-                this.state.choice
-                  ? this.props.selectChoice(this.state.choice)
-                  : this.props.stepForward();
+                if (this.state.choice && this.state.choice.name)
+                  this.props.selectChoice(this.state.choice);
+              }}
+            />
+            <Finish
+              className={`icon-finish ${
+                this.props.choicesMade.length - 1 === this.props.stepLength ? "" : "disabled"
+              }`}
+              onClick={() => {
+                if (this.props.choicesMade.length - 1 === this.props.stepLength)
+                  this.props.finishEditing();
               }}
             />
             <div className="actions">
@@ -261,11 +271,13 @@ class StepView extends React.Component {
                   mode="isConfigure"
                   label={
                     this.state.choice && this.state.choice.name === "Custom"
-                      ? "Remove custom choice"
+                      ? "Less accuracy"
                       : "More accuracy"
                   }
                   onClick={() =>
-                    this.markChoiceActive({ name: "Custom", values: {} })
+                  this.state.choice && this.state.choice.name === "Custom"
+                    ? this.markChoiceActive({ name: undefined, values: {} })     
+                    : this.markChoiceActive({ name: "Custom", values: {} })                    
                   }
                 />
               </span>
@@ -274,7 +286,10 @@ class StepView extends React.Component {
                   className="icon-background"
                   onClick={() => this.props.switchBlackOnWhite()}
                 />
-                <GlyphIcon className="icon-glyph" onClick={() => {}} />
+                <GlyphIcon
+                  className="icon-glyph"
+                  onClick={() => this.props.switchGlyphMode()}
+                />
               </span>
             </div>
           </div>
@@ -290,6 +305,8 @@ const mapStateToProps = state => ({
   choicesMade: state.font.choicesMade,
   chosenWord: state.user.chosenWord,
   isBlackOnWhite: state.user.isBlackOnWhite,
+  isGlyphMode: state.user.isGlyphMode,
+  stepLength: state.font.currentPreset.steps.length,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -300,7 +317,8 @@ const mapDispatchToProps = dispatch =>
       updateSliderFont,
       finishEditing,
       resetStep,
-      switchBlackOnWhite
+      switchBlackOnWhite,
+      switchGlyphMode
     },
     dispatch
   );
@@ -313,6 +331,7 @@ StepView.propTypes = {
   updateSliderFont: PropTypes.func.isRequired,
   resetStep: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
+  stepLength: PropTypes.number.isRequired,
   choicesMade: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired
@@ -329,7 +348,9 @@ StepView.propTypes = {
   }).isRequired,
   chosenWord: PropTypes.string.isRequired,
   switchBlackOnWhite: PropTypes.func.isRequired,
-  isBlackOnWhite: PropTypes.bool.isRequired,
+  switchGlyphMode: PropTypes.func.isRequired,
+  isGlyphMode: PropTypes.bool.isRequired,
+  isBlackOnWhite: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);

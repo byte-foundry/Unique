@@ -11,7 +11,7 @@ const Step = props => (
   <div
     role="button"
     className={`Step ${props.current ? 'current' : ''}`}
-    onClick={() => props.goToStep(props.index, props.specimen)}
+    onClick={() => props.goToStep(props.index + 1, props.specimen)}
     tabIndex="0"
   >
     <span>

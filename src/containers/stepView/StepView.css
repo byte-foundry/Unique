@@ -18,15 +18,6 @@
   max-width: 850px;
 }
 
-
-.StepView h3 {
-  display: inline-block;
-  padding-bottom: 4px;
-  font-size: 1rem;
-  color: #CAB8DA;
-  border-bottom: 2px solid #CAB8DA;
-}
-
 .StepView h3:not(.currentState) {
   margin-bottom: 60px;
 }
@@ -59,26 +50,57 @@
   border-bottom-color: white;
 }
 
-.StepView .icon-back, .StepView .icon-next {
-  width: 30px;
+.StepView .icon-back, .StepView .icon-next, .StepView .icon-finish {
+  width: 40px;
   height: auto;
   cursor: pointer;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  transition: transform .3s ease;
+  transform: translateY(-50%) translateZ(0px);
+  transition: transform .3s ease, background .3s ease, border-color .3s ease;  
+  border: 1px solid #FF6359;
+  padding: 0px;
+}
+
+.StepView .icon-back path, .StepView .icon-next path, .StepView .icon-finish path {
+  fill: white;
 }
 
 .StepView .icon-back {
+  background: #FF6359;
   left: -75px;
+}
+
+.StepView .icon-next.disabled {
+  border-color: #C7C3D1;
+  background: #C7C3D1;
+}
+
+.StepView .icon-finish.disabled {
+  display: none;
+}
+
+.StepView .icon-finish {
+  right: -135px;
+  background: #FF6359;
 }
 
 .StepView .icon-next {
   right: -75px;
+  background: #FF6359;
 }
 
-.StepView .icon-next:hover, .StepView .icon-back:hover {
-  transform: scale(1.1) translateY(-50%);
+.StepView.whiteOnBlack .icon-back, .StepView.whiteOnBlack .icon-next, .StepView.whiteOnBlack .icon-finish {
+  background: transparent;
+}
+
+.StepView .icon-next:not(.disabled):hover, .StepView .icon-finish:not(.disabled):hover, .StepView .icon-back:hover {
+  transform: scale(1.1) translateY(-50%) translateZ(0px);
+}
+
+.StepView.whiteOnBlack .icon-next:not(.disabled) path, .StepView.whiteOnBlack .icon-back path {
+  fill: #FF6359;
+  transition: fill .3s ease;  
 }
 
 
@@ -86,6 +108,11 @@
 .StepView .choiceMore {
   position: relative;
   display: none;
+  background: transparent;
+}
+
+.StepView.whiteOnBlack .choiceMore {
+  color: white;
 }
 
 .StepView .choiceMore:focus {
@@ -95,4 +122,5 @@
 .StepView .choiceMore.selected {
   font-family: 'sliderFont';
   display: block;
+  margin-bottom: 30px;
 }
