@@ -1,47 +1,64 @@
 .SpecimenView {
   position: relative;
   display: block;
-  padding: 50px;
 }
 
-.SpecimenView h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'peasy';
-  font-size: 15rem;
-  line-height: 15rem;
-  margin: 0;
-  font-weight: normal;
+.SpecimenView .container {
+  position: relative;
 }
+
 
 .SpecimenView h3 {
   display: inline-block;
-  margin-top: 50px;
-  padding-bottom: 4px;
   font-size: 1rem;
-  color: #CAB8DA;
-  border-bottom: 2px solid #CAB8DA;
-  margin-bottom: 30px;
+  color: #FF6359;
+  font-family: unique, sans-serif;
+  font-weight: 400;
+  margin-left: 0;
 }
 
-.SpecimenView .StepList h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
+.SpecimenView h2 {
+  display: inline-block;
+  font-size: 2rem;
+  color: black;
+  font-family: unique, sans-serif;
+  font-weight: 400;
+  margin-left: 0;
 }
 
-.SpecimenView .StepList {
-  padding-top: 0;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
-
-.SpecimenView .back {
+.SpecimenView .icon-back, .SpecimenView .icon-next {
+  width: 40px;
+  height: auto;
+  cursor: pointer;
   position: absolute;
-  top: 55px;
-  left: 45px;
+  top: 50%;
+  transform: translateY(-50%) translateZ(0px);
+  transition: transform .3s ease, background .3s ease, border-color .3s ease;  
+  border: 1px solid #FF6359;
+  background: #FF6359;
+  padding: 0px;
+  z-index: 10;
+}
+
+.SpecimenView .icon-back path, .SpecimenView .icon-next path {
+  fill: white;
+}
+
+.SpecimenView .icon-back {
+  left: -75px;
+}
+
+.SpecimenView .hooray {
+  font-family: unique, sans-serif;
+  font-weight: 400;
+  color: #C7C3D1;
+  width: 300px;
+  margin-bottom: 100px;
+  margin-top: 100px;
+}
+
+.SpecimenView .hooray h2{
+  font-weight: 400;
 }
 
 .SpecimenView .export .hollow {
@@ -49,153 +66,56 @@
 }
 
 .SpecimenView .export p {
-  color: #c7b5d8
+  color: #c7b5d8;
 }
 
-.SpecimenView .specimen {
-  font-size: 22px;
+.SpecimenView .word {
+  font-size: 75px;
 }
 
-.SpecimenView .specimen .logo {
-  margin-top: 100px;
-  margin-bottom: 100px;
-  text-align: center;
+.SpecimenView .characters {
+  font-size: 45px;
 }
 
-.SpecimenView .specimen .logo .logo-unstyled {
-  font-size: 85px;
+.SpecimenView .greyscale {
+  font-size: 20px;
 }
 
-
-
-
-.SpecimenView .specimen.website .templates {
-  display: block;
-  min-height: 800px; 
-}
-
-.SpecimenView .specimen.website .templates .template {
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  margin-bottom: 80px;
-}
-
-.SpecimenView .specimen.website .templates .template .text {
-  overflow: hidden;
+.SpecimenView .greyscale-left {
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
 }
 
 
-.SpecimenView .specimen.website .templates .desktop-wrapper {
-  width: 100%;
-  height: 800px;
-  overflow: hidden;
+.SpecimenView .greyscale-right {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
 }
 
-.SpecimenView .specimen.website .templates .desktop-wrapper .text{
-  position: absolute;
-  display: block;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -30%);
-  width: 80%;
-  height: 60%;
+.SpecimenView .greyscale-left.greyscale-first {
+  color: #000000;
 }
 
-.SpecimenView .specimen.website .templates .tablet-wrapper {
-  width: 100%;
-  height: 600px;
-  overflow: hidden;
+.SpecimenView .greyscale-left.greyscale-second {
+  color: #666666;
 }
 
-.SpecimenView .specimen.website .templates .tablet-wrapper .text{
-  position: absolute;
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 65%;
-  height: 80%;
-  font-size: 0.8em;
+.SpecimenView .greyscale-left.greyscale-third {
+  color: #CCCCCC;
 }
 
-.SpecimenView .specimen.website .templates .mobile-wrapper {
-  width: 100%;
-  height: 500px;
-  margin-top: 100px;
-  overflow: hidden;
+.SpecimenView .greyscale-right.greyscale-first {
+  color: #FFFFFF;
 }
 
-.SpecimenView .specimen.website .templates .mobile-wrapper .text{
-  position: absolute;
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 35%;
-  height: 65%;
-  font-size: 0.7em;
+.SpecimenView .greyscale-right.greyscale-second {
+  color: #999999;
 }
 
-
-.SpecimenView .specimen .text1 {
-  font-size: 12pt;
-  padding: 0;
-  margin: 1em 0 0 0;
-  text-align: justify;
-}
-
-.SpecimenView .specimen .text2 {
-  font-size: 11pt;
-  padding: 0;
-  margin: 1rem 0 0 0;
-  text-align: justify;
-}
-
-.SpecimenView .specimen .text3 {
-  font-size: 10pt;
-  padding: 0;
-  margin: 1rem 0 0 0;
-  text-align: justify;
-}
-
-.SpecimenView .specimen .uppercase {
-  font-size: 2.5em;
-  letter-spacing: 0;
-  text-align: justify;
-  height: 1.5em;
-  overflow: hidden;
-}
-
-.SpecimenView .specimen .uppercase:after {
-  content: "";
-  display: inline-block;
-  width: 100%;
-}
-
-.SpecimenView .specimen .lowercase {
-  font-size: 1.5em;
-  letter-spacing: 0;
-  text-align: justify;
-  height: 1.5em;
-  overflow: hidden;
-}
-
-.SpecimenView .specimen .lowercase:after {
-  content: "";
-  display: inline-block;
-  width: 100%;
-}
-
-.SpecimenView .StepList {
-  font-family: duA5LDxD8w, sans-serif;
-  font-size: 14px;
-}
-
-
-.SpecimenView .specimen h2, .SpecimenView .specimen h3 {
-  font-weight: normal;
+.SpecimenView .greyscale-right.greyscale-third {
+  color: #333333;
 }
 
 .SpecimenView form input {

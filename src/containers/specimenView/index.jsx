@@ -1,165 +1,26 @@
 // @flow
-import React from 'react';
-import { push } from 'react-router-redux';
-import { withRouter } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Shortcuts } from 'react-shortcuts';
-import './SpecimenView.css';
-import StepList from '../stepList/';
-import Button from '../../components/button/';
-import CustomLogo from '../../components/customLogo';
-import { storeEmail, storeProject } from '../../data/user';
-import desktopBackground from './desktop.svg';
-import tabletBackground from './tablet.svg';
-import mobileBackground from './mobile.svg';
+import React from "react";
+import { push } from "react-router-redux";
+import { withRouter } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Shortcuts } from "react-shortcuts";
+import "./SpecimenView.css";
+import StepList from "../stepList/";
+import Button from "../../components/button/";
+import CustomLogo from "../../components/customLogo";
+import { storeEmail, storeProject } from "../../data/user";
+import desktopBackground from "./desktop.svg";
+import tabletBackground from "./tablet.svg";
+import mobileBackground from "./mobile.svg";
 
-const isEmail = string => new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(string);
+import { ReactComponent as Back } from "../stepView/back.svg";
 
-const logoSpecimen = (
-  fontName,
-  word,
-  isCustomLogo,
-  showControls,
-  setCustomLogo,
-  removeCustomLogo,
-  validateCustomLogo,
-) => (
-  <div className="specimen row">
-    <div className="col-sm-12 col-md-8">
-      <div className="logo">
-        {isCustomLogo
-        ? <CustomLogo word={word} fontName={fontName} shouldShowControls={showControls} />
-        : <span className="logo-unstyled" style={{ fontFamily: `'${fontName}'` }}>{ word }</span>}
-      </div>
-      {
-        isCustomLogo && showControls
-        ? (
-          <Button
-            className="hollow"
-            label="cancel"
-            onClick={() => removeCustomLogo()}
-          />
-        )
-        : null
-      }
-      <Button
-        className=""
-        label={isCustomLogo && showControls ? 'Set customization' : 'Customize it'}
-        onClick={() => {
-          return isCustomLogo ? validateCustomLogo() : setCustomLogo();
-        }}
-      />
-    </div>
-    <div className="col-sm-12 col-md-3">
-      <StepList specimen />
-    </div>
-  </div>
-);
-
-const textSpecimen = fontName => (
-  <div className="specimen row" style={{ fontFamily: `'${fontName}'` }}>
-    <div className="col-sm-12 col-md-6">
-      <div className="uppercase">A B C D E F G H I</div>
-      <div className="uppercase">J K L M N O P Q R</div>
-      <div className="uppercase">S T U V W X Y Z</div>
-      <div className="lowercase">
-        a b c d e f g h i j k l m n o p q r s t u v w x y z
-      </div>
-      <div className="lowercase">1 2 3 4 5 6 7 8 9 0 . . . ( & ! ? )</div>
-      <div className="text1">
-        There is a theory which states that if ever anyone discovers exactly
-        what the Universe is for and why it is here, it will instantly disappear
-        and be replaced by something even more bizarre and inexplicable. There
-        is another theory which states that this has already happened.
-      </div>
-      <div className="text2">
-        Twelve voices were shouting in anger, and they were all alike. No
-        question, now, what had happened to the faces of the pigs. The creatures
-        outside looked from pig to man, and from man to pig, and from pig to man
-        again; but already it was impossible to say which was which.
-      </div>
-    </div>
-    <div className="col-sm-12 col-md-6">
-      <StepList specimen />
-    </div>
-  </div>
-);
-
-const websiteSpecimen = fontName => (
-  <div className="specimen website" style={{ fontFamily: `'${fontName}'` }}>
-    <div className="templates">
-      <div className="row">
-        <div className="col-sm-12">
-          <div className="template desktop-wrapper" style={{ backgroundImage: `url(${desktopBackground})` }}>
-            <span className="text">
-              There is a theory which states that if ever anyone discovers exactly
-              what the Universe is for and why it is here, it will instantly disappear
-              and be replaced by something even more bizarre and inexplicable. There
-              is another theory which states that this has already happened.
-              <br />
-              Twelve voices were shouting in anger, and they were all alike. No
-              question, now, what had happened to the faces of the pigs. The creatures
-              outside looked from pig to man, and from man to pig, and from pig to man
-              again; but already it was impossible to say which was which.
-              <br />
-              The trouble with most forms of transport, he thought, is basically one
-              of them not being worth all the bother. On Earth—when there had been an Earth,
-              before it was demolished to make way for a new hyperspace bypass—the problem had been with cars.
-              The disadvantages involved in pulling lots of black sticky slime from out of the ground where it
-              had been safely hidden out of harm's way, turning it into tar to cover the land with, smoke to fill
-              the air with and pouring the rest into the sea, all seemed to outweigh the advantages of being able
-              to get more quickly from one place to another—particularly when the place you arrived at had probably become,
-              as a result of this, very similar to the place you had left, i.e. covered with tar, full of smoke and short of fish.
-            </span>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-sm-12 col-md-12 col-lg-6">
-          <div className="template tablet-wrapper" style={{ backgroundImage: `url(${tabletBackground})` }}>
-            <span className="text">
-              There is a theory which states that if ever anyone discovers exactly
-              what the Universe is for and why it is here, it will instantly disappear
-              and be replaced by something even more bizarre and inexplicable. There
-              is another theory which states that this has already happened.
-              <br />
-              Twelve voices were shouting in anger, and they were all alike. No
-              question, now, what had happened to the faces of the pigs. The creatures
-              outside looked from pig to man, and from man to pig, and from pig to man
-              again; but already it was impossible to say which was which.
-              <br />
-              The trouble with most forms of transport, he thought, is basically one
-              of them not being worth all the bother. On Earth—when there had been an Earth,
-              before it was demolished to make way for a new hyperspace bypass—the problem had been with cars.
-            </span>
-          </div>
-        </div>
-        <div className="col-sm-12 col-md-12 col-lg-6">
-          <div className="template mobile-wrapper" style={{ backgroundImage: `url(${mobileBackground})` }}>
-            <span className="text">
-              There is a theory which states that if ever anyone discovers exactly
-              what the Universe is for and why it is here, it will instantly disappear
-              and be replaced by something even more bizarre and inexplicable. There
-              is another theory which states that this has already happened.
-              <br />
-              Twelve voices were shouting in anger, and they were all alike. No
-              question, now, what had happened to the faces of the pigs. The creatures
-              outside looked from pig to man, and from man to pig, and from pig to man
-              again; but already it was impossible to say which was which.
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div className="row">
-      <div className="col-sm-12">
-        <StepList specimen />
-      </div>
-    </div>
-  </div>
-);
+const isEmail = string =>
+  new RegExp(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  ).test(string);
 
 const renderValidateLoggedIn = (storeProj, fontName) => (
   <div>
@@ -181,10 +42,9 @@ const renderValidateNotLoggedIn = (
   changeEmail,
   sendEmail,
   onFocus,
-  onBlur,
+  onBlur
 ) =>
-  email === '' || !email || shouldChangeEmail
-  ? (
+  email === "" || !email || shouldChangeEmail ? (
     <form onSubmit={handleSubmit}>
       <input
         type="email"
@@ -196,10 +56,10 @@ const renderValidateNotLoggedIn = (
       />
       <button type="submit">Download</button>
     </form>
-  )
-  : (
+  ) : (
     <div className="export">
-      <p>You are currently registered as {email}.</p><br />
+      <p>You are currently registered as {email}.</p>
+      <br />
       <Button
         className="hollow"
         label="Change email"
@@ -214,13 +74,13 @@ class SpecimenView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      email: "",
       shouldChangeEmail: false,
       isCustomLogo: false,
       showCustomLogoControls: true,
       shouldContinueUnregistered: false,
       fontName: props.projectName,
-      isInputFocused: false,
+      isInputFocused: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -248,12 +108,12 @@ class SpecimenView extends React.Component {
   removeCustomLogo() {
     this.setState({
       isCustomLogo: !this.state.isCustomLogo,
-      showCustomLogoControls: true,
+      showCustomLogoControls: true
     });
   }
   validateCustomLogo() {
     this.setState({
-      showCustomLogoControls: !this.state.showCustomLogoControls,
+      showCustomLogoControls: !this.state.showCustomLogoControls
     });
   }
   handleChange(event) {
@@ -274,7 +134,7 @@ class SpecimenView extends React.Component {
   handleShortcuts(action) {
     if (!this.state.isInputFocused) {
       switch (action) {
-        case 'STEP_BACK':
+        case "STEP_BACK":
           this.props.goBack();
           break;
         default:
@@ -285,45 +145,85 @@ class SpecimenView extends React.Component {
   render() {
     const { isAuthenticated, login } = this.props.auth;
     return (
-      <Shortcuts
-        name="CHOICES"
-        handler={this.handleShortcuts}
-        isolate
-      >
-        <div className="SpecimenView" ref={(c) => { this.specimenViewWrapper = c; }} tabIndex="-1">
-          <Button
-            className="back"
-            mode="isBack"
-            label="Back"
-            onClick={() => this.props.goBack()}
-          />
+      <Shortcuts name="CHOICES" handler={this.handleShortcuts} isolate>
+        <div
+          className="SpecimenView"
+          ref={c => {
+            this.specimenViewWrapper = c;
+          }}
+          tabIndex="-1"
+        >
           <div className="container">
-            <h3>
-              Hooray ! You have created the perfect bespoke font for your project
-            </h3>
-            {(() => {
-              switch (this.props.need) {
-                case "logo":
-                  return logoSpecimen(
-                    this.props.fontName,
-                    this.props.word,
-                    this.state.isCustomLogo,
-                    this.state.showCustomLogoControls,
-                    this.setCustomLogo,
-                    this.removeCustomLogo,
-                    this.validateCustomLogo,
-                    this.onFocus,
-                    this.onBlur,
-                  );
-                case "text":
-                  return textSpecimen(this.props.fontName);
-                case "website":
-                  return websiteSpecimen(this.props.fontName);
-                default:
-                  return textSpecimen(this.props.fontName);
-              }
-            })()}
-            <h3>If you like your work, download it!</h3>
+            <Back
+              className="icon-back"
+              onClick={() => {
+                this.props.goBack();
+              }}
+            />
+            <div className="hooray">
+              <h2>It's a match!</h2>
+              <p>
+                You have created the perfect bespoke font that fits your needs.
+              </p>
+            </div>
+            <div
+              className="specimen row"
+              style={{ fontFamily: `'${this.props.fontName}'` }}
+            >
+              <div className="col-sm-12 ">
+                <h3>Word</h3>
+                <p className="word">{this.props.word}</p>
+                <h3>Characters</h3>
+                <p className="characters">
+                  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+                </p>
+                <p className="characters">
+                  a b c d e f g h i j k l m n o p q r s t u v w x y z
+                </p>
+                <p className="characters">
+                  1 2 3 4 5 6 7 8 9 0 . . . ( & ! ? )
+                </p>
+                <h3>Grey scale</h3>
+                <div className="row">
+                  <div className="col-md-6 col-sm-12 greyscale-left">
+                    <p className="greyscale greyscale-left greyscale-first">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
+                    <p className="greyscale greyscale-left greyscale-second">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
+                    <p className="greyscale greyscale-left greyscale-third">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
+                  </div>
+                  <div className="col-md-6 col-sm-12 greyscale-right">
+                    <p className="greyscale greyscale-right greyscale-first">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
+                    <p className="greyscale greyscale-right greyscale-second">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
+                    <p className="greyscale greyscale-right greyscale-third">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br/><br/><br/><br/>
+            <h2>If you like your work, download it!</h2>
             <p>What would be the name of your font?</p>
             <form action="">
               <input
@@ -331,30 +231,33 @@ class SpecimenView extends React.Component {
                 value={this.state.fontName}
                 placeholder="Your font name"
                 name="fontname"
-                onChange={(e) => {
+                onChange={e => {
                   this.setState({ fontName: e.target.value });
                   e.stopPropagation();
                   e.preventDefault();
                 }}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
-
               />
             </form>
             {isAuthenticated() ? (
-              renderValidateLoggedIn(this.props.storeProject, this.state.fontName)
+              renderValidateLoggedIn(
+                this.props.storeProject,
+                this.state.fontName
+              )
             ) : (
               <div>
                 <p>You are not logged in.</p>
                 <p>
-                  Do you want to log in / create an account to save your project?
+                  Do you want to log in / create an account to save your
+                  project?
                 </p>
                 <p>
                   <Button
                     className=""
                     label="Log in"
                     onClick={() => {
-                      login('/specimen');
+                      login("/specimen");
                     }}
                   />
                 </p>
@@ -368,7 +271,7 @@ class SpecimenView extends React.Component {
                     this.changeEmail,
                     this.sendEmail,
                     this.onFocus,
-                    this.onBlur,
+                    this.onBlur
                   )
                 ) : (
                   <Button
@@ -393,14 +296,18 @@ const mapStateToProps = state => ({
   email: state.user.email,
   need: state.font.need,
   word: state.user.chosenWord,
-  projectName: state.user.projectName,
+  projectName: state.user.projectName
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  goBack: () => push('/customize'),
-  storeEmail,
-  storeProject,
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      goBack: () => push("/customize"),
+      storeEmail,
+      storeProject
+    },
+    dispatch
+  );
 
 SpecimenView.propTypes = {
   storeEmail: PropTypes.func.isRequired,
@@ -412,15 +319,17 @@ SpecimenView.propTypes = {
   word: PropTypes.string.isRequired,
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.func.isRequired,
-    login: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired
   }).isRequired,
   projectName: PropTypes.string,
 };
 
 SpecimenView.defaultProps = {
-  fontName: 'ptypo',
-  email: '',
-  projectName: '',
+  fontName: "ptypo",
+  email: "",
+  projectName: ""
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpecimenView));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SpecimenView)
+);

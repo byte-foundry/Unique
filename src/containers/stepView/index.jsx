@@ -198,9 +198,9 @@ class StepView extends React.Component {
             />
             <FlipMove
               className="choices row"
-              duration={300}
-              delay={200}
-              staggerDelayBy={100}
+              duration={250}
+              delay={150}
+              staggerDelayBy={50}
               easing="ease-out"
               appearAnimation={
                 undefined
@@ -237,7 +237,7 @@ class StepView extends React.Component {
                 key={`choiceCustom`}
                 onDoubleClick={() => this.props.selectChoice(this.state.choice)}
               >
-                {this.props.isGlyphMode ? 'n' : this.props.chosenWord}
+                {this.props.isGlyphMode ? 'g' : this.props.chosenWord}
                 <p className="choiceName">Custom</p>
               </div>
             </FlipMove>            
