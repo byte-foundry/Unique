@@ -13,7 +13,7 @@
 
 .Choice.glyphMode {
   font-size: 20vh;
-  line-height: 10vh;
+  line-height: 11vh;
   text-align: center;
   padding: 0;
   padding-top: 5vh;
@@ -22,7 +22,7 @@
 }
 
 .Choice.glyphMode .choiceName{
-  margin-top: 0px;
+  margin-top: 5px;
 }
 
 .Choice.whiteOnBlack {

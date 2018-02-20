@@ -8,48 +8,61 @@ import { Link } from "react-router-dom";
 import Step from "../../components/step/";
 import Button from "../../components/button";
 import { goToStep, finishEditing } from "../../data/font";
-import "./StepList.css";
+import "./Sidebar.css";
 
 import { ReactComponent as ProfileIcon } from "./profile.svg";
 import { ReactComponent as MenuIcon } from "./menu.svg";
 
 const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
-  steps.map(
-    (step, i) =>
-      (
-        <Step
-          index={i}
-          title={steps[i].name}
-          key={steps[i].name}
-          current={index === i + 1 && !isSpecimen}
-          choice={choicesMade[i - 1] ? choicesMade[i - 1].name : undefined}
-          specimen={isSpecimen}
+  steps.map((step, i) => (
+    <Step
+      index={i}
+      title={steps[i].name}
+      key={steps[i].name}
+      current={index === i + 1 && !isSpecimen}
+      choice={choicesMade[i - 1] ? choicesMade[i - 1].name : undefined}
+      specimen={isSpecimen}
+    />
+  ));
+class Sidebar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSmall: false
+    };
+  }
+  render() {
+    return (
+      <div className={`Sidebar ${this.state.isSmall ? 'small' : ''}`}>
+        <ProfileIcon
+          className="icon-profile"
+          onClick={() => {
+            this.props.isAuthenticated()
+              ? this.props.goToLibrary()
+              : this.props.login();
+          }}
         />
-      )
-  );
-const StepList = props => {
-  console.log(props);
-  return (
-    <div className="StepList">
-      <ProfileIcon
-        className="icon-profile"
-        onClick={() => {
-          props.isAuthenticated() ? props.goToLibrary() : props.login();
-        }}
-      />
-      <MenuIcon className="icon-menu" onClick={() => {}} />
-      {getStepsDone(
-        props.steps,
-        props.step,
-        props.choicesMade,
-        props.fontName,
-        props.specimen
-      )}
-    </div>
-  );
-};
+        <MenuIcon
+          className="icon-menu"
+          onClick={() => this.setState({ isSmall: !this.state.isSmall })}
+        />
+        <div className="steps">
+          {this.state.isSmall
+            ? false
+            : getStepsDone(
+                this.props.steps,
+                this.props.step,
+                this.props.choicesMade,
+                this.props.fontName,
+                this.props.specimen
+              )}
+        </div>
+      </div>
+    );
+  }
+}
 
-StepList.propTypes = {
+Sidebar.propTypes = {
   step: PropTypes.number.isRequired,
   steps: PropTypes.arrayOf(
     PropTypes.shape({
@@ -75,7 +88,7 @@ StepList.propTypes = {
   goToLibrary: PropTypes.func.isRequired
 };
 
-StepList.defaultProps = {
+Sidebar.defaultProps = {
   specimen: false
 };
 
@@ -95,4 +108,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(StepList);
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

@@ -17,7 +17,7 @@ class Choice extends React.Component {
         tabIndex={0}
         style={{ fontFamily: `choiceFont${this.props.index}` }}
       >
-        {this.props.isGlyphMode ? 'n' : this.props.text}
+        {this.props.isGlyphMode ? 'g' : this.props.text}
         <p className="choiceName">{this.props.choice.name}</p>
         {this.props.mostSelected ? (
           <span className=""/>

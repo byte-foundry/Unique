@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './ParamChoice.css';
 import StepView from '../stepView/';
-import StepList from '../stepList/';
+import Sidebar from '../sidebar/';
 
 const ParamChoice = (props) => (
   <div className="ParamChoice container-fluid">
@@ -15,7 +15,7 @@ const ParamChoice = (props) => (
         <StepView />
       </div>
       <div className="right col-sm-2">
-        <StepList {...props}/>
+        <Sidebar {...props}/>
       </div>
     </div>
   </div>
