@@ -546,7 +546,7 @@ export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
   const { currentPreset } = getState().font;
   switch (step) {
     case 0:
-      dispatch(push("/"));
+      dispatch(push("/select"));
       break;
     case currentPreset.steps.length + 1:
       dispatch(updateFont(true));

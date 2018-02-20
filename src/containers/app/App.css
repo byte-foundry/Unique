@@ -124,7 +124,7 @@
 
 @keyframes animLoadedLogo {
 	to { 
-		transform: translate3d(-45%,100%,0) translate3d(0,2.5%,0) scale3d(0.30,0.30,1); 
+		transform: translate3d(-43%,100%,0) translate3d(0,5.5%,0) scale3d(0.30,0.30,1); 
 	}
 }
 

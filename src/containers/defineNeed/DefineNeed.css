@@ -1,43 +1,58 @@
 .DefineNeed {
   padding-top: 120px;
+  position: relative;
 }
 
 .DefineNeed .needs {
+  font-size: 2rem;
+}
+
+.DefineNeed .needs div {
+  cursor: pointer;
+  color: #C7C3D1;
+  margin-bottom: 3px;
+  transition: color .3s ease;
+}
+
+.DefineNeed .needs .selected {
+  color: #FF6359;
+}
+
+.DefineNeed .icon-next {
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #FF6359;
+  transition: all .3s ease;  
+  border: 1px solid #FF6359;
+  padding: 0px;
+  z-index: 3;
+}
+.DefineNeed .icon-next path {
+  fill: white;
+}
+.DefineNeed .icon-next.disabled {
+  border-color: #C7C3D1;
+  background: #C7C3D1;
 }
 
 .DefineNeed h1, .DefineNeed h2 {
   display: inline-block;
-  margin-bottom: 60px;
-  padding-bottom: 4px;
-  font-size: 1rem;
-  color: #CAB8DA;
-  border-bottom: 2px solid #CAB8DA;
+  font-weight: 400;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  color: black;
 }
 
-.DefineNeed h2 {
-  text-align: center;
-  margin-top: 60px;
-  border-bottom: none;
+.DefineNeed .logoName {
+  margin-top: 50px;
 }
 
-
-.DefineNeed .needs .card {
-  margin-bottom: 15px;
-}
-
-.DefineNeed .needs .card .image {
-  height: 200px;
-  background-color: #c7b5d8;
-}
-
-.DefineNeed .needs .card .title {
-  background-color: #000;
-  color: white;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  padding: 20px 40px;
-  font-size: 18px;
-  font-weight: 700;
+.DefineNeed .logoName h1{
+  margin-bottom: 20px;
 }
 
 
@@ -47,14 +62,14 @@
   margin-top: 5px;
   height: 70px;
   width: 75%;
-  font-size: 18px;
-  background-color: rgba(80,18,134,0.08);
+  font-size: 2rem;
+  background-color: transparent;
   border: none;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  padding-left: 30px;
   user-select: none;
-  margin-bottom: 15px;
+}
+
+.DefineNeed form input::placeholder {
+  color: #C7C3D1;
 }
 
 .DefineNeed form button {

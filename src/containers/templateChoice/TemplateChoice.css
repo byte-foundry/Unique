@@ -1,7 +1,8 @@
 .TemplateChoice {
   position: relative;
-  display: block;
-  padding-top: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-height: 100vh;
 }
 
@@ -22,6 +23,10 @@
   left: 45px;
 }
 
+.TemplateChoice .container {
+  position: relative;
+}
+
 .TemplateChoice h2 {
   display: block;
   margin: 80px;
@@ -31,6 +36,37 @@
   font-size: 1rem;
   color: #CAB8DA;
   text-align: center;
+}
+
+.TemplateChoice .icon-back, .TemplateChoice .icon-next {
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateZ(0px);
+  transition: transform .3s ease, background .3s ease, border-color .3s ease;  
+  border: 1px solid #FF6359;
+  background: #FF6359;
+  padding: 0px;
+  z-index: 10;
+}
+
+.TemplateChoice .icon-back path, .TemplateChoice .icon-next path {
+  fill: white;
+}
+
+.TemplateChoice .icon-back {
+  left: -75px;
+}
+
+.TemplateChoice .icon-next {
+  right: -75px;
+}
+
+.TemplateChoice .icon-next.disabled {
+  border-color: #C7C3D1;
+  background: #C7C3D1;
 }
 
 .TemplateChoice .Button {
