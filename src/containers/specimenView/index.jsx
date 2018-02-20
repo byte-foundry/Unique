@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Shortcuts } from "react-shortcuts";
 import "./SpecimenView.css";
-import StepList from "../stepList/";
 import Button from "../../components/button/";
 import CustomLogo from "../../components/customLogo";
 import { storeEmail, storeProject } from "../../data/user";
