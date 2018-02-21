@@ -1,14 +1,16 @@
 .Choice {
   position: relative;
   width: 100%;
-  padding: 25px 15px 25px 70px;
-  font-size: 5.5vh;
+  padding: 25px 15px 15px 70px;
+  font-size: 10vh;
+  line-height: 8vh;
   background: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   cursor: pointer;
   border: 3px solid transparent;
   user-select: none;
   transition: color .3s ease, background .3s ease, border-color .3s ease;
+  margin-bottom: 20px;
 }
 
 .Choice.glyphMode {
@@ -39,8 +41,9 @@
 }
 
 .Choice .choiceName {
-  font-family: unique, sans-serif;
-  margin-top: -15px;
+  font-family: unique, sans-serif;  
+  line-height: 1;
+  margin-top: -10px;
   margin-bottom: 0;
   font-size: 14px;
   color: #C7C3D1;
