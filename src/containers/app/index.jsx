@@ -17,19 +17,20 @@ import Auth from "../../components/auth";
 import "./bootstrap-reboot.css";
 import "./bootstrap-grid.css";
 import "./App.css";
-import { ReactComponent as Logo } from './logo.svg';
+import { ReactComponent as Logo } from "./logo.svg";
 
 import ProtectedRoute from "../../components/protectedRoute/";
 
 import DefineNeed from "../defineNeed/";
 import TemplateChoice from "../templateChoice/";
-import ParamChoice from "../paramChoice/";
 import SpecimenView from "../specimenView/";
 import ExportTypes from "../exportTypes/";
 import Success from "../success/";
 import WelcomeBack from "../welcomeBack/";
 import Library from "../library/";
 import Button from "../../components/button";
+import StepView from "../stepView/";
+import Sidebar from "../sidebar/";
 
 class App extends React.Component {
   /* global Intercom*/
@@ -127,74 +128,95 @@ class App extends React.Component {
   render() {
     const { isAuthenticated } = this.auth;
     return (
-      <main className={`App ${this.props.isLoading ? 'loading' : 'loaded'}`}>
+      <main className={`App ${this.props.isLoading ? "loading" : "loaded"}`}>
         <header className="App-header">
-          <h1
-            className="App-logo-wrapper"
-          >
-            <Logo onClick={() => {
+          <h1 className="App-logo-wrapper">
+            <Logo
+              onClick={() => {
                 this.props.goToHome();
-              }}/>
-          </h1>
-        </header>
-        <div className="App-content">
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={props => <DefineNeed auth={this.auth} {...props} />}
-            />
-            <Route exact path="/restart" component={WelcomeBack} />
-            <Route
-              path="/callback"
-              render={props => {
-                this.handleAuthentication(props);
-                return <div>loading</div>;
               }}
             />
-            <ProtectedRoute
-              exact
-              requirement={() => this.hasSelectedNeed()}
-              path="/select"
-              component={TemplateChoice}
-            />
-            <ProtectedRoute
-              exact
-              requirement={() => isAuthenticated()}
-              path="/library"
-              component={Library}
-            />
-            <ProtectedRoute
-              exact
-              requirement={() => this.hasSelectedFont()}
-              path="/customize"
-              component={props => <ParamChoice isAuthenticated={this.auth.isAuthenticated} login={this.auth.login} {...props} />}
-            />
-            <ProtectedRoute
-              exact
-              requirement={() => this.hasSelectedFont()}
-              path="/specimen"
-              component={props => <SpecimenView auth={this.auth} {...props} />}
-            />
-            <ProtectedRoute
-              exact
-              requirement={() => this.hasMailRegistered()}
-              path="/export"
-              component={ExportTypes}
-            />
-            <ProtectedRoute
-              exact
-              requirement={() => this.hasSuccessfulPayment()}
-              path="/success"
-              component={Success}
-            />
-            <ProtectedRoute
-              exact
-              requirement={() => true}
-              path="/ptyposuccess"
-              component={Success}
-            />
-          </Switch>
+          </h1>
+        </header>
+        <div className="App-content container-fluid">
+          <div className="row">
+            <div className="left col-sm-10">
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={props => <DefineNeed auth={this.auth} {...props} />}
+                />
+                <Route exact path="/restart" component={WelcomeBack} />
+                <Route
+                  path="/callback"
+                  render={props => {
+                    this.handleAuthentication(props);
+                    return <div>loading</div>;
+                  }}
+                />
+                <ProtectedRoute
+                  exact
+                  requirement={() => this.hasSelectedNeed()}
+                  path="/select"
+                  component={TemplateChoice}
+                />
+                <ProtectedRoute
+                  exact
+                  requirement={() => isAuthenticated()}
+                  path="/library"
+                  component={Library}
+                />
+                <ProtectedRoute
+                  exact
+                  requirement={() => this.hasSelectedFont()}
+                  path="/customize"
+                  component={props => <StepView {...props} />}
+                />
+                <ProtectedRoute
+                  exact
+                  requirement={() => this.hasSelectedFont()}
+                  path="/specimen"
+                  component={props => (
+                    <SpecimenView auth={this.auth} {...props} />
+                  )}
+                />
+                <ProtectedRoute
+                  exact
+                  requirement={() => this.hasMailRegistered()}
+                  path="/export"
+                  component={ExportTypes}
+                />
+                <ProtectedRoute
+                  exact
+                  requirement={() => this.hasSuccessfulPayment()}
+                  path="/success"
+                  component={Success}
+                />
+                <ProtectedRoute
+                  exact
+                  requirement={() => true}
+                  path="/ptyposuccess"
+                  component={Success}
+                />
+              </Switch>
+            </div>
+            <div
+              className={`right col-sm-2 ${
+                this.props.isBlackOnWhite ||
+                this.props.location.pathname !== "/customize"
+                  ? ""
+                  : "whiteOnBlack"
+              }`}
+            >
+              <Sidebar
+                pathName={this.props.location.pathname}
+                isAuthenticated={this.auth.isAuthenticated}
+                login={this.auth.login}
+                {...this.props}
+              />
+            </div>
+          </div>
         </div>
       </main>
     );
@@ -207,10 +229,10 @@ App.propTypes = {
   userEmail: PropTypes.string,
   hasPayed: PropTypes.bool.isRequired,
   selectedFontLoaded: PropTypes.shape({
-    fontName: PropTypes.string.isRequired,
+    fontName: PropTypes.string.isRequired
   }),
   hasPresetsLoaded: PropTypes.shape({
-    fontName: PropTypes.string.isRequired,
+    fontName: PropTypes.string.isRequired
   }),
   pathname: PropTypes.string.isRequired,
   need: PropTypes.string.isRequired,
@@ -222,17 +244,18 @@ App.propTypes = {
   createPrototypoFactory: PropTypes.func.isRequired,
   isPrototypoLoaded: PropTypes.bool.isRequired,
   isPrototypoLoading: PropTypes.bool.isRequired,
+  isBlackOnWhite: PropTypes.bool.isRequired
 };
 
 App.defaultProps = {
   selectedFont: "",
   selectedFontLoaded: undefined,
   userEmail: "",
-  hasPresetsLoaded: undefined,
+  hasPresetsLoaded: undefined
 };
 
 App.childContextTypes = {
-  shortcuts: PropTypes.object.isRequired,
+  shortcuts: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -248,7 +271,8 @@ const mapStateToProps = state => ({
   isLoading: state.ui.unstable || state.createdFonts.isPrototypoLoading,
   shouldLogout: state.user.shouldLogout,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
-  isPrototypoLoading: state.createdFonts.isPrototypoLoading
+  isPrototypoLoading: state.createdFonts.isPrototypoLoading,
+  isBlackOnWhite: state.user.isBlackOnWhite
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

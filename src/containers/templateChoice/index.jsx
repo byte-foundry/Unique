@@ -111,6 +111,7 @@ class TemplateChoice extends React.Component {
                     <Template
                       font={font}
                       onClick={() => this.setState({ templateIndex: index })}
+                      onDoubleClick={() => this.props.selectFont(this.props.presets[index])}
                       selected={
                         this.state.templateIndex !== -1 &&
                         `${

@@ -3,6 +3,22 @@
   display: block;
 }
 
+.App {
+	min-height: 100vh;
+	padding: 0;
+}
+
+.App .left {
+	padding: 0;
+}
+.App .right {
+	padding: 0;
+}
+
+.App .right.whiteOnBlack {
+  background: black;
+}
+
 .App .App-header {
   position: fixed;
   top: 0;
@@ -26,7 +42,7 @@
 .App-logo-wrapper {
   top: 0;
   height: 100%;
-  transform: translate3d(0,25%,0);
+  transform: translate3d(0,50%,0);
 }
 
 .App-logo-wrapper svg {

@@ -14,6 +14,7 @@ class Template extends React.Component {
         key={`preset${this.props.font.preset}${this.props.font.variant}`}
         className={`Choice ${this.props.selected ? "selected" : ""} col-sm-12`}
         onClick={this.props.onClick}
+        onDoubleClick={this.props.onDoubleClick}
         style={{ fontFamily: `'${this.props.font.preset}${this.props.font.variant}'` }}
       >
         {this.props.text}
@@ -28,6 +29,7 @@ Template.propTypes = {
     variant: PropTypes.string.isRequired
   }).isRequired,
   onClick: PropTypes.func.isRequired,
+  onDoubleClick: PropTypes.func.isRequired,
   text: PropTypes.string,
   mostSelected: PropTypes.bool,
   isLoading: PropTypes.bool.isRequired,

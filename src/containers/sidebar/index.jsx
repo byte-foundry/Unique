@@ -11,7 +11,6 @@ import { goToStep, finishEditing } from "../../data/font";
 import "./Sidebar.css";
 
 import { ReactComponent as ProfileIcon } from "./profile.svg";
-import { ReactComponent as MenuIcon } from "./menu.svg";
 
 const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
   steps.map((step, i) => (
@@ -27,13 +26,10 @@ const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isSmall: false
-    };
   }
   render() {
     return (
-      <div className={`Sidebar ${this.state.isSmall ? 'small' : ''}`}>
+      <div className={`Sidebar ${this.props.location.pathname !== "/customize" ? 'small' : ''}`}>
         <ProfileIcon
           className="icon-profile"
           onClick={() => {
@@ -42,12 +38,8 @@ class Sidebar extends React.Component {
               : this.props.login();
           }}
         />
-        <MenuIcon
-          className="icon-menu"
-          onClick={() => this.setState({ isSmall: !this.state.isSmall })}
-        />
         <div className="steps">
-          {this.state.isSmall
+          {this.props.location.pathname !== "/customize"
             ? false
             : getStepsDone(
                 this.props.steps,
@@ -80,9 +72,8 @@ Sidebar.propTypes = {
       name: PropTypes.string.isRequired
     })
   ).isRequired,
+  pathName: PropTypes.string.isRequired,
   fontName: PropTypes.string.isRequired,
-  specimen: PropTypes.bool,
-  finishEditing: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   goToLibrary: PropTypes.func.isRequired
