@@ -119,7 +119,11 @@ class StepView extends React.Component {
               break;
             }
             if (choiceIndex === 0) {
-              this.setState({ choice: { name: "No choice", values: {} } });
+              this.setState({
+                choice: this.props.stepValues.choices[
+                  this.props.stepValues.choices.length - 1
+                ]
+              });
               break;
             } else {
               this.setState({
@@ -128,7 +132,11 @@ class StepView extends React.Component {
               break;
             }
           } else {
-            this.setState({ choice: { name: "No choice", values: {} } });
+            this.setState({
+              choice: this.props.stepValues.choices[
+                this.props.stepValues.choices.length - 1
+              ]
+            });
             break;
           }
         case "CHOICE_NEXT":
@@ -145,7 +153,7 @@ class StepView extends React.Component {
               choice => choice.name === this.state.choice.name
             );
             if (choiceIndex + 1 >= this.props.stepValues.choices.length) {
-              this.setState({ choice: { name: "No choice", values: {} } });
+              this.setState({ choice: this.props.stepValues.choices[0] });
               break;
             } else {
               this.setState({
@@ -158,7 +166,11 @@ class StepView extends React.Component {
             break;
           }
         case "CHOICE_CUSTOM":
-          this.markChoiceActive({ name: "Custom", values: {} });
+          if (this.state.choice && this.state.choice.name === "Custom") {
+            this.setState({ choice: { name: "No choice", values: {} } });
+          } else {
+            this.markChoiceActive({ name: "Custom", values: {} });
+          }
           break;
         case "CHOICE_SELECT":
           this.props.selectChoice(this.state.choice);
@@ -166,8 +178,11 @@ class StepView extends React.Component {
         case "STEP_BACK":
           this.props.stepBack();
           break;
-        case "STEP_FORWARD":
-          this.props.stepForward();
+        case "BW_MODE":
+          this.props.switchBlackOnWhite();
+          break;
+        case "GLYPH_MODE":
+          this.props.switchGlyphMode();
           break;
         case "FINISH_FONT":
           this.props.finishEditing();
@@ -202,12 +217,8 @@ class StepView extends React.Component {
               delay={150}
               staggerDelayBy={50}
               easing="ease-out"
-              appearAnimation={
-                undefined
-              }
-              enterAnimation={
-                "fade"
-              }
+              appearAnimation={undefined}
+              enterAnimation={"fade"}
               leaveAnimation={"none"}
             >
               {this.props.stepValues.choices.map((choice, index) => (
@@ -229,18 +240,18 @@ class StepView extends React.Component {
                   this.state.choice && this.state.choice.name === "Custom"
                     ? "selected"
                     : ""
-                } col-sm-${this.props.isGlyphMode ? '4 glyphMode' : '12'}`}
+                } col-sm-${this.props.isGlyphMode ? "4 glyphMode" : "12"}`}
                 role="option"
                 aria-checked="false"
                 aria-selected="false"
                 tabIndex={0}
-                key={`choiceCustom`}
+                key={`choiceCustom${this.props.step}`}
                 onDoubleClick={() => this.props.selectChoice(this.state.choice)}
               >
-                {this.props.isGlyphMode ? 'g' : this.props.chosenWord}
+                {this.props.isGlyphMode ? "g" : this.props.chosenWord}
                 <p className="choiceName">Custom</p>
               </div>
-            </FlipMove>            
+            </FlipMove>
             {this.state.choice && this.state.choice.name === "Custom" ? (
               <Sliders onUpdate={this.onUpdate} />
             ) : (
@@ -257,11 +268,13 @@ class StepView extends React.Component {
             />
             <Finish
               className={`icon-finish ${
-                this.props.choicesMade.length - 1 === this.props.stepLength ? "" : "disabled"
+                this.props.choicesMade.length - 1 === this.props.stepLength
+                  ? ""
+                  : "disabled"
               }`}
               onClick={() => {
                 if (this.props.choicesMade.length - 1 === this.props.stepLength)
-                  this.props.finishEditing();
+                  this.props.finishEditing(this.state.choice);
               }}
             />
             <div className="actions">
@@ -275,9 +288,9 @@ class StepView extends React.Component {
                       : "More accuracy"
                   }
                   onClick={() =>
-                  this.state.choice && this.state.choice.name === "Custom"
-                    ? this.markChoiceActive({ name: undefined, values: {} })     
-                    : this.markChoiceActive({ name: "Custom", values: {} })                    
+                    this.state.choice && this.state.choice.name === "Custom"
+                      ? this.markChoiceActive({ name: undefined, values: {} })
+                      : this.markChoiceActive({ name: "Custom", values: {} })
                   }
                 />
               </span>
@@ -306,7 +319,7 @@ const mapStateToProps = state => ({
   chosenWord: state.user.chosenWord,
   isBlackOnWhite: state.user.isBlackOnWhite,
   isGlyphMode: state.user.isGlyphMode,
-  stepLength: state.font.currentPreset.steps.length,
+  stepLength: state.font.currentPreset.steps.length
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

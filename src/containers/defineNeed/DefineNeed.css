@@ -15,7 +15,7 @@
 }
 
 .DefineNeed .needs .selected {
-  color: #FF6359;
+  color: #7D45FF;
 }
 
 .DefineNeed .icon-next {
@@ -25,9 +25,9 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background: #FF6359;
+  background: #7D45FF;
   transition: all .3s ease;  
-  border: 1px solid #FF6359;
+  border: 1px solid #7D45FF;
   padding: 0px;
   z-index: 3;
 }

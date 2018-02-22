@@ -92,7 +92,7 @@ class Sliders extends React.Component {
 const mapStateToProps = state => ({
   currentFontValues: { ...state.font.stepBaseValues, ...state.font.currentParams },
   choices: state.font.currentPreset.steps[state.font.step - 1].choices,
-  controls: state.createdFonts.fonts[state.font.fontName].json.controls,
+  controls: state.createdFonts.fonts[state.font.fontName] ? state.createdFonts.fonts[state.font.fontName].json.controls : [],
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ resetSliderFont }, dispatch);

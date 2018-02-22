@@ -28,7 +28,6 @@ import ExportTypes from "../exportTypes/";
 import Success from "../success/";
 import WelcomeBack from "../welcomeBack/";
 import Library from "../library/";
-import Button from "../../components/button";
 import StepView from "../stepView/";
 import Sidebar from "../sidebar/";
 

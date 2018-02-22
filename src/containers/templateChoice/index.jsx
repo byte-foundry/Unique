@@ -8,7 +8,6 @@ import FlipMove from "react-flip-move";
 import { Shortcuts } from "react-shortcuts";
 import "./TemplateChoice.css";
 import Template from "../../components/template/";
-import Button from "../../components/button/";
 
 import { selectFont } from "../../data/font";
 
@@ -92,18 +91,18 @@ class TemplateChoice extends React.Component {
             <Back
               className="icon-back"
               onClick={() => {
-                this.props.redirectToHome()
+                this.props.redirectToHome();
               }}
             />
             <div className="template-wrapper">
               <FlipMove
                 className="choices row"
                 duration={300}
-                delay={200}
-                staggerDelayBy={100}
+                delay={800}
+                staggerDelayBy={50}
                 easing="ease-out"
-                appearAnimation={undefined}
-                enterAnimation={"fade"}
+                appearAnimation={"fade"}
+                enterAnimation={undefined}
                 leaveAnimation={"none"}
               >
                 {this.props.presets.map((font, index) => {
@@ -111,7 +110,9 @@ class TemplateChoice extends React.Component {
                     <Template
                       font={font}
                       onClick={() => this.setState({ templateIndex: index })}
-                      onDoubleClick={() => this.props.selectFont(this.props.presets[index])}
+                      onDoubleClick={() =>
+                        this.props.selectFont(this.props.presets[index])
+                      }
                       selected={
                         this.state.templateIndex !== -1 &&
                         `${

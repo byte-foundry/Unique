@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.css';
 import backIcon from './return.svg';
-import settingsIcon from './settings.svg';
 
 const Button = props => (
   <span

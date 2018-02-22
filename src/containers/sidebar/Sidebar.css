@@ -13,7 +13,7 @@
 }
 
 .Sidebar.small {
-  width: 70px;
+  width: 0px;
 }
 
 .Sidebar.small .steps {
@@ -41,5 +41,5 @@
 
 .Sidebar .icon-menu {
   right: 30px;
-  fill: #ff6359;
+  fill: #7D45FF;
 }

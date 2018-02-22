@@ -26,7 +26,7 @@
   min-height: 480px;
   width: 100%;
   height: 100%;
-  background: #FF6359;
+  background: #7D45FF;
   transition: background-color 1s ease;
 }
 
@@ -106,13 +106,13 @@
 }
 
 .loaded .App-logo-wrapper svg .cls-2 {
-	fill: #FF6359;
+	fill: #7D45FF;
 	transform: translateX(0%);
 	animation: inherit;
 }
 
 .loaded .App-logo-wrapper svg .cls-1 {
-	fill:#FF6359;
+	fill:#7D45FF;
 	animation-delay: 0.4s;
 }
 

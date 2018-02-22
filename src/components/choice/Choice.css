@@ -3,7 +3,7 @@
   width: 100%;
   padding: 25px 15px 15px 70px;
   font-size: 6vh;
-  line-height: 5vh;
+  line-height: 1;
   background: #fff;
   margin-bottom: 5px;
   cursor: pointer;
@@ -11,11 +11,15 @@
   user-select: none;
   transition: color .3s ease, background .3s ease, border-color .3s ease;
   margin-bottom: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  align-self: baseline;
 }
 
 .Choice.glyphMode {
   font-size: 15vh;
-  line-height: 14vh;
+  line-height: 1;
   text-align: center;
   padding: 0;
   padding-bottom: 20px;
@@ -37,7 +41,7 @@
 }
 
 .Choice.selected {
-  border-color: #FF6359;
+  border-color: #7D45FF;
 }
 
 .Choice .choiceName {

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { goToStep } from '../../data/font';
-import pencilIcon from './pencil.svg';
 import './Step.css';
 
 const Step = props => (

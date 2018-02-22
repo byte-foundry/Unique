@@ -11,7 +11,7 @@
 .SpecimenView h3 {
   display: inline-block;
   font-size: 1rem;
-  color: #FF6359;
+  color: #7D45FF;
   font-family: unique, sans-serif;
   font-weight: 400;
   margin-left: 0;
@@ -34,8 +34,8 @@
   top: 50%;
   transform: translateY(-50%) translateZ(0px);
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
-  border: 1px solid #FF6359;
-  background: #FF6359;
+  border: 1px solid #7D45FF;
+  background: #7D45FF;
   padding: 0px;
   z-index: 10;
 }

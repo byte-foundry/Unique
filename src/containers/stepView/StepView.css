@@ -58,7 +58,7 @@
   top: 50%;
   transform: translateY(-50%) translateZ(0px);
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
-  border: 1px solid #FF6359;
+  border: 1px solid #7D45FF;
   padding: 0px;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .StepView .icon-back {
-  background: #FF6359;
+  background: #7D45FF;
   left: -75px;
 }
 
@@ -82,12 +82,12 @@
 
 .StepView .icon-finish {
   right: -135px;
-  background: #FF6359;
+  background: #7D45FF;
 }
 
 .StepView .icon-next {
   right: -75px;
-  background: #FF6359;
+  background: #7D45FF;
 }
 
 .StepView.whiteOnBlack .icon-back, .StepView.whiteOnBlack .icon-next, .StepView.whiteOnBlack .icon-finish {
@@ -99,7 +99,7 @@
 }
 
 .StepView.whiteOnBlack .icon-next:not(.disabled) path, .StepView.whiteOnBlack .icon-back path {
-  fill: #FF6359;
+  fill: #7D45FF;
   transition: fill .3s ease;  
 }
 

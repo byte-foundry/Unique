@@ -127,7 +127,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         step: action.step,
-        choicesMade: action.choicesMade
+        choicesMade: action.choicesMade,
+        currentParams: action.currentParams
       };
 
     case SELECT_CHOICE:
@@ -216,7 +217,7 @@ export const selectFont = font => (dispatch, getState) => {
   const { choicesFontsName = [] } = getState().font;
   const { loadedPresetsName } = getState().presets;
   const { chosenWord } = getState().user;
-  const selectedFont = {...font};
+  const selectedFont = { ...font };
   dispatch({
     type: SELECT_FONT_REQUESTED
   });
@@ -226,34 +227,46 @@ export const selectFont = font => (dispatch, getState) => {
   });
   let maxStep = 0;
   font.steps.forEach((step, index) => {
+    console.log(selectedFont.steps[index].choices);
     if (step.choices.length > maxStep) {
       maxStep = step.choices.length;
     }
-    // Create default choices
-    const defaultStepParams = {};    
-    step.choices.forEach(choice => {
-      Object.keys(choice.values).forEach(key => {
-        if (key !== "name") {
-          defaultStepParams[key] = font.baseValues[key];
-        }
+
+    if (!step.choices.find(e => e.name === "Default")) {
+      // Create default choices
+      const defaultStepParams = {};
+      step.choices.forEach(choice => {
+        Object.keys(choice.values).forEach(key => {
+          if (key !== "name") {
+            defaultStepParams[key] = font.baseValues[key];
+          }
+        });
       });
-    });
-    selectedFont.steps[index].choices.push ({
-      name: 'Default',
-      values: defaultStepParams,
-      id: `default${step.name}`
-    });
+      selectedFont.steps[index].choices.push({
+        name: "Default",
+        values: defaultStepParams,
+        id: `default${step.name}`
+      });
+    }
 
     // Sort choices
-    let stepParams = {}
-    step.choices.forEach(choice => {stepParams = {...stepParams, ...choice.values}});
-    const {glyphSpecialProps, manualChanges, name,  glyphComponentChoice, ...params}  = stepParams;
-    const paramToSort = Object.keys(params)[0];    
+    let stepParams = {};
+    step.choices.forEach(choice => {
+      stepParams = { ...stepParams, ...choice.values };
+    });
+    const {
+      glyphSpecialProps,
+      manualChanges,
+      name,
+      glyphComponentChoice,
+      ...params
+    } = stepParams;
+    const paramToSort = Object.keys(params)[0];
 
-    step.choices.sort(function (a, b) {
+    step.choices.sort(function(a, b) {
       return a.values[paramToSort] - b.values[paramToSort];
     });
-  });  
+  });
 
   const promiseArray = [];
   for (let i = 0; i < maxStep + 1; i += 1) {
@@ -517,15 +530,15 @@ export const updateFont = (isSpecimen = false) => (dispatch, getState) => {
     step === currentPreset.steps.length || isSpecimen
       ? "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&"
       : chosenWord;
-  console.log(fonts)
-  console.log(fontName)
+  console.log(fonts);
+  console.log(fontName);
   if (fonts[fontName]) {
     fonts[fontName].changeParams(
       { ...stepBaseValues, ...currentParams },
       chosenWord
     );
   }
-  if(fonts[sliderFontName]) {
+  if (fonts[sliderFontName]) {
     fonts[sliderFontName].changeParams(
       { ...stepBaseValues, ...currentParams },
       chosenWord
@@ -546,6 +559,7 @@ export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
   const { currentPreset } = getState().font;
   switch (step) {
     case 0:
+      dispatch(loadPresets());
       dispatch(push("/select"));
       break;
     case currentPreset.steps.length + 1:
@@ -575,7 +589,7 @@ export const stepForward = () => (dispatch, getState) => {
   let { step } = getState().font;
   choicesMade[step] = {};
   choicesMade[step].name = "No choice";
-  console.log('> STEP FORWARD')
+  console.log("> STEP FORWARD");
   console.log(choicesMade);
   console.log(step);
   const paramsToReset = {};
@@ -678,14 +692,55 @@ export const selectChoice = choice => (dispatch, getState) => {
   }
 };
 
-export const finishEditing = () => (dispatch, getState) => {
+export const finishEditing = choice => (dispatch, getState) => {
   const { choicesMade, currentPreset, step } = getState().font;
+  let { currentParams } = getState().font;
   const stepLength = currentPreset.steps.length;
+
+  const paramsToReset = {};
+  if (choicesMade[step]) {
+    Object.keys(choicesMade[step]).forEach(key => {
+      if (key !== "name") {
+        paramsToReset[key] = currentPreset.baseValues[key];
+      }
+    });
+  }
+  currentParams = {
+    ...currentParams,
+    ...paramsToReset,
+    ...choice.values
+  };
+  choicesMade[step] = choice.values || {};
+  choicesMade[step].name = choice.name;
+
   for (let index = step; index < stepLength + 1; index += 1) {
     if (!choicesMade[index]) {
       choicesMade[index] = {};
       choicesMade[index].name = "No choice";
     }
+  }
+  if (choice.name === "Custom" || choice.name === "No choice") {
+    request(GRAPHQL_API, getSpecialChoiceSelectedCount(choice.name))
+      .then(data =>
+        request(
+          GRAPHQL_API,
+          updateSelectedCount(
+            "Choice",
+            data.allChoices[0].id,
+            data.allChoices[0].selected + 1
+          )
+        )
+      )
+      .catch(error => console.log(error));
+  } else {
+    request(GRAPHQL_API, getSelectedCount("Choice", choice.id))
+      .then(data =>
+        request(
+          GRAPHQL_API,
+          updateSelectedCount("Choice", choice.id, data.Choice.selected + 1)
+        )
+      )
+      .catch(error => console.log(error));
   }
   request(GRAPHQL_API, getSpecialChoiceSelectedCount("No choice"))
     .then(data =>
@@ -699,13 +754,14 @@ export const finishEditing = () => (dispatch, getState) => {
       )
     )
     .catch(error => console.log(error));
-  dispatch(updateFont(true));
-  dispatch(push("/specimen"));
   dispatch({
     type: FINISH_EDITING,
     step: stepLength,
-    choicesMade
+    choicesMade,
+    currentParams
   });
+  dispatch(updateFont(true));
+  dispatch(push("/specimen"));
 };
 
 export const download = () => (dispatch, getState) => {

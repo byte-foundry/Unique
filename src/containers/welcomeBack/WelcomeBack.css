@@ -1,31 +1,49 @@
+.WelcomeBack {
+  padding-top: 120px;
+  position: relative;
+}
+
+.WelcomeBack h1,
+.WelcomeBack h2 {
+  display: inline-block;
+  font-weight: 400;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  color: black;
+}
+
 .WelcomeBack .choices {
-  }
-  
-  
-  .WelcomeBack h1, .WelcomeBack h2 {
-    margin: 80px;
-    margin-left: 0;
-  }
+  font-size: 2rem;
+}
 
+.WelcomeBack .choices div {
+  cursor: pointer;
+  color: #c7c3d1;
+  margin-bottom: 3px;
+  transition: color 0.3s ease;
+}
 
-  .WelcomeBack .card {
-    cursor: pointer;
-    outline: none;
-    margin-bottom: 15px;
-  }
-  
-  .WelcomeBack .card .image {
-    height: 200px;
-    background-color: #c7b5d8;
-  }
-  
-  .WelcomeBack .card .title {
-    background-color: #000;
-    color: white;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    padding: 20px 40px;
-    font-size: 18px;
-    font-weight: 700;
-  }
-  
+.WelcomeBack .choices .selected {
+  color: #7d45ff;
+}
+
+.WelcomeBack .icon-next {
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #7d45ff;
+  transition: all 0.3s ease;
+  border: 1px solid #7d45ff;
+  padding: 0px;
+  z-index: 3;
+}
+.WelcomeBack .icon-next path {
+  fill: white;
+}
+.WelcomeBack .icon-next.disabled {
+  border-color: #c7c3d1;
+  background: #c7c3d1;
+}

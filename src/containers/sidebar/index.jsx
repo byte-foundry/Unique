@@ -4,10 +4,8 @@ import PropTypes from "prop-types";
 import { push } from "react-router-redux";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
 import Step from "../../components/step/";
-import Button from "../../components/button";
-import { goToStep, finishEditing } from "../../data/font";
+import { goToStep } from "../../data/font";
 import "./Sidebar.css";
 
 import { ReactComponent as ProfileIcon } from "./profile.svg";
