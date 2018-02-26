@@ -44,13 +44,13 @@
   transform: translateY(-50%) translateZ(0px);
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
   border: 1px solid #7D45FF;
-  background: #7D45FF;
+  background: transparent;
   padding: 0px;
   z-index: 10;
 }
 
 .TemplateChoice .icon-back path, .TemplateChoice .icon-next path {
-  fill: white;
+  fill: #7D45FF;
 }
 
 .TemplateChoice .icon-back {
@@ -66,6 +66,9 @@
   background: #C7C3D1;
 }
 
+.TemplateChoice .icon-next.disabled path {
+  fill: white;
+}
 .TemplateChoice .Button {
   margin-left: 0px;
 }

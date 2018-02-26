@@ -25,18 +25,22 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background: #7D45FF;
+  background: transparent;
   transition: all .3s ease;  
   border: 1px solid #7D45FF;
   padding: 0px;
   z-index: 3;
 }
 .DefineNeed .icon-next path {
-  fill: white;
+  fill: #7D45FF;
 }
 .DefineNeed .icon-next.disabled {
   border-color: #C7C3D1;
   background: #C7C3D1;
+}
+
+.DefineNeed .icon-next.disabled path {
+  fill: white;
 }
 
 .DefineNeed h1, .DefineNeed h2 {

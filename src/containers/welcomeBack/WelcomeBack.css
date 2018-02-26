@@ -34,16 +34,20 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background: #7d45ff;
+  background: transparent;
   transition: all 0.3s ease;
   border: 1px solid #7d45ff;
   padding: 0px;
   z-index: 3;
 }
 .WelcomeBack .icon-next path {
-  fill: white;
+  fill: #7D45FF;
 }
 .WelcomeBack .icon-next.disabled {
   border-color: #c7c3d1;
   background: #c7c3d1;
+}
+
+.WelcomeBack .icon-next.disabled path {
+  fill: white;
 }

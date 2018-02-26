@@ -63,11 +63,11 @@
 }
 
 .StepView .icon-back path, .StepView .icon-next path, .StepView .icon-finish path {
-  fill: white;
+  fill: #7D45FF;
 }
 
 .StepView .icon-back {
-  background: #7D45FF;
+  background: transparent;
   left: -75px;
 }
 
@@ -76,18 +76,22 @@
   background: #C7C3D1;
 }
 
+.StepView .icon-next.disabled path {
+  fill: white;
+}
+
 .StepView .icon-finish.disabled {
   display: none;
 }
 
 .StepView .icon-finish {
   right: -135px;
-  background: #7D45FF;
+  background: transparent;
 }
 
 .StepView .icon-next {
   right: -75px;
-  background: #7D45FF;
+  background: transparent;
 }
 
 .StepView.whiteOnBlack .icon-back, .StepView.whiteOnBlack .icon-next, .StepView.whiteOnBlack .icon-finish {

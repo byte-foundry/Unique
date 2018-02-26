@@ -35,13 +35,13 @@
   transform: translateY(-50%) translateZ(0px);
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
   border: 1px solid #7D45FF;
-  background: #7D45FF;
+  background: transparent;
   padding: 0px;
   z-index: 10;
 }
 
 .SpecimenView .icon-back path, .SpecimenView .icon-next path {
-  fill: white;
+  fill: #7D45FF;
 }
 
 .SpecimenView .icon-back {
