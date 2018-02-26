@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import FlipMove from "react-flip-move";
 import { Shortcuts } from "react-shortcuts";
+import { FormattedMessage } from "react-intl";
 import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 import {
@@ -251,7 +252,13 @@ class StepView extends React.Component {
                 onDoubleClick={() => this.props.selectChoice(this.state.choice)}
               >
                 {this.props.isGlyphMode ? "g" : this.props.chosenWord}
-                <p className="choiceName">Custom</p>
+                <p className="choiceName">
+                  <FormattedMessage
+                    id="StepView.customChoiceName"
+                    defaultMessage="Custom"
+                    description="Custom choice name"
+                  />
+                </p>
               </div>
             </FlipMove>
             {this.state.choice && this.state.choice.name === "Custom" ? (
@@ -281,54 +288,130 @@ class StepView extends React.Component {
             />
             <div className="actions">
               <span className="previousStep">
-                <Button
-                  className="hollow"
-                  mode="isConfigure"
-                  label={
-                    this.state.choice && this.state.choice.name === "Custom"
-                      ? "Less accuracy"
-                      : "More accuracy"
-                  }
-                  onClick={() =>
-                    this.state.choice && this.state.choice.name === "Custom"
-                      ? this.markChoiceActive({ name: undefined, values: {} })
-                      : this.markChoiceActive({ name: "Custom", values: {} })
-                  }
-                />
+                {this.state.choice && this.state.choice.name === "Custom" ? (
+                  <FormattedMessage
+                    id="StepView.customButtonLess"
+                    defaultMessage="Less accuracy"
+                    description="More accuracy button - less state"
+                  >
+                    {text => (
+                      <Button
+                        className="hollow"
+                        mode="isConfigure"
+                        label={text}
+                        onClick={() =>
+                          this.markChoiceActive({ name: undefined, values: {} })
+                        }
+                      />
+                    )}
+                  </FormattedMessage>
+                ) : (
+                  <FormattedMessage
+                    id="StepView.customButtonMore"
+                    defaultMessage="More accuracy"
+                    description="More accuracy button - more state"
+                  >
+                    {text => (
+                      <Button
+                        className="hollow"
+                        mode="isConfigure"
+                        label={text}
+                        onClick={() =>
+                          this.markChoiceActive({ name: "Custom", values: {} })
+                        }
+                      />
+                    )}
+                  </FormattedMessage>
+                )}
               </span>
               <span className="controls">
-                <Tooltip
-                  title={`${
-                    this.props.isBlackOnWhite
-                      ? "Toggle white on black mode"
-                      : "Toggle black on white mode"
-                  }`}
-                  position="top"
-                  trigger="mouseenter"
-                  arrow="true"
-                  delay={600}
-                >
-                  <BackgroundIcon
-                    className="icon-background"
-                    onClick={() => this.props.switchBlackOnWhite()}
-                  />
-                </Tooltip>
-                <Tooltip
-                  title={`${
-                    this.props.isGlyphMode
-                      ? "Toggle regular mode"
-                      : "Toggle glyph mode"
-                  }`}
-                  position="top"
-                  trigger="mouseenter"
-                  arrow="true"
-                  delay={600}
-                >
-                  <GlyphIcon
-                    className="icon-glyph"
-                    onClick={() => this.props.switchGlyphMode()}
-                  />
-                </Tooltip>
+                {this.props.isBlackOnWhite ? (
+                  <FormattedMessage
+                    id="StepView.blackOnWhiteTooltipOn"
+                    defaultMessage="Toggle white on black mode"
+                    description="Black on white mode - On State"
+                  >
+                    {text => (
+                      <Tooltip
+                        title={text}
+                        position="top"
+                        trigger="mouseenter"
+                        arrow="true"
+                        delay={600}
+                      >
+                        <BackgroundIcon
+                          className="icon-background"
+                          onClick={() => this.props.switchBlackOnWhite()}
+                        />
+                      </Tooltip>
+                    )}
+                  </FormattedMessage>
+                ) : (
+                  <FormattedMessage
+                    id="StepView.blackOnWhiteTooltipOff"
+                    defaultMessage="Toggle black on white mode"
+                    description="Black on white mode - Off State"
+                  >
+                    {text => (
+                      <Tooltip
+                        title={text}
+                        position="top"
+                        trigger="mouseenter"
+                        arrow="true"
+                        delay={600}
+                      >
+                        <BackgroundIcon
+                          className="icon-background"
+                          onClick={() => this.props.switchBlackOnWhite()}
+                        />
+                      </Tooltip>
+                    )}
+                  </FormattedMessage>
+                )}
+
+                {this.props.isGlyphMode ? (
+                  <FormattedMessage
+                    id="StepView.glyphTooltipOff"
+                    defaultMessage="Toggle regular mode"
+                    description="Glyph mode - Off State"
+                  >
+                    {text => (
+                      <Tooltip
+                        title={text}
+                        position="top"
+                        trigger="mouseenter"
+                        arrow="true"
+                        delay={600}
+                      >
+                        <GlyphIcon
+                          className="icon-glyph"
+                          onClick={() => this.props.switchGlyphMode()}
+                        />
+                      </Tooltip>
+                    )}
+                  </FormattedMessage>
+                ) : (
+                  <FormattedMessage
+                    id="StepView.glyphTooltipOn"
+                    defaultMessage="Toggle glyph"
+                    description="Glyph mode - On State"
+                  >
+                    {text => (
+                      <Tooltip
+                        title={text}
+                        position="top"
+                        trigger="mouseenter"
+                        arrow="true"
+                        delay={600}
+                      >
+                        <GlyphIcon
+                          className="icon-glyph"
+                          onClick={() => this.props.switchGlyphMode()}
+                        />
+                      </Tooltip>
+                    )}
+                  </FormattedMessage>
+                )}
               </span>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { FormattedMessage } from "react-intl";
 import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 import { defineNeed } from "../../data/font";
@@ -51,7 +52,13 @@ class DefineNeed extends React.Component {
         {this.props.isLoading ? <h2>Creating font...</h2> : false}
         <div className="row">
           <div className="col-sm-12">
-            <h1>What kind of need do you have?</h1>
+            <h1>
+              <FormattedMessage
+                id="DefineNeed.title"
+                defaultMessage="What kind of need do you have?"
+                description="Define need page title"
+              />
+            </h1>
           </div>
         </div>
         <div className="needs row">
@@ -61,18 +68,30 @@ class DefineNeed extends React.Component {
             }`}
             onClick={() => this.setState({ selected: "logo" })}
           >
-            Logotype
+            <FormattedMessage
+              id="DefineNeed.logo"
+              defaultMessage="Logotype"
+              description="Logo need"
+            />
             {this.state.selected === "logo" && (
               <span>
                 {" "}
-                <Tooltip
-                  title="A logotype font is blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla"
-                  position="top"
-                  trigger="mouseenter"
-                  arrow="true"
+                <FormattedMessage
+                  id="DefineNeed.logoTooltip"
+                  defaultMessage="A logo font is blablabla blablabla blablabla"
+                  description="logo need tooltip"
                 >
-                  <span className="tooltip">i</span>
-                </Tooltip>
+                  {text => (
+                    <Tooltip
+                      title={text}
+                      position="top"
+                      trigger="mouseenter"
+                      arrow="true"
+                    >
+                      <span className="tooltip">i</span>
+                    </Tooltip>
+                  )}
+                </FormattedMessage>
               </span>
             )}
           </div>
@@ -82,18 +101,30 @@ class DefineNeed extends React.Component {
             }`}
             onClick={() => this.setState({ selected: "text" })}
           >
-            Text
+            <FormattedMessage
+              id="DefineNeed.text"
+              defaultMessage="Text"
+              description="Text need"
+            />
             {this.state.selected === "text" && (
               <span>
                 {" "}
-                <Tooltip
-                  title="A text font is blablabla blablabla blablabla blablabla"
-                  position="top"
-                  trigger="mouseenter"
-                  arrow="true"
+                <FormattedMessage
+                  id="DefineNeed.textTooltip"
+                  defaultMessage="A text font is blablabla blablabla blablabla"
+                  description="text need tooltip"
                 >
-                  <span className="tooltip">i</span>
-                </Tooltip>
+                  {text => (
+                    <Tooltip
+                      title={text}
+                      position="top"
+                      trigger="mouseenter"
+                      arrow="true"
+                    >
+                      <span className="tooltip">i</span>
+                    </Tooltip>
+                  )}
+                </FormattedMessage>
               </span>
             )}
           </div>
@@ -103,18 +134,30 @@ class DefineNeed extends React.Component {
             }`}
             onClick={() => this.setState({ selected: "website" })}
           >
-            Website
+            <FormattedMessage
+              id="DefineNeed.website"
+              defaultMessage="Website"
+              description="Website need"
+            />
             {this.state.selected === "website" && (
               <span>
                 {" "}
-                <Tooltip
-                  title="A website font is blablabla blablabla blablabla blablabla"
-                  position="top"
-                  trigger="mouseenter"
-                  arrow="true"
+                <FormattedMessage
+                  id="DefineNeed.websiteTooltip"
+                  defaultMessage="A website font is blablabla blablabla blablabla"
+                  description="Website need tooltip"
                 >
-                  <span className="tooltip">i</span>
-                </Tooltip>
+                  {text => (
+                    <Tooltip
+                      title={text}
+                      position="top"
+                      trigger="mouseenter"
+                      arrow="true"
+                    >
+                      <span className="tooltip">i</span>
+                    </Tooltip>
+                  )}
+                </FormattedMessage>
               </span>
             )}
           </div>
@@ -122,16 +165,30 @@ class DefineNeed extends React.Component {
         {this.state.selected === "logo" ? (
           <div className="row logoName">
             <div className="col-sm-12">
-              <h1>What is your brand name?</h1>
+              <h1>
+                <FormattedMessage
+                  id="DefineNeed.brandTitle"
+                  defaultMessage="What is your brand name?"
+                  description="Brand name question"
+                />
+              </h1>
             </div>
             <div className="col-sm-12">
               <form onSubmit={this.handleSubmit}>
-                <input
-                  type="text"
-                  placeholder="Type something"
-                  name="text"
-                  onChange={this.handleChange}
-                />
+                <FormattedMessage
+                  id="DefineNeed.brandInput"
+                  defaultMessage="Type something"
+                  description="Brand input placeholder"
+                >
+                  {text => (
+                    <input
+                      type="text"
+                      placeholder={text}
+                      name="text"
+                      onChange={this.handleChange}
+                    />
+                  )}
+                </FormattedMessage>
               </form>
             </div>
           </div>

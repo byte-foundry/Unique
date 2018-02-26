@@ -1,0 +1,17 @@
+[
+  {
+    "id": "WelcomeBack.title",
+    "description": "Welcome back page title",
+    "defaultMessage": "Welcome back,"
+  },
+  {
+    "id": "WelcomeBack.resumeProject",
+    "description": "Welcome back resume project",
+    "defaultMessage": "Resume your project"
+  },
+  {
+    "id": "WelcomeBack.createNewProject",
+    "description": "Welcome back create new project",
+    "defaultMessage": "Create a new one"
+  }
+]

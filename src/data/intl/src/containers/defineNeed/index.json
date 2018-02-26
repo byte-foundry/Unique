@@ -1,0 +1,47 @@
+[
+  {
+    "id": "DefineNeed.title",
+    "description": "Define need page title",
+    "defaultMessage": "What kind of need do you have?"
+  },
+  {
+    "id": "DefineNeed.logo",
+    "description": "Logo need",
+    "defaultMessage": "Logotype"
+  },
+  {
+    "id": "DefineNeed.logoTooltip",
+    "description": "logo need tooltip",
+    "defaultMessage": "A logo font is blablabla blablabla blablabla"
+  },
+  {
+    "id": "DefineNeed.text",
+    "description": "Text need",
+    "defaultMessage": "Text"
+  },
+  {
+    "id": "DefineNeed.textTooltip",
+    "description": "text need tooltip",
+    "defaultMessage": "A text font is blablabla blablabla blablabla"
+  },
+  {
+    "id": "DefineNeed.website",
+    "description": "Website need",
+    "defaultMessage": "Website"
+  },
+  {
+    "id": "DefineNeed.websiteTooltip",
+    "description": "Website need tooltip",
+    "defaultMessage": "A website font is blablabla blablabla blablabla"
+  },
+  {
+    "id": "DefineNeed.brandTitle",
+    "description": "Brand name question",
+    "defaultMessage": "What is your brand name?"
+  },
+  {
+    "id": "DefineNeed.brandInput",
+    "description": "Brand input placeholder",
+    "defaultMessage": "Type something"
+  }
+]

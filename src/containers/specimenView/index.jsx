@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Shortcuts } from "react-shortcuts";
+import { FormattedMessage } from "react-intl";
 import "./SpecimenView.css";
 import Button from "../../components/button/";
 import CustomLogo from "../../components/customLogo";
@@ -160,9 +161,19 @@ class SpecimenView extends React.Component {
               }}
             />
             <div className="hooray">
-              <h2>It's a match!</h2>
+              <h2>
+                <FormattedMessage
+                  id="SpecimenView.title"
+                  defaultMessage="It's a match!"
+                  description="Speciem view title"
+                />
+              </h2>
               <p>
-                You have created the perfect bespoke font that fits your needs.
+                <FormattedMessage
+                  id="SpecimenView.subtitle"
+                  defaultMessage="You have created the perfect bespoke font that fits your needs."
+                  description="Speciem view subtitle"
+                />
               </p>
             </div>
             <div
@@ -170,9 +181,21 @@ class SpecimenView extends React.Component {
               style={{ fontFamily: `'${this.props.fontName}'` }}
             >
               <div className="col-sm-12 ">
-                <h3>Word</h3>
+                <h3>
+                  <FormattedMessage
+                    id="SpecimenView.word"
+                    defaultMessage="Word"
+                    description="Speciem view word"
+                  />
+                </h3>
                 <p className="word">{this.props.word}</p>
-                <h3>Characters</h3>
+                <h3>
+                  <FormattedMessage
+                    id="SpecimenView.characters"
+                    defaultMessage="Characters"
+                    description="Speciem view characters"
+                  />
+                </h3>
                 <p className="characters">
                   A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
                 </p>
@@ -182,7 +205,13 @@ class SpecimenView extends React.Component {
                 <p className="characters">
                   1 2 3 4 5 6 7 8 9 0 . . . ( & ! ? )
                 </p>
-                <h3>Grey scale</h3>
+                <h3>
+                  <FormattedMessage
+                    id="SpecimenView.greyScale"
+                    defaultMessage="Greyscale"
+                    description="Speciem view greyscale"
+                  />
+                </h3>
                 <div className="row">
                   <div className="col-md-6 col-sm-12 greyscale-left">
                     <p className="greyscale greyscale-left greyscale-first">
@@ -221,23 +250,46 @@ class SpecimenView extends React.Component {
                 </div>
               </div>
             </div>
-            <br/><br/><br/><br/>
-            <h2>If you like your work, download it!</h2>
-            <p>What would be the name of your font?</p>
-            <form action="">
-              <input
-                type="text"
-                value={this.state.fontName}
-                placeholder="Your font name"
-                name="fontname"
-                onChange={e => {
-                  this.setState({ fontName: e.target.value });
-                  e.stopPropagation();
-                  e.preventDefault();
-                }}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
+            <br />
+            <br />
+            <br />
+            <br />
+            <h2>
+              <FormattedMessage
+                id="SpecimenView.downloadCTA"
+                defaultMessage="If you like your font, download it!"
+                description="Speciem view download cta"
               />
+            </h2>
+            <p>
+              <FormattedMessage
+                id="SpecimenView.fontName"
+                defaultMessage="What would be the name of your font?"
+                description="Speciem view fontName cta"
+              />
+            </p>
+            <form action="">
+              <FormattedMessage
+                id="SpecimenView.fontNamePlaceholder"
+                defaultMessage="Your font name"
+                description="Specimen view fontName placeholder"
+              >
+                {text => (
+                  <input
+                    type="text"
+                    value={this.state.fontName}
+                    placeholder={text}
+                    name="fontname"
+                    onChange={e => {
+                      this.setState({ fontName: e.target.value });
+                      e.stopPropagation();
+                      e.preventDefault();
+                    }}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
+                  />
+                )}
+              </FormattedMessage>
             </form>
             {isAuthenticated() ? (
               renderValidateLoggedIn(
@@ -246,21 +298,44 @@ class SpecimenView extends React.Component {
               )
             ) : (
               <div>
-                <p>You are not logged in.</p>
                 <p>
-                  Do you want to log in / create an account to save your
-                  project?
-                </p>
-                <p>
-                  <Button
-                    className=""
-                    label="Log in"
-                    onClick={() => {
-                      login("/specimen");
-                    }}
+                  <FormattedMessage
+                    id="SpecimenView.notLoggedIn1"
+                    defaultMessage="You are not logged in."
+                    description="Speciem view not logged in - first"
                   />
                 </p>
-                <p>You can also continue without an account</p>
+                <p>
+                  <FormattedMessage
+                    id="SpecimenView.notLoggedIn2"
+                    defaultMessage="Do you want to Log in / Create an account to save your project ?"
+                    description="Speciem view not logged in - Second"
+                  />
+                </p>
+                <p>
+                  <FormattedMessage
+                    id="SpecimenView.logInButton"
+                    defaultMessage="Log in"
+                    description="Specimen view login button"
+                  >
+                    {text => (
+                      <Button
+                        className=""
+                        label={text}
+                        onClick={() => {
+                          login("/specimen");
+                        }}
+                      />
+                    )}
+                  </FormattedMessage>
+                </p>
+                <p>
+                  <FormattedMessage
+                    id="SpecimenView.withoutAccount"
+                    defaultMessage="You can also continue without an account."
+                    description="Speciem view - without account"
+                  />
+                </p>
                 {this.state.shouldContinueUnregistered ? (
                   renderValidateNotLoggedIn(
                     this.props.email,
@@ -273,12 +348,20 @@ class SpecimenView extends React.Component {
                     this.onBlur
                   )
                 ) : (
-                  <Button
-                    label="Continue unregistered"
-                    onClick={() =>
-                      this.setState({ shouldContinueUnregistered: true })
-                    }
-                  />
+                  <FormattedMessage
+                    id="SpecimenView.continueUnregisteredButton"
+                    defaultMessage="Continue unregistered"
+                    description="Specimen view continue unregistered button"
+                  >
+                    {text => (
+                      <Button
+                        label={text}
+                        onClick={() =>
+                          this.setState({ shouldContinueUnregistered: true })
+                        }
+                      />
+                    )}
+                  </FormattedMessage>
                 )}
               </div>
             )}
@@ -320,7 +403,7 @@ SpecimenView.propTypes = {
     isAuthenticated: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired
   }).isRequired,
-  projectName: PropTypes.string,
+  projectName: PropTypes.string
 };
 
 SpecimenView.defaultProps = {

@@ -6,9 +6,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Step from "../../components/step/";
 import { goToStep } from "../../data/font";
+import { setLocale } from "../../data/ui";
 import "./Sidebar.css";
 
 import { ReactComponent as ProfileIcon } from "./profile.svg";
+import { ReactComponent as FrenchIcon } from "./french.svg";
+import { ReactComponent as EnglishIcon } from "./english.svg";
 
 const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
   steps.map((step, i) => (
@@ -47,6 +50,20 @@ class Sidebar extends React.Component {
                 this.props.specimen
               )}
         </div>
+        <div className="languages">
+        <FrenchIcon
+          className="icon-language"
+          onClick={() => {
+            this.props.setLocale('fr');
+          }}
+        />
+        <EnglishIcon
+          className="icon-language"
+          onClick={() => {
+            this.props.setLocale('en');
+          }}
+        />
+        </div>
       </div>
     );
   }
@@ -74,7 +91,8 @@ Sidebar.propTypes = {
   fontName: PropTypes.string.isRequired,
   isAuthenticated: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
-  goToLibrary: PropTypes.func.isRequired
+  goToLibrary: PropTypes.func.isRequired,
+  setLocale: PropTypes.func.isRequired
 };
 
 Sidebar.defaultProps = {
@@ -92,7 +110,8 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       goToStep,
-      goToLibrary: () => push("/library")
+      goToLibrary: () => push("/library"),
+      setLocale,
     },
     dispatch
   );

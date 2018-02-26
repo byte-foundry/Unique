@@ -39,6 +39,21 @@
   fill: white;
 }
 
+.Sidebar .languages {
+  position: absolute;
+  bottom: 100px;
+  left: 0px;
+  width: 50px;
+}
+
+.Sidebar .icon-language {
+  width: 30px;
+  margin: 10px auto;
+  height: auto;
+  display: block;
+  cursor: pointer;
+}
+
 .Sidebar .icon-menu {
   right: 30px;
   fill: #7D45FF;

@@ -15,6 +15,7 @@
     "react-dom": "^15.5.4",
     "react-flip-move": "^3.0.0",
     "react-input-range": "^1.2.2",
+    "react-intl": "^2.4.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
@@ -29,6 +30,9 @@
     "save-as": "^0.1.8"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-react-intl": "^2.4.0",
+    "babel-preset-react-app": "^3.1.1",
     "flow-bin": "^0.47.0",
     "react-scripts": "2.0.0-next.9754a231"
   },
@@ -37,7 +41,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "extract-messages-osx": "NODE_ENV=production babel ./src  --out-file /dev/null",
+    "extract-messages": "set NODE_ENV=production&& babel ./src >NUL"
   },
   "browserslist": {
     "development": [

@@ -5,6 +5,7 @@ import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { FormattedMessage } from "react-intl";
 import "./WelcomeBack.css";
 
 import { ReactComponent as Next } from "../stepView/next.svg";
@@ -46,7 +47,14 @@ class WelcomeBack extends React.Component {
         />
         <div className="row">
           <div className="col-sm-12">
-            <h1>Welcome back,</h1>
+            <h1>
+              {" "}
+              <FormattedMessage
+                id="WelcomeBack.title"
+                defaultMessage="Welcome back,"
+                description="Welcome back page title"
+              />
+            </h1>
           </div>
         </div>
         <div className="choices row">
@@ -56,7 +64,11 @@ class WelcomeBack extends React.Component {
             }`}
             onClick={() => this.setState({ selected: "old" })}
           >
-            Resume your project
+            <FormattedMessage
+              id="WelcomeBack.resumeProject"
+              defaultMessage="Resume your project"
+              description="Welcome back resume project"
+            />
           </div>
           <div
             className={`col-sm-12 ${
@@ -64,7 +76,11 @@ class WelcomeBack extends React.Component {
             }`}
             onClick={() => this.setState({ selected: "new" })}
           >
-            Create a new one
+            <FormattedMessage
+              id="WelcomeBack.createNewProject"
+              defaultMessage="Create a new one"
+              description="Welcome back create new project"
+            />
           </div>
         </div>
       </div>

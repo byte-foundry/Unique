@@ -5,6 +5,7 @@ import { push } from "react-router-redux";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import FlipMove from "react-flip-move";
+import { FormattedMessage } from "react-intl";
 import { Shortcuts } from "react-shortcuts";
 import "./TemplateChoice.css";
 import Template from "../../components/template/";
@@ -96,7 +97,13 @@ class TemplateChoice extends React.Component {
             />
             <div className="row">
               <div className="col-sm-12">
-                <h1>Select one of our templates and start editing!</h1>
+                <h1>
+                  <FormattedMessage
+                    id="TemplateChoice.title"
+                    defaultMessage="Select one of our templates and start editing!"
+                    description="Template choice page title"
+                  />
+                </h1>
               </div>
             </div>
             <div className="template-wrapper">
