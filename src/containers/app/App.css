@@ -166,3 +166,13 @@
   overflow: hidden;
 	margin: 0 auto;
 }
+
+.tippy-tooltip {
+	font-size: .8rem !important;
+	border-radius: 0px !important;
+	background-color: #7D45FF !important;
+}
+
+.tippy-popper[x-placement^=top] [x-arrow] {
+	border-top-color: #7D45FF !important;
+}

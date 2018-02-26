@@ -5,6 +5,8 @@ import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import FlipMove from "react-flip-move";
 import { Shortcuts } from "react-shortcuts";
+import { Tooltip } from "react-tippy";
+import "react-tippy/dist/tippy.css";
 import {
   stepForward,
   stepBack,
@@ -295,14 +297,38 @@ class StepView extends React.Component {
                 />
               </span>
               <span className="controls">
-                <BackgroundIcon
-                  className="icon-background"
-                  onClick={() => this.props.switchBlackOnWhite()}
-                />
-                <GlyphIcon
-                  className="icon-glyph"
-                  onClick={() => this.props.switchGlyphMode()}
-                />
+                <Tooltip
+                  title={`${
+                    this.props.isBlackOnWhite
+                      ? "Toggle white on black mode"
+                      : "Toggle black on white mode"
+                  }`}
+                  position="top"
+                  trigger="mouseenter"
+                  arrow="true"
+                  delay={600}
+                >
+                  <BackgroundIcon
+                    className="icon-background"
+                    onClick={() => this.props.switchBlackOnWhite()}
+                  />
+                </Tooltip>
+                <Tooltip
+                  title={`${
+                    this.props.isGlyphMode
+                      ? "Toggle regular mode"
+                      : "Toggle glyph mode"
+                  }`}
+                  position="top"
+                  trigger="mouseenter"
+                  arrow="true"
+                  delay={600}
+                >
+                  <GlyphIcon
+                    className="icon-glyph"
+                    onClick={() => this.props.switchGlyphMode()}
+                  />
+                </Tooltip>
               </span>
             </div>
           </div>

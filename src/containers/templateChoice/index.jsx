@@ -94,6 +94,11 @@ class TemplateChoice extends React.Component {
                 this.props.redirectToHome();
               }}
             />
+            <div className="row">
+              <div className="col-sm-12">
+                <h1>Select one of our templates and start editing!</h1>
+              </div>
+            </div>
             <div className="template-wrapper">
               <FlipMove
                 className="choices row"

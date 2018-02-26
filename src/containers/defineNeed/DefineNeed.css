@@ -55,6 +55,11 @@
   margin-bottom: 20px;
 }
 
+.DefineNeed .tooltip {
+  vertical-align: super;
+  font-size:  1rem;
+}
+
 
 .DefineNeed form {}
 

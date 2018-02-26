@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Tooltip } from "react-tippy";
+import "react-tippy/dist/tippy.css";
 import { defineNeed } from "../../data/font";
 import { storeChosenWord } from "../../data/user";
 import "./DefineNeed.css";
@@ -60,6 +62,19 @@ class DefineNeed extends React.Component {
             onClick={() => this.setState({ selected: "logo" })}
           >
             Logotype
+            {this.state.selected === "logo" && (
+              <span>
+                {" "}
+                <Tooltip
+                  title="A logotype font is blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla"
+                  position="top"
+                  trigger="mouseenter"
+                  arrow="true"
+                >
+                  <span className="tooltip">i</span>
+                </Tooltip>
+              </span>
+            )}
           </div>
           <div
             className={`col-sm-12 ${
@@ -68,6 +83,19 @@ class DefineNeed extends React.Component {
             onClick={() => this.setState({ selected: "text" })}
           >
             Text
+            {this.state.selected === "text" && (
+              <span>
+                {" "}
+                <Tooltip
+                  title="A text font is blablabla blablabla blablabla blablabla"
+                  position="top"
+                  trigger="mouseenter"
+                  arrow="true"
+                >
+                  <span className="tooltip">i</span>
+                </Tooltip>
+              </span>
+            )}
           </div>
           <div
             className={`col-sm-12 ${
@@ -76,6 +104,19 @@ class DefineNeed extends React.Component {
             onClick={() => this.setState({ selected: "website" })}
           >
             Website
+            {this.state.selected === "website" && (
+              <span>
+                {" "}
+                <Tooltip
+                  title="A website font is blablabla blablabla blablabla blablabla"
+                  position="top"
+                  trigger="mouseenter"
+                  arrow="true"
+                >
+                  <span className="tooltip">i</span>
+                </Tooltip>
+              </span>
+            )}
           </div>
         </div>
         {this.state.selected === "logo" ? (
