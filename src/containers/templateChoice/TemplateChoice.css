@@ -43,7 +43,7 @@
   top: 50%;
   transform: translateY(-50%) translateZ(0px);
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
-  border: 1px solid #7D45FF;
+  border: 2px solid #7D45FF;
   background: transparent;
   padding: 0px;
   z-index: 10;
@@ -63,11 +63,10 @@
 
 .TemplateChoice .icon-next.disabled {
   border-color: #C7C3D1;
-  background: #C7C3D1;
 }
 
 .TemplateChoice .icon-next.disabled path {
-  fill: white;
+  fill: #C7C3D1;
 }
 .TemplateChoice .Button {
   margin-left: 0px;

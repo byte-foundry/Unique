@@ -27,7 +27,7 @@
   right: 0;
   background: transparent;
   transition: all .3s ease;  
-  border: 1px solid #7D45FF;
+  border: 2px solid #7D45FF;
   padding: 0px;
   z-index: 3;
 }
@@ -36,11 +36,10 @@
 }
 .DefineNeed .icon-next.disabled {
   border-color: #C7C3D1;
-  background: #C7C3D1;
 }
 
 .DefineNeed .icon-next.disabled path {
-  fill: white;
+  fill: #C7C3D1;
 }
 
 .DefineNeed h1, .DefineNeed h2 {
