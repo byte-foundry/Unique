@@ -14,7 +14,7 @@ import { ReactComponent as FrenchIcon } from "./french.svg";
 import { ReactComponent as EnglishIcon } from "./english.svg";
 
 const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
-  steps.map((step, i) => (
+  steps && steps.map((step, i) => (
     <Step
       index={i}
       title={steps[i].name}

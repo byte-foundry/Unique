@@ -65,3 +65,18 @@
   padding: 4px 8px;
   border: 2px solid #000;
 }
+
+.Choice .icon-pencil{
+  height: 15px;
+  width: auto;
+  position: absolute;
+  top: 30px;
+  cursor: pointer;
+  padding-left: 10px;
+  fill: #C7C3D1;
+}
+
+.Choice span[contenteditable="true"] {
+  border: 1px dotted #7D45FF;
+  padding: 5px 10px;
+}

@@ -16,7 +16,12 @@ import {
   finishEditing,
   resetStep
 } from "../../data/font";
-import { switchBlackOnWhite, switchGlyphMode } from "../../data/user";
+import {
+  switchBlackOnWhite,
+  switchGlyphMode,
+  storeChosenWord,
+  storeChosenGlyph
+} from "../../data/user";
 import Choice from "../../components/choice/";
 import WordView from "../wordView/";
 import Sliders from "../sliders/";
@@ -60,8 +65,8 @@ class StepView extends React.Component {
       this.setState({ choice: currentParams });
       return true;
     };
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
+    this.enableShortcuts = this.enableShortcuts.bind(this);
+    this.disableShortcuts = this.disableShortcuts.bind(this);
     this.handleShortcuts = this.handleShortcuts.bind(this);
     this.setChoiceSelected = this.setChoiceSelected.bind(this);
   }
@@ -74,10 +79,10 @@ class StepView extends React.Component {
   componentWillReceiveProps(newProps) {
     this.setChoiceSelected(newProps);
   }
-  onFocus() {
+  disableShortcuts() {
     this.setState({ isInputFocused: true });
   }
-  onBlur() {
+  enableShortcuts() {
     this.setState({ isInputFocused: false });
   }
   setChoiceSelected(props) {
@@ -215,7 +220,7 @@ class StepView extends React.Component {
               }}
             />
             <FlipMove
-              className="choices row"
+              className="choices row justify-content-sm-center"
               duration={250}
               delay={150}
               staggerDelayBy={50}
@@ -233,9 +238,14 @@ class StepView extends React.Component {
                   index={index}
                   selected={this.state.choice === choice}
                   text={this.props.chosenWord}
+                  glyph={this.props.chosenGlyph}
                   mostSelected={this.state.mostSelected === choice.id}
                   isBlackOnWhite={this.props.isBlackOnWhite}
                   isGlyphMode={this.props.isGlyphMode}
+                  storeChosenWord={this.props.storeChosenWord}
+                  storeChosenGlyph={this.props.storeChosenGlyph}
+                  disableShortcuts={this.disableShortcuts}
+                  enableShortcuts={this.enableShortcuts}
                 />
               ))}
               <div
@@ -426,6 +436,7 @@ const mapStateToProps = state => ({
   step: state.font.step,
   choicesMade: state.font.choicesMade,
   chosenWord: state.user.chosenWord,
+  chosenGlyph: state.user.chosenGlyph,
   isBlackOnWhite: state.user.isBlackOnWhite,
   isGlyphMode: state.user.isGlyphMode,
   stepLength: state.font.currentPreset.steps.length
@@ -440,7 +451,9 @@ const mapDispatchToProps = dispatch =>
       finishEditing,
       resetStep,
       switchBlackOnWhite,
-      switchGlyphMode
+      switchGlyphMode,
+      storeChosenWord,
+      storeChosenGlyph
     },
     dispatch
   );
@@ -469,10 +482,13 @@ StepView.propTypes = {
     )
   }).isRequired,
   chosenWord: PropTypes.string.isRequired,
+  chosenGlyph: PropTypes.string.isRequired,
   switchBlackOnWhite: PropTypes.func.isRequired,
   switchGlyphMode: PropTypes.func.isRequired,
   isGlyphMode: PropTypes.bool.isRequired,
-  isBlackOnWhite: PropTypes.bool.isRequired
+  isBlackOnWhite: PropTypes.bool.isRequired,
+  storeChosenWord: PropTypes.func.isRequired,
+  storeChosenGlyph: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);

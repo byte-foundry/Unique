@@ -370,7 +370,6 @@ export const setFontBought = () => dispatch => {
 };
 
 export const updateSubset = () => (dispatch, getState) => {
-  const { chosenWord } = getState().user;
   const { fontName, step } = getState().font;
   if (step && fontName) {
     dispatch(updateStepValues(step, fontName));
@@ -379,7 +378,7 @@ export const updateSubset = () => (dispatch, getState) => {
 };
 
 const updateStepValues = (step, font) => (dispatch, getState) => {
-  let { chosenWord } = getState().user;
+  let { chosenWord, chosenGlyph } = getState().user;
   console.log("========updateStepValues===========");
   const {
     choicesFontsName,
@@ -407,7 +406,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     if (fonts[choicesFontsName[index]]) {
       fonts[choicesFontsName[index]].changeParams(
         { ...stepBaseValues, ...currentParams, ...stepChoices },
-        chosenWord
+        chosenWord + chosenGlyph
       );
     } else {
       dispatch(setUnstable());
@@ -420,7 +419,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
           .then(createdFont => {
             createdFont.changeParams(
               { ...stepBaseValues, ...currentParams, ...stepChoices },
-              chosenWord
+              chosenWord + chosenGlyph
             );
             dispatch(storeCreatedFont(createdFont, `choiceFont${index}`));
             choicesFontsName[index] = `choiceFont${index}`;
@@ -436,7 +435,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
   if (fonts[sliderFontName]) {
     fonts[sliderFontName].changeParams(
       { ...stepBaseValues, ...currentParams },
-      chosenWord
+      chosenWord + chosenGlyph
     );
   } else {
     dispatch(setUnstable());
@@ -449,7 +448,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
         .then(createdFont => {
           createdFont.changeParams(
             { ...stepBaseValues, ...currentParams },
-            chosenWord
+            chosenWord + chosenGlyph
           );
           dispatch(storeCreatedFont(createdFont, sliderFontName));
           dispatch(setStable());
@@ -460,10 +459,10 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     chosenWord =
       step === currentPreset.steps.length
         ? "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&"
-        : chosenWord;
+        : chosenWord + chosenGlyph;
     fonts[curFontName].changeParams(
       { ...stepBaseValues, ...currentParams },
-      chosenWord
+      chosenWord + chosenGlyph
     );
   }
   request(
@@ -516,7 +515,7 @@ export const resetStep = () => (dispatch, getState) => {
 };
 
 export const updateFont = (isSpecimen = false) => (dispatch, getState) => {
-  let { chosenWord } = getState().user;
+  let { chosenWord, chosenGlyph } = getState().user;
   const {
     fontName,
     currentParams,
@@ -529,19 +528,19 @@ export const updateFont = (isSpecimen = false) => (dispatch, getState) => {
   chosenWord =
     step === currentPreset.steps.length || isSpecimen
       ? "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&"
-      : chosenWord;
+      : chosenWord + chosenGlyph;
   console.log(fonts);
   console.log(fontName);
   if (fonts[fontName]) {
     fonts[fontName].changeParams(
       { ...stepBaseValues, ...currentParams },
-      chosenWord
+      chosenWord + chosenGlyph
     );
   }
   if (fonts[sliderFontName]) {
     fonts[sliderFontName].changeParams(
       { ...stepBaseValues, ...currentParams },
-      chosenWord
+      chosenWord + chosenGlyph
     );
   }
   dispatch({
