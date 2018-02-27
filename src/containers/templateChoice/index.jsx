@@ -88,15 +88,15 @@ class TemplateChoice extends React.Component {
           }}
           tabIndex="-1"
         >
+          <Back
+            className="icon-back"
+            onClick={() => {
+              this.props.redirectToHome();
+            }}
+          />
           <div className="container">
-            <Back
-              className="icon-back"
-              onClick={() => {
-                this.props.redirectToHome();
-              }}
-            />
-            <div className="row">
-              <div className="col-sm-12">
+            <div className="row justify-content-sm-center">
+              <div className="col-sm-12 col-md-11 col-lg-10">
                 <h1>
                   <FormattedMessage
                     id="TemplateChoice.title"
@@ -108,7 +108,7 @@ class TemplateChoice extends React.Component {
             </div>
             <div className="template-wrapper">
               <FlipMove
-                className="choices row"
+                className="choices row justify-content-sm-center"
                 duration={300}
                 delay={800}
                 staggerDelayBy={50}

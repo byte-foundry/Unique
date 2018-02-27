@@ -12,7 +12,7 @@ class Template extends React.Component {
         aria-selected="false"
         tabIndex={0}
         key={`preset${this.props.font.preset}${this.props.font.variant}`}
-        className={`Choice ${this.props.selected ? "selected" : ""} col-sm-12`}
+        className={`Choice ${this.props.selected ? "selected" : ""} col-sm-12 col-md-11 col-lg-10`}
         onClick={this.props.onClick}
         onDoubleClick={this.props.onDoubleClick}
         style={{ fontFamily: `'${this.props.font.preset}${this.props.font.variant}'` }}

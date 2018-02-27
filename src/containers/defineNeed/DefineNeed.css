@@ -1,6 +1,9 @@
 .DefineNeed {
-  padding-top: 120px;
   position: relative;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 .DefineNeed .needs {
@@ -23,7 +26,8 @@
   height: auto;
   cursor: pointer;
   position: absolute;
-  bottom: 0;
+  top: 50%;
+  transform: translateY(-50%);
   right: 0;
   background: transparent;
   transition: all .3s ease;  

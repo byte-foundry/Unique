@@ -17,8 +17,8 @@ class Choice extends React.Component {
   render() {
     return (
       <div
-        className={`Choice ${this.props.selected ? "selected" : ""}  col-sm-${
-          this.props.isGlyphMode ? "4" : "auto"
+        className={`Choice ${this.props.selected ? "selected" : ""}  ${
+          this.props.isGlyphMode ? "col-sm-4" : "auto"
         } ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"} ${
           this.props.isGlyphMode ? "glyphMode" : ""
         }`}
@@ -37,6 +37,7 @@ class Choice extends React.Component {
           this.setState({ isHovered: false });
         }}
       >
+      
         <ContentEditable
           html={this.props.isGlyphMode ? this.props.glyph : this.props.text}
           disabled={!this.state.isEditable}

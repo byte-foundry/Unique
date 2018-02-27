@@ -39,14 +39,15 @@ class WelcomeBack extends React.Component {
   render() {
     return (
       <div className="WelcomeBack container">
-        <Next
-          className={`icon-next ${!this.state.selected ? "disabled" : ""}`}
-          onClick={e => {
-            this.handleSubmit(e);
-          }}
-        />
-        <div className="row">
-          <div className="col-sm-12">
+      <Next
+              className={`icon-next ${!this.state.selected ? "disabled" : ""}`}
+              onClick={e => {
+                this.handleSubmit(e);
+              }}
+            />
+        <div className="row justify-content-sm-center">
+          <div className="col-sm-12 col-md-11 col-lg-10">
+            
             <h1>
               {" "}
               <FormattedMessage
@@ -57,9 +58,9 @@ class WelcomeBack extends React.Component {
             </h1>
           </div>
         </div>
-        <div className="choices row">
+        <div className="choices row justify-content-sm-center">
           <div
-            className={`col-sm-12 ${
+            className={`col-sm-12 col-md-11 col-lg-10 ${
               this.state.selected === "old" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "old" })}
@@ -71,7 +72,7 @@ class WelcomeBack extends React.Component {
             />
           </div>
           <div
-            className={`col-sm-12 ${
+            className={`col-sm-12 col-md-11 col-lg-10 ${
               this.state.selected === "new" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "new" })}

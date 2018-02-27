@@ -50,8 +50,8 @@ class DefineNeed extends React.Component {
           }}
         />
         {this.props.isLoading ? <h2>Creating font...</h2> : false}
-        <div className="row">
-          <div className="col-sm-12">
+        <div className="row justify-content-sm-center">
+          <div className="col-sm-12 col-md-11 col-lg-10">
             <h1>
               <FormattedMessage
                 id="DefineNeed.title"
@@ -61,9 +61,9 @@ class DefineNeed extends React.Component {
             </h1>
           </div>
         </div>
-        <div className="needs row">
+        <div className="needs row justify-content-sm-center">
           <div
-            className={`col-sm-12 ${
+            className={`col-sm-12 col-md-11 col-lg-10 ${
               this.state.selected === "logo" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "logo" })}
@@ -96,7 +96,7 @@ class DefineNeed extends React.Component {
             )}
           </div>
           <div
-            className={`col-sm-12 ${
+            className={`col-sm-12 col-md-11 col-lg-10 ${
               this.state.selected === "text" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "text" })}
@@ -129,7 +129,7 @@ class DefineNeed extends React.Component {
             )}
           </div>
           <div
-            className={`col-sm-12 ${
+            className={`col-sm-12 col-md-11 col-lg-10 ${
               this.state.selected === "website" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "website" })}
@@ -163,8 +163,8 @@ class DefineNeed extends React.Component {
           </div>
         </div>
         {this.state.selected === "logo" ? (
-          <div className="row logoName">
-            <div className="col-sm-12">
+          <div className="row justify-content-sm-center logoName">
+            <div className="col-sm-12 col-md-11 col-lg-10">
               <h1>
                 <FormattedMessage
                   id="DefineNeed.brandTitle"
@@ -173,7 +173,7 @@ class DefineNeed extends React.Component {
                 />
               </h1>
             </div>
-            <div className="col-sm-12">
+            <div className="col-sm-12 col-md-11 col-lg-10">
               <form onSubmit={this.handleSubmit}>
                 <FormattedMessage
                   id="DefineNeed.brandInput"

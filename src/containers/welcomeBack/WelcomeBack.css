@@ -36,7 +36,7 @@
   right: 0;
   background: transparent;
   transition: all 0.3s ease;
-  border: 1px solid #7d45ff;
+  border: 2px solid #7d45ff;
   padding: 0px;
   z-index: 3;
 }
@@ -45,9 +45,8 @@
 }
 .WelcomeBack .icon-next.disabled {
   border-color: #c7c3d1;
-  background: #c7c3d1;
 }
 
 .WelcomeBack .icon-next.disabled path {
-  fill: white;
+  fill: #c7c3d1;
 }
