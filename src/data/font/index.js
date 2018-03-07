@@ -1,5 +1,6 @@
 import { templateNames } from "prototypo-library";
 import saveAs from "save-as";
+import mergeWith from "lodash.mergewith";
 import { push } from "react-router-redux";
 import { request } from "graphql-request";
 import { loadPresets } from "../presets";
@@ -252,7 +253,7 @@ export const selectFont = font => (dispatch, getState) => {
     // Sort choices
     let stepParams = {};
     step.choices.forEach(choice => {
-      stepParams = { ...stepParams, ...choice.values };
+      stepParams = mergeWith(stepParams, choice.values);
     });
     const {
       glyphSpecialProps,
@@ -263,7 +264,7 @@ export const selectFont = font => (dispatch, getState) => {
     } = stepParams;
     const paramToSort = Object.keys(params)[0];
 
-    step.choices.sort(function(a, b) {
+    step.choices.sort(function (a, b) {
       return a.values[paramToSort] - b.values[paramToSort];
     });
   });
@@ -272,7 +273,7 @@ export const selectFont = font => (dispatch, getState) => {
   for (let i = 0; i < maxStep + 1; i += 1) {
     console.log(
       `Creating choiceFont${i} from template ${
-        templateNames[templates[font.template]]
+      templateNames[templates[font.template]]
       }`
     );
     promiseArray.push(
@@ -405,7 +406,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
     console.log(fonts[choicesFontsName[index]]);
     if (fonts[choicesFontsName[index]]) {
       fonts[choicesFontsName[index]].changeParams(
-        { ...stepBaseValues, ...currentParams, ...stepChoices },
+        mergeWith(mergeWith(stepBaseValues, currentParams), stepChoices),
         chosenWord + chosenGlyph
       );
     } else {
@@ -418,7 +419,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
           )
           .then(createdFont => {
             createdFont.changeParams(
-              { ...stepBaseValues, ...currentParams, ...stepChoices },
+              mergeWith(mergeWith(stepBaseValues, currentParams), stepChoices),
               chosenWord + chosenGlyph
             );
             dispatch(storeCreatedFont(createdFont, `choiceFont${index}`));
@@ -434,7 +435,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
   });
   if (fonts[sliderFontName]) {
     fonts[sliderFontName].changeParams(
-      { ...stepBaseValues, ...currentParams },
+      mergeWith(stepBaseValues, currentParams),
       chosenWord + chosenGlyph
     );
   } else {
@@ -447,7 +448,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
         )
         .then(createdFont => {
           createdFont.changeParams(
-            { ...stepBaseValues, ...currentParams },
+            mergeWith(stepBaseValues, currentParams),
             chosenWord + chosenGlyph
           );
           dispatch(storeCreatedFont(createdFont, sliderFontName));
@@ -461,7 +462,7 @@ const updateStepValues = (step, font) => (dispatch, getState) => {
         ? "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&"
         : chosenWord + chosenGlyph;
     fonts[curFontName].changeParams(
-      { ...stepBaseValues, ...currentParams },
+      mergeWith(stepBaseValues, currentParams),
       chosenWord + chosenGlyph
     );
   }
@@ -503,10 +504,10 @@ export const resetStep = () => (dispatch, getState) => {
     values: {}
   };
   console.log(choicesMade);
-  currentParams = {
-    ...currentParams,
-    ...paramsToReset
-  };
+  currentParams = mergeWith(
+    currentParams,
+    paramsToReset
+  );
   dispatch({
     type: RESET_STEP,
     choicesMade: [...choicesMade],
@@ -533,13 +534,13 @@ export const updateFont = (isSpecimen = false) => (dispatch, getState) => {
   console.log(fontName);
   if (fonts[fontName]) {
     fonts[fontName].changeParams(
-      { ...stepBaseValues, ...currentParams },
+      mergeWith(stepBaseValues, currentParams),
       chosenWord + chosenGlyph
     );
   }
   if (fonts[sliderFontName]) {
     fonts[sliderFontName].changeParams(
-      { ...stepBaseValues, ...currentParams },
+      mergeWith(stepBaseValues, currentParams),
       chosenWord + chosenGlyph
     );
   }
@@ -602,10 +603,10 @@ export const stepForward = () => (dispatch, getState) => {
   dispatch({
     type: SELECT_CHOICE,
     choicesMade,
-    currentParams: {
-      ...currentParams,
-      ...paramsToReset
-    }
+    currentParams: mergeWith(
+      currentParams,
+      paramsToReset
+    ),
   });
   dispatch(goToStep((step += 1)));
   request(GRAPHQL_API, getSpecialChoiceSelectedCount("No choice"))
@@ -653,11 +654,11 @@ export const selectChoice = choice => (dispatch, getState) => {
       }
     });
   }
-  currentParams = {
-    ...currentParams,
-    ...paramsToReset,
-    ...choice.values
-  };
+  currentParams = mergeWith(
+    mergeWith(currentParams,
+      paramsToReset),
+    choice.values
+  );
   choicesMade[step] = choice.values || {};
   choicesMade[step].name = choice.name;
   dispatch({
@@ -704,11 +705,11 @@ export const finishEditing = choice => (dispatch, getState) => {
       }
     });
   }
-  currentParams = {
-    ...currentParams,
-    ...paramsToReset,
-    ...choice.values
-  };
+  currentParams = mergeWith(
+    mergeWith(currentParams,
+      paramsToReset),
+    choice.values
+  );
   choicesMade[step] = choice.values || {};
   choicesMade[step].name = choice.name;
 
@@ -788,7 +789,7 @@ export const resetSliderFont = () => (dispatch, getState) => {
   const { currentParams, stepBaseValues, sliderFontName } = getState().font;
   const { fonts } = getState().createdFonts;
   fonts[sliderFontName].changeParams(
-    { ...stepBaseValues, ...currentParams },
+    mergeWith(stepBaseValues, currentParams),
     chosenWord
   );
 };
@@ -825,7 +826,7 @@ export const reloadFonts = (restart = true) => (dispatch, getState) => {
           )
         );
         createdFont.changeParams(
-          { ...baseValues, ...currentParams },
+          mergeWith(baseValues, currentParams),
           chosenWord
         );
       });
@@ -854,11 +855,11 @@ export const reloadFonts = (restart = true) => (dispatch, getState) => {
               }
               if (currentPreset.steps[currentStep - 1].choices[i]) {
                 createdFont.changeParams(
-                  {
-                    ...baseValues,
-                    ...currentParams,
-                    ...currentPreset.steps[currentStep - 1].choices[i].values
-                  },
+                  mergeWith(
+                    mergeWith(baseValues,
+                      currentParams),
+                    currentPreset.steps[currentStep - 1].choices[i].values
+                  ),
                   chosenWord
                 );
                 dispatch(storeCreatedFont(createdFont, `choiceFont${i}`));
@@ -881,10 +882,7 @@ export const reloadFonts = (restart = true) => (dispatch, getState) => {
           )
           .then(createdFont => {
             createdFont.changeParams(
-              {
-                ...baseValues,
-                ...currentParams
-              },
+              mergeWith(baseValues, currentParams),
               chosenWord
             );
             dispatch(storeCreatedFont(createdFont, "sliderFont"));
