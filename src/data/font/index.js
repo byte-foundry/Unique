@@ -362,7 +362,6 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
         }
       });
     }
-    console.log(fonts[choicesFontsName[index]]);
     if (fonts[choicesFontsName[index]]) {
       fonts[choicesFontsName[index]].changeParams(
         mergeWith(mergeWith(stepBaseValues, currentParams), stepChoices),
@@ -372,6 +371,7 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
       // Error : no choiceFont for this choice
     }
   });
+  // Update slider font
   if (fonts[sliderFontName]) {
     fonts[sliderFontName].changeParams(
       mergeWith(stepBaseValues, currentParams),
@@ -382,12 +382,12 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
   }
 
   // If exists, change user font
-  if (fonts[curFontName] && fonts[curFontName].changeParams) {
+  if (fonts[fontName] && fonts[fontName].changeParams) {
     chosenWord =
       step === currentPreset.steps.length
         ? "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&"
         : chosenWord + chosenGlyph;
-    fonts[curFontName].changeParams(
+    fonts[fontName].changeParams(
       mergeWith(stepBaseValues, currentParams),
       chosenWord + chosenGlyph
     );
