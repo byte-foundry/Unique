@@ -477,7 +477,6 @@ StepView.propTypes = {
   selectChoice: PropTypes.func.isRequired,
   finishEditing: PropTypes.func.isRequired,
   updateSliderFont: PropTypes.func.isRequired,
-  resetStep: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
   stepLength: PropTypes.number.isRequired,
   choicesMade: PropTypes.arrayOf(

@@ -19,22 +19,16 @@ import {
   getPreset
 } from "../queries";
 
-export const CREATE_REQUESTED = "font/CREATE_REQUESTED";
-export const CREATE = "font/CREATE";
 export const SELECT_FONT_REQUESTED = "font/SELECT_FONT_REQUESTED";
 export const SELECT_FONT = "font/SELECT_FONT";
 export const DEFINE_NEED = "font/DEFINE_NEED";
 export const CHANGE_STEP = "font/CHANGE_STEP";
 export const UPDATE_VALUES = "font/UPDATE_VALUES";
-export const SELECT_CHOICE_REQUESTED = "font/SELECT_CHOICE_REQUESTED";
 export const SELECT_CHOICE = "font/SELECT_CHOICE";
 export const RELOAD_FONTS = "font/RELOAD_FONTS";
-export const FINISH_EDITING = "font/FINISH_EDITING";
 export const CLEAR_IS_LOADING = "font/CLEAR_IS_LOADING";
 export const LOAD_FONT_DATA = "font/LOAD_FONT_DATA";
-export const ADD_CHOICE_FONT = "font/ADD_CHOICE_FONT";
 export const SET_FONT_BOUGHT = "font/SET_FONT_BOUGHT";
-export const RESET_STEP = "font/RESET_STEP";
 
 const initialState = {
   fontName: "",
@@ -62,24 +56,9 @@ const templates = {
 };
 
 export default (state = initialState, action) => {
+  console.log(action.type)
+  console.log(action)
   switch (action.type) {
-    case CREATE_REQUESTED:
-      return {
-        ...state,
-        isLoading: true
-      };
-
-    case CREATE:
-      return {
-        ...state,
-        fontName: action.fontName,
-        currentPreset: action.selectedFont,
-        step: 1,
-        initialValues: action.initialValues,
-        isLoading: false,
-        stepBaseValues: action.stepBaseValues
-      };
-
     case DEFINE_NEED:
       return {
         ...state,
@@ -89,6 +68,7 @@ export default (state = initialState, action) => {
     case SELECT_FONT_REQUESTED:
       return {
         ...state,
+        currentPreset: action.selectedFont,
         isLoading: true
       };
 
@@ -101,27 +81,15 @@ export default (state = initialState, action) => {
         initialValues: action.initialValues,
         isLoading: false,
         stepBaseValues: action.stepBaseValues,
-        choicesMade: [null],
+        choicesMade: action.choicesMade,
         choicesFontsName: action.choicesFontsName,
-        currentParams: {},
+        currentParams: action.currentParams,
         sliderFontName: action.sliderFontName
       };
-
-    case ADD_CHOICE_FONT:
-      return {
-        ...state,
-        choicesFontsName: action.choicesFontsName
-      };
-
     case SET_FONT_BOUGHT:
       return {
         ...state,
         alreadyBought: true
-      };
-
-    case SELECT_CHOICE_REQUESTED:
-      return {
-        ...state
       };
 
     case SELECT_CHOICE:
@@ -169,14 +137,19 @@ export default (state = initialState, action) => {
   }
 };
 
-export const selectFont = font => (dispatch, getState) => {
+export const selectFont = (font, step) => (dispatch, getState) => {
   console.log('==========font/selectFont============')
 
 
   const { chosenWord } = getState().user;
+  const {
+    currentParams,
+    choicesMade,
+  } = getState().font;
   const selectedFont = { ...font };
   dispatch({
-    type: SELECT_FONT_REQUESTED
+    type: SELECT_FONT_REQUESTED,
+    selectedFont
   });
   const selectedFontName = `${selectedFont.preset}${selectedFont.variant}`;
 
@@ -243,6 +216,21 @@ export const selectFont = font => (dispatch, getState) => {
 
   // Create max choiceFont number + slider fonts
 
+
+  //User font  
+  promiseArray.push(
+    new Promise(resolve => {
+      dispatch(createPrototypoFactory()).then(prototypoFontFactory => {
+        prototypoFontFactory
+          .createFont(selectedFontName, templateNames[templates[selectedFont.template]])
+          .then(createdFont => {
+            dispatch(storeCreatedFont(createdFont, selectedFontName));
+            resolve(true);
+          });
+      });
+    })
+  );
+
   //All choices font
   for (let i = 0; i < maxChoices + 1; i += 1) {
     promiseArray.push(
@@ -294,8 +282,6 @@ export const selectFont = font => (dispatch, getState) => {
       .catch(error => console.log(error));
 
     // All set, ready to customize
-    dispatch(goToStep(1));
-    dispatch(push("/customize"));
     dispatch({
       type: SELECT_FONT,
       fontName: selectedFontName,
@@ -303,8 +289,12 @@ export const selectFont = font => (dispatch, getState) => {
       initialValues: { ...selectedFont.baseValues },
       stepBaseValues: { ...selectedFont.baseValues },
       choicesFontsName,
-      sliderFontName
-    });
+      sliderFontName,
+      choicesMade: step ? choicesMade : [null],
+      currentParams: step ? currentParams : {},
+    });    
+    dispatch(goToStep(step || 1));
+    dispatch(push("/customize"));
   });
 };
 
@@ -350,11 +340,12 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
   } = getState().font;
   const { fonts } = getState().createdFonts;
   const stepToUpdate = step || getState().font.step;
-
+  const subset = isSpecimen ? "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&" : chosenWord + chosenGlyph;
 
   // Update choice fonts
   currentPreset.steps[stepToUpdate - 1].choices.forEach((choice, index) => {
     const stepChoices = { ...choice.values };
+    // If choice already done on this step, reset choice values on the font (for the default mostly)
     if (choicesMade[stepToUpdate]) {
       Object.keys(choicesMade[stepToUpdate]).forEach(key => {
         if (!stepChoices[key]) {
@@ -362,34 +353,35 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
         }
       });
     }
+
+    // Update choice font param
     if (fonts[choicesFontsName[index]]) {
+      // CurrentParams, then step Base Values, then choice values
       fonts[choicesFontsName[index]].changeParams(
         mergeWith(mergeWith(stepBaseValues, currentParams), stepChoices),
-        chosenWord + chosenGlyph
+        subset
       );
     } else {
       // Error : no choiceFont for this choice
+      console.log('// Error : no choiceFont for this choice')
     }
   });
   // Update slider font
   if (fonts[sliderFontName]) {
     fonts[sliderFontName].changeParams(
       mergeWith(stepBaseValues, currentParams),
-      chosenWord + chosenGlyph
+      subset
     );
   } else {
     // Error, no slider font
+    console.log('// Error, no slider font')
   }
 
   // If exists, change user font
   if (fonts[fontName] && fonts[fontName].changeParams) {
-    chosenWord =
-      step === currentPreset.steps.length
-        ? "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&"
-        : chosenWord + chosenGlyph;
     fonts[fontName].changeParams(
       mergeWith(stepBaseValues, currentParams),
-      chosenWord + chosenGlyph
+      subset
     );
   }
 
@@ -410,6 +402,7 @@ export const clearFontIsLoading = () => dispatch => {
 export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
   console.log('==========font/goToStep============')
   const { currentPreset } = getState().font;
+  console.log(currentPreset)
   switch (step) {
     case 0:
       dispatch(loadPresets());
@@ -442,20 +435,11 @@ export const selectChoice = choice => (dispatch, getState) => {
   console.log('==========font/selectChoice============')
   const { choicesMade, currentPreset } = getState().font;
   let { step, currentParams } = getState().font;
-  console.log(choice);
-  if (!choice || !choice.name) {
-    console.log("no choice selected");
-    choice = {
-      name: "No choice",
-      values: {}
-    };
-    console.log(choice);
-  }
-  console.log("===============================================");
-  dispatch({
-    type: SELECT_CHOICE_REQUESTED,
-    params: choice.values
-  });
+  
+  // If choice not in the step, do nothing
+  if( !currentPreset.steps[step - 1].choices.find(e => e.name === choice.name)) return;
+
+  // If choice already saved for this step, reset those
   const paramsToReset = {};
   if (choicesMade[step]) {
     Object.keys(choicesMade[step]).forEach(key => {
@@ -464,19 +448,28 @@ export const selectChoice = choice => (dispatch, getState) => {
       }
     });
   }
+
+  // Current font params : Params to reset, then current params, then choice values
   currentParams = mergeWith(
     mergeWith(currentParams,
       paramsToReset),
     choice.values
   );
+
+  // Save choice made  
   choicesMade[step] = choice.values || {};
   choicesMade[step].name = choice.name;
+
   dispatch({
     type: SELECT_CHOICE,
     currentParams,
     choicesMade
   });
+
+  // Go to next step
   dispatch(goToStep((step += 1)));
+
+  // Tracking : update selected count
   if (choice.name === "Custom" || choice.name === "No choice") {
     request(GRAPHQL_API, getSpecialChoiceSelectedCount(choice.name))
       .then(data =>
@@ -543,6 +536,8 @@ export const resetSliderFont = () => (dispatch, getState) => {
 
 export const reloadFonts = (restart = true) => (dispatch, getState) => {
   console.log('==========font/reloadFonts============')
+  const { currentPreset, step, isLoading } = getState().font;
+  dispatch(selectFont(currentPreset, step));
 };
 
 export const loadProject = (loadedProjectID, loadedProjectName) => (
