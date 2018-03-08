@@ -125,12 +125,11 @@ class App extends React.Component {
     console.log(this.props.hasPresetsLoaded);
     console.log(this.props.need);
     console.log(this.props.pathname);
-    console.log(typeof this.props.hasPresetsLoaded === "object");
     console.log("========================================");
     if (
       this.props.need !== "" &&
       this.props.pathname === "/select" &&
-      !(typeof this.props.hasPresetsLoaded === "object")
+      !(this.props.hasPresetsLoaded)
     ) {
       console.log("Has selected need but do not have presets loaded");
       this.props.reloadPresets();
@@ -247,9 +246,7 @@ App.propTypes = {
   selectedFontLoaded: PropTypes.shape({
     fontName: PropTypes.string.isRequired
   }),
-  hasPresetsLoaded: PropTypes.shape({
-    fontName: PropTypes.string.isRequired
-  }),
+  hasPresetsLoaded: PropTypes.bool,
   pathname: PropTypes.string.isRequired,
   need: PropTypes.string.isRequired,
   reloadPresets: PropTypes.func.isRequired,
@@ -268,7 +265,7 @@ App.defaultProps = {
   selectedFont: "",
   selectedFontLoaded: undefined,
   userEmail: "",
-  hasPresetsLoaded: undefined,
+  hasPresetsLoaded: false,
   locale: "en"
 };
 
@@ -283,9 +280,7 @@ const mapStateToProps = state => ({
   userEmail: state.user.email,
   hasPayed: state.user.hasPayed,
   need: state.font.need,
-  hasPresetsLoaded: state.font.fontName
-    ? state.createdFonts.fonts[state.font.fontName]
-    : state.createdFonts.fonts[state.presets.loadedPresetsName[0]],
+  hasPresetsLoaded: state.presets.loadedPresetsName.length > 1,
   isLoading: state.ui.unstable || state.createdFonts.isPrototypoLoading,
   shouldLogout: state.user.shouldLogout,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
