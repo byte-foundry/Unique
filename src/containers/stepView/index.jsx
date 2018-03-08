@@ -9,12 +9,10 @@ import { FormattedMessage } from "react-intl";
 import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 import {
-  stepForward,
   stepBack,
   selectChoice,
   updateSliderFont,
   finishEditing,
-  resetStep
 } from "../../data/font";
 import {
   switchBlackOnWhite,
@@ -462,12 +460,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      stepForward,
       stepBack,
       selectChoice,
       updateSliderFont,
       finishEditing,
-      resetStep,
       switchBlackOnWhite,
       switchGlyphMode,
       storeChosenWord,
@@ -477,7 +473,6 @@ const mapDispatchToProps = dispatch =>
   );
 
 StepView.propTypes = {
-  stepForward: PropTypes.func.isRequired,
   stepBack: PropTypes.func.isRequired,
   selectChoice: PropTypes.func.isRequired,
   finishEditing: PropTypes.func.isRequired,

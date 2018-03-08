@@ -8,6 +8,7 @@
     "graphql-request": "^1.3.4",
     "history": "^4.6.3",
     "lodash.debounce": "^4.0.8",
+    "lodash.mergewith": "^4.6.1",
     "prop-types": "^15.5.10",
     "prototypo-library": "^1.2.11",
     "react": "^15.5.4",
