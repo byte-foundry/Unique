@@ -246,7 +246,9 @@ App.propTypes = {
   selectedFontLoaded: PropTypes.shape({
     fontName: PropTypes.string.isRequired
   }),
-  hasPresetsLoaded: PropTypes.bool,
+  hasPresetsLoaded: PropTypes.shape({
+    fontName: PropTypes.string.isRequired
+  }),
   pathname: PropTypes.string.isRequired,
   need: PropTypes.string.isRequired,
   reloadPresets: PropTypes.func.isRequired,
@@ -280,7 +282,7 @@ const mapStateToProps = state => ({
   userEmail: state.user.email,
   hasPayed: state.user.hasPayed,
   need: state.font.need,
-  hasPresetsLoaded: state.presets.loadedPresetsName.length > 1,
+  hasPresetsLoaded: state.createdFonts.fonts[state.presets.loadedPresetsName[0]],
   isLoading: state.ui.unstable || state.createdFonts.isPrototypoLoading,
   shouldLogout: state.user.shouldLogout,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
