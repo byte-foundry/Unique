@@ -36,21 +36,22 @@
 }
 
 .TemplateChoice .icon-back, .TemplateChoice .icon-next {
-  width: 40px;
+  width: 30px;
   height: auto;
   cursor: pointer;
   position: absolute;
   top: 50%;
   transform: translateY(-50%) translateZ(0px);
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
-  border: 2px solid #7D45FF;
+  border: 2px solid #5320ee;
   background: transparent;
   padding: 0px;
   z-index: 10;
+  border-radius: 50%;
 }
 
 .TemplateChoice .icon-back path, .TemplateChoice .icon-next path {
-  fill: #7D45FF;
+  fill: #5320ee;
 }
 
 .TemplateChoice .icon-back {
@@ -62,11 +63,11 @@
 }
 
 .TemplateChoice .icon-next.disabled {
-  border-color: #C7C3D1;
+  border-color: #b8b5c0;
 }
 
 .TemplateChoice .icon-next.disabled path {
-  fill: #C7C3D1;
+  fill: #b8b5c0;
 }
 .TemplateChoice .Button {
   margin-left: 0px;

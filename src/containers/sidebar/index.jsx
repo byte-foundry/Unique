@@ -6,12 +6,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Step from "../../components/step/";
 import { goToStep } from "../../data/font";
-import { setLocale } from "../../data/ui";
 import "./Sidebar.css";
 
 import { ReactComponent as ProfileIcon } from "./profile.svg";
-import { ReactComponent as FrenchIcon } from "./french.svg";
-import { ReactComponent as EnglishIcon } from "./english.svg";
 
 const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
   steps && steps.map((step, i) => (
@@ -20,7 +17,7 @@ const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
       title={steps[i].name}
       key={steps[i].name}
       current={index === i + 1 && !isSpecimen}
-      choice={choicesMade[i - 1] ? choicesMade[i - 1].name : undefined}
+      choice={choicesMade[i + 1] ? choicesMade[i + 1].name : undefined}
       specimen={isSpecimen}
     />
   ));
@@ -29,6 +26,8 @@ class Sidebar extends React.Component {
     super(props);
   }
   render() {
+    console.log(this.props.choicesMade)
+    console.log(this.props.steps)
     return (
       <div className={`Sidebar ${this.props.location.pathname !== "/customize" ? 'small' : ''}`}>
         <ProfileIcon
@@ -49,20 +48,6 @@ class Sidebar extends React.Component {
                 this.props.fontName,
                 this.props.specimen
               )}
-        </div>
-        <div className="languages">
-        <FrenchIcon
-          className="icon-language"
-          onClick={() => {
-            this.props.setLocale('fr');
-          }}
-        />
-        <EnglishIcon
-          className="icon-language"
-          onClick={() => {
-            this.props.setLocale('en');
-          }}
-        />
         </div>
       </div>
     );
@@ -92,7 +77,6 @@ Sidebar.propTypes = {
   isAuthenticated: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   goToLibrary: PropTypes.func.isRequired,
-  setLocale: PropTypes.func.isRequired
 };
 
 Sidebar.defaultProps = {
@@ -111,7 +95,6 @@ const mapDispatchToProps = dispatch =>
     {
       goToStep,
       goToLibrary: () => push("/library"),
-      setLocale,
     },
     dispatch
   );

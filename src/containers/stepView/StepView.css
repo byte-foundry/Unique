@@ -51,19 +51,20 @@
 }
 
 .StepView .icon-back, .StepView .icon-next, .StepView .icon-finish {
-  width: 40px;
+  width: 30px;
   height: auto;
   cursor: pointer;
   position: absolute;
   top: 50%;
   transform: translateY(-50%) translateZ(0px);
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
-  border: 2px solid #7D45FF;
+  border: 2px solid #5320ee;
+  border-radius: 50%;
   padding: 0px;
 }
 
 .StepView .icon-back path, .StepView .icon-next path, .StepView .icon-finish path {
-  fill: #7D45FF;
+  fill: #5320ee;
 }
 
 .StepView .icon-back {
@@ -72,11 +73,11 @@
 }
 
 .StepView .icon-next.disabled {
-  border-color: #C7C3D1;
+  border-color: #b8b5c0;
 }
 
 .StepView .icon-next.disabled path {
-  fill: #C7C3D1;
+  fill: #b8b5c0;
 }
 
 .StepView .icon-finish.disabled {
@@ -102,7 +103,7 @@
 }
 
 .StepView.whiteOnBlack .icon-next:not(.disabled) path, .StepView.whiteOnBlack .icon-back path {
-  fill: #7D45FF;
+  fill: #5320ee;
   transition: fill .3s ease;  
 }
 

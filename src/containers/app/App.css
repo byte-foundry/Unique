@@ -26,7 +26,8 @@
   min-height: 480px;
   width: 100%;
   height: 100%;
-  background: #7D45FF;
+	background: #5320ee;
+	background-image: linear-gradient(209deg, #5320ee, #5d28e2 68%, #622bdd);
   transition: background-color 1s ease;
 }
 
@@ -42,21 +43,31 @@
 .App-logo-wrapper {
   top: 0;
   height: 100%;
-  transform: translate3d(0,50%,0);
+  transform: translate3d(0,33%,0);
 }
 
 .App-logo-wrapper svg {
 	display: block;
   margin: 0 auto;
   min-width: 320px;
-	max-width: 480px;
-	width: 25%;
+	max-width: 680px;
+	width: 50%;
 	overflow: visible;
 }
 
-.App-logo-wrapper svg .cls-1 {
-	fill:#ffffff;
-	transition: fill 1s cubic-bezier(0.7,0,0.3,1);
+.App-logo-wrapper .logo-main {
+  fill: white;
+}
+.App-logo-wrapper .letter {  
+	opacity: 0;
+	fill: white;
+}
+
+.App-logo-wrapper .letter.animate {
+  animation-duration: .8s;
+  animation-name: animate;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 .App-loader-wrapper {
@@ -77,6 +88,42 @@
   margin-right: 10px;
   cursor: pointer;
 }
+
+.App .language-select {
+	position: absolute;
+	bottom: 30px;
+	left: 30px;
+}
+
+.App .language-select .language-list {
+	list-style: none;
+	background-color: black;
+	margin: 0;
+	padding: 0;
+	height: 0px;
+	transition: height .3s ease-out;
+}
+
+.App .language-select .language-list.opened {
+	height: 34px;
+}
+
+.App .language-select li {
+	cursor: pointer;
+	color: white;
+	padding: 5px 10px;
+	padding-right: 20px;
+}
+
+.App .language-select .language-active {
+	cursor: pointer;
+	color: #b8b5c0;
+	text-decoration: underline;
+	padding: 5px 10px;
+	padding-right: 20px;
+	user-select: none;
+}
+
 
 
 
@@ -105,15 +152,12 @@
 	cursor: pointer;
 }
 
-.loaded .App-logo-wrapper svg .cls-2 {
-	fill: #7D45FF;
-	transform: translateX(0%);
-	animation: inherit;
+.loaded .App-logo-wrapper .logo-main {
+  fill: #5320ee;
 }
-
-.loaded .App-logo-wrapper svg .cls-1 {
-	fill:#7D45FF;
-	animation-delay: 0.4s;
+.loaded  .App-logo-wrapper .letter-1 {  
+	opacity: 1;
+	fill: #5320ee;
 }
 
 .loaded .App-loader-wrapper {
@@ -140,7 +184,7 @@
 
 @keyframes animLoadedLogo {
 	to { 
-		transform: translate3d(-43%,100%,0) translate3d(0,5.5%,0) scale3d(0.30,0.30,1); 
+		transform: translate3d(-45%,100%,0) translate3d(0,-0.5%,0) scale3d(0.30,0.30,1); 
 	}
 }
 
@@ -162,6 +206,26 @@
 	}
 }
 
+
+@keyframes animate {
+  0% {
+    opacity: 0;    
+    transform: translate3d(0,-20%,0);
+  }
+  30% {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+  70% {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0,20%,0);
+  }
+}
+
 .App-content {
   overflow: hidden;
 	margin: 0 auto;
@@ -170,9 +234,9 @@
 .tippy-tooltip {
 	font-size: .8rem !important;
 	border-radius: 0px !important;
-	background-color: #7D45FF !important;
+	background-color: #5320ee !important;
 }
 
 .tippy-popper[x-placement^=top] [x-arrow] {
-	border-top-color: #7D45FF !important;
+	border-top-color: #5320ee !important;
 }

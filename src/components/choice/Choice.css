@@ -1,7 +1,7 @@
 .Choice {
   position: relative;
   width: 100%;
-  padding: 25px 15px 15px 70px;
+  padding: 30px 15px 20px 20px;
   font-size: 6vh;
   line-height: 1;
   background: #fff;
@@ -41,16 +41,16 @@
 }
 
 .Choice.selected {
-  border-color: #7D45FF;
+  border-color: #5320ee;
 }
 
 .Choice .choiceName {
   font-family: unique, sans-serif;  
   line-height: 1;
-  margin-top: 0px;
+  margin-top: 5px;
   margin-bottom: 0;
   font-size: 14px;
-  color: #C7C3D1;
+  color: #b8b5c0;
 }
 
 .Choice .mostSelected {
@@ -73,10 +73,10 @@
   top: 30px;
   cursor: pointer;
   padding-left: 10px;
-  fill: #C7C3D1;
+  fill: #b8b5c0;
 }
 
 .Choice span[contenteditable="true"] {
-  border: 1px dotted #7D45FF;
+  border: 1px dotted #5320ee;
   padding: 5px 10px;
 }

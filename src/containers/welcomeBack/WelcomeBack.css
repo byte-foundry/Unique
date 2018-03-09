@@ -18,13 +18,13 @@
 
 .WelcomeBack .choices div {
   cursor: pointer;
-  color: #c7c3d1;
+  color: #b8b5c0;
   margin-bottom: 3px;
   transition: color 0.3s ease;
 }
 
 .WelcomeBack .choices .selected {
-  color: #7d45ff;
+  color: #5320ee;
 }
 
 .WelcomeBack .icon-next {
@@ -36,17 +36,17 @@
   right: 0;
   background: transparent;
   transition: all 0.3s ease;
-  border: 2px solid #7d45ff;
+  border: 2px solid #5320ee;
   padding: 0px;
   z-index: 3;
 }
 .WelcomeBack .icon-next path {
-  fill: #7D45FF;
+  fill: #5320ee;
 }
 .WelcomeBack .icon-next.disabled {
-  border-color: #c7c3d1;
+  border-color: #b8b5c0;
 }
 
 .WelcomeBack .icon-next.disabled path {
-  fill: #c7c3d1;
+  fill: #b8b5c0;
 }

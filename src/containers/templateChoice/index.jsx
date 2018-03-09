@@ -108,7 +108,7 @@ class TemplateChoice extends React.Component {
             </div>
             <div className="template-wrapper">
               <FlipMove
-                className="choices row justify-content-sm-center"
+                className="templates row justify-content-sm-center"
                 duration={300}
                 delay={800}
                 staggerDelayBy={50}

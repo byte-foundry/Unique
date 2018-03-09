@@ -9,8 +9,8 @@ import './Step.css';
 const Step = props => (
   <div
     role="button"
-    className={`Step ${props.current ? 'current' : ''}`}
-    onClick={() => props.goToStep(props.index + 1, props.specimen)}
+    className={`Step ${props.current ? 'current' : ''} ${!props.choice? 'disabled' : ''}`}
+    onClick={() => props.choice ? props.goToStep(props.index + 1, props.specimen) : false}
     tabIndex="0"
   >
     <span>

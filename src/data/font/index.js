@@ -436,8 +436,6 @@ export const selectChoice = choice => (dispatch, getState) => {
   let { step, currentParams } = getState().font;
 
   // If choice not in the step, do nothing
-  console.log(currentPreset.steps[step - 1].choices);
-  console.log(choice);
   if (
     !currentPreset.steps[step - 1].choices.find(e => e.id === choice.id)
   ) {

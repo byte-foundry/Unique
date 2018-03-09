@@ -73,27 +73,25 @@ class DefineNeed extends React.Component {
               defaultMessage="Logotype"
               description="Logo need"
             />
-            {this.state.selected === "logo" && (
-              <span>
-                {" "}
-                <FormattedMessage
-                  id="DefineNeed.logoTooltip"
-                  defaultMessage="A logo font is blablabla blablabla blablabla"
-                  description="logo need tooltip"
-                >
-                  {text => (
-                    <Tooltip
-                      title={text}
-                      position="top"
-                      trigger="mouseenter"
-                      arrow="true"
-                    >
-                      <span className="tooltip">i</span>
-                    </Tooltip>
-                  )}
-                </FormattedMessage>
-              </span>
-            )}
+            <span>
+              {" "}
+              <FormattedMessage
+                id="DefineNeed.logoTooltip"
+                defaultMessage="A logo font is blablabla blablabla blablabla"
+                description="logo need tooltip"
+              >
+                {text => (
+                  <Tooltip
+                    title={text}
+                    position="top"
+                    trigger="mouseenter"
+                    arrow="true"
+                  >
+                    <span className="tooltip">?</span>
+                  </Tooltip>
+                )}
+              </FormattedMessage>
+            </span>
           </div>
           <div
             className={`col-sm-12 col-md-11 col-lg-10 ${
@@ -106,27 +104,25 @@ class DefineNeed extends React.Component {
               defaultMessage="Text"
               description="Text need"
             />
-            {this.state.selected === "text" && (
-              <span>
-                {" "}
-                <FormattedMessage
-                  id="DefineNeed.textTooltip"
-                  defaultMessage="A text font is blablabla blablabla blablabla"
-                  description="text need tooltip"
-                >
-                  {text => (
-                    <Tooltip
-                      title={text}
-                      position="top"
-                      trigger="mouseenter"
-                      arrow="true"
-                    >
-                      <span className="tooltip">i</span>
-                    </Tooltip>
-                  )}
-                </FormattedMessage>
-              </span>
-            )}
+            <span>
+              {" "}
+              <FormattedMessage
+                id="DefineNeed.textTooltip"
+                defaultMessage="A text font is blablabla blablabla blablabla"
+                description="text need tooltip"
+              >
+                {text => (
+                  <Tooltip
+                    title={text}
+                    position="top"
+                    trigger="mouseenter"
+                    arrow="true"
+                  >
+                    <span className="tooltip">?</span>
+                  </Tooltip>
+                )}
+              </FormattedMessage>
+            </span>
           </div>
           <div
             className={`col-sm-12 col-md-11 col-lg-10 ${
@@ -139,27 +135,25 @@ class DefineNeed extends React.Component {
               defaultMessage="Website"
               description="Website need"
             />
-            {this.state.selected === "website" && (
-              <span>
-                {" "}
-                <FormattedMessage
-                  id="DefineNeed.websiteTooltip"
-                  defaultMessage="A website font is blablabla blablabla blablabla"
-                  description="Website need tooltip"
-                >
-                  {text => (
-                    <Tooltip
-                      title={text}
-                      position="top"
-                      trigger="mouseenter"
-                      arrow="true"
-                    >
-                      <span className="tooltip">i</span>
-                    </Tooltip>
-                  )}
-                </FormattedMessage>
-              </span>
-            )}
+            <span>
+              {" "}
+              <FormattedMessage
+                id="DefineNeed.websiteTooltip"
+                defaultMessage="A website font is blablabla blablabla blablabla"
+                description="Website need tooltip"
+              >
+                {text => (
+                  <Tooltip
+                    title={text}
+                    position="top"
+                    trigger="mouseenter"
+                    arrow="true"
+                  >
+                    <span className="tooltip">?</span>
+                  </Tooltip>
+                )}
+              </FormattedMessage>
+            </span>
           </div>
         </div>
         {this.state.selected === "logo" ? (

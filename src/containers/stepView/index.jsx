@@ -12,7 +12,7 @@ import {
   stepBack,
   selectChoice,
   updateSliderFont,
-  finishEditing,
+  finishEditing
 } from "../../data/font";
 import {
   switchBlackOnWhite,
@@ -213,12 +213,29 @@ class StepView extends React.Component {
           <div className="container">
             <div className="row justify-content-sm-center">
               <div className="col-sm-12 col-md-11 col-lg-10">
-                <Back
-                  className="icon-back"
-                  onClick={() => {
-                    this.props.stepBack();
-                  }}
-                />
+                <FormattedMessage
+                  id="Shortcuts.previousAction"
+                  defaultMessage="Press left key to go back"
+                  description="Shortcut - previous action"
+                >
+                  {text => (
+                    <Tooltip
+                      title={text}
+                      position="top"
+                      open={this.props.showShortcutTooltips}
+                      arrow="true"
+                      delay={200}
+                    >
+                      <Back
+                        className="icon-back"
+                        onClick={() => {
+                          this.props.stepBack();
+                        }}
+                      />
+                    </Tooltip>
+                  )}
+                </FormattedMessage>
+
                 <FlipMove
                   className="choices row"
                   duration={250}
@@ -278,17 +295,35 @@ class StepView extends React.Component {
                 ) : (
                   false
                 )}
-                <Next
-                  className={`icon-next ${
-                    !(this.state.choice && this.state.choice.name)
-                      ? "disabled"
-                      : ""
-                  }`}
-                  onClick={() => {
-                    if (this.state.choice && this.state.choice.name)
-                      this.props.selectChoice(this.state.choice);
-                  }}
-                />
+
+                <FormattedMessage
+                  id="Shortcuts.nextAction"
+                  defaultMessage="Press right key to move forward"
+                  description="Shortcut - next action"
+                >
+                  {text => (
+                    <Tooltip
+                      title={text}
+                      position="top"
+                      open={this.props.showShortcutTooltips}
+                      arrow="true"
+                      delay={200}
+                    >
+                      <Next
+                        className={`icon-next ${
+                          !(this.state.choice && this.state.choice.name)
+                            ? "disabled"
+                            : ""
+                        }`}
+                        onClick={() => {
+                          if (this.state.choice && this.state.choice.name)
+                            this.props.selectChoice(this.state.choice);
+                        }}
+                      />
+                    </Tooltip>
+                  )}
+                </FormattedMessage>
+
                 <Finish
                   className={`icon-finish ${
                     this.props.choicesMade.length - 1 === this.props.stepLength

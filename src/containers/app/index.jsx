@@ -19,6 +19,7 @@ import keymap from "../../data/keymap";
 import { createPrototypoFactory } from "../../data/createdFonts";
 import { importPresets, reloadPresets } from "../../data/presets";
 import { reloadFonts } from "../../data/font";
+import { setLocale } from "../../data/ui";
 import { GRAPHQL_API } from "../../data/constants";
 import { getAllPresets } from "../../data/queries";
 import Auth from "../../components/auth";
@@ -46,6 +47,8 @@ const messages = {
   en: messages_en
 };
 
+let interval;
+
 class App extends React.Component {
   /* global Intercom*/
   constructor(props) {
@@ -63,6 +66,9 @@ class App extends React.Component {
     if (!props.isPrototypoLoaded && !props.isPrototypoLoading) {
       props.createPrototypoFactory();
     }
+    this.state = {
+      isLanguageMenuOpen: false
+    };
   }
   getChildContext() {
     return { shortcuts: this.shortcutManager };
@@ -129,7 +135,7 @@ class App extends React.Component {
     if (
       this.props.need !== "" &&
       this.props.pathname === "/select" &&
-      !(this.props.hasPresetsLoaded)
+      !this.props.hasPresetsLoaded
     ) {
       console.log("Has selected need but do not have presets loaded");
       this.props.reloadPresets();
@@ -140,8 +146,30 @@ class App extends React.Component {
   }
   render() {
     const { isAuthenticated } = this.auth;
+    const supportedLanguages = {
+      fr: "Français",
+      en: "English"
+    };
+    if (this.props.isLoading) {
+      // load animation
+      clearInterval(interval);
+      const letters = document.querySelectorAll(".letter");
+      let activeLetter = 0;
+      interval = setInterval(function() {
+        for (let i = 0; i < letters.length; i++) {
+          letters[i].classList.remove("animate");
+        }
+        letters[activeLetter].classList.add("animate");
+        activeLetter =
+          activeLetter + 1 === letters.length ? 0 : activeLetter + 1;
+      }, 800);
+    }
+    else clearInterval(interval);
     return (
-      <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
+      <IntlProvider
+        locale={this.props.locale}
+        messages={messages[this.props.locale]}
+      >
         <main className={`App ${this.props.isLoading ? "loading" : "loaded"}`}>
           <header className="App-header">
             <h1 className="App-logo-wrapper">
@@ -231,6 +259,41 @@ class App extends React.Component {
                 />
               </div>
             </div>
+            <div className="language-select">
+              <ul
+                className={`language-list ${
+                  this.state.isLanguageMenuOpen ? "opened" : ""
+                }`}
+              >
+                {Object.keys(supportedLanguages).map(
+                  (key, index) =>
+                    key !== this.props.locale ? (
+                      <li
+                        onClick={() => {
+                          this.props.setLocale(key);
+                          this.setState({
+                            isLanguageMenuOpen: false
+                          });
+                        }}
+                      >
+                        {supportedLanguages[key]}
+                      </li>
+                    ) : (
+                      false
+                    )
+                )}
+              </ul>
+              <span
+                className="language-active"
+                onClick={() => {
+                  this.setState({
+                    isLanguageMenuOpen: !this.state.isLanguageMenuOpen
+                  });
+                }}
+              >
+                {supportedLanguages[this.props.locale]}
+              </span>
+            </div>
           </div>
         </main>
       </IntlProvider>
@@ -260,7 +323,8 @@ App.propTypes = {
   isPrototypoLoaded: PropTypes.bool.isRequired,
   isPrototypoLoading: PropTypes.bool.isRequired,
   isBlackOnWhite: PropTypes.bool.isRequired,
-  locale: PropTypes.string
+  locale: PropTypes.string,
+  setLocale: PropTypes.func.isRequired
 };
 
 App.defaultProps = {
@@ -282,7 +346,8 @@ const mapStateToProps = state => ({
   userEmail: state.user.email,
   hasPayed: state.user.hasPayed,
   need: state.font.need,
-  hasPresetsLoaded: state.createdFonts.fonts[state.presets.loadedPresetsName[0]],
+  hasPresetsLoaded:
+    state.createdFonts.fonts[state.presets.loadedPresetsName[0]],
   isLoading: state.ui.unstable || state.createdFonts.isPrototypoLoading,
   shouldLogout: state.user.shouldLogout,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
@@ -296,6 +361,7 @@ const mapDispatchToProps = dispatch =>
       importPresets,
       reloadPresets,
       reloadFonts,
+      setLocale,
       goToHome: () => push("/"),
       createPrototypoFactory
     },

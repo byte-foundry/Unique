@@ -12,13 +12,13 @@
 
 .DefineNeed .needs div {
   cursor: pointer;
-  color: #C7C3D1;
+  color: #b8b5c0;
   margin-bottom: 3px;
   transition: color .3s ease;
 }
 
 .DefineNeed .needs .selected {
-  color: #7D45FF;
+  color: #5320ee;
 }
 
 .DefineNeed .icon-next {
@@ -31,19 +31,20 @@
   right: 0;
   background: transparent;
   transition: all .3s ease;  
-  border: 2px solid #7D45FF;
+  border: 2px solid #5320ee;
   padding: 0px;
   z-index: 3;
+  border-radius: 50%;
 }
 .DefineNeed .icon-next path {
-  fill: #7D45FF;
+  fill: #5320ee;
 }
 .DefineNeed .icon-next.disabled {
-  border-color: #C7C3D1;
+  border-color: #b8b5c0;
 }
 
 .DefineNeed .icon-next.disabled path {
-  fill: #C7C3D1;
+  fill: #b8b5c0;
 }
 
 .DefineNeed h1, .DefineNeed h2 {
@@ -62,9 +63,22 @@
   margin-bottom: 20px;
 }
 
+.DefineNeed .needs .selected {
+  color: #5320ee;
+}
+
 .DefineNeed .tooltip {
-  vertical-align: super;
-  font-size:  1rem;
+  vertical-align: middle;
+  font-size:  .75rem;
+  border: 1px solid #b8b5c0;
+  padding: 2px 6px;
+  border-radius: 50%;
+  transition: color .3s ease, background-color .3s ease;
+}
+
+.DefineNeed .selected .tooltip {
+  color: #5320ee;
+  border-color: #5320ee;
 }
 
 
@@ -72,32 +86,18 @@
 
 .DefineNeed form input {
   margin-top: 5px;
-  height: 70px;
+  height: 50px;
   width: 75%;
   font-size: 2rem;
   background-color: transparent;
   border: none;
+  border-bottom: 2px solid #b8b5c0;
+  color: #b8b5c0;
   user-select: none;
 }
 
 .DefineNeed form input::placeholder {
-  color: #C7C3D1;
-}
-
-.DefineNeed form button {
-  margin-top: 5px;
-  width: 25%;
-  height: 70px;
-  font-size: 18px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  padding-left: 30px;
-  padding-right: 30px;
-  font-weight: 700;
-  cursor: pointer;
+  color: #b8b5c0;
 }
 
 .DefineNeed form input:focus {
