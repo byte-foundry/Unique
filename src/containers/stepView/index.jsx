@@ -289,7 +289,6 @@ class StepView extends React.Component {
                 ) : (
                   false
                 )}
-<<<<<<< HEAD
 
                 <FormattedMessage
                   id="Shortcuts.nextAction"
@@ -319,18 +318,6 @@ class StepView extends React.Component {
                   )}
                 </FormattedMessage>
 
-=======
-                <Next
-                  className={`icon-next ${
-                    !(this.state.choice && this.state.choice.name)
-                      ? 'disabled'
-                      : ''
-                  }`}
-                  onClick={() => {
-                    if (this.state.choice && this.state.choice.name) { this.props.selectChoice(this.state.choice); }
-                  }}
-                />
->>>>>>> 8caa9af7d531ca7dc18b2790c768c06cd05e7317
                 <Finish
                   className={`icon-finish ${
                     this.props.choicesMade.length - 1 === this.props.stepLength
