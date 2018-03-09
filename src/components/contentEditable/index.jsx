@@ -8,7 +8,9 @@ class ContentEditable extends React.Component {
   }
 
   render() {
-    const { tagName, html, onChange, ...props } = this.props;
+    const {
+      tagName, html, onChange, ...props
+    } = this.props;
 
     return React.createElement(
       tagName || 'span',

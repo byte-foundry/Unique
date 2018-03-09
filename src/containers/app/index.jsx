@@ -1,60 +1,60 @@
 // @flow
-import React from "react";
-import PropTypes from "prop-types";
-import { Switch, Route, withRouter } from "react-router-dom";
-import { push } from "react-router-redux";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { request } from "graphql-request";
-import { ShortcutManager } from "react-shortcuts";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import { push } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { request } from 'graphql-request';
+import { ShortcutManager } from 'react-shortcuts';
 
-import { IntlProvider } from "react-intl";
-import { addLocaleData } from "react-intl";
-import locale_en from "react-intl/locale-data/en";
-import locale_fr from "react-intl/locale-data/fr";
+import { IntlProvider } from 'react-intl';
+import { addLocaleData } from 'react-intl';
+import locale_en from 'react-intl/locale-data/en';
+import locale_fr from 'react-intl/locale-data/fr';
 
-import messages_en from "../../data/intl/locale_en";
-import messages_fr from "../../data/intl/locale_fr";
-import keymap from "../../data/keymap";
-import { createPrototypoFactory } from "../../data/createdFonts";
-import { importPresets, reloadPresets } from "../../data/presets";
-import { reloadFonts } from "../../data/font";
-import { GRAPHQL_API } from "../../data/constants";
-import { getAllPresets } from "../../data/queries";
-import Auth from "../../components/auth";
-import "./bootstrap-reboot.css";
-import "./bootstrap-grid.css";
-import "./App.css";
-import { ReactComponent as Logo } from "./logo.svg";
+import messages_en from '../../data/intl/locale_en';
+import messages_fr from '../../data/intl/locale_fr';
+import keymap from '../../data/keymap';
+import { createPrototypoFactory } from '../../data/createdFonts';
+import { importPresets, reloadPresets } from '../../data/presets';
+import { reloadFonts } from '../../data/font';
+import { GRAPHQL_API } from '../../data/constants';
+import { getAllPresets } from '../../data/queries';
+import Auth from '../../components/auth';
+import './bootstrap-reboot.css';
+import './bootstrap-grid.css';
+import './App.css';
+import { ReactComponent as Logo } from './logo.svg';
 
-import ProtectedRoute from "../../components/protectedRoute/";
+import ProtectedRoute from '../../components/protectedRoute/';
 
-import DefineNeed from "../defineNeed/";
-import TemplateChoice from "../templateChoice/";
-import SpecimenView from "../specimenView/";
-import ExportTypes from "../exportTypes/";
-import Success from "../success/";
-import WelcomeBack from "../welcomeBack/";
-import Library from "../library/";
-import StepView from "../stepView/";
-import Sidebar from "../sidebar/";
+import DefineNeed from '../defineNeed/';
+import TemplateChoice from '../templateChoice/';
+import SpecimenView from '../specimenView/';
+import ExportTypes from '../exportTypes/';
+import Success from '../success/';
+import WelcomeBack from '../welcomeBack/';
+import Library from '../library/';
+import StepView from '../stepView/';
+import Sidebar from '../sidebar/';
 
 addLocaleData([...locale_en, ...locale_fr]);
 
 const messages = {
   fr: messages_fr,
-  en: messages_en
+  en: messages_en,
 };
 
 class App extends React.Component {
-  /* global Intercom*/
+  /* global Intercom */
   constructor(props) {
     super(props);
     request(GRAPHQL_API, getAllPresets)
       .then(data => props.importPresets(data.allPresets))
       .catch(error => console.log(error));
-    if (props.userEmail !== "") {
-      Intercom("update", { email: props.userEmail });
+    if (props.userEmail !== '') {
+      Intercom('update', { email: props.userEmail });
     }
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.auth = new Auth();
@@ -71,29 +71,29 @@ class App extends React.Component {
     if (newProps.shouldLogout) this.auth.logout();
   }
   hasSelectedFont() {
-    console.log("=========hasSelectedFont=======");
+    console.log('=========hasSelectedFont=======');
     console.log(typeof this.props.selectedFontLoaded);
-    console.log(typeof this.props.selectedFontLoaded === "object");
-    console.log("====================================");
+    console.log(typeof this.props.selectedFontLoaded === 'object');
+    console.log('====================================');
     if (
-      this.props.selectedFont !== "" &&
-      (this.props.pathname === "/customize" ||
-        this.props.pathname === "/specimen") &&
-      !(typeof this.props.selectedFontLoaded === "object")
+      this.props.selectedFont !== '' &&
+      (this.props.pathname === '/customize' ||
+        this.props.pathname === '/specimen') &&
+      !(typeof this.props.selectedFontLoaded === 'object')
     ) {
-      console.log("font selected but not loaded");
+      console.log('font selected but not loaded');
       this.props.reloadFonts();
       return true;
     }
-    console.log(`font selected: ${this.props.selectedFont !== ""}`);
-    return this.props.selectedFont !== "";
+    console.log(`font selected: ${this.props.selectedFont !== ''}`);
+    return this.props.selectedFont !== '';
   }
   hasSuccessfulPayment() {
     if (
       this.props.hasPayed === true &&
-      !(typeof this.props.selectedFontLoaded === "object")
+      !(typeof this.props.selectedFontLoaded === 'object')
     ) {
-      console.log("Payment successful but font not loaded");
+      console.log('Payment successful but font not loaded');
       this.props.reloadFonts();
       return true;
     }
@@ -102,15 +102,15 @@ class App extends React.Component {
   }
   hasMailRegistered() {
     if (
-      this.props.userEmail !== "" &&
-      !(typeof this.props.selectedFontLoaded === "object")
+      this.props.userEmail !== '' &&
+      !(typeof this.props.selectedFontLoaded === 'object')
     ) {
-      console.log("Mail registered but font not loaded");
+      console.log('Mail registered but font not loaded');
       this.props.reloadFonts();
       return true;
     }
-    console.log(`Mail registered: ${this.props.userEmail !== ""}`);
-    return this.props.userEmail !== "";
+    console.log(`Mail registered: ${this.props.userEmail !== ''}`);
+    return this.props.userEmail !== '';
   }
   isLoggedIn() {
     return this.auth.isAuthenticated;
@@ -121,28 +121,28 @@ class App extends React.Component {
     }
   }
   hasSelectedNeed() {
-    console.log("=========HAS SELECTED NEED ============");
+    console.log('=========HAS SELECTED NEED ============');
     console.log(this.props.hasPresetsLoaded);
     console.log(this.props.need);
     console.log(this.props.pathname);
-    console.log("========================================");
+    console.log('========================================');
     if (
-      this.props.need !== "" &&
-      this.props.pathname === "/select" &&
+      this.props.need !== '' &&
+      this.props.pathname === '/select' &&
       !(this.props.hasPresetsLoaded)
     ) {
-      console.log("Has selected need but do not have presets loaded");
+      console.log('Has selected need but do not have presets loaded');
       this.props.reloadPresets();
       return true;
     }
-    console.log(`Need selected: ${this.props.need !== ""}`);
-    return this.props.need !== "";
+    console.log(`Need selected: ${this.props.need !== ''}`);
+    return this.props.need !== '';
   }
   render() {
     const { isAuthenticated } = this.auth;
     return (
       <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
-        <main className={`App ${this.props.isLoading ? "loading" : "loaded"}`}>
+        <main className={`App ${this.props.isLoading ? 'loading' : 'loaded'}`}>
           <header className="App-header">
             <h1 className="App-logo-wrapper">
               <Logo
@@ -164,7 +164,7 @@ class App extends React.Component {
                   <Route exact path="/restart" component={WelcomeBack} />
                   <Route
                     path="/callback"
-                    render={props => {
+                    render={(props) => {
                       this.handleAuthentication(props);
                       return <div>loading</div>;
                     }}
@@ -218,9 +218,9 @@ class App extends React.Component {
               <div
                 className={`right col-sm-2 ${
                   this.props.isBlackOnWhite ||
-                  this.props.location.pathname !== "/customize"
-                    ? ""
-                    : "whiteOnBlack"
+                  this.props.location.pathname !== '/customize'
+                    ? ''
+                    : 'whiteOnBlack'
                 }`}
               >
                 <Sidebar
@@ -244,10 +244,10 @@ App.propTypes = {
   userEmail: PropTypes.string,
   hasPayed: PropTypes.bool.isRequired,
   selectedFontLoaded: PropTypes.shape({
-    fontName: PropTypes.string.isRequired
+    fontName: PropTypes.string.isRequired,
   }),
   hasPresetsLoaded: PropTypes.shape({
-    fontName: PropTypes.string.isRequired
+    fontName: PropTypes.string.isRequired,
   }),
   pathname: PropTypes.string.isRequired,
   need: PropTypes.string.isRequired,
@@ -260,19 +260,19 @@ App.propTypes = {
   isPrototypoLoaded: PropTypes.bool.isRequired,
   isPrototypoLoading: PropTypes.bool.isRequired,
   isBlackOnWhite: PropTypes.bool.isRequired,
-  locale: PropTypes.string
+  locale: PropTypes.string,
 };
 
 App.defaultProps = {
-  selectedFont: "",
+  selectedFont: '',
   selectedFontLoaded: undefined,
-  userEmail: "",
+  userEmail: '',
   hasPresetsLoaded: false,
-  locale: "en"
+  locale: 'en',
 };
 
 App.childContextTypes = {
-  shortcuts: PropTypes.object.isRequired
+  shortcuts: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -288,7 +288,7 @@ const mapStateToProps = state => ({
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isBlackOnWhite: state.user.isBlackOnWhite,
-  locale: state.ui.locale
+  locale: state.ui.locale,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -296,9 +296,9 @@ const mapDispatchToProps = dispatch =>
       importPresets,
       reloadPresets,
       reloadFonts,
-      goToHome: () => push("/"),
-      createPrototypoFactory
+      goToHome: () => push('/'),
+      createPrototypoFactory,
     },
-    dispatch
+    dispatch,
   );
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -78,19 +78,18 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
   if (isLoading) return;
   dispatch({
     type: LOAD_PRESETS_REQUESTED,
-  });  
+  });
   const promiseArray = [];
   const loadedPresetsName = [];
   importedPresets.forEach((preset, index) => {
     promiseArray.push(new Promise((resolve) => {
       dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
-        prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[templates[preset.template]]).then(
-          (createdFont) => {
-            createdFont.changeParams(preset.baseValues);
-            resolve(true);
-            loadedPresetsName[index] = `${preset.preset}${preset.variant}`;
-            dispatch(storeCreatedFont(createdFont, `${preset.preset}${preset.variant}`));
-          });
+        prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[templates[preset.template]]).then((createdFont) => {
+          createdFont.changeParams(preset.baseValues);
+          resolve(true);
+          loadedPresetsName[index] = `${preset.preset}${preset.variant}`;
+          dispatch(storeCreatedFont(createdFont, `${preset.preset}${preset.variant}`));
+        });
       });
     }));
   });
