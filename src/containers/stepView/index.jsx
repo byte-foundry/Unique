@@ -1,41 +1,41 @@
 // @flow
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import PropTypes from "prop-types";
-import FlipMove from "react-flip-move";
-import { Shortcuts } from "react-shortcuts";
-import { FormattedMessage } from "react-intl";
-import { Tooltip } from "react-tippy";
-import "react-tippy/dist/tippy.css";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import FlipMove from 'react-flip-move';
+import { Shortcuts } from 'react-shortcuts';
+import { FormattedMessage } from 'react-intl';
+import { Tooltip } from 'react-tippy';
+import 'react-tippy/dist/tippy.css';
 import {
   stepBack,
   selectChoice,
   updateSliderFont,
-  finishEditing
-} from "../../data/font";
+  finishEditing,
+} from '../../data/font';
 import {
   switchBlackOnWhite,
   switchGlyphMode,
   storeChosenWord,
-  storeChosenGlyph
-} from "../../data/user";
-import Choice from "../../components/choice/";
-import WordView from "../wordView/";
-import Sliders from "../sliders/";
-import Button from "../../components/button/";
-import "./StepView.css";
+  storeChosenGlyph,
+} from '../../data/user';
+import Choice from '../../components/choice/';
+import WordView from '../wordView/';
+import Sliders from '../sliders/';
+import Button from '../../components/button/';
+import './StepView.css';
 
-import { ReactComponent as Back } from "./back.svg";
-import { ReactComponent as Next } from "./next.svg";
-import { ReactComponent as Finish } from "./finish.svg";
-import { ReactComponent as BackgroundIcon } from "./background.svg";
-import { ReactComponent as GlyphIcon } from "./glyph.svg";
+import { ReactComponent as Back } from './back.svg';
+import { ReactComponent as Next } from './next.svg';
+import { ReactComponent as Finish } from './finish.svg';
+import { ReactComponent as BackgroundIcon } from './background.svg';
+import { ReactComponent as GlyphIcon } from './glyph.svg';
 
-const isMostSelected = choices => {
+const isMostSelected = (choices) => {
   let most = choices[0].id;
   let value = 0;
-  choices.forEach(choice => {
+  choices.forEach((choice) => {
     if (choice.selected > value) {
       value = choice.selected;
       most = choice.id;
@@ -49,14 +49,14 @@ class StepView extends React.Component {
     super(props);
     this.state = {
       choice: props.choicesMade[props.step],
-      isInputFocused: false
+      isInputFocused: false,
     };
 
-    this.markChoiceActive = choice => {
+    this.markChoiceActive = (choice) => {
       this.setState({ choice });
     };
 
-    this.onUpdate = updatedParam => {
+    this.onUpdate = (updatedParam) => {
       const currentParams = this.state.choice;
       this.props.updateSliderFont(updatedParam);
       currentParams.values[updatedParam.name] = parseFloat(updatedParam.value);
@@ -86,41 +86,37 @@ class StepView extends React.Component {
   setChoiceSelected(props) {
     let choice = {};
     if (props.choicesMade[props.step]) {
-      if (props.choicesMade[props.step].name === "Custom") {
+      if (props.choicesMade[props.step].name === 'Custom') {
         choice = {
           name: props.choicesMade[props.step].name,
-          values: { ...props.choicesMade[props.step] }
+          values: { ...props.choicesMade[props.step] },
         };
         delete choice.values.name;
       } else {
-        choice = props.stepValues.choices.find(
-          c => c.name === props.choicesMade[props.step].name
-        );
+        choice = props.stepValues.choices.find(c => c.name === props.choicesMade[props.step].name);
       }
     }
     this.setState({
       choice,
-      mostSelected: isMostSelected(props.stepValues.choices)
+      mostSelected: isMostSelected(props.stepValues.choices),
     });
   }
   handleShortcuts(action, event) {
     if (!this.state.isInputFocused) {
       switch (action) {
-        case "CHOICE_PREVIOUS":
+        case 'CHOICE_PREVIOUS':
           if (this.state.choice) {
-            if (this.state.choice.name === "Custom") {
-              this.setState({ choice: { name: "No choice", values: {} } });
+            if (this.state.choice.name === 'Custom') {
+              this.setState({ choice: { name: 'No choice', values: {} } });
               break;
             }
 
-            const choiceIndex = this.props.stepValues.choices.findIndex(
-              choice => choice.name === this.state.choice.name
-            );
-            if (this.state.choice.name === "No choice") {
+            const choiceIndex = this.props.stepValues.choices.findIndex(choice => choice.name === this.state.choice.name);
+            if (this.state.choice.name === 'No choice') {
               this.setState({
                 choice: this.props.stepValues.choices[
                   this.props.stepValues.choices.length - 1
-                ]
+                ],
               });
               break;
             }
@@ -128,12 +124,12 @@ class StepView extends React.Component {
               this.setState({
                 choice: this.props.stepValues.choices[
                   this.props.stepValues.choices.length - 1
-                ]
+                ],
               });
               break;
             } else {
               this.setState({
-                choice: this.props.stepValues.choices[choiceIndex - 1]
+                choice: this.props.stepValues.choices[choiceIndex - 1],
               });
               break;
             }
@@ -141,29 +137,27 @@ class StepView extends React.Component {
             this.setState({
               choice: this.props.stepValues.choices[
                 this.props.stepValues.choices.length - 1
-              ]
+              ],
             });
             break;
           }
-        case "CHOICE_NEXT":
+        case 'CHOICE_NEXT':
           if (this.state.choice) {
-            if (this.state.choice.name === "Custom") {
+            if (this.state.choice.name === 'Custom') {
               this.setState({ choice: this.props.stepValues.choices[0] });
               break;
             }
-            if (this.state.choice.name === "No choice") {
+            if (this.state.choice.name === 'No choice') {
               this.setState({ choice: this.props.stepValues.choices[0] });
               break;
             }
-            const choiceIndex = this.props.stepValues.choices.findIndex(
-              choice => choice.name === this.state.choice.name
-            );
+            const choiceIndex = this.props.stepValues.choices.findIndex(choice => choice.name === this.state.choice.name);
             if (choiceIndex + 1 >= this.props.stepValues.choices.length) {
               this.setState({ choice: this.props.stepValues.choices[0] });
               break;
             } else {
               this.setState({
-                choice: this.props.stepValues.choices[choiceIndex + 1]
+                choice: this.props.stepValues.choices[choiceIndex + 1],
               });
               break;
             }
@@ -171,26 +165,26 @@ class StepView extends React.Component {
             this.setState({ choice: this.props.stepValues.choices[0] });
             break;
           }
-        case "CHOICE_CUSTOM":
-          if (this.state.choice && this.state.choice.name === "Custom") {
-            this.setState({ choice: { name: "No choice", values: {} } });
+        case 'CHOICE_CUSTOM':
+          if (this.state.choice && this.state.choice.name === 'Custom') {
+            this.setState({ choice: { name: 'No choice', values: {} } });
           } else {
-            this.markChoiceActive({ name: "Custom", values: {} });
+            this.markChoiceActive({ name: 'Custom', values: {} });
           }
           break;
-        case "CHOICE_SELECT":
+        case 'CHOICE_SELECT':
           this.props.selectChoice(this.state.choice);
           break;
-        case "STEP_BACK":
+        case 'STEP_BACK':
           this.props.stepBack();
           break;
-        case "BW_MODE":
+        case 'BW_MODE':
           this.props.switchBlackOnWhite();
           break;
-        case "GLYPH_MODE":
+        case 'GLYPH_MODE':
           this.props.switchGlyphMode();
           break;
-        case "FINISH_FONT":
+        case 'FINISH_FONT':
           this.props.finishEditing();
           break;
         default:
@@ -203,9 +197,9 @@ class StepView extends React.Component {
       <Shortcuts name="CHOICES" handler={this.handleShortcuts}>
         <div
           className={`StepView ${
-            this.props.isBlackOnWhite ? "" : "whiteOnBlack"
+            this.props.isBlackOnWhite ? '' : 'whiteOnBlack'
           }`}
-          ref={c => {
+          ref={(c) => {
             this.stepViewWrapper = c;
           }}
           tabIndex="-1"
@@ -243,8 +237,8 @@ class StepView extends React.Component {
                   staggerDelayBy={50}
                   easing="ease-out"
                   appearAnimation={undefined}
-                  enterAnimation={"fade"}
-                  leaveAnimation={"none"}
+                  enterAnimation="fade"
+                  leaveAnimation="none"
                 >
                   {this.props.stepValues.choices.map((choice, index) => (
                     <Choice
@@ -267,10 +261,10 @@ class StepView extends React.Component {
                   ))}
                   <div
                     className={`Choice choiceMore ${
-                      this.state.choice && this.state.choice.name === "Custom"
-                        ? "selected"
-                        : ""
-                    } col-sm-${this.props.isGlyphMode ? "4 glyphMode" : "12"}`}
+                      this.state.choice && this.state.choice.name === 'Custom'
+                        ? 'selected'
+                        : ''
+                    } col-sm-${this.props.isGlyphMode ? '4 glyphMode' : '12'}`}
                     role="option"
                     aria-checked="false"
                     aria-selected="false"
@@ -280,7 +274,7 @@ class StepView extends React.Component {
                       this.props.selectChoice(this.state.choice)
                     }
                   >
-                    {this.props.isGlyphMode ? "g" : this.props.chosenWord}
+                    {this.props.isGlyphMode ? 'g' : this.props.chosenWord}
                     <p className="choiceName">
                       <FormattedMessage
                         id="StepView.customChoiceName"
@@ -290,11 +284,12 @@ class StepView extends React.Component {
                     </p>
                   </div>
                 </FlipMove>
-                {this.state.choice && this.state.choice.name === "Custom" ? (
+                {this.state.choice && this.state.choice.name === 'Custom' ? (
                   <Sliders onUpdate={this.onUpdate} />
                 ) : (
                   false
                 )}
+<<<<<<< HEAD
 
                 <FormattedMessage
                   id="Shortcuts.nextAction"
@@ -324,24 +319,35 @@ class StepView extends React.Component {
                   )}
                 </FormattedMessage>
 
+=======
+                <Next
+                  className={`icon-next ${
+                    !(this.state.choice && this.state.choice.name)
+                      ? 'disabled'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    if (this.state.choice && this.state.choice.name) { this.props.selectChoice(this.state.choice); }
+                  }}
+                />
+>>>>>>> 8caa9af7d531ca7dc18b2790c768c06cd05e7317
                 <Finish
                   className={`icon-finish ${
                     this.props.choicesMade.length - 1 === this.props.stepLength
-                      ? ""
-                      : "disabled"
+                      ? ''
+                      : 'disabled'
                   }`}
                   onClick={() => {
                     if (
                       this.props.choicesMade.length - 1 ===
                       this.props.stepLength
-                    )
-                      this.props.finishEditing(this.state.choice);
+                    ) { this.props.finishEditing(this.state.choice); }
                   }}
                 />
                 <div className="actions">
                   <span className="previousStep">
                     {this.state.choice &&
-                    this.state.choice.name === "Custom" ? (
+                    this.state.choice.name === 'Custom' ? (
                       <FormattedMessage
                         id="StepView.customButtonLess"
                         defaultMessage="Less accuracy"
@@ -355,7 +361,7 @@ class StepView extends React.Component {
                             onClick={() =>
                               this.markChoiceActive({
                                 name: undefined,
-                                values: {}
+                                values: {},
                               })
                             }
                           />
@@ -374,8 +380,8 @@ class StepView extends React.Component {
                             label={text}
                             onClick={() =>
                               this.markChoiceActive({
-                                name: "Custom",
-                                values: {}
+                                name: 'Custom',
+                                values: {},
                               })
                             }
                           />
@@ -490,7 +496,7 @@ const mapStateToProps = state => ({
   chosenGlyph: state.user.chosenGlyph,
   isBlackOnWhite: state.user.isBlackOnWhite,
   isGlyphMode: state.user.isGlyphMode,
-  stepLength: state.font.currentPreset.steps.length
+  stepLength: state.font.currentPreset.steps.length,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -502,9 +508,9 @@ const mapDispatchToProps = dispatch =>
       switchBlackOnWhite,
       switchGlyphMode,
       storeChosenWord,
-      storeChosenGlyph
+      storeChosenGlyph,
     },
-    dispatch
+    dispatch,
   );
 
 StepView.propTypes = {
@@ -514,19 +520,15 @@ StepView.propTypes = {
   updateSliderFont: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
   stepLength: PropTypes.number.isRequired,
-  choicesMade: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired,
+  choicesMade: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  })).isRequired,
   stepValues: PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    choices: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired
-      })
-    )
+    choices: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    })),
   }).isRequired,
   chosenWord: PropTypes.string.isRequired,
   chosenGlyph: PropTypes.string.isRequired,
@@ -535,7 +537,7 @@ StepView.propTypes = {
   isGlyphMode: PropTypes.bool.isRequired,
   isBlackOnWhite: PropTypes.bool.isRequired,
   storeChosenWord: PropTypes.func.isRequired,
-  storeChosenGlyph: PropTypes.func.isRequired
+  storeChosenGlyph: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);
