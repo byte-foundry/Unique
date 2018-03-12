@@ -7,7 +7,6 @@ class Template extends React.Component {
   render() {
     return (
       <div
-        tabIndex={0}
         key={`preset${this.props.font.preset}${this.props.font.variant}`}
         className={`Template ${this.props.selected ? "selected" : ""} col-sm-12 col-md-11 col-lg-10`}
         onClick={this.props.onClick}

@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
+import Slider from 'react-rangeslider'
+import 'react-rangeslider/lib/index.css'
 import PropTypes from 'prop-types';
 import { resetSliderFont } from '../../data/font';
 import { params } from '../../data/labels';
@@ -41,11 +43,17 @@ const getBaseParams = (values, choices, controls) => {
 class Sliders extends React.Component {
   constructor(props) {
     super(props);
+    const params = getBaseParams(props.currentFontValues, props.choices, props.controls);
+    const values = params.reduce(function(result, item) {
+      result[item.key] = item.initialValue;
+      return result;
+    }, {});
+
     this.state = {
-      params: getBaseParams(props.currentFontValues, props.choices, props.controls),
-      values: {},
+      params,
+      values,
     };
-    this.onSliderChange = debounce(this.onSliderChange, 50).bind(this);
+    this.onSliderChange = debounce(this.onSliderChange, 40).bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -58,11 +66,11 @@ class Sliders extends React.Component {
     this.props.resetSliderFont();
   }
 
-  onSliderChange(e, name) {
+  onSliderChange(value, name) {
     const values = this.state.values;
-    values[name] = e.target.value;
+    values[name] = value;
     this.setState({ values });
-    this.props.onUpdate({ name, value: e.target.value });
+    this.props.onUpdate({ name, value });
   }
 
   render() {
@@ -73,14 +81,14 @@ class Sliders extends React.Component {
             <label htmlFor={param.name}>
               {param.name}
             </label>
-            <input
-              type="range"
-              name={param.name}
+            <Slider
               min={param.minValue}
               max={param.maxValue}
               step={param.step}
-              defaultValue={param.initialValue}
-              onChange={(event) => { event.persist(); this.onSliderChange(event, param.key); }}
+              value={this.state.values[param.key]}
+              orientation='horizontal'
+              tooltip={false}
+              onChange={(value) => {this.onSliderChange(value, param.key); }}
             />
           </div>))}
       </div>
