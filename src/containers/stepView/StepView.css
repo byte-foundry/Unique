@@ -3,7 +3,7 @@
   margin-bottom: 0;
   min-height: 100vh;
   background: white;
-  transition: background .3s ease;
+  transition: background 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,12 +29,13 @@
   justify-content: space-between;
 }
 
-.StepView .icon-glyph, .StepView .icon-background {
+.StepView .icon-glyph,
+.StepView .icon-background {
   width: 25px;
   padding: 5px;
   height: auto;
   cursor: pointer;
-  transition: fill .3s ease;
+  transition: fill 0.3s ease;
 }
 
 .StepView.whiteOnBlack .icon-glyph {
@@ -50,20 +51,35 @@
   border-bottom-color: white;
 }
 
-.StepView .icon-back, .StepView .icon-next, .StepView .icon-finish {
+.StepView .icon-back-wrapper {
+  position: absolute;
+  top: 50%;
+  left: -75px;
+  transform: translateY(-50%) translateZ(0px);
+}
+
+.StepView .icon-next-wrapper {
+  position: absolute;
+  top: 50%;
+  right: -75px;
+  transform: translateY(-50%) translateZ(0px);
+}
+
+.StepView .icon-back,
+.StepView .icon-next,
+.StepView .icon-finish {
   width: 30px;
   height: auto;
   cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%) translateZ(0px);
-  transition: transform .3s ease, background .3s ease, border-color .3s ease;  
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
   border: 2px solid #5320ee;
   border-radius: 50%;
   padding: 0px;
 }
 
-.StepView .icon-back path, .StepView .icon-next path, .StepView .icon-finish path {
+.StepView .icon-back path,
+.StepView .icon-next path,
+.StepView .icon-finish path {
   fill: #5320ee;
 }
 
@@ -85,29 +101,28 @@
 }
 
 .StepView .icon-finish {
-  right: -135px;
+  position: absolute;
+  right: -75px;
+  top: calc(50% + 40px);
+  transform: translateY(-50%) translateZ(0px);
   background: transparent;
 }
-
 .StepView .icon-next {
   right: -75px;
   background: transparent;
 }
 
-.StepView.whiteOnBlack .icon-back, .StepView.whiteOnBlack .icon-next, .StepView.whiteOnBlack .icon-finish {
+.StepView.whiteOnBlack .icon-back,
+.StepView.whiteOnBlack .icon-next,
+.StepView.whiteOnBlack .icon-finish {
   background: transparent;
 }
 
-.StepView .icon-next:not(.disabled):hover, .StepView .icon-finish:not(.disabled):hover, .StepView .icon-back:hover {
-  transform: scale(1.1) translateY(-50%) translateZ(0px);
-}
-
-.StepView.whiteOnBlack .icon-next:not(.disabled) path, .StepView.whiteOnBlack .icon-back path {
+.StepView.whiteOnBlack .icon-next:not(.disabled) path,
+.StepView.whiteOnBlack .icon-back path {
   fill: #5320ee;
-  transition: fill .3s ease;  
+  transition: fill 0.3s ease;
 }
-
-
 
 .StepView .choiceMore {
   position: relative;
@@ -124,7 +139,7 @@
 }
 
 .StepView .choiceMore.selected {
-  font-family: 'sliderFont';
+  font-family: "sliderFont";
   display: block;
   margin-bottom: 30px;
 }

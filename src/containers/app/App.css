@@ -240,3 +240,7 @@
 .tippy-popper[x-placement^=top] [x-arrow] {
 	border-top-color: #5320ee !important;
 }
+
+.tippy-popper[x-placement^=bottom] [x-arrow] {
+	border-bottom-color: #5320ee !important;
+}

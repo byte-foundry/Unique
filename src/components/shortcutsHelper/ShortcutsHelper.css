@@ -1,27 +1,29 @@
 .ShortcutsHelper {
+}
+
+.ShortcutsHelper .tooltip-button {
     position: absolute;
-    display: block;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #fafafa;
-    color: white;
-    padding: 5px 10px;
-}
-.ShortcutsHelper ul {
-    list-style-type: none;
+    bottom: 30px;
+    right: 260px;
+    border: 1px solid black;
+    cursor: pointer;
+    padding: 0px 7px;
+    border-radius: 50%;
 }
 
-.ShortcutsHelper li {
-    float: left;
-    margin-right: 15px;
+.ShortcutsHelper .tooltip-backdrop {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: white;
+    animation: showBackdrop .3s ease forwards;
+    opacity: 0;
 }
 
-.ShortcutsHelper li .key {
-    color: #888;
-    padding-left: 8px;
-}
-
-.ShortcutsHelper li .name {
-    color: #333;
+@keyframes showBackdrop {
+	to { 
+		opacity: 0.6;
+	}
 }

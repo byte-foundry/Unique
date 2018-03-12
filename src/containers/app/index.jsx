@@ -19,7 +19,7 @@ import keymap from "../../data/keymap";
 import { createPrototypoFactory } from "../../data/createdFonts";
 import { importPresets, reloadPresets } from "../../data/presets";
 import { reloadFonts } from "../../data/font";
-import { setLocale } from "../../data/ui";
+import { setLocale, toggleTooltips } from "../../data/ui";
 import { GRAPHQL_API } from "../../data/constants";
 import { getAllPresets } from "../../data/queries";
 import Auth from "../../components/auth";
@@ -29,6 +29,7 @@ import "./App.css";
 import { ReactComponent as Logo } from "./logo.svg";
 
 import ProtectedRoute from '../../components/protectedRoute/';
+import ShortcutsHelper from '../../components/shortcutsHelper';
 
 import DefineNeed from '../defineNeed/';
 import TemplateChoice from '../templateChoice/';
@@ -256,6 +257,7 @@ class App extends React.Component {
                 />
               </div>
             </div>
+            <ShortcutsHelper shouldShowTooltips={this.props.shouldShowTooltips} toggleTooltips={this.props.toggleTooltips}/>
             <div className="language-select">
               <ul
                 className={`language-list ${
@@ -321,7 +323,9 @@ App.propTypes = {
   isPrototypoLoading: PropTypes.bool.isRequired,
   isBlackOnWhite: PropTypes.bool.isRequired,
   locale: PropTypes.string,
-  setLocale: PropTypes.func.isRequired
+  setLocale: PropTypes.func.isRequired,
+  toggleTooltips: PropTypes.func.isRequired,
+  shouldShowTooltips: PropTypes.bool.isRequired,
 };
 
 App.defaultProps = {
@@ -351,6 +355,7 @@ const mapStateToProps = state => ({
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isBlackOnWhite: state.user.isBlackOnWhite,
   locale: state.ui.locale,
+  shouldShowTooltips: state.ui.shouldShowTooltips,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -360,7 +365,8 @@ const mapDispatchToProps = dispatch =>
       reloadFonts,
       setLocale,
       goToHome: () => push("/"),
-      createPrototypoFactory
+      createPrototypoFactory,
+      toggleTooltips,
     },
     dispatch,
   );

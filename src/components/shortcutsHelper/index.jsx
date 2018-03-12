@@ -5,24 +5,19 @@ import './ShortcutsHelper.css';
 
 const ShortcutsHelper = props => (
   <div className="ShortcutsHelper">
-    <ul>
-      {props.shortcuts.map(shortcut => (
-        <li key={`key${shortcut.name}`}>
-          <span className="name">{shortcut.name}:</span>
-          <span className="key">{' '}{shortcut.key}</span>
-        </li>
-      ))}
-    </ul>
+    {props.shouldShowTooltips ?
+      (<div className="tooltip-backdrop"/>)
+      : false
+    }
+    <div className="tooltip-button" onClick={() => {props.toggleTooltips()}}>
+      ?
+    </div>
   </div>
 );
 
 ShortcutsHelper.propTypes = {
-  shortcuts: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        key: PropTypes.string.isRequired,
-      }),
-  ).isRequired,
+  shouldShowTooltips: PropTypes.bool.isRequired,
+  toggleTooltips: PropTypes.func.isRequired,
 };
 
 export default ShortcutsHelper;
