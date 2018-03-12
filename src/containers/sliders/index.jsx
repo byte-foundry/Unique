@@ -19,7 +19,7 @@ const getBaseParams = (values, choices, controls) => {
       console.log('> Adding custom slider');
       console.log(key);
       console.log(params[key]);
-      if (!keys[key] && key !== 'manualChanges' && key !== 'name' && key !== 'glyphComponentChoice' && key !== 'glyphSpecialProps' && key !== 'indiv_group_param' && key !== 'indiv_glyphs') {
+      if (!keys[key] && key !== 'manualChanges' && key !== 'name' && key !== 'glyphComponentChoice' && key !== 'glyphSpecialProps' && key !== 'indiv_group_param' && key !== 'indiv_glyphs' && key !== 'altList') {
         customParams.push({ name: params[key].title, initialValue: values[key], key });
         keys[key] = true;
       }

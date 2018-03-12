@@ -29,7 +29,7 @@ class Sidebar extends React.Component {
     console.log(this.props.choicesMade)
     console.log(this.props.steps)
     return (
-      <div className={`Sidebar ${this.props.location.pathname !== "/customize" ? 'small' : ''}`}>
+      <div className={`Sidebar ${(this.props.location.pathname !== "/customize" && this.props.location.pathname !== "/specimen") ? 'small' : ''}`}>
         <ProfileIcon
           className="icon-profile"
           onClick={() => {
@@ -39,14 +39,14 @@ class Sidebar extends React.Component {
           }}
         />
         <div className="steps">
-          {this.props.location.pathname !== "/customize"
+          {(this.props.location.pathname !== "/customize" && this.props.location.pathname !== "/specimen")
             ? false
             : getStepsDone(
                 this.props.steps,
                 this.props.step,
                 this.props.choicesMade,
                 this.props.fontName,
-                this.props.specimen
+                this.props.location.pathname === "/specimen"
               )}
         </div>
       </div>

@@ -1,12 +1,12 @@
 .SpecimenView {
   position: relative;
   display: block;
+  padding-bottom: 100px;
 }
 
 .SpecimenView .container {
   position: relative;
 }
-
 
 .SpecimenView h3 {
   display: inline-block;
@@ -26,14 +26,15 @@
   margin-left: 0;
 }
 
-.SpecimenView .icon-back, .SpecimenView .icon-next {
+.SpecimenView .icon-back,
+.SpecimenView .icon-next {
   width: 30px;
   height: auto;
   cursor: pointer;
   position: absolute;
   top: 50%;
   transform: translateY(-50%) translateZ(0px);
-  transition: transform .3s ease, background .3s ease, border-color .3s ease;  
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
   border: 2px solid #5320ee;
   background: transparent;
   padding: 0px;
@@ -41,7 +42,8 @@
   border-radius: 50%;
 }
 
-.SpecimenView .icon-back path, .SpecimenView .icon-next path {
+.SpecimenView .icon-back path,
+.SpecimenView .icon-next path {
   fill: #5320ee;
 }
 
@@ -53,14 +55,30 @@
   font-family: unique, sans-serif;
   font-weight: 400;
   color: #b8b5c0;
-  width: 300px;
   margin-bottom: 100px;
   margin-top: 100px;
+  width: 75%;
 }
 
-.SpecimenView .hooray h2{
+.SpecimenView .hooray h2 {
   font-weight: 400;
+  font-size: 32px;
+  color: black;
 }
+
+.SpecimenView .hooray .subtitle {
+  font-weight: 400;
+  font-size: 28px;
+  color: #b8b5c0;
+}
+
+.SpecimenView .hooray .subtitle-two {
+  font-weight: 400;
+  font-size: 28px;
+  color: #d0cdd6;
+}
+
+
 
 .SpecimenView .export .hollow {
   margin-right: 20px;
@@ -71,59 +89,74 @@
 }
 
 .SpecimenView .word {
-  font-size: 75px;
+  font-size: 48px;  
+  margin-top: 40px;
+  margin-bottom: 65px;
 }
 
 .SpecimenView .characters {
-  font-size: 45px;
+  font-size: 24px;
+  padding: 40px;
 }
 
-.SpecimenView .greyscale {
-  font-size: 20px;
+.SpecimenView .uppercase {
+  letter-spacing: 0;
+  text-align: justify;
 }
 
-.SpecimenView .greyscale-left {
+.SpecimenView .uppercase:after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+}
+
+.SpecimenView .lowercase {
+  letter-spacing: 0;
+  text-align: justify;
+}
+
+.SpecimenView .lowercase:after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+}
+
+.SpecimenView .text-wrapper {
+  position: relative;
+  height: 350px;
+  overflow: hidden;
+  border: 20px solid white;
+}
+
+.SpecimenView .text {
+  position: absolute;
+  top: -20px;
+  left: -20px;
   background-color: white;
   color: black;
-  padding: 10px 20px;
+  overflow: hidden;
+  text-align: justify;
+  width: 120%;
 }
 
-
-.SpecimenView .greyscale-right {
-  background-color: black;
-  color: white;
-  padding: 10px 20px;
+.SpecimenView .text.text-small {
+  font-size: 10px;
 }
 
-.SpecimenView .greyscale-left.greyscale-first {
-  color: #000000;
+.SpecimenView .text.text-medium {
+  font-size: 14px;
 }
 
-.SpecimenView .greyscale-left.greyscale-second {
-  color: #666666;
-}
-
-.SpecimenView .greyscale-left.greyscale-third {
-  color: #CCCCCC;
-}
-
-.SpecimenView .greyscale-right.greyscale-first {
-  color: #FFFFFF;
-}
-
-.SpecimenView .greyscale-right.greyscale-second {
-  color: #999999;
-}
-
-.SpecimenView .greyscale-right.greyscale-third {
-  color: #333333;
+.SpecimenView .text.text-big {
+  font-size: 18px;
+  text-align: left;
 }
 
 .SpecimenView form input {
   margin-bottom: 60px;
   height: 70px;
   font-size: 18px;
-  background-color: rgba(80,18,134,0.08);
+  background-color: rgba(80, 18, 134, 0.08);
   border: none;
   border-radius: 8px;
   padding-left: 30px;

@@ -17,59 +17,6 @@ import mobileBackground from "./mobile.svg";
 
 import { ReactComponent as Back } from "../stepView/back.svg";
 
-const isEmail = string =>
-  new RegExp(
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  ).test(string);
-
-const renderValidateLoggedIn = (storeProj, fontName) => (
-  <div>
-    <Button
-      className=""
-      label="Download"
-      onClick={() => {
-        storeProj(fontName);
-      }}
-    />
-  </div>
-);
-
-const renderValidateNotLoggedIn = (
-  email,
-  shouldChangeEmail,
-  handleSubmit,
-  handleChange,
-  changeEmail,
-  sendEmail,
-  onFocus,
-  onBlur
-) =>
-  email === "" || !email || shouldChangeEmail ? (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="your email"
-        name="email"
-        onChange={handleChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
-      />
-      <button type="submit">Download</button>
-    </form>
-  ) : (
-    <div className="export">
-      <p>You are currently registered as {email}.</p>
-      <br />
-      <Button
-        className="hollow"
-        label="Change email"
-        onClick={() => changeEmail()}
-      />
-
-      <Button label="Download your font" onClick={() => sendEmail()} />
-    </div>
-  );
-
 class SpecimenView extends React.Component {
   constructor(props) {
     super(props);
@@ -82,16 +29,9 @@ class SpecimenView extends React.Component {
       fontName: props.projectName,
       isInputFocused: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.setCustomLogo = this.setCustomLogo.bind(this);
-    this.removeCustomLogo = this.removeCustomLogo.bind(this);
-    this.validateCustomLogo = this.validateCustomLogo.bind(this);
     this.handleShortcuts = this.handleShortcuts.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
-    this.changeEmail = this.changeEmail.bind(this);
-    this.sendEmail = this.sendEmail.bind(this);
   }
   componentDidMount() {
     this.specimenViewWrapper.focus();
@@ -101,35 +41,6 @@ class SpecimenView extends React.Component {
   }
   onBlur() {
     this.setState({ isInputFocused: false });
-  }
-  setCustomLogo() {
-    this.setState({ isCustomLogo: !this.state.isCustomLogo });
-  }
-  removeCustomLogo() {
-    this.setState({
-      isCustomLogo: !this.state.isCustomLogo,
-      showCustomLogoControls: true
-    });
-  }
-  validateCustomLogo() {
-    this.setState({
-      showCustomLogoControls: !this.state.showCustomLogoControls
-    });
-  }
-  handleChange(event) {
-    this.setState({ email: event.target.value });
-  }
-  handleSubmit(event) {
-    if (isEmail(this.state.email)) {
-      this.props.storeEmail(this.state.email, this.state.fontName);
-    }
-    event.preventDefault();
-  }
-  changeEmail() {
-    this.setState({ shouldChangeEmail: true });
-  }
-  sendEmail() {
-    this.props.storeEmail(this.props.email);
   }
   handleShortcuts(action) {
     if (!this.state.isInputFocused) {
@@ -143,7 +54,6 @@ class SpecimenView extends React.Component {
     }
   }
   render() {
-    const { isAuthenticated, login } = this.props.auth;
     return (
       <Shortcuts name="CHOICES" handler={this.handleShortcuts} isolate>
         <div
@@ -164,15 +74,22 @@ class SpecimenView extends React.Component {
               <h2>
                 <FormattedMessage
                   id="SpecimenView.title"
-                  defaultMessage="It's a match!"
+                  defaultMessage="Congrats, you're almost done!"
                   description="Speciem view title"
                 />
               </h2>
-              <p>
+              <p className="subtitle">
                 <FormattedMessage
                   id="SpecimenView.subtitle"
-                  defaultMessage="You have created the perfect bespoke font that fits your needs."
+                  defaultMessage="Embark on new adventures with your complete glyph set! But before you move on, let's give your font a name"
                   description="Speciem view subtitle"
+                />
+              </p>
+              <p className="subtitle-two">
+                <FormattedMessage
+                  id="SpecimenView.subtitleBack"
+                  defaultMessage="Not quite right? Just click trough the menu to edit"
+                  description="Speciem view back subtitle"
                 />
               </p>
             </div>
@@ -183,9 +100,9 @@ class SpecimenView extends React.Component {
               <div className="col-sm-12 ">
                 <h3>
                   <FormattedMessage
-                    id="SpecimenView.word"
-                    defaultMessage="Word"
-                    description="Speciem view word"
+                    id="SpecimenView.display"
+                    defaultMessage="Display"
+                    description="Specimen view display"
                   />
                 </h3>
                 <p className="word">{this.props.word}</p>
@@ -196,175 +113,129 @@ class SpecimenView extends React.Component {
                     description="Speciem view characters"
                   />
                 </h3>
-                <p className="characters">
-                  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
-                </p>
-                <p className="characters">
-                  a b c d e f g h i j k l m n o p q r s t u v w x y z
-                </p>
-                <p className="characters">
-                  1 2 3 4 5 6 7 8 9 0 . . . ( & ! ? )
-                </p>
+                <div className="characters">
+                  <div className="uppercase">A B C D E F G H I J K L M</div>
+                  <div className="uppercase">N O P Q R S T U V W X Y Z</div>
+                  <div className="lowercase">a b c d e f g h i j k l m</div>
+                  <div className="lowercase">n o p q r s t u v w x y z</div>
+                  <div className="lowercase">1 2 3 4 5 6 7 8 9 0 & @ .</div>
+                  <div className="lowercase">{", ? ! “ ” ( ) < > ° + - $"}</div>
+                </div>
                 <h3>
                   <FormattedMessage
-                    id="SpecimenView.greyScale"
-                    defaultMessage="Greyscale"
-                    description="Speciem view greyscale"
+                    id="SpecimenView.text"
+                    defaultMessage="Text"
+                    description="Speciem view text"
                   />
                 </h3>
                 <div className="row">
-                  <div className="col-md-6 col-sm-12 greyscale-left">
-                    <p className="greyscale greyscale-left greyscale-first">
+                  <div className="col-md-4 col-sm-12 text-wrapper">
+                    <p className="text text-small">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                    <p className="greyscale greyscale-left greyscale-second">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                    <p className="greyscale greyscale-left greyscale-third">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
+                      aliqua. Pretium nibh ipsum consequat nisl vel pretium
+                      lectus quam. Diam in arcu cursus euismod quis viverra nibh
+                      cras. Donec pretium vulputate sapien nec. Amet aliquam id
+                      diam maecenas. Et magnis dis parturient montes nascetur
+                      ridiculus mus mauris. Integer feugiat scelerisque varius
+                      morbi enim nunc. Nisl condimentum id venenatis a
+                      condimentum vitae sapien. Facilisi morbi tempus iaculis
+                      urna id. Congue mauris rhoncus aenean vel elit. Arcu
+                      cursus euismod quis viverra nibh cras pulvinar.
+                      Pellentesque elit eget gravida cum. Sed adipiscing diam
+                      donec adipiscing. Pretium nibh ipsum consequat nisl.
+                      Elementum pulvinar etiam non quam lacus suspendisse
+                      faucibus interdum posuere. Arcu dui vivamus arcu felis
+                      bibendum ut. Viverra ipsum nunc aliquet bibendum enim
+                      facilisis gravida neque convallis. Aliquet sagittis id
+                      consectetur purus ut faucibus pulvinar elementum. Laoreet
+                      suspendisse interdum consectetur libero id. Nibh tellus
+                      molestie nunc non blandit massa enim nec. Leo duis ut diam
+                      quam nulla porttitor massa. Ipsum a arcu cursus vitae
+                      congue mauris rhoncus aenean. In arcu cursus euismod quis
+                      viverra nibh cras. At volutpat diam ut venenatis. Volutpat
+                      blandit aliquam etiam erat velit scelerisque in dictum.
+                      Faucibus interdum posuere lorem ipsum dolor sit amet.
+                      Montes nascetur ridiculus mus mauris vitae ultricies leo.
+                      Massa enim nec dui nunc mattis enim ut tellus. Dui sapien
+                      eget mi proin sed. Suspendisse potenti nullam ac tortor
+                      vitae purus faucibus. Gravida cum sociis natoque penatibus
+                      et magnis dis parturient montes. Sed ullamcorper morbi
+                      tincidunt ornare massa eget egestas purus viverra. Aliquam
+                      malesuada bibendum arcu vitae elementum curabitur vitae
+                      nunc. Non arcu risus quis varius quam quisque id. Odio
+                      euismod lacinia at quis risus sed vulputate odio.
                     </p>
                   </div>
-                  <div className="col-md-6 col-sm-12 greyscale-right">
-                    <p className="greyscale greyscale-right greyscale-first">
+                  <div className="col-md-4 col-sm-12 text-wrapper">
+                    <p className="text text-medium">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
+                      aliqua. Pretium nibh ipsum consequat nisl vel pretium
+                      lectus quam. Diam in arcu cursus euismod quis viverra nibh
+                      cras. Donec pretium vulputate sapien nec. Amet aliquam id
+                      diam maecenas. Et magnis dis parturient montes nascetur
+                      ridiculus mus mauris. Integer feugiat scelerisque varius
+                      morbi enim nunc. Nisl condimentum id venenatis a
+                      condimentum vitae sapien. Facilisi morbi tempus iaculis
+                      urna id. Congue mauris rhoncus aenean vel elit. Arcu
+                      cursus euismod quis viverra nibh cras pulvinar.
+                      Pellentesque elit eget gravida cum. Sed adipiscing diam
+                      donec adipiscing. Pretium nibh ipsum consequat nisl.
+                      Elementum pulvinar etiam non quam lacus suspendisse
+                      faucibus interdum posuere. Arcu dui vivamus arcu felis
+                      bibendum ut. Viverra ipsum nunc aliquet bibendum enim
+                      facilisis gravida neque convallis. Aliquet sagittis id
+                      consectetur purus ut faucibus pulvinar elementum. Laoreet
+                      suspendisse interdum consectetur libero id. Nibh tellus
+                      molestie nunc non blandit massa enim nec. Leo duis ut diam
+                      quam nulla porttitor massa. Ipsum a arcu cursus vitae
+                      congue mauris rhoncus aenean. In arcu cursus euismod quis
+                      viverra nibh cras. At volutpat diam ut venenatis. Volutpat
+                      blandit aliquam etiam erat velit scelerisque in dictum.
                     </p>
-                    <p className="greyscale greyscale-right greyscale-second">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                  </div>
+                  <div className="col-md-4 col-sm-12 text-wrapper">
+                    <p className="text text-big">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                    <p className="greyscale greyscale-right greyscale-third">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
+                      aliqua. Pretium nibh ipsum consequat nisl vel pretium
+                      lectus quam. Diam in arcu cursus euismod quis viverra nibh
+                      cras. Donec pretium vulputate sapien nec. Amet aliquam id
+                      diam maecenas. Et magnis dis parturient montes nascetur
+                      ridiculus mus mauris. Integer feugiat scelerisque varius
+                      morbi enim nunc. Nisl condimentum id venenatis a
+                      condimentum vitae sapien. Facilisi morbi tempus iaculis
+                      urna id. Congue mauris rhoncus aenean vel elit. Arcu
+                      cursus euismod quis viverra nibh cras pulvinar.
+                      Pellentesque elit eget gravida cum. Sed adipiscing diam
+                      donec adipiscing. Pretium nibh ipsum consequat nisl.
+                      Elementum pulvinar etiam non quam lacus suspendisse
+                      faucibus interdum posuere. Arcu dui vivamus arcu felis
+                      bibendum ut. Viverra ipsum nunc aliquet bibendum enim
+                      facilisis gravida neque convallis. Aliquet sagittis id
+                      consectetur purus ut faucibus pulvinar elementum. Laoreet
+                      suspendisse interdum consectetur libero id. Nibh tellus
+                      molestie nunc non blandit massa enim nec. Leo duis ut diam
+                      quam nulla porttitor massa. Ipsum a arcu cursus vitae
+                      congue mauris rhoncus aenean. In arcu cursus euismod quis
+                      viverra nibh cras. At volutpat diam ut venenatis. Volutpat
+                      blandit aliquam etiam erat velit scelerisque in dictum.
+                      Faucibus interdum posuere lorem ipsum dolor sit amet.
+                      Montes nascetur ridiculus mus mauris vitae ultricies leo.
+                      Massa enim nec dui nunc mattis enim ut tellus. Dui sapien
+                      eget mi proin sed. Suspendisse potenti nullam ac tortor
+                      vitae purus faucibus. Gravida cum sociis natoque penatibus
+                      et magnis dis parturient montes. Sed ullamcorper morbi
+                      tincidunt ornare massa eget egestas purus viverra. Aliquam
+                      malesuada bibendum arcu vitae elementum curabitur vitae
+                      nunc. Non arcu risus quis varius quam quisque id. Odio
+                      euismod lacinia at quis risus sed vulputate odio.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <h2>
-              <FormattedMessage
-                id="SpecimenView.downloadCTA"
-                defaultMessage="If you like your font, download it!"
-                description="Speciem view download cta"
-              />
-            </h2>
-            <p>
-              <FormattedMessage
-                id="SpecimenView.fontName"
-                defaultMessage="What would be the name of your font?"
-                description="Speciem view fontName cta"
-              />
-            </p>
-            <form action="">
-              <FormattedMessage
-                id="SpecimenView.fontNamePlaceholder"
-                defaultMessage="Your font name"
-                description="Specimen view fontName placeholder"
-              >
-                {text => (
-                  <input
-                    type="text"
-                    value={this.state.fontName}
-                    placeholder={text}
-                    name="fontname"
-                    onChange={e => {
-                      this.setState({ fontName: e.target.value });
-                      e.stopPropagation();
-                      e.preventDefault();
-                    }}
-                    onFocus={this.onFocus}
-                    onBlur={this.onBlur}
-                  />
-                )}
-              </FormattedMessage>
-            </form>
-            {isAuthenticated() ? (
-              renderValidateLoggedIn(
-                this.props.storeProject,
-                this.state.fontName
-              )
-            ) : (
-              <div>
-                <p>
-                  <FormattedMessage
-                    id="SpecimenView.notLoggedIn1"
-                    defaultMessage="You are not logged in."
-                    description="Speciem view not logged in - first"
-                  />
-                </p>
-                <p>
-                  <FormattedMessage
-                    id="SpecimenView.notLoggedIn2"
-                    defaultMessage="Do you want to Log in / Create an account to save your project ?"
-                    description="Speciem view not logged in - Second"
-                  />
-                </p>
-                <p>
-                  <FormattedMessage
-                    id="SpecimenView.logInButton"
-                    defaultMessage="Log in"
-                    description="Specimen view login button"
-                  >
-                    {text => (
-                      <Button
-                        className=""
-                        label={text}
-                        onClick={() => {
-                          login("/specimen");
-                        }}
-                      />
-                    )}
-                  </FormattedMessage>
-                </p>
-                <p>
-                  <FormattedMessage
-                    id="SpecimenView.withoutAccount"
-                    defaultMessage="You can also continue without an account."
-                    description="Speciem view - without account"
-                  />
-                </p>
-                {this.state.shouldContinueUnregistered ? (
-                  renderValidateNotLoggedIn(
-                    this.props.email,
-                    this.state.shouldChangeEmail,
-                    this.handleSubmit,
-                    this.handleChange,
-                    this.changeEmail,
-                    this.sendEmail,
-                    this.onFocus,
-                    this.onBlur
-                  )
-                ) : (
-                  <FormattedMessage
-                    id="SpecimenView.continueUnregisteredButton"
-                    defaultMessage="Continue unregistered"
-                    description="Specimen view continue unregistered button"
-                  >
-                    {text => (
-                      <Button
-                        label={text}
-                        onClick={() =>
-                          this.setState({ shouldContinueUnregistered: true })
-                        }
-                      />
-                    )}
-                  </FormattedMessage>
-                )}
-              </div>
-            )}
           </div>
         </div>
       </Shortcuts>

@@ -328,9 +328,9 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
     fontName,
   } = getState().font;
   const { fonts } = getState().createdFonts;
-  const stepToUpdate = step || getState().font.step;
+  const stepToUpdate = step ? step : getState().font.step;
   const subset = isSpecimen
-    ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&'
+    ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&@,?!“”()<>°+-$ '
     : chosenWord + chosenGlyph;
 
   // Update choice fonts
@@ -392,6 +392,7 @@ export const clearFontIsLoading = () => (dispatch) => {
 export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
   console.log('==========font/goToStep============');
   const { currentPreset } = getState().font;
+  const previousStep = getState().font.step;
   console.log(currentPreset);
   switch (step) {
     case 0:
@@ -406,7 +407,7 @@ export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
       dispatch(updateValues(step));
       dispatch({
         type: CHANGE_STEP,
-        step,
+        step: isSpecimen ? previousStep : step,
       });
       if (isSpecimen) {
         dispatch(updateValues(undefined, true));
@@ -421,7 +422,7 @@ export const stepBack = () => (dispatch, getState) => {
   dispatch(goToStep((step -= 1)));
 };
 
-export const selectChoice = choice => (dispatch, getState) => {
+export const selectChoice = (choice, isSpecimen = false) => (dispatch, getState) => {
   console.log('==========font/selectChoice============');
   const { choicesMade, currentPreset } = getState().font;
   let { step, currentParams } = getState().font;
@@ -459,7 +460,12 @@ export const selectChoice = choice => (dispatch, getState) => {
     choicesMade,
   });
   // Go to next step
-  dispatch(goToStep((step += 1)));
+  if(isSpecimen) {
+    dispatch(goToStep(undefined, true));
+  }
+  else {
+    dispatch(goToStep(step += 1));
+  }
 
   // Tracking : update selected count
   if (choice.name === 'Custom' || choice.name === 'No choice') {
@@ -487,7 +493,7 @@ export const selectChoice = choice => (dispatch, getState) => {
 
 export const finishEditing = choice => (dispatch, getState) => {
   // Select choice
-  dispatch(goToStep(undefined, true));
+  dispatch(selectChoice(choice, true));
   dispatch(push('/specimen'));
 };
 
