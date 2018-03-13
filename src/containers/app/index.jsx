@@ -34,7 +34,7 @@ import ShortcutsHelper from '../../components/shortcutsHelper';
 import DefineNeed from '../defineNeed/';
 import TemplateChoice from '../templateChoice/';
 import SpecimenView from '../specimenView/';
-import ExportTypes from '../exportTypes/';
+import Checkout from '../checkout/';
 import Success from '../success/';
 import WelcomeBack from '../welcomeBack/';
 import Library from '../library/';
@@ -217,9 +217,9 @@ class App extends React.Component {
                   />
                   <ProtectedRoute
                     exact
-                    requirement={() => this.hasMailRegistered()}
-                    path="/export"
-                    component={ExportTypes}
+                    requirement={() => this.hasSelectedFont()}
+                    path="/checkout"
+                    component={Checkout}
                   />
                   <ProtectedRoute
                     exact

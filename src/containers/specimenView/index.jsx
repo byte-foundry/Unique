@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { push } from 'react-router-redux';
 import { FormattedMessage } from "react-intl";
 import "./SpecimenView.css";
 import Button from "../../components/button/";
@@ -69,7 +70,7 @@ class SpecimenView extends React.Component {
               />
             </p>
             <div className="buttons">
-                  <Button className="button-download" onClick={() => {}} mode="full" label="Download" />
+                  <Button className="button-download" onClick={() => {this.props.goToCheckout()}} mode="full" label="Download" />
             </div>
           </div>
           <div
@@ -320,7 +321,8 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       storeEmail,
-      storeProject
+      storeProject,
+      goToCheckout: () => push('/checkout')
     },
     dispatch
   );
@@ -337,7 +339,8 @@ SpecimenView.propTypes = {
     isAuthenticated: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired
   }).isRequired,
-  projectName: PropTypes.string
+  projectName: PropTypes.string,
+  goToCheckout: PropTypes.func.isRequired,
 };
 
 SpecimenView.defaultProps = {
