@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
 import "./SpecimenView.css";
 import Button from "../../components/button/";
-import CustomLogo from "../../components/customLogo";
 import { storeEmail, storeProject } from "../../data/user";
 import desktopBackground from "./desktop.svg";
 import tabletBackground from "./tablet.svg";
@@ -69,6 +68,9 @@ class SpecimenView extends React.Component {
                 description="Speciem view back subtitle"
               />
             </p>
+            <div className="buttons">
+                  <Button className="button-download" onClick={() => {}} mode="full" label="Download" />
+            </div>
           </div>
           <div
             className="specimen row"

@@ -3,11 +3,11 @@
   background-color: #000;
   border: 2px solid #000;
   color: #fff;
-  border-radius: 5px;
-  padding: 5px 20px;
+  padding: 15px 40px;
   cursor: pointer;
   display: inline;
   transition: all .3s ease;
+  font-size: 18px;
 }
 
 .Button:hover {
@@ -26,6 +26,12 @@
   background-color: #000;
   color: #fff;
   border: 2px solid #000;
+}
+
+.Button.full {
+  background-color: #5320ee;
+  border-color: #5320ee;
+  color: white;
 }
 
 .Button.isBack {
