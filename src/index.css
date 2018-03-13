@@ -3,13 +3,6 @@
   src: url(fonts/unique_medium.otf) format("opentype");
   font-weight: 400;
 }
-@font-face {
-  font-family: unique;
-  src: url(fonts/unique_bold.otf) format("opentype");
-  font-style: normal;
-  font-weight: 700;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -20,4 +13,9 @@ body {
 
 ::selection {
   background: rgba(255, 100, 89, 0.24);
+}
+
+body, p, h1, h2, h3, h4, span, div {
+  -webkit-font-smoothing: antialiased; /* This needs to be set or some font faced fonts look bold on Mac in Chrome/Webkit based browsers. */
+-moz-osx-font-smoothing: grayscale; /* Fixes font bold issue in Firefox version 25+ on Mac */
 }

@@ -282,8 +282,15 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       choicesMade: step ? choicesMade : [null],
       currentParams: step ? currentParams : {},
     });
-    dispatch(goToStep(step || 1));
-    dispatch(push('/customize'));
+    if (step && choicesMade[step]) {
+      dispatch(goToStep(step + 1));
+    }
+    else {
+      dispatch(goToStep(step || 1));
+    }
+    if (choicesMade.length < selectedFont.steps.length) {
+      dispatch(push('/customize'));
+    }
   });
 };
 
@@ -389,8 +396,9 @@ export const clearFontIsLoading = () => (dispatch) => {
   });
 };
 
-export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
+export const goToStep = (step, isSpecimen = false) => (dispatch, getState) => {
   console.log('==========font/goToStep============');
+  console.log(step)
   const { currentPreset } = getState().font;
   const previousStep = getState().font.step;
   console.log(currentPreset);
@@ -401,16 +409,21 @@ export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
       break;
     case currentPreset.steps.length + 1:
       dispatch(updateValues(undefined, true));
+      dispatch({
+        type: CHANGE_STEP,
+        step: currentPreset.steps.length,
+      });
+      console.log('Going to /specimen')
       dispatch(push('/specimen'));
       break;
     default:
-      dispatch(updateValues(step));
+      dispatch(updateValues(step, isSpecimen));
       dispatch({
         type: CHANGE_STEP,
-        step: isSpecimen ? previousStep : step,
+        step: step ? step : previousStep,
       });
       if (isSpecimen) {
-        dispatch(updateValues(undefined, true));
+        console.log('Going to /customize')
         dispatch(push('/customize'));
       }
       break;
@@ -492,7 +505,6 @@ export const selectChoice = (choice, isSpecimen = false) => (dispatch, getState)
 };
 
 export const finishEditing = choice => (dispatch, getState) => {
-  // Select choice
   dispatch(selectChoice(choice, true));
   dispatch(push('/specimen'));
 };

@@ -26,8 +26,6 @@ class Sidebar extends React.Component {
     super(props);
   }
   render() {
-    console.log(this.props.choicesMade)
-    console.log(this.props.steps)
     return (
       <div className={`Sidebar ${(this.props.location.pathname !== "/customize" && this.props.location.pathname !== "/specimen") ? 'small' : ''}`}>
         <ProfileIcon

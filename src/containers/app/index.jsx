@@ -78,21 +78,15 @@ class App extends React.Component {
     if (newProps.shouldLogout) this.auth.logout();
   }
   hasSelectedFont() {
-    console.log('=========hasSelectedFont=======');
-    console.log(typeof this.props.selectedFontLoaded);
-    console.log(typeof this.props.selectedFontLoaded === 'object');
-    console.log('====================================');
     if (
       this.props.selectedFont !== '' &&
       (this.props.pathname === '/customize' ||
         this.props.pathname === '/specimen') &&
       !(typeof this.props.selectedFontLoaded === 'object')
     ) {
-      console.log('font selected but not loaded');
       this.props.reloadFonts();
       return true;
     }
-    console.log(`font selected: ${this.props.selectedFont !== ''}`);
     return this.props.selectedFont !== '';
   }
   hasSuccessfulPayment() {
@@ -257,7 +251,7 @@ class App extends React.Component {
                 />
               </div>
             </div>
-            <ShortcutsHelper shouldShowTooltips={this.props.shouldShowTooltips} toggleTooltips={this.props.toggleTooltips}/>
+            {this.props.location.pathname === "/customize" && (<ShortcutsHelper shouldShowTooltips={this.props.shouldShowTooltips} toggleTooltips={this.props.toggleTooltips}/>)}
             <div className="language-select">
               <ul
                 className={`language-list ${
