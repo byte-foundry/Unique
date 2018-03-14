@@ -164,20 +164,10 @@ export const selectFont = (font, step) => (dispatch, getState) => {
 
     // If no default choice, create it
     if (!step.choices.find(e => e.name === 'Default')) {
-      const defaultStepParams = {};
-      // Get all choices params for this step and set them to the font default value
-      step.choices.forEach((choice) => {
-        Object.keys(choice.values).forEach((key) => {
-          if (key !== 'name') {
-            defaultStepParams[key] = selectedFont.baseValues[key];
-          }
-        });
-      });
-
       // Push default choice to the font steps
       selectedFont.steps[index].choices.push({
         name: 'Default',
-        values: defaultStepParams,
+        values: {},
         id: `default${step.name}`,
       });
     }
@@ -186,7 +176,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     let stepParams = {};
     // Get all step params
     step.choices.forEach((choice) => {
-      stepParams = mergeWith(stepParams, choice.values);
+      stepParams = mergeWith({}, stepParams, choice.values);
     });
     // Extract what's not needed
     const {
@@ -343,20 +333,42 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
   // Update choice fonts
   currentPreset.steps[stepToUpdate - 1].choices.forEach((choice, index) => {
     const stepChoices = { ...choice.values };
-    // If choice already done on this step, reset choice values on the font (for the default mostly)
-    if (choicesMade[stepToUpdate]) {
-      Object.keys(choicesMade[stepToUpdate]).forEach((key) => {
-        if (!stepChoices[key]) {
-          stepChoices[key] = currentPreset.baseValues[key];
-        }
+    const choiceWithoutCurrentStep = choicesMade.filter((item, i) => stepToUpdate - 1 !== i);
+
+    const manualChanges = {};
+    const baseManualChanges = currentPreset.baseValues.manualChanges;
+    const choiceManualChangeKeys = Object.keys(baseManualChanges);
+
+    choiceManualChangeKeys.forEach((key) => {
+      const baseValue = baseManualChanges[key];
+      const valueCursors = Object.keys(baseValue.cursors);
+      manualChanges[key] = { cursors: {} };
+
+      valueCursors.forEach((cursor) => {
+        manualChanges[key].cursors[cursor] = baseValue.cursors[cursor];
+
+        [...choiceWithoutCurrentStep, stepChoices].forEach((choiceMade) => {
+          if (choiceMade.manualChanges && choiceMade.manualChanges[key] && choiceMade.manualChanges[key].cursors[cursor]) {
+            manualChanges[key].cursors[cursor] += choiceMade.manualChanges[key].cursors[cursor] - baseValue.cursors[cursor];
+          }
+        });
       });
-    }
+    });
 
     // Update choice font param
     if (fonts[choicesFontsName[index]]) {
       // CurrentParams, then step Base Values, then choice values
+      const params = mergeWith(
+        {},
+        currentPreset.baseValues,
+        ...choiceWithoutCurrentStep,
+        stepChoices,
+        {
+          manualChanges,
+        },
+      );
       fonts[choicesFontsName[index]].changeParams(
-        mergeWith({}, stepBaseValues, currentParams, stepChoices),
+        params,
         subset,
       );
     } else {
@@ -457,15 +469,40 @@ export const selectChoice = (choice, isSpecimen = false) => (dispatch, getState)
     });
   }
 
-  // Current font params : Params to reset, then current params, then choice values
-  currentParams = mergeWith(
-    mergeWith(currentParams, paramsToReset),
-    choice.values,
-  );
-
   // Save choice made
-  choicesMade[step] = choice.values || {};
-  choicesMade[step].name = choice.name;
+  choicesMade[step - 1] = choice.values || {};
+  choicesMade[step - 1].name = choice.name;
+  const manualChanges = {};
+  const baseManualChanges = currentPreset.baseValues.manualChanges;
+  const choiceManualChangeKeys = Object.keys(baseManualChanges);
+
+  choiceManualChangeKeys.forEach((key) => {
+    const baseValue = baseManualChanges[key];
+    const valueCursors = Object.keys(baseValue.cursors);
+    manualChanges[key] = { cursors: {} };
+
+    valueCursors.forEach((cursor) => {
+      manualChanges[key].cursors[cursor] = baseValue.cursors[cursor];
+
+      choicesMade.forEach((choiceMade) => {
+        if (choiceMade.manualChanges && choiceMade.manualChanges[key] && choiceMade.manualChanges[key].cursors[cursor]) {
+          manualChanges[key].cursors[cursor] += choiceMade.manualChanges[key].cursors[cursor] - baseValue.cursors[cursor];
+        }
+      });
+    });
+  });
+
+  // Current font params : Params to reset, then current params, then choice values
+  currentParams =
+    mergeWith(
+      {},
+      currentPreset.baseValues,
+      ...choicesMade,
+      {
+        manualChanges,
+      },
+    );
+
 
   dispatch({
     type: SELECT_CHOICE,
@@ -537,7 +574,7 @@ export const resetSliderFont = () => (dispatch, getState) => {
   const { currentParams, stepBaseValues, sliderFontName } = getState().font;
   const { fonts } = getState().createdFonts;
   fonts[sliderFontName].changeParams(
-    mergeWith(stepBaseValues, currentParams),
+    mergeWith({}, stepBaseValues, currentParams),
     chosenWord,
   );
 };
