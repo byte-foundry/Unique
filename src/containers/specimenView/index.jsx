@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { push } from 'react-router-redux';
+import { push } from "react-router-redux";
 import { FormattedMessage } from "react-intl";
 import "./SpecimenView.css";
 import Button from "../../components/button/";
@@ -70,7 +70,39 @@ class SpecimenView extends React.Component {
               />
             </p>
             <div className="buttons">
-                  <Button className="button-download" onClick={() => {this.props.goToCheckout()}} mode="full" label="Download" />
+              <FormattedMessage
+                id="SpecimenView.downloadAction"
+                defaultMessage="Download"
+                description="SpecimenView - Download action"
+              >
+                {text => (
+                  <Button
+                    className="button-download"
+                    onClick={() => {
+                      this.props.goToCheckout();
+                    }}
+                    mode="full"
+                    label={text}
+                  />
+                )}
+              </FormattedMessage>
+
+              <FormattedMessage
+                id="SpecimenView.saveAction"
+                defaultMessage="Save it for later"
+                description="SpecimenView - Save action"
+              >
+                {text => (
+                  <Button
+                    className="button-save"
+                    onClick={() => {
+                      this.props.storeProject();
+                    }}
+                    mode="light"
+                    label={text}
+                  />
+                )}
+              </FormattedMessage>
             </div>
           </div>
           <div
@@ -322,7 +354,7 @@ const mapDispatchToProps = dispatch =>
     {
       storeEmail,
       storeProject,
-      goToCheckout: () => push('/checkout')
+      goToCheckout: () => push("/checkout")
     },
     dispatch
   );
@@ -340,7 +372,7 @@ SpecimenView.propTypes = {
     login: PropTypes.func.isRequired
   }).isRequired,
   projectName: PropTypes.string,
-  goToCheckout: PropTypes.func.isRequired,
+  goToCheckout: PropTypes.func.isRequired
 };
 
 SpecimenView.defaultProps = {

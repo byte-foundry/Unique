@@ -1,5 +1,5 @@
 .Sidebar {
-  background-color: black;
+  background: linear-gradient(8deg, black, black 68%, black);
   padding-top: 100px;
   color: white;
   min-height: 100vh;
@@ -8,7 +8,7 @@
   border-left: 1px solid white;
   max-width: 250px;
   margin-left: auto;
-  transition: width 0.3s ease;
+  transition: width 0.3s ease, background .3s ease;
   width: 100%;
 }
 
@@ -42,4 +42,47 @@
 .Sidebar .icon-menu {
   right: 30px;
   fill: #5320ee;
+}
+
+
+.Sidebar.checkout {
+  background: linear-gradient(8deg, #5320ee, #5d28e2 68%, #622bdd);
+}
+
+
+.Sidebar.checkout .sidebar-checkout {
+  margin-top: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.Sidebar.checkout .sidebar-checkout .price {
+  font-size: 52px;
+}
+
+.Sidebar.checkout .sidebar-checkout .choices {
+  margin-top: 40px;
+}
+
+.Sidebar.checkout .sidebar-checkout .choices .choice {
+  color: #DFD4F8;
+}
+
+.Sidebar.checkout .sidebar-checkout .choices .choice::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.Sidebar.checkout .sidebar-checkout .choices .choice .left {
+  float: left;
+}
+
+.Sidebar.checkout .sidebar-checkout .choices .choice .right {
+  float: right;
+}
+
+.Sidebar.checkout .button-checkout {
+  display: inline-block;
+  margin-top: 60px;
 }

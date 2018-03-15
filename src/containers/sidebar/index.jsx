@@ -4,14 +4,18 @@ import PropTypes from "prop-types";
 import { push } from "react-router-redux";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { FormattedMessage } from "react-intl";
 import Step from "../../components/step/";
 import { goToStep } from "../../data/font";
+import Button from "../../components/button/";
+import Checkout from "../../components/checkout";
 import "./Sidebar.css";
 
 import { ReactComponent as ProfileIcon } from "./profile.svg";
 
 const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
-  steps && steps.map((step, i) => (
+  steps &&
+  steps.map((step, i) => (
     <Step
       index={i}
       title={steps[i].name}
@@ -27,7 +31,15 @@ class Sidebar extends React.Component {
   }
   render() {
     return (
-      <div className={`Sidebar ${(this.props.location.pathname !== "/customize" && this.props.location.pathname !== "/specimen") ? 'small' : ''}`}>
+      <div
+        className={`Sidebar ${
+          this.props.location.pathname !== "/customize" &&
+          this.props.location.pathname !== "/specimen" &&
+          this.props.mode !== "checkout"
+            ? "small"
+            : ""
+        } ${this.props.mode === "checkout" ? "checkout" : ""}`}
+      >
         <ProfileIcon
           className="icon-profile"
           onClick={() => {
@@ -36,17 +48,59 @@ class Sidebar extends React.Component {
               : this.props.login();
           }}
         />
-        <div className="steps">
-          {(this.props.location.pathname !== "/customize" && this.props.location.pathname !== "/specimen")
-            ? false
-            : getStepsDone(
-                this.props.steps,
-                this.props.step,
-                this.props.choicesMade,
-                this.props.fontName,
-                this.props.location.pathname === "/specimen"
+        {this.props.mode !== "checkout" ? (
+          <div className="steps">
+            {this.props.location.pathname !== "/customize" &&
+            this.props.location.pathname !== "/specimen"
+              ? false
+              : getStepsDone(
+                  this.props.steps,
+                  this.props.step,
+                  this.props.choicesMade,
+                  this.props.fontName,
+                  this.props.location.pathname === "/specimen"
+                )}
+          </div>
+        ) : (
+          <div className="sidebar-checkout">
+            <h2 className="price">
+              {parseFloat(this.props.checkoutPrice).toFixed(2)}
+            </h2>
+            <div className="choices">
+              {this.props.checkoutOptions.map(
+                option =>
+                  option.selected && (
+                    <div className="choice">
+                      <span className="left">{option.name}</span>
+                      <span className="right">
+                        {option.price === 0 ? "included" : option.price}
+                      </span>
+                    </div>
+                  )
               )}
-        </div>
+            </div>
+            <FormattedMessage
+              id="Sidebar.checkoutAction"
+              defaultMessage="Checkout"
+              description="Sidebar - Checkout action"
+            >
+              {text => (
+                <Checkout
+                  title="Unique"
+                  amount={this.props.checkoutPrice}
+                  description={"Your unique package"}
+                >
+                  <Button
+                    className="button-checkout"
+                    onClick={() => {}}
+                    mode="white"
+                    label={text}
+                  />
+                </Checkout>
+              )}
+            </FormattedMessage>
+          </div>
+        )}
       </div>
     );
   }
@@ -75,24 +129,29 @@ Sidebar.propTypes = {
   isAuthenticated: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   goToLibrary: PropTypes.func.isRequired,
+  mode: PropTypes.string,
+  checkoutPrice: PropTypes.number.isRequired
 };
 
 Sidebar.defaultProps = {
-  specimen: false
+  specimen: false,
+  mode: "default"
 };
 
 const mapStateToProps = state => ({
   fontName: state.font.currentPreset.preset + state.font.currentPreset.variant,
   steps: state.font.currentPreset.steps,
   step: state.font.step,
-  choicesMade: state.font.choicesMade
+  choicesMade: state.font.choicesMade,
+  checkoutPrice: state.user.checkoutPrice,
+  checkoutOptions: state.user.checkoutOptions
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       goToStep,
-      goToLibrary: () => push("/library"),
+      goToLibrary: () => push("/library")
     },
     dispatch
   );

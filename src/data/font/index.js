@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { request } from 'graphql-request';
 import { loadPresets } from '../presets';
 import { setUnstable, setStable } from '../ui';
-import { storeChosenWord, updateProjectInfos } from '../user';
+import { storeChosenWord, updateProjectInfos, resetCheckout } from '../user';
 import { DEFAULT_UI_WORD, GRAPHQL_API } from '../constants';
 import {
   storeCreatedFont,
@@ -139,7 +139,7 @@ export default (state = initialState, action) => {
 
 export const selectFont = (font, step) => (dispatch, getState) => {
   console.log('==========font/selectFont============');
-
+  dispatch(resetCheckout());
   const { chosenWord } = getState().user;
   const { currentParams, choicesMade } = getState().font;
   const selectedFont = { ...font };
@@ -282,6 +282,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       choicesMade: step ? choicesMade : [null],
       currentParams: step ? currentParams : {},
     });
+    dispatch(setStable());
     if (step && choicesMade[step]) {
       dispatch(goToStep(step + 1));
     }

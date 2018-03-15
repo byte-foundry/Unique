@@ -21,7 +21,8 @@ import {
   DEFAULT_UI_WORD,
   DEFAULT_UI_GLYPH,
   GRAPHQL_API,
-  GRAPHQL_PROTOTYPO_API
+  GRAPHQL_PROTOTYPO_API,
+  BASE_PACK_PRICE
 } from "../constants";
 
 export const STORE_USER_EMAIL = "user/STORE_USER_EMAIL";
@@ -36,6 +37,8 @@ export const STORE_PROJECT_INFOS = "user/STORE_PROJECT_INFOS";
 export const CHANGE_FONT_SIZE = "user/CHANGE_FONT_SIZE";
 export const SWITCH_BLACK_ON_WHITE = "user/SWITCH_BLACK_ON_WHITE";
 export const SWITCH_GLYPH_MODE = "user/SWITCH_GLYPH_MODE";
+export const CHANGE_CHECKOUT_ORDER = "user/CHANGE_CHECKOUT_ORDER";
+export const RESET_CHECKOUT_OPTIONS = "user/RESET_CHECKOUT_OPTIONS";
 export const LOGOUT = "user/LOGOUT";
 
 const initialState = {
@@ -52,7 +55,9 @@ const initialState = {
   fontSize: 70,
   isBlackOnWhite: true,
   isGlyphMode: false,
-  chosenGlyph: DEFAULT_UI_GLYPH
+  chosenGlyph: DEFAULT_UI_GLYPH,
+  checkoutOptions: [],
+  checkoutPrice: BASE_PACK_PRICE
 };
 
 export default (state = initialState, action) => {
@@ -154,64 +159,89 @@ export default (state = initialState, action) => {
         isGlyphMode: !state.isGlyphMode
       };
 
+    case CHANGE_CHECKOUT_ORDER:
+      return {
+        ...state,
+        checkoutOptions: action.checkoutOptions,
+        checkoutPrice: action.checkoutPrice
+      };
+
+    case RESET_CHECKOUT_OPTIONS:
+      return {
+        ...state,
+        checkoutOptions: [],
+        checkoutPrice: BASE_PACK_PRICE
+      };
     default:
       return state;
   }
 };
 
-export const storeProject = fontName => (dispatch, getState) => {
+export const storeProject = (fontName, bought = false) => (
+  dispatch,
+  getState
+) => {
   console.log("========STORE PROJECT========");
   const { currentPreset, choicesMade } = getState().font;
   console.log(choicesMade);
   const { projectID, graphqlID } = getState().user;
-  request(GRAPHQL_API, getUserProjects(graphqlID))
-    .then(data => {
-      if (data.User.projects.find(project => project.id === projectID)) {
-        console.log("project already found on database. updating it");
-        request(
-          GRAPHQL_API,
-          updateProject(projectID, choicesMade, fontName)
-        ).then(res => {
-          console.log(res);
-          dispatch({
-            type: STORE_PROJECT,
-            projectID: res.updateProject.id,
-            projects: res.updateProject.user.projects,
-            projectName: fontName
+  if (graphqlID) {
+    request(GRAPHQL_API, getUserProjects(graphqlID))
+      .then(data => {
+        if (data.User.projects.find(project => project.id === projectID)) {
+          console.log("project already found on database. updating it");
+          request(
+            GRAPHQL_API,
+            updateProject(projectID, choicesMade, fontName, bought)
+          ).then(res => {
+            console.log(res);
+            dispatch({
+              type: STORE_PROJECT,
+              projectID: res.updateProject.id,
+              projects: res.updateProject.user.projects,
+              projectName: fontName
+            });
+            dispatch(push("/library"));
           });
-          dispatch(push("/export"));
-        });
-      } else {
-        console.log("project not found, saving it on database");
-        request(
-          GRAPHQL_API,
-          addProjectToUser(graphqlID, currentPreset.id, choicesMade, fontName)
-        ).then(res => {
-          const metadata = {
-            unique_preset: res.createProject.id,
-            choices_made: choicesMade
-              .map((choice, index) => {
-                if (index !== 0) return choice.name;
-                return currentPreset.preset + currentPreset.variant;
-              })
-              .toString()
-          };
-          console.log(res);
-          Intercom("update", {
-            unique_finished_fonts: res.createProject.user.projects.length
+        } else {
+          console.log("project not found, saving it on database");
+          request(
+            GRAPHQL_API,
+            addProjectToUser(
+              graphqlID,
+              currentPreset.id,
+              choicesMade,
+              fontName,
+              bought
+            )
+          ).then(res => {
+            const metadata = {
+              unique_preset: res.createProject.id,
+              choices_made: choicesMade
+                .map((choice, index) => {
+                  if (index !== 0) return choice.name;
+                  return currentPreset.preset + currentPreset.variant;
+                })
+                .toString()
+            };
+            console.log(res);
+            Intercom("update", {
+              unique_finished_fonts: res.createProject.user.projects.length
+            });
+            Intercom("trackEvent", "unique-finished-font", metadata);
+            dispatch({
+              type: STORE_PROJECT,
+              projectID: res.createProject.id,
+              projects: res.createProject.user.projects,
+              projectName: fontName
+            });
+            dispatch(push("/library"));
           });
-          Intercom("trackEvent", "unique-finished-font", metadata);
-          dispatch({
-            type: STORE_PROJECT,
-            projectID: res.createProject.id,
-            projects: res.createProject.user.projects,
-            projectName: fontName
-          });
-          dispatch(push("/export"));
-        });
-      }
-    })
-    .catch(error => console.log(error));
+        }
+      })
+      .catch(error => console.log(error));
+  }
+  // Else : user not logged in, adding the project to a "to be savec spot" that will be saved after email input
 };
 
 export const updateProjectInfos = (projectID, projectName) => dispatch => {
@@ -247,7 +277,10 @@ export const changeFontSize = fontSize => dispatch => {
   });
 };
 
-export const storeEmail = (email, fontName) => (dispatch, getState) => {
+export const storeEmail = (email, fontName, payed = false) => (
+  dispatch,
+  getState
+) => {
   console.log("========STORE EMAIL========");
   /* global Intercom*/
   const { currentPreset, choicesMade } = getState().font;
@@ -265,7 +298,7 @@ export const storeEmail = (email, fontName) => (dispatch, getState) => {
               graphqlID: data.User.id,
               prototypoUser: response.User ? response.User : {}
             });
-            dispatch(storeProject(fontName));
+            dispatch(storeProject(fontName, payed));
           })
           .catch(error => console.log(error));
       } else {
@@ -298,7 +331,7 @@ export const storeEmail = (email, fontName) => (dispatch, getState) => {
               () => Intercom("trackEvent", "unique-finished-font", metadata),
               1500
             );
-            dispatch(storeProject(fontName));
+            dispatch(storeProject(fontName, payed));
           })
           .catch(error => console.log(error));
       }
@@ -314,6 +347,9 @@ export const storeExportType = exportType => dispatch => {
     exportType
   });
 };
+
+export const resetCheckout = () => dispatch =>
+  dispatch({ type: RESET_CHECKOUT_OPTIONS });
 
 export const storeChosenWord = chosenWord => dispatch => {
   dispatch({
@@ -340,60 +376,11 @@ export const storeChosenGlyph = chosenGlyph => dispatch => {
   dispatch(updateSubset());
 };
 
-export const afterPayment = () => (dispatch, getState) => {
-  /* global Intercom*/
-  const { exportType, graphqlID, projectID, projects } = getState().user;
-  const { id } = getState().font.currentPreset;
-  const { choicesMade, currentPreset } = getState().font;
-  dispatch(setFontBought(id));
-  console.log("Setting project bought");
-  console.log(projects);
-  projects.find(project => project.id === projectID).bought = true;
-  console.log(projects);
-
-  dispatch({
-    type: PAYMENT_SUCCESSFUL,
-    projects
-  });
-  request(GRAPHQL_API, getPresetExportedCount(id))
-    .then(data =>
-      request(
-        GRAPHQL_API,
-        updatePresetExportedCount(id, data.Preset.exported + 1)
-      )
-    )
-    .catch(error => console.log(error));
-  request(GRAPHQL_API, updateProjectBought(projectID))
-    .then(() =>
-      request(GRAPHQL_API, getBoughtProjects(graphqlID))
-        .then(res => {
-          const metadata = {
-            unique_preset: id,
-            choices_made: choicesMade
-              .map((choice, index) => {
-                if (index !== 0) return choice.name;
-                return currentPreset.preset + currentPreset.variant;
-              })
-              .toString()
-          };
-          Intercom("trackEvent", "unique-bought-font", metadata);
-          Intercom("update", { unique_bought_fonts: res.allProjects.length });
-        })
-        .catch(error => console.log(error))
-    )
-    .catch(error => console.log(error));
-
-  switch (exportType) {
-    case "host":
-      break;
-    case "download":
-      dispatch(push("/success"));
-      break;
-    case "prototypo":
-      break;
-    default:
-      break;
-  }
+export const afterPayment = res => (dispatch, getState) => {
+  const { data } = res;
+  const isPayed = data.paid;
+  const userStripeEmail = data.source.metadata.name;
+  dispatch(storeEmail(userStripeEmail, undefined, isPayed));
 };
 
 export const exportFontToPrototypoWithAccount = (
@@ -431,6 +418,20 @@ export const exportFontToPrototypoWithAccount = (
     })
     .catch(error => console.log(error));
   console.log("====================================");
+};
+
+export const updateCheckoutOptions = checkoutOptions => dispatch => {
+  let price = BASE_PACK_PRICE;
+  checkoutOptions.forEach(option => {
+    if (option.selected) {
+      price = price + option.price;
+    }
+  });
+  dispatch({
+    type: CHANGE_CHECKOUT_ORDER,
+    checkoutOptions: [...checkoutOptions],
+    checkoutPrice: price
+  });
 };
 
 export const loginToGraphCool = accessToken => dispatch => {

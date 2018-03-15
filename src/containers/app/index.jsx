@@ -114,7 +114,7 @@ class App extends React.Component {
     return this.props.userEmail !== '';
   }
   isLoggedIn() {
-    return this.auth.isAuthenticated;
+    return this.props.userId !== '';
   }
   handleAuthentication(nextState, replace) {
     if (/access_token|id_token|error/.test(nextState.location.hash)) {
@@ -247,6 +247,7 @@ class App extends React.Component {
                   pathName={this.props.location.pathname}
                   isAuthenticated={this.auth.isAuthenticated}
                   login={this.auth.login}
+                  mode={this.props.location.pathname === "/checkout" ? 'checkout' : 'default'}
                   {...this.props}
                 />
               </div>
@@ -320,6 +321,7 @@ App.propTypes = {
   setLocale: PropTypes.func.isRequired,
   toggleTooltips: PropTypes.func.isRequired,
   shouldShowTooltips: PropTypes.bool.isRequired,
+  userId: PropTypes.string,
 };
 
 App.defaultProps = {
@@ -328,6 +330,7 @@ App.defaultProps = {
   userEmail: '',
   hasPresetsLoaded: false,
   locale: 'en',
+  userId: '',
 };
 
 App.childContextTypes = {
@@ -350,6 +353,7 @@ const mapStateToProps = state => ({
   isBlackOnWhite: state.user.isBlackOnWhite,
   locale: state.ui.locale,
   shouldShowTooltips: state.ui.shouldShowTooltips,
+  userId: state.user.graphqlID,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

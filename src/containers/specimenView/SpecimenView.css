@@ -40,6 +40,9 @@
 .SpecimenView .buttons .button-download {
   float: right;
 }
+.SpecimenView .buttons .button-save {
+  float: right;
+}
 
 .SpecimenView .icon-back,
 .SpecimenView .icon-next {

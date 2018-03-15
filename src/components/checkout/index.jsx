@@ -15,13 +15,13 @@ const CURRENCY = 'EUR';
 
 const fromEuroToCent = amount => amount * 100;
 
-const successPayment = (data) => {
-  console.log(data);
+const successPayment = (data, callback) => {
+  console.log(data);  
+  callback(data);
 };
 
-const errorPayment = (data, callback) => {
+const errorPayment = (data) => {
   console.log(data);
-  callback();
 };
 
 const onToken = (amount, description, callback) => token =>
@@ -32,8 +32,8 @@ const onToken = (amount, description, callback) => token =>
       currency: CURRENCY,
       amount: fromEuroToCent(amount),
     })
-    .then(data => successPayment(data))
-    .catch(data => errorPayment(data, callback));
+    .then(data => successPayment(data, callback))
+    .catch(data => errorPayment(data));
 
 const Checkout = props => (
   <StripeCheckout
