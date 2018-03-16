@@ -61,6 +61,7 @@ type Project @model {
   id: ID! @isUnique
   preset: Preset @relation(name: "ProjectOnPreset")
   updatedAt: DateTime!
+  need: String
   user: User @relation(name: "UserOnProject")
   name: String @defaultValue(value: "Untitled")
 }

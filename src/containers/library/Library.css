@@ -1,54 +1,80 @@
-.Library {}
-.Library .container{
-    padding-top: 100px;
+.Library {
+}
+.Library .container {
+  padding-top: 100px;
 }
 
 .Library h1 {
-    display: inline-block;
-    margin-bottom: 30px;
+  display: inline-block;
+  font-weight: 400;
+  margin-bottom: 40px;
+  font-size: 32px;
+  color: black;
 }
 
-.Library .project{
-    display: inline-block;
-    cursor: pointer;
-    margin-right: 20px;
-    margin-bottom: 20px;
+.Library h2 {
+  display: inline-block;
+  font-weight: 400;
+  margin-bottom: 40px;
+  font-size: 28px;
+  color: black;
+}
+
+.Library .actions {
+}
+
+.Library .actions .action {
+  cursor: pointer;
+  color: #b8b5c0;
+  margin-bottom: 3px;
+  transition: color 0.3s ease;
+  font-size: 2rem;
+}
+
+.Library .projects {
+  margin-top: 100px;
+}
+
+.Library .project {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.Library .project .preview {
+  text-align: center;
+  padding: 25px 10px;
+  font-size: 35px;
+  color: #b8b5c0;
+}
+
+.Library .project .need {
+  font-size: 18px;
+  padding: 15px 30px;
+  color: white;
+  background-color: #5320ee;
+  
+}
+
+.Library .project .fontName {
+  font-size: 18px;
+  padding: 15px 30px;
+  color: white;
+  background-color: black;
+}
+
+.Library .project .actions {
+  margin-top: 10px;
+}
+
+.Library .project .actions::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.Library .project .actions .action-open {
+  display: inline-block;
+  float: right;
 }
 
 
-.Library .project .description {
-    padding: 10px 20px;
-    min-height: 80px;
-    background-color: #c7b5d8;
-}
-
-.Library .project .title {
-    background-color: #000;
-    color: white;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    padding: 20px 40px;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.Library .project .bought-icon {
-    position: absolute;
-    top: 5px;
-    right: 20px;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    border: 2px solid white;
-    background-color: orange;
-}
-
-.Library .project .bought-icon.isBought {
-    background-color: green;
-}
-.Library .create {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 15px 30px;
-    font-size: 1rem;
-}

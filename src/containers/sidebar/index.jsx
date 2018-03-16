@@ -1,12 +1,11 @@
 // @flow
 import React from "react";
 import PropTypes from "prop-types";
-import { push } from "react-router-redux";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import Step from "../../components/step/";
-import { goToStep } from "../../data/font";
+import { goToStep, loadLibrary } from "../../data/font";
 import Button from "../../components/button/";
 import Checkout from "../../components/checkout";
 import "./Sidebar.css";
@@ -21,7 +20,7 @@ const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
       title={steps[i].name}
       key={steps[i].name}
       current={index === i + 1 && !isSpecimen}
-      choice={choicesMade[i + 1] ? choicesMade[i + 1].name : undefined}
+      choice={choicesMade[i] ? choicesMade[i].name : undefined}
       specimen={isSpecimen}
     />
   ));
@@ -30,6 +29,9 @@ class Sidebar extends React.Component {
     super(props);
   }
   render() {
+    console.log('---------------')
+    console.log(this.props.choicesMade)
+    console.log('---------------')
     return (
       <div
         className={`Sidebar ${
@@ -44,7 +46,7 @@ class Sidebar extends React.Component {
           className="icon-profile"
           onClick={() => {
             this.props.isAuthenticated()
-              ? this.props.goToLibrary()
+              ? this.props.loadLibrary()
               : this.props.login();
           }}
         />
@@ -128,7 +130,7 @@ Sidebar.propTypes = {
   fontName: PropTypes.string.isRequired,
   isAuthenticated: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
-  goToLibrary: PropTypes.func.isRequired,
+  loadLibrary: PropTypes.func.isRequired,
   mode: PropTypes.string,
   checkoutPrice: PropTypes.number.isRequired
 };
@@ -151,7 +153,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       goToStep,
-      goToLibrary: () => push("/library")
+      loadLibrary,
     },
     dispatch
   );

@@ -22,9 +22,11 @@ class Masonry extends React.Component {
   }
 
   onResize() {
-    const columns = this.getColumns(this.refs.Masonry.offsetWidth);
-    if (columns !== this.state.columns) {
-      this.setState({ columns: columns });
+    if(this.refs.Masonry) {
+      const columns = this.getColumns(this.refs.Masonry.offsetWidth);
+      if (columns !== this.state.columns) {
+        this.setState({ columns: columns });
+      }
     }
   }
 

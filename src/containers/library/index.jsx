@@ -1,57 +1,152 @@
 // @flow
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { push } from 'react-router-redux';
-import { connect } from 'react-redux';
-import FlipMove from 'react-flip-move';
-import PropTypes from 'prop-types';
-import Button from '../../components/button/';
-import { loadProject } from '../../data/font';
-import './Library.css';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { push } from "react-router-redux";
+import { connect } from "react-redux";
+import FlipMove from "react-flip-move";
+import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
+import Button from "../../components/button/";
+import { loadProject, download } from "../../data/font";
+import "./Library.css";
 
-const Library = props => {
-  console.log(props.projects);
-  return (
-    <div className="Library">
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-12">
-            <h1>My library</h1>
+class Library extends React.Component {
+  constructor(props) {
+    super(props);
+    const payedProjects = props.projects.filter(
+      project => project.bought === true
+    );
+    const savedProjects = props.projects.filter(
+      project => project.bought === false
+    );
+    this.state = {
+      payedProjects,
+      savedProjects
+    };
+  }
+  render() {
+    console.log(this.props.projects);
+    return (
+      <div className="Library">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <h1>
+                <FormattedMessage
+                  id="Library.title"
+                  defaultMessage="Hello!"
+                  description="Library page title"
+                />
+              </h1>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <FlipMove
-            duration={100}
-            easing="ease"
-            appearAnimation="elevator"
-            leaveAnimation="elevator"
-            staggerDurationBy="10"
-            staggerDelayBy="20"
-          >
-            {props.projects.map(project => (
-              <div className="col-sm-3 project" role="button" tabIndex="0" onClick={() => props.loadProject(project.id, project.name)} key={project.id}>
-                <span className={`bought-icon ${project.bought ? 'isBought' : ''}`} />
-                <div className="description">
-                  {project.preset.steps.map((step, index) => (
-                    <span key={`${project.id}${step.name}`}>{project.choicesMade[index + 1] ? `${step.name}: ${project.choicesMade[index + 1].name}` : ''}<br /></span>
-                  ))}
+          <div className="row actions">
+            <div className="col-sm-12">
+              <p className="action" onClick={() => this.props.goToHome()}>
+                <FormattedMessage
+                  id="Library.actionCreate"
+                  defaultMessage="Create a new project"
+                  description="Library page title"
+                />
+              </p>
+            </div>
+          </div>
+          <div className="row projects">
+            <div className="col-sm-12">
+              <h2>
+                <FormattedMessage
+                  id="Library.savedProjectsTitle"
+                  defaultMessage="Saved Projects"
+                  description="Library saved projects title"
+                />
+              </h2>
+            </div>
+            <FlipMove
+              duration={100}
+              easing="ease"
+              appearAnimation="elevator"
+              leaveAnimation="elevator"
+              staggerDurationBy="10"
+              staggerDelayBy="20"
+              style={{ width: "100%" }}
+            >
+              {this.state.savedProjects.map(project => (
+                <div className="col-sm-3 project" key={project.id}>
+                  <div className="preview" style={{fontFamily: `project${project.id}`}}>AaBbCc</div>
+                  <div className="need">Text</div>
+                  <div className="fontName">{project.name || "Undefined"}</div>
+                  <div className="actions">
+                    <FormattedMessage
+                      id="Library.openAction"
+                      defaultMessage="Open"
+                      description="Library open project button"
+                    >
+                      {text => (
+                        <Button
+                          onClick={() =>
+                            this.props.loadProject(project.id, project.name)
+                          }
+                          label={text}
+                          mode="hollow"
+                          className="action-open"
+                        />
+                      )}
+                    </FormattedMessage>
+                  </div>
                 </div>
-                <div className="title">{project.name || 'Undefined'}</div>
-              </div>
-            ))}
-          </FlipMove>
-          <div className="col-sm-12">
-            <Button
-              className="create"
-              label="Create a new one"
-              mode=""
-              onClick={() => props.goToHome()}
-            />
+              ))}
+            </FlipMove>
+          </div>
+          <div className="row projects">
+            <div className="col-sm-12">
+              <h2>
+                <FormattedMessage
+                  id="Library.boughtProjectsTitle"
+                  defaultMessage="Bought Projects"
+                  description="Library bought projects title"
+                />
+              </h2>
+            </div>
+            <FlipMove
+              duration={100}
+              easing="ease"
+              appearAnimation="elevator"
+              leaveAnimation="elevator"
+              staggerDurationBy="10"
+              staggerDelayBy="20"
+              style={{ width: "100%" }}
+            >
+              {this.state.payedProjects.map(project => (
+                <div className="col-sm-3 project" key={project.id}>
+                  <div className="preview" style={{fontFamily: `project${project.id}`}}>AaBbCc</div>
+                  <div className="need">Text</div>
+                  <div className="fontName">{project.name || "Undefined"}</div>
+                  <div className="actions">
+                    <FormattedMessage
+                      id="Library.downloadAction"
+                      defaultMessage="Download"
+                      description="Library download project button"
+                    >
+                      {text => (
+                        <Button
+                          onClick={() =>
+                            this.props.download(`project${project.id}`)
+                          }
+                          label={text}
+                          mode="hollow"
+                          className="action-open"
+                        />
+                      )}
+                    </FormattedMessage>
+                  </div>
+                </div>
+              ))}
+            </FlipMove>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 Library.propTypes = {
@@ -59,18 +154,24 @@ Library.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       bought: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
+      name: PropTypes.string.isRequired
+    })
   ).isRequired,
   goToHome: PropTypes.func.isRequired,
   loadProject: PropTypes.func.isRequired,
+  download: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
-  projects: state.user.projects,
+  projects: state.user.projects
 });
-const mapDispatchToProps = dispatch => bindActionCreators({
-  goToHome: () => push('/'),
-  loadProject,
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      goToHome: () => push("/"),
+      loadProject,
+      download
+    },
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Library);

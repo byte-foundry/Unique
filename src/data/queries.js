@@ -179,7 +179,7 @@ export const connectToGraphCool = accessToken => `
 `;
 
 
-export const addProjectToUser = (userId, presetId, choicesMade, name, bought) => `
+export const addProjectToUser = (userId, presetId, choicesMade, name, bought, need) => `
     mutation{
         createProject(
             userId:"${userId}",
@@ -187,6 +187,7 @@ export const addProjectToUser = (userId, presetId, choicesMade, name, bought) =>
             choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, "\\\"")}"
             name: "${name}"
             bought: ${bought}
+            need: "${need}"
         ) {
             id
             createdAt
@@ -194,13 +195,13 @@ export const addProjectToUser = (userId, presetId, choicesMade, name, bought) =>
             user {
                 projects {
                     id
-                    bought
                     name
                     choicesMade
+                    bought
                     preset {
-                        steps {
-                            name
-                        }
+                        variant
+                        template 
+                        baseValues                    
                     }
                 }
             }
@@ -232,9 +233,9 @@ export const updateProject = (projectId, choicesMade, name, bought) => `
                     choicesMade
                     bought
                     preset {
-                        steps {
-                            name
-                        }
+                        variant
+                        template 
+                        baseValues                    
                     }
                 }
             }
@@ -344,9 +345,9 @@ export const getUserProjects = graphQLID => `
                 choicesMade
                 bought
                 preset {
-                    steps {
-                        name
-                    }
+                    variant
+                    template 
+                    baseValues                    
                 }
             }
         }

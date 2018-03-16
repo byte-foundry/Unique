@@ -1,5 +1,6 @@
 import { push } from "react-router-redux";
 import { request, GraphQLClient } from "graphql-request";
+import { setUnstable, setStable } from '../ui';
 import {
   findUser,
   createUser,
@@ -16,7 +17,7 @@ import {
   getUserProjects,
   updateProject
 } from "../queries";
-import { setFontBought, updateSubset } from "../font";
+import { setFontBought, updateSubset, loadLibrary } from "../font";
 import {
   DEFAULT_UI_WORD,
   DEFAULT_UI_GLYPH,
@@ -33,6 +34,7 @@ export const STORE_PROTOTYPO_USER = "user/STORE_PROTOTYPO_USER";
 export const PAYMENT_SUCCESSFUL = "user/PAYMENT_SUCCESSFUL";
 export const CONNECT_TO_GRAPHCOOL = "user/CONNECT_TO_GRAPHCOOL";
 export const STORE_PROJECT = "user/STORE_PROJECT";
+export const STORE_PROJECTS = "user/STORE_PROJECTS";
 export const STORE_PROJECT_INFOS = "user/STORE_PROJECT_INFOS";
 export const CHANGE_FONT_SIZE = "user/CHANGE_FONT_SIZE";
 export const SWITCH_BLACK_ON_WHITE = "user/SWITCH_BLACK_ON_WHITE";
@@ -119,6 +121,12 @@ export default (state = initialState, action) => {
         projectName: action.projectName
       };
 
+    case STORE_PROJECTS:
+      return {
+        ...state,
+        projects: action.projects,
+      }
+
     case LOGOUT:
       return {
         ...state,
@@ -201,7 +209,8 @@ export const storeProject = (fontName, bought = false) => (
               projects: res.updateProject.user.projects,
               projectName: fontName
             });
-            dispatch(push("/library"));
+            dispatch(loadLibrary());
+            dispatch(setStable());
           });
         } else {
           console.log("project not found, saving it on database");
@@ -235,7 +244,8 @@ export const storeProject = (fontName, bought = false) => (
               projects: res.createProject.user.projects,
               projectName: fontName
             });
-            dispatch(push("/library"));
+            dispatch(loadLibrary());
+            dispatch(setStable());
           });
         }
       })
