@@ -49,6 +49,13 @@
   color: white;
 }
 
+.Button.text {
+  background-color: transparent;
+  border-color: transparent;
+  color: black;
+  text-decoration: underline;
+}
+
 .Button.isBack {
   background: none;
   border: none;

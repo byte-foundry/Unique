@@ -213,7 +213,8 @@ export const selectFont = (font, step) => (dispatch, getState) => {
         prototypoFontFactory
           .createFont(
             selectedFontName,
-            templateNames[templates[selectedFont.template]]
+            templateNames[templates[selectedFont.template]],
+            true
           )
           .then(createdFont => {
             dispatch(storeCreatedFont(createdFont, selectedFontName));
@@ -231,7 +232,8 @@ export const selectFont = (font, step) => (dispatch, getState) => {
           prototypoFontFactory
             .createFont(
               `choiceFont${i}`,
-              templateNames[templates[selectedFont.template]]
+              templateNames[templates[selectedFont.template]],
+              true
             )
             .then(createdFont => {
               resolve(true);
@@ -251,7 +253,8 @@ export const selectFont = (font, step) => (dispatch, getState) => {
         prototypoFontFactory
           .createFont(
             sliderFontName,
-            templateNames[templates[selectedFont.template]]
+            templateNames[templates[selectedFont.template]],
+            true
           )
           .then(createdFont => {
             dispatch(storeCreatedFont(createdFont, sliderFontName));
@@ -672,7 +675,8 @@ export const loadLibrary = () => (dispatch, getState) => {
                 prototypoFontFactory
                   .createFont(
                     `project${project.id}`,
-                    templateNames[templates[project.preset.template]]
+                    templateNames[templates[project.preset.template]],
+                    true
                   )
                   .then(createdFont => {
                     createdFont.changeParams(project.preset.baseValues);

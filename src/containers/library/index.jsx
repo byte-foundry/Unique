@@ -8,6 +8,7 @@ import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import Button from "../../components/button/";
 import { loadProject, download } from "../../data/font";
+import { deleteUserProject } from "../../data/user";
 import "./Library.css";
 
 class Library extends React.Component {
@@ -24,7 +25,20 @@ class Library extends React.Component {
       savedProjects
     };
   }
+  componentWillReceiveProps(newProps) {
+    const payedProjects = newProps.projects.filter(
+      project => project.bought === true
+    );
+    const savedProjects = newProps.projects.filter(
+      project => project.bought === false
+    );
+    this.setState({
+      payedProjects,
+      savedProjects
+    });
+  }
   render() {
+    console.log('Library render');
     console.log(this.props.projects);
     return (
       <div className="Library">
@@ -72,10 +86,29 @@ class Library extends React.Component {
             >
               {this.state.savedProjects.map(project => (
                 <div className="col-sm-3 project" key={project.id}>
-                  <div className="preview" style={{fontFamily: `project${project.id}`}}>AaBbCc</div>
+                  <div
+                    className="preview"
+                    style={{ fontFamily: `project${project.id}` }}
+                  >
+                    AaBbCc
+                  </div>
                   <div className="need">Text</div>
                   <div className="fontName">{project.name || "Undefined"}</div>
                   <div className="actions">
+                    <FormattedMessage
+                      id="Library.deleteAction"
+                      defaultMessage="Delete"
+                      description="Library delete project button"
+                    >
+                      {text => (
+                        <Button
+                          onClick={() => this.props.deleteUserProject(project.id)}
+                          label={text}
+                          mode="text"
+                          className="action-delete"
+                        />
+                      )}
+                    </FormattedMessage>
                     <FormattedMessage
                       id="Library.openAction"
                       defaultMessage="Open"
@@ -118,7 +151,12 @@ class Library extends React.Component {
             >
               {this.state.payedProjects.map(project => (
                 <div className="col-sm-3 project" key={project.id}>
-                  <div className="preview" style={{fontFamily: `project${project.id}`}}>AaBbCc</div>
+                  <div
+                    className="preview"
+                    style={{ fontFamily: `project${project.id}` }}
+                  >
+                    AaBbCc
+                  </div>
                   <div className="need">Text</div>
                   <div className="fontName">{project.name || "Undefined"}</div>
                   <div className="actions">
@@ -160,6 +198,7 @@ Library.propTypes = {
   goToHome: PropTypes.func.isRequired,
   loadProject: PropTypes.func.isRequired,
   download: PropTypes.func.isRequired,
+  deleteUserProject: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
   projects: state.user.projects
@@ -169,7 +208,8 @@ const mapDispatchToProps = dispatch =>
     {
       goToHome: () => push("/"),
       loadProject,
-      download
+      download,
+      deleteUserProject
     },
     dispatch
   );

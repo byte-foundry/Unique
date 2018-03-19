@@ -215,6 +215,16 @@ export const addProjectToUser = (userId, presetId, choicesMade, name, bought, ne
     }
 `;
 
+export const deleteProject = (projectId) => `
+    mutation{
+        deleteProject(
+            id:"${projectId}"
+        ) {
+            id
+        }
+    }
+`;
+
 export const updateProject = (projectId, choicesMade, name, bought) => `
     mutation{
         updateProject(

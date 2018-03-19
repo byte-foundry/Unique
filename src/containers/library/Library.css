@@ -76,5 +76,9 @@
   display: inline-block;
   float: right;
 }
+.Library .project .actions .action-delete{
+  display: inline-block;
+  float: left;
+}
 
 

@@ -84,7 +84,7 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
   importedPresets.forEach((preset, index) => {
     promiseArray.push(new Promise((resolve) => {
       dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
-        prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[templates[preset.template]]).then((createdFont) => {
+        prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[templates[preset.template]], true).then((createdFont) => {
           createdFont.changeParams(preset.baseValues);
           resolve(true);
           loadedPresetsName[index] = `${preset.preset}${preset.variant}`;

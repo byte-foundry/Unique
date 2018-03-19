@@ -15,7 +15,8 @@ import {
   sendFontToPrototypo,
   connectToGraphCool,
   getUserProjects,
-  updateProject
+  updateProject,
+  deleteProject,
 } from "../queries";
 import { setFontBought, updateSubset, loadLibrary } from "../font";
 import {
@@ -41,6 +42,7 @@ export const SWITCH_BLACK_ON_WHITE = "user/SWITCH_BLACK_ON_WHITE";
 export const SWITCH_GLYPH_MODE = "user/SWITCH_GLYPH_MODE";
 export const CHANGE_CHECKOUT_ORDER = "user/CHANGE_CHECKOUT_ORDER";
 export const RESET_CHECKOUT_OPTIONS = "user/RESET_CHECKOUT_OPTIONS";
+export const DELETE_PROJECT = "user/DELETE_PROJECT";
 export const LOGOUT = "user/LOGOUT";
 
 const initialState = {
@@ -120,6 +122,12 @@ export default (state = initialState, action) => {
         projects: action.projects,
         projectName: action.projectName
       };
+
+    case DELETE_PROJECT:
+      return {
+        ...state,
+        projects: action.projects,
+      }
 
     case STORE_PROJECTS:
       return {
@@ -253,6 +261,37 @@ export const storeProject = (fontName, bought = false) => (
   }
   // Else : user not logged in, adding the project to a "to be savec spot" that will be saved after email input
 };
+
+export const deleteUserProject = (projectID) => (
+  dispatch,
+  getState
+) => {
+  console.log("========DELETE PROJECT========");
+  const { graphqlID, projects } = getState().user;
+  let newProjects = [...projects]
+  if (graphqlID) {
+    request(GRAPHQL_API, getUserProjects(graphqlID))
+      .then(data => {
+        if (data.User.projects.find(project => project.id === projectID)) {
+          console.log("project found on database. deleting it");
+          request(
+            GRAPHQL_API,
+            deleteProject(projectID)
+          ).then(res => {
+            newProjects.splice(newProjects.findIndex(e => e.id = projectID), 1);
+            dispatch({
+              type: DELETE_PROJECT,
+              projects: newProjects,
+            });
+          });
+        } else {
+          console.log("project not found in user DB");
+        }
+      })
+      .catch(error => console.log(error));
+  }
+};
+
 
 export const updateProjectInfos = (projectID, projectName) => dispatch => {
   dispatch({
