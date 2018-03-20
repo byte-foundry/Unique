@@ -62,6 +62,28 @@ class SpecimenView extends React.Component {
                 description="Speciem view subtitle"
               />
             </p>
+            <p className="fontName">
+              <FormattedMessage
+                id="SpecimenView.nameActionLabel"
+                defaultMessage="Give your font a name:"
+                description="SpecimenView - Name action label"
+              />
+              <FormattedMessage
+                id="SpecimenView.nameAction"
+                defaultMessage="My font name"
+                description="SpecimenView - Name action"
+              >
+                {text => (
+                  <input
+                    type="text"
+                    value={this.state.fontName}
+                    placeholder={text}
+                    className="input-fontname"
+                    onChange={e => this.setState({ fontName: e.target.value })}
+                  />
+                )}
+              </FormattedMessage>
+            </p>
             <p className="subtitle-two">
               <FormattedMessage
                 id="SpecimenView.subtitleBack"
@@ -79,7 +101,7 @@ class SpecimenView extends React.Component {
                   <Button
                     className="button-download"
                     onClick={() => {
-                      this.props.goToCheckout();
+                      this.props.goToCheckout(this.state.fontName);
                     }}
                     mode="full"
                     label={text}
@@ -96,7 +118,7 @@ class SpecimenView extends React.Component {
                   <Button
                     className="button-save"
                     onClick={() => {
-                      this.props.storeProject();
+                      this.props.storeProject(this.state.fontName);
                     }}
                     mode="light"
                     label={text}
@@ -354,7 +376,7 @@ const mapDispatchToProps = dispatch =>
     {
       storeEmail,
       storeProject,
-      goToCheckout: () => push("/checkout")
+      goToCheckout: (fontName) => push({ pathname: '/checkout', fontName})
     },
     dispatch
   );

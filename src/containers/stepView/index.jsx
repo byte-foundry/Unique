@@ -367,8 +367,8 @@ class StepView extends React.Component {
                       >
                         {text => (
                           <Button
-                            className="hollow"
-                            mode="isConfigure"
+                            className="isConfigure"
+                            mode="text"
                             label={text}
                             onClick={() =>
                               this.markChoiceActive({
@@ -387,8 +387,8 @@ class StepView extends React.Component {
                       >
                         {text => (
                           <Button
-                            className="hollow"
-                            mode="isConfigure"
+                            className="isConfigure"
+                            mode="text"
                             label={text}
                             onClick={() =>
                               this.markChoiceActive({

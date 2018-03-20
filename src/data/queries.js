@@ -179,7 +179,7 @@ export const connectToGraphCool = accessToken => `
 `;
 
 
-export const addProjectToUser = (userId, presetId, choicesMade, name, bought, need) => `
+export const addProjectToUser = (userId, presetId, choicesMade, name, bought, need, checkoutOptions) => `
     mutation{
         createProject(
             userId:"${userId}",
@@ -188,6 +188,7 @@ export const addProjectToUser = (userId, presetId, choicesMade, name, bought, ne
             name: "${name}"
             bought: ${bought}
             need: "${need}"
+            checkoutPackage: ${JSON.stringify(checkoutOptions)}
         ) {
             id
             createdAt
@@ -198,6 +199,8 @@ export const addProjectToUser = (userId, presetId, choicesMade, name, bought, ne
                     name
                     choicesMade
                     bought
+                    need
+                    checkoutPackage
                     preset {
                         variant
                         template 
@@ -225,13 +228,14 @@ export const deleteProject = (projectId) => `
     }
 `;
 
-export const updateProject = (projectId, choicesMade, name, bought) => `
+export const updateProject = (projectId, choicesMade, name, bought, checkoutOptions) => `
     mutation{
         updateProject(
             id:"${projectId}"
             choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, "\\\"")}"
             name: "${name}"
             bought: ${bought}
+            checkoutPackage: ${JSON.stringify(checkoutOptions)}
         ) {
             id
             createdAt
@@ -242,6 +246,8 @@ export const updateProject = (projectId, choicesMade, name, bought) => `
                     name
                     choicesMade
                     bought
+                    need
+                    checkoutPackage
                     preset {
                         variant
                         template 
@@ -354,6 +360,7 @@ export const getUserProjects = graphQLID => `
                 name
                 choicesMade
                 bought
+                need
                 preset {
                     variant
                     template 

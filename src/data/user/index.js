@@ -61,7 +61,8 @@ const initialState = {
   isGlyphMode: false,
   chosenGlyph: DEFAULT_UI_GLYPH,
   checkoutOptions: [],
-  checkoutPrice: BASE_PACK_PRICE
+  checkoutPrice: BASE_PACK_PRICE,
+  userFontName: '',
 };
 
 export default (state = initialState, action) => {
@@ -179,7 +180,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         checkoutOptions: action.checkoutOptions,
-        checkoutPrice: action.checkoutPrice
+        checkoutPrice: action.checkoutPrice,
+        userFontName: action.fontName,
       };
 
     case RESET_CHECKOUT_OPTIONS:
@@ -198,9 +200,18 @@ export const storeProject = (fontName, bought = false) => (
   getState
 ) => {
   console.log("========STORE PROJECT========");
-  const { currentPreset, choicesMade } = getState().font;
+  const { currentPreset, choicesMade, need } = getState().font;
   console.log(choicesMade);
-  const { projectID, graphqlID } = getState().user;
+  const { projectID, graphqlID, checkoutOptions } = getState().user;
+  let filteredCheckoutOptions = [];
+  if (bought) {
+    checkoutOptions.forEach(option => {
+      if (option.selected) {
+        filteredCheckoutOptions.push(option.dbName)
+      }
+    })
+    console.log(filteredCheckoutOptions)
+  }
   if (graphqlID) {
     request(GRAPHQL_API, getUserProjects(graphqlID))
       .then(data => {
@@ -208,18 +219,18 @@ export const storeProject = (fontName, bought = false) => (
           console.log("project already found on database. updating it");
           request(
             GRAPHQL_API,
-            updateProject(projectID, choicesMade, fontName, bought)
+            updateProject(projectID, choicesMade, fontName, bought, filteredCheckoutOptions)
           ).then(res => {
             console.log(res);
             dispatch({
               type: STORE_PROJECT,
               projectID: res.updateProject.id,
               projects: res.updateProject.user.projects,
-              projectName: fontName
+              projectName: fontName,
             });
             dispatch(loadLibrary());
             dispatch(setStable());
-          });
+          });   
         } else {
           console.log("project not found, saving it on database");
           request(
@@ -229,7 +240,9 @@ export const storeProject = (fontName, bought = false) => (
               currentPreset.id,
               choicesMade,
               fontName,
-              bought
+              bought,
+              need,
+              filteredCheckoutOptions,
             )
           ).then(res => {
             const metadata = {
@@ -426,10 +439,11 @@ export const storeChosenGlyph = chosenGlyph => dispatch => {
 };
 
 export const afterPayment = res => (dispatch, getState) => {
+  const { userFontName } = getState().user;
   const { data } = res;
   const isPayed = data.paid;
   const userStripeEmail = data.source.metadata.name;
-  dispatch(storeEmail(userStripeEmail, undefined, isPayed));
+  dispatch(storeEmail(userStripeEmail, userFontName, isPayed));
 };
 
 export const exportFontToPrototypoWithAccount = (
@@ -469,7 +483,7 @@ export const exportFontToPrototypoWithAccount = (
   console.log("====================================");
 };
 
-export const updateCheckoutOptions = checkoutOptions => dispatch => {
+export const updateCheckoutOptions = (checkoutOptions, fontName) => dispatch => {
   let price = BASE_PACK_PRICE;
   checkoutOptions.forEach(option => {
     if (option.selected) {
@@ -479,7 +493,8 @@ export const updateCheckoutOptions = checkoutOptions => dispatch => {
   dispatch({
     type: CHANGE_CHECKOUT_ORDER,
     checkoutOptions: [...checkoutOptions],
-    checkoutPrice: price
+    checkoutPrice: price,
+    fontName
   });
 };
 

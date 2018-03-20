@@ -92,7 +92,7 @@ class Library extends React.Component {
                   >
                     AaBbCc
                   </div>
-                  <div className="need">Text</div>
+                  <div className="need">{project.need}</div>
                   <div className="fontName">{project.name || "Undefined"}</div>
                   <div className="actions">
                     <FormattedMessage
@@ -157,7 +157,7 @@ class Library extends React.Component {
                   >
                     AaBbCc
                   </div>
-                  <div className="need">Text</div>
+                  <div className="need">{project.need}</div>
                   <div className="fontName">{project.name || "Undefined"}</div>
                   <div className="actions">
                     <FormattedMessage
@@ -168,7 +168,7 @@ class Library extends React.Component {
                       {text => (
                         <Button
                           onClick={() =>
-                            this.props.download(`project${project.id}`)
+                            this.props.download(`project${project.id}`, project.name || "Undefined")
                           }
                           label={text}
                           mode="hollow"

@@ -568,13 +568,13 @@ export const finishEditing = choice => (dispatch, getState) => {
   dispatch(push("/specimen"));
 };
 
-export const download = (name) => (dispatch, getState) => {
+export const download = (name, filename) => (dispatch, getState) => {
   console.log("==========font/download============");
   const { fontName } = getState().font;
   const { fonts } = getState().createdFonts;
   fonts[name ? name : fontName].getArrayBuffer().then(data => {
     const blob = new Blob([data], { type: "application/x-font-opentype" });
-    saveAs(blob, `${fontName}.otf`);
+    saveAs(blob, `${filename}.otf`);
   });
 };
 

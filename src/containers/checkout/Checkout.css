@@ -26,7 +26,7 @@
   box-sizing: border-box;
   transition: border-color ease 0.15s;
   margin: 10px 10px -3px 0px;
-  user-select: none;
+  cursor: pointer;
 }
 .Checkout .checkout-options .option .check-box::before,
 .check-box::after {

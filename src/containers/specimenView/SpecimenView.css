@@ -26,7 +26,6 @@
   margin-left: 0;
 }
 
-
 .SpecimenView .buttons {
   margin-top: 100px;
 }
@@ -96,6 +95,33 @@
   color: #d0cdd6;
 }
 
+.SpecimenView .fontName {
+  color: #b8b5c0;
+  font-size: 20px;
+}
+
+.SpecimenView .input-fontname {
+  margin-left: 15px;
+  margin-top: 5px;
+  height: 30px;
+  width: auto;
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #d0cdd6;
+  color: #b8b5c0;
+  user-select: none;
+  padding: 5px 10px;
+}
+
+.SpecimenView .input-fontname::placeholder {
+  color: #d0cdd6;
+  font-size: 18px;
+}
+
+.SpecimenView .input-fontname:focus {
+  border: none;
+}
 
 
 .SpecimenView .export .hollow {

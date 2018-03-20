@@ -152,6 +152,11 @@
 	cursor: pointer;
 }
 
+.loaded .App-logo-wrapper svg  .letter-1.animate{
+	animation: none;
+}
+
+
 .loaded .App-logo-wrapper .logo-main {
   fill: #5320ee;
 }

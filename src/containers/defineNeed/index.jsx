@@ -98,6 +98,10 @@ class DefineNeed extends React.Component {
               this.state.selected === "text" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "text" })}
+            onDoubleClick={(e) => {
+              this.setState({ selected: "text" });
+              this.handleSubmit(e);
+            }}
           >
             <FormattedMessage
               id="DefineNeed.text"
@@ -129,6 +133,10 @@ class DefineNeed extends React.Component {
               this.state.selected === "website" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "website" })}
+            onDoubleClick={(e) => {
+              this.setState({ selected: "website" });
+              this.handleSubmit(e);
+            }}
           >
             <FormattedMessage
               id="DefineNeed.website"

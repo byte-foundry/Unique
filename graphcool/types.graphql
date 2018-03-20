@@ -64,6 +64,7 @@ type Project @model {
   need: String
   user: User @relation(name: "UserOnProject")
   name: String @defaultValue(value: "Untitled")
+  checkoutPackage: [String!] @defaultValue(value: [])
 }
 
 

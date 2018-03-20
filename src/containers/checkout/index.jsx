@@ -30,7 +30,8 @@ class Checkout extends React.Component {
           logo: <OtfLogo />,
           type: "logo",
           price: 0,
-          selected: true
+          selected: true,
+          dbName: 'baseFont',
         },
         {
           name: (
@@ -41,6 +42,7 @@ class Checkout extends React.Component {
             />
           ),
           logo: <SpecimenLogo />,
+          dbName: 'specimen',
           class: "specimen-logo",
           type: "logo",
           price: 0,
@@ -55,6 +57,7 @@ class Checkout extends React.Component {
             />
           ),
           class: "variant",
+          dbName: 'lightOption',
           type: "font",
           price: 5,
           selected: false
@@ -68,6 +71,7 @@ class Checkout extends React.Component {
             />
           ),
           class: "variant",
+          dbName: 'boldOption',
           type: "font",
           price: 5,
           selected: false
@@ -82,6 +86,7 @@ class Checkout extends React.Component {
           ),
           class: "variant",
           type: "font",
+          dbName: 'italicOption',
           price: 5,
           selected: false
         }
@@ -99,7 +104,7 @@ class Checkout extends React.Component {
       selectedIndex
     ].selected;
     this.setState({ selectedOptions });
-    this.props.updateCheckoutOptions(selectedOptions);
+    this.props.updateCheckoutOptions(selectedOptions, this.props.history.location.fontName);
   }
   render() {
     return (
@@ -140,6 +145,11 @@ class Checkout extends React.Component {
                   <label
                     htmlFor={`${checkoutOption.type}${index}`}
                     className="check-box"
+                    onClick={() => {
+                      if (index !== 0) {
+                        this.toggleChoice(checkoutOption.name);
+                      }
+                    }}
                   />
                   <p className="option-title">{checkoutOption.name}</p>
                 </div>

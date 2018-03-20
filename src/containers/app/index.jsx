@@ -159,7 +159,10 @@ class App extends React.Component {
           activeLetter + 1 === letters.length ? 0 : activeLetter + 1;
       }, 800);
     }
-    else clearInterval(interval);
+    else {
+      clearInterval(interval);
+      const logoOne = document.querySelectorAll(".letter-1");
+    };
     return (
       <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
         <main className={`App ${this.props.isLoading ? 'loading' : 'loaded'}`}>
