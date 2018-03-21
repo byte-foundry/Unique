@@ -61,6 +61,27 @@
   border: none;
 }
 
+.Button.social-google {
+  background-color: #db4733;
+  color: white;
+  font-size: 14px;
+  border-color: #db4733;
+}
+
+.Button.social-facebook {
+  background-color: #3b5998;
+  font-size: 14px;
+  color: white;
+  border-color: #3b5998;
+}
+
+.Button.social-twitter {
+  background-color: #00aced;
+  color: white;
+  font-size: 14px;
+  border-color: #00aced;
+}
+
 .Button.isBack img  {
   width: 30px;
   height: auto;

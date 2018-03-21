@@ -1,17 +1,17 @@
 // @flow
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Switch, Route, withRouter } from 'react-router-dom';
-import { push } from 'react-router-redux';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { request } from 'graphql-request';
-import { ShortcutManager } from 'react-shortcuts';
+import React from "react";
+import PropTypes from "prop-types";
+import { Switch, Route, withRouter } from "react-router-dom";
+import { push } from "react-router-redux";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { request } from "graphql-request";
+import { ShortcutManager } from "react-shortcuts";
 
-import { IntlProvider } from 'react-intl';
-import { addLocaleData } from 'react-intl';
-import locale_en from 'react-intl/locale-data/en';
-import locale_fr from 'react-intl/locale-data/fr';
+import { IntlProvider } from "react-intl";
+import { addLocaleData } from "react-intl";
+import locale_en from "react-intl/locale-data/en";
+import locale_fr from "react-intl/locale-data/fr";
 
 import messages_en from "../../data/intl/locale_en";
 import messages_fr from "../../data/intl/locale_fr";
@@ -28,24 +28,24 @@ import "./bootstrap-grid.css";
 import "./App.css";
 import { ReactComponent as Logo } from "./logo.svg";
 
-import ProtectedRoute from '../../components/protectedRoute/';
-import ShortcutsHelper from '../../components/shortcutsHelper';
+import ProtectedRoute from "../../components/protectedRoute/";
+import ShortcutsHelper from "../../components/shortcutsHelper";
 
-import DefineNeed from '../defineNeed/';
-import TemplateChoice from '../templateChoice/';
-import SpecimenView from '../specimenView/';
-import Checkout from '../checkout/';
-import Success from '../success/';
-import WelcomeBack from '../welcomeBack/';
-import Library from '../library/';
-import StepView from '../stepView/';
-import Sidebar from '../sidebar/';
+import DefineNeed from "../defineNeed/";
+import TemplateChoice from "../templateChoice/";
+import SpecimenView from "../specimenView/";
+import Checkout from "../checkout/";
+import WelcomeBack from "../welcomeBack/";
+import Library from "../library/";
+import StepView from "../stepView/";
+import Sidebar from "../sidebar/";
+import Authenticate from "../authenticate/";
 
 addLocaleData([...locale_en, ...locale_fr]);
 
 const messages = {
   fr: messages_fr,
-  en: messages_en,
+  en: messages_en
 };
 
 let interval;
@@ -57,8 +57,8 @@ class App extends React.Component {
     request(GRAPHQL_API, getAllPresets)
       .then(data => props.importPresets(data.allPresets))
       .catch(error => console.log(error));
-    if (props.userEmail !== '') {
-      Intercom('update', { email: props.userEmail });
+    if (props.userEmail !== "") {
+      Intercom("update", { email: props.userEmail });
     }
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.auth = new Auth();
@@ -79,22 +79,22 @@ class App extends React.Component {
   }
   hasSelectedFont() {
     if (
-      this.props.selectedFont !== '' &&
-      (this.props.pathname === '/customize' ||
-        this.props.pathname === '/specimen') &&
-      !(typeof this.props.selectedFontLoaded === 'object')
+      this.props.selectedFont !== "" &&
+      (this.props.pathname === "/customize" ||
+        this.props.pathname === "/specimen") &&
+      !(typeof this.props.selectedFontLoaded === "object")
     ) {
       this.props.reloadFonts();
       return true;
     }
-    return this.props.selectedFont !== '';
+    return this.props.selectedFont !== "";
   }
   hasSuccessfulPayment() {
     if (
       this.props.hasPayed === true &&
-      !(typeof this.props.selectedFontLoaded === 'object')
+      !(typeof this.props.selectedFontLoaded === "object")
     ) {
-      console.log('Payment successful but font not loaded');
+      console.log("Payment successful but font not loaded");
       this.props.reloadFonts();
       return true;
     }
@@ -103,18 +103,18 @@ class App extends React.Component {
   }
   hasMailRegistered() {
     if (
-      this.props.userEmail !== '' &&
-      !(typeof this.props.selectedFontLoaded === 'object')
+      this.props.userEmail !== "" &&
+      !(typeof this.props.selectedFontLoaded === "object")
     ) {
-      console.log('Mail registered but font not loaded');
+      console.log("Mail registered but font not loaded");
       this.props.reloadFonts();
       return true;
     }
-    console.log(`Mail registered: ${this.props.userEmail !== ''}`);
-    return this.props.userEmail !== '';
+    console.log(`Mail registered: ${this.props.userEmail !== ""}`);
+    return this.props.userEmail !== "";
   }
   isLoggedIn() {
-    return this.props.userId !== '';
+    return this.props.userId !== "";
   }
   handleAuthentication(nextState, replace) {
     if (/access_token|id_token|error/.test(nextState.location.hash)) {
@@ -122,22 +122,22 @@ class App extends React.Component {
     }
   }
   hasSelectedNeed() {
-    console.log('=========HAS SELECTED NEED ============');
+    console.log("=========HAS SELECTED NEED ============");
     console.log(this.props.hasPresetsLoaded);
     console.log(this.props.need);
     console.log(this.props.pathname);
-    console.log('========================================');
+    console.log("========================================");
     if (
-      this.props.need !== '' &&
-      this.props.pathname === '/select' &&
-      !(this.props.hasPresetsLoaded)
+      this.props.need !== "" &&
+      this.props.pathname === "/select" &&
+      !this.props.hasPresetsLoaded
     ) {
-      console.log('Has selected need but do not have presets loaded');
+      console.log("Has selected need but do not have presets loaded");
       this.props.reloadPresets();
       return true;
     }
-    console.log(`Need selected: ${this.props.need !== ''}`);
-    return this.props.need !== '';
+    console.log(`Need selected: ${this.props.need !== ""}`);
+    return this.props.need !== "";
   }
   render() {
     const { isAuthenticated } = this.auth;
@@ -145,7 +145,7 @@ class App extends React.Component {
       fr: "Français",
       en: "English"
     };
-    if (this.props.isLoading) {
+    if (this.props.isLoading && this.props.location.pathname !== '/auth') {
       // load animation
       clearInterval(interval);
       const letters = document.querySelectorAll(".letter");
@@ -158,26 +158,33 @@ class App extends React.Component {
         activeLetter =
           activeLetter + 1 === letters.length ? 0 : activeLetter + 1;
       }, 800);
-    }
-    else {
+    } else {
       clearInterval(interval);
-      const logoOne = document.querySelectorAll(".letter-1");
-    };
+    }
     return (
-      <IntlProvider locale={this.props.locale} messages={messages[this.props.locale]}>
-        <main className={`App ${this.props.isLoading ? 'loading' : 'loaded'}`}>
-          <header className="App-header">
-            <h1 className="App-logo-wrapper">
-              <Logo
-                onClick={() => {
-                  this.props.goToHome();
-                }}
-              />
-            </h1>
-          </header>
+      <IntlProvider
+        locale={this.props.locale}
+        messages={messages[this.props.locale]}
+      >
+        <main className={`App ${this.props.isLoading ? "loading" : "loaded"}`}>
+          {this.props.location.pathname !== "/auth" && (
+            <header className="App-header">
+              <h1 className="App-logo-wrapper">
+                <Logo
+                  onClick={() => {
+                    this.props.goToHome();
+                  }}
+                />
+              </h1>
+            </header>
+          )}
           <div className="App-content container-fluid">
             <div className="row">
-              <div className="left col-sm-10">
+              <div
+                className={`left col-sm-${
+                  this.props.location.pathname !== "/auth" ? "10" : "12"
+                }`}
+              >
                 <Switch>
                   <Route
                     exact
@@ -187,7 +194,7 @@ class App extends React.Component {
                   <Route exact path="/restart" component={WelcomeBack} />
                   <Route
                     path="/callback"
-                    render={(props) => {
+                    render={props => {
                       this.handleAuthentication(props);
                       return <div>loading</div>;
                     }}
@@ -226,36 +233,41 @@ class App extends React.Component {
                   />
                   <ProtectedRoute
                     exact
-                    requirement={() => this.hasSuccessfulPayment()}
-                    path="/success"
-                    component={Success}
-                  />
-                  <ProtectedRoute
-                    exact
                     requirement={() => true}
-                    path="/ptyposuccess"
-                    component={Success}
+                    path="/auth"
+                    component={Authenticate}
                   />
                 </Switch>
               </div>
-              <div
-                className={`right col-sm-2 ${
-                  this.props.isBlackOnWhite ||
-                  this.props.location.pathname !== '/customize'
-                    ? ''
-                    : 'whiteOnBlack'
-                }`}
-              >
-                <Sidebar
-                  pathName={this.props.location.pathname}
-                  isAuthenticated={this.auth.isAuthenticated}
-                  login={this.auth.login}
-                  mode={this.props.location.pathname === "/checkout" ? 'checkout' : 'default'}
-                  {...this.props}
-                />
-              </div>
+              {this.props.location.pathname !== "/auth" && (
+                <div
+                  className={`right col-sm-2 ${
+                    this.props.isBlackOnWhite ||
+                    this.props.location.pathname !== "/customize"
+                      ? ""
+                      : "whiteOnBlack"
+                  }`}
+                >
+                  <Sidebar
+                    pathName={this.props.location.pathname}
+                    isAuthenticated={this.auth.isAuthenticated}
+                    login={this.auth.login}
+                    mode={
+                      this.props.location.pathname === "/checkout"
+                        ? "checkout"
+                        : "default"
+                    }
+                    {...this.props}
+                  />
+                </div>
+              )}
             </div>
-            {this.props.location.pathname === "/customize" && (<ShortcutsHelper shouldShowTooltips={this.props.shouldShowTooltips} toggleTooltips={this.props.toggleTooltips}/>)}
+            {this.props.location.pathname === "/customize" && (
+              <ShortcutsHelper
+                shouldShowTooltips={this.props.shouldShowTooltips}
+                toggleTooltips={this.props.toggleTooltips}
+              />
+            )}
             <div className="language-select">
               <ul
                 className={`language-list ${
@@ -304,10 +316,10 @@ App.propTypes = {
   userEmail: PropTypes.string,
   hasPayed: PropTypes.bool.isRequired,
   selectedFontLoaded: PropTypes.shape({
-    fontName: PropTypes.string.isRequired,
+    fontName: PropTypes.string.isRequired
   }),
   hasPresetsLoaded: PropTypes.shape({
-    fontName: PropTypes.string.isRequired,
+    fontName: PropTypes.string.isRequired
   }),
   pathname: PropTypes.string.isRequired,
   need: PropTypes.string.isRequired,
@@ -324,20 +336,20 @@ App.propTypes = {
   setLocale: PropTypes.func.isRequired,
   toggleTooltips: PropTypes.func.isRequired,
   shouldShowTooltips: PropTypes.bool.isRequired,
-  userId: PropTypes.string,
+  userId: PropTypes.string
 };
 
 App.defaultProps = {
-  selectedFont: '',
+  selectedFont: "",
   selectedFontLoaded: undefined,
-  userEmail: '',
+  userEmail: "",
   hasPresetsLoaded: false,
-  locale: 'en',
-  userId: '',
+  locale: "en",
+  userId: ""
 };
 
 App.childContextTypes = {
-  shortcuts: PropTypes.object.isRequired,
+  shortcuts: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -356,7 +368,7 @@ const mapStateToProps = state => ({
   isBlackOnWhite: state.user.isBlackOnWhite,
   locale: state.ui.locale,
   shouldShowTooltips: state.ui.shouldShowTooltips,
-  userId: state.user.graphqlID,
+  userId: state.user.graphqlID
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -367,8 +379,8 @@ const mapDispatchToProps = dispatch =>
       setLocale,
       goToHome: () => push("/"),
       createPrototypoFactory,
-      toggleTooltips,
+      toggleTooltips
     },
-    dispatch,
+    dispatch
   );
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
