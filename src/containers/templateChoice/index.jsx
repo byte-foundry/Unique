@@ -115,9 +115,9 @@ class TemplateChoice extends React.Component {
                     }
                     selected={
                       this.state.templateIndex !== -1 &&
-                      `${this.props.presets[this.state.templateIndex].preset}${
-                        this.props.presets[this.state.templateIndex].variant
-                      }` === `${font.preset}${font.variant}`
+                      `${this.props.presets[this.state.templateIndex].variant.family.name}${
+                        this.props.presets[this.state.templateIndex].variant.name
+                      }` === `${font.variant.family.name}${font.variant.name}`
                     }
                     text={this.props.chosenWord}
                     mostSelected={isMostSelected(this.props.presets, font)}

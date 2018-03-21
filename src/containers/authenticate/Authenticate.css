@@ -135,3 +135,12 @@
   color: #5b26e6;
   text-decoration: none;
 }
+
+@keyframes animateLeft {
+    from {
+
+    }
+    to {
+        
+    }
+}

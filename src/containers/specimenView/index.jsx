@@ -363,7 +363,7 @@ class SpecimenView extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  fontName: state.font.currentPreset.preset + state.font.currentPreset.variant,
+  fontName: state.font.currentPreset.variant.family.name + state.font.currentPreset.variant.name,
   step: state.font.step,
   email: state.user.email,
   need: state.font.need,

@@ -62,7 +62,7 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 const mapStateToProps = state => ({
-  fontName: state.font.currentPreset.preset + state.font.currentPreset.variant,
+  fontName: state.font.currentPreset.variant.family.name + state.font.currentPreset.variant.name,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WordView);

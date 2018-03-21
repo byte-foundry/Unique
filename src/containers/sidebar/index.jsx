@@ -141,7 +141,7 @@ Sidebar.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  fontName: state.font.currentPreset.preset + state.font.currentPreset.variant,
+  fontName: state.font.currentPreset.variant.family.name + state.font.currentPreset.variant.name,
   steps: state.font.currentPreset.steps,
   step: state.font.step,
   choicesMade: state.font.choicesMade,

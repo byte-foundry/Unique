@@ -1,63 +1,14 @@
-export const storePreset = preset => `
-    mutation {
-        createPreset(
-            name: "${preset.name}"
-            preset: "${preset.preset}"
-            variant: "${preset.variant}"
-            template: "${preset.template}"
-            needs: [
-                { name: "text" }
-            ]
-            baseValues : "${JSON.stringify(preset.baseValues).replace(/"/g, "\\\"")}"
-            steps: [
-                ${preset.steps.map(step => `
-                    {
-                        name: "${step.name}"
-                        description: "${step.description}"
-                        choices:
-                        [  
-                            ${step.choices.map(choice => `
-                                {
-                                    name: "${choice.name}"
-                                    db: "${choice.db}"
-                                    values: "${JSON.stringify(choice.values).replace(/"/g, "\\\"")}"
-                                }
-                            `)}
-                        ]
-                    }
-                `)}
-            ]
-        ) { id }
-    }
-`;
-
 export const getAllPresets = `
-    query {allPresets {
-    id
-    preset
-    variant
-    template
-    selected
-    needs
-    baseValues
-    steps {
-        id
-        name
-        description
-        selected
-        choices {
-        id
-        name
-        values
-        selected
-        }
+    query {
+        getAllUniquePresets {
+            presets
+          }
     }
-    }}
 `;
 
-export const getPreset = id => `
+export const getUserProject = id => `
 {
-    Project(id: "${id}") {
+    UniqueProject(id: "${id}") {
       id
       choicesMade
       name
@@ -65,7 +16,12 @@ export const getPreset = id => `
       preset {
         id
         preset
-        variant
+        variant {
+            name
+            family {
+                name
+            }
+        }
         template
         selected
         needs
@@ -80,6 +36,7 @@ export const getPreset = id => `
             name
             values
             selected
+            fieldDifference
           }
         }
       }
@@ -107,7 +64,6 @@ export const updateSelectedCount = (type, id, count) => `
     }
 `;
 
-
 export const getSpecialChoiceSelectedCount = name => `
 {
     allChoices(filter: {name_contains: "${name}"}) {
@@ -117,7 +73,6 @@ export const getSpecialChoiceSelectedCount = name => `
   }
   
 `;
-
 
 export const getPresetExportedCount = id => `
     query {
@@ -150,15 +105,14 @@ export const findUser = email => `
     }
 `;
 
-
-export const createUser = (email) => `
+export const createUser = email => `
     mutation {
         createUser (
             email: "${email}"
         )
         {
             id
-            projects {
+            uniqueProjects {
                 id
                 name
             }
@@ -178,13 +132,20 @@ export const connectToGraphCool = accessToken => `
     }
 `;
 
-
-export const addProjectToUser = (userId, presetId, choicesMade, name, bought, need, checkoutOptions) => `
+export const addProjectToUser = (
+  userId,
+  presetId,
+  choicesMade,
+  name,
+  bought,
+  need,
+  checkoutOptions
+) => `
     mutation{
-        createProject(
+        createUniqueProject(
             userId:"${userId}",
             presetId: "${presetId}",
-            choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, "\\\"")}"
+            choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, '\\"')}"
             name: "${name}"
             bought: ${bought}
             need: "${need}"
@@ -194,7 +155,7 @@ export const addProjectToUser = (userId, presetId, choicesMade, name, bought, ne
             createdAt
             name
             user {
-                projects {
+                uniqueProjects {
                     id
                     name
                     choicesMade
@@ -218,9 +179,9 @@ export const addProjectToUser = (userId, presetId, choicesMade, name, bought, ne
     }
 `;
 
-export const deleteProject = (projectId) => `
+export const deleteProject = projectId => `
     mutation{
-        deleteProject(
+        deleteUniqueProject(
             id:"${projectId}"
         ) {
             id
@@ -228,11 +189,17 @@ export const deleteProject = (projectId) => `
     }
 `;
 
-export const updateProject = (projectId, choicesMade, name, bought, checkoutOptions) => `
+export const updateProject = (
+  projectId,
+  choicesMade,
+  name,
+  bought,
+  checkoutOptions
+) => `
     mutation{
-        updateProject(
+        updateUniqueProject(
             id:"${projectId}"
-            choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, "\\\"")}"
+            choicesMade: "${JSON.stringify(choicesMade).replace(/"/g, '\\"')}"
             name: "${name}"
             bought: ${bought}
             checkoutPackage: ${JSON.stringify(checkoutOptions)}
@@ -241,7 +208,7 @@ export const updateProject = (projectId, choicesMade, name, bought, checkoutOpti
             createdAt
             name
             user {
-                projects {
+                uniqueProjects {
                     id
                     name
                     choicesMade
@@ -267,7 +234,7 @@ export const updateProject = (projectId, choicesMade, name, bought, checkoutOpti
 
 export const getBoughtProjects = userId => `
     query {
-        allProjects(
+        allUniqueProjects(
             filter: {
                 bought: false,
                 user: {
@@ -284,21 +251,11 @@ export const getBoughtProjects = userId => `
 
 export const updateProjectBought = projectId => `
     mutation {
-        updateProject (
+        updateUniqueProject (
             id: "${projectId}"
             bought: true
         )
         {
-            id
-        }
-    }
-`;
-
-export const getPrototypoUser = userEmail => `
-    query {
-        User (
-            email: "${userEmail}"
-        ) {
             id
         }
     }
@@ -330,32 +287,13 @@ mutation {
 }
 `;
 
-export const sendFontToPrototypo = (prototypoUserId, familyName, template, variantName, values) => `
-    mutation {
-        createFamily(
-            ownerId:"${prototypoUserId}"
-            name:"${familyName}"
-            template:"${template}"
-            variants: [
-                {
-                    name: "${variantName}"
-                    values: "${JSON.stringify(values).replace(/"/g, "\\\"")}"
-                }    
-            ]
-    )
-    {
-        id
-    }
-}
-`;
-
 export const getUserProjects = graphQLID => `
     query {
         User(
             id: "${graphQLID}"
         )
         {
-            projects(orderBy: createdAt_ASC) {
+            uniqueProjects(orderBy: createdAt_ASC) {
                 id
                 name
                 choicesMade

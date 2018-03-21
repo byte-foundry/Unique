@@ -21,7 +21,7 @@ import {
   getSelectedCount,
   updateSelectedCount,
   getSpecialChoiceSelectedCount,
-  getPreset,
+  getUserProject,
   getUserProjects
 } from "../queries";
 
@@ -54,11 +54,11 @@ const initialState = {
 };
 
 const templates = {
-  elzevir: "ELZEVIR",
-  venus: "GROTESK",
-  "john-fell": "FELL",
-  gfnt: "SPECTRAL",
-  antique: "ANTIQUE"
+  'elzevir.ptf': 'ELZEVIR',
+  'venus.ptf': 'GROTESK',
+  'john-fell.ptf': 'FELL',
+  'gfnt.ptf': 'SPECTRAL',
+  'antique.ptf': 'ANTIQUE',
 };
 
 export default (state = initialState, action) => {
@@ -153,7 +153,9 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     type: SELECT_FONT_REQUESTED,
     selectedFont
   });
-  const selectedFontName = `${selectedFont.preset}${selectedFont.variant}`;
+  console.log(selectedFont)
+  const selectedFontName = `${selectedFont.variant.family.name}${selectedFont.variant.name}`;
+  console.log(selectedFontName)
 
   //* *********  PREPARE FONT ***********/
 
@@ -538,7 +540,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
   }
 
   // Tracking : update selected count
-  if (choice.name === "Custom" || choice.name === "No choice") {
+  if (choice.name === "Custom" || choice.name === "No choice" || choice.name === "Default") {
     request(GRAPHQL_API, getSpecialChoiceSelectedCount(choice.name))
       .then(data =>
         request(
@@ -623,19 +625,19 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
     dispatch(setUnstable());
     // fetch preset and project infos
     console.log("===========Loading preset infos ============");
-    request(GRAPHQL_API, getPreset(loadedProjectID))
+    request(GRAPHQL_API, getUserProject(loadedProjectID))
       .then(data => {
-        console.log(data.Project);
-        const baseValues = data.Project.preset.baseValues;
-        const currentPreset = data.Project.preset;
+        console.log(data.UniqueProject);
+        const baseValues = data.UniqueProject.preset.baseValues;
+        const currentPreset = data.UniqueProject.variant.family.name;
         console.log(currentPreset);
         const step = currentPreset.steps.length;
         const currentParams = {};
-        data.Project.choicesMade.forEach((choice, index) => {
+        data.UniqueProject.choicesMade.forEach((choice, index) => {
           if (choice !== null) {
             Object.keys(choice).forEach(key => {
               if (key !== "name") {
-                currentParams[key] = data.Project.choicesMade[index][key];
+                currentParams[key] = data.UniqueProject.choicesMade[index][key];
               }
             });
           }
@@ -646,7 +648,7 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
           currentParams,
           baseValues,
           step,
-          bought: data.Project.bought
+          bought: data.UniqueProject.bought
         });
         dispatch(updateProjectInfos(loadedProjectID, loadedProjectName));
         dispatch(reloadFonts(false));
@@ -664,12 +666,12 @@ export const loadLibrary = () => (dispatch, getState) => {
     dispatch(setUnstable());
     request(GRAPHQL_API, getUserProjects(graphqlID))
       .then(data => {
-        const { projects } = data.User;
+        const { uniqueProjects } = data.User;
         console.log(data)
         // Create fonts
         const promiseArray = [];
         dispatch(createPrototypoFactory()).then(prototypoFontFactory => {
-          projects.map(project => {
+          uniqueProjects.map(project => {
             promiseArray.push(
               new Promise(resolve => {
                 prototypoFontFactory
@@ -691,7 +693,7 @@ export const loadLibrary = () => (dispatch, getState) => {
         Promise.all(promiseArray).then(() => {
           dispatch({
             type: STORE_PROJECTS,
-            projects,
+            projects: uniqueProjects,
           });
           dispatch(setStable());
           dispatch(push("/library"));

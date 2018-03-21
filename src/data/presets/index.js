@@ -15,11 +15,11 @@ const initialState = {
 };
 
 const templates = {
-  elzevir: 'ELZEVIR',
-  venus: 'GROTESK',
-  'john-fell': 'FELL',
-  gfnt: 'SPECTRAL',
-  antique: 'ANTIQUE',
+  'elzevir.ptf': 'ELZEVIR',
+  'venus.ptf': 'GROTESK',
+  'john-fell.ptf': 'FELL',
+  'gfnt.ptf': 'SPECTRAL',
+  'antique.ptf': 'ANTIQUE',
 };
 
 export default (state = initialState, action) => {
@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
     case IMPORT_PRESETS:
       return {
         ...state,
-        importedPresets: action.presetsArray,
+        importedPresets: action.importedPresets,
         isLoading: false,
       };
 
@@ -56,16 +56,14 @@ export default (state = initialState, action) => {
 
 
 export const importPresets = presets => (dispatch) => {
+  console.log('-- ImportPresets');
   dispatch({
     type: IMPORT_PRESETS_REQUESTED,
   });
-  const presetsArray = [];
-  Object.keys(presets).forEach((key) => {
-    presetsArray.push(presets[key]);
-  });
+  console.log(presets);
   dispatch({
     type: IMPORT_PRESETS,
-    presetsArray,
+    importedPresets: presets,
   });
 };
 
@@ -84,11 +82,11 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
   importedPresets.forEach((preset, index) => {
     promiseArray.push(new Promise((resolve) => {
       dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
-        prototypoFontFactory.createFont(`${preset.preset}${preset.variant}`, templateNames[templates[preset.template]], true).then((createdFont) => {
+        prototypoFontFactory.createFont(`${preset.variant.family.name}${preset.variant.name}`, templateNames[templates[preset.template]], true).then((createdFont) => {
           createdFont.changeParams(preset.baseValues);
           resolve(true);
-          loadedPresetsName[index] = `${preset.preset}${preset.variant}`;
-          dispatch(storeCreatedFont(createdFont, `${preset.preset}${preset.variant}`));
+          loadedPresetsName[index] = `${preset.variant.family.name}${preset.variant.name}`;
+          dispatch(storeCreatedFont(createdFont, `${preset.variant.family.name}${preset.variant.name}`));
         });
       });
     }));

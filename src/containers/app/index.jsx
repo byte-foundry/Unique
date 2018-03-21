@@ -55,7 +55,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     request(GRAPHQL_API, getAllPresets)
-      .then(data => props.importPresets(data.allPresets))
+      .then(data => props.importPresets(data.getAllUniquePresets.presets))
       .catch(error => console.log(error));
     if (props.userEmail !== "") {
       Intercom("update", { email: props.userEmail });
@@ -78,6 +78,10 @@ class App extends React.Component {
     if (newProps.shouldLogout) this.auth.logout();
   }
   hasSelectedFont() {
+    console.log("=========HAS SELECTED FONT ============");
+    console.log(this.props.selectedFontLoaded);
+    console.log(this.props.selectedFont)
+    console.log("========================================");
     if (
       this.props.selectedFont !== "" &&
       (this.props.pathname === "/customize" ||
@@ -354,7 +358,7 @@ App.childContextTypes = {
 
 const mapStateToProps = state => ({
   pathname: state.routing.location.pathname,
-  selectedFont: state.font.currentPreset.preset,
+  selectedFont: state.font.currentPreset.variant.family.name,
   selectedFontLoaded: state.createdFonts.fonts[state.font.fontName],
   userEmail: state.user.email,
   hasPayed: state.user.hasPayed,

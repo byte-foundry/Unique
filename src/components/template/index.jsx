@@ -7,14 +7,14 @@ class Template extends React.Component {
   render() {
     return (
       <div
-        key={`preset${this.props.font.preset}${this.props.font.variant}`}
+        key={`preset${this.props.font.variant.family.name}${this.props.font.variant.name}`}
         className={`Template ${this.props.selected ? "selected" : ""} col-sm-12 col-md-11 col-lg-10`}
         onClick={this.props.onClick}
         onDoubleClick={this.props.onDoubleClick}
-        style={{ fontFamily: `'${this.props.font.preset}${this.props.font.variant}'` }}
+        style={{ fontFamily: `'${this.props.font.variant.family.name}${this.props.font.variant.name}'` }}
       >
         {this.props.text}
-        <p className="templateName">{this.props.font.preset}</p>
+        <p className="templateName">{this.props.font.variant.family.name}</p>
       </div>
     );
   }
