@@ -222,16 +222,16 @@ export const storeProject = (fontName, bought = false) => (
           data.user.uniqueProjects.find(project => project.id === projectID)
         ) {
           console.log("project already found on database. updating it");
-          request(
-            GRAPHQL_API,
-            updateProject(
-              projectID,
-              choicesMade,
-              fontName,
-              bought,
-              filteredCheckoutOptions
+          client
+            .request(
+              updateProject(
+                projectID,
+                choicesMade,
+                fontName,
+                bought,
+                filteredCheckoutOptions
+              )
             )
-          )
             .then(res => {
               console.log(res);
               dispatch({
