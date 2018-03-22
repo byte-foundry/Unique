@@ -302,6 +302,9 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     if (choicesMade.length < selectedFont.steps.length) {
       dispatch(push("/customize"));
     }
+    else {
+      dispatch(push("/specimen"))
+    }
   });
 };
 
