@@ -15,7 +15,6 @@ export const getUserProject = id => `
       bought
       preset {
         id
-        preset
         variant {
             name
             family {

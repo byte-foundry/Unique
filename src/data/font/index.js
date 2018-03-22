@@ -137,7 +137,8 @@ export default (state = initialState, action) => {
         currentParams: action.currentParams,
         baseValues: action.baseValues,
         step: action.step,
-        alreadyBought: action.bought
+        alreadyBought: action.bought,
+        choicesMade: action.choicesMade,
       };
     default:
       return state;
@@ -295,15 +296,14 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     });
     dispatch(setStable());
     if (step && choicesMade[step]) {
-      dispatch(goToStep(step + 1, true));
+      dispatch(goToStep(step + 1));
     } else {
-      dispatch(goToStep(step || 1, true));
+      dispatch(goToStep(step || 1));
     }
     if (choicesMade.length < selectedFont.steps.length) {
       dispatch(push("/customize"));
-    }
-    else {
-      dispatch(push("/specimen"))
+    } else {
+      dispatch(push("/specimen"));
     }
   });
 };
@@ -339,8 +339,8 @@ export const updateSubset = () => (dispatch, getState) => {
 const updateValues = (step, isSpecimen) => (dispatch, getState) => {
   const { chosenWord, chosenGlyph } = getState().user;
   console.log("========font/updateValues===========");
-  console.log("is Specimen ?")
-  console.log(isSpecimen)
+  console.log("is Specimen ?");
+  console.log(isSpecimen);
   const {
     choicesFontsName,
     currentPreset,
@@ -460,10 +460,8 @@ export const clearFontIsLoading = () => dispatch => {
   });
 };
 
-export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
+export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
   console.log("==========font/goToStep============");
-  console.log("is Specimen ?")
-  console.log(isSpecimen)
   console.log(step);
   const { currentPreset } = getState().font;
   const previousStep = getState().font.step;
@@ -483,11 +481,12 @@ export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
       dispatch(push("/specimen"));
       break;
     default:
-      dispatch(updateValues(step, isSpecimen));
+      dispatch(updateValues(step, step === currentPreset.steps.length));
       dispatch({
         type: CHANGE_STEP,
         step: step || previousStep
       });
+      if (fromSpecimen) dispatch(push("/customize"));
       break;
   }
 };
@@ -663,7 +662,7 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
   getState
 ) => {
   console.log("==========font/loadProject============");
-  const { projectID } = getState().user;
+  const { projectID, graphQLToken } = getState().user;
   console.log("> Loading project");
   console.log(projectID);
   console.log(loadedProjectID);
@@ -674,11 +673,17 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
     dispatch(setUnstable());
     // fetch preset and project infos
     console.log("===========Loading preset infos ============");
-    request(GRAPHQL_API, getUserProject(loadedProjectID))
+    const client = new GraphQLClient(GRAPHQL_API, {
+      headers: {
+        Authorization: `Bearer ${graphQLToken}`
+      }
+    });
+    client
+      .request(getUserProject(loadedProjectID))
       .then(data => {
         console.log(data.UniqueProject);
         const baseValues = data.UniqueProject.preset.baseValues;
-        const currentPreset = data.UniqueProject.variant.family.name;
+        const currentPreset = data.UniqueProject.preset;
         console.log(currentPreset);
         const step = currentPreset.steps.length;
         const currentParams = {};
@@ -697,6 +702,7 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
           currentParams,
           baseValues,
           step,
+          choicesMade: data.UniqueProject.choicesMade,
           bought: data.UniqueProject.bought
         });
         dispatch(updateProjectInfos(loadedProjectID, loadedProjectName));
