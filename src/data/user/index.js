@@ -308,7 +308,6 @@ export const deleteUserProject = projectID => (dispatch, getState) => {
     client
       .request(getUserProjects(graphqlID))
       .then(data => {
-        console.log(data)
         if (
           data.user.uniqueProjects.find(project => project.id === projectID)
         ) {
@@ -515,7 +514,7 @@ export const loginToGraphCool = (accessToken, authData) => dispatch => {
       });
       /* global Intercom*/
       Intercom("update", { email: res.user.email });
-      if (authData && authData.type) {
+      if (authData && Object.keys(authData).length > 1) {
         dispatch(
           authData.callback(authData.fontName, authData.type === "boughtFont")
         );
