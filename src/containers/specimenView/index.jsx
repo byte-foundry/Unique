@@ -8,7 +8,7 @@ import { push } from "react-router-redux";
 import { FormattedMessage } from "react-intl";
 import "./SpecimenView.css";
 import Button from "../../components/button/";
-import { storeEmail, storeProject } from "../../data/user";
+import { storeProject } from "../../data/user";
 import desktopBackground from "./desktop.svg";
 import tabletBackground from "./tablet.svg";
 import mobileBackground from "./mobile.svg";
@@ -118,7 +118,11 @@ class SpecimenView extends React.Component {
                   <Button
                     className="button-save"
                     onClick={() => {
-                      this.props.storeProject(this.state.fontName);
+                      if (this.props.isAuthenticated) {
+                        this.props.storeProject(this.state.fontName);
+                      } else {
+                        this.props.authenticate(this.props.storeProject, this.state.fontName)
+                      }
                     }}
                     mode="light"
                     label={text}
@@ -363,26 +367,32 @@ class SpecimenView extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  fontName: state.font.currentPreset.variant.family.name + state.font.currentPreset.variant.name,
+  fontName:
+    state.font.currentPreset.variant.family.name +
+    state.font.currentPreset.variant.name,
   step: state.font.step,
   email: state.user.email,
   need: state.font.need,
   word: state.user.chosenWord,
-  projectName: state.user.projectName
+  projectName: state.user.projectName,
+  isAuthenticated: typeof state.user.graphqlID === "string",
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      storeEmail,
       storeProject,
-      goToCheckout: (fontName) => push({ pathname: '/checkout', fontName})
+      goToCheckout: fontName => push({ pathname: "/checkout", fontName }),
+      authenticate: (callback, fontName) =>
+        push({
+          pathname: "/auth",
+          authData: { callback, fontName, type: "saveFont" }
+        })
     },
     dispatch
   );
 
 SpecimenView.propTypes = {
-  storeEmail: PropTypes.func.isRequired,
   storeProject: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
   fontName: PropTypes.string,
@@ -394,7 +404,9 @@ SpecimenView.propTypes = {
     login: PropTypes.func.isRequired
   }).isRequired,
   projectName: PropTypes.string,
-  goToCheckout: PropTypes.func.isRequired
+  goToCheckout: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  authenticate: PropTypes.func.isRequired,
 };
 
 SpecimenView.defaultProps = {

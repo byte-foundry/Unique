@@ -9,11 +9,11 @@
 .Authenticate .container {
   background: white;
   position: relative;
-  height: 100%;
+  height: auto;
 }
 
 .Authenticate .row {
-  height: 100%;
+  height: auto
 }
 
 .Authenticate .closeIcon {
@@ -31,7 +31,7 @@
   position: relative;
   background-image: linear-gradient(#5f1ffc, #5f1ffc),
     linear-gradient(218deg, #5320ee, #5d28e2 68%, #622bdd);
-  height: 100%;
+  height: auto;
 }
 
 .Authenticate .left svg {
@@ -55,7 +55,7 @@
 }
 
 .Authenticate .right {
-  height: 100%;
+  height: auto;
   padding-top: 50px;
   padding-bottom: 50px;
   padding-left: 50px;

@@ -118,8 +118,7 @@
 .App .language-select .language-active {
 	cursor: pointer;
 	color: #b8b5c0;
-	text-decoration: underline;
-	background: black;
+	text-decoration: underline;	
 	padding: 6px 10px;
 	padding-right: 20px;
 	user-select: none;

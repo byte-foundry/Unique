@@ -125,7 +125,12 @@ export const addProjectToUser = (
                     need
                     checkoutPackage
                     preset {
-                        variant
+                        variant {
+                            name
+                            family {
+                                name
+                            }
+                        }
                         template 
                         baseValues                    
                     }
@@ -178,7 +183,12 @@ export const updateProject = (
                     need
                     checkoutPackage
                     preset {
-                        variant
+                        variant {
+                            name
+                            family {
+                                name
+                            }
+                        }
                         template 
                         baseValues                    
                     }
@@ -230,7 +240,6 @@ export const authenticateUser = (email, password) => `
             password:"${password}"
         )
         {
-            id
             token
         }
     }
@@ -242,7 +251,6 @@ export const authenticateFacebookUser = (token) => `
             facebookToken:"${token}"
         )
         {
-            id
             token
         }
     }
@@ -255,7 +263,6 @@ export const authenticateTwitterUser = (token, verifier) => `
             oAuthVerifier: "${verifier}"
         )
         {
-            id
             token
         }
     }
@@ -268,7 +275,6 @@ export const authenticateGoogleUser = (token) => `
             googleToken:"${token}"
         )
         {
-            id
             token
         }
     }
@@ -290,10 +296,9 @@ mutation {
 
 export const getUserProjects = graphQLID => `
     query {
-        User(
-            id: "${graphQLID}"
-        )
+        user
         {   
+            id
             email
             uniqueProjects(orderBy: createdAt_ASC) {
                 id

@@ -92,7 +92,7 @@ class Checkout extends React.Component {
         }
       ],
     };
-    this.props.updateCheckoutOptions(this.state.selectedOptions);
+    this.props.updateCheckoutOptions(this.state.selectedOptions, this.props.history.location.fontName);
     this.toggleChoice = this.toggleChoice.bind(this);
   }
   toggleChoice(name) {
@@ -105,6 +105,9 @@ class Checkout extends React.Component {
     ].selected;
     this.setState({ selectedOptions });
     this.props.updateCheckoutOptions(selectedOptions, this.props.history.location.fontName);
+  }
+  componentWillMount() {
+    this.props.updateCheckoutOptions(this.state.selectedOptions, this.props.history.location.fontName);
   }
   render() {
     return (

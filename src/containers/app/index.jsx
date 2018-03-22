@@ -19,6 +19,7 @@ import keymap from "../../data/keymap";
 import { createPrototypoFactory } from "../../data/createdFonts";
 import { importPresets, reloadPresets } from "../../data/presets";
 import { reloadFonts } from "../../data/font";
+import { logout } from "../../data/user";
 import { setLocale, toggleTooltips } from "../../data/ui";
 import { GRAPHQL_API } from "../../data/constants";
 import { getAllPresets } from "../../data/queries";
@@ -73,12 +74,12 @@ class App extends React.Component {
     return { shortcuts: this.shortcutManager };
   }
   componentWillReceiveProps(newProps) {
-    if (newProps.shouldLogout) this.auth.logout();
+    if (newProps.shouldLogout) this.props.logout();
   }
   hasSelectedFont() {
     console.log("=========HAS SELECTED FONT ============");
     console.log(this.props.selectedFontLoaded);
-    console.log(this.props.selectedFont)
+    console.log(this.props.selectedFont);
     console.log("========================================");
     if (
       this.props.selectedFont !== "" &&
@@ -146,7 +147,7 @@ class App extends React.Component {
       fr: "Français",
       en: "English"
     };
-    if (this.props.isLoading && this.props.location.pathname !== '/auth') {
+    if (this.props.isLoading && this.props.location.pathname !== "/auth") {
       // load animation
       clearInterval(interval);
       const letters = document.querySelectorAll(".letter");
@@ -294,6 +295,10 @@ class App extends React.Component {
               </ul>
               <span
                 className="language-active"
+                style={{
+                  backgroundColor:
+                    this.props.location.pathname === "/auth" ? "black" : "white"
+                }}
                 onClick={() => {
                   this.setState({
                     isLanguageMenuOpen: !this.state.isLanguageMenuOpen
@@ -338,6 +343,7 @@ App.propTypes = {
   shouldShowTooltips: PropTypes.bool.isRequired,
   userId: PropTypes.string,
   isAuthenticated: PropTypes.bool,
+  logout: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
@@ -356,7 +362,9 @@ App.childContextTypes = {
 
 const mapStateToProps = state => ({
   pathname: state.routing.location.pathname,
-  selectedFont: state.font.currentPreset.variant && state.font.currentPreset.variant.family.name,
+  selectedFont:
+    state.font.currentPreset.variant &&
+    state.font.currentPreset.variant.family.name,
   selectedFontLoaded: state.createdFonts.fonts[state.font.fontName],
   userEmail: state.user.email,
   hasPayed: state.user.hasPayed,
@@ -366,7 +374,7 @@ const mapStateToProps = state => ({
   isLoading: state.ui.unstable || state.createdFonts.isPrototypoLoading,
   shouldLogout: state.user.shouldLogout,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
-  isAuthenticated: typeof(state.user.graphqlID) === 'string',
+  isAuthenticated: typeof state.user.graphqlID === "string",
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isBlackOnWhite: state.user.isBlackOnWhite,
   locale: state.ui.locale,
@@ -382,7 +390,8 @@ const mapDispatchToProps = dispatch =>
       setLocale,
       goToHome: () => push("/"),
       createPrototypoFactory,
-      toggleTooltips
+      toggleTooltips,
+      logout
     },
     dispatch
   );

@@ -59,20 +59,43 @@ class Authenticate extends React.Component {
     this.hidePassword = this.hidePassword.bind(this);
     this.loginEmailUser = this.loginEmailUser.bind(this);
     this.signupEmailUser = this.signupEmailUser.bind(this);
+    this.loginGoogle = this.loginGoogle.bind(this);
+    this.loginFacebook = this.loginFacebook.bind(this);
+    this.loginTwitter = this.loginTwitter.bind(this);
   }
   loginEmailUser() {
-    this.props.loginWithEmail(
-      this.state.formValues.email,
-      this.state.formValues.password
-    );
+    //todo : loading, errors
+    if (this.props.location.authData && this.props.location.authData.type) {
+      this.props.loginWithEmail(
+        this.state.formValues.email,
+        this.state.formValues.password,
+        this.props.location.authData
+      );
+    } else {
+      this.props.loginWithEmail(
+        this.state.formValues.email,
+        this.state.formValues.password
+      );
+    }
   }
   signupEmailUser() {
-    this.props.signupWithEmail(
-      this.state.formValues.email,
-      this.state.formValues.password,
-      this.state.formValues.firstName,
-      this.state.formValues.lastName
-    );
+    //todo : loading, errors
+    if (this.props.location.authData && this.props.location.authData.type) {
+      this.props.signupWithEmail(
+        this.state.formValues.email,
+        this.state.formValues.password,
+        this.state.formValues.firstName,
+        this.state.formValues.lastName,
+        this.props.location.authData
+      );
+    } else {
+      this.props.signupWithEmail(
+        this.state.formValues.email,
+        this.state.formValues.password,
+        this.state.formValues.firstName,
+        this.state.formValues.lastName
+      );
+    }
   }
   showPassword() {
     if (!this.state.shouldShowPassword)
@@ -81,6 +104,33 @@ class Authenticate extends React.Component {
   hidePassword() {
     if (this.state.shouldShowPassword)
       this.setState({ shouldShowPassword: false });
+  }
+  loginFacebook(response) {
+    if (this.props.location.authData && this.props.location.authData.type !== "") {
+      this.props.loginWithFacebook(response, this.props.location.authData);
+    } else {
+      this.props.loginWithFacebook(response);
+    }
+  }
+  loginGoogle(response) {
+    //todo : loading, errors
+    console.log('login with google')
+    console.log(this.props.location)
+    console.log(this.props.location.authData && this.props.location.authData.type !== "")
+    if (this.props.location.authData && this.props.location.authData.type !== "") {
+      this.props.loginWithGoogle(response, this.props.location.authData);
+      console.log('with authdata')
+    } else {
+      this.props.loginWithGoogle(response);
+    }
+  }
+  loginTwitter(response) {
+    //todo : loading, errors
+    if (this.props.location.authData && this.props.location.authData.type !== "") {
+      this.props.loginWithTwitter(response, this.props.location.authData);
+    } else {
+      this.props.loginWithTwitter(response);
+    }
   }
   renderSignIn() {
     return (
@@ -309,15 +359,26 @@ class Authenticate extends React.Component {
                   description="Sign in header message"
                 />
               </h2>
-              {this.props.hasBoughtFont && (
-                <p>
-                  <FormattedMessage
-                    id="Auth.HasBoughtFontMessage"
-                    defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- You will recieve an email with all the details... ---"
-                    description="Sign in header message if the user has bought a font"
-                  />
-                </p>
-              )}
+              {this.props.location.authData &&
+                this.props.location.authData.type === "saveFont" && (
+                  <p>
+                    <FormattedMessage
+                      id="Auth.SaveFontMessage"
+                      defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                      description="Sign in header message if the user has saved a font"
+                    />
+                  </p>
+                )}
+              {this.props.location.authData &&
+                this.props.location.authData.type === "boughtFont" && (
+                  <p>
+                    <FormattedMessage
+                      id="Auth.BoughtFontMessage"
+                      defaultMessage="Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                      description="Sign in header message if the user has bought a font"
+                    />
+                  </p>
+                )}
             </div>
           );
         } else {
@@ -330,15 +391,26 @@ class Authenticate extends React.Component {
                   description="Sign up header message"
                 />
               </h2>
-              {this.props.hasBoughtFont && (
-                <p>
-                  <FormattedMessage
-                    id="Auth.HasBoughtFontMessage"
-                    defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- You will recieve an email with all the details... ---"
-                    description="Sign in header message if the user has bought a font"
-                  />
-                </p>
-              )}
+              {this.props.location.authData &&
+                this.props.location.authData.type === "saveFont" && (
+                  <p>
+                    <FormattedMessage
+                      id="Auth.SaveFontMessage"
+                      defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                      description="Sign in header message if the user has saved a font"
+                    />
+                  </p>
+                )}
+              {this.props.location.authData &&
+                this.props.location.authData.type === "boughtFont" && (
+                  <p>
+                    <FormattedMessage
+                      id="Auth.BoughtFontMessage"
+                      defaultMessage="Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                      description="Sign in header message if the user has bought a font"
+                    />
+                  </p>
+                )}
             </div>
           );
         }
@@ -346,6 +418,7 @@ class Authenticate extends React.Component {
     }
   }
   render() {
+    console.log(this.props);
     return (
       <div className="Authenticate">
         <div className="container">
@@ -374,7 +447,7 @@ class Authenticate extends React.Component {
                   appId={FACEBOOK_APP_ID}
                   autoLoad={false}
                   fields="name,email"
-                  callback={this.props.loginWithFacebook}
+                  callback={this.loginFacebook}
                   render={renderProps => (
                     <Button
                       label="Facebook"
@@ -384,7 +457,7 @@ class Authenticate extends React.Component {
                   )}
                 />
                 <TwitterLogin
-                  callback={this.props.loginWithTwitter}
+                  callback={this.loginTwitter}
                   requestTokenUrl={TWITTER_REQUEST_TOKEN_URL}
                   render={renderProps => (
                     <Button
@@ -397,8 +470,8 @@ class Authenticate extends React.Component {
                 <GoogleLogin
                   clientId={GOOGLE_CLIENT_ID}
                   buttonText="Login"
-                  onSuccess={this.props.loginWithGoogle}
-                  onFailure={this.props.loginWithGoogle}
+                  onSuccess={this.loginGoogle}
+                  onFailure={this.loginGoogle}
                   render={renderProps => (
                     <Button
                       label="Google"
