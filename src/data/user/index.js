@@ -1,20 +1,20 @@
 import { push } from "react-router-redux";
 import { request, GraphQLClient } from "graphql-request";
-import { setUnstable, setStable } from '../ui';
+import { setUnstable, setStable } from "../ui";
 import {
-  findUser,
-  createUser,
   addProjectToUser,
   getPresetExportedCount,
   updatePresetExportedCount,
   updateProjectBought,
   getBoughtProjects,
   authenticateUser,
+  authenticateFacebookUser,
+  authenticateGoogleUser,
+  authenticateTwitterUser,
   signupUser,
-  connectToGraphCool,
   getUserProjects,
   updateProject,
-  deleteProject,
+  deleteProject
 } from "../queries";
 import { setFontBought, updateSubset, loadLibrary } from "../font";
 import {
@@ -57,7 +57,8 @@ const initialState = {
   chosenGlyph: DEFAULT_UI_GLYPH,
   checkoutOptions: [],
   checkoutPrice: BASE_PACK_PRICE,
-  userFontName: '',
+  userFontName: "",
+  graphQLToken: undefined
 };
 
 export default (state = initialState, action) => {
@@ -66,7 +67,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         email: action.email,
-        graphqlID: action.graphqlID,
+        graphqlID: action.graphqlID
       };
 
     case STORE_EXPORT_TYPE:
@@ -99,6 +100,7 @@ export default (state = initialState, action) => {
         ...state,
         graphqlID: action.graphqlID,
         email: action.email,
+        graphQLToken: action.graphQLToken,
         projects: action.projects,
         shouldLogout: action.shouldLogout
       };
@@ -114,14 +116,14 @@ export default (state = initialState, action) => {
     case DELETE_PROJECT:
       return {
         ...state,
-        projects: action.projects,
-      }
+        projects: action.projects
+      };
 
     case STORE_PROJECTS:
       return {
         ...state,
-        projects: action.projects,
-      }
+        projects: action.projects
+      };
 
     case LOGOUT:
       return {
@@ -167,7 +169,7 @@ export default (state = initialState, action) => {
         ...state,
         checkoutOptions: action.checkoutOptions,
         checkoutPrice: action.checkoutPrice,
-        userFontName: action.fontName,
+        userFontName: action.fontName
       };
 
     case RESET_CHECKOUT_OPTIONS:
@@ -193,30 +195,38 @@ export const storeProject = (fontName, bought = false) => (
   if (bought) {
     checkoutOptions.forEach(option => {
       if (option.selected) {
-        filteredCheckoutOptions.push(option.dbName)
+        filteredCheckoutOptions.push(option.dbName);
       }
-    })
-    console.log(filteredCheckoutOptions)
+    });
+    console.log(filteredCheckoutOptions);
   }
   if (graphqlID) {
     request(GRAPHQL_API, getUserProjects(graphqlID))
       .then(data => {
-        if (data.User.uniqueProjects.find(project => project.id === projectID)) {
+        if (
+          data.User.uniqueProjects.find(project => project.id === projectID)
+        ) {
           console.log("project already found on database. updating it");
           request(
             GRAPHQL_API,
-            updateProject(projectID, choicesMade, fontName, bought, filteredCheckoutOptions)
+            updateProject(
+              projectID,
+              choicesMade,
+              fontName,
+              bought,
+              filteredCheckoutOptions
+            )
           ).then(res => {
             console.log(res);
             dispatch({
               type: STORE_PROJECT,
               projectID: res.updateUniqueProject.id,
               projects: res.updateUniqueProject.user.uniqueProjects,
-              projectName: fontName,
+              projectName: fontName
             });
             dispatch(loadLibrary());
             dispatch(setStable());
-          });   
+          });
         } else {
           console.log("project not found, saving it on database");
           request(
@@ -228,7 +238,7 @@ export const storeProject = (fontName, bought = false) => (
               fontName,
               bought,
               need,
-              filteredCheckoutOptions,
+              filteredCheckoutOptions
             )
           ).then(res => {
             const metadata = {
@@ -236,13 +246,17 @@ export const storeProject = (fontName, bought = false) => (
               choices_made: choicesMade
                 .map((choice, index) => {
                   if (index !== 0) return choice.name;
-                  return currentPreset.variant.family.name + currentPreset.variant.name;
+                  return (
+                    currentPreset.variant.family.name +
+                    currentPreset.variant.name
+                  );
                 })
                 .toString()
             };
             console.log(res);
             Intercom("update", {
-              unique_finished_fonts: res.createUniqueProject.user.uniqueProjects.length
+              unique_finished_fonts:
+                res.createUniqueProject.user.uniqueProjects.length
             });
             Intercom("trackEvent", "unique-finished-font", metadata);
             dispatch({
@@ -261,26 +275,25 @@ export const storeProject = (fontName, bought = false) => (
   // Else : user not logged in, adding the project to a "to be savec spot" that will be saved after email input
 };
 
-export const deleteUserProject = (projectID) => (
-  dispatch,
-  getState
-) => {
+export const deleteUserProject = projectID => (dispatch, getState) => {
   console.log("========DELETE PROJECT========");
   const { graphqlID, projects } = getState().user;
-  let newProjects = [...projects]
+  let newProjects = [...projects];
   if (graphqlID) {
     request(GRAPHQL_API, getUserProjects(graphqlID))
       .then(data => {
-        if (data.User.uniqueProjects.find(project => project.id === projectID)) {
+        if (
+          data.User.uniqueProjects.find(project => project.id === projectID)
+        ) {
           console.log("project found on database. deleting it");
-          request(
-            GRAPHQL_API,
-            deleteProject(projectID)
-          ).then(res => {
-            newProjects.splice(newProjects.findIndex(e => e.id = projectID), 1);
+          request(GRAPHQL_API, deleteProject(projectID)).then(res => {
+            newProjects.splice(
+              newProjects.findIndex(e => (e.id = projectID)),
+              1
+            );
             dispatch({
               type: DELETE_PROJECT,
-              projects: newProjects,
+              projects: newProjects
             });
           });
         } else {
@@ -290,7 +303,6 @@ export const deleteUserProject = (projectID) => (
       .catch(error => console.log(error));
   }
 };
-
 
 export const updateProjectInfos = (projectID, projectName) => dispatch => {
   dispatch({
@@ -332,49 +344,48 @@ export const storeEmail = (email, fontName, payed = false) => (
   console.log("========STORE EMAIL========");
   /* global Intercom*/
   const { currentPreset, choicesMade } = getState().font;
-  request(GRAPHQL_API, findUser(email))
-    .then(data => {
-      if (data.User) {
-        console.log(
-          "> User found on Prototypo graphcool"
-        );
-        dispatch({
-          type: STORE_USER_EMAIL,
-          email,
-          graphqlID: data.User.id,
-        });
-        dispatch(storeProject(fontName, payed));
-      } else {
-        request(GRAPHQL_API, createUser(email, currentPreset.id, choicesMade))
-          .then(res => {
-            console.log(
-              "> User created on Prototypo graphcool"
-            );
-            dispatch({
-              type: STORE_USER_EMAIL,
-              email,
-              graphqlID: res.createUser.id,
-            });
-            const metadata = {
-              unique_preset: res.createUser.uniqueProjects[0].id,
-              choices_made: choicesMade
-                .map((choice, index) => {
-                  if (index !== 0) return choice.name;
-                  return currentPreset.variant.family.name + currentPreset.variant.name;
-                })
-                .toString()
-            };
-            Intercom("update", { email, unique_finished_fonts: 1 });
-            setTimeout(
-              () => Intercom("trackEvent", "unique-finished-font", metadata),
-              1500
-            );
-            dispatch(storeProject(fontName, payed));
-          })
-          .catch(error => console.log(error));
-      }
-    })
-    .catch(error => console.log(error));
+  // request(GRAPHQL_API, findUser(email))
+  //   .then(data => {
+  //     if (data.User) {
+  //       console.log("> User found on Prototypo graphcool");
+  //       dispatch({
+  //         type: STORE_USER_EMAIL,
+  //         email,
+  //         graphqlID: data.User.id
+  //       });
+  //       dispatch(storeProject(fontName, payed));
+  //     } else {
+  //       request(GRAPHQL_API, createUser(email, currentPreset.id, choicesMade))
+  //         .then(res => {
+  //           console.log("> User created on Prototypo graphcool");
+  //           dispatch({
+  //             type: STORE_USER_EMAIL,
+  //             email,
+  //             graphqlID: res.createUser.id
+  //           });
+  //           const metadata = {
+  //             unique_preset: res.createUser.uniqueProjects[0].id,
+  //             choices_made: choicesMade
+  //               .map((choice, index) => {
+  //                 if (index !== 0) return choice.name;
+  //                 return (
+  //                   currentPreset.variant.family.name +
+  //                   currentPreset.variant.name
+  //                 );
+  //               })
+  //               .toString()
+  //           };
+  //           Intercom("update", { email, unique_finished_fonts: 1 });
+  //           setTimeout(
+  //             () => Intercom("trackEvent", "unique-finished-font", metadata),
+  //             1500
+  //           );
+  //           dispatch(storeProject(fontName, payed));
+  //         })
+  //         .catch(error => console.log(error));
+  //     }
+  //   })
+  //   .catch(error => console.log(error));
 };
 
 export const storeExportType = exportType => dispatch => {
@@ -419,11 +430,14 @@ export const afterPayment = res => (dispatch, getState) => {
   const { data } = res;
   const isPayed = data.paid;
   const userStripeEmail = data.source.metadata.name;
-  console.log('TODO : DISPATCH LOGIN PEUPLER EMAIL')
+  console.log("TODO : DISPATCH LOGIN PEUPLER EMAIL");
   //dispatch(storeEmail(userStripeEmail, userFontName, isPayed));
 };
 
-export const updateCheckoutOptions = (checkoutOptions, fontName) => dispatch => {
+export const updateCheckoutOptions = (
+  checkoutOptions,
+  fontName
+) => dispatch => {
   let price = BASE_PACK_PRICE;
   checkoutOptions.forEach(option => {
     if (option.selected) {
@@ -438,33 +452,100 @@ export const updateCheckoutOptions = (checkoutOptions, fontName) => dispatch => 
   });
 };
 
-export const loginToGraphCool = accessToken => dispatch => {
+export const loginWithTwitter = ({
+  oauthVerifier,
+  oauthToken,
+  error
+}) => dispatch => {
+  request(GRAPHQL_API, authenticateTwitterUser(oauthToken, oauthVerifier))
+    .then(res => {
+      dispatch(
+        loginToGraphCool(
+          res.authenticateTwitterUser.token,
+          res.authenticateTwitterUser.id
+        )
+      );
+    })
+    .catch(err => console.log(err));
+};
+
+export const loginWithFacebook = response => dispatch => {
+  const token = response.accessToken;
+  request(GRAPHQL_API, authenticateFacebookUser(token))
+    .then(res => {
+      dispatch(
+        loginToGraphCool(
+          res.authenticateFacebookUser.token,
+          res.authenticateFacebookUser.id
+        )
+      );
+    })
+    .catch(err => console.log(err));
+};
+
+export const loginWithGoogle = response => dispatch => {
+  const token = response.accessToken;
+  request(GRAPHQL_API, authenticateGoogleUser(token))
+    .then(res => {
+      dispatch(
+        loginToGraphCool(
+          res.authenticateGoogleUser.token,
+          res.authenticateGoogleUser.id
+        )
+      );
+    })
+    .catch(err => console.log(err));
+};
+
+export const loginWithEmail = (email, password) => dispatch => {
+  request(GRAPHQL_API, authenticateUser(email, password))
+    .then(res => {
+      dispatch(
+        loginToGraphCool(
+          res.authenticateEmailUser.token,
+          res.authenticateEmailUser.id
+        )
+      );
+    })
+    .catch(err => console.log(err));
+};
+
+export const signupWithEmail = (
+  email,
+  password,
+  firstName,
+  lastName
+) => dispatch => {
+  request(GRAPHQL_API, signupUser(email, password, firstName, lastName))
+    .then(res => {
+      dispatch(loginWithEmail(email, password));
+    })
+    .catch(err => console.log(err));
+};
+
+export const loginToGraphCool = (accessToken, id) => dispatch => {
   console.log("=========CONNECTING TO GRAPHCOOL DATABASE============");
-  request(GRAPHQL_API, connectToGraphCool(accessToken))
-    .then(data => {
-      console.log(data);
-      request(GRAPHQL_API, getUserProjects(data.authenticateUser.id))
-        .then(res => {
-          console.log(res);
-          console.log(
-            "> User connected on Prototypo Graphcool"
-          );
-          dispatch({
-            type: CONNECT_TO_GRAPHCOOL,
-            email: data.authenticateUser.email,
-            graphqlID: data.authenticateUser.id,
-            projects: res.User.uniqueProjects,
-            shouldLogout: false
-          });
-        })
-        .catch(error => console.log(error));
-      Intercom("update", { email: data.authenticateUser.email });
+  request(GRAPHQL_API, getUserProjects(id))
+    .then(res => {
+      console.log("> User connected on Prototypo Graphcool");
+      console.log(res);
+      dispatch({
+        type: CONNECT_TO_GRAPHCOOL,
+        email: res.User.email,
+        graphqlID: id,
+        graphQLToken: accessToken,
+        projects: res.User.uniqueProjects,
+        shouldLogout: false
+      });
+      Intercom("update", { email: res.User.email });
+      dispatch(loadLibrary());
     })
     .catch(error => {
       console.log(error);
       dispatch({
         type: CONNECT_TO_GRAPHCOOL,
         email: undefined,
+        graphQLToken: undefined,
         graphqlID: undefined,
         projects: [],
         shouldLogout: true

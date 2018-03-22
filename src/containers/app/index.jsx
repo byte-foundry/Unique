@@ -22,7 +22,6 @@ import { reloadFonts } from "../../data/font";
 import { setLocale, toggleTooltips } from "../../data/ui";
 import { GRAPHQL_API } from "../../data/constants";
 import { getAllPresets } from "../../data/queries";
-import Auth from "../../components/auth";
 import "./bootstrap-reboot.css";
 import "./bootstrap-grid.css";
 import "./App.css";
@@ -61,7 +60,6 @@ class App extends React.Component {
       Intercom("update", { email: props.userEmail });
     }
     this.handleAuthentication = this.handleAuthentication.bind(this);
-    this.auth = new Auth();
     this.shortcutManager = new ShortcutManager(keymap);
     console.log(props);
     if (!props.isPrototypoLoaded && !props.isPrototypoLoading) {
@@ -144,7 +142,6 @@ class App extends React.Component {
     return this.props.need !== "";
   }
   render() {
-    const { isAuthenticated } = this.auth;
     const supportedLanguages = {
       fr: "Français",
       en: "English"
@@ -211,7 +208,7 @@ class App extends React.Component {
                   />
                   <ProtectedRoute
                     exact
-                    requirement={() => isAuthenticated()}
+                    requirement={() => this.props.isAuthenticated}
                     path="/library"
                     component={Library}
                   />
@@ -254,8 +251,7 @@ class App extends React.Component {
                 >
                   <Sidebar
                     pathName={this.props.location.pathname}
-                    isAuthenticated={this.auth.isAuthenticated}
-                    login={this.auth.login}
+                    isAuthenticated={this.props.isAuthenticated}
                     mode={
                       this.props.location.pathname === "/checkout"
                         ? "checkout"
@@ -340,7 +336,8 @@ App.propTypes = {
   setLocale: PropTypes.func.isRequired,
   toggleTooltips: PropTypes.func.isRequired,
   shouldShowTooltips: PropTypes.bool.isRequired,
-  userId: PropTypes.string
+  userId: PropTypes.string,
+  isAuthenticated: PropTypes.bool,
 };
 
 App.defaultProps = {
@@ -348,6 +345,7 @@ App.defaultProps = {
   selectedFontLoaded: undefined,
   userEmail: "",
   hasPresetsLoaded: false,
+  isAuthenticated: false,
   locale: "en",
   userId: ""
 };
@@ -358,7 +356,7 @@ App.childContextTypes = {
 
 const mapStateToProps = state => ({
   pathname: state.routing.location.pathname,
-  selectedFont: state.font.currentPreset.variant.family.name,
+  selectedFont: state.font.currentPreset.variant && state.font.currentPreset.variant.family.name,
   selectedFontLoaded: state.createdFonts.fonts[state.font.fontName],
   userEmail: state.user.email,
   hasPayed: state.user.hasPayed,
@@ -368,6 +366,7 @@ const mapStateToProps = state => ({
   isLoading: state.ui.unstable || state.createdFonts.isPrototypoLoading,
   shouldLogout: state.user.shouldLogout,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
+  isAuthenticated: typeof(state.user.graphqlID) === 'string',
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isBlackOnWhite: state.user.isBlackOnWhite,
   locale: state.ui.locale,

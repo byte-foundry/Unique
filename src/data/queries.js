@@ -94,44 +94,6 @@ export const updatePresetExportedCount = (id, count) => `
     }
 `;
 
-export const findUser = email => `
-    query {
-        User (
-            email: "${email}"
-        )
-        {
-            id
-        }
-    }
-`;
-
-export const createUser = email => `
-    mutation {
-        createUser (
-            email: "${email}"
-        )
-        {
-            id
-            uniqueProjects {
-                id
-                name
-            }
-        }
-    }
-`;
-
-export const connectToGraphCool = accessToken => `
-    mutation {
-        authenticateUser (
-            accessToken: "${accessToken}"
-        )
-        {
-            id
-            email
-        }
-    }
-`;
-
 export const addProjectToUser = (
   userId,
   presetId,
@@ -268,6 +230,45 @@ export const authenticateUser = (email, password) => `
             password:"${password}"
         )
         {
+            id
+            token
+        }
+    }
+`;
+
+export const authenticateFacebookUser = (token) => `
+    mutation {
+        authenticateFacebookUser(
+            facebookToken:"${token}"
+        )
+        {
+            id
+            token
+        }
+    }
+`;
+
+export const authenticateTwitterUser = (token, verifier) => `
+    mutation {
+        authenticateTwitterUser(
+            oAuthToken: "${token}"
+            oAuthVerifier: "${verifier}"
+        )
+        {
+            id
+            token
+        }
+    }
+`;
+
+
+export const authenticateGoogleUser = (token) => `
+    mutation {
+        authenticateGoogleUser(
+            googleToken:"${token}"
+        )
+        {
+            id
             token
         }
     }
@@ -292,7 +293,8 @@ export const getUserProjects = graphQLID => `
         User(
             id: "${graphQLID}"
         )
-        {
+        {   
+            email
             uniqueProjects(orderBy: createdAt_ASC) {
                 id
                 name
@@ -300,7 +302,12 @@ export const getUserProjects = graphQLID => `
                 bought
                 need
                 preset {
-                    variant
+                    variant {
+                        name
+                        family {
+                            name
+                        }
+                    }
                     template 
                     baseValues                    
                 }

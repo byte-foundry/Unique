@@ -6,7 +6,22 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import TwitterLogin from "react-twitter-auth";
+import GoogleLogin from "react-google-login";
 import Button from "../../components/button/";
+import {
+  TWITTER_REQUEST_TOKEN_URL,
+  GOOGLE_CLIENT_ID,
+  FACEBOOK_APP_ID
+} from "../../data/constants";
+import {
+  loginWithGoogle,
+  loginWithFacebook,
+  loginWithTwitter,
+  loginWithEmail,
+  signupWithEmail
+} from "../../data/user/";
 import { ReactComponent as Logo } from "../app/logo.svg";
 import { ReactComponent as Eye } from "./eye.svg";
 import { ReactComponent as Close } from "./close.svg";
@@ -42,6 +57,22 @@ class Authenticate extends React.Component {
     this.renderHeader = this.renderHeader.bind(this);
     this.showPassword = this.showPassword.bind(this);
     this.hidePassword = this.hidePassword.bind(this);
+    this.loginEmailUser = this.loginEmailUser.bind(this);
+    this.signupEmailUser = this.signupEmailUser.bind(this);
+  }
+  loginEmailUser() {
+    this.props.loginWithEmail(
+      this.state.formValues.email,
+      this.state.formValues.password
+    );
+  }
+  signupEmailUser() {
+    this.props.signupWithEmail(
+      this.state.formValues.email,
+      this.state.formValues.password,
+      this.state.formValues.firstName,
+      this.state.formValues.lastName
+    );
   }
   showPassword() {
     if (!this.state.shouldShowPassword)
@@ -118,7 +149,15 @@ class Authenticate extends React.Component {
               defaultMessage="Log in"
               description="Login page log in form button"
             >
-              {text => <Button mode="full" label={text} onClick={() => {}} />}
+              {text => (
+                <Button
+                  mode="full"
+                  label={text}
+                  onClick={() => {
+                    this.loginEmailUser();
+                  }}
+                />
+              )}
             </FormattedMessage>
           </div>
         </div>
@@ -242,7 +281,15 @@ class Authenticate extends React.Component {
               defaultMessage="Sign up"
               description="Login page sign up form button"
             >
-              {text => <Button mode="full" label={text} onClick={() => {}} />}
+              {text => (
+                <Button
+                  mode="full"
+                  label={text}
+                  onClick={() => {
+                    this.signupEmailUser();
+                  }}
+                />
+              )}
             </FormattedMessage>
           </div>
         </div>
@@ -323,20 +370,42 @@ class Authenticate extends React.Component {
                 />
               </div>
               <div className="social-buttons">
-                <Button
-                  label="Facebook"
-                  mode="social-facebook"
-                  onClick={() => {}}
+                <FacebookLogin
+                  appId={FACEBOOK_APP_ID}
+                  autoLoad={false}
+                  fields="name,email"
+                  callback={this.props.loginWithFacebook}
+                  render={renderProps => (
+                    <Button
+                      label="Facebook"
+                      mode="social-facebook"
+                      onClick={renderProps.onClick}
+                    />
+                  )}
                 />
-                <Button
-                  label="Twitter"
-                  mode="social-twitter"
-                  onClick={() => {}}
+                <TwitterLogin
+                  callback={this.props.loginWithTwitter}
+                  requestTokenUrl={TWITTER_REQUEST_TOKEN_URL}
+                  render={renderProps => (
+                    <Button
+                      label="Twitter"
+                      mode="social-twitter"
+                      onClick={renderProps.onClick}
+                    />
+                  )}
                 />
-                <Button
-                  label="Google"
-                  mode="social-google"
-                  onClick={() => {}}
+                <GoogleLogin
+                  clientId={GOOGLE_CLIENT_ID}
+                  buttonText="Login"
+                  onSuccess={this.props.loginWithGoogle}
+                  onFailure={this.props.loginWithGoogle}
+                  render={renderProps => (
+                    <Button
+                      label="Google"
+                      mode="social-google"
+                      onClick={renderProps.onClick}
+                    />
+                  )}
                 />
               </div>
               <div className="mode-switch">
@@ -401,11 +470,26 @@ class Authenticate extends React.Component {
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ goToHome: () => push("/") }, dispatch);
+  bindActionCreators(
+    {
+      goToHome: () => push("/"),
+      loginWithGoogle,
+      loginWithFacebook,
+      loginWithTwitter,
+      loginWithEmail,
+      signupWithEmail
+    },
+    dispatch
+  );
 
 Authenticate.propTypes = {
   hasBoughtFont: PropTypes.bool,
-  goToHome: PropTypes.func.isRequired
+  goToHome: PropTypes.func.isRequired,
+  loginWithGoogle: PropTypes.func.isRequired,
+  loginWithFacebook: PropTypes.func.isRequired,
+  loginWithTwitter: PropTypes.func.isRequired,
+  loginWithEmail: PropTypes.func.isRequired,
+  signupWithEmail: PropTypes.func.isRequired
 };
 
 Authenticate.defaultProps = {

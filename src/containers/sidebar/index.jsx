@@ -2,6 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { FormattedMessage } from "react-intl";
 import Step from "../../components/step/";
@@ -29,9 +30,9 @@ class Sidebar extends React.Component {
     super(props);
   }
   render() {
-    console.log('---------------')
-    console.log(this.props.choicesMade)
-    console.log('---------------')
+    console.log("---------------");
+    console.log(this.props.choicesMade);
+    console.log("---------------");
     return (
       <div
         className={`Sidebar ${
@@ -45,9 +46,9 @@ class Sidebar extends React.Component {
         <ProfileIcon
           className="icon-profile"
           onClick={() => {
-            this.props.isAuthenticated()
+            this.props.isAuthenticated
               ? this.props.loadLibrary()
-              : this.props.login();
+              : this.props.goToAuth();
           }}
         />
         {this.props.mode !== "checkout" ? (
@@ -128,7 +129,7 @@ Sidebar.propTypes = {
   ).isRequired,
   pathName: PropTypes.string.isRequired,
   fontName: PropTypes.string.isRequired,
-  isAuthenticated: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   loadLibrary: PropTypes.func.isRequired,
   mode: PropTypes.string,
@@ -141,7 +142,10 @@ Sidebar.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  fontName: state.font.currentPreset.variant.family.name + state.font.currentPreset.variant.name,
+  fontName:
+    state.font.currentPreset.variant &&
+    state.font.currentPreset.variant.family.name +
+      state.font.currentPreset.variant.name,
   steps: state.font.currentPreset.steps,
   step: state.font.step,
   choicesMade: state.font.choicesMade,
@@ -154,6 +158,7 @@ const mapDispatchToProps = dispatch =>
     {
       goToStep,
       loadLibrary,
+      goToAuth: () => push({ pathname: "/auth", authData: {} })
     },
     dispatch
   );
