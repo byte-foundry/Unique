@@ -295,9 +295,9 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     });
     dispatch(setStable());
     if (step && choicesMade[step]) {
-      dispatch(goToStep(step + 1));
+      dispatch(goToStep(step + 1, true));
     } else {
-      dispatch(goToStep(step || 1));
+      dispatch(goToStep(step || 1, true));
     }
     if (choicesMade.length < selectedFont.steps.length) {
       dispatch(push("/customize"));
@@ -339,6 +339,8 @@ export const updateSubset = () => (dispatch, getState) => {
 const updateValues = (step, isSpecimen) => (dispatch, getState) => {
   const { chosenWord, chosenGlyph } = getState().user;
   console.log("========font/updateValues===========");
+  console.log("is Specimen ?")
+  console.log(isSpecimen)
   const {
     choicesFontsName,
     currentPreset,
@@ -458,8 +460,10 @@ export const clearFontIsLoading = () => dispatch => {
   });
 };
 
-export const goToStep = (step, isSpecimen = false) => (dispatch, getState) => {
+export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
   console.log("==========font/goToStep============");
+  console.log("is Specimen ?")
+  console.log(isSpecimen)
   console.log(step);
   const { currentPreset } = getState().font;
   const previousStep = getState().font.step;
