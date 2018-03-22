@@ -488,10 +488,6 @@ export const goToStep = (step, isSpecimen) => (dispatch, getState) => {
         type: CHANGE_STEP,
         step: step || previousStep
       });
-      if (isSpecimen) {
-        console.log("Going to /customize");
-        dispatch(push("/customize"));
-      }
       break;
   }
 };
