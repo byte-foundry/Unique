@@ -84,7 +84,7 @@ export default (state = initialState, action) => {
         ...state,
         fontName: action.fontName,
         currentPreset: action.selectedFont,
-        step: 1,
+        step: action.step,
         initialValues: action.initialValues,
         isLoading: false,
         stepBaseValues: action.stepBaseValues,
@@ -148,6 +148,7 @@ export default (state = initialState, action) => {
 export const selectFont = (font, step) => (dispatch, getState) => {
   console.log("==========font/selectFont============");
   dispatch(resetCheckout());
+  console.log(step)
   const { chosenWord } = getState().user;
   const { currentParams, choicesMade } = getState().font;
   const selectedFont = { ...font };
@@ -292,7 +293,8 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       choicesFontsName,
       sliderFontName,
       choicesMade: step ? choicesMade : [null],
-      currentParams: step ? currentParams : {}
+      currentParams: step ? currentParams : {},
+      step: step || 1,
     });
     dispatch(setStable());
     if (step && choicesMade[step]) {
@@ -300,7 +302,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     } else {
       dispatch(goToStep(step || 1));
     }
-    if (choicesMade.length < selectedFont.steps.length) {
+    if (!step || choicesMade.length < selectedFont.steps.length) {
       dispatch(push("/customize"));
     } else {
       dispatch(push("/specimen"));
@@ -472,20 +474,22 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
       dispatch(push("/select"));
       break;
     case currentPreset.steps.length + 1:
+    
+    dispatch({
+      type: CHANGE_STEP,
+      step: currentPreset.steps.length
+    });
       dispatch(updateValues(undefined, true));
-      dispatch({
-        type: CHANGE_STEP,
-        step: currentPreset.steps.length
-      });
       console.log("Going to /specimen");
       dispatch(push("/specimen"));
       break;
     default:
+    
+    dispatch({
+      type: CHANGE_STEP,
+      step: step || previousStep
+    });
       dispatch(updateValues(step, step === currentPreset.steps.length));
-      dispatch({
-        type: CHANGE_STEP,
-        step: step || previousStep
-      });
       if (fromSpecimen) dispatch(push("/customize"));
       break;
   }
@@ -614,6 +618,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
 };
 
 export const finishEditing = choice => (dispatch, getState) => {
+  console.log("==========font/finishEditing============");
   dispatch(selectChoice(choice, true));
   dispatch(push("/specimen"));
 };
@@ -668,6 +673,7 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
   console.log(loadedProjectID);
   console.log(loadedProjectName);
   if (projectID === loadedProjectID) {
+    console.log('Same project loaded, going to specimen')
     dispatch(push("/specimen"));
   } else {
     dispatch(setUnstable());
