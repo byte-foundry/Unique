@@ -279,6 +279,18 @@ class App extends React.Component {
                   (key, index) =>
                     key !== this.props.locale ? (
                       <li
+                        style={{
+                          backgroundColor:
+                            this.props.location.pathname === "/auth" ||
+                            (!this.props.isBlackOnWhite && this.props.location.pathname === "/customize")
+                              ? "white"
+                              : "black",
+                          color:
+                            this.props.location.pathname === "/auth" ||
+                            (!this.props.isBlackOnWhite && this.props.location.pathname === "/customize")
+                              ? "black"
+                              : "white"
+                        }}
                         onClick={() => {
                           this.props.setLocale(key);
                           this.setState({
@@ -297,7 +309,10 @@ class App extends React.Component {
                 className="language-active"
                 style={{
                   backgroundColor:
-                    this.props.location.pathname === "/auth" ? "black" : "white"
+                    this.props.location.pathname === "/auth" ||
+                    (!this.props.isBlackOnWhite && this.props.location.pathname === "/customize")
+                      ? "black"
+                      : "white"
                 }}
                 onClick={() => {
                   this.setState({
@@ -343,7 +358,7 @@ App.propTypes = {
   shouldShowTooltips: PropTypes.bool.isRequired,
   userId: PropTypes.string,
   isAuthenticated: PropTypes.bool,
-  logout: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 App.defaultProps = {
