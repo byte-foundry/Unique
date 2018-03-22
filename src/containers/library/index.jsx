@@ -7,7 +7,7 @@ import FlipMove from "react-flip-move";
 import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import Button from "../../components/button/";
-import { loadProject, download } from "../../data/font";
+import { loadProject, download, reloadFonts } from "../../data/font";
 import { deleteUserProject } from "../../data/user";
 import "./Library.css";
 
@@ -38,7 +38,7 @@ class Library extends React.Component {
     });
   }
   render() {
-    console.log('Library render');
+    console.log("Library render");
     console.log(this.props.projects);
     return (
       <div className="Library">
@@ -60,7 +60,17 @@ class Library extends React.Component {
                 <FormattedMessage
                   id="Library.actionCreate"
                   defaultMessage="Create a new project"
-                  description="Library page title"
+                  description="Library action new project"
+                />
+              </p>
+              <p
+                className="action"
+                onClick={() => this.props.reloadFonts(true)}
+              >
+                <FormattedMessage
+                  id="Library.actionReload"
+                  defaultMessage="Restart your project"
+                  description="Libraryaction restart project"
                 />
               </p>
             </div>
@@ -102,7 +112,9 @@ class Library extends React.Component {
                     >
                       {text => (
                         <Button
-                          onClick={() => this.props.deleteUserProject(project.id)}
+                          onClick={() =>
+                            this.props.deleteUserProject(project.id)
+                          }
                           label={text}
                           mode="text"
                           className="action-delete"
@@ -168,7 +180,10 @@ class Library extends React.Component {
                       {text => (
                         <Button
                           onClick={() =>
-                            this.props.download(`project${project.id}`, project.name || "Undefined")
+                            this.props.download(
+                              `project${project.id}`,
+                              project.name || "Undefined"
+                            )
                           }
                           label={text}
                           mode="hollow"
@@ -199,6 +214,7 @@ Library.propTypes = {
   loadProject: PropTypes.func.isRequired,
   download: PropTypes.func.isRequired,
   deleteUserProject: PropTypes.func.isRequired,
+  reloadFonts: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   projects: state.user.projects
@@ -209,7 +225,8 @@ const mapDispatchToProps = dispatch =>
       goToHome: () => push("/"),
       loadProject,
       download,
-      deleteUserProject
+      deleteUserProject,
+      reloadFonts
     },
     dispatch
   );
