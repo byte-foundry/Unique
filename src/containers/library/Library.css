@@ -2,13 +2,14 @@
 }
 .Library .container {
   padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .Library h1 {
   display: inline-block;
   font-weight: 400;
   margin-bottom: 40px;
-  font-size: 32px;
+  font-size: 28px;
   color: black;
 }
 
@@ -16,7 +17,7 @@
   display: inline-block;
   font-weight: 400;
   margin-bottom: 40px;
-  font-size: 28px;
+  font-size: 22px;
   color: black;
 }
 
@@ -28,7 +29,7 @@
   color: #b8b5c0;
   margin-bottom: 3px;
   transition: color 0.3s ease;
-  font-size: 2rem;
+  font-size: 18px;
 }
 
 .Library .projects {
@@ -42,13 +43,13 @@
 
 .Library .project .preview {
   text-align: center;
-  padding: 25px 10px;
-  font-size: 35px;
+  padding: 20px 10px;
+  font-size: 25px;
   color: #b8b5c0;
 }
 
 .Library .project .need {
-  font-size: 18px;
+  font-size: 14px;
   padding: 15px 30px;
   color: white;
   background-color: #5320ee;
@@ -56,7 +57,7 @@
 }
 
 .Library .project .fontName {
-  font-size: 18px;
+  font-size: 14px;
   padding: 15px 30px;
   color: white;
   background-color: black;

@@ -1,10 +1,18 @@
 .Checkout {
   margin-top: 200px;
+  padding-bottom: 150px;
 }
 
 .Checkout h2 {
-  font-size: 32px;
+  font-size: 26px;
   margin-bottom: 50px;
+  font-family: unique, sans-serif;
+  font-weight: 400;
+}
+
+.Checkout .checkout-options {
+  max-width: 75%;
+  margin: 0 auto;
 }
 
 .Checkout .checkout-options .option {
@@ -27,6 +35,7 @@
   transition: border-color ease 0.15s;
   margin: 10px 10px -3px 0px;
   cursor: pointer;
+  transform: scale(0.8);
 }
 .Checkout .checkout-options .option .check-box::before,
 .check-box::after {
@@ -77,6 +86,7 @@
 .Checkout .checkout-options .option .option-title {
   display: inline-block;
   margin-bottom: 0;
+  font-size: 14px;
 }
 
 .Checkout .checkout-options .option svg {
@@ -111,8 +121,8 @@
 }
 
 .Checkout .checkout-options .option.specimen-logo.selected path.letters {
-    display: inherit;
-  }
+  display: inherit;
+}
 
 .Checkout .checkout-options .option.specimen-logo svg {
   height: auto;
@@ -138,7 +148,7 @@
 }
 
 .Checkout .checkout-options .option.variant .font-wrapper span {
-  font-size: 45px;
+  font-size: 40px;
 }
 
 @keyframes dothabottomcheck {
