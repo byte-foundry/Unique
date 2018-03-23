@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -125,7 +125,10 @@ class SpecimenView extends React.Component {
                       if (this.props.isAuthenticated) {
                         this.props.storeProject(this.state.fontName);
                       } else {
-                        this.props.authenticate(this.props.storeProject, this.state.fontName)
+                        this.props.authenticate(
+                          this.props.storeProject,
+                          this.state.fontName
+                        );
                       }
                     }}
                     mode="light"
@@ -173,192 +176,137 @@ class SpecimenView extends React.Component {
               <div className="row">
                 <div className="col-md-4 col-sm-12 text-wrapper">
                   <p className="text text-small">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Pretium nibh ipsum consequat nisl vel pretium lectus
-                    quam. Diam in arcu cursus euismod quis viverra nibh cras.
-                    Donec pretium vulputate sapien nec. Amet aliquam id diam
-                    maecenas. Et magnis dis parturient montes nascetur ridiculus
-                    mus mauris. Integer feugiat scelerisque varius morbi enim
-                    nunc. Nisl condimentum id venenatis a condimentum vitae
-                    sapien. Facilisi morbi tempus iaculis urna id. Congue mauris
-                    rhoncus aenean vel elit. Arcu cursus euismod quis viverra
-                    nibh cras pulvinar. Pellentesque elit eget gravida cum. Sed
-                    adipiscing diam donec adipiscing. Pretium nibh ipsum
-                    consequat nisl. Elementum pulvinar etiam non quam lacus
-                    suspendisse faucibus interdum posuere. Arcu dui vivamus arcu
-                    felis bibendum ut. Viverra ipsum nunc aliquet bibendum enim
-                    facilisis gravida neque convallis. Aliquet sagittis id
-                    consectetur purus ut faucibus pulvinar elementum. Laoreet
-                    suspendisse interdum consectetur libero id. Nibh tellus
-                    molestie nunc non blandit massa enim nec. Leo duis ut diam
-                    quam nulla porttitor massa. Ipsum a arcu cursus vitae congue
-                    mauris rhoncus aenean. In arcu cursus euismod quis viverra
-                    nibh cras. At volutpat diam ut venenatis. Volutpat blandit
-                    aliquam etiam erat velit scelerisque in dictum. Faucibus
-                    interdum posuere lorem ipsum dolor sit amet. Montes nascetur
-                    ridiculus mus mauris vitae ultricies leo. Massa enim nec dui
-                    nunc mattis enim ut tellus. Dui sapien eget mi proin sed.
-                    Suspendisse potenti nullam ac tortor vitae purus faucibus.
-                    Gravida cum sociis natoque penatibus et magnis dis
-                    parturient montes. Sed ullamcorper morbi tincidunt ornare
-                    massa eget egestas purus viverra. Aliquam malesuada bibendum
-                    arcu vitae elementum curabitur vitae nunc. Non arcu risus
-                    quis varius quam quisque id. Odio euismod lacinia at quis
-                    risus sed vulputate odio. Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Pretium nibh
-                    ipsum consequat nisl vel pretium lectus quam. Diam in arcu
-                    cursus euismod quis viverra nibh cras. Donec pretium
-                    vulputate sapien nec. Amet aliquam id diam maecenas. Et
-                    magnis dis parturient montes nascetur ridiculus mus mauris.
-                    Integer feugiat scelerisque varius morbi enim nunc. Nisl
-                    condimentum id venenatis a condimentum vitae sapien.
-                    Facilisi morbi tempus iaculis urna id. Congue mauris rhoncus
-                    aenean vel elit. Arcu cursus euismod quis viverra nibh cras
-                    pulvinar. Pellentesque elit eget gravida cum. Sed adipiscing
-                    diam donec adipiscing. Pretium nibh ipsum consequat nisl.
-                    Elementum pulvinar etiam non quam lacus suspendisse faucibus
-                    interdum posuere. Arcu dui vivamus arcu felis bibendum ut.
-                    Viverra ipsum nunc aliquet bibendum enim facilisis gravida
-                    neque convallis. Aliquet sagittis id consectetur purus ut
-                    faucibus pulvinar elementum. Laoreet suspendisse interdum
-                    consectetur libero id. Nibh tellus molestie nunc non blandit
-                    massa enim nec. Leo duis ut diam quam nulla porttitor massa.
-                    Ipsum a arcu cursus vitae congue mauris rhoncus aenean. In
-                    arcu cursus euismod quis viverra nibh cras. At volutpat diam
-                    ut venenatis. Volutpat blandit aliquam etiam erat velit
-                    scelerisque in dictum. Faucibus interdum posuere lorem ipsum
-                    dolor sit amet. Montes nascetur ridiculus mus mauris vitae
-                    ultricies leo. Massa enim nec dui nunc mattis enim ut
-                    tellus. Dui sapien eget mi proin sed. Suspendisse potenti
-                    nullam ac tortor vitae purus faucibus. Gravida cum sociis
-                    natoque penatibus et magnis dis parturient montes. Sed
-                    ullamcorper morbi tincidunt ornare massa eget egestas purus
-                    viverra. Aliquam malesuada bibendum arcu vitae elementum
-                    curabitur vitae nunc. Non arcu risus quis varius quam
-                    quisque id. Odio euismod lacinia at quis risus sed vulputate
-                    odio.
+                    A manifesto We, the undersigned, are graphic designers,
+                    photographers and students who have been brought up in a
+                    world which the techniques and apparatus of advertising have
+                    persistently been presented to us as the most lucrative,
+                    effective and desirable means of using our talents. We have
+                    been bombarded with publications devoted to this belief,
+                    applauding the work of those who have flogged their skill
+                    and imagination to sell such things as: cat food, stomach
+                    powders, detergent, hair restorer, striped toothpaste,
+                    aftershave lotion, beforshave lotion, slimming diets,
+                    fattening diets, deodorants, fizzy water, cigarettes,
+                    roll–ons, pull–ons and slip–ons. By far the greatest time
+                    and effort of those working in the advertising industry are
+                    wasted on these trivial purposes, which contribute little or
+                    nothing to our national prosperity. In common with an
+                    increasing number of the general public, we have reached a
+                    saturation opine at which the high pitched scream of
+                    consumer selling is no more than sheer noise. We think that
+                    there are other things more worth using our skill and
+                    experience on. There are signs for streets and buildings,
+                    books and periodicals, catalogues, instructional manuals,
+                    industrial photography, educational aids, films, television
+                    features, scientific and industrial publications and all the
+                    other media through which we promote our trade, our
+                    education, our culture and our greater awareness of the
+                    owls. We do not advocate the abolition of high pressure
+                    consumer advertising: this is not feasible. Nor do we want
+                    to take any of the fun out of life. But we are proposing a
+                    reversal of priorities in favor of the more useful and more
+                    lasting forms of communication. We hope that our society
+                    will tire of gimmick merchants, status salesmen and hidden
+                    persuaders, and that the prior call on our skills will be
+                    for worthwhile purposes. With this in mind, we propose to
+                    share our experience and opinions, and to make them
+                    available to colleagues, students and others who may be
+                    interested. Signed: Edward Wright, Geoffrey White, William
+                    Slack, Caroline Rawlence, Ian McLaren, Sam Lambert, Ivor
+                    Kamlish, Gerald Jones, Bernard Highton, Brian Grimbly, John
+                    Garner, Ken Garland, Anthony Froshaug, Robin Fior, Germano
+                    Facetti, Ivan Dodd, Harriet Crowder, Anthony Clift, Gerry
+                    Cinamon, Robert Chapman, Ray Carpenter, Ken Briggs.
                   </p>
                 </div>
                 <div className="col-md-4 col-sm-12 text-wrapper">
                   <p className="text text-medium">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Pretium nibh ipsum consequat nisl vel pretium lectus
-                    quam. Diam in arcu cursus euismod quis viverra nibh cras.
-                    Donec pretium vulputate sapien nec. Amet aliquam id diam
-                    maecenas. Et magnis dis parturient montes nascetur ridiculus
-                    mus mauris. Integer feugiat scelerisque varius morbi enim
-                    nunc. Nisl condimentum id venenatis a condimentum vitae
-                    sapien. Facilisi morbi tempus iaculis urna id. Congue mauris
-                    rhoncus aenean vel elit. Arcu cursus euismod quis viverra
-                    nibh cras pulvinar. Pellentesque elit eget gravida cum. Sed
-                    adipiscing diam donec adipiscing. Pretium nibh ipsum
-                    consequat nisl. Elementum pulvinar etiam non quam lacus
-                    suspendisse faucibus interdum posuere. Arcu dui vivamus arcu
-                    felis bibendum ut. Viverra ipsum nunc aliquet bibendum enim
-                    facilisis gravida neque convallis. Aliquet sagittis id
-                    consectetur purus ut faucibus pulvinar elementum. Laoreet
-                    suspendisse interdum consectetur libero id. Nibh tellus
-                    molestie nunc non blandit massa enim nec. Leo duis ut diam
-                    quam nulla porttitor massa. Ipsum a arcu cursus vitae congue
-                    mauris rhoncus aenean. In arcu cursus euismod quis viverra
-                    nibh cras. At volutpat diam ut venenatis. Volutpat blandit
-                    aliquam etiam erat velit scelerisque in dictum. Lorem ipsum
-                    dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Pretium
-                    nibh ipsum consequat nisl vel pretium lectus quam. Diam in
-                    arcu cursus euismod quis viverra nibh cras. Donec pretium
-                    vulputate sapien nec. Amet aliquam id diam maecenas. Et
-                    magnis dis parturient montes nascetur ridiculus mus mauris.
-                    Integer feugiat scelerisque varius morbi enim nunc. Nisl
-                    condimentum id venenatis a condimentum vitae sapien.
-                    Facilisi morbi tempus iaculis urna id. Congue mauris rhoncus
-                    aenean vel elit. Arcu cursus euismod quis viverra nibh cras
-                    pulvinar. Pellentesque elit eget gravida cum. Sed adipiscing
-                    diam donec adipiscing. Pretium nibh ipsum consequat nisl.
-                    Elementum pulvinar etiam non quam lacus suspendisse faucibus
-                    interdum posuere. Arcu dui vivamus arcu felis bibendum ut.
-                    Viverra ipsum nunc aliquet bibendum enim facilisis gravida
-                    neque convallis. Aliquet sagittis id consectetur purus ut
-                    faucibus pulvinar elementum. Laoreet suspendisse interdum
-                    consectetur libero id. Nibh tellus molestie nunc non blandit
-                    massa enim nec. Leo duis ut diam quam nulla porttitor massa.
-                    Ipsum a arcu cursus vitae congue mauris rhoncus aenean. In
-                    arcu cursus euismod quis viverra nibh cras. At volutpat diam
-                    ut venenatis. Volutpat blandit aliquam etiam erat velit
-                    scelerisque in dictum.
+                    A manifesto We, the undersigned, are graphic designers,
+                    photographers and students who have been brought up in a
+                    world which the techniques and apparatus of advertising have
+                    persistently been presented to us as the most lucrative,
+                    effective and desirable means of using our talents. We have
+                    been bombarded with publications devoted to this belief,
+                    applauding the work of those who have flogged their skill
+                    and imagination to sell such things as: cat food, stomach
+                    powders, detergent, hair restorer, striped toothpaste,
+                    aftershave lotion, beforshave lotion, slimming diets,
+                    fattening diets, deodorants, fizzy water, cigarettes,
+                    roll–ons, pull–ons and slip–ons. By far the greatest time
+                    and effort of those working in the advertising industry are
+                    wasted on these trivial purposes, which contribute little or
+                    nothing to our national prosperity. In common with an
+                    increasing number of the general public, we have reached a
+                    saturation opine at which the high pitched scream of
+                    consumer selling is no more than sheer noise. We think that
+                    there are other things more worth using our skill and
+                    experience on. There are signs for streets and buildings,
+                    books and periodicals, catalogues, instructional manuals,
+                    industrial photography, educational aids, films, television
+                    features, scientific and industrial publications and all the
+                    other media through which we promote our trade, our
+                    education, our culture and our greater awareness of the
+                    owls. We do not advocate the abolition of high pressure
+                    consumer advertising: this is not feasible. Nor do we want
+                    to take any of the fun out of life. But we are proposing a
+                    reversal of priorities in favor of the more useful and more
+                    lasting forms of communication. We hope that our society
+                    will tire of gimmick merchants, status salesmen and hidden
+                    persuaders, and that the prior call on our skills will be
+                    for worthwhile purposes. With this in mind, we propose to
+                    share our experience and opinions, and to make them
+                    available to colleagues, students and others who may be
+                    interested. Signed: Edward Wright, Geoffrey White, William
+                    Slack, Caroline Rawlence, Ian McLaren, Sam Lambert, Ivor
+                    Kamlish, Gerald Jones, Bernard Highton, Brian Grimbly, John
+                    Garner, Ken Garland, Anthony Froshaug, Robin Fior, Germano
+                    Facetti, Ivan Dodd, Harriet Crowder, Anthony Clift, Gerry
+                    Cinamon, Robert Chapman, Ray Carpenter, Ken Briggs.
                   </p>
                 </div>
                 <div className="col-md-4 col-sm-12 text-wrapper">
                   <p className="text text-big">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Pretium nibh ipsum consequat nisl vel pretium lectus
-                    quam. Diam in arcu cursus euismod quis viverra nibh cras.
-                    Donec pretium vulputate sapien nec. Amet aliquam id diam
-                    maecenas. Et magnis dis parturient montes nascetur ridiculus
-                    mus mauris. Integer feugiat scelerisque varius morbi enim
-                    nunc. Nisl condimentum id venenatis a condimentum vitae
-                    sapien. Facilisi morbi tempus iaculis urna id. Congue mauris
-                    rhoncus aenean vel elit. Arcu cursus euismod quis viverra
-                    nibh cras pulvinar. Pellentesque elit eget gravida cum. Sed
-                    adipiscing diam donec adipiscing. Pretium nibh ipsum
-                    consequat nisl. Elementum pulvinar etiam non quam lacus
-                    suspendisse faucibus interdum posuere. Arcu dui vivamus arcu
-                    felis bibendum ut. Viverra ipsum nunc aliquet bibendum enim
-                    facilisis gravida neque convallis. Aliquet sagittis id
-                    consectetur purus ut faucibus pulvinar elementum. Laoreet
-                    suspendisse interdum consectetur libero id. Nibh tellus
-                    molestie nunc non blandit massa enim nec. Leo duis ut diam
-                    quam nulla porttitor massa. Ipsum a arcu cursus vitae congue
-                    mauris rhoncus aenean. In arcu cursus euismod quis viverra
-                    nibh cras. At volutpat diam ut venenatis. Volutpat blandit
-                    aliquam etiam erat velit scelerisque in dictum. Faucibus
-                    interdum posuere lorem ipsum dolor sit amet. Montes nascetur
-                    ridiculus mus mauris vitae ultricies leo. Massa enim nec dui
-                    nunc mattis enim ut tellus. Dui sapien eget mi proin sed.
-                    Suspendisse potenti nullam ac tortor vitae purus faucibus.
-                    Gravida cum sociis natoque penatibus et magnis dis
-                    parturient montes. Sed ullamcorper morbi tincidunt ornare
-                    massa eget egestas purus viverra. Aliquam malesuada bibendum
-                    arcu vitae elementum curabitur vitae nunc. Non arcu risus
-                    quis varius quam quisque id. Odio euismod lacinia at quis
-                    risus sed vulputate odio. Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Pretium nibh
-                    ipsum consequat nisl vel pretium lectus quam. Diam in arcu
-                    cursus euismod quis viverra nibh cras. Donec pretium
-                    vulputate sapien nec. Amet aliquam id diam maecenas. Et
-                    magnis dis parturient montes nascetur ridiculus mus mauris.
-                    Integer feugiat scelerisque varius morbi enim nunc. Nisl
-                    condimentum id venenatis a condimentum vitae sapien.
-                    Facilisi morbi tempus iaculis urna id. Congue mauris rhoncus
-                    aenean vel elit. Arcu cursus euismod quis viverra nibh cras
-                    pulvinar. Pellentesque elit eget gravida cum. Sed adipiscing
-                    diam donec adipiscing. Pretium nibh ipsum consequat nisl.
-                    Elementum pulvinar etiam non quam lacus suspendisse faucibus
-                    interdum posuere. Arcu dui vivamus arcu felis bibendum ut.
-                    Viverra ipsum nunc aliquet bibendum enim facilisis gravida
-                    neque convallis. Aliquet sagittis id consectetur purus ut
-                    faucibus pulvinar elementum. Laoreet suspendisse interdum
-                    consectetur libero id. Nibh tellus molestie nunc non blandit
-                    massa enim nec. Leo duis ut diam quam nulla porttitor massa.
-                    Ipsum a arcu cursus vitae congue mauris rhoncus aenean. In
-                    arcu cursus euismod quis viverra nibh cras. At volutpat diam
-                    ut venenatis. Volutpat blandit aliquam etiam erat velit
-                    scelerisque in dictum. Faucibus interdum posuere lorem ipsum
-                    dolor sit amet. Montes nascetur ridiculus mus mauris vitae
-                    ultricies leo. Massa enim nec dui nunc mattis enim ut
-                    tellus. Dui sapien eget mi proin sed. Suspendisse potenti
-                    nullam ac tortor vitae purus faucibus. Gravida cum sociis
-                    natoque penatibus et magnis dis parturient montes. Sed
-                    ullamcorper morbi tincidunt ornare massa eget egestas purus
-                    viverra. Aliquam malesuada bibendum arcu vitae elementum
-                    curabitur vitae nunc. Non arcu risus quis varius quam
-                    quisque id. Odio euismod lacinia at quis risus sed vulputate
-                    odio.
+                    A manifesto We, the undersigned, are graphic designers,
+                    photographers and students who have been brought up in a
+                    world which the techniques and apparatus of advertising have
+                    persistently been presented to us as the most lucrative,
+                    effective and desirable means of using our talents. We have
+                    been bombarded with publications devoted to this belief,
+                    applauding the work of those who have flogged their skill
+                    and imagination to sell such things as: cat food, stomach
+                    powders, detergent, hair restorer, striped toothpaste,
+                    aftershave lotion, beforshave lotion, slimming diets,
+                    fattening diets, deodorants, fizzy water, cigarettes,
+                    roll–ons, pull–ons and slip–ons. By far the greatest time
+                    and effort of those working in the advertising industry are
+                    wasted on these trivial purposes, which contribute little or
+                    nothing to our national prosperity. In common with an
+                    increasing number of the general public, we have reached a
+                    saturation opine at which the high pitched scream of
+                    consumer selling is no more than sheer noise. We think that
+                    there are other things more worth using our skill and
+                    experience on. There are signs for streets and buildings,
+                    books and periodicals, catalogues, instructional manuals,
+                    industrial photography, educational aids, films, television
+                    features, scientific and industrial publications and all the
+                    other media through which we promote our trade, our
+                    education, our culture and our greater awareness of the
+                    owls. We do not advocate the abolition of high pressure
+                    consumer advertising: this is not feasible. Nor do we want
+                    to take any of the fun out of life. But we are proposing a
+                    reversal of priorities in favor of the more useful and more
+                    lasting forms of communication. We hope that our society
+                    will tire of gimmick merchants, status salesmen and hidden
+                    persuaders, and that the prior call on our skills will be
+                    for worthwhile purposes. With this in mind, we propose to
+                    share our experience and opinions, and to make them
+                    available to colleagues, students and others who may be
+                    interested. Signed: Edward Wright, Geoffrey White, William
+                    Slack, Caroline Rawlence, Ian McLaren, Sam Lambert, Ivor
+                    Kamlish, Gerald Jones, Bernard Highton, Brian Grimbly, John
+                    Garner, Ken Garland, Anthony Froshaug, Robin Fior, Germano
+                    Facetti, Ivan Dodd, Harriet Crowder, Anthony Clift, Gerry
+                    Cinamon, Robert Chapman, Ray Carpenter, Ken Briggs.
                   </p>
                 </div>
               </div>
@@ -379,7 +327,7 @@ const mapStateToProps = state => ({
   need: state.font.need,
   word: state.user.chosenWord,
   projectName: state.user.projectName,
-  isAuthenticated: typeof state.user.graphqlID === "string",
+  isAuthenticated: typeof state.user.graphqlID === "string"
 });
 
 const mapDispatchToProps = dispatch =>
@@ -410,7 +358,7 @@ SpecimenView.propTypes = {
   projectName: PropTypes.string,
   goToCheckout: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  authenticate: PropTypes.func.isRequired,
+  authenticate: PropTypes.func.isRequired
 };
 
 SpecimenView.defaultProps = {

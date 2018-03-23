@@ -73,10 +73,12 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
     dispatch(setUnstable());
   }
   const { importedPresets, isLoading } = getState().presets;
+  const { need } = getState().font;
   if (isLoading) return;
   dispatch({
     type: LOAD_PRESETS_REQUESTED,
   });
+  console.log(importedPresets)
   const promiseArray = [];
   const loadedPresetsName = [];
   importedPresets.forEach((preset, index) => {

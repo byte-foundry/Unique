@@ -90,15 +90,25 @@ class TemplateChoice extends React.Component {
           }}
           tabIndex="-1"
         >
-          
           <div className="container">
-          <Back
-            className="icon-back"
-            onClick={() => {
-              this.props.redirectToHome();
-            }}
-          />
-            <PerfectScrollbar option={{suppressScrollX: true}}>
+            <Back
+              className="icon-back"
+              onClick={() => {
+                this.props.redirectToHome();
+              }}
+            />
+            <div className="row justify-content-sm-center">
+              <div className="col-sm-12 col-md-11 col-lg-10">
+                <h1>
+                  <FormattedMessage
+                    id="TemplateChoice.title"
+                    defaultMessage="Pick one of our templates and get started!"
+                    description="TemplateChoice page title"
+                  />
+                </h1>
+              </div>
+            </div>
+            <PerfectScrollbar option={{ suppressScrollX: true }}>
               <div className="template-wrapper">
                 <FlipMove
                   className="templates row justify-content-center"

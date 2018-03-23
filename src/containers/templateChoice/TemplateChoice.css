@@ -24,17 +24,13 @@
   position: relative;
 }
 
-.TemplateChoice h2 {
-  display: block;
-  margin: 80px;
-  margin-bottom: 0;
-  margin-top: 0;
-  padding-bottom: 4px;
-  font-size: 1rem;
-  color: #CAB8DA;
-  text-align: center;
+.TemplateChoice h1, .TemplateChoice h2 {
+  display: inline-block;
+  font-weight: 400;
+  margin-bottom: 40px;
+  font-size: 28px;
+  color: black;
 }
-
 .TemplateChoice .icon-back, .TemplateChoice .icon-next {
   width: 35px;
   height: auto;
@@ -74,7 +70,7 @@
 }
 
 .TemplateChoice .template-wrapper {
-  max-height: 500px;
+  max-height: 550px;
 }
 
 .TemplateChoice .ps__thumb-y  {
