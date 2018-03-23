@@ -17,12 +17,13 @@
   align-self: baseline;
 }
 
-.Template.selected {
+.Template.selected,
+.Template:hover {
   border-color: #5320ee;
 }
 
 .Template .templateName {
-  font-family: unique, sans-serif;  
+  font-family: unique, sans-serif;
   line-height: 1;
   margin-top: 10px;
   margin-bottom: 0;

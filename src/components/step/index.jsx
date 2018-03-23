@@ -14,7 +14,7 @@ const Step = props => (
     tabIndex="0"
   >
     <span>
-      {props.index + 1}.{' '}{props.title}
+      <span className='Index'>{props.index + 1}.{' '}</span>{props.title}
     </span>
   </div>
 );

@@ -7,6 +7,19 @@
   transition: color .3s ease, background .3s ease;
   text-transform: uppercase;
   font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.Step:hover {
+    background-color: #5320ee;
+}
+.Step.disabled:hover {
+    background-color: inherit;
+}
+
+.Step .Index {
+    font-weight: bold;
+    margin-right: .5em;
 }
 
 .Step.disabled {

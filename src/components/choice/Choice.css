@@ -28,7 +28,7 @@
 }
 
 .Choice.glyphMode .choiceName{
-  margin-top: 15px;
+  margin-top: 35px;
 }
 
 .Choice.whiteOnBlack {
@@ -45,7 +45,7 @@
 }
 
 .Choice .choiceName {
-  font-family: unique, sans-serif;  
+  font-family: unique, sans-serif;
   line-height: 1;
   margin-top: 10px;
   margin-bottom: 0;

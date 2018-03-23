@@ -155,7 +155,7 @@ class SpecimenView extends React.Component {
                 <FormattedMessage
                   id="SpecimenView.characters"
                   defaultMessage="Characters"
-                  description="Speciem view characters"
+                  description="Specimen view characters"
                 />
               </h3>
               <div className="characters">
