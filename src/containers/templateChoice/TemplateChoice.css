@@ -74,4 +74,14 @@
 }
 
 .TemplateChoice .template-wrapper {
+  max-height: 500px;
+}
+
+.TemplateChoice .ps__thumb-y  {
+  background: #5320ee !important;
+  background-image: linear-gradient(209deg, #5320ee, #5d28e2 68%, #622bdd) !important;
+}
+
+.TemplateChoice .ps__rail-y {
+  opacity: 1 !important;
 }

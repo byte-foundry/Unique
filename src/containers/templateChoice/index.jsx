@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import FlipMove from "react-flip-move";
 import { FormattedMessage } from "react-intl";
 import { Shortcuts } from "react-shortcuts";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 import "./TemplateChoice.css";
 import Template from "../../components/template/";
 
@@ -95,37 +97,43 @@ class TemplateChoice extends React.Component {
             }}
           />
           <div className="container">
-            <div className="template-wrapper">
-              <FlipMove
-                className="templates row justify-content-sm-center"
-                duration={300}
-                delay={800}
-                staggerDelayBy={50}
-                easing="ease-out"
-                appearAnimation="fade"
-                enterAnimation={undefined}
-                leaveAnimation="none"
-              >
-                {this.props.presets.map((font, index) => (
-                  <Template
-                    font={font}
-                    onClick={() => this.setState({ templateIndex: index })}
-                    onDoubleClick={() =>
-                      this.props.selectFont(this.props.presets[index])
-                    }
-                    selected={
-                      this.state.templateIndex !== -1 &&
-                      `${this.props.presets[this.state.templateIndex].variant.family.name}${
-                        this.props.presets[this.state.templateIndex].variant.name
-                      }` === `${font.variant.family.name}${font.variant.name}`
-                    }
-                    text={this.props.chosenWord}
-                    mostSelected={isMostSelected(this.props.presets, font)}
-                    isLoading={this.props.isLoading}
-                  />
-                ))}
-              </FlipMove>
-            </div>
+            <PerfectScrollbar option={{suppressScrollX: true}}>
+              <div className="template-wrapper">
+                <FlipMove
+                  className="templates row justify-content-center"
+                  duration={300}
+                  delay={800}
+                  staggerDelayBy={50}
+                  easing="ease-out"
+                  appearAnimation="fade"
+                  enterAnimation={undefined}
+                  leaveAnimation="none"
+                >
+                  {this.props.presets.map((font, index) => (
+                    <Template
+                      font={font}
+                      onClick={() => this.setState({ templateIndex: index })}
+                      onDoubleClick={() =>
+                        this.props.selectFont(this.props.presets[index])
+                      }
+                      selected={
+                        this.state.templateIndex !== -1 &&
+                        `${
+                          this.props.presets[this.state.templateIndex].variant
+                            .family.name
+                        }${
+                          this.props.presets[this.state.templateIndex].variant
+                            .name
+                        }` === `${font.variant.family.name}${font.variant.name}`
+                      }
+                      text={this.props.chosenWord}
+                      mostSelected={isMostSelected(this.props.presets, font)}
+                      isLoading={this.props.isLoading}
+                    />
+                  ))}
+                </FlipMove>
+              </div>
+            </PerfectScrollbar>
             {this.props.isLoading ? <h2>Loading font...</h2> : false}
             <Next
               className={`icon-next ${
