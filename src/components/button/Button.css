@@ -1,7 +1,7 @@
 .Button {
   font-size: 0.8rem;
-  background-color: #000;
-  border: 2px solid #000;
+  background-color: #111;
+  border: 2px solid #111;
   color: #fff;
   padding: 8px 15px;
   cursor: pointer;
@@ -16,8 +16,8 @@
 
 .Button:hover {
   background-color: #fff;
-  color: #000;
-  border: 2px solid #000;
+  color: #111;
+  border: 2px solid #111;
 }
 
 .Button.hollow {
