@@ -90,13 +90,14 @@ class TemplateChoice extends React.Component {
           }}
           tabIndex="-1"
         >
+          
+          <div className="container">
           <Back
             className="icon-back"
             onClick={() => {
               this.props.redirectToHome();
             }}
           />
-          <div className="container">
             <PerfectScrollbar option={{suppressScrollX: true}}>
               <div className="template-wrapper">
                 <FlipMove

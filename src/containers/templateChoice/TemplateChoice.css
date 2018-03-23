@@ -55,7 +55,7 @@
 }
 
 .TemplateChoice .icon-back {
-  left: -75px;
+  left: 15px;
 }
 
 .TemplateChoice .icon-next {
@@ -84,4 +84,18 @@
 
 .TemplateChoice .ps__rail-y {
   opacity: 1 !important;
+}
+
+@media (max-width: 768px) {
+  .TemplateChoice .icon-next {
+    right: -35px;
+    z-index: 10;
+  }
+  .TemplateChoice .icon-back {
+    left: inherit;
+    right: -35px;
+    top: 40%;
+    transform: translateY(-55%) translateZ(0px);
+    z-index: 10;
+  }
 }
