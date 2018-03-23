@@ -74,6 +74,11 @@
   padding: 2px 6px;
   border-radius: 50%;
   transition: color .3s ease, background-color .3s ease;
+  display: none;
+}
+
+.DefineNeed .needs div:hover .tooltip {
+  display: inherit;
 }
 
 .DefineNeed .selected .tooltip {

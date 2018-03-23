@@ -10,7 +10,7 @@
     "lodash.mergewith": "^4.6.1",
     "lodash.uniq": "^4.5.0",
     "prop-types": "^15.5.10",
-    "prototypo-library": "^1.2.12",
+    "prototypo-library": "^1.2.13",
     "react": "^15.5.4",
     "react-color": "^2.13.8",
     "react-dom": "^15.5.4",
