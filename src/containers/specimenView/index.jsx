@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+import ReactDOM from 'react-dom';
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -36,6 +37,9 @@ class SpecimenView extends React.Component {
   }
   onBlur() {
     this.setState({ isInputFocused: false });
+  }
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
   render() {
     return (

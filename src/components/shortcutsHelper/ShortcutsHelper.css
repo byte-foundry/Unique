@@ -4,10 +4,10 @@
 .ShortcutsHelper .tooltip-button {
     position: absolute;
     bottom: 30px;
-    right: 260px;
+    right: 18%;
     border: 1px solid black;
     cursor: pointer;
-    padding: 0px 7px;
+    padding: 0px 8px;
     border-radius: 50%;
 }
 

@@ -22,6 +22,7 @@ import {
   loginWithEmail,
   signupWithEmail
 } from "../../data/user/";
+import { reloadFonts } from "../../data/font/";
 import { ReactComponent as Logo } from "../app/logo.svg";
 import { ReactComponent as Eye } from "./eye.svg";
 import { ReactComponent as Close } from "./close.svg";
@@ -425,7 +426,7 @@ class Authenticate extends React.Component {
           <Close
             className="closeIcon"
             onClick={() => {
-              this.props.goToHome();
+              this.props.reloadFonts();
             }}
           />
           <div className="row">
@@ -550,7 +551,8 @@ const mapDispatchToProps = dispatch =>
       loginWithFacebook,
       loginWithTwitter,
       loginWithEmail,
-      signupWithEmail
+      signupWithEmail,
+      reloadFonts
     },
     dispatch
   );
@@ -562,7 +564,8 @@ Authenticate.propTypes = {
   loginWithFacebook: PropTypes.func.isRequired,
   loginWithTwitter: PropTypes.func.isRequired,
   loginWithEmail: PropTypes.func.isRequired,
-  signupWithEmail: PropTypes.func.isRequired
+  signupWithEmail: PropTypes.func.isRequired,
+  reloadFonts: PropTypes.func.isRequired,
 };
 
 Authenticate.defaultProps = {

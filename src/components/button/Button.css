@@ -7,7 +7,7 @@
   cursor: pointer;
   display: inline;
   transition: all .3s ease;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .Button:hover {
@@ -54,6 +54,10 @@
   border-color: transparent;
   color: black;
   text-decoration: underline;
+}
+
+.Button.text.isConfigure {
+  padding-left: 0;
 }
 
 .Button.isBack {

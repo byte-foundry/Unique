@@ -2,10 +2,11 @@
   display: block;
   cursor: pointer;
   padding: 13px 40px;
+  padding-left: 20px;
   background: black;
   transition: color .3s ease, background .3s ease;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .Step.disabled {

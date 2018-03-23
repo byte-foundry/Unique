@@ -1,14 +1,16 @@
 .Authenticate {
   background: black;
   width: 100vw;
-  height: 100vh;
-  padding-top: 150px;
-  padding-bottom: 150px;
+  height: 100vh;  
+  display: flex;
+  align-items: center;
 }
 
 .Authenticate .container {
   background: white;
   position: relative;
+  margin-top: auto;
+  margin-bottom: auto;
   height: auto;
 }
 
@@ -67,20 +69,20 @@
 }
 
 .Authenticate .header h2 {
-  font-size: 32px;
+  font-size: 26px;
   padding-bottom: 30px;
   color: #5b26e6;
 }
 
 .Authenticate .header p {
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.89;
   color: #b8b5c0;
 }
 
 .Authenticate .signup p,
 .Authenticate .signin p {
-  font-size: 18px;
+  font-size: 14px;
   margin-bottom: 0;
 }
 
@@ -90,6 +92,7 @@
   padding: 5px 10px;
   border: 2px solid transparent;
   box-shadow: none;
+  font-size: 14px;
 }
 
 .Authenticate .signup input::placeholder,
@@ -110,7 +113,7 @@
 }
 
 .Authenticate .auth-alternative {
-  font-size: 14px;
+  font-size: 12px;
   color: #b8b5c0;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -126,12 +129,12 @@
 }
 
 .Authenticate .mode-switch {
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
 }
 
 .Authenticate .mode-switch .Button.text {
-  font-size: 14px;
+  font-size: 12px;
   color: #5b26e6;
   text-decoration: none;
 }

@@ -10,7 +10,7 @@
 
 .SpecimenView h3 {
   display: inline-block;
-  font-size: 1rem;
+  font-size: 16px;
   color: #5320ee;
   font-family: unique, sans-serif;
   font-weight: 400;
@@ -19,7 +19,7 @@
 
 .SpecimenView h2 {
   display: inline-block;
-  font-size: 2rem;
+  font-size: 28px;
   color: black;
   font-family: unique, sans-serif;
   font-weight: 400;
@@ -78,20 +78,20 @@
 
 .SpecimenView .hooray h2 {
   font-weight: 400;
-  font-size: 32px;
+  font-size: 24px;
   color: black;
 }
 
 .SpecimenView .hooray .subtitle {
   font-weight: 400;
-  font-size: 28px;
+  font-size: 22px;
   color: #b8b5c0;
   width: 75%;
 }
 
 .SpecimenView .hooray .subtitle-two {
   font-weight: 400;
-  font-size: 28px;
+  font-size: 18px;
   color: #d0cdd6;
 }
 
@@ -105,7 +105,7 @@
   margin-top: 5px;
   height: 30px;
   width: auto;
-  font-size: 18px;
+  font-size: 14px;
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #d0cdd6;
@@ -116,7 +116,7 @@
 
 .SpecimenView .input-fontname::placeholder {
   color: #d0cdd6;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .SpecimenView .input-fontname:focus {
@@ -133,13 +133,13 @@
 }
 
 .SpecimenView .word {
-  font-size: 48px;  
+  font-size: 45px;  
   margin-top: 40px;
   margin-bottom: 65px;
 }
 
 .SpecimenView .characters {
-  font-size: 24px;
+  font-size: 20px;
   padding: 40px;
 }
 

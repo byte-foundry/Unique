@@ -4,15 +4,15 @@
 }
 
 .App {
-	min-height: 100vh;
-	padding: 0;
+  min-height: 100vh;
+  padding: 0;
 }
 
 .App .left {
-	padding: 0;
+  padding: 0;
 }
 .App .right {
-	padding: 0;
+  padding: 0;
 }
 
 .App .right.whiteOnBlack {
@@ -26,45 +26,47 @@
   min-height: 480px;
   width: 100%;
   height: 100%;
-	background: #5320ee;
-	background-image: linear-gradient(209deg, #5320ee, #5d28e2 68%, #622bdd);
+  background: #5320ee;
+  background-image: linear-gradient(209deg, #5320ee, #5d28e2 68%, #622bdd);
   transition: background-color 1s ease;
 }
 
 .App-logo-wrapper,
 .App-loader-wrapper {
-	position: absolute;
-	left: 0;
-	width: 100%;
-	opacity: 0;
-	cursor: default;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: default;
 }
 
 .App-logo-wrapper {
-  top: 0;
-  height: 100%;
-  transform: translate3d(0,33%,0);
+  top: 50%;
+  left: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .App-logo-wrapper svg {
-	display: block;
+  display: block;
   margin: 0 auto;
-  min-width: 320px;
-	max-width: 680px;
-	width: 50%;
-	overflow: visible;
+  min-width: 100px;
+  max-width: 680px;
+  width: 50%;
+  overflow: visible;
+  transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .App-logo-wrapper .logo-main {
   fill: white;
 }
-.App-logo-wrapper .letter {  
-	opacity: 0;
-	fill: white;
+.App-logo-wrapper .letter {
+  opacity: 0;
+  fill: white;
 }
 
 .App-logo-wrapper .letter.animate {
-  animation-duration: .8s;
+  animation-duration: 0.8s;
   animation-name: animate;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
@@ -90,162 +92,160 @@
 }
 
 .App .language-select {
-	position: absolute;
-	bottom: 30px;
-	left: 30px;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
 }
 
 .App .language-select .language-list {
-	list-style: none;
-	background-color: black;
-	margin: 0;
-	padding: 0;
-	height: 0px;
-	transition: height .3s ease-out;
+  list-style: none;
+  background-color: black;
+  margin: 1px;
+  padding: 0;
+  height: 0px;
+  transition: height 0.3s ease-out;
+  font-size: 14px;
 }
 
 .App .language-select .language-list.opened {
-	height: 34px;
+  height: 28px;
 }
 
 .App .language-select li {
-	cursor: pointer;
-	color: white;
-	padding: 1px 10px;
-	padding-right: 11px;
+  cursor: pointer;
+  color: white;
+  padding: 1px 10px;
+  padding-right: 5px;
 }
 
 .App .language-select .language-active {
-	cursor: pointer;
-	color: #b8b5c0;
-	text-decoration: underline;	
-	padding: 6px 10px;
-	padding-right: 20px;
-	user-select: none;
+  cursor: pointer;
+  color: #b8b5c0;
+  text-decoration: underline;
+  padding: 6px 10px;
+  padding-right: 20px;
+  font-size: 14px;
+  user-select: none;
 }
-
-
-
 
 .loading .App-logo-wrapper,
 .loading .App-loader-wrapper {
-	opacity: 1;
-	animation: animInitialHeader 1s cubic-bezier(0.7,0,0.3,1) both;
+  opacity: 1;
+  animation: animInitialHeader 1s cubic-bezier(0.7, 0, 0.3, 1) both;
 }
 
 .loading .App-loader-wrapper {
-	animation-delay: 0.2s;
+  animation-delay: 0.2s;
 }
 
 .loaded .App-logo-wrapper,
 .loaded .App-loader-wrapper {
-	opacity: 1;
+  opacity: 1;
 }
 
-.loaded .App-logo-wrapper{
-	transform-origin: 50% 0;
-	bottom: 0px;
-	animation: animLoadedLogo 1s cubic-bezier(0.7,0,0.3,1) forwards;
+.loaded .App-logo-wrapper {
+	top: initial;
+  bottom: -86px;
+  left: 0px;
+	width: auto;
+	height: 75px;
+  transform: translate(0, 0);
 }
 
 .loaded .App-logo-wrapper svg {
-	cursor: pointer;
+  cursor: pointer;
+  width: 150px;
+  margin: 0;
 }
 
-.loaded .App-logo-wrapper svg  .letter-1.animate{
-	animation: none;
+.loaded .App-logo-wrapper svg .letter-1.animate {
+  animation: none;
 }
-
 
 .loaded .App-logo-wrapper .logo-main {
   fill: #5320ee;
 }
-.loaded  .App-logo-wrapper .letter-1 {  
-	opacity: 1;
-	fill: #5320ee;
+.loaded .App-logo-wrapper .letter-1 {
+  opacity: 1;
+  fill: #5320ee;
 }
 
 .loaded .App-loader-wrapper {
-	animation: animLoadedLoader 0.5s cubic-bezier(0.7,0,0.3,1) forwards;
+  animation: animLoadedLoader 0.5s cubic-bezier(0.7, 0, 0.3, 1) forwards;
 }
 
 .loaded .App-header {
-  animation: animLoadedHeader 1s cubic-bezier(0.7,0,0.3,1) forwards;
+  animation: animLoadedHeader 1s cubic-bezier(0.7, 0, 0.3, 1) forwards;
   background-color: #fff;
   position: absolute;
 }
 
-.loaded .App-content .DefineNeed, .loaded .App-content .DefineNeed div {
-  animation: animLoadedContent 1s cubic-bezier(0.7,0,0.3,1) both;
+.loaded .App-content .DefineNeed,
+.loaded .App-content .DefineNeed div {
+  animation: animLoadedContent 1s cubic-bezier(0.7, 0, 0.3, 1) both;
 }
-
 
 @keyframes animInitialHeader {
-	from { 
-		opacity: 0; 
-		transform: translate3d(0,800px,0); 
-	}
-}
-
-@keyframes animLoadedLogo {
-	to { 
-		transform: translate3d(-45%,100%,0) translate3d(0,-0.5%,0) scale3d(0.30,0.30,1); 
-	}
+  from {
+    opacity: 0;
+    transform: translate3d(0, 800px, 0);
+  }
 }
 
 @keyframes animLoadedLoader {
-	to { 
-		opacity: 0; 
-		transform: translate3d(0,-100%,0) scale3d(0.3,0.3,1); 
-	}
+  to {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0) scale3d(0.3, 0.3, 1);
+  }
 }
 
 @keyframes animLoadedHeader {
-	to { transform: translate3d(0,-100%,0); }
+  to {
+    transform: translate3d(0, -100%, 0);
+  }
 }
 
 @keyframes animLoadedContent {
-	from { 
-		opacity: 0; 
-		transform: translate3d(0,200px,0); 
-	}
+  from {
+    opacity: 0;
+    transform: translate3d(0, 200px, 0);
+  }
 }
-
 
 @keyframes animate {
   0% {
-    opacity: 0;    
-    transform: translate3d(0,-20%,0);
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
   }
   30% {
     opacity: 1;
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
   }
   70% {
     opacity: 1;
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
     opacity: 0;
-    transform: translate3d(0,20%,0);
+    transform: translate3d(0, 20%, 0);
   }
 }
 
 .App-content {
   overflow: hidden;
-	margin: 0 auto;
+  margin: 0 auto;
 }
 
 .tippy-tooltip {
-	font-size: .8rem !important;
-	border-radius: 0px !important;
-	background-color: #5320ee !important;
+  font-size: 0.8rem !important;
+  border-radius: 0px !important;
+  background-color: #5320ee !important;
 }
 
-.tippy-popper[x-placement^=top] [x-arrow] {
-	border-top-color: #5320ee !important;
+.tippy-popper[x-placement^="top"] [x-arrow] {
+  border-top-color: #5320ee !important;
 }
 
-.tippy-popper[x-placement^=bottom] [x-arrow] {
-	border-bottom-color: #5320ee !important;
+.tippy-popper[x-placement^="bottom"] [x-arrow] {
+  border-bottom-color: #5320ee !important;
 }

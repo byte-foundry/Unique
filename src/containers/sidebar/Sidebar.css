@@ -27,7 +27,7 @@
 
 .Sidebar .icon-profile,
 .Sidebar .icon-menu {
-  height: 25px;
+  height: 20px;
   width: auto;
   position: absolute;
   top: 20px;
@@ -35,7 +35,7 @@
 }
 
 .Sidebar .icon-profile {
-  left: 12px;
+  left: 14px;
   fill: white;
 }
 

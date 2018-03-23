@@ -205,8 +205,8 @@ class StepView extends React.Component {
           tabIndex="-1"
         >
           <div className="container">
-            <div className="row justify-content-sm-center">
-              <div className="col-sm-12 col-md-11 col-lg-10">
+            <div className="row justify-content-center">
+              <div className="col-sm-10">
                 <FormattedMessage
                   id="Shortcuts.previousAction"
                   defaultMessage="Press left key to go back"
