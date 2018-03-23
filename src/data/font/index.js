@@ -157,6 +157,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     selectedFont
   });
   console.log(selectedFont);
+  if (!selectedFont.variant) return;
   const selectedFontName = `${selectedFont.variant.family.name}${
     selectedFont.variant.name
   }`;
@@ -474,7 +475,7 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
       dispatch(push("/select"));
       break;
     case currentPreset.steps.length + 1:
-    
+
     dispatch({
       type: CHANGE_STEP,
       step: currentPreset.steps.length
@@ -484,7 +485,7 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
       dispatch(push("/specimen"));
       break;
     default:
-    
+
     dispatch({
       type: CHANGE_STEP,
       step: step || previousStep
