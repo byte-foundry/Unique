@@ -4,7 +4,9 @@
   color: white;
   min-height: 100vh;
   height: 100%;
-  position: relative;
+  position: fixed;
+  top: 0;
+  right: 0;
   border-left: 1px solid white;
   max-width: 250px;
   margin-left: auto;

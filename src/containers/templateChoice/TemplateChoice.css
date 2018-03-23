@@ -11,6 +11,7 @@
   font-weight: 400;
   margin-bottom: 40px;
   font-size: 2.5rem;
+  margin-left: -35px;
   color: black;
 }
 
@@ -35,7 +36,7 @@
   width: 35px;
   height: auto;
   cursor: pointer;
-  position: absolute;
+  position: sticky;
   top: 50%;
   transform: translateY(-50%) translateZ(0px);
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
@@ -52,10 +53,12 @@
 
 .TemplateChoice .icon-back {
   left: 15px;
+  float: left;
 }
 
 .TemplateChoice .icon-next {
   right: -75px;
+  float: right;
 }
 
 .TemplateChoice .icon-next.disabled {
