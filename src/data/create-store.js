@@ -11,7 +11,7 @@ const saveLoadConfig = {
   namespace: 'peasy',
 };
 const enhancers = [];
-const middleware = [thunk, routerMiddleware(history), save(saveLoadConfig)];
+const middleware = [thunk, routerMiddleware(history)];
 
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
@@ -23,6 +23,6 @@ if (process.env.NODE_ENV === 'development') {
 
 const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
 
-const store = createStore(rootReducer, load(saveLoadConfig), composedEnhancers);
+const store = createStore(rootReducer, composedEnhancers);
 
 export default store;

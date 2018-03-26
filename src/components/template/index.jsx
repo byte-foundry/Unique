@@ -8,13 +8,13 @@ class Template extends React.Component {
     return (
       <div
         key={`preset${this.props.font.variant.family.name}${this.props.font.variant.name}`}
-        className={`Template ${this.props.selected ? "selected" : ""} col-sm-12 col-md-11 col-lg-10`}
+        className={`Template ${this.props.selected ? "selected" : ""}`}
         onClick={this.props.onClick}
         onDoubleClick={this.props.onDoubleClick}
         style={{ fontFamily: `'${this.props.font.variant.family.name}${this.props.font.variant.name}'` }}
       >
-        {this.props.text}
-        <p className="templateName">{this.props.font.variant.family.name}</p>
+        {this.props.font.variant.family.name}
+        <p className="templateName">{`Font preset ${this.props.index}`}</p>
       </div>
     );
   }

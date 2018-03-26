@@ -1,9 +1,7 @@
 .TemplateChoice {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   min-height: 100vh;
+  margin-bottom: 50px;
 }
 
 .TemplateChoice h1, .TemplateChoice h2 {
@@ -11,7 +9,6 @@
   font-weight: 400;
   margin-bottom: 40px;
   font-size: 2.5rem;
-  margin-left: -35px;
   color: black;
 }
 
@@ -32,13 +29,12 @@
   font-size: 28px;
   color: black;
 }
+
 .TemplateChoice .icon-back, .TemplateChoice .icon-next {
   width: 35px;
   height: auto;
   cursor: pointer;
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%) translateZ(0px);
+  position: absolute;  
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
   border: 2px solid #5320ee;
   background: transparent;
@@ -51,14 +47,16 @@
   fill: #5320ee;
 }
 
-.TemplateChoice .icon-back {
-  left: 15px;
-  float: left;
+.TemplateChoice .icon-back {  
+  top: calc(50%);
+  right: -20px;
+  transform: translateX(20px) translateY(calc(50%)) translateZ(0px);
 }
 
-.TemplateChoice .icon-next {
-  right: -75px;
-  float: right;
+.TemplateChoice .icon-next {  
+  top: calc(50% + 100px);
+  right: -20px;
+  transform: translateX(20px) translateY(calc(-50% - 110px)) translateZ(0px);
 }
 
 .TemplateChoice .icon-next.disabled {

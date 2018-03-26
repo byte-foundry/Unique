@@ -181,6 +181,15 @@ class App extends React.Component {
             </header>
           )}
           <div className="App-content container-fluid">
+            <div className="row logo-mobile">
+              <div className="col-sm-12">
+                <Logo
+                  onClick={() => {
+                    this.props.goToHome();
+                  }}
+                />
+              </div>
+            </div>
             <div className="row">
               <div
                 className={`left col-sm-${
@@ -269,59 +278,65 @@ class App extends React.Component {
                 toggleTooltips={this.props.toggleTooltips}
               />
             )}
-            <div className="language-select">
-              <ul
-                className={`language-list ${
-                  this.state.isLanguageMenuOpen ? "opened" : ""
-                }`}
-              >
-                {Object.keys(supportedLanguages).map(
-                  (key, index) =>
-                    key !== this.props.locale ? (
-                      <li
-                        style={{
-                          backgroundColor:
-                            this.props.location.pathname === "/auth" ||
-                            (!this.props.isBlackOnWhite && this.props.location.pathname === "/customize")
-                              ? "white"
-                              : "black",
-                          color:
-                            this.props.location.pathname === "/auth" ||
-                            (!this.props.isBlackOnWhite && this.props.location.pathname === "/customize")
-                              ? "black"
-                              : "white"
-                        }}
-                        onClick={() => {
-                          this.props.setLocale(key);
-                          this.setState({
-                            isLanguageMenuOpen: false
-                          });
-                        }}
-                      >
-                        {supportedLanguages[key]}
-                      </li>
-                    ) : (
-                      false
-                    )
-                )}
-              </ul>
-              <span
-                className="language-active"
-                style={{
-                  backgroundColor:
-                    this.props.location.pathname === "/auth" ||
-                    (!this.props.isBlackOnWhite && this.props.location.pathname === "/customize")
-                      ? "black"
-                      : "white"
-                }}
-                onClick={() => {
-                  this.setState({
-                    isLanguageMenuOpen: !this.state.isLanguageMenuOpen
-                  });
-                }}
-              >
-                {supportedLanguages[this.props.locale]}
-              </span>
+
+            <div className="row">
+              <div className="col-sm-12">
+                <div
+                  className="language-active"
+                  style={{
+                    backgroundColor:
+                      this.props.location.pathname === "/auth" ||
+                      (!this.props.isBlackOnWhite &&
+                        this.props.location.pathname === "/customize")
+                        ? "black"
+                        : "white"
+                  }}
+                  onClick={() => {
+                    this.setState({
+                      isLanguageMenuOpen: !this.state.isLanguageMenuOpen
+                    });
+                  }}
+                >
+                  <div
+                    className={`language-select ${
+                      this.state.isLanguageMenuOpen ? "opened" : ""
+                    }`}
+                  >
+                    {Object.keys(supportedLanguages).map(
+                      (key, index) =>
+                        key !== this.props.locale ? (
+                          <p
+                            style={{
+                              backgroundColor:
+                                this.props.location.pathname === "/auth" ||
+                                (!this.props.isBlackOnWhite &&
+                                  this.props.location.pathname === "/customize")
+                                  ? "white"
+                                  : "black",
+                              color:
+                                this.props.location.pathname === "/auth" ||
+                                (!this.props.isBlackOnWhite &&
+                                  this.props.location.pathname === "/customize")
+                                  ? "black"
+                                  : "white"
+                            }}
+                            onClick={() => {
+                              this.props.setLocale(key);
+                              this.setState({
+                                isLanguageMenuOpen: false
+                              });
+                            }}
+                          >
+                            {supportedLanguages[key]}
+                          </p>
+                        ) : (
+                          false
+                        )
+                    )}
+                  </div>
+                  {supportedLanguages[this.props.locale]}
+                </div>
+              </div>
             </div>
           </div>
         </main>

@@ -91,34 +91,8 @@
   cursor: pointer;
 }
 
-.App .language-select {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-}
 
-.App .language-select .language-list {
-  list-style: none;
-  background-color: black;
-  margin: 1px;
-  padding: 0;
-  height: 0px;
-  transition: height 0.3s ease-out;
-  font-size: 16px;
-}
-
-.App .language-select .language-list.opened {
-  height: 28px;
-}
-
-.App .language-select li {
-  cursor: pointer;
-  color: white;
-  padding: 1px 10px;
-  padding-right: 5px;
-}
-
-.App .language-select .language-active {
+.App  .language-active {
   cursor: pointer;
   color: #b8b5c0;
   text-decoration: underline;
@@ -126,12 +100,41 @@
   padding-right: 20px;
   font-size: 16px;
   user-select: none;
+  display: inline;
+  position: relative;
 }
+
+.App .language-select {
+  float:left;
+  position:absolute;
+  bottom: 35px;
+  left: 0;
+  font-size: 16px;
+  height: 0;
+  overflow: hidden;
+  transition: height .3s ease;
+}
+
+
+.App .language-select.opened {
+  height: 38px;
+}
+
+.App .language-select p {
+  cursor: pointer;  
+  background-color: black;
+  color: white;
+  padding: 6px 10px;
+  display: inline;
+  display: block;
+  margin: 0;
+}
+
+
 
 .loading .App-logo-wrapper,
 .loading .App-loader-wrapper {
   opacity: 1;
-  animation: animInitialHeader 1s cubic-bezier(0.7, 0, 0.3, 1) both;
 }
 
 .loading .App-loader-wrapper {
@@ -183,13 +186,6 @@
 .loaded .App-content .DefineNeed,
 .loaded .App-content .DefineNeed div {
   animation: animLoadedContent 1s cubic-bezier(0.7, 0, 0.3, 1) both;
-}
-
-@keyframes animInitialHeader {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 800px, 0);
-  }
 }
 
 @keyframes animLoadedLoader {
@@ -248,4 +244,38 @@
 
 .tippy-popper[x-placement^="bottom"] [x-arrow] {
   border-bottom-color: #5320ee !important;
+}
+
+
+.App .logo-mobile {
+  display: none;
+}
+
+.App .logo-mobile svg {
+  cursor: pointer;
+  width: 150px;
+  margin: 0;
+}
+
+.App .logo-mobile .logo-main {
+  fill: #5320ee;
+}
+
+.App .logo-mobile .letter {
+  opacity: 0;
+}
+
+.App .logo-mobile .letter-1 {
+  opacity: 1;
+  fill: #5320ee;
+}
+
+@media (max-width: 1800px) {
+  .App.loaded .App-logo-wrapper {
+    display: none;
+  }
+
+  .App .logo-mobile {
+    display: block;
+  }
 }

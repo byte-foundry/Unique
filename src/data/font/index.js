@@ -156,8 +156,10 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     type: SELECT_FONT_REQUESTED,
     selectedFont
   });
-  console.log(selectedFont);
-  if (!selectedFont.variant) return;
+  if (!selectedFont.variant) {
+    dispatch(push('/'));
+    return;
+  };
   const selectedFontName = `${selectedFont.variant.family.name}${
     selectedFont.variant.name
   }`;
