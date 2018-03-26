@@ -512,7 +512,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
   let { step, currentParams } = getState().font;
 
   // If choice not in the step, do nothing
-  if (!currentPreset.steps[step - 1].choices.find(e => e.id === choice.id)) {
+  if (!currentPreset.steps[step - 1].choices.find(e => e.id === choice.id) && choice.name !== 'Custom') {
     return;
   }
 
