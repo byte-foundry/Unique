@@ -1,13 +1,23 @@
 [
   {
+    "id": "Shortcuts.previousAction",
+    "description": "Shortcut - previous action",
+    "defaultMessage": "Press left key to go back"
+  },
+  {
+    "id": "Shortcuts.chooseChoice",
+    "description": "Shortcut - up down choice action",
+    "defaultMessage": "Press up and down keys to choose the most suitable option"
+  },
+  {
     "id": "StepView.customChoiceName",
     "description": "Custom choice name",
     "defaultMessage": "Custom"
   },
   {
-    "id": "StepView.customButtonMore",
-    "description": "More accuracy button - more state",
-    "defaultMessage": "More accuracy"
+    "id": "Shortcuts.nextAction",
+    "description": "Shortcut - next action",
+    "defaultMessage": "Press right key to move forward"
   },
   {
     "id": "StepView.customButtonLess",
@@ -15,23 +25,28 @@
     "defaultMessage": "Less accuracy"
   },
   {
-    "id": "StepView.blackOnWhiteTooltipOn",
-    "description": "Black on white mode - On State",
-    "defaultMessage": "Toggle white on black mode"
+    "id": "StepView.customButtonMore",
+    "description": "More accuracy button - more state",
+    "defaultMessage": "More accuracy"
   },
   {
-    "id": "StepView.blackOnWhiteTooltipOff",
-    "description": "Black on white mode - Off State",
+    "id": "Shortcuts.blackOnWhiteAction",
+    "description": "Black on white mode - toggle",
+    "defaultMessage": "Press G key to toggle white on black mode"
+  },
+  {
+    "id": "StepView.blackOnWhiteTooltip",
+    "description": "Black on white mode - toggle",
     "defaultMessage": "Toggle black on white mode"
   },
   {
-    "id": "StepView.glyphTooltipOn",
-    "description": "Glyph mode - On State",
-    "defaultMessage": "Toggle glyph"
+    "id": "Shortcuts.glyphAction",
+    "description": "Glyph mode - toggle",
+    "defaultMessage": "Press G key to toggle glyph mode"
   },
   {
-    "id": "StepView.glyphTooltipOff",
-    "description": "Glyph mode - Off State",
-    "defaultMessage": "Toggle regular mode"
+    "id": "StepView.glyphTooltip",
+    "description": "Glyph mode - toggle",
+    "defaultMessage": "Toggle glyph mode"
   }
 ]

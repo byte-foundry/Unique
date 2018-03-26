@@ -1,6 +1,7 @@
 .TemplateChoice {
   position: relative;
   min-height: 100vh;
+  padding-top: 100px;
   margin-bottom: 50px;
 }
 

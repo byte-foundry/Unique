@@ -2,66 +2,51 @@
   {
     "id": "SpecimenView.title",
     "description": "Speciem view title",
-    "defaultMessage": "It's a match!"
+    "defaultMessage": "Congrats, you're almost done!"
   },
   {
     "id": "SpecimenView.subtitle",
     "description": "Speciem view subtitle",
-    "defaultMessage": "You have created the perfect bespoke font that fits your needs."
+    "defaultMessage": "Embark on new adventures with your complete glyph set! But before you move on, let's give your font a name"
   },
   {
-    "id": "SpecimenView.word",
-    "description": "Speciem view word",
-    "defaultMessage": "Word"
+    "id": "SpecimenView.nameActionLabel",
+    "description": "SpecimenView - Name action label",
+    "defaultMessage": "Give your font a name:"
+  },
+  {
+    "id": "SpecimenView.nameAction",
+    "description": "SpecimenView - Name action",
+    "defaultMessage": "My font name"
+  },
+  {
+    "id": "SpecimenView.subtitleBack",
+    "description": "Speciem view back subtitle",
+    "defaultMessage": "Not quite right? Just click trough the menu to edit"
+  },
+  {
+    "id": "SpecimenView.downloadAction",
+    "description": "SpecimenView - Download action",
+    "defaultMessage": "Download"
+  },
+  {
+    "id": "SpecimenView.saveAction",
+    "description": "SpecimenView - Save action",
+    "defaultMessage": "Save it for later"
+  },
+  {
+    "id": "SpecimenView.display",
+    "description": "Specimen view display",
+    "defaultMessage": "Display"
   },
   {
     "id": "SpecimenView.characters",
-    "description": "Speciem view characters",
+    "description": "Specimen view characters",
     "defaultMessage": "Characters"
   },
   {
-    "id": "SpecimenView.greyScale",
-    "description": "Speciem view greyscale",
-    "defaultMessage": "Greyscale"
-  },
-  {
-    "id": "SpecimenView.downloadCTA",
-    "description": "Speciem view download cta",
-    "defaultMessage": "If you like your font, download it!"
-  },
-  {
-    "id": "SpecimenView.fontName",
-    "description": "Speciem view fontName cta",
-    "defaultMessage": "What would be the name of your font?"
-  },
-  {
-    "id": "SpecimenView.fontNamePlaceholder",
-    "description": "Specimen view fontName placeholder",
-    "defaultMessage": "Your font name"
-  },
-  {
-    "id": "SpecimenView.notLoggedIn1",
-    "description": "Speciem view not logged in - first",
-    "defaultMessage": "You are not logged in."
-  },
-  {
-    "id": "SpecimenView.notLoggedIn2",
-    "description": "Speciem view not logged in - Second",
-    "defaultMessage": "Do you want to Log in / Create an account to save your project ?"
-  },
-  {
-    "id": "SpecimenView.logInButton",
-    "description": "Specimen view login button",
-    "defaultMessage": "Log in"
-  },
-  {
-    "id": "SpecimenView.withoutAccount",
-    "description": "Speciem view - without account",
-    "defaultMessage": "You can also continue without an account."
-  },
-  {
-    "id": "SpecimenView.continueUnregisteredButton",
-    "description": "Specimen view continue unregistered button",
-    "defaultMessage": "Continue unregistered"
+    "id": "SpecimenView.text",
+    "description": "Speciem view text",
+    "defaultMessage": "Text"
   }
 ]

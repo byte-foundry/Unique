@@ -65,7 +65,7 @@ class Checkout extends React.Component {
         {
           name: (
             <FormattedMessage
-              id="CheckoutView.LightOption"
+              id="CheckoutView.BoldOption"
               defaultMessage="Bold variant"
               description="Bold"
             />
@@ -79,7 +79,7 @@ class Checkout extends React.Component {
         {
           name: (
             <FormattedMessage
-              id="CheckoutView.LightOption"
+              id="CheckoutView.ItalicOption"
               defaultMessage="Italic variant"
               description="Italic"
             />

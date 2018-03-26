@@ -12,6 +12,7 @@
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Define need page title</description>
+                        <comment></comment>
                         <default_text>What kind of need do you have?</default_text>
                         <translations>
                             <translation>
@@ -28,6 +29,7 @@
                         <name>logo</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Logo need</description>
+                        <comment></comment>
                         <default_text>Logotype</default_text>
                         <translations>
                             <translation>
@@ -44,6 +46,7 @@
                         <name>logoTooltip</name>
                         <definition_loaded>false</definition_loaded>
                         <description>logo need tooltip</description>
+                        <comment></comment>
                         <default_text>A logo font is blablabla blablabla blablabla</default_text>
                         <translations>
                             <translation>
@@ -60,6 +63,7 @@
                         <name>text</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Text need</description>
+                        <comment></comment>
                         <default_text>Text</default_text>
                         <translations>
                             <translation>
@@ -76,6 +80,7 @@
                         <name>textTooltip</name>
                         <definition_loaded>false</definition_loaded>
                         <description>text need tooltip</description>
+                        <comment></comment>
                         <default_text>A text font is blablabla blablabla blablabla</default_text>
                         <translations>
                             <translation>
@@ -92,6 +97,7 @@
                         <name>website</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Website need</description>
+                        <comment></comment>
                         <default_text>Website</default_text>
                         <translations>
                             <translation>
@@ -108,6 +114,7 @@
                         <name>websiteTooltip</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Website need tooltip</description>
+                        <comment></comment>
                         <default_text>A website font is blablabla blablabla blablabla</default_text>
                         <translations>
                             <translation>
@@ -124,6 +131,7 @@
                         <name>brandTitle</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Brand name question</description>
+                        <comment></comment>
                         <default_text>What is your brand name?</default_text>
                         <translations>
                             <translation>
@@ -140,6 +148,7 @@
                         <name>brandInput</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Brand input placeholder</description>
+                        <comment></comment>
                         <default_text>Type something</default_text>
                         <translations>
                             <translation>
@@ -160,8 +169,9 @@
                     <concept_node>
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Template choice page title</description>
-                        <default_text>Select one of our templates and start editing!</default_text>
+                        <description>TemplateChoice page title</description>
+                        <comment></comment>
+                        <default_text>Pick one of our templates and get started!</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -182,7 +192,8 @@
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Speciem view title</description>
-                        <default_text>It's a match!</default_text>
+                        <comment></comment>
+                        <default_text>Congrats, you're almost done!</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -198,7 +209,8 @@
                         <name>subtitle</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Speciem view subtitle</description>
-                        <default_text>You have created the perfect bespoke font that fits your needs.</default_text>
+                        <comment></comment>
+                        <default_text>Embark on new adventures with your complete glyph set! But before you move on, let's give your font a name</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -213,8 +225,9 @@
                     <concept_node>
                         <name>word</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Speciem view word</description>
-                        <default_text>Word</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -229,7 +242,8 @@
                     <concept_node>
                         <name>characters</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Speciem view characters</description>
+                        <description>Specimen view characters</description>
+                        <comment></comment>
                         <default_text>Characters</default_text>
                         <translations>
                             <translation>
@@ -245,8 +259,9 @@
                     <concept_node>
                         <name>greyScale</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Speciem view greyscale</description>
-                        <default_text>Greyscale</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -261,8 +276,9 @@
                     <concept_node>
                         <name>downloadCTA</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Speciem view download cta</description>
-                        <default_text>If you like your font, download it!</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -277,8 +293,9 @@
                     <concept_node>
                         <name>fontName</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Speciem view fontName cta</description>
-                        <default_text>What would be the name of your font?</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -293,8 +310,9 @@
                     <concept_node>
                         <name>fontNamePlaceholder</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Specimen view fontName placeholder</description>
-                        <default_text>Your font name</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -309,8 +327,9 @@
                     <concept_node>
                         <name>notLoggedIn1</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Speciem view not logged in - first</description>
-                        <default_text>You are not logged in.</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -325,8 +344,9 @@
                     <concept_node>
                         <name>notLoggedIn2</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Speciem view not logged in - Second</description>
-                        <default_text>Do you want to Log in / Create an account to save your project ?</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -341,8 +361,9 @@
                     <concept_node>
                         <name>logInButton</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Specimen view login button</description>
-                        <default_text>Log in</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -357,8 +378,9 @@
                     <concept_node>
                         <name>withoutAccount</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Speciem view - without account</description>
-                        <default_text>You can also continue without an account.</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -373,8 +395,128 @@
                     <concept_node>
                         <name>continueUnregisteredButton</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Specimen view continue unregistered button</description>
-                        <default_text>Continue unregistered</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>nameActionLabel</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>SpecimenView - Name action label</description>
+                        <comment></comment>
+                        <default_text>Give your font a name:</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>nameAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>SpecimenView - Name action</description>
+                        <comment></comment>
+                        <default_text>My font name</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>subtitleBack</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Speciem view back subtitle</description>
+                        <comment></comment>
+                        <default_text>Not quite right? Just click trough the menu to edit</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>downloadAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>SpecimenView - Download action</description>
+                        <comment></comment>
+                        <default_text>Download</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>saveAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>SpecimenView - Save action</description>
+                        <comment></comment>
+                        <default_text>Save it for later</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>display</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Specimen view display</description>
+                        <comment></comment>
+                        <default_text>Display</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>text</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Speciem view text</description>
+                        <comment></comment>
+                        <default_text>Text</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -395,6 +537,7 @@
                         <name>customChoiceName</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Custom choice name</description>
+                        <comment></comment>
                         <default_text>Custom</default_text>
                         <translations>
                             <translation>
@@ -411,6 +554,7 @@
                         <name>customButtonMore</name>
                         <definition_loaded>false</definition_loaded>
                         <description>More accuracy button - more state</description>
+                        <comment></comment>
                         <default_text>More accuracy</default_text>
                         <translations>
                             <translation>
@@ -427,6 +571,7 @@
                         <name>customButtonLess</name>
                         <definition_loaded>false</definition_loaded>
                         <description>More accuracy button - less state</description>
+                        <comment></comment>
                         <default_text>Less accuracy</default_text>
                         <translations>
                             <translation>
@@ -442,8 +587,9 @@
                     <concept_node>
                         <name>blackOnWhiteTooltipOn</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Black on white mode - On State</description>
-                        <default_text>Toggle white on black mode</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -458,8 +604,9 @@
                     <concept_node>
                         <name>blackOnWhiteTooltipOff</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Black on white mode - Off State</description>
-                        <default_text>Toggle black on white mode</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -474,8 +621,9 @@
                     <concept_node>
                         <name>glyphTooltipOn</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Glyph mode - On State</description>
-                        <default_text>Toggle glyph</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -490,8 +638,43 @@
                     <concept_node>
                         <name>glyphTooltipOff</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Glyph mode - Off State</description>
-                        <default_text>Toggle regular mode</default_text>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>blackOnWhiteTooltip</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Black on white mode - toggle</description>
+                        <comment></comment>
+                        <default_text>Toggle black on white mode</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>glyphTooltip</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Glyph mode - toggle</description>
+                        <comment></comment>
+                        <default_text>Toggle glyph mode</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -512,6 +695,7 @@
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Welcome back page title</description>
+                        <comment></comment>
                         <default_text>Welcome back,</default_text>
                         <translations>
                             <translation>
@@ -528,6 +712,7 @@
                         <name>resumeProject</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Welcome back resume project</description>
+                        <comment></comment>
                         <default_text>Resume your project</default_text>
                         <translations>
                             <translation>
@@ -544,7 +729,628 @@
                         <name>createNewProject</name>
                         <definition_loaded>false</definition_loaded>
                         <description>Welcome back create new project</description>
+                        <comment></comment>
                         <default_text>Create a new one</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                </children>
+            </folder_node>
+            <folder_node>
+                <name>Auth</name>
+                <children>
+                    <concept_node>
+                        <name>SignUpEmailLabel</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Sign up form email label</description>
+                        <comment></comment>
+                        <default_text>Email</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SignUpPasswordLabel</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Sign up form password label</description>
+                        <comment></comment>
+                        <default_text>Password</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>LogInFormButton</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Login page log in form button</description>
+                        <comment></comment>
+                        <default_text>Log in</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SignUpFirstNameLabel</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Sign up form first name label</description>
+                        <comment></comment>
+                        <default_text>First name</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SignUpLastNameLabel</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Sign up form last name label</description>
+                        <comment></comment>
+                        <default_text>Last name</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SignUpFormButton</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Login page sign up form button</description>
+                        <comment></comment>
+                        <default_text>Sign up</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SignInHeader</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Sign in header message</description>
+                        <comment></comment>
+                        <default_text>Welcome back</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SaveFontMessage</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Sign in header message if the user has saved a font</description>
+                        <comment></comment>
+                        <default_text>Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BoughtFontMessage</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Sign in header message if the user has bought a font</description>
+                        <comment></comment>
+                        <default_text>Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SignUpHeader</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Sign up header message</description>
+                        <comment></comment>
+                        <default_text>Nice to meet you</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SocialMessage</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Login page social auth CTA message</description>
+                        <comment></comment>
+                        <default_text>Or sign up with</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SignUpCTA</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Login page sign up CTA</description>
+                        <comment></comment>
+                        <default_text>New here ?</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SignUpButton</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Login page sign up switch button</description>
+                        <comment></comment>
+                        <default_text>Create an account</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SignInCTA</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Login page sign in CTA</description>
+                        <comment></comment>
+                        <default_text>Already have an account ?</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SignInButton</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Login page sign in switch button</description>
+                        <comment></comment>
+                        <default_text>Login</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                </children>
+            </folder_node>
+            <folder_node>
+                <name>CheckoutView</name>
+                <children>
+                    <concept_node>
+                        <name>OtfOption</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Otf</description>
+                        <comment></comment>
+                        <default_text>OTF file</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>SpecimenOption</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Specimen</description>
+                        <comment></comment>
+                        <default_text>Specimen</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>LightOption</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Light</description>
+                        <comment></comment>
+                        <default_text>Light variant</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>BoldOption</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Bold</description>
+                        <comment></comment>
+                        <default_text>Bold variant</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>ItalicOption</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Italic</description>
+                        <comment></comment>
+                        <default_text>Italic variant</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>title</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Checkout view title</description>
+                        <comment></comment>
+                        <default_text>Create your Unique package:</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                </children>
+            </folder_node>
+            <folder_node>
+                <name>Library</name>
+                <children>
+                    <concept_node>
+                        <name>title</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Library page title</description>
+                        <comment></comment>
+                        <default_text>Hello!</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>actionCreate</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Library action new project</description>
+                        <comment></comment>
+                        <default_text>Create a new project</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>actionReload</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Libraryaction restart project</description>
+                        <comment></comment>
+                        <default_text>Restart your project</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>savedProjectsTitle</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Library saved projects title</description>
+                        <comment></comment>
+                        <default_text>Saved Projects</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>deleteAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Library delete project button</description>
+                        <comment></comment>
+                        <default_text>Delete</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>openAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Library open project button</description>
+                        <comment></comment>
+                        <default_text>Open</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>boughtProjectsTitle</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Library bought projects title</description>
+                        <comment></comment>
+                        <default_text>Bought Projects</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>downloadAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Library download project button</description>
+                        <comment></comment>
+                        <default_text>Download</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                </children>
+            </folder_node>
+            <folder_node>
+                <name>Sidebar</name>
+                <children>
+                    <concept_node>
+                        <name>checkoutAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Sidebar - Checkout action</description>
+                        <comment></comment>
+                        <default_text>Checkout</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                </children>
+            </folder_node>
+            <folder_node>
+                <name>Shortcuts</name>
+                <children>
+                    <concept_node>
+                        <name>previousAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Shortcut - previous action</description>
+                        <comment></comment>
+                        <default_text>Press left key to go back</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>chooseChoice</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Shortcut - up down choice action</description>
+                        <comment></comment>
+                        <default_text>Press up and down keys to choose the most suitable option</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>nextAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Shortcut - next action</description>
+                        <comment></comment>
+                        <default_text>Press right key to move forward</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>blackOnWhiteAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Black on white mode - toggle</description>
+                        <comment></comment>
+                        <default_text>Press G key to toggle white on black mode</default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>glyphAction</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Glyph mode - toggle</description>
+                        <comment></comment>
+                        <default_text>Press G key to toggle glyph mode</default_text>
                         <translations>
                             <translation>
                                 <language>en-US</language>
@@ -564,14 +1370,14 @@
         <translation_file>
             <language>en-US</language>
             <file>locale_en.json</file>
-            <file_size>1835</file_size>
-            <modification_timestamp>1519661617</modification_timestamp>
+            <file_size>4144</file_size>
+            <modification_timestamp>1522082432</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>fr-FR</language>
             <file>locale_fr.json</file>
-            <file_size>1956</file_size>
-            <modification_timestamp>1519661617</modification_timestamp>
+            <file_size>3248</file_size>
+            <modification_timestamp>1522082432</modification_timestamp>
         </translation_file>
     </translation_files>
     <editor_configuration>
@@ -581,7 +1387,7 @@
             <copy_template></copy_template>
         </copy_templates>
     </editor_configuration>
-    <primary_language>en-US</primary_language>
+    <primary_language></primary_language>
     <configuration>
         <definitions>.</definitions>
         <indent>tab</indent>

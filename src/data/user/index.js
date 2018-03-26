@@ -51,7 +51,7 @@ const initialState = {
   projectID: undefined,
   projectName: undefined,
   shouldLogout: false,
-  fontSize: 70,
+  fontSize: 50,
   isBlackOnWhite: true,
   isGlyphMode: false,
   chosenGlyph: DEFAULT_UI_GLYPH,

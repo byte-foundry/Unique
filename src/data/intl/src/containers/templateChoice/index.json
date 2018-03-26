@@ -1,7 +1,7 @@
 [
   {
     "id": "TemplateChoice.title",
-    "description": "Template choice page title",
-    "defaultMessage": "Select one of our templates and start editing!"
+    "description": "TemplateChoice page title",
+    "defaultMessage": "Pick one of our templates and get started!"
   }
 ]

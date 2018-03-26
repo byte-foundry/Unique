@@ -1,0 +1,77 @@
+[
+  {
+    "id": "Auth.SignUpEmailLabel",
+    "description": "Sign up form email label",
+    "defaultMessage": "Email"
+  },
+  {
+    "id": "Auth.SignUpPasswordLabel",
+    "description": "Sign up form password label",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "Auth.LogInFormButton",
+    "description": "Login page log in form button",
+    "defaultMessage": "Log in"
+  },
+  {
+    "id": "Auth.SignUpFirstNameLabel",
+    "description": "Sign up form first name label",
+    "defaultMessage": "First name"
+  },
+  {
+    "id": "Auth.SignUpLastNameLabel",
+    "description": "Sign up form last name label",
+    "defaultMessage": "Last name"
+  },
+  {
+    "id": "Auth.SignUpFormButton",
+    "description": "Login page sign up form button",
+    "defaultMessage": "Sign up"
+  },
+  {
+    "id": "Auth.SignInHeader",
+    "description": "Sign in header message",
+    "defaultMessage": "Welcome back"
+  },
+  {
+    "id": "Auth.SaveFontMessage",
+    "description": "Sign in header message if the user has saved a font",
+    "defaultMessage": "Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+  },
+  {
+    "id": "Auth.BoughtFontMessage",
+    "description": "Sign in header message if the user has bought a font",
+    "defaultMessage": "Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+  },
+  {
+    "id": "Auth.SignUpHeader",
+    "description": "Sign up header message",
+    "defaultMessage": "Nice to meet you"
+  },
+  {
+    "id": "Auth.SocialMessage",
+    "description": "Login page social auth CTA message",
+    "defaultMessage": "Or sign up with"
+  },
+  {
+    "id": "Auth.SignUpCTA",
+    "description": "Login page sign up CTA",
+    "defaultMessage": "New here ?"
+  },
+  {
+    "id": "Auth.SignUpButton",
+    "description": "Login page sign up switch button",
+    "defaultMessage": "Create an account"
+  },
+  {
+    "id": "Auth.SignInCTA",
+    "description": "Login page sign in CTA",
+    "defaultMessage": "Already have an account ?"
+  },
+  {
+    "id": "Auth.SignInButton",
+    "description": "Login page sign in switch button",
+    "defaultMessage": "Login"
+  }
+]

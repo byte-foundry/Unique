@@ -17,9 +17,7 @@ class Choice extends React.Component {
   render() {
     return (
       <div
-        className={`Choice ${this.props.selected ? 'selected' : ''}  ${
-          this.props.isGlyphMode ? 'col-sm-4' : 'auto'
-        } ${this.props.isBlackOnWhite ? '' : 'whiteOnBlack'} ${
+        className={`Choice ${this.props.selected ? 'selected' : ''}  ${this.props.isBlackOnWhite ? '' : 'whiteOnBlack'} ${
           this.props.isGlyphMode ? 'glyphMode' : ''
         }`}
         key={this.props.choice.name}
@@ -29,7 +27,7 @@ class Choice extends React.Component {
         aria-checked="false"
         aria-selected="false"
         tabIndex={0}
-        style={{ fontFamily: `choiceFont${this.props.index}` }}
+        style={{ fontFamily: `choiceFont${this.props.index}`, fontSize: `${this.props.fontSize}px` }}
         onMouseEnter={() => {
           this.setState({ isHovered: true });
         }}
@@ -101,6 +99,7 @@ Choice.propTypes = {
   storeChosenGlyph: PropTypes.func.isRequired,
   enableShortcuts: PropTypes.func.isRequired,
   disableShortcuts: PropTypes.func.isRequired,
+  fontSize: PropTypes.number.isRequired,
 };
 
 Choice.defaultProps = {

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "Library.title",
+    "description": "Library page title",
+    "defaultMessage": "Hello!"
+  },
+  {
+    "id": "Library.actionCreate",
+    "description": "Library action new project",
+    "defaultMessage": "Create a new project"
+  },
+  {
+    "id": "Library.actionReload",
+    "description": "Libraryaction restart project",
+    "defaultMessage": "Restart your project"
+  },
+  {
+    "id": "Library.savedProjectsTitle",
+    "description": "Library saved projects title",
+    "defaultMessage": "Saved Projects"
+  },
+  {
+    "id": "Library.deleteAction",
+    "description": "Library delete project button",
+    "defaultMessage": "Delete"
+  },
+  {
+    "id": "Library.openAction",
+    "description": "Library open project button",
+    "defaultMessage": "Open"
+  },
+  {
+    "id": "Library.boughtProjectsTitle",
+    "description": "Library bought projects title",
+    "defaultMessage": "Bought Projects"
+  },
+  {
+    "id": "Library.downloadAction",
+    "description": "Library download project button",
+    "defaultMessage": "Download"
+  }
+]

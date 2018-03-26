@@ -1,0 +1,32 @@
+[
+  {
+    "id": "CheckoutView.OtfOption",
+    "description": "Otf",
+    "defaultMessage": "OTF file"
+  },
+  {
+    "id": "CheckoutView.SpecimenOption",
+    "description": "Specimen",
+    "defaultMessage": "Specimen"
+  },
+  {
+    "id": "CheckoutView.LightOption",
+    "description": "Light",
+    "defaultMessage": "Light variant"
+  },
+  {
+    "id": "CheckoutView.BoldOption",
+    "description": "Bold",
+    "defaultMessage": "Bold variant"
+  },
+  {
+    "id": "CheckoutView.ItalicOption",
+    "description": "Italic",
+    "defaultMessage": "Italic variant"
+  },
+  {
+    "id": "CheckoutView.title",
+    "description": "Checkout view title",
+    "defaultMessage": "Create your Unique package:"
+  }
+]
