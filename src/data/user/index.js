@@ -30,6 +30,7 @@ export const STORE_CHOSEN_WORD = "user/STORE_CHOSEN_WORD";
 export const STORE_CHOSEN_GLYPH = "user/STORE_CHOSEN_GLYPH";
 export const PAYMENT_SUCCESSFUL = "user/PAYMENT_SUCCESSFUL";
 export const CONNECT_TO_GRAPHCOOL = "user/CONNECT_TO_GRAPHCOOL";
+export const LOGIN_ERROR = "user/LOGIN_ERROR";
 export const STORE_PROJECT = "user/STORE_PROJECT";
 export const STORE_PROJECTS = "user/STORE_PROJECTS";
 export const STORE_PROJECT_INFOS = "user/STORE_PROJECT_INFOS";
@@ -58,7 +59,8 @@ const initialState = {
   checkoutOptions: [],
   checkoutPrice: BASE_PACK_PRICE,
   userFontName: "",
-  graphQLToken: undefined
+  graphQLToken: undefined,
+  authError: ""
 };
 
 export default (state = initialState, action) => {
@@ -102,7 +104,8 @@ export default (state = initialState, action) => {
         email: action.email,
         graphQLToken: action.graphQLToken,
         projects: action.projects,
-        shouldLogout: action.shouldLogout
+        shouldLogout: action.shouldLogout,
+        authError: ""
       };
 
     case STORE_PROJECT:
@@ -178,6 +181,12 @@ export default (state = initialState, action) => {
         ...state,
         checkoutOptions: [],
         checkoutPrice: BASE_PACK_PRICE
+      };
+
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        authError: action.authError
       };
     default:
       return state;
@@ -447,7 +456,13 @@ export const loginWithTwitter = (
     .then(res => {
       dispatch(loginToGraphCool(res.authenticateTwitterUser.token, authData));
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: LOGIN_ERROR,
+        authError: err
+      });
+    });
 };
 
 export const loginWithFacebook = (response, authData) => dispatch => {
@@ -456,7 +471,13 @@ export const loginWithFacebook = (response, authData) => dispatch => {
     .then(res => {
       dispatch(loginToGraphCool(res.authenticateFacebookUser.token, authData));
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: LOGIN_ERROR,
+        authError: err
+      });
+    });
 };
 
 export const loginWithGoogle = (response, authData) => dispatch => {
@@ -467,7 +488,13 @@ export const loginWithGoogle = (response, authData) => dispatch => {
     .then(res => {
       dispatch(loginToGraphCool(res.authenticateGoogleUser.token, authData));
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: LOGIN_ERROR,
+        authError: err
+      });
+    });
 };
 
 export const loginWithEmail = (email, password, authData) => dispatch => {
@@ -475,7 +502,13 @@ export const loginWithEmail = (email, password, authData) => dispatch => {
     .then(res => {
       dispatch(loginToGraphCool(res.authenticateEmailUser.token, authData));
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: LOGIN_ERROR,
+        authError: err.response.errors[0].functionError,
+      });
+    });
 };
 
 export const signupWithEmail = (

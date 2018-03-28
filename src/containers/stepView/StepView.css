@@ -187,6 +187,7 @@
 .StepView .icon-highFontSize,
 .StepView .icon-lowFontSize {
   margin: 0px 10px;
+  cursor: pointer;
 }
 
 .StepView .icon-highFontSize path,

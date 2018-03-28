@@ -5,9 +5,24 @@
     "defaultMessage": "Email"
   },
   {
+    "id": "Auth.RequiredEmailError",
+    "description": "Form error email required",
+    "defaultMessage": "Email required"
+  },
+  {
+    "id": "Auth.InvalidEmailError",
+    "description": "Form error Email invalid",
+    "defaultMessage": "Email invalid"
+  },
+  {
     "id": "Auth.SignUpPasswordLabel",
     "description": "Sign up form password label",
     "defaultMessage": "Password"
+  },
+  {
+    "id": "Auth.RequiredPasswordError",
+    "description": "Form error Password required",
+    "defaultMessage": "Password required"
   },
   {
     "id": "Auth.LogInFormButton",
@@ -20,6 +35,11 @@
     "defaultMessage": "First name"
   },
   {
+    "id": "Auth.RequiredFirstNameError",
+    "description": "Form error first name required",
+    "defaultMessage": "First name required"
+  },
+  {
     "id": "Auth.SignUpLastNameLabel",
     "description": "Sign up form last name label",
     "defaultMessage": "Last name"
@@ -28,6 +48,26 @@
     "id": "Auth.SignUpFormButton",
     "description": "Login page sign up form button",
     "defaultMessage": "Sign up"
+  },
+  {
+    "id": "Auth.HappyMessage1",
+    "description": "Sign in happy word 1",
+    "defaultMessage": "Yay"
+  },
+  {
+    "id": "Auth.HappyMessage2",
+    "description": "Sign in happy word 2",
+    "defaultMessage": "Hooray"
+  },
+  {
+    "id": "Auth.HappyMessage3",
+    "description": "Sign in happy word 3",
+    "defaultMessage": "Woo"
+  },
+  {
+    "id": "Auth.SignInHeaderBoughtFont",
+    "description": "Sign in header message if font bought",
+    "defaultMessage": "Thank you!"
   },
   {
     "id": "Auth.SignInHeader",
@@ -46,13 +86,18 @@
   },
   {
     "id": "Auth.SignUpHeader",
-    "description": "Sign up header message",
+    "description": "Sign up header title",
     "defaultMessage": "Nice to meet you"
   },
   {
     "id": "Auth.SocialMessage",
     "description": "Login page social auth CTA message",
     "defaultMessage": "Or sign up with"
+  },
+  {
+    "id": "Auth.GeneralError",
+    "description": "Login page general error",
+    "defaultMessage": "Woops, something happened"
   },
   {
     "id": "Auth.SignUpCTA",

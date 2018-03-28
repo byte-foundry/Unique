@@ -48,5 +48,10 @@
     "id": "SpecimenView.text",
     "description": "Speciem view text",
     "defaultMessage": "Text"
+  },
+  {
+    "id": "SpecimenView.downloadActionBottom",
+    "description": "SpecimenView - Download action Bottom",
+    "defaultMessage": "Download"
   }
 ]

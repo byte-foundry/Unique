@@ -423,7 +423,7 @@ class StepView extends React.Component {
                   </span>
                   <span className="controls">
                     <span className="font-size">
-                      <LowFontSizeIcon className="icon-lowFontSize" />
+                      <LowFontSizeIcon className="icon-lowFontSize"  onClick={() => this.props.changeFontSize(20)}/>
                       <input
                         type="range"
                         min="20"
@@ -434,7 +434,7 @@ class StepView extends React.Component {
                           this.props.changeFontSize(e.target.value)
                         }
                       />
-                      <HighFontSizeIcon className="icon-highFontSize" />
+                      <HighFontSizeIcon className="icon-highFontSize" onClick={() => this.props.changeFontSize(140)}/>
                     </span>
                     {this.props.shouldShowTooltips ? (
                       <FormattedMessage

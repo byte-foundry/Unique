@@ -8,6 +8,7 @@
   display: inline;
   transition: all .3s ease;
   font-size: 16px;
+  position: relative;
 }
 
 .Button + .Button {
@@ -74,6 +75,9 @@
   color: white;
   font-size: 14px;
   border-color: #db4733;
+  min-width: 105px;
+  text-align: center;
+  margin: 0;
 }
 
 .Button.social-facebook {
@@ -81,6 +85,9 @@
   font-size: 14px;
   color: white;
   border-color: #3b5998;
+  min-width: 105px;
+  text-align: center;
+  margin: 0;
 }
 
 .Button.social-twitter {
@@ -88,6 +95,9 @@
   color: white;
   font-size: 14px;
   border-color: #00aced;
+  min-width: 105px;
+  text-align: center;
+  margin: 0;
 }
 
 .Button.isBack img  {
@@ -98,4 +108,12 @@
 .Button:focus {
   outline: none;
   user-select: none;
+}
+
+.Button svg {
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

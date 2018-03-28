@@ -314,9 +314,9 @@ class SpecimenView extends React.Component {
           </div>
           <div className="buttons">
             <FormattedMessage
-              id="SpecimenView.downloadAction"
+              id="SpecimenView.downloadActionBottom"
               defaultMessage="Download"
-              description="SpecimenView - Download action"
+              description="SpecimenView - Download action Bottom"
             >
               {text => (
                 <Button
@@ -325,30 +325,6 @@ class SpecimenView extends React.Component {
                     this.props.goToCheckout(this.state.fontName);
                   }}
                   mode="full"
-                  label={text}
-                />
-              )}
-            </FormattedMessage>
-
-            <FormattedMessage
-              id="SpecimenView.saveAction"
-              defaultMessage="Save it for later"
-              description="SpecimenView - Save action"
-            >
-              {text => (
-                <Button
-                  className="button-save"
-                  onClick={() => {
-                    if (this.props.isAuthenticated) {
-                      this.props.storeProject(this.state.fontName);
-                    } else {
-                      this.props.authenticate(
-                        this.props.storeProject,
-                        this.state.fontName
-                      );
-                    }
-                  }}
-                  mode="light"
                   label={text}
                 />
               )}

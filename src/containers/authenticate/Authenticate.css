@@ -95,6 +95,26 @@
   font-size: 14px;
 }
 
+.Authenticate .signup input.isError,
+.Authenticate .signin input.isError {
+  border-color: red;
+  margin-bottom: 3px;
+}
+
+.Authenticate p.error {
+  color: red;
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 10px;
+}
+
+.Authenticate .general-error {
+  text-align: center;
+  color: red;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
 .Authenticate .signup input::placeholder,
 .Authenticate .signin input::placeholder {
   color: #b8b5c0;
