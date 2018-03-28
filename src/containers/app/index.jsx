@@ -8,13 +8,6 @@ import { connect } from "react-redux";
 import { request } from "graphql-request";
 import { ShortcutManager } from "react-shortcuts";
 
-import { IntlProvider } from "react-intl";
-import { addLocaleData } from "react-intl";
-import locale_en from "react-intl/locale-data/en";
-import locale_fr from "react-intl/locale-data/fr";
-
-import messages_en from "../../data/intl/locale_en";
-import messages_fr from "../../data/intl/locale_fr";
 import keymap from "../../data/keymap";
 import { createPrototypoFactory } from "../../data/createdFonts";
 import { importPresets, reloadPresets } from "../../data/presets";
@@ -41,14 +34,12 @@ import StepView from "../stepView/";
 import Sidebar from "../sidebar/";
 import Authenticate from "../authenticate/";
 
-addLocaleData([...locale_en, ...locale_fr]);
-
-const messages = {
-  fr: messages_fr,
-  en: messages_en
-};
-
 let interval;
+
+const supportedLanguages = {
+  fr: "Français",
+  en: "English"
+};
 
 class App extends React.Component {
   /* global Intercom */
@@ -83,8 +74,8 @@ class App extends React.Component {
     console.log("========================================");
     if (
       this.props.selectedFont !== "" &&
-      (this.props.pathname === "/customize" ||
-        this.props.pathname === "/specimen") &&
+      (this.props.pathname === "/app/customize" ||
+        this.props.pathname === "/app/specimen") &&
       !(typeof this.props.selectedFontLoaded === "object")
     ) {
       this.props.reloadFonts();
@@ -132,7 +123,7 @@ class App extends React.Component {
     console.log("========================================");
     if (
       this.props.need !== "" &&
-      this.props.pathname === "/select" &&
+      this.props.pathname === "/app/select" &&
       !this.props.hasPresetsLoaded
     ) {
       console.log("Has selected need but do not have presets loaded");
@@ -143,11 +134,8 @@ class App extends React.Component {
     return this.props.need !== "";
   }
   render() {
-    const supportedLanguages = {
-      fr: "Français",
-      en: "English"
-    };
-    if (this.props.isLoading && this.props.location.pathname !== "/auth") {
+    console.log(this.props.location.pathname)
+    if (this.props.isLoading && this.props.location.pathname !== "/app/auth") {
       // load animation
       clearInterval(interval);
       const letters = document.querySelectorAll(".letter");
@@ -163,13 +151,9 @@ class App extends React.Component {
     } else {
       clearInterval(interval);
     }
-    return (
-      <IntlProvider
-        locale={this.props.locale}
-        messages={messages[this.props.locale]}
-      >
+    return (      
         <main className={`App ${this.props.isLoading ? "loading" : "loaded"}`}>
-          {this.props.location.pathname !== "/auth" && (
+          {this.props.location.pathname !== "/app/auth" && (
             <header className="App-header">
               <h1 className="App-logo-wrapper">
                 <Logo
@@ -193,68 +177,55 @@ class App extends React.Component {
             <div className="row">
               <div
                 className={`left col-sm-${
-                  this.props.location.pathname !== "/auth" ? "10" : "12"
+                  this.props.location.pathname !== "/app/auth" ? "10" : "12"
                 }`}
               >
                 <Switch>
                   <Route
                     exact
-                    path="/"
+                    path="/app"
                     render={props => <DefineNeed auth={this.auth} {...props} />}
                   />
-                  <Route exact path="/restart" component={WelcomeBack} />
-                  <Route
-                    path="/callback"
-                    render={props => {
-                      this.handleAuthentication(props);
-                      return <div>loading</div>;
-                    }}
-                  />
+                  <Route exact path="/app/restart" component={WelcomeBack} />
                   <ProtectedRoute
-                    exact
                     requirement={() => this.hasSelectedNeed()}
-                    path="/select"
+                    path="/app/select"
                     component={TemplateChoice}
                   />
                   <ProtectedRoute
-                    exact
                     requirement={() => this.props.isAuthenticated}
-                    path="/library"
+                    path="/app/library"
                     component={Library}
                   />
                   <ProtectedRoute
-                    exact
                     requirement={() => this.hasSelectedFont()}
-                    path="/customize"
+                    path="/app/customize"
                     component={props => <StepView {...props} />}
                   />
                   <ProtectedRoute
-                    exact
                     requirement={() => this.hasSelectedFont()}
-                    path="/specimen"
+                    path="/app/specimen"
                     component={props => (
                       <SpecimenView auth={this.auth} {...props} />
                     )}
                   />
                   <ProtectedRoute
-                    exact
                     requirement={() => this.hasSelectedFont()}
-                    path="/checkout"
+                    path="/app/checkout"
                     component={Checkout}
                   />
                   <ProtectedRoute
-                    exact
                     requirement={() => true}
-                    path="/auth"
+                    path="/app/auth"
                     component={Authenticate}
                   />
                 </Switch>
               </div>
-              {this.props.location.pathname !== "/auth" && (
+              {this.props.location.pathname !== "/app/auth" && (
                 <div
                   className={`right col-sm-2 ${
                     this.props.isBlackOnWhite ||
-                    this.props.location.pathname !== "/customize"
+                    this.props.location.pathname !== "/app/customize"
                       ? ""
                       : "whiteOnBlack"
                   }`}
@@ -263,7 +234,7 @@ class App extends React.Component {
                     pathName={this.props.location.pathname}
                     isAuthenticated={this.props.isAuthenticated}
                     mode={
-                      this.props.location.pathname === "/checkout"
+                      this.props.location.pathname === "/app/checkout"
                         ? "checkout"
                         : "default"
                     }
@@ -272,7 +243,7 @@ class App extends React.Component {
                 </div>
               )}
             </div>
-            {this.props.location.pathname === "/customize" && (
+            {this.props.location.pathname === "/app/customize" && (
               <ShortcutsHelper
                 shouldShowTooltips={this.props.shouldShowTooltips}
                 toggleTooltips={this.props.toggleTooltips}
@@ -285,9 +256,9 @@ class App extends React.Component {
                   className="language-active"
                   style={{
                     backgroundColor:
-                      this.props.location.pathname === "/auth" ||
+                      this.props.location.pathname === "/app/auth" ||
                       (!this.props.isBlackOnWhite &&
-                        this.props.location.pathname === "/customize")
+                        this.props.location.pathname === "/app/customize")
                         ? "black"
                         : "white"
                   }}
@@ -308,15 +279,15 @@ class App extends React.Component {
                           <p
                             style={{
                               backgroundColor:
-                                this.props.location.pathname === "/auth" ||
+                                this.props.location.pathname === "/app/auth" ||
                                 (!this.props.isBlackOnWhite &&
-                                  this.props.location.pathname === "/customize")
+                                  this.props.location.pathname === "/app/customize")
                                   ? "white"
                                   : "black",
                               color:
-                                this.props.location.pathname === "/auth" ||
+                                this.props.location.pathname === "/app/auth" ||
                                 (!this.props.isBlackOnWhite &&
-                                  this.props.location.pathname === "/customize")
+                                  this.props.location.pathname === "/app/customize")
                                   ? "black"
                                   : "white"
                             }}
@@ -340,7 +311,6 @@ class App extends React.Component {
             </div>
           </div>
         </main>
-      </IntlProvider>
     );
   }
 }
@@ -407,7 +377,6 @@ const mapStateToProps = state => ({
   isAuthenticated: typeof state.user.graphqlID === "string",
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isBlackOnWhite: state.user.isBlackOnWhite,
-  locale: state.ui.locale,
   shouldShowTooltips: state.ui.shouldShowTooltips,
   userId: state.user.graphqlID
 });
@@ -418,7 +387,7 @@ const mapDispatchToProps = dispatch =>
       reloadPresets,
       reloadFonts,
       setLocale,
-      goToHome: () => push("/"),
+      goToHome: () => push("/app"),
       createPrototypoFactory,
       toggleTooltips,
       logout

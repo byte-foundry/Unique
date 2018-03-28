@@ -168,7 +168,7 @@ class Checkout extends React.Component {
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ goBack: () => push("/specimen"), updateCheckoutOptions }, dispatch);
+  bindActionCreators({ goBack: () => push("/app/specimen"), updateCheckoutOptions }, dispatch);
 
 Checkout.propTypes = {updateCheckoutOptions : PropTypes.func.isRequired};
 

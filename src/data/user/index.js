@@ -419,7 +419,7 @@ export const afterPayment = res => (dispatch, getState) => {
   } else {
     dispatch(
       push({
-        pathname: "/auth",
+        pathname: "/app/auth",
         authData: {
           callback: storeProject,
           fontName: userFontName,

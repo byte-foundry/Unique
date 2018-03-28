@@ -49,8 +49,8 @@
 }
 
 .Button.full {
-  background-color: #5320ee;
-  border-color: #5320ee;
+  background-image: linear-gradient(259deg, #5320ee, #5d28e2 68%, #622bdd);
+  border-color: transparent;
   color: white;
 }
 

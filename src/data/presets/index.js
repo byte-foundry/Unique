@@ -100,7 +100,7 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
       loadedPresetsName,
     });
     dispatch(clearFontIsLoading());
-    dispatch(push('/select'));
+    dispatch(push('/app/select'));
     dispatch(setStable());
   });
   console.log('======END LOAD PRESETS=======');

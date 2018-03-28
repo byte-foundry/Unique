@@ -222,7 +222,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      goToHome: () => push("/"),
+      goToHome: () => push("/app/"),
       loadProject,
       download,
       deleteUserProject,

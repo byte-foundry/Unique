@@ -9,7 +9,7 @@ const ProtectedRoute = ({ component: Component, requirement, ...rest }) => (
     render={props =>
       (requirement()
         ? <Component {...props} />
-        : <Redirect to={{ pathname: '/', state: { from: props.location } }} />)}
+        : <Redirect to={{ pathname: '/app', state: { from: props.location } }} />)}
   />
 );
 

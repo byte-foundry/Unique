@@ -36,8 +36,8 @@ class Sidebar extends React.Component {
     return (
       <div
         className={`Sidebar ${
-          this.props.location.pathname !== "/customize" &&
-          this.props.location.pathname !== "/specimen" &&
+          this.props.location.pathname !== "/app/customize" &&
+          this.props.location.pathname !== "/app/specimen" &&
           this.props.mode !== "checkout"
             ? "small"
             : ""
@@ -53,8 +53,8 @@ class Sidebar extends React.Component {
         />
         {this.props.mode !== "checkout" ? (
           <div className="steps">
-            {this.props.location.pathname !== "/customize" &&
-            this.props.location.pathname !== "/specimen"
+            {this.props.location.pathname !== "/app/customize" &&
+            this.props.location.pathname !== "/app/specimen"
               ? false
               : getStepsDone(
                   this.props.steps,
@@ -158,7 +158,7 @@ const mapDispatchToProps = dispatch =>
     {
       goToStep,
       loadLibrary,
-      goToAuth: () => push({ pathname: "/auth", authData: {} })
+      goToAuth: () => push({ pathname: "/app/auth", authData: {} })
     },
     dispatch
   );

@@ -980,7 +980,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      goToHome: () => push("/"),
+      goToHome: () => push("/app/"),
       loginWithGoogle,
       loginWithFacebook,
       loginWithTwitter,

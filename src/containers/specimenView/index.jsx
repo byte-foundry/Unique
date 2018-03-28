@@ -352,10 +352,10 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       storeProject,
-      goToCheckout: fontName => push({ pathname: "/checkout", fontName }),
+      goToCheckout: fontName => push({ pathname: "/app/checkout", fontName }),
       authenticate: (callback, fontName) =>
         push({
-          pathname: "/auth",
+          pathname: "/app/auth",
           authData: { callback, fontName, type: "saveFont" }
         })
     },

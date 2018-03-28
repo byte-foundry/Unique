@@ -170,7 +170,7 @@ const mapStateToProps = state => ({
   chosenWord: state.user.chosenWord
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ selectFont, redirectToHome: () => push("/") }, dispatch);
+  bindActionCreators({ selectFont, redirectToHome: () => push("/app/") }, dispatch);
 
 TemplateChoice.propTypes = {
   selectFont: PropTypes.func.isRequired,

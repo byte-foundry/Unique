@@ -157,7 +157,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     selectedFont
   });
   if (!selectedFont.variant) {
-    dispatch(push('/'));
+    dispatch(push('/app/'));
     return;
   };
   const selectedFontName = `${selectedFont.variant.family.name}${
@@ -306,9 +306,9 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       dispatch(goToStep(step || 1));
     }
     if (!step || choicesMade.length < selectedFont.steps.length) {
-      dispatch(push("/customize"));
+      dispatch(push("/app/customize"));
     } else {
-      dispatch(push("/specimen"));
+      dispatch(push("/app/specimen"));
     }
   });
 };
@@ -474,7 +474,7 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
   switch (step) {
     case 0:
       dispatch(loadPresets());
-      dispatch(push("/select"));
+      dispatch(push("/app/select"));
       break;
     case currentPreset.steps.length + 1:
 
@@ -484,7 +484,7 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
     });
       dispatch(updateValues(undefined, true));
       console.log("Going to /specimen");
-      dispatch(push("/specimen"));
+      dispatch(push("/app/specimen"));
       break;
     default:
 
@@ -493,7 +493,7 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
       step: step || previousStep
     });
       dispatch(updateValues(step, step === currentPreset.steps.length));
-      if (fromSpecimen) dispatch(push("/customize"));
+      if (fromSpecimen) dispatch(push("/app/customize"));
       break;
   }
 };
@@ -623,7 +623,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
 export const finishEditing = choice => (dispatch, getState) => {
   console.log("==========font/finishEditing============");
   dispatch(selectChoice(choice, true));
-  dispatch(push("/specimen"));
+  dispatch(push("/app/specimen"));
 };
 
 export const download = (name, filename) => (dispatch, getState) => {
@@ -677,7 +677,7 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
   console.log(loadedProjectName);
   if (projectID === loadedProjectID) {
     console.log('Same project loaded, going to specimen')
-    dispatch(push("/specimen"));
+    dispatch(push("/app/specimen"));
   } else {
     dispatch(setUnstable());
     // fetch preset and project infos
@@ -767,7 +767,7 @@ export const loadLibrary = () => (dispatch, getState) => {
             projects: data.user.uniqueProjects
           });
           dispatch(setStable());
-          dispatch(push("/library"));
+          dispatch(push("/app/library"));
         });
       })
       .catch(error => console.log(error));
