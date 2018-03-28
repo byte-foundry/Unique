@@ -24,7 +24,7 @@
 .Button.hollow {
   background-color: #fff;
   color: #5f1ffc;
-  border: 2px solid #5f1ffc;
+  border: 2px solid transparent;
 }
 
 .Button.light {

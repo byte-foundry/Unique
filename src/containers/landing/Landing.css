@@ -3,8 +3,14 @@
 
 .Landing .header {
   background-image: linear-gradient(246deg, #5320ee, #5d28e2 68%, #622bdd);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 6vw));
-  padding-bottom: 6vw;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
+  padding-bottom: 20%;
+}
+
+.Landing .header h2 {
+  font-weight: 400;
+  color: white;
+  font-size: 28px;
 }
 
 .Landing .header .logos {
@@ -16,20 +22,173 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 200px;
+  width: 150px;
   height: auto;
+}
+
+.Landing .header .logos .logo-icon .logo-main {
+  fill: white;
+}
+
+.Landing .header .logos .logo-icon .letter {
+  opacity: 0;
+}
+
+.Landing .header .logos .logo-icon .letter-1 {
+  opacity: 1;
+  fill: white;
 }
 
 .Landing .header .logos .profile-icon {
   position: absolute;
-  top: 30px;
-  right: 30px;
-  width: 30px;
+  top: 20px;
+  right: 20px;
+  width: 20px;
   height: auto;
+}
+
+.Landing .header .Button {
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 14px 30px;
+}
+
+.Landing .header input {
+  background: transparent;
+  border: 2px solid white;
+  padding: 10px 20px;
+  margin-right: 15px;
+  color: white;
+}
+
+.Landing .header input::placeholder {
+  color: white;
+  font-size: 14px;
+  vertical-align: middle;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+.Landing .header .logos .profile-icon path,
+.Landing .header .logos .profile-icon circle {
+  fill: white;
+}
+
+.Landing .description {
+  padding-top: 20%;
+  text-align: center;
+  padding-bottom: 10%;
+}
+
+.Landing .description h1 {
+  font-weight: 400;
+  color: black;
+  text-transform: uppercase;
+}
+
+.Landing .description p {
+  margin-top: 30px;
+  font-weight: 400;
+  color: #b0b7bf;
+  line-height: 30px;
+}
+
+.Landing .description .Button {
+  margin-top: 40px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 400;
+  display: inline-block;
 }
 
 .Landing .header .catch {
   padding-top: 20vh;
+}
+
+.Landing .featureList {
+  background-image: linear-gradient(246deg, #5320ee, #5d28e2 68%, #622bdd);
+  padding-top: 12%;
+  padding-bottom: 12%;
+  clip-path: polygon(0 20%, 100% 0, 100% 80%, 0% 100%);
+  color: white;
+}
+
+.Landing .featureList li {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.Landing .howItWorks {
+  padding-top: 5%;
+  padding-bottom: 0%;
+}
+
+.Landing .howItWorks .row {
+  margin-bottom: 20%;
+}
+
+.Landing .howItWorks h1 {
+  font-weight: 400;
+  color: #632bdd;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.Landing .howItWorks .stepNumber {
+  font-size: 12px;
+  color: #632bdd;
+  margin-bottom: 10px;
+}
+
+.Landing .howItWorks h3 {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.Landing .howItWorks .stepdescription {
+  color: #b0b7bf;
+}
+
+.Landing .howItWorks .Button {
+  padding-left: 0;
+  color: #632bdd;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.Landing .prototypo {
+  padding-top: 20%;
+  padding-bottom: 10%;
+  background-image: linear-gradient(246deg, #5320ee, #5d28e2 68%, #622bdd);
+  clip-path: polygon(0 20%, 100% 0, 100% 100%, 0% 100%);
+  color: white;
+}
+
+.Landing .prototypo h1 {
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.Landing .prototypo p {
+  line-height: 30px;
+}
+
+.Landing .footer {
+  color: white;
+  background: black;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.Landing .footer .credits {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.Landing .float-left {
+  float: left;
 }
 
 .Landing .float-right {
