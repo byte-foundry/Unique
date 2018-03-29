@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { push } from "react-router-redux";
@@ -20,12 +21,17 @@ import { ReactComponent as HowItWorks1 } from "./howitworks_1.svg";
 import { ReactComponent as HowItWorks2 } from "./howitworks_2.svg";
 import { ReactComponent as HowItWorks3 } from "./howitworks_3.svg";
 
+import { createPrototypoFactory } from "../../data/createdFonts";
+
 import Button from "../../components/button";
 
 import "./Landing.css";
 class Landing extends React.Component {
   constructor(props) {
     super(props);
+    if (!props.isPrototypoLoaded && !props.isPrototypoLoading) {
+      props.createPrototypoFactory();
+    }
     this.state = {};
   }
   render() {
@@ -387,13 +393,28 @@ class Landing extends React.Component {
   }
 }
 
-Landing.propTypes = {};
+Landing.propTypes = {
+  isPrototypoLoaded: PropTypes.bool.isRequired,
+  isPrototypoLoading: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool,
+  createPrototypoFactory: PropTypes.func.isRequired,
+};
 
-const mapStateToProps = state => ({});
+Landing.defaultProps = {
+  isAuthenticated: false
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: typeof state.user.graphqlID === "string",
+  isPrototypoLoading: state.createdFonts.isPrototypoLoading,
+  isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
+});
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      goToApp: () => push("/app")
+      goToApp: () => push("/app"),
+      createPrototypoFactory,
     },
     dispatch
   );

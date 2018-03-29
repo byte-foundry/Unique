@@ -92,7 +92,7 @@
 .Landing .description .one-2 {
     position: absolute;
     bottom: -20%;
-    left: 5%;
+    left: 0;
     height: 400px;
     width: auto;
     z-index: 2;
@@ -143,7 +143,7 @@
 .Landing .featureList .one-3 {
     position: absolute;
     bottom: 5%;
-    right: 10%;
+    right: 6vw;
     height: 200px;
     width: auto;
     z-index: 2;

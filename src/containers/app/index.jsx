@@ -13,7 +13,7 @@ import { createPrototypoFactory } from "../../data/createdFonts";
 import { importPresets, reloadPresets } from "../../data/presets";
 import { reloadFonts } from "../../data/font";
 import { logout } from "../../data/user";
-import { setLocale, toggleTooltips } from "../../data/ui";
+import { setLocale, toggleTooltips, getCurrencyRates } from "../../data/ui";
 import { GRAPHQL_API } from "../../data/constants";
 import { getAllPresets } from "../../data/queries";
 import "./bootstrap-reboot.css";
@@ -57,6 +57,7 @@ class App extends React.Component {
     if (!props.isPrototypoLoaded && !props.isPrototypoLoading) {
       props.createPrototypoFactory();
     }
+    props.getCurrencyRates();
     this.state = {
       isLanguageMenuOpen: false
     };
@@ -343,7 +344,8 @@ App.propTypes = {
   shouldShowTooltips: PropTypes.bool.isRequired,
   userId: PropTypes.string,
   isAuthenticated: PropTypes.bool,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  getCurrencyRates: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
@@ -390,7 +392,8 @@ const mapDispatchToProps = dispatch =>
       goToHome: () => push("/app"),
       createPrototypoFactory,
       toggleTooltips,
-      logout
+      logout,
+      getCurrencyRates,
     },
     dispatch
   );

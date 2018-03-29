@@ -1,5 +1,6 @@
 import { push } from "react-router-redux";
 import { request, GraphQLClient } from "graphql-request";
+import fx from "money";
 import { setUnstable, setStable } from "../ui";
 import {
   addProjectToUser,
@@ -59,6 +60,7 @@ const initialState = {
   checkoutOptions: [],
   checkoutPrice: BASE_PACK_PRICE,
   userFontName: "",
+  option5Price: 5,
   graphQLToken: undefined,
   authError: ""
 };
@@ -173,7 +175,8 @@ export default (state = initialState, action) => {
         ...state,
         checkoutOptions: action.checkoutOptions,
         checkoutPrice: action.checkoutPrice,
-        userFontName: action.fontName
+        userFontName: action.fontName,
+        option5Price: action.option5Price,
       };
 
     case RESET_CHECKOUT_OPTIONS:
@@ -430,20 +433,25 @@ export const afterPayment = res => (dispatch, getState) => {
   }
 };
 
-export const updateCheckoutOptions = (
-  checkoutOptions,
-  fontName
-) => dispatch => {
+export const updateCheckoutOptions = (checkoutOptions, fontName) => (
+  dispatch,
+  getState
+) => {
+  const { currencyRates, currency } = getState().ui;
+  fx.rates = currencyRates.rates;
+  fx.base = currencyRates.base;
   let price = BASE_PACK_PRICE;
   checkoutOptions.forEach(option => {
     if (option.selected) {
       price = price + option.price;
     }
   });
+  const checkoutPrice = fx.convert(price, { from: 'USD', to: currency });
   dispatch({
     type: CHANGE_CHECKOUT_ORDER,
     checkoutOptions: [...checkoutOptions],
-    checkoutPrice: price,
+    checkoutPrice,
+    option5Price: fx.convert(5, { from: 'USD', to: currency }),
     fontName
   });
 };
@@ -506,7 +514,7 @@ export const loginWithEmail = (email, password, authData) => dispatch => {
       console.log(err);
       dispatch({
         type: LOGIN_ERROR,
-        authError: err.response.errors[0].functionError,
+        authError: err.response.errors[0].functionError
       });
     });
 };

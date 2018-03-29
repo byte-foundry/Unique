@@ -138,7 +138,7 @@ export default (state = initialState, action) => {
         baseValues: action.baseValues,
         step: action.step,
         alreadyBought: action.bought,
-        choicesMade: action.choicesMade,
+        choicesMade: action.choicesMade
       };
     default:
       return state;
@@ -148,7 +148,7 @@ export default (state = initialState, action) => {
 export const selectFont = (font, step) => (dispatch, getState) => {
   console.log("==========font/selectFont============");
   dispatch(resetCheckout());
-  console.log(step)
+  console.log(step);
   const { chosenWord } = getState().user;
   const { currentParams, choicesMade } = getState().font;
   const selectedFont = { ...font };
@@ -157,9 +157,9 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     selectedFont
   });
   if (!selectedFont.variant) {
-    dispatch(push('/app/'));
+    dispatch(push("/app/"));
     return;
-  };
+  }
   const selectedFontName = `${selectedFont.variant.family.name}${
     selectedFont.variant.name
   }`;
@@ -297,7 +297,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       sliderFontName,
       choicesMade: step ? choicesMade : [null],
       currentParams: step ? currentParams : {},
-      step: step || 1,
+      step: step || 1
     });
     dispatch(setStable());
     if (step && choicesMade[step]) {
@@ -477,21 +477,19 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
       dispatch(push("/app/select"));
       break;
     case currentPreset.steps.length + 1:
-
-    dispatch({
-      type: CHANGE_STEP,
-      step: currentPreset.steps.length
-    });
+      dispatch({
+        type: CHANGE_STEP,
+        step: currentPreset.steps.length
+      });
       dispatch(updateValues(undefined, true));
       console.log("Going to /specimen");
       dispatch(push("/app/specimen"));
       break;
     default:
-
-    dispatch({
-      type: CHANGE_STEP,
-      step: step || previousStep
-    });
+      dispatch({
+        type: CHANGE_STEP,
+        step: step || previousStep
+      });
       dispatch(updateValues(step, step === currentPreset.steps.length));
       if (fromSpecimen) dispatch(push("/app/customize"));
       break;
@@ -512,7 +510,10 @@ export const selectChoice = (choice, isSpecimen = false) => (
   let { step, currentParams } = getState().font;
 
   // If choice not in the step, do nothing
-  if (!currentPreset.steps[step - 1].choices.find(e => e.id === choice.id) && choice.name !== 'Custom') {
+  if (
+    !currentPreset.steps[step - 1].choices.find(e => e.id === choice.id) &&
+    choice.name !== "Custom"
+  ) {
     return;
   }
 
@@ -626,6 +627,17 @@ export const finishEditing = choice => (dispatch, getState) => {
   dispatch(push("/app/specimen"));
 };
 
+export const getArrayBuffer = name => (dispatch, getState) => {
+  console.log("==========font/getArrayBuffer============");
+  const { fontName } = getState().font;
+  const { fonts } = getState().createdFonts;
+  return new Promise(resolve => {
+    fonts[name || fontName].getArrayBuffer().then(data => {
+      resolve(data);
+    });
+  });
+};
+
 export const download = (name, filename) => (dispatch, getState) => {
   console.log("==========font/download============");
   const { fontName } = getState().font;
@@ -676,7 +688,7 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
   console.log(loadedProjectID);
   console.log(loadedProjectName);
   if (projectID === loadedProjectID) {
-    console.log('Same project loaded, going to specimen')
+    console.log("Same project loaded, going to specimen");
     dispatch(push("/app/specimen"));
   } else {
     dispatch(setUnstable());

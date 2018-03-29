@@ -31,7 +31,16 @@ class Sidebar extends React.Component {
   }
   render() {
     console.log("---------------");
-    console.log(this.props.choicesMade);
+    console.log(this.props);
+    console.log(
+      parseFloat(this.props.checkoutPrice).toLocaleString(
+        this.props.locale_full,
+        {
+          style: "currency",
+          currency: this.props.currency
+        }
+      )
+    );
     console.log("---------------");
     return (
       <div
@@ -67,7 +76,13 @@ class Sidebar extends React.Component {
         ) : (
           <div className="sidebar-checkout">
             <h2 className="price">
-              {parseFloat(this.props.checkoutPrice).toFixed(2)}
+              {parseFloat(this.props.checkoutPrice).toLocaleString(
+                this.props.locale_full,
+                {
+                  style: "currency",
+                  currency: this.props.currency
+                }
+              )}
             </h2>
             <div className="choices">
               {this.props.checkoutOptions.map(
@@ -76,7 +91,12 @@ class Sidebar extends React.Component {
                     <div className="choice">
                       <span className="left">{option.name}</span>
                       <span className="right">
-                        {option.price === 0 ? "included" : option.price}
+                        {option.price === 0
+                          ? "included"
+                          : parseFloat(this.props.option5Price).toLocaleString(
+                              this.props.locale_full,
+                              { maximumSignificantDigits: 2 }
+                            )}
                       </span>
                     </div>
                   )
@@ -98,6 +118,7 @@ class Sidebar extends React.Component {
                     onClick={() => {}}
                     mode="white"
                     label={text}
+                    checkoutOptions={this.props.checkoutOptions}
                   />
                 </Checkout>
               )}
@@ -133,7 +154,10 @@ Sidebar.propTypes = {
   login: PropTypes.func.isRequired,
   loadLibrary: PropTypes.func.isRequired,
   mode: PropTypes.string,
-  checkoutPrice: PropTypes.number.isRequired
+  checkoutPrice: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
+  locale_full: PropTypes.string.isRequired,
+  option5price: PropTypes.number.isRequired
 };
 
 Sidebar.defaultProps = {
@@ -150,7 +174,10 @@ const mapStateToProps = state => ({
   step: state.font.step,
   choicesMade: state.font.choicesMade,
   checkoutPrice: state.user.checkoutPrice,
-  checkoutOptions: state.user.checkoutOptions
+  checkoutOptions: state.user.checkoutOptions,
+  locale_full: state.ui.locale_full,
+  currency: state.ui.currency,
+  option5Price: state.user.option5Price,
 });
 
 const mapDispatchToProps = dispatch =>
