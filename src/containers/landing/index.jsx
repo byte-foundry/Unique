@@ -2,8 +2,23 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { push } from "react-router-redux";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import { ReactComponent as Logo } from "../app/logo.svg";
 import { ReactComponent as ProfileIcon } from "../sidebar/profile.svg";
+
+import { ReactComponent as One1 } from "./number1.svg";
+import { ReactComponent as One2 } from "./number2.svg";
+import { ReactComponent as One3 } from "./number3.svg";
+import { ReactComponent as One4 } from "./number4.svg";
+import { ReactComponent as One5 } from "./number5.svg";
+
+import { ReactComponent as UniqueVisual } from "./unique_visual.svg";
+
+import { ReactComponent as HowItWorks1 } from "./howitworks_1.svg";
+import { ReactComponent as HowItWorks2 } from "./howitworks_2.svg";
+import { ReactComponent as HowItWorks3 } from "./howitworks_3.svg";
 
 import Button from "../../components/button";
 
@@ -51,7 +66,13 @@ class Landing extends React.Component {
                     description="Landing page header CTA"
                   >
                     {text => (
-                      <Button mode="hollow" label={text} onClick={() => {}} />
+                      <Button
+                        mode="hollow"
+                        label={text}
+                        onClick={() => {
+                          this.props.goToApp();
+                        }}
+                      />
                     )}
                   </FormattedMessage>
                 </div>
@@ -61,6 +82,12 @@ class Landing extends React.Component {
         </div>
         <div className="description">
           <div className="container">
+            <One1 className="one-1" />
+            <div className="row">
+              <div className="col-sm-12">
+                <UniqueVisual className="uniqueVisual" />
+              </div>
+            </div>
             <div className="row">
               <div className="col-sm-12">
                 <h1>
@@ -97,11 +124,18 @@ class Landing extends React.Component {
                   description="Landing description CTA"
                 >
                   {text => (
-                    <Button mode="full" label={text} onClick={() => {}} />
+                    <Button
+                      mode="full"
+                      label={text}
+                      onClick={() => {
+                        this.props.goToApp();
+                      }}
+                    />
                   )}
                 </FormattedMessage>
               </div>
             </div>
+            <One2 className="one-2" />
           </div>
         </div>
         <div className="featureList">
@@ -130,6 +164,13 @@ class Landing extends React.Component {
                       description="Unique feature list item 3"
                     />
                   </li>
+                  <li>
+                    <FormattedMessage
+                      id="Landing.featureListItem7"
+                      defaultMessage="Unlimited usages!"
+                      description="Unique feature list item 7"
+                    />
+                  </li>
                 </ul>
               </div>
               <div className="col-sm-12 col-md-6">
@@ -155,9 +196,17 @@ class Landing extends React.Component {
                       description="Unique feature list item 6"
                     />
                   </li>
+                  <li>
+                    <FormattedMessage
+                      id="Landing.featureListItem8"
+                      defaultMessage="No royalties!"
+                      description="Unique feature list item 8"
+                    />
+                  </li>
                 </ul>
               </div>
             </div>
+            <One3 className="one-3" />
           </div>
         </div>
         <div className="howItWorks">
@@ -197,15 +246,25 @@ class Landing extends React.Component {
                     description="Unique how it works step 1 CTA"
                   >
                     {text => (
-                      <Button mode="text" label={text} onClick={() => {}} />
+                      <Button
+                        mode="text"
+                        label={text}
+                        onClick={() => {
+                          this.props.goToApp();
+                        }}
+                      />
                     )}
                   </FormattedMessage>
                 </p>
               </div>
-              <div className="col-sm-12 col-md-8" />
+              <div className="col-sm-12 col-md-8 image-wrapper">
+                <HowItWorks1 className="howItWorks-icon1" />
+              </div>
             </div>
             <div className="row">
-              <div className="col-sm-12 col-md-8" />
+              <div className="col-sm-12 col-md-8 image-wrapper">
+                <HowItWorks2 className="howItWorks-icon2" />
+              </div>
               <div className="col-sm-12 col-md-4">
                 <p className="stepNumber">02.</p>
                 <h3>
@@ -229,7 +288,13 @@ class Landing extends React.Component {
                     description="Unique how it works step 2 CTA"
                   >
                     {text => (
-                      <Button mode="text" label={text} onClick={() => {}} />
+                      <Button
+                        mode="text"
+                        label={text}
+                        onClick={() => {
+                          this.props.goToApp();
+                        }}
+                      />
                     )}
                   </FormattedMessage>
                 </p>
@@ -259,17 +324,26 @@ class Landing extends React.Component {
                     description="Unique how it works step 3 CTA"
                   >
                     {text => (
-                      <Button mode="text" label={text} onClick={() => {}} />
+                      <Button
+                        mode="text"
+                        label={text}
+                        onClick={() => {
+                          this.props.goToApp();
+                        }}
+                      />
                     )}
                   </FormattedMessage>
                 </p>
               </div>
-              <div className="col-sm-12 col-md-8" />
+              <div className="col-sm-12 col-md-8 image-wrapper">
+                <HowItWorks3 className="howItWorks-icon3" />
+              </div>
             </div>
           </div>
         </div>
         <div className="prototypo">
           <div className="container">
+            <One5 className="one-5" />
             <div className="row">
               <div className="col-sm-12 col-md-8" />
               <div className="col-sm-12 col-md-4">
@@ -315,4 +389,14 @@ class Landing extends React.Component {
 
 Landing.propTypes = {};
 
-export default withRouter(Landing);
+const mapStateToProps = state => ({});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      goToApp: () => push("/app")
+    },
+    dispatch
+  );
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Landing)
+);

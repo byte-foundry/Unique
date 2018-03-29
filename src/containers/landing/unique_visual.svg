@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="745" height="514" viewBox="0 0 745 514">
+    <defs>
+        <path id="b" d="M0 0h740.744v509.949H0z"/>
+        <filter id="a" width="100.9%" height="101.4%" x="-.5%" y="-.5%" filterUnits="objectBoundingBox">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.454134779 0 0 0 0 0.454134779 0 0 0 0 0.454134779 0 0 0 0.4 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(2 1)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use fill="#FFF" xlink:href="#b"/>
+        </g>
+        <path fill="#000" fill-opacity=".95" d="M614.143 1h128.601v509.949H614.143z"/>
+        <path fill="#6029E0" d="M614.143 104.02h128.601v25.755H614.143z"/>
+        <text fill="#0E0528" font-family="WideGrotesk-Light, Wide Grotesk" font-size="35.027" font-style="expanded" font-weight="300" transform="translate(130.601 122.049)">
+            <tspan x="22.664" y="34">Blueberry</tspan>
+        </text>
+        <path stroke="#5F1FFC" stroke-width="1.545" d="M131.374 206.267h366.77v97.87h-366.77z"/>
+        <text fill="#0E0528" font-family="WideGrotesk-Regular, Wide Grotesk" font-size="35.027" font-style="expanded" transform="translate(130.601 122.049)">
+            <tspan x="22.664" y="142.171">Blueberry</tspan>
+        </text>
+        <text fill="#0E0528" font-family="WideGrotesk-Black, Wide Grotesk" font-size="35.027" font-style="expanded" font-weight="700" transform="translate(130.601 122.049)">
+            <tspan x="22.664" y="259.099">Blueberry</tspan>
+        </text>
+        <g stroke="#5F1FFB" stroke-width="1.03" transform="translate(56.013 244.642)">
+            <ellipse cx="11.574" cy="11.59" rx="11.574" ry="11.59"/>
+            <path stroke-linecap="square" d="M12.346 14.938l-3.087-3.09 3.087-3.091"/>
+        </g>
+        <g stroke="#5F1FFB" stroke-width="1.03" transform="rotate(-180 283.409 133.91)">
+            <ellipse cx="11.574" cy="11.59" rx="11.574" ry="11.59"/>
+            <path stroke-linecap="square" d="M12.346 14.68l-3.087-3.09 3.087-3.09"/>
+        </g>
+        <path stroke="#FFF" stroke-linecap="square" stroke-width="3.606" d="M629.832 90.37h46.297M629.832 116.125h29.836"/>
+        <path stroke="#575757" stroke-linecap="square" stroke-width="3.606" d="M629.832 193.39h39.61M629.832 219.145h82.305M629.832 141.88h21.605M629.832 244.9h32.922M629.832 167.635h25.72M629.832 270.655h47.326" opacity=".444"/>
+    </g>
+</svg>
