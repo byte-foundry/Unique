@@ -12,7 +12,11 @@ import keymap from "../../data/keymap";
 import { createPrototypoFactory } from "../../data/createdFonts";
 import { importPresets, reloadPresets } from "../../data/presets";
 import { reloadFonts } from "../../data/font";
-import { logout } from "../../data/user";
+import {
+  logout, switchBlackOnWhite,
+  switchGlyphMode,
+  changeFontSize,
+} from "../../data/user";
 import { setLocale, toggleTooltips, getCurrencyRates } from "../../data/ui";
 import { GRAPHQL_API } from "../../data/constants";
 import { getAllPresets } from "../../data/queries";
@@ -22,7 +26,7 @@ import "./App.css";
 import { ReactComponent as Logo } from "./logo.svg";
 
 import ProtectedRoute from "../../components/protectedRoute/";
-import ShortcutsHelper from "../../components/shortcutsHelper";
+import Footer from "../../components/footer/";
 
 import DefineNeed from "../defineNeed/";
 import TemplateChoice from "../templateChoice/";
@@ -36,10 +40,6 @@ import Authenticate from "../authenticate/";
 
 let interval;
 
-const supportedLanguages = {
-  fr: "Français",
-  en: "English"
-};
 
 class App extends React.Component {
   /* global Intercom */
@@ -141,7 +141,7 @@ class App extends React.Component {
       clearInterval(interval);
       const letters = document.querySelectorAll(".letter");
       let activeLetter = 0;
-      interval = setInterval(function() {
+      interval = setInterval(function () {
         for (let i = 0; i < letters.length; i++) {
           letters[i].classList.remove("animate");
         }
@@ -152,166 +152,101 @@ class App extends React.Component {
     } else {
       clearInterval(interval);
     }
-    return (      
-        <main className={`App ${this.props.isLoading ? "loading" : "loaded"}`}>
-          {this.props.location.pathname !== "/app/auth" && (
-            <header className="App-header">
-              <h1 className="App-logo-wrapper">
-                <Logo
-                  onClick={() => {
-                    this.props.goToHome();
-                  }}
-                />
-              </h1>
-            </header>
-          )}
-          <div className="App-content container-fluid">
-            <div className="row logo-mobile">
-              <div className="col-sm-12">
-                <Logo
-                  onClick={() => {
-                    this.props.goToHome();
-                  }}
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div
-                className={`left col-sm-${
-                  this.props.location.pathname !== "/app/auth" ? "10" : "12"
-                }`}
-              >
-                <Switch>
-                  <Route
-                    exact
-                    path="/app"
-                    render={props => <DefineNeed auth={this.auth} {...props} />}
-                  />
-                  <Route exact path="/app/restart" component={WelcomeBack} />
-                  <ProtectedRoute
-                    requirement={() => this.hasSelectedNeed()}
-                    path="/app/select"
-                    component={TemplateChoice}
-                  />
-                  <ProtectedRoute
-                    requirement={() => this.props.isAuthenticated}
-                    path="/app/library"
-                    component={Library}
-                  />
-                  <ProtectedRoute
-                    requirement={() => this.hasSelectedFont()}
-                    path="/app/customize"
-                    component={props => <StepView {...props} />}
-                  />
-                  <ProtectedRoute
-                    requirement={() => this.hasSelectedFont()}
-                    path="/app/specimen"
-                    component={props => (
-                      <SpecimenView auth={this.auth} {...props} />
-                    )}
-                  />
-                  <ProtectedRoute
-                    requirement={() => this.hasSelectedFont()}
-                    path="/app/checkout"
-                    component={Checkout}
-                  />
-                  <ProtectedRoute
-                    requirement={() => true}
-                    path="/app/auth"
-                    component={Authenticate}
-                  />
-                </Switch>
-              </div>
-              {this.props.location.pathname !== "/app/auth" && (
-                <div
-                  className={`right col-sm-2 ${
-                    this.props.isBlackOnWhite ||
-                    this.props.location.pathname !== "/app/customize"
-                      ? ""
-                      : "whiteOnBlack"
-                  }`}
-                >
-                  <Sidebar
-                    pathName={this.props.location.pathname}
-                    isAuthenticated={this.props.isAuthenticated}
-                    mode={
-                      this.props.location.pathname === "/app/checkout"
-                        ? "checkout"
-                        : "default"
-                    }
-                    {...this.props}
-                  />
-                </div>
-              )}
-            </div>
-            {this.props.location.pathname === "/app/customize" && (
-              <ShortcutsHelper
-                shouldShowTooltips={this.props.shouldShowTooltips}
-                toggleTooltips={this.props.toggleTooltips}
+    return (
+      <main className={`App ${this.props.isLoading ? "loading" : "loaded"}`}>
+        {this.props.location.pathname !== "/app/auth" && (
+          <header className="App-header">
+            <h1 className="App-logo-wrapper">
+              <Logo
+                onClick={() => {
+                  this.props.goToHome();
+                }}
               />
-            )}
-
-            <div className="row">
-              <div className="col-sm-12">
-                <div
-                  className="language-active"
-                  style={{
-                    backgroundColor:
-                      this.props.location.pathname === "/app/auth" ||
-                      (!this.props.isBlackOnWhite &&
-                        this.props.location.pathname === "/app/customize")
-                        ? "black"
-                        : "white"
-                  }}
-                  onClick={() => {
-                    this.setState({
-                      isLanguageMenuOpen: !this.state.isLanguageMenuOpen
-                    });
-                  }}
-                >
-                  <div
-                    className={`language-select ${
-                      this.state.isLanguageMenuOpen ? "opened" : ""
-                    }`}
-                  >
-                    {Object.keys(supportedLanguages).map(
-                      (key, index) =>
-                        key !== this.props.locale ? (
-                          <p
-                            style={{
-                              backgroundColor:
-                                this.props.location.pathname === "/app/auth" ||
-                                (!this.props.isBlackOnWhite &&
-                                  this.props.location.pathname === "/app/customize")
-                                  ? "white"
-                                  : "black",
-                              color:
-                                this.props.location.pathname === "/app/auth" ||
-                                (!this.props.isBlackOnWhite &&
-                                  this.props.location.pathname === "/app/customize")
-                                  ? "black"
-                                  : "white"
-                            }}
-                            onClick={() => {
-                              this.props.setLocale(key);
-                              this.setState({
-                                isLanguageMenuOpen: false
-                              });
-                            }}
-                          >
-                            {supportedLanguages[key]}
-                          </p>
-                        ) : (
-                          false
-                        )
-                    )}
-                  </div>
-                  {supportedLanguages[this.props.locale]}
-                </div>
-              </div>
+            </h1>
+          </header>
+        )}
+        <div className="App-content container-fluid">
+          <div className="row logo-mobile">
+            <div className="col-sm-12">
+              <Logo
+                onClick={() => {
+                  this.props.goToHome();
+                }}
+              />
             </div>
           </div>
-        </main>
+          <div className="row">
+            <div
+              className={`left col-sm-${
+                this.props.location.pathname !== "/app/auth" ? "10" : "12"
+                }`}
+            >
+              <Switch>
+                <Route
+                  exact
+                  path="/app"
+                  render={props => <DefineNeed auth={this.auth} {...props} />}
+                />
+                <Route exact path="/app/restart" component={WelcomeBack} />
+                <ProtectedRoute
+                  requirement={() => this.hasSelectedNeed()}
+                  path="/app/select"
+                  component={TemplateChoice}
+                />
+                <ProtectedRoute
+                  requirement={() => this.props.isAuthenticated}
+                  path="/app/library"
+                  component={Library}
+                />
+                <ProtectedRoute
+                  requirement={() => this.hasSelectedFont()}
+                  path="/app/customize"
+                  component={props => <StepView {...props} />}
+                />
+                <ProtectedRoute
+                  requirement={() => this.hasSelectedFont()}
+                  path="/app/specimen"
+                  component={props => (
+                    <SpecimenView auth={this.auth} {...props} />
+                  )}
+                />
+                <ProtectedRoute
+                  requirement={() => this.hasSelectedFont()}
+                  path="/app/checkout"
+                  component={Checkout}
+                />
+                <ProtectedRoute
+                  requirement={() => true}
+                  path="/app/auth"
+                  component={Authenticate}
+                />
+              </Switch>
+            </div>
+            {this.props.location.pathname !== "/app/auth" && (
+              <div
+                className={`right col-sm-2 ${
+                  this.props.isBlackOnWhite ||
+                    this.props.location.pathname !== "/app/customize"
+                    ? ""
+                    : "whiteOnBlack"
+                  }`}
+              >
+                <Sidebar
+                  pathName={this.props.location.pathname}
+                  isAuthenticated={this.props.isAuthenticated}
+                  mode={
+                    this.props.location.pathname === "/app/checkout"
+                      ? "checkout"
+                      : "default"
+                  }
+                  {...this.props}
+                />
+              </div>
+            )}
+          </div>
+          <Footer fontSize={this.props.fontSize} pathname={this.props.location.pathname} shouldShowTooltips={this.props.shouldShowTooltips} toggleTooltips={this.props.toggleTooltips} isBlackOnWhite={this.props.isBlackOnWhite} switchBlackOnWhite={this.props.switchBlackOnWhite} switchGlyphMode={this.props.switchGlyphMode} changeFontSize={this.props.changeFontSize} setLocale={this.props.setLocale} locale={this.props.locale} />
+        </div>
+      </main>
     );
   }
 }
@@ -346,6 +281,10 @@ App.propTypes = {
   isAuthenticated: PropTypes.bool,
   logout: PropTypes.func.isRequired,
   getCurrencyRates: PropTypes.func.isRequired,
+  switchBlackOnWhite: PropTypes.func.isRequired,
+  switchGlyphMode: PropTypes.func.isRequired,
+  changeFontSize: PropTypes.func.isRequired,
+  fontSize: PropTypes.number.isRequired,
 };
 
 App.defaultProps = {
@@ -380,7 +319,9 @@ const mapStateToProps = state => ({
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isBlackOnWhite: state.user.isBlackOnWhite,
   shouldShowTooltips: state.ui.shouldShowTooltips,
-  userId: state.user.graphqlID
+  userId: state.user.graphqlID,
+  locale: state.ui.locale,
+  fontSize: state.user.fontSize,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -394,6 +335,9 @@ const mapDispatchToProps = dispatch =>
       toggleTooltips,
       logout,
       getCurrencyRates,
+      switchBlackOnWhite,
+      switchGlyphMode,
+      changeFontSize,
     },
     dispatch
   );

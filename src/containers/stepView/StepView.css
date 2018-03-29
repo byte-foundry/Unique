@@ -1,12 +1,12 @@
 .StepView {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 80px;
   background: white;
   transition: background 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
 }
 
 .StepView.whiteOnBlack {
@@ -19,38 +19,6 @@
 
 .StepView h3:not(.currentState) {
   margin-bottom: 60px;
-}
-
-.StepView .actions {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.StepView .icon-background {
-  margin-right: 10px;
-}
-
-.StepView .icon-glyph,
-.StepView .icon-background {
-  width: 25px;
-  padding: 0px 5px;
-  height: auto;
-  cursor: pointer;
-  transition: fill 0.3s ease;
-}
-
-.StepView .icon-glyph path {
-  fill: black;
-}
-
-.StepView.whiteOnBlack .icon-glyph path {
-  fill: white;
-}
-
-.StepView.whiteOnBlack .icon-background {
-  fill: white;
 }
 
 .StepView.whiteOnBlack .Button.isConfigure {
@@ -149,71 +117,6 @@
   font-family: "sliderFont";
   display: block;
   margin-bottom: 30px;
-}
-
-.StepView .font-size {
-  margin-right: 10px;
-}
-
-.StepView .font-size input[type="range"] {
-  display: inline-block;
-  -webkit-appearance: none;
-  background-color: black;
-  width: 100px;
-  height: 2px;
-  border-radius: 2px;
-  outline: 0;
-  transform: translateY(-5px);
-}
-
-.StepView .font-size input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  background-color: white;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  border: 2px solid black;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-}
-​ .StepView .font-size input[type="range"]::-webkit-slider-thumb:hover {
-  background-color: white;
-  border: 2px solid black;
-}
-.StepView .font-size input[type="range"]::-webkit-slider-thumb:active {
-  transform: scale(1.2);
-}
-
-.StepView .icon-highFontSize,
-.StepView .icon-lowFontSize {
-  margin: 0px 10px;
-  cursor: pointer;
-}
-
-.StepView .icon-highFontSize path,
-.StepView .icon-lowFontSize path {
-  fill: black;
-}
-
-.StepView.whiteOnBlack .font-size input[type="range"] {
-  background-color: white;
-}
-
-.StepView.whiteOnBlack .font-size input[type="range"]::-webkit-slider-thumb {
-  background-color: black;
-  border: 2px solid white;
-}
-​
-  .StepView.whiteOnBlack
-  .font-size
-  input[type="range"]::-webkit-slider-thumb:hover {
-  background-color: black;
-  border: 2px solid white;
-}
-
-.StepView.whiteOnBlack .icon-highFontSize path,
-.StepView.whiteOnBlack .icon-lowFontSize path {
-  fill: white;
 }
 
 @media (max-width: 768px) {

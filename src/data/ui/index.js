@@ -72,7 +72,7 @@ export const toggleTooltips = () => dispatch => {
 export const setLocale = locale => dispatch => {
   dispatch({
     type: SET_LOCALE,
-    locale
+    locale: locale.toString(),
   });
 };
 

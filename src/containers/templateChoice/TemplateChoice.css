@@ -1,8 +1,8 @@
 .TemplateChoice {
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 270px);
   padding-top: 100px;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 }
 
 .TemplateChoice h1, .TemplateChoice h2 {
@@ -35,7 +35,7 @@
   width: 35px;
   height: auto;
   cursor: pointer;
-  position: absolute;  
+  position: fixed;  
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
   border: 2px solid #5320ee;
   background: transparent;
@@ -50,13 +50,13 @@
 
 .TemplateChoice .icon-back {  
   top: calc(50%);
-  right: -20px;
+  right: 150px;
   transform: translateX(20px) translateY(calc(50%)) translateZ(0px);
 }
 
 .TemplateChoice .icon-next {  
   top: calc(50% + 100px);
-  right: -20px;
+  right: 150px;
   transform: translateX(20px) translateY(calc(-50% - 110px)) translateZ(0px);
 }
 
@@ -71,27 +71,16 @@
   margin-left: 0px;
 }
 
-.TemplateChoice .template-wrapper {
-  max-height: 550px;
-}
-
-.TemplateChoice .ps__thumb-y  {
-  background: #5320ee !important;
-  background-image: linear-gradient(209deg, #5320ee, #5d28e2 68%, #622bdd) !important;
-}
-
-.TemplateChoice .ps__rail-y {
-  opacity: 1 !important;
-}
+.TemplateChoice .template-wrapper {}
 
 @media (max-width: 768px) {
   .TemplateChoice .icon-next {
-    right: -35px;
+    right: 15px;
     z-index: 10;
   }
   .TemplateChoice .icon-back {
     left: inherit;
-    right: -35px;
+    right: 15px;
     top: 40%;
     transform: translateY(-55%) translateZ(0px);
     z-index: 10;

@@ -1,0 +1,101 @@
+.Footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.Footer .footer-wrapper {
+    background-color: white;
+    margin-left: -15px;
+    padding-left: 45px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    padding-right: 45px;
+}
+
+.Footer .footer-wrapper:after {
+    content: "";
+  display: table;
+  clear: both;
+}
+
+
+.Footer .FontControls {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+
+.Footer .ShortcutsHelper {
+    float: right;
+}
+
+
+.Footer  .language-active {
+    cursor: pointer;
+    color: #b8b5c0;
+    text-decoration: underline;
+    padding: 6px 10px;
+    padding-right: 20px;
+    font-size: 16px;
+    user-select: none;
+    display: inline;
+    position: relative;
+    float: left;
+  }
+  
+  .Footer .language-select {
+    float:left;
+    position:absolute;
+    bottom: 35px;
+    left: 0;
+    font-size: 16px;
+    height: 0;
+    overflow: hidden;
+    transition: height .3s ease;
+  }
+  
+  
+  .Footer .language-select.opened {
+    height: 180px;
+  }
+  
+  .Footer .language-select p {
+    cursor: pointer;  
+    background-color: black;
+    color: white;
+    padding: 6px 10px;
+    display: block;
+    margin: 0;
+  }
+
+
+  .Footer.whiteOnBlack .footer-wrapper {
+      background-color: black;
+  }
+
+  .Footer.whiteOnBlack .font-size input[type="range"] {
+    background-color: white;
+  }
+  
+  .Footer.whiteOnBlack .font-size input[type="range"]::-webkit-slider-thumb {
+    background-color: black;
+    border: 2px solid white;
+  }
+  ​
+    .Footer.whiteOnBlack
+    .font-size
+    input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: black;
+    border: 2px solid white;
+  }
+  
+  .Footer.whiteOnBlack svg path {
+    fill: white;
+  }
+
+  .Footer.whiteOnBlack .tooltip-button {
+      color: white;
+      border-color: white;
+  }

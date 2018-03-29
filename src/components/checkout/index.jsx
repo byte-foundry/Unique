@@ -38,34 +38,34 @@ const onToken = (amount, description, callback, setUnstable, setStable, currency
       const paymentNumber = res.data.id;
       const family = userFontName;
       const invoice = {
-currency,
-choices: checkoutOptions
+        currency,
+        choices: checkoutOptions
       }
       //successPayment(data, callback))
-    //   {
-    //     "family": "familyName",
-    //     "fonts": [
-    //         {
-    //             "variant": "blah",
-    //             "data": ArrayBuffer
-    //         }
-    //     ],
-    //     "invoice": {
-    //         "choices": [
-    //             {
-    //                 "name": "specimen",
-    //                 "price": 0
-    //             },
-    //             {
-    //                 "name": "otf",
-    //                 "price": 15
-    //             }
-    //         ],
-    //         "currency": "$"
-    //     },
-    //     "paymentNumber": "ch_mkljqdfml",
-    //     "customerId": "cus_mjsqmdfl"
-    // }
+      //   {
+      //     "family": "familyName",
+      //     "fonts": [
+      //         {
+      //             "variant": "blah",
+      //             "data": ArrayBuffer
+      //         }
+      //     ],
+      //     "invoice": {
+      //         "choices": [
+      //             {
+      //                 "name": "specimen",
+      //                 "price": 0
+      //             },
+      //             {
+      //                 "name": "otf",
+      //                 "price": 15
+      //             }
+      //         ],
+      //         "currency": "$"
+      //     },
+      //     "paymentNumber": "ch_mkljqdfml",
+      //     "customerId": "cus_mjsqmdfl"
+      // }
     })
     .catch(data => {
       setStable();
@@ -116,7 +116,7 @@ Checkout.propTypes = {
   email: PropTypes.string,
   afterPayment: PropTypes.func.isRequired,
   setUnstable: PropTypes.func.isRequired,
-  setStable: PropTypes.func.isRequired
+  setStable: PropTypes.func.isRequired,
   userFontName: PropTypes.string.isRequired,
 };
 

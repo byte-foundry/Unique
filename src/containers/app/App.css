@@ -91,47 +91,6 @@
   cursor: pointer;
 }
 
-
-.App  .language-active {
-  cursor: pointer;
-  color: #b8b5c0;
-  text-decoration: underline;
-  padding: 6px 10px;
-  padding-right: 20px;
-  font-size: 16px;
-  user-select: none;
-  display: inline;
-  position: relative;
-}
-
-.App .language-select {
-  float:left;
-  position:absolute;
-  bottom: 35px;
-  left: 0;
-  font-size: 16px;
-  height: 0;
-  overflow: hidden;
-  transition: height .3s ease;
-}
-
-
-.App .language-select.opened {
-  height: 38px;
-}
-
-.App .language-select p {
-  cursor: pointer;  
-  background-color: black;
-  color: white;
-  padding: 6px 10px;
-  display: inline;
-  display: block;
-  margin: 0;
-}
-
-
-
 .loading .App-logo-wrapper,
 .loading .App-loader-wrapper {
   opacity: 1;

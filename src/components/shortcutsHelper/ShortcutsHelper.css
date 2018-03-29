@@ -1,13 +1,14 @@
 .ShortcutsHelper {
+    display: inline-block;
 }
 
 .ShortcutsHelper .tooltip-button {
-    position: absolute;
-    bottom: 30px;
-    right: 18%;
-    border: 1px solid black;
+    position: relative;
+    display: inline-block;
+    border: 2px solid black;
     cursor: pointer;
     padding: 0px 8px;
+    transform: translateY(-4px);
     border-radius: 50%;
 }
 

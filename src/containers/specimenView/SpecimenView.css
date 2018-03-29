@@ -1,7 +1,7 @@
 .SpecimenView {
   position: relative;
   display: block;
-  padding-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 .SpecimenView .container {

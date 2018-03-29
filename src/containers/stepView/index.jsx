@@ -14,12 +14,9 @@ import {
   updateSliderFont,
   finishEditing
 } from "../../data/font";
-import {
-  switchBlackOnWhite,
-  switchGlyphMode,
+import {  
   storeChosenWord,
   storeChosenGlyph,
-  changeFontSize
 } from "../../data/user";
 import Choice from "../../components/choice/";
 import WordView from "../wordView/";
@@ -30,10 +27,6 @@ import "./StepView.css";
 import { ReactComponent as Back } from "./back.svg";
 import { ReactComponent as Next } from "./next.svg";
 import { ReactComponent as Finish } from "./finish.svg";
-import { ReactComponent as BackgroundIcon } from "./background.svg";
-import { ReactComponent as GlyphIcon } from "./glyph.svg";
-import { ReactComponent as LowFontSizeIcon } from "./lowFontSize.svg";
-import { ReactComponent as HighFontSizeIcon } from "./highFontSize.svg";
 
 const isMostSelected = choices => {
   let most = choices[0].id;
@@ -421,109 +414,6 @@ class StepView extends React.Component {
                       </FormattedMessage>
                     )}
                   </span>
-                  <span className="controls">
-                    <span className="font-size">
-                      <LowFontSizeIcon className="icon-lowFontSize"  onClick={() => this.props.changeFontSize(20)}/>
-                      <input
-                        type="range"
-                        min="20"
-                        max="140"
-                        step="2"
-                        value={this.props.fontSize}
-                        onChange={e =>
-                          this.props.changeFontSize(e.target.value)
-                        }
-                      />
-                      <HighFontSizeIcon className="icon-highFontSize" onClick={() => this.props.changeFontSize(140)}/>
-                    </span>
-                    {this.props.shouldShowTooltips ? (
-                      <FormattedMessage
-                        id="Shortcuts.blackOnWhiteAction"
-                        defaultMessage="Press G key to toggle white on black mode"
-                        description="Black on white mode - toggle"
-                      >
-                        {text => (
-                          <Tooltip
-                            title={text}
-                            position="top"
-                            open={this.props.shouldShowTooltips}
-                            arrow="true"
-                            delay={600}
-                          >
-                            <BackgroundIcon
-                              className="icon-background"
-                              onClick={() => this.props.switchBlackOnWhite()}
-                            />
-                          </Tooltip>
-                        )}
-                      </FormattedMessage>
-                    ) : (
-                      <FormattedMessage
-                        id="StepView.blackOnWhiteTooltip"
-                        defaultMessage="Toggle black on white mode"
-                        description="Black on white mode - toggle"
-                      >
-                        {text => (
-                          <Tooltip
-                            title={text}
-                            position="top"
-                            trigger="mouseenter"
-                            arrow="true"
-                            delay={600}
-                          >
-                            <BackgroundIcon
-                              className="icon-background"
-                              onClick={() => this.props.switchBlackOnWhite()}
-                            />
-                          </Tooltip>
-                        )}
-                      </FormattedMessage>
-                    )}
-
-                    {this.props.shouldShowTooltips ? (
-                      <FormattedMessage
-                        id="Shortcuts.glyphAction"
-                        defaultMessage="Press G key to toggle glyph mode"
-                        description="Glyph mode - toggle"
-                      >
-                        {text => (
-                          <Tooltip
-                            title={text}
-                            position="bottom"
-                            open={this.props.shouldShowTooltips}
-                            arrow="true"
-                            delay={600}
-                          >
-                            <GlyphIcon
-                              className="icon-glyph"
-                              onClick={() => this.props.switchGlyphMode()}
-                            />
-                          </Tooltip>
-                        )}
-                      </FormattedMessage>
-                    ) : (
-                      <FormattedMessage
-                        id="StepView.glyphTooltip"
-                        defaultMessage="Toggle glyph mode"
-                        description="Glyph mode - toggle"
-                      >
-                        {text => (
-                          <Tooltip
-                            title={text}
-                            position="top"
-                            trigger="mouseenter"
-                            arrow="true"
-                            delay={600}
-                          >
-                            <GlyphIcon
-                              className="icon-glyph"
-                              onClick={() => this.props.switchGlyphMode()}
-                            />
-                          </Tooltip>
-                        )}
-                      </FormattedMessage>
-                    )}
-                  </span>
                 </div>
               </div>
             </div>
@@ -553,11 +443,8 @@ const mapDispatchToProps = dispatch =>
       selectChoice,
       updateSliderFont,
       finishEditing,
-      switchBlackOnWhite,
-      switchGlyphMode,
       storeChosenWord,
       storeChosenGlyph,
-      changeFontSize
     },
     dispatch
   );
@@ -585,15 +472,12 @@ StepView.propTypes = {
   }).isRequired,
   chosenWord: PropTypes.string.isRequired,
   chosenGlyph: PropTypes.string.isRequired,
-  switchBlackOnWhite: PropTypes.func.isRequired,
-  switchGlyphMode: PropTypes.func.isRequired,
   isGlyphMode: PropTypes.bool.isRequired,
   isBlackOnWhite: PropTypes.bool.isRequired,
   storeChosenWord: PropTypes.func.isRequired,
   storeChosenGlyph: PropTypes.func.isRequired,
   shouldShowTooltips: PropTypes.bool.isRequired,
   fontSize: PropTypes.number.isRequired,
-  changeFontSize: PropTypes.number.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);
