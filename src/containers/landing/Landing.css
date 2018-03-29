@@ -4,7 +4,7 @@
 .Landing .header {
   background-image: linear-gradient(246deg, #5320ee, #5d28e2 68%, #622bdd);
   clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
-  padding-bottom: 20%;
+  padding-bottom: 25%;
   position: relative;
 }
 
@@ -101,7 +101,7 @@
 .Landing .description .uniqueVisual {
   width: 100%;
   height: auto;
-  margin-top: -50%;
+  margin-top: -40vw;
   margin-bottom: 10%;
 }
 
@@ -176,7 +176,7 @@
 .Landing .howItWorks .image-wrapper {
     position: relative;
     height: 170px;
-    margin-bottom: 40%;
+    margin-bottom: 50%;
 }
 
 .Landing .howItWorks .howItWorks-icon1 {
