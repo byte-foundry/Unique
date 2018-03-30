@@ -165,7 +165,7 @@ class App extends React.Component {
             </h1>
           </header>
         )}
-        <div className="App-content container-fluid">
+        <div className={`App-content container-fluid ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"}`}>
           <div className="row logo-mobile">
             <div className="col-sm-12">
               <Logo

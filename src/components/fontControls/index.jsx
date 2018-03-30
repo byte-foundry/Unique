@@ -6,10 +6,10 @@ import { Tooltip } from "react-tippy";
 
 import './FontControls.css';
 
-import { ReactComponent as BackgroundIcon } from "./background.svg";
+import { ReactComponent as BackgroundIcon } from "./blackwhite.svg";
 import { ReactComponent as GlyphIcon } from "./glyph.svg";
-import { ReactComponent as LowFontSizeIcon } from "./lowFontSize.svg";
-import { ReactComponent as HighFontSizeIcon } from "./highFontSize.svg";
+import { ReactComponent as LowFontSizeIcon } from "./minus.svg";
+import { ReactComponent as HighFontSizeIcon } from "./plus.svg";
 
 const FontControls = props => (
     <div className="FontControls">

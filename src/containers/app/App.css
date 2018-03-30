@@ -147,6 +147,9 @@
   animation: animLoadedContent 1s cubic-bezier(0.7, 0, 0.3, 1) both;
 }
 
+.loaded .App-content.whiteOnBlack {
+  background-color: black;
+}
 @keyframes animLoadedLoader {
   to {
     opacity: 0;
