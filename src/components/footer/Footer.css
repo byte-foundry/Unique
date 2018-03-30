@@ -1,106 +1,64 @@
 .Footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .Footer .footer-wrapper {
-    background-color: white;
-    margin-left: -15px;
-    padding-left: 45px;
-    padding-top: 15px;
-    padding-right: 45px;
+  background-color: white;
+  margin-left: -15px;
+  padding-left: 45px;
+  padding-top: 15px;
+  padding-right: 45px;
 }
 
 .Footer .footer-wrapper:after {
-    content: "";
+  content: "";
   display: table;
   clear: both;
 }
 
-
 .Footer .FontControls {
-    display: inline-block;
-    float: right;
-    margin-right: 20px;
+  display: inline-block;
+  float: right;
+  margin-right: 20px;
 }
 
 .Footer .ShortcutsHelper {
-    float: right;
+  float: right;
 }
 
+.Footer.whiteOnBlack .footer-wrapper {
+  background-color: black;
+}
 
-.Footer  .language-active {
-    cursor: pointer;
-    color: #b8b5c0;
-    text-decoration: underline;
-    padding: 2px 10px;
-    padding-right: 20px;
-    font-size: 16px;
-    user-select: none;
-    display: inline;
-    position: relative;
-    float: left;
-    transform: translateY(-3px);
-  }
-  
-  .Footer .language-select {
-    float:left;
-    position:absolute;
-    bottom: 35px;
-    left: 0;
-    font-size: 16px;
-    height: 0;
-    overflow: hidden;
-    transition: height .3s ease;
-  }
-  
-  
-  .Footer .language-select.opened {
-    height: 180px;
-  }
-  
-  .Footer .language-select p {
-    cursor: pointer;  
-    background-color: black;
-    color: white;
-    padding: 6px 10px;
-    display: block;
-    margin: 0;
-  }
+.Footer.whiteOnBlack .font-size input[type="range"] {
+  background-color: white;
+}
 
+.Footer.whiteOnBlack .font-size input[type="range"]::-webkit-slider-thumb {
+  background-color: white;
+  border: 2px solid white;
+}
+​
+  .Footer.whiteOnBlack
+  .font-size
+  input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: black;
+  border: 2px solid white;
+}
 
-  .Footer.whiteOnBlack .footer-wrapper {
-      background-color: black;
-  }
+.Footer.whiteOnBlack svg path {
+  fill: white;
+  stroke: white;
+}
 
-  .Footer.whiteOnBlack .font-size input[type="range"] {
-    background-color: white;
-  }
-  
-  .Footer.whiteOnBlack .font-size input[type="range"]::-webkit-slider-thumb {
-    background-color: white;
-    border: 2px solid white;
-  }
-  ​
-    .Footer.whiteOnBlack
-    .font-size
-    input[type="range"]::-webkit-slider-thumb:hover {
-    background-color: black;
-    border: 2px solid white;
-  }
-  
-  .Footer.whiteOnBlack svg path {
-    fill: white;
-    stroke: white;
-  }
+.Footer.whiteOnBlack .tooltip-button {
+  color: white;
+  border-color: white;
+}
 
-  .Footer.whiteOnBlack .tooltip-button {
-      color: white;
-      border-color: white;
-  }
-
-  .Footer.whiteOnBlack .icon-background path{
-    fill: black;
-  }
+.Footer.whiteOnBlack .icon-background path {
+  fill: black;
+}

@@ -1,0 +1,137 @@
+[
+  {
+    "id": "Landing.headerTitle",
+    "description": "Unique header title",
+    "defaultMessage": "Easily get fonts that you'll never see anywhere else"
+  },
+  {
+    "id": "Landing.headerInputPlaceholder",
+    "description": "Landing page header input placeholder",
+    "defaultMessage": "Type a little something"
+  },
+  {
+    "id": "Landing.headerInputCTA",
+    "description": "Landing page header CTA",
+    "defaultMessage": "Get your font"
+  },
+  {
+    "id": "Landing.descriptionTitle",
+    "description": "Unique description title",
+    "defaultMessage": "Get your custom fonts in a few steps"
+  },
+  {
+    "id": "Landing.descriptionText",
+    "description": "Unique description text",
+    "defaultMessage": "A custom font goes a long way, giving you that special extra. \r\n                      With Unique you get just what you need – a custom font ready for use!\r\n\r\n                      Simply select, customize and off you go! \r\n                      It’s that easy."
+  },
+  {
+    "id": "Landing.descriptionCTA",
+    "description": "Landing description CTA",
+    "defaultMessage": "Get your unique font"
+  },
+  {
+    "id": "Landing.featureListItem1",
+    "description": "Unique feature list item 1",
+    "defaultMessage": "Save oodles of time!"
+  },
+  {
+    "id": "Landing.featureListItem2",
+    "description": "Unique feature list item 2",
+    "defaultMessage": "Get your custom fonts in a few steps!"
+  },
+  {
+    "id": "Landing.featureListItem3",
+    "description": "Unique feature list item 3",
+    "defaultMessage": "Get expert tips and tricks!"
+  },
+  {
+    "id": "Landing.featureListItem7",
+    "description": "Unique feature list item 7",
+    "defaultMessage": "Unlimited usages!"
+  },
+  {
+    "id": "Landing.featureListItem4",
+    "description": "Unique feature list item 4",
+    "defaultMessage": "Break free of marketplaces!"
+  },
+  {
+    "id": "Landing.featureListItem5",
+    "description": "Unique feature list item 5",
+    "defaultMessage": "No more recycling fonts!"
+  },
+  {
+    "id": "Landing.featureListItem6",
+    "description": "Unique feature list item 6",
+    "defaultMessage": "On demand - no subscription!"
+  },
+  {
+    "id": "Landing.featureListItem8",
+    "description": "Unique feature list item 8",
+    "defaultMessage": "No royalties!"
+  },
+  {
+    "id": "Landing.howItWorksTitle",
+    "description": "Unique how it works title",
+    "defaultMessage": "How it works"
+  },
+  {
+    "id": "Landing.howItWorksStep1Title",
+    "description": "Unique how it works step 1 title",
+    "defaultMessage": "Specify your need"
+  },
+  {
+    "id": "Landing.howItWorksStep1Description",
+    "description": "Unique how it works step 1 description",
+    "defaultMessage": "What are you looking for? A logo? A display? Just tell us what you need."
+  },
+  {
+    "id": "Landing.howItWorksStep1CTA",
+    "description": "Unique how it works step 1 CTA",
+    "defaultMessage": "Get your Unique font"
+  },
+  {
+    "id": "Landing.howItWorksStep2Title",
+    "description": "Unique how it works step 2 title",
+    "defaultMessage": "Pick your choices"
+  },
+  {
+    "id": "Landing.howItWorksStep2Description",
+    "description": "Unique how it works step 2 description",
+    "defaultMessage": "Select the thickness, slant, etc. for your font by clicking on your favorite choice."
+  },
+  {
+    "id": "Landing.howItWorksStep2CTA",
+    "description": "Unique how it works step 2 CTA",
+    "defaultMessage": "Get your Unique font"
+  },
+  {
+    "id": "Landing.howItWorksStep3Title",
+    "description": "Unique how it works step 3 title",
+    "defaultMessage": "Download your font"
+  },
+  {
+    "id": "Landing.howItWorksStep3Description",
+    "description": "Unique how it works step 3 description",
+    "defaultMessage": "Love it? Download your font and use it right away!"
+  },
+  {
+    "id": "Landing.howItWorksStep3CTA",
+    "description": "Unique how it works step 3 CTA",
+    "defaultMessage": "Get your Unique font"
+  },
+  {
+    "id": "Landing.prototypoTitle",
+    "description": "Unique prototypo title",
+    "defaultMessage": "Get started"
+  },
+  {
+    "id": "Landing.prototypoDescription",
+    "description": "Unique prototypo description",
+    "defaultMessage": "Powered by Prototypo’s tech using algorithms to generate\r\n                    fonts/ typefaces, Unique offers the largest font variation out\r\n                    there! Open up countless possibilities with each choice you\r\n                    make! Our passionate team of designers is constantly adding\r\n                    new templates/ font models, multiplying the range of choices\r\n                    available."
+  },
+  {
+    "id": "Landing.footerCopyright",
+    "description": "Unique copyright footer",
+    "defaultMessage": "Unique © Powered by Prototypo"
+  }
+]

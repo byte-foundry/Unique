@@ -22,7 +22,9 @@ import { ReactComponent as HowItWorks2 } from "./howitworks_2.svg";
 import { ReactComponent as HowItWorks3 } from "./howitworks_3.svg";
 
 import { createPrototypoFactory } from "../../data/createdFonts";
+import { setLocale } from "../../data/ui";
 
+import LanguageSelect from "../../components/languageSelect";
 import Button from "../../components/button";
 
 import "./Landing.css";
@@ -107,7 +109,7 @@ class Landing extends React.Component {
             </div>
             <div className="row justify-content-center">
               <div className="col-sm-12 col-md-6">
-                <p>
+                <p style={{ whiteSpace: "pre-line" }}>
                   <FormattedMessage
                     id="Landing.descriptionText"
                     defaultMessage="
@@ -360,7 +362,7 @@ class Landing extends React.Component {
                     description="Unique prototypo title"
                   />
                 </h1>
-                <p>
+                <p style={{ whiteSpace: "pre-line" }}>
                   <FormattedMessage
                     id="Landing.prototypoDescription"
                     defaultMessage="Powered by Prototypo’s tech using algorithms to generate
@@ -385,6 +387,12 @@ class Landing extends React.Component {
                 defaultMessage="Unique © Powered by Prototypo"
                 description="Unique copyright footer"
               />
+              <LanguageSelect
+                pathname={this.props.location.pathname}
+                isBlackOnWhite={this.props.isBlackOnWhite}
+                setLocale={this.props.setLocale}
+                locale={this.props.locale}
+              />
             </span>
           </div>
         </div>
@@ -398,6 +406,9 @@ Landing.propTypes = {
   isPrototypoLoading: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool,
   createPrototypoFactory: PropTypes.func.isRequired,
+  isBlackOnWhite: PropTypes.string.isRequired,
+  setLocale: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired
 };
 
 Landing.defaultProps = {
@@ -408,6 +419,8 @@ const mapStateToProps = state => ({
   isAuthenticated: typeof state.user.graphqlID === "string",
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
+  isBlackOnWhite: state.user.isBlackOnWhite,
+  locale: state.ui.locale
 });
 
 const mapDispatchToProps = dispatch =>
@@ -415,6 +428,7 @@ const mapDispatchToProps = dispatch =>
     {
       goToApp: () => push("/app"),
       createPrototypoFactory,
+      setLocale
     },
     dispatch
   );

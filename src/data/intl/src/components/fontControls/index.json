@@ -1,0 +1,22 @@
+[
+  {
+    "id": "Shortcuts.blackOnWhiteAction",
+    "description": "Black on white mode - toggle",
+    "defaultMessage": "Press G key to toggle white on black mode"
+  },
+  {
+    "id": "StepView.blackOnWhiteTooltip",
+    "description": "Black on white mode - toggle",
+    "defaultMessage": "Toggle black on white mode"
+  },
+  {
+    "id": "Shortcuts.glyphAction",
+    "description": "Glyph mode - toggle",
+    "defaultMessage": "Press G key to toggle glyph mode"
+  },
+  {
+    "id": "StepView.glyphTooltip",
+    "description": "Glyph mode - toggle",
+    "defaultMessage": "Toggle glyph mode"
+  }
+]
