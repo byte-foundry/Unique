@@ -697,9 +697,10 @@ export const finishEditing = choice => (dispatch, getState) => {
 export const getArrayBuffer = name => (dispatch, getState) => {
   console.log('==========font/getArrayBuffer============');
   const { fontName } = getState().font;
+  const { userFontName } = getState().user;
   const { fonts } = getState().createdFonts;
   return new Promise((resolve) => {
-    fonts[name || fontName].getArrayBuffer().then((data) => {
+    fonts[name || fontName].getArrayBuffer(userFontName).then((data) => {
       resolve(data);
     });
   });

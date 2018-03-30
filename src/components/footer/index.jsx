@@ -14,15 +14,16 @@ class Footer extends React.Component {
     this.state = {};
   }
   render() {
+    console.log(this.props)
     return (
       <div
-        className={`Footer ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"}`}
+        className={`Footer ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"} ${this.props.pathname === "/app/auth" ? "whiteOnBlack" : ""}`}
       >
         <div className="row">
           <div className="col-lg-10 col-sm-12 footer-wrapper">
             <LanguageSelect
               pathname={this.props.pathName}
-              isBlackOnWhite={this.props.isBlackOnWhite}
+              isBlackOnWhite={this.props.pathname === "/app/auth" ? this.props.isBlackOnWhite : true}
               setLocale={this.props.setLocale}
               locale={this.props.locale}
             />

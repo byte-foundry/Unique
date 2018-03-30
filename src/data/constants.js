@@ -6,6 +6,7 @@ export const PAYMENT_SERVER_URL =
   process.env.NODE_ENV === "production"
     ? "https://bzawttxlqh.execute-api.eu-west-1.amazonaws.com/local/unique/fonts/buy"
     : "https://bzawttxlqh.execute-api.eu-west-1.amazonaws.com/local/unique/fonts/buy";
+export const VALIDATION_SERVER_URL = "https://unique-back.prototypo.io/create-package/";
 export const DEFAULT_UI_WORD = "Hamburgefonstiv ABC 123";
 export const DEFAULT_UI_GLYPH = "g";
 export const GRAPHQL_API = "https://api.graph.cool/simple/v1/prototypo-new-dev";
