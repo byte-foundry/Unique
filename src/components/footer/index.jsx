@@ -20,7 +20,7 @@ class Footer extends React.Component {
         className={`Footer ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"} ${this.props.pathname === "/app/auth" ? "whiteOnBlack" : ""}`}
       >
         <div className="row">
-          <div className="col-lg-10 col-sm-12 footer-wrapper">
+          <div className="col-lg-12 col-sm-12 footer-wrapper">
             <LanguageSelect
               pathname={this.props.pathName}
               isBlackOnWhite={this.props.pathname === "/app/auth" ? this.props.isBlackOnWhite : true}
