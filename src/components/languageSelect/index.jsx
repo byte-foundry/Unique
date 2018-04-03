@@ -79,7 +79,7 @@ class LanguageSelect extends React.Component {
                 )
             )}
           </div>
-          {supportedLanguages[this.props.locale]}
+          {supportedLanguages[this.props.locale] ? supportedLanguages[this.props.locale] : supportedLanguages.en}
         </div>
       </div>
     );

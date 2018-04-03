@@ -12,12 +12,10 @@ import {
   stepBack,
   selectChoice,
   updateSliderFont,
-  finishEditing
+  finishEditing,
+  goToStep
 } from "../../data/font";
-import {  
-  storeChosenWord,
-  storeChosenGlyph,
-} from "../../data/user";
+import { storeChosenWord, storeChosenGlyph } from "../../data/user";
 import Choice from "../../components/choice/";
 import WordView from "../wordView/";
 import Sliders from "../sliders/";
@@ -195,6 +193,7 @@ class StepView extends React.Component {
     }
   }
   render() {
+    console.log(this.props);
     return (
       <Shortcuts name="CHOICES" handler={this.handleShortcuts}>
         <div
@@ -207,33 +206,28 @@ class StepView extends React.Component {
           tabIndex="-1"
         >
           <div className="container">
+            <div className="row justify-content-md-between step-description">
+              <div className="col-md-4 col-sm-12">
+                <p className="step-name">{this.props.stepValues.name}</p>
+              </div>
+              <div className="col-md-4 col-sm-12">
+                <div className="step-bubbles">
+                  {[...Array(this.props.stepLength)].map((e, i) => (
+                    <span
+                      className={`step-bubble ${this.props.step > i || this.props.choicesMade[i] ? "past" : ""} ${i === this.props.step - 1 ? 'current' : ''}`}
+                      onClick={() => {
+                        if (this.props.step > i || this.props.choicesMade[i]) {
+                          this.props.goToStep(i + 1);
+                        }
+                      }}
+                      key={`stepbubble-${i}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
             <div className="row justify-content-center">
-              <div className="col-sm-10">
-                <FormattedMessage
-                  id="Shortcuts.previousAction"
-                  defaultMessage="Press left key to go back"
-                  description="Shortcut - previous action"
-                >
-                  {text => (
-                    <div className="icon-back-wrapper">
-                      <Tooltip
-                        title={text}
-                        position="top"
-                        open={this.props.shouldShowTooltips}
-                        arrow="true"
-                        delay={200}
-                      >
-                        <Back
-                          className="icon-back"
-                          onClick={() => {
-                            this.props.stepBack();
-                          }}
-                        />
-                      </Tooltip>
-                    </div>
-                  )}
-                </FormattedMessage>
-
+              <div className="col-sm-12 choices-wrapper">
                 <FormattedMessage
                   id="Shortcuts.chooseChoice"
                   defaultMessage="Press up and down keys to choose the most suitable option"
@@ -285,43 +279,35 @@ class StepView extends React.Component {
                             />
                           </div>
                         ))}
-                        <div
-                          className={`Choice choiceMore ${
-                            this.state.choice &&
-                            this.state.choice.name === "Custom"
-                              ? "selected"
-                              : ""
-                          } col-sm-${
-                            this.props.isGlyphMode ? "4 glyphMode" : "12"
-                          }`}
-                          role="option"
-                          aria-checked="false"
-                          aria-selected="false"
-                          tabIndex={0}
-                          key={`choiceCustom${this.props.step}`}
-                          onDoubleClick={() =>
-                            this.props.selectChoice(this.state.choice)
-                          }
-                        >
-                          {this.props.isGlyphMode ? "g" : this.props.chosenWord}
-                          <p className="choiceName">
-                            <FormattedMessage
-                              id="StepView.customChoiceName"
-                              defaultMessage="Custom"
-                              description="Custom choice name"
-                            />
-                          </p>
-                        </div>
                       </FlipMove>
                     </Tooltip>
                   )}
                 </FormattedMessage>
 
-                {this.state.choice && this.state.choice.name === "Custom" ? (
-                  <Sliders onUpdate={this.onUpdate} />
-                ) : (
-                  false
-                )}
+                <FormattedMessage
+                  id="Shortcuts.previousAction"
+                  defaultMessage="Press left key to go back"
+                  description="Shortcut - previous action"
+                >
+                  {text => (
+                    <div className="icon-back-wrapper">
+                      <Tooltip
+                        title={text}
+                        position="top"
+                        open={this.props.shouldShowTooltips}
+                        arrow="true"
+                        delay={200}
+                      >
+                        <Back
+                          className="icon-back"
+                          onClick={() => {
+                            this.props.stepBack();
+                          }}
+                        />
+                      </Tooltip>
+                    </div>
+                  )}
+                </FormattedMessage>
 
                 <FormattedMessage
                   id="Shortcuts.nextAction"
@@ -369,52 +355,6 @@ class StepView extends React.Component {
                     }
                   }}
                 />
-                <div className="actions">
-                  <span className="previousStep">
-                    {this.state.choice &&
-                    this.state.choice.name === "Custom" ? (
-                      <FormattedMessage
-                        id="StepView.customButtonLess"
-                        defaultMessage="Less accuracy"
-                        description="More accuracy button - less state"
-                      >
-                        {text => (
-                          <Button
-                            className="isConfigure"
-                            mode="text"
-                            label={text}
-                            onClick={() =>
-                              this.markChoiceActive({
-                                name: undefined,
-                                values: {}
-                              })
-                            }
-                          />
-                        )}
-                      </FormattedMessage>
-                    ) : (
-                      <FormattedMessage
-                        id="StepView.customButtonMore"
-                        defaultMessage="More accuracy"
-                        description="More accuracy button - more state"
-                      >
-                        {text => (
-                          <Button
-                            className="isConfigure"
-                            mode="text"
-                            label={text}
-                            onClick={() =>
-                              this.markChoiceActive({
-                                name: "Custom",
-                                values: {}
-                              })
-                            }
-                          />
-                        )}
-                      </FormattedMessage>
-                    )}
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -445,6 +385,7 @@ const mapDispatchToProps = dispatch =>
       finishEditing,
       storeChosenWord,
       storeChosenGlyph,
+      goToStep,
     },
     dispatch
   );
@@ -478,6 +419,7 @@ StepView.propTypes = {
   storeChosenGlyph: PropTypes.func.isRequired,
   shouldShowTooltips: PropTypes.bool.isRequired,
   fontSize: PropTypes.number.isRequired,
+  goToStep: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);

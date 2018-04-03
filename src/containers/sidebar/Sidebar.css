@@ -8,10 +8,11 @@
   top: 0;
   right: 0;
   border-left: 1px solid white;
-  max-width: 250px;
   margin-left: auto;
   transition: width 0.3s ease, background .3s ease;
   width: 100%;
+  max-width: 16.666667%;
+  z-index: 10;
 }
 
 .Sidebar.small {

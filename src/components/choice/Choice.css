@@ -43,6 +43,9 @@
 .Choice.selected {
   border-color: #5320ee;
 }
+.Choice:hover {
+  border-color: #5320ee;
+}
 
 .Choice .choiceName {
   font-family: unique, sans-serif;
@@ -66,15 +69,24 @@
   border: 2px solid #111;
 }
 
-.Choice .icon-pencil{
-  height: 15px;
+.Choice .icon-edit{
+  height: 30px;
+  width: 35px;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  cursor: pointer;
+  background: #5320ee;
+}
+
+.Choice .icon-edit svg{
+  height: 20px;
   width: auto;
   position: absolute;
-  top: 30px;
-  cursor: pointer;
-  padding-left: 10px;
-  fill: #b8b5c0;
+  top: 5px;
+  left: 10px;
 }
+
 
 .Choice span[contenteditable="true"] {
   border: 1px dotted #5320ee;

@@ -8,9 +8,10 @@
 .Footer .footer-wrapper {
   background-color: white;
   margin-left: -15px;
-  padding-left: 45px;
+  padding-left: 30px;
   padding-top: 15px;
-  padding-right: 45px;
+  padding-right: 15px;
+  padding-bottom: 15px;
 }
 
 .Footer .footer-wrapper:after {

@@ -10,9 +10,7 @@ import { FormattedMessage } from "react-intl";
 import "./SpecimenView.css";
 import Button from "../../components/button/";
 import { storeProject } from "../../data/user";
-import desktopBackground from "./desktop.svg";
-import tabletBackground from "./tablet.svg";
-import mobileBackground from "./mobile.svg";
+import { ReactComponent as Back } from "../stepView/back.svg";
 
 class SpecimenView extends React.Component {
   constructor(props) {
@@ -42,6 +40,90 @@ class SpecimenView extends React.Component {
     window.scrollTo(0, 0);
   }
   render() {
+    const uppercase = [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z"
+    ];
+    const lowercase = [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z"
+    ];
+    const symbols = [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "&",
+      "@",
+      ".",
+      ",",
+      "?",
+      "!",
+      "“",
+      "”",
+      "(",
+      ")",
+      "<",
+      ">",
+      "°",
+      "+",
+      "-",
+      "$"
+    ];
     return (
       <div
         className="SpecimenView"
@@ -62,31 +144,9 @@ class SpecimenView extends React.Component {
             <p className="subtitle">
               <FormattedMessage
                 id="SpecimenView.subtitle"
-                defaultMessage="Embark on new adventures with your complete glyph set! But before you move on, let's give your font a name"
+                defaultMessage="Embark on new adventures with your complete glyph set!"
                 description="Speciem view subtitle"
               />
-            </p>
-            <p className="fontName">
-              <FormattedMessage
-                id="SpecimenView.nameActionLabel"
-                defaultMessage="Give your font a name:"
-                description="SpecimenView - Name action label"
-              />
-              <FormattedMessage
-                id="SpecimenView.nameAction"
-                defaultMessage="My font name"
-                description="SpecimenView - Name action"
-              >
-                {text => (
-                  <input
-                    type="text"
-                    value={this.state.fontName}
-                    placeholder={text}
-                    className="input-fontname"
-                    onChange={e => this.setState({ fontName: e.target.value })}
-                  />
-                )}
-              </FormattedMessage>
             </p>
             <p className="subtitle-two">
               <FormattedMessage
@@ -96,6 +156,12 @@ class SpecimenView extends React.Component {
               />
             </p>
             <div className="buttons">
+              <Back
+                className="icon-back"
+                onClick={() => {
+                  this.props.goBack();
+                }}
+              />
               <FormattedMessage
                 id="SpecimenView.downloadAction"
                 defaultMessage="Download"
@@ -153,161 +219,103 @@ class SpecimenView extends React.Component {
               <p className="word">{this.props.word}</p>
               <h3>
                 <FormattedMessage
-                  id="SpecimenView.characters"
-                  defaultMessage="Characters"
-                  description="Specimen view characters"
-                />
-              </h3>
-              <div className="characters">
-                <div className="uppercase">A B C D E F G H I J K L M</div>
-                <div className="uppercase">N O P Q R S T U V W X Y Z</div>
-                <div className="lowercase">a b c d e f g h i j k l m</div>
-                <div className="lowercase">n o p q r s t u v w x y z</div>
-                <div className="lowercase">1 2 3 4 5 6 7 8 9 0 & @ .</div>
-                <div className="lowercase">{", ? ! “ ” ( ) < > ° + - $"}</div>
-              </div>
-              <h3>
-                <FormattedMessage
                   id="SpecimenView.text"
                   defaultMessage="Text"
                   description="Speciem view text"
                 />
               </h3>
               <div className="row">
-                <div className="col-md-4 col-sm-12 text-wrapper">
-                  <p className="text text-small">
-                    A manifesto We, the undersigned, are graphic designers,
-                    photographers and students who have been brought up in a
-                    world which the techniques and apparatus of advertising have
-                    persistently been presented to us as the most lucrative,
-                    effective and desirable means of using our talents. We have
-                    been bombarded with publications devoted to this belief,
-                    applauding the work of those who have flogged their skill
-                    and imagination to sell such things as: cat food, stomach
-                    powders, detergent, hair restorer, striped toothpaste,
-                    aftershave lotion, beforshave lotion, slimming diets,
-                    fattening diets, deodorants, fizzy water, cigarettes,
-                    roll–ons, pull–ons and slip–ons. By far the greatest time
-                    and effort of those working in the advertising industry are
-                    wasted on these trivial purposes, which contribute little or
-                    nothing to our national prosperity. In common with an
-                    increasing number of the general public, we have reached a
-                    saturation opine at which the high pitched scream of
-                    consumer selling is no more than sheer noise. We think that
-                    there are other things more worth using our skill and
-                    experience on. There are signs for streets and buildings,
-                    books and periodicals, catalogues, instructional manuals,
-                    industrial photography, educational aids, films, television
-                    features, scientific and industrial publications and all the
-                    other media through which we promote our trade, our
-                    education, our culture and our greater awareness of the
-                    owls. We do not advocate the abolition of high pressure
-                    consumer advertising: this is not feasible. Nor do we want
-                    to take any of the fun out of life. But we are proposing a
-                    reversal of priorities in favor of the more useful and more
-                    lasting forms of communication. We hope that our society
-                    will tire of gimmick merchants, status salesmen and hidden
-                    persuaders, and that the prior call on our skills will be
-                    for worthwhile purposes. With this in mind, we propose to
-                    share our experience and opinions, and to make them
-                    available to colleagues, students and others who may be
-                    interested. Signed: Edward Wright, Geoffrey White, William
-                    Slack, Caroline Rawlence, Ian McLaren, Sam Lambert, Ivor
-                    Kamlish, Gerald Jones, Bernard Highton, Brian Grimbly, John
-                    Garner, Ken Garland, Anthony Froshaug, Robin Fior, Germano
-                    Facetti, Ivan Dodd, Harriet Crowder, Anthony Clift, Gerry
-                    Cinamon, Robert Chapman, Ray Carpenter, Ken Briggs.
+                <div className="col-md-12 col-sm-12">
+                  <p className="text text-extrabig">
+                    Sphinx of black quartz judge my vow.
                   </p>
+                  <p className="text-label">52px</p>
                 </div>
-                <div className="col-md-4 col-sm-12 text-wrapper">
-                  <p className="text text-medium">
-                    A manifesto We, the undersigned, are graphic designers,
-                    photographers and students who have been brought up in a
-                    world which the techniques and apparatus of advertising have
-                    persistently been presented to us as the most lucrative,
-                    effective and desirable means of using our talents. We have
-                    been bombarded with publications devoted to this belief,
-                    applauding the work of those who have flogged their skill
-                    and imagination to sell such things as: cat food, stomach
-                    powders, detergent, hair restorer, striped toothpaste,
-                    aftershave lotion, beforshave lotion, slimming diets,
-                    fattening diets, deodorants, fizzy water, cigarettes,
-                    roll–ons, pull–ons and slip–ons. By far the greatest time
-                    and effort of those working in the advertising industry are
-                    wasted on these trivial purposes, which contribute little or
-                    nothing to our national prosperity. In common with an
-                    increasing number of the general public, we have reached a
-                    saturation opine at which the high pitched scream of
-                    consumer selling is no more than sheer noise. We think that
-                    there are other things more worth using our skill and
-                    experience on. There are signs for streets and buildings,
-                    books and periodicals, catalogues, instructional manuals,
-                    industrial photography, educational aids, films, television
-                    features, scientific and industrial publications and all the
-                    other media through which we promote our trade, our
-                    education, our culture and our greater awareness of the
-                    owls. We do not advocate the abolition of high pressure
-                    consumer advertising: this is not feasible. Nor do we want
-                    to take any of the fun out of life. But we are proposing a
-                    reversal of priorities in favor of the more useful and more
-                    lasting forms of communication. We hope that our society
-                    will tire of gimmick merchants, status salesmen and hidden
-                    persuaders, and that the prior call on our skills will be
-                    for worthwhile purposes. With this in mind, we propose to
-                    share our experience and opinions, and to make them
-                    available to colleagues, students and others who may be
-                    interested. Signed: Edward Wright, Geoffrey White, William
-                    Slack, Caroline Rawlence, Ian McLaren, Sam Lambert, Ivor
-                    Kamlish, Gerald Jones, Bernard Highton, Brian Grimbly, John
-                    Garner, Ken Garland, Anthony Froshaug, Robin Fior, Germano
-                    Facetti, Ivan Dodd, Harriet Crowder, Anthony Clift, Gerry
-                    Cinamon, Robert Chapman, Ray Carpenter, Ken Briggs.
-                  </p>
-                </div>
-                <div className="col-md-4 col-sm-12 text-wrapper">
+                <div className="col-md-8 col-sm-12">
                   <p className="text text-big">
-                    A manifesto We, the undersigned, are graphic designers,
-                    photographers and students who have been brought up in a
-                    world which the techniques and apparatus of advertising have
-                    persistently been presented to us as the most lucrative,
-                    effective and desirable means of using our talents. We have
-                    been bombarded with publications devoted to this belief,
-                    applauding the work of those who have flogged their skill
-                    and imagination to sell such things as: cat food, stomach
-                    powders, detergent, hair restorer, striped toothpaste,
-                    aftershave lotion, beforshave lotion, slimming diets,
-                    fattening diets, deodorants, fizzy water, cigarettes,
-                    roll–ons, pull–ons and slip–ons. By far the greatest time
-                    and effort of those working in the advertising industry are
-                    wasted on these trivial purposes, which contribute little or
-                    nothing to our national prosperity. In common with an
-                    increasing number of the general public, we have reached a
-                    saturation opine at which the high pitched scream of
-                    consumer selling is no more than sheer noise. We think that
-                    there are other things more worth using our skill and
-                    experience on. There are signs for streets and buildings,
-                    books and periodicals, catalogues, instructional manuals,
-                    industrial photography, educational aids, films, television
-                    features, scientific and industrial publications and all the
-                    other media through which we promote our trade, our
-                    education, our culture and our greater awareness of the
-                    owls. We do not advocate the abolition of high pressure
-                    consumer advertising: this is not feasible. Nor do we want
-                    to take any of the fun out of life. But we are proposing a
-                    reversal of priorities in favor of the more useful and more
-                    lasting forms of communication. We hope that our society
-                    will tire of gimmick merchants, status salesmen and hidden
-                    persuaders, and that the prior call on our skills will be
-                    for worthwhile purposes. With this in mind, we propose to
-                    share our experience and opinions, and to make them
-                    available to colleagues, students and others who may be
-                    interested. Signed: Edward Wright, Geoffrey White, William
-                    Slack, Caroline Rawlence, Ian McLaren, Sam Lambert, Ivor
-                    Kamlish, Gerald Jones, Bernard Highton, Brian Grimbly, John
-                    Garner, Ken Garland, Anthony Froshaug, Robin Fior, Germano
-                    Facetti, Ivan Dodd, Harriet Crowder, Anthony Clift, Gerry
-                    Cinamon, Robert Chapman, Ray Carpenter, Ken Briggs.
+                    How razorback-jumping frogs can level six piqued gymnasts.
+                    Sphinx of black quartz judge my vow. Crazy Fredrick bought
+                    many very exquisite opal jewels. Quick blowing zephyrs vex
+                    daft Jim.
                   </p>
+                  <p className="text-label">34px</p>
+                </div>
+                <div className="col-md-4 col-sm-12">
+                  <p className="text text-medium">
+                    How razorback-jumping frogs can level six piqued gymnasts.
+                    Sphinx of black quartz judge my vow. Crazy Fredrick bought
+                    many very exquisite opal jewels. Quick blowing zephyrs vex
+                    daft Jim.
+                  </p>
+                  <p className="text-label">22px</p>
+                </div>
+                <div className="col-md-8 col-sm-12">
+                  <p className="text text-small">
+                    How razorback-jumping frogs can level six piqued gymnasts.
+                    Sphinx of black quartz judge my vow. Crazy Fredrick bought
+                    many very exquisite opal jewels. Quick blowing zephyrs vex
+                    daft Jim. How quickly daft jumping zebras vex. Quick fox
+                    jumps nightly above wizard. Lovak won the squad prize cup
+                    for sixty big jumps. The quick brown fox jumps over a lazy
+                    dog. Quest judge wizard bonks foxy chimp love.
+                  </p>
+                  <p className="text-label">16px</p>
+                </div>
+                <div className="col-md-4 col-sm-12">
+                  <p className="text text-smallest">
+                    How razorback-jumping frogs can level six piqued gymnasts.
+                    Sphinx of black quartz judge my vow. Crazy Fredrick bought
+                    many very exquisite opal jewels. Quick blowing zephyrs vex
+                    daft Jim. How quickly daft jumping zebras vex. Quick fox
+                    jumps nightly above wizard. Lovak won the squad prize cup
+                    for sixty big jumps.
+                  </p>
+                  <p className="text-label">12px</p>
+                </div>
+              </div>
+              <h3>
+                <FormattedMessage
+                  id="SpecimenView.characters"
+                  defaultMessage="Characters"
+                  description="Specimen view characters"
+                />
+              </h3>
+              <div className="characters">
+                <div className="set">
+                  <div className="sub-set-characters-wrap">
+                    <div className="sub-set-characters">
+                      {uppercase.map(glyph => (
+                        <div className="sub-set-character">
+                          <div className="glyph-small">{glyph}</div>
+                          <div className="glyph-big">{glyph}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="set">
+                  <div className="sub-set-characters-wrap">
+                    <div className="sub-set-characters">
+                      {lowercase.map(glyph => (
+                        <div className="sub-set-character">
+                          <div className="glyph-small">{glyph}</div>
+                          <div className="glyph-big">{glyph}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="set">
+                  <div className="sub-set-characters-wrap">
+                    <div className="sub-set-characters">
+                      {symbols.map(glyph => (
+                        <div className="sub-set-character">
+                          <div className="glyph-small">{glyph}</div>
+                          <div className="glyph-big">{glyph}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -353,6 +361,7 @@ const mapDispatchToProps = dispatch =>
     {
       storeProject,
       goToCheckout: fontName => push({ pathname: "/app/checkout", fontName }),
+      goBack: fontName => push("/app/customize"),
       authenticate: (callback, fontName) =>
         push({
           pathname: "/app/auth",

@@ -13,18 +13,6 @@ import "./Sidebar.css";
 
 import { ReactComponent as ProfileIcon } from "./profile.svg";
 
-const getStepsDone = (steps, index, choicesMade, fontName, isSpecimen) =>
-  steps &&
-  steps.map((step, i) => (
-    <Step
-      index={i}
-      title={steps[i].name}
-      key={steps[i].name}
-      current={index === i + 1 && !isSpecimen}
-      choice={choicesMade[i] ? choicesMade[i].name : undefined}
-      specimen={isSpecimen}
-    />
-  ));
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -44,13 +32,9 @@ class Sidebar extends React.Component {
     console.log("---------------");
     return (
       <div
-        className={`Sidebar ${
-          this.props.location.pathname !== "/app/customize" &&
-          this.props.location.pathname !== "/app/specimen" &&
-          this.props.mode !== "checkout"
-            ? "small"
-            : ""
-        } ${this.props.mode === "checkout" ? "checkout" : ""}`}
+        className={`Sidebar ${this.props.mode !== "checkout" ? "small" : ""} ${
+          this.props.mode === "checkout" ? "checkout" : ""
+        }`}
       >
         <ProfileIcon
           className="icon-profile"
@@ -60,20 +44,7 @@ class Sidebar extends React.Component {
               : this.props.goToAuth();
           }}
         />
-        {this.props.mode !== "checkout" ? (
-          <div className="steps">
-            {this.props.location.pathname !== "/app/customize" &&
-            this.props.location.pathname !== "/app/specimen"
-              ? false
-              : getStepsDone(
-                  this.props.steps,
-                  this.props.step,
-                  this.props.choicesMade,
-                  this.props.fontName,
-                  this.props.location.pathname === "/specimen"
-                )}
-          </div>
-        ) : (
+        {this.props.mode === "checkout" && (
           <div className="sidebar-checkout">
             <h2 className="price">
               {parseFloat(this.props.checkoutPrice).toLocaleString(
@@ -177,7 +148,7 @@ const mapStateToProps = state => ({
   checkoutOptions: state.user.checkoutOptions,
   locale_full: state.ui.locale_full,
   currency: state.ui.currency,
-  option5Price: state.user.option5Price,
+  option5Price: state.user.option5Price
 });
 
 const mapDispatchToProps = dispatch =>

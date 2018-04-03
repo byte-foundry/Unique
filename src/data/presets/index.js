@@ -81,12 +81,12 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
   const promiseArray = [];
   const loadedPresetsName = [];
   importedPresets.forEach((preset, index) => {
-    promiseArray.push(
-      new Promise(resolve => {
-        dispatch(createPrototypoFactory()).then(prototypoFontFactory => {
-          console.log("--Creating font--");
-          console.log(preset);
-          if (preset.variant.family) {
+    if (preset.variant && preset.variant.family) {
+      promiseArray.push(
+        new Promise(resolve => {
+          dispatch(createPrototypoFactory()).then(prototypoFontFactory => {
+            console.log("--Creating font--");
+            console.log(preset);
             prototypoFontFactory
               .createFont(
                 `${preset.variant.family.name}${preset.variant.name}`,
@@ -106,10 +106,10 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
                   )
                 );
               });
-          }
-        });
-      })
-    );
+          });
+        })
+      );
+    }
   });
   Promise.all(promiseArray).then(() => {
     console.log("> All presets loaded");

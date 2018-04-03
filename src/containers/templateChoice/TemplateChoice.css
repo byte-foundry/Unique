@@ -32,7 +32,7 @@
 }
 
 .TemplateChoice .icon-back, .TemplateChoice .icon-next {
-  width: 35px;
+  width: 40px;
   height: auto;
   cursor: pointer;
   position: fixed;  
@@ -51,13 +51,13 @@
 .TemplateChoice .icon-back {  
   top: calc(50%);
   right: 150px;
-  transform: translateX(20px) translateY(calc(50%)) translateZ(0px);
+  transform: translateY(calc(50%)) translateZ(0px);
 }
 
 .TemplateChoice .icon-next {  
   top: calc(50% + 100px);
   right: 150px;
-  transform: translateX(20px) translateY(calc(-50% - 110px)) translateZ(0px);
+  transform: translateY(-50%) translateZ(0px);
 }
 
 .TemplateChoice .icon-next.disabled {

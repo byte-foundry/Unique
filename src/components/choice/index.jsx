@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ContentEditable from '../contentEditable';
 import './Choice.css';
-import { ReactComponent as PencilIcon } from './pencil.svg';
+import { ReactComponent as EditIcon } from './t.svg';
 
 class Choice extends React.Component {
   constructor(props) {
@@ -64,8 +64,8 @@ class Choice extends React.Component {
           ref={c => (this.contentEditable = c)}
         />
         {this.state.isHovered && (
-          <PencilIcon
-            className="icon-pencil"
+         <span className="icon-edit">
+          <EditIcon            
             onClick={() => {
               const isEditable = this.state.isEditable;
               this.setState({ isEditable: !isEditable });
@@ -74,6 +74,7 @@ class Choice extends React.Component {
               }
             }}
           />
+         </span>
         )}
         <p className="choiceName">{this.props.choice.name}</p>
         {this.props.mostSelected ? <span className="" /> : false}

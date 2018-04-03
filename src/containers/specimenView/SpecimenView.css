@@ -28,6 +28,7 @@
 
 .SpecimenView .buttons {
   margin-top: 20px;
+  margin-bottom: 80px;
 }
 
 .SpecimenView .buttons::after {
@@ -43,15 +44,11 @@
   float: right;
 }
 
-.SpecimenView .icon-back,
-.SpecimenView .icon-next {
-  width: 30px;
+.SpecimenView .icon-back {
+  width: 40px;
   height: auto;
   cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%) translateZ(0px);
-  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  position: relative;
   border: 2px solid #5320ee;
   background: transparent;
   padding: 0px;
@@ -64,9 +61,6 @@
   fill: #5320ee;
 }
 
-.SpecimenView .icon-back {
-  left: -75px;
-}
 
 .SpecimenView .hooray {
   font-family: unique, sans-serif;
@@ -123,7 +117,6 @@
   border: none;
 }
 
-
 .SpecimenView .export .hollow {
   margin-right: 20px;
 }
@@ -133,67 +126,101 @@
 }
 
 .SpecimenView .word {
-  font-size: 45px;
+  font-size: 68px;
   margin-top: 40px;
   margin-bottom: 65px;
 }
 
-.SpecimenView .characters {
-  font-size: 20px;
-  padding: 40px;
+.SpecimenView .characters .set {
+  margin: calc(4rem - 1px) auto;
 }
 
-.SpecimenView .uppercase {
-  letter-spacing: 0;
-  text-align: justify;
+@media (min-width: 800px) {
+  .SpecimenView .characters .set {
+    max-width: 80vw;
+  }
 }
 
-.SpecimenView .uppercase:after {
-  content: "";
-  display: inline-block;
-  width: 100%;
+@media (max-width: 800px) and (max-width: 800px) {
+  .SpecimenView .characters .set .mobile-break {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 }
 
-.SpecimenView .lowercase {
-  letter-spacing: 0;
-  text-align: justify;
+.SpecimenView .characters .sub-set-characters {
+  display: flex;
+  flex-flow: wrap;
+  align-content: flex-start;
 }
 
-.SpecimenView .lowercase:after {
-  content: "";
-  display: inline-block;
-  width: 100%;
-}
-
-.SpecimenView .text-wrapper {
+.SpecimenView .characters .sub-set-character {
+  width: 4rem;
+  height: 4rem;
+  vertical-align: middle;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #b8b5c0;
+  background: white;
+  text-align: center;
+  padding-top: .5rem;
+  font-size: 2rem;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  cursor: default;
   position: relative;
-  height: 350px;
-  overflow: hidden;
-  border: 20px solid white;
+}
+
+.SpecimenView .characters .sub-set-character:hover .glyph-big {
+  display: block;
+}
+
+.SpecimenView .characters .sub-set-character .glyph-big {
+  position: absolute;
+  width: calc(300% + 4px);
+  height: calc(300% + 4px);
+  top: calc(-100% - 2px);
+  left: calc(-100% - 2px);
+  padding-top: 1rem;
+  z-index: 1;
+  display: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #b8b5c0;
+  background: white;
+  pointer-events: none;
+  font-size: 300%;
 }
 
 .SpecimenView .text {
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  background-color: white;
-  color: black;
-  overflow: hidden;
-  text-align: left;
-  width: 120%;
+  margin-bottom: 5px;
+}
+
+.SpecimenView .text-label {
+  font-family: unique, sans-serif;
+  font-size: 13px;
+  color: #c7c3d1;
+  margin-bottom: 50px;
+}
+
+.SpecimenView .text.text-smallest {
+  font-size: 12px;
 }
 
 .SpecimenView .text.text-small {
-  font-size: 10px;
+  font-size: 16px;
 }
 
 .SpecimenView .text.text-medium {
-  font-size: 14px;
+  font-size: 22px;
 }
 
 .SpecimenView .text.text-big {
-  font-size: 18px;
-  text-align: left;
+  font-size: 34px;
+}
+
+.SpecimenView .text.text-extrabig {
+  font-size: 52px;
 }
 
 .SpecimenView form input {
