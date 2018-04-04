@@ -53,7 +53,7 @@ const onToken = (
       const fontsSelected = checkoutOptions.filter(e => e.type === 'font' || e.dbName === "baseFont");
       const promiseArray = [];
       fontsSelected.forEach((fontSelected) => {
-        promiseArray.push(getArrayBuffer(fontSelected.fontName, 'unique_font', fontSelected.type === 'font' ? fontSelected.name : 'Regular'))
+        promiseArray.push(getArrayBuffer(fontSelected.fontName, userFontName || 'unique_font', fontSelected.type === 'font' ? fontSelected.name : 'Regular'))
       });
       Promise.all(promiseArray).then((buffers) => {
         console.log(buffers);

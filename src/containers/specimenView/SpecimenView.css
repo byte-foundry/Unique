@@ -249,3 +249,44 @@
 .SpecimenView form input:focus {
   outline: none;
 }
+
+.modal {
+  padding: 45px!important;
+  padding-bottom: 0!important;
+  padding-right: 0!important;
+  max-width: 450px!important;
+}
+
+.modal h2 {
+  margin-bottom: 40px!important;
+  font-weight: 400;
+  padding-right: 45px!important;
+}
+
+.modal p {
+  font-size: 20px;
+  color: #cdcad6;
+  margin-bottom: 40px!important;
+  padding-right: 45px!important;
+}
+
+.modal input {
+  width: 100%;
+  border: solid 1px #cdcad6;
+  padding: 10px 15px;
+  color: black;
+}
+
+.modal input::placeholder {
+  color: #cdcad6;
+}
+
+.modal .Button {
+  display: inline-block;
+  text-align: center;
+  float: right;
+  width: 60%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+

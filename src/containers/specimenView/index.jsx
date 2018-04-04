@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Modal from 'react-responsive-modal';
+import Modal from "react-responsive-modal";
 import { push } from "react-router-redux";
 import { FormattedMessage } from "react-intl";
 import "./SpecimenView.css";
@@ -17,14 +17,9 @@ class SpecimenView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      shouldChangeEmail: false,
-      isCustomLogo: false,
-      showCustomLogoControls: true,
-      shouldContinueUnregistered: false,
       fontName: props.projectName,
       isInputFocused: false,
-      isModalOpened: true,
+      isModalOpened: false
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -135,9 +130,81 @@ class SpecimenView extends React.Component {
         tabIndex="-1"
       >
         <div className="container">
-        <Modal open={this.state.isModalOpened} onClose={() => {this.setState({isModalOpened: false})}} little>
-          <h2>Simple centered modal</h2>
-        </Modal>
+          <Modal
+            open={this.state.isModalOpened}
+            showCloseIcon={false}
+            closeOnOverlayClick={false}
+            closeOnEsc={false}
+            little
+            classNames={{
+              modal: 'modal',
+              overlay: 'overlay'
+            }}
+          >
+            <h2>
+              <FormattedMessage
+                id="SpecimenView.modalTitle"
+                defaultMessage="One more thing,"
+                description="Speciem view name font modal title"
+              />
+            </h2>
+            <p>
+              <FormattedMessage
+                id="SpecimenView.modalTitle"
+                defaultMessage="A unique font deserves a unique name. What would be the name of your font?"
+                description="Speciem view name font modal description"
+              />
+            </p>
+            <p>
+              <FormattedMessage
+                id="SpecimenView.nameAction"
+                defaultMessage="My font name"
+                description="SpecimenView - name action"
+              >
+                {text => (
+                  <input
+                    type="text"
+                    value={this.state.fontName}
+                    onChange={e => {
+                      this.setState({ fontName: e.target.value });
+                    }}
+                    placeholder={text}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
+                  />
+                )}
+              </FormattedMessage>
+            </p>
+            <FormattedMessage
+              id="SpecimenView.closeModalAction"
+              defaultMessage="Done"
+              description="SpecimenView - Close modal action"
+            >
+              {text => (
+                <Button
+                  className="button-closeModal"
+                  onClick={() => {
+                    if (this.state.fromModal === "save") {
+                      if (this.props.isAuthenticated) {
+                        this.props.storeProject(this.state.fontName);
+                      } else {
+                        this.props.authenticate(
+                          this.props.storeProject,
+                          this.state.fontName
+                        );
+                      }
+                    } else {
+                      this.props.goToCheckout(this.state.fontName);
+                    }
+
+                    this.setState({ isModalOpened: false });
+                  }}
+                  mode="full"
+                  label={text}
+                />
+              )}
+            </FormattedMessage>
+          </Modal>
           <div className="hooray">
             <h2>
               <FormattedMessage
@@ -176,7 +243,14 @@ class SpecimenView extends React.Component {
                   <Button
                     className="button-download"
                     onClick={() => {
-                      this.props.goToCheckout(this.state.fontName);
+                      if (this.state.fontName) {
+                        this.props.goToCheckout(this.state.fontName);
+                      } else {
+                        this.setState({
+                          isModalOpened: true,
+                          fromModal: "checkout"
+                        });
+                      }
                     }}
                     mode="full"
                     label={text}
@@ -193,13 +267,20 @@ class SpecimenView extends React.Component {
                   <Button
                     className="button-save"
                     onClick={() => {
-                      if (this.props.isAuthenticated) {
-                        this.props.storeProject(this.state.fontName);
+                      if (this.state.fontName) {
+                        if (this.props.isAuthenticated) {
+                          this.props.storeProject(this.state.fontName);
+                        } else {
+                          this.props.authenticate(
+                            this.props.storeProject,
+                            this.state.fontName
+                          );
+                        }
                       } else {
-                        this.props.authenticate(
-                          this.props.storeProject,
-                          this.state.fontName
-                        );
+                        this.setState({
+                          isModalOpened: true,
+                          fromModal: "save"
+                        });
                       }
                     }}
                     mode="light"
