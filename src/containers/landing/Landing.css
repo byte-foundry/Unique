@@ -48,6 +48,8 @@
   right: 20px;
   width: 20px;
   height: auto;
+  cursor: pointer;
+  z-index: 10;
 }
 
 .Landing .header .Button {

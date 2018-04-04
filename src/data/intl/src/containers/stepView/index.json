@@ -1,32 +1,17 @@
 [
   {
-    "id": "Shortcuts.previousAction",
-    "description": "Shortcut - previous action",
-    "defaultMessage": "Press left key to go back"
-  },
-  {
     "id": "Shortcuts.chooseChoice",
     "description": "Shortcut - up down choice action",
     "defaultMessage": "Press up and down keys to choose the most suitable option"
   },
   {
-    "id": "StepView.customChoiceName",
-    "description": "Custom choice name",
-    "defaultMessage": "Custom"
+    "id": "Shortcuts.previousAction",
+    "description": "Shortcut - previous action",
+    "defaultMessage": "Press left key to go back"
   },
   {
     "id": "Shortcuts.nextAction",
     "description": "Shortcut - next action",
     "defaultMessage": "Press right key to move forward"
-  },
-  {
-    "id": "StepView.customButtonLess",
-    "description": "More accuracy button - less state",
-    "defaultMessage": "Less accuracy"
-  },
-  {
-    "id": "StepView.customButtonMore",
-    "description": "More accuracy button - more state",
-    "defaultMessage": "More accuracy"
   }
 ]

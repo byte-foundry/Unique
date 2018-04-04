@@ -22,6 +22,7 @@ import { ReactComponent as HowItWorks2 } from "./howitworks_2.svg";
 import { ReactComponent as HowItWorks3 } from "./howitworks_3.svg";
 
 import { createPrototypoFactory } from "../../data/createdFonts";
+import { loadLibrary } from "../../data/font";
 import { setLocale } from "../../data/ui";
 
 import LanguageSelect from "../../components/languageSelect";
@@ -42,7 +43,14 @@ class Landing extends React.Component {
         <div className="header">
           <div className="logos">
             <Logo className="logo-icon" />
-            <ProfileIcon className="profile-icon" />
+            <ProfileIcon
+              className="profile-icon"
+              onClick={() => {
+                this.props.isAuthenticated
+                  ? this.props.loadLibrary()
+                  : this.props.goToAuth();
+              }}
+            />
           </div>
           <div className="container catch">
             <div className="row">
@@ -420,7 +428,8 @@ const mapStateToProps = state => ({
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
   isBlackOnWhite: state.user.isBlackOnWhite,
-  locale: state.ui.locale
+  locale: state.ui.locale,
+  loadLibrary: PropTypes.func.isRequired
 });
 
 const mapDispatchToProps = dispatch =>
@@ -428,7 +437,9 @@ const mapDispatchToProps = dispatch =>
     {
       goToApp: () => push("/app"),
       createPrototypoFactory,
-      setLocale
+      setLocale,
+      loadLibrary,
+      goToAuth: () => push({ pathname: "/app/auth", authData: {} })
     },
     dispatch
   );

@@ -213,6 +213,11 @@
   display: none;
 }
 
+.App .logo-mobile.auth {
+  background: black;
+  z-index: 10;
+}
+
 .App .logo-mobile svg {
   cursor: pointer;
   width: 150px;
@@ -239,5 +244,12 @@
 
   .App .logo-mobile {
     display: block;
+  }
+}
+
+@media (max-width: 576px) {
+  .App .logo-mobile svg{
+    margin-left: -20px;
+    margin-top: -5px;
   }
 }

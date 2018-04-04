@@ -1123,6 +1123,43 @@
                             </translation>
                         </translations>
                     </concept_node>
+                    <concept_node>
+                        <name>LaunchDiscountOption</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Launch discount</description>
+                        <comment></comment>
+                        <default_text>Launch discount</default_text>
+                        <translations>
+                            <translation>
+                                <language>Lt-sr-SP</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>de-DE</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>es-ES</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>it-IT</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>pt-PT</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
                 </children>
             </folder_node>
             <folder_node>
@@ -1851,7 +1888,7 @@
                         <definition_loaded>false</definition_loaded>
                         <description>Speciem view subtitle</description>
                         <comment></comment>
-                        <default_text>Embark on new adventures with your complete glyph set! But before you move on, let's give your font a name</default_text>
+                        <default_text>Embark on new adventures with your complete glyph set!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1886,9 +1923,9 @@
                     <concept_node>
                         <name>nameActionLabel</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>SpecimenView - Name action label</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>Give your font a name:</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1923,9 +1960,9 @@
                     <concept_node>
                         <name>nameAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>SpecimenView - Name action</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>My font name</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2414,9 +2451,9 @@
                     <concept_node>
                         <name>customChoiceName</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Custom choice name</description>
+                        <description></description>
                         <comment>what is this</comment>
-                        <default_text>Custom</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2451,9 +2488,9 @@
                     <concept_node>
                         <name>customButtonLess</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>More accuracy button - less state</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>Less accuracy</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2488,9 +2525,9 @@
                     <concept_node>
                         <name>customButtonMore</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>More accuracy button - more state</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>More accuracy</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3775,44 +3812,44 @@
         <translation_file>
             <language>Lt-sr-SP</language>
             <file>language_def.json</file>
-            <file_size>5913</file_size>
-            <modification_timestamp>1522831314</modification_timestamp>
+            <file_size>5970</file_size>
+            <modification_timestamp>1522839267</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>en-US</language>
             <file>language_en.json</file>
-            <file_size>6054</file_size>
-            <modification_timestamp>1522831314</modification_timestamp>
+            <file_size>6111</file_size>
+            <modification_timestamp>1522839267</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>de-DE</language>
             <file>language_de.json</file>
-            <file_size>6414</file_size>
-            <modification_timestamp>1522831314</modification_timestamp>
+            <file_size>6470</file_size>
+            <modification_timestamp>1522839267</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>fr-FR</language>
             <file>language_fr.json</file>
-            <file_size>6802</file_size>
-            <modification_timestamp>1522831314</modification_timestamp>
+            <file_size>6867</file_size>
+            <modification_timestamp>1522839267</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>it-IT</language>
             <file>language_it.json</file>
-            <file_size>6631</file_size>
-            <modification_timestamp>1522831314</modification_timestamp>
+            <file_size>6687</file_size>
+            <modification_timestamp>1522839267</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>es-ES</language>
             <file>language_es.json</file>
-            <file_size>6303</file_size>
-            <modification_timestamp>1522831314</modification_timestamp>
+            <file_size>6369</file_size>
+            <modification_timestamp>1522839267</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>pt-PT</language>
             <file>language_pt.json</file>
-            <file_size>4911</file_size>
-            <modification_timestamp>1522831314</modification_timestamp>
+            <file_size>4976</file_size>
+            <modification_timestamp>1522839267</modification_timestamp>
         </translation_file>
     </translation_files>
     <editor_configuration>

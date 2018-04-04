@@ -61,6 +61,7 @@ const initialState = {
   checkoutPrice: BASE_PACK_PRICE,
   userFontName: "",
   option5Price: 5,
+  option20Price: -20,
   graphQLToken: undefined,
   authError: ""
 };
@@ -177,6 +178,7 @@ export default (state = initialState, action) => {
         checkoutPrice: action.checkoutPrice,
         userFontName: action.fontName,
         option5Price: action.option5Price,
+        option20Price: action.option20Price,
       };
 
     case RESET_CHECKOUT_OPTIONS:
@@ -452,6 +454,7 @@ export const updateCheckoutOptions = (checkoutOptions, fontName) => (
     checkoutOptions: [...checkoutOptions],
     checkoutPrice,
     option5Price: fx.convert(5, { from: 'USD', to: currency }),
+    option20Price: fx.convert(-20, { from: 'USD', to: currency }),
     fontName
   });
 };

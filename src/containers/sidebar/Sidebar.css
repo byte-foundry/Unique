@@ -69,6 +69,9 @@
 
 .Sidebar.checkout .sidebar-checkout .choices .choice {
   color: #DFD4F8;
+  padding-bottom: 5px;
+  padding-top: 10px;
+  border-bottom: 1px solid #DFD4F8;
 }
 
 .Sidebar.checkout .sidebar-checkout .choices .choice::after {
@@ -86,6 +89,19 @@
 }
 
 .Sidebar.checkout .button-checkout {
-  display: inline-block;
+  display: block;
+  text-align: center;
   margin-top: 60px;
+}
+
+@media (max-width: 576px) {
+  .Sidebar.small {
+    background: none;
+    height: 50px;
+    min-height: 50px;
+    border-left: transparent;
+  }
+  .Sidebar .icon-profile {
+    fill: black;
+  }
 }

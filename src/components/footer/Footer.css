@@ -34,6 +34,17 @@
   background-color: black;
 }
 
+.Footer.whiteOnBlack .language-active {
+  background-color: black !important;
+  color: white!important;
+}
+
+.Footer.whiteOnBlack .language-select.opened p {
+  background-color: white !important;
+  color: black!important;
+}
+
+
 .Footer.whiteOnBlack .font-size input[type="range"] {
   background-color: white;
 }

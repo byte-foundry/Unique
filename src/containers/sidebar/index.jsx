@@ -64,10 +64,15 @@ class Sidebar extends React.Component {
                       <span className="right">
                         {option.price === 0
                           ? "included"
-                          : parseFloat(this.props.option5Price).toLocaleString(
-                              this.props.locale_full,
-                              { maximumSignificantDigits: 2 }
-                            )}
+                          : parseFloat(
+                              option.type === "discount"
+                                ? this.props.option20Price
+                                : this.props.option5Price
+                            ).toLocaleString(this.props.locale_full, {
+                              style: "currency",
+                              currency: this.props.currency,
+                              maximumSignificantDigits: 3
+                            })}
                       </span>
                     </div>
                   )
@@ -128,7 +133,8 @@ Sidebar.propTypes = {
   checkoutPrice: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
   locale_full: PropTypes.string.isRequired,
-  option5price: PropTypes.number.isRequired
+  option5Price: PropTypes.number.isRequired,
+  option20Price: PropTypes.number.isRequired
 };
 
 Sidebar.defaultProps = {
@@ -148,7 +154,8 @@ const mapStateToProps = state => ({
   checkoutOptions: state.user.checkoutOptions,
   locale_full: state.ui.locale_full,
   currency: state.ui.currency,
-  option5Price: state.user.option5Price
+  option5Price: state.user.option5Price,
+  option20Price: state.user.option20Price
 });
 
 const mapDispatchToProps = dispatch =>

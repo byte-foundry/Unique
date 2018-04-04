@@ -13,9 +13,10 @@ import { createPrototypoFactory } from "../../data/createdFonts";
 import { importPresets, reloadPresets } from "../../data/presets";
 import { reloadFonts } from "../../data/font";
 import {
-  logout, switchBlackOnWhite,
+  logout,
+  switchBlackOnWhite,
   switchGlyphMode,
-  changeFontSize,
+  changeFontSize
 } from "../../data/user";
 import { setLocale, toggleTooltips, getCurrencyRates } from "../../data/ui";
 import { GRAPHQL_API } from "../../data/constants";
@@ -39,7 +40,6 @@ import Sidebar from "../sidebar/";
 import Authenticate from "../authenticate/";
 
 let interval;
-
 
 class App extends React.Component {
   /* global Intercom */
@@ -135,13 +135,13 @@ class App extends React.Component {
     return this.props.need !== "";
   }
   render() {
-    console.log(this.props.location.pathname)
+    console.log(this.props.location.pathname);
     if (this.props.isLoading && this.props.location.pathname !== "/app/auth") {
       // load animation
       clearInterval(interval);
       const letters = document.querySelectorAll(".letter");
       let activeLetter = 0;
-      interval = setInterval(function () {
+      interval = setInterval(function() {
         for (let i = 0; i < letters.length; i++) {
           letters[i].classList.remove("animate");
         }
@@ -165,8 +165,16 @@ class App extends React.Component {
             </h1>
           </header>
         )}
-        <div className={`App-content container-fluid ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"}`}>
-          <div className="row logo-mobile">
+        <div
+          className={`App-content container-fluid ${
+            this.props.isBlackOnWhite ? "" : "whiteOnBlack"
+          }`}
+        >
+          <div
+            className={`row logo-mobile ${
+              this.props.location.pathname === "/app/auth"  ? "auth" : ""
+            }`}
+          >
             <div className="col-sm-12">
               <Logo
                 onClick={() => {
@@ -179,7 +187,7 @@ class App extends React.Component {
             <div
               className={`left col-sm-${
                 this.props.location.pathname !== "/app/auth" ? "10" : "12"
-                }`}
+              }`}
             >
               <Switch>
                 <Route
@@ -226,10 +234,10 @@ class App extends React.Component {
               <div
                 className={`right col-sm-2 ${
                   this.props.isBlackOnWhite ||
-                    this.props.location.pathname !== "/app/customize"
+                  this.props.location.pathname !== "/app/customize"
                     ? ""
                     : "whiteOnBlack"
-                  }`}
+                }`}
               >
                 <Sidebar
                   pathName={this.props.location.pathname}
@@ -244,7 +252,18 @@ class App extends React.Component {
               </div>
             )}
           </div>
-          <Footer fontSize={this.props.fontSize} pathname={this.props.location.pathname} shouldShowTooltips={this.props.shouldShowTooltips} toggleTooltips={this.props.toggleTooltips} isBlackOnWhite={this.props.isBlackOnWhite} switchBlackOnWhite={this.props.switchBlackOnWhite} switchGlyphMode={this.props.switchGlyphMode} changeFontSize={this.props.changeFontSize} setLocale={this.props.setLocale} locale={this.props.locale} />
+          <Footer
+            fontSize={this.props.fontSize}
+            pathname={this.props.location.pathname}
+            shouldShowTooltips={this.props.shouldShowTooltips}
+            toggleTooltips={this.props.toggleTooltips}
+            isBlackOnWhite={this.props.isBlackOnWhite}
+            switchBlackOnWhite={this.props.switchBlackOnWhite}
+            switchGlyphMode={this.props.switchGlyphMode}
+            changeFontSize={this.props.changeFontSize}
+            setLocale={this.props.setLocale}
+            locale={this.props.locale}
+          />
         </div>
       </main>
     );
@@ -284,7 +303,7 @@ App.propTypes = {
   switchBlackOnWhite: PropTypes.func.isRequired,
   switchGlyphMode: PropTypes.func.isRequired,
   changeFontSize: PropTypes.func.isRequired,
-  fontSize: PropTypes.number.isRequired,
+  fontSize: PropTypes.number.isRequired
 };
 
 App.defaultProps = {
@@ -321,7 +340,7 @@ const mapStateToProps = state => ({
   shouldShowTooltips: state.ui.shouldShowTooltips,
   userId: state.user.graphqlID,
   locale: state.ui.locale,
-  fontSize: state.user.fontSize,
+  fontSize: state.user.fontSize
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -337,7 +356,7 @@ const mapDispatchToProps = dispatch =>
       getCurrencyRates,
       switchBlackOnWhite,
       switchGlyphMode,
-      changeFontSize,
+      changeFontSize
     },
     dispatch
   );

@@ -7,17 +7,7 @@
   {
     "id": "SpecimenView.subtitle",
     "description": "Speciem view subtitle",
-    "defaultMessage": "Embark on new adventures with your complete glyph set! But before you move on, let's give your font a name"
-  },
-  {
-    "id": "SpecimenView.nameActionLabel",
-    "description": "SpecimenView - Name action label",
-    "defaultMessage": "Give your font a name:"
-  },
-  {
-    "id": "SpecimenView.nameAction",
-    "description": "SpecimenView - Name action",
-    "defaultMessage": "My font name"
+    "defaultMessage": "Embark on new adventures with your complete glyph set!"
   },
   {
     "id": "SpecimenView.subtitleBack",
@@ -40,14 +30,14 @@
     "defaultMessage": "Display"
   },
   {
-    "id": "SpecimenView.characters",
-    "description": "Specimen view characters",
-    "defaultMessage": "Characters"
-  },
-  {
     "id": "SpecimenView.text",
     "description": "Speciem view text",
     "defaultMessage": "Text"
+  },
+  {
+    "id": "SpecimenView.characters",
+    "description": "Specimen view characters",
+    "defaultMessage": "Characters"
   },
   {
     "id": "SpecimenView.downloadActionBottom",

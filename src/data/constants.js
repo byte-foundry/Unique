@@ -10,7 +10,7 @@ export const VALIDATION_SERVER_URL = "https://unique-back.prototypo.io/create-pa
 export const DEFAULT_UI_WORD = "Hamburgefonstiv ABC 123";
 export const DEFAULT_UI_GLYPH = "g";
 export const GRAPHQL_API = "https://api.graph.cool/simple/v1/prototypo-new-dev";
-export const BASE_PACK_PRICE = 15.0;
+export const BASE_PACK_PRICE = 35.0;
 // const AWS_URL = `https://${
 //   process.env.NODE_ENV === "production" ? "e4jpj60rk8" : "tc1b6vq6o8"
 // }.execute-api.eu-west-1.amazonaws.com/${

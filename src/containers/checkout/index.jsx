@@ -8,6 +8,7 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import Masonry from "../../components/masonry";
 import { updateCheckoutOptions } from "../../data/user";
+import { createFontVariants } from "../../data/font";
 import { ReactComponent as OtfLogo } from "./otf.svg";
 import { ReactComponent as SpecimenLogo } from "./specimen.svg";
 
@@ -31,7 +32,8 @@ class Checkout extends React.Component {
           type: "logo",
           price: 0,
           selected: true,
-          dbName: "baseFont"
+          dbName: "baseFont",
+          visible: true,
         },
         {
           name: (
@@ -46,7 +48,8 @@ class Checkout extends React.Component {
           class: "specimen-logo",
           type: "logo",
           price: 0,
-          selected: true
+          selected: true,
+          visible: true,
         },
         {
           name: (
@@ -60,7 +63,8 @@ class Checkout extends React.Component {
           dbName: "lightOption",
           type: "font",
           price: 5,
-          selected: false
+          selected: false,
+          visible: true,
         },
         {
           name: (
@@ -74,7 +78,8 @@ class Checkout extends React.Component {
           dbName: "boldOption",
           type: "font",
           price: 5,
-          selected: false
+          selected: false,
+          visible: true,
         },
         {
           name: (
@@ -88,14 +93,31 @@ class Checkout extends React.Component {
           type: "font",
           dbName: "italicOption",
           price: 5,
-          selected: false
-        }
+          selected: false,
+          visible: true,
+        },
+        {
+          name: (
+            <FormattedMessage
+              id="CheckoutView.LaunchDiscountOption"
+              defaultMessage="Launch discount"
+              description="Launch discount"
+            />
+          ),
+          class: "discount",
+          dbName: "launchDiscount",
+          type: "discount",
+          price: -20,
+          selected: true,
+          visible: false,
+        },
       ]
     };
-    this.props.updateCheckoutOptions(
+    props.updateCheckoutOptions(
       this.state.selectedOptions,
-      this.props.history.location.fontName
+      props.history.location.fontName
     );
+    props.createFontVariants();
     this.toggleChoice = this.toggleChoice.bind(this);
   }
   toggleChoice(name) {
@@ -131,7 +153,7 @@ class Checkout extends React.Component {
           </h2>
           <div className="checkout-options">
             <Masonry breakPoints={[350]}>
-              {this.state.selectedOptions.map((checkoutOption, index) => (
+              {this.state.selectedOptions.filter(e => e.visible).map((checkoutOption, index) => (
                 <div
                   className={`option ${checkoutOption.class} ${
                     checkoutOption.selected ? "selected" : ""
@@ -147,7 +169,7 @@ class Checkout extends React.Component {
                   )}
                   {checkoutOption.type === "font" && (
                     <div className="font-wrapper">
-                      <span>{this.props.chosenWord}</span>
+                      <span style={{ fontFamily: `'${this.props.fontName}'` }}>{this.props.chosenWord}</span>
                     </div>
                   )}
                   <input
@@ -177,18 +199,24 @@ class Checkout extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  chosenWord: state.user.chosenWord
+  chosenWord: state.user.chosenWord,
+  fontName:
+    state.font.currentPreset.variant.family.name +
+    state.font.currentPreset.variant.name,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     { goBack: () => push("/app/specimen"), updateCheckoutOptions },
+    createFontVariants,
     dispatch
   );
 
 Checkout.propTypes = {
   updateCheckoutOptions: PropTypes.func.isRequired,
-  chosenWord: PropTypes.string.isRequired
+  chosenWord: PropTypes.string.isRequired,
+  fontName: PropTypes.string,
+  createFontVariants: PropTypes.func.isRequired,
 };
 
 export default withRouter(

@@ -6,6 +6,12 @@
   align-items: center;
 }
 
+@media (max-width: 1800px) {
+  .Authenticate {
+    margin-top: -85px;
+  }
+}
+
 .Authenticate .container {
   background: white;
   position: relative;

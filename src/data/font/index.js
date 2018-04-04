@@ -716,6 +716,10 @@ export const download = (name, filename) => (dispatch, getState) => {
   });
 };
 
+export const createFontVariants = () => (dispatch, getState) => {
+
+};
+
 export const updateSliderFont = newParams => (dispatch, getState) => {
   console.log('==========font/updateSliderFont============');
   const { chosenWord } = getState().user;

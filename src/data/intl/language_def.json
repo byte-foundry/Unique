@@ -29,6 +29,7 @@
 	"CheckoutView.BoldOption": "Bold variant",
 	"CheckoutView.ItalicOption": "Italic variant",
 	"CheckoutView.title": "Create your Unique package:",
+	"CheckoutView.LaunchDiscountOption": "Launch discount",
 	"DefineNeed.title": "What kind of need do you have?",
 	"DefineNeed.logo": "Logotype",
 	"DefineNeed.logoTooltip": "A logo font is blablabla blablabla blablabla",
