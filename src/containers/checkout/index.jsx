@@ -50,52 +50,8 @@ class Checkout extends React.Component {
           price: 0,
           selected: true,
           visible: true,
-        },
-        {
-          name: (
-            <FormattedMessage
-              id="CheckoutView.LightOption"
-              defaultMessage="Light variant"
-              description="Light"
-            />
-          ),
-          class: "variant",
-          dbName: "lightOption",
-          type: "font",
-          price: 5,
-          selected: false,
-          visible: true,
-        },
-        {
-          name: (
-            <FormattedMessage
-              id="CheckoutView.BoldOption"
-              defaultMessage="Bold variant"
-              description="Bold"
-            />
-          ),
-          class: "variant",
-          dbName: "boldOption",
-          type: "font",
-          price: 5,
-          selected: false,
-          visible: true,
-        },
-        {
-          name: (
-            <FormattedMessage
-              id="CheckoutView.ItalicOption"
-              defaultMessage="Italic variant"
-              description="Italic"
-            />
-          ),
-          class: "variant",
-          type: "font",
-          dbName: "italicOption",
-          price: 5,
-          selected: false,
-          visible: true,
-        },
+        },     
+        
         {
           name: (
             <FormattedMessage
@@ -140,7 +96,27 @@ class Checkout extends React.Component {
       this.props.history.location.fontName
     );
   }
+  componentWillReceiveProps(newProps) {
+    const {selectedOptions} = this.state;
+    let filteredSelectedOption = selectedOptions.filter(e => e.type !== 'font');
+    newProps.possibleVariants.forEach(option => {
+      filteredSelectedOption.push(
+        {
+          name: option.variant,
+          class: "variant",
+          type: "font",
+          dbName: "italicOption",
+          fontName: option.name,
+          price: 5,
+          selected: false,
+          visible: true,
+        }
+      )
+    });
+    this.setState({selectedOptions: filteredSelectedOption});
+  }
   render() {
+    console.log(this.props)
     return (
       <div className="Checkout">
         <div className="container">
@@ -169,7 +145,7 @@ class Checkout extends React.Component {
                   )}
                   {checkoutOption.type === "font" && (
                     <div className="font-wrapper">
-                      <span style={{ fontFamily: `'${this.props.fontName}'` }}>{this.props.chosenWord}</span>
+                      <span style={{ fontFamily: `'${checkoutOption.fontName}'` }}>{this.props.chosenWord}</span>
                     </div>
                   )}
                   <input
@@ -200,6 +176,7 @@ class Checkout extends React.Component {
 
 const mapStateToProps = state => ({
   chosenWord: state.user.chosenWord,
+  possibleVariants: state.font.possibleVariants,
   fontName:
     state.font.currentPreset.variant.family.name +
     state.font.currentPreset.variant.name,
@@ -207,8 +184,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { goBack: () => push("/app/specimen"), updateCheckoutOptions },
-    createFontVariants,
+    { goBack: () => push("/app/specimen"), updateCheckoutOptions, createFontVariants },
     dispatch
   );
 

@@ -18,7 +18,7 @@ import {
   VALIDATION_SERVER_URL
 } from "../../data/constants";
 
-const fromValueToCent = amount => amount.toFixed(2) * 100;
+const fromValueToCent = amount => parseInt(amount.toFixed(2) * 100);
 
 const successPayment = (data, callback) => {
   console.log(data);
@@ -49,12 +49,23 @@ const onToken = (
       amount: fromValueToCent(amount)
     })
     .then(res => {
-      getArrayBuffer().then(buffer => {
-        console.log(buffer);
-        var intArray = new Uint8Array(buffer);
-        const arrayFrom = Array.from(intArray);
+      const fonts = [];
+      const fontsSelected = checkoutOptions.filter(e => e.type === 'font' || e.dbName === "baseFont");
+      const promiseArray = [];
+      fontsSelected.forEach((fontSelected) => {
+        promiseArray.push(getArrayBuffer(fontSelected.fontName, 'unique_font', fontSelected.type === 'font' ? fontSelected.name : 'Regular'))
+      });
+      Promise.all(promiseArray).then((buffers) => {
+        console.log(buffers);
+        let fonts = buffers.map((buffer, index) => {
+          const intArray = new Uint8Array(buffer);
+          return  {
+            variant: fontsSelected[index].type === 'font' ? fontsSelected[index].name : 'Regular',
+            data: Array.from(intArray)
+          }
+        });
         const paymentNumber = res.data.id;
-        const family = userFontName;
+        const family = userFontName || 'unique_font';
         const invoice = {
           currency,
           choices: checkoutOptions
@@ -66,22 +77,12 @@ const onToken = (
               paymentNumber,
               family,
               invoice,
-              fonts: [
-                {
-                  variant: "regular",
-                  data: arrayFrom
-                }
-              ]
+              fonts,
             },
             { responseType: "arraybuffer" }
           )
           .then(pack => {
-             console.log(pack);
-            // var buf = new ArrayBuffer(pack.data.length);
-            // var bufView = new Uint8Array(buf);
-            // for (var i = 0; i < pack.data.length; i++) {
-            //   bufView[i] = pack.data.charCodeAt(i);
-            // }
+            console.log(pack);
             const blob = new Blob([new DataView(pack.data)], { type: "application/zip" });
             saveAs(blob, "purchase.zip");
             successPayment(res, callback);
@@ -90,7 +91,7 @@ const onToken = (
             errorPayment(err);
             console.log(err);
           });
-      });
+    });
     })
     .catch(data => {
       setStable();
