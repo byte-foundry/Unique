@@ -2,6 +2,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
+import { push } from "react-router-redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
@@ -11,6 +12,7 @@ import { defineNeed } from "../../data/font";
 import { storeChosenWord } from "../../data/user";
 import "./DefineNeed.css";
 
+import { ReactComponent as Back } from "../stepView/back.svg";
 import { ReactComponent as Next } from "../stepView/next.svg";
 
 class DefineNeed extends React.Component {
@@ -43,6 +45,12 @@ class DefineNeed extends React.Component {
   render() {
     return (
       <div className="DefineNeed container">
+        <Back
+          className="icon-back"
+          onClick={() => {
+            this.props.redirectToLanding();
+          }}
+        />
         <Next
           className={`icon-next ${!this.state.selected ? "disabled" : ""}`}
           onClick={e => {
@@ -98,7 +106,7 @@ class DefineNeed extends React.Component {
               this.state.selected === "text" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "text" })}
-            onDoubleClick={(e) => {
+            onDoubleClick={e => {
               this.setState({ selected: "text" });
               this.handleSubmit(e);
             }}
@@ -133,7 +141,7 @@ class DefineNeed extends React.Component {
               this.state.selected === "website" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "website" })}
-            onDoubleClick={(e) => {
+            onDoubleClick={e => {
               this.setState({ selected: "website" });
               this.handleSubmit(e);
             }}
@@ -210,7 +218,8 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       defineNeed,
-      storeChosenWord
+      storeChosenWord,
+      redirectToLanding: () => push("/")
     },
     dispatch
   );
@@ -218,7 +227,8 @@ const mapDispatchToProps = dispatch =>
 DefineNeed.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   defineNeed: PropTypes.func.isRequired,
-  storeChosenWord: PropTypes.func.isRequired
+  storeChosenWord: PropTypes.func.isRequired,
+  redirectToLanding: PropTypes.func.isRequired
 };
 
 export default withRouter(

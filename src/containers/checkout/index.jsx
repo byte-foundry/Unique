@@ -31,7 +31,7 @@ class Checkout extends React.Component {
           type: "logo",
           price: 0,
           selected: true,
-          dbName: 'baseFont',
+          dbName: "baseFont"
         },
         {
           name: (
@@ -42,7 +42,7 @@ class Checkout extends React.Component {
             />
           ),
           logo: <SpecimenLogo />,
-          dbName: 'specimen',
+          dbName: "specimen",
           class: "specimen-logo",
           type: "logo",
           price: 0,
@@ -57,7 +57,7 @@ class Checkout extends React.Component {
             />
           ),
           class: "variant",
-          dbName: 'lightOption',
+          dbName: "lightOption",
           type: "font",
           price: 5,
           selected: false
@@ -71,7 +71,7 @@ class Checkout extends React.Component {
             />
           ),
           class: "variant",
-          dbName: 'boldOption',
+          dbName: "boldOption",
           type: "font",
           price: 5,
           selected: false
@@ -86,13 +86,16 @@ class Checkout extends React.Component {
           ),
           class: "variant",
           type: "font",
-          dbName: 'italicOption',
+          dbName: "italicOption",
           price: 5,
           selected: false
         }
-      ],
+      ]
     };
-    this.props.updateCheckoutOptions(this.state.selectedOptions, this.props.history.location.fontName);
+    this.props.updateCheckoutOptions(
+      this.state.selectedOptions,
+      this.props.history.location.fontName
+    );
     this.toggleChoice = this.toggleChoice.bind(this);
   }
   toggleChoice(name) {
@@ -104,10 +107,16 @@ class Checkout extends React.Component {
       selectedIndex
     ].selected;
     this.setState({ selectedOptions });
-    this.props.updateCheckoutOptions(selectedOptions, this.props.history.location.fontName);
+    this.props.updateCheckoutOptions(
+      selectedOptions,
+      this.props.history.location.fontName
+    );
   }
   componentWillMount() {
-    this.props.updateCheckoutOptions(this.state.selectedOptions, this.props.history.location.fontName);
+    this.props.updateCheckoutOptions(
+      this.state.selectedOptions,
+      this.props.history.location.fontName
+    );
   }
   render() {
     return (
@@ -124,7 +133,9 @@ class Checkout extends React.Component {
             <Masonry breakPoints={[350]}>
               {this.state.selectedOptions.map((checkoutOption, index) => (
                 <div
-                  className={`option ${checkoutOption.class} ${checkoutOption.selected ? 'selected' : ''}`}
+                  className={`option ${checkoutOption.class} ${
+                    checkoutOption.selected ? "selected" : ""
+                  }`}
                   onClick={() => {
                     if (index !== 0) {
                       this.toggleChoice(checkoutOption.name);
@@ -136,7 +147,7 @@ class Checkout extends React.Component {
                   )}
                   {checkoutOption.type === "font" && (
                     <div className="font-wrapper">
-                      <span>Chosen word</span>
+                      <span>{this.props.chosenWord}</span>
                     </div>
                   )}
                   <input
@@ -165,12 +176,20 @@ class Checkout extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  chosenWord: state.user.chosenWord
+});
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ goBack: () => push("/app/specimen"), updateCheckoutOptions }, dispatch);
+  bindActionCreators(
+    { goBack: () => push("/app/specimen"), updateCheckoutOptions },
+    dispatch
+  );
 
-Checkout.propTypes = {updateCheckoutOptions : PropTypes.func.isRequired};
+Checkout.propTypes = {
+  updateCheckoutOptions: PropTypes.func.isRequired,
+  chosenWord: PropTypes.string.isRequired
+};
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Checkout)

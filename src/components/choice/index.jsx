@@ -27,7 +27,7 @@ class Choice extends React.Component {
         aria-checked="false"
         aria-selected="false"
         tabIndex={0}
-        style={{ fontFamily: `choiceFont${this.props.index}`, fontSize: `${this.props.fontSize}px` }}
+        style={{ fontFamily: `choiceFont${this.props.index}`, fontSize: `${this.props.isGlyphMode ? this.props.fontSize * 2 : this.props.fontSize}px` }}
         onMouseEnter={() => {
           this.setState({ isHovered: true });
         }}

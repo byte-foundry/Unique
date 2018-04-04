@@ -4,6 +4,11 @@
   padding-top: 100px;
   margin-bottom: 100px;
 }
+@media (min-width: 1800px) {
+  .TemplateChoice {
+    margin-top: 85px;
+  }
+}
 
 .TemplateChoice h1, .TemplateChoice h2 {
   display: inline-block;

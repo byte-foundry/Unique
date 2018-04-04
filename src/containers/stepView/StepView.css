@@ -8,6 +8,11 @@
   justify-content: center;
   min-height: calc(100vh - 145px);
 }
+@media (min-width: 1800px) {
+  .StepView {
+    margin-top: 85px;
+  }
+}
 
 .StepView.whiteOnBlack {
   background: black;

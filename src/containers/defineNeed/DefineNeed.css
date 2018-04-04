@@ -6,6 +6,12 @@
     min-height: calc(100vh - 200px);
 }
 
+@media (min-width: 1800px) {
+  .DefineNeed {
+    margin-top: 85px;
+  }
+}
+
 .DefineNeed .needs {
   font-size: 24px;
   line-height: 1.4;
@@ -25,12 +31,12 @@
   color: #5320ee;
 }
 
-.DefineNeed .icon-next {
+.DefineNeed .icon-next, .DefineNeed .icon-back {
   width: 40px;
   height: auto;
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: calc(50% + 40px);;
   transform: translateY(-50%);
   right: 0;
   background: transparent;
@@ -40,8 +46,11 @@
   z-index: 3;
   border-radius: 50%;
 }
-.DefineNeed .icon-next path {
+.DefineNeed .icon-next path, .DefineNeed .icon-back path {
   fill: #5320ee;
+}
+.DefineNeed .icon-back {
+  top: calc(50% - 40px);
 }
 .DefineNeed .icon-next.disabled {
   border-color: #b8b5c0;

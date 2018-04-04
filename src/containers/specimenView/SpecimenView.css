@@ -3,6 +3,11 @@
   display: block;
   margin-bottom: 80px;
 }
+@media (min-width: 1800px) {
+  .SpecimenView {
+    margin-top: 85px;
+  }
+}
 
 .SpecimenView .container {
   position: relative;
