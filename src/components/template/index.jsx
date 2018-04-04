@@ -12,19 +12,24 @@ class Template extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tags: props.font.tags
+      tags: props.font.tags,
+      interval: undefined,
     };
     this.shuffleTags = this.shuffleTags.bind(this);
   }
   componentDidMount() {
     this.shuffleTags();
   }
+  componentWillUnmount() {
+    clearInterval(this.state.interval);
+  }
   shuffleTags() {
-    setInterval(() => {
+    let interval = setInterval(() => {
       let tags = this.state.tags;
       shuffleArray(tags);
       this.setState({ tags });
-    }, 3000);
+    }, 6000);
+    this.setState({ interval });
   }
   render() {
     let tags = [...this.state.tags];
@@ -32,14 +37,14 @@ class Template extends React.Component {
       <div
         key={`preset${this.props.font.variant.family.name}${
           this.props.font.variant.name
-        }`}
+          }`}
         className={`Template ${this.props.selected ? "selected" : ""}`}
         onClick={this.props.onClick}
         onDoubleClick={this.props.onDoubleClick}
         style={{
           fontFamily: `'${this.props.font.variant.family.name}${
             this.props.font.variant.name
-          }'`
+            }'`
         }}
       >
         {tags[0]}

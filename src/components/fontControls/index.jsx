@@ -28,37 +28,17 @@ const FontControls = props => (
             <HighFontSizeIcon className="icon-highFontSize" onClick={() => props.changeFontSize(140)} />
         </span>
         {props.shouldShowTooltips ? (
-            <FormattedMessage
-                id="Shortcuts.blackOnWhiteAction"
-                defaultMessage="Press G key to toggle white on black mode"
-                description="Black on white mode - toggle"
-            >
-                {text => (
-                    <Tooltip
-                        title={text}
-                        position="top"
-                        open={props.shouldShowTooltips}
-                        arrow="true"
-                        delay={600}
-                    >
-                        <BackgroundIcon
-                            className="icon-background"
-                            onClick={() => props.switchBlackOnWhite()}
-                        />
-                    </Tooltip>
-                )}
-            </FormattedMessage>
-        ) : (
+            <span key="fontControlTooltip">
                 <FormattedMessage
-                    id="StepView.blackOnWhiteTooltip"
-                    defaultMessage="Toggle black on white mode"
+                    id="Shortcuts.blackOnWhiteAction"
+                    defaultMessage="Press G key to toggle white on black mode"
                     description="Black on white mode - toggle"
                 >
                     {text => (
                         <Tooltip
                             title={text}
-                            position="top"
-                            trigger="mouseenter"
+                            position="left"
+                            open={props.shouldShowTooltips}
                             arrow="true"
                             delay={600}
                         >
@@ -69,40 +49,16 @@ const FontControls = props => (
                         </Tooltip>
                     )}
                 </FormattedMessage>
-            )}
-
-        {props.shouldShowTooltips ? (
-            <FormattedMessage
-                id="Shortcuts.glyphAction"
-                defaultMessage="Press G key to toggle glyph mode"
-                description="Glyph mode - toggle"
-            >
-                {text => (
-                    <Tooltip
-                        title={text}
-                        position="bottom"
-                        open={props.shouldShowTooltips}
-                        arrow="true"
-                        delay={600}
-                    >
-                        <GlyphIcon
-                            className="icon-glyph"
-                            onClick={() => props.switchGlyphMode()}
-                        />
-                    </Tooltip>
-                )}
-            </FormattedMessage>
-        ) : (
                 <FormattedMessage
-                    id="StepView.glyphTooltip"
-                    defaultMessage="Toggle glyph mode"
+                    id="Shortcuts.glyphAction"
+                    defaultMessage="Press G key to toggle glyph mode"
                     description="Glyph mode - toggle"
                 >
                     {text => (
                         <Tooltip
                             title={text}
-                            position="top"
-                            trigger="mouseenter"
+                            position="bottom"
+                            open={props.shouldShowTooltips}
                             arrow="true"
                             delay={600}
                         >
@@ -113,6 +69,50 @@ const FontControls = props => (
                         </Tooltip>
                     )}
                 </FormattedMessage>
+            </span>
+        ) : (
+                <span key="fontControl">
+                    <FormattedMessage
+                        id="StepView.blackOnWhiteTooltip"
+                        defaultMessage="Toggle black on white mode"
+                        description="Black on white mode - toggle"
+                    >
+                        {text => (
+                            <Tooltip
+                                title={text}
+                                position="top"
+                                trigger="mouseenter"
+                                arrow="true"
+                                delay={600}
+                            >
+                                <BackgroundIcon
+                                    className="icon-background"
+                                    onClick={() => props.switchBlackOnWhite()}
+                                />
+                            </Tooltip>
+                        )}
+                    </FormattedMessage>
+                    <FormattedMessage
+                        id="StepView.glyphTooltip"
+                        defaultMessage="Toggle glyph mode"
+                        description="Glyph mode - toggle"
+                    >
+                        {text => (
+                            <Tooltip
+                                title={text}
+                                position="top"
+                                trigger="mouseenter"
+                                arrow="true"
+                                delay={600}
+                            >
+                                <GlyphIcon
+                                    className="icon-glyph"
+                                    onClick={() => props.switchGlyphMode()}
+                                />
+                            </Tooltip>
+                        )}
+                    </FormattedMessage>
+                </span>
             )}
     </div>
 );

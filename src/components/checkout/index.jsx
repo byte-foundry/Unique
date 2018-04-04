@@ -84,7 +84,7 @@ const onToken = (
           .then(pack => {
             console.log(pack);
             const blob = new Blob([new DataView(pack.data)], { type: "application/zip" });
-            saveAs(blob, "purchase.zip");
+            saveAs(blob, `${userFontName || 'unique_purchase'}.zip`);
             successPayment(res, callback);
           })
           .catch(err => {

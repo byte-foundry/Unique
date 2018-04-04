@@ -132,9 +132,10 @@ class SpecimenView extends React.Component {
         <div className="container">
           <Modal
             open={this.state.isModalOpened}
+            onClose={() => {
+              this.setState({ fontName: "", isModalOpened: false })
+            }}
             showCloseIcon={false}
-            closeOnOverlayClick={false}
-            closeOnEsc={false}
             little
             classNames={{
               modal: 'modal',
@@ -184,20 +185,22 @@ class SpecimenView extends React.Component {
                 <Button
                   className="button-closeModal"
                   onClick={() => {
-                    if (this.state.fromModal === "save") {
-                      if (this.props.isAuthenticated) {
-                        this.props.storeProject(this.state.fontName);
+                    if (this.state.fontName !== "") {
+                      if (this.state.fromModal === "save") {
+                        if (this.props.isAuthenticated) {
+                          this.props.storeProject(this.state.fontName);
+                        } else {
+                          this.props.authenticate(
+                            this.props.storeProject,
+                            this.state.fontName
+                          );
+                        }
                       } else {
-                        this.props.authenticate(
-                          this.props.storeProject,
-                          this.state.fontName
-                        );
+                        this.props.goToCheckout(this.state.fontName);
                       }
-                    } else {
-                      this.props.goToCheckout(this.state.fontName);
-                    }
 
-                    this.setState({ isModalOpened: false });
+                      this.setState({ isModalOpened: false });
+                    }
                   }}
                   mode="full"
                   label={text}
@@ -414,9 +417,16 @@ class SpecimenView extends React.Component {
             >
               {text => (
                 <Button
-                  className="button-download"
+                  className="button-download download-bottom"
                   onClick={() => {
-                    this.props.goToCheckout(this.state.fontName);
+                    if (this.state.fontName) {
+                      this.props.goToCheckout(this.state.fontName);
+                    } else {
+                      this.setState({
+                        isModalOpened: true,
+                        fromModal: "checkout"
+                      });
+                    }
                   }}
                   mode="full"
                   label={text}

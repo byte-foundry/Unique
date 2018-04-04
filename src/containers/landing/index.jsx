@@ -24,6 +24,7 @@ import { ReactComponent as HowItWorks3 } from "./howitworks_3.svg";
 import { createPrototypoFactory } from "../../data/createdFonts";
 import { loadLibrary } from "../../data/font";
 import { setLocale } from "../../data/ui";
+import { storeChosenWord } from "../../data/user";
 
 import LanguageSelect from "../../components/languageSelect";
 import Button from "../../components/button";
@@ -35,7 +36,9 @@ class Landing extends React.Component {
     if (!props.isPrototypoLoaded && !props.isPrototypoLoading) {
       props.createPrototypoFactory();
     }
-    this.state = {};
+    this.state = {
+      chosenWord: "",
+    };
   }
   render() {
     return (
@@ -73,7 +76,7 @@ class Landing extends React.Component {
                     description="Landing page header input placeholder"
                   >
                     {text => (
-                      <input type="text" placeholder={text} name="text" />
+                      <input type="text" placeholder={text} value={this.state.chosenWord} onChange={(e) => { this.setState({ chosenWord: e.target.value }) }} name="text" />
                     )}
                   </FormattedMessage>
                   <FormattedMessage
@@ -86,6 +89,9 @@ class Landing extends React.Component {
                         mode="hollow"
                         label={text}
                         onClick={() => {
+                          if (this.state.chosenWord !== "") {
+                            this.props.storeChosenWord(this.state.chosenWord);
+                          }
                           this.props.goToApp();
                         }}
                       />
@@ -121,10 +127,10 @@ class Landing extends React.Component {
                   <FormattedMessage
                     id="Landing.descriptionText"
                     defaultMessage="
-                      A custom font goes a long way, giving you that special extra. 
+                    A custom font goes a long way, giving you that special extra.
                       With Unique you get just what you need – a custom font ready for use!
 
-                      Simply select, customize and off you go! 
+                      Simply select, customize and off you go!
                       It’s that easy.
                       "
                     description="Unique description text"
@@ -374,7 +380,7 @@ class Landing extends React.Component {
                   <FormattedMessage
                     id="Landing.prototypoDescription"
                     defaultMessage="Powered by Prototypo’s tech using algorithms to generate
-                    fonts/ typefaces, Unique offers the largest font variation out
+                    fonts / typefaces, Unique offers the largest font variation out
                     there! Open up countless possibilities with each choice you
                     make! Our passionate team of designers is constantly adding
                     new templates/ font models, multiplying the range of choices
@@ -429,7 +435,8 @@ const mapStateToProps = state => ({
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
   isBlackOnWhite: state.user.isBlackOnWhite,
   locale: state.ui.locale,
-  loadLibrary: PropTypes.func.isRequired
+  loadLibrary: PropTypes.func.isRequired,
+  storeChosenWord: PropTypes.func.isRequired,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -439,7 +446,8 @@ const mapDispatchToProps = dispatch =>
       createPrototypoFactory,
       setLocale,
       loadLibrary,
-      goToAuth: () => push({ pathname: "/app/auth", authData: {} })
+      goToAuth: () => push({ pathname: "/app/auth", authData: {} }),
+      storeChosenWord
     },
     dispatch
   );

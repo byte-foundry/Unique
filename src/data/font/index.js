@@ -323,9 +323,6 @@ export const selectFont = (font, step) => (dispatch, getState) => {
 
 export const defineNeed = need => dispatch => {
   console.log("==========font/defineNeed============");
-  if (need !== "logo") {
-    dispatch(storeChosenWord(DEFAULT_UI_WORD));
-  }
   dispatch({
     type: DEFINE_NEED,
     need

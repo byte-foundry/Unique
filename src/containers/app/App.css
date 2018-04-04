@@ -208,6 +208,10 @@
   border-bottom-color: #5320ee !important;
 }
 
+.tippy-popper[x-placement^=left] [x-arrow] {
+  border-left-color: #5320ee !important;
+}
+
 
 .App .logo-mobile {
   display: none;

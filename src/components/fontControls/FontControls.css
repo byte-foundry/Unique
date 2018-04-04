@@ -18,7 +18,7 @@
 }
 
 .FontControls .icon-glyph {
-  transform: translateY(1px);
+  width: 20px;
 }
 
 .FontControls .icon-glyph path {
