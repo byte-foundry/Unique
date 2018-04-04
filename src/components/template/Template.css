@@ -15,6 +15,7 @@
   text-overflow: "...";
   overflow: hidden;
   align-self: baseline;
+  text-transform: capitalize;
 }
 
 .Template.selected,
@@ -29,6 +30,7 @@
   margin-bottom: 0;
   font-size: 14px;
   color: #b8b5c0;
+  text-transform: capitalize;
 }
 
 .Template .mostSelected {

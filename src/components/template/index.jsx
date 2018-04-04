@@ -2,9 +2,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Template.css';
-
-class Template extends React.Component {
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+class Template extends React.Component {  
   render() {
+    let tags = [...this.props.font.tags];
+    shuffleArray(tags);
     return (
       <div
         key={`preset${this.props.font.variant.family.name}${this.props.font.variant.name}`}
@@ -13,8 +20,8 @@ class Template extends React.Component {
         onDoubleClick={this.props.onDoubleClick}
         style={{ fontFamily: `'${this.props.font.variant.family.name}${this.props.font.variant.name}'` }}
       >
-        {this.props.font.variant.family.name}
-        <p className="templateName">{`Font preset ${this.props.index}`}</p>
+        {tags[0]}
+        <p className="templateName">{`${tags[1]}, ${tags[2]}`}</p>
       </div>
     );
   }
