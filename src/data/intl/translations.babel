@@ -3813,43 +3813,43 @@
             <language>Lt-sr-SP</language>
             <file>language_def.json</file>
             <file_size>5970</file_size>
-            <modification_timestamp>1522839267</modification_timestamp>
+            <modification_timestamp>1522862213</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>en-US</language>
             <file>language_en.json</file>
             <file_size>6111</file_size>
-            <modification_timestamp>1522839267</modification_timestamp>
+            <modification_timestamp>1522862213</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>de-DE</language>
             <file>language_de.json</file>
             <file_size>6470</file_size>
-            <modification_timestamp>1522839267</modification_timestamp>
+            <modification_timestamp>1522862213</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>fr-FR</language>
             <file>language_fr.json</file>
-            <file_size>6867</file_size>
-            <modification_timestamp>1522839267</modification_timestamp>
+            <file_size>6978</file_size>
+            <modification_timestamp>1522862213</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>it-IT</language>
             <file>language_it.json</file>
             <file_size>6687</file_size>
-            <modification_timestamp>1522839267</modification_timestamp>
+            <modification_timestamp>1522862213</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>es-ES</language>
             <file>language_es.json</file>
             <file_size>6369</file_size>
-            <modification_timestamp>1522839267</modification_timestamp>
+            <modification_timestamp>1522862213</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>pt-PT</language>
             <file>language_pt.json</file>
-            <file_size>4976</file_size>
-            <modification_timestamp>1522839267</modification_timestamp>
+            <file_size>6458</file_size>
+            <modification_timestamp>1522862213</modification_timestamp>
         </translation_file>
     </translation_files>
     <editor_configuration>
