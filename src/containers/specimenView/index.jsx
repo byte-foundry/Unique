@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import Modal from 'react-responsive-modal';
 import { push } from "react-router-redux";
 import { FormattedMessage } from "react-intl";
 import "./SpecimenView.css";
@@ -22,7 +23,8 @@ class SpecimenView extends React.Component {
       showCustomLogoControls: true,
       shouldContinueUnregistered: false,
       fontName: props.projectName,
-      isInputFocused: false
+      isInputFocused: false,
+      isModalOpened: true,
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -133,6 +135,9 @@ class SpecimenView extends React.Component {
         tabIndex="-1"
       >
         <div className="container">
+        <Modal open={this.state.isModalOpened} onClose={() => {this.setState({isModalOpened: false})}} little>
+          <h2>Simple centered modal</h2>
+        </Modal>
           <div className="hooray">
             <h2>
               <FormattedMessage

@@ -117,14 +117,6 @@
     linear-gradient(219deg, #5320ee, #5d28e2 68%, #622bdd);
 }
 
-.Checkout .checkout-options .option.specimen-logo path.letters {
-  display: none;
-}
-
-.Checkout .checkout-options .option.specimen-logo.selected path.letters {
-  display: inherit;
-}
-
 .Checkout .checkout-options .option.specimen-logo svg {
   height: auto;
   width: 100%;

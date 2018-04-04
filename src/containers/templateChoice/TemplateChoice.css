@@ -42,15 +42,9 @@
   cursor: pointer;
   position: fixed;  
   transition: transform .3s ease, background .3s ease, border-color .3s ease;  
-  border: 2px solid #5320ee;
   background: transparent;
   padding: 0px;
   z-index: 10;
-  border-radius: 50%;
-}
-
-.TemplateChoice .icon-back path, .TemplateChoice .icon-next path {
-  fill: #5320ee;
 }
 
 .TemplateChoice .icon-back {  
@@ -65,12 +59,8 @@
   transform: translateY(-50%) translateZ(0px);
 }
 
-.TemplateChoice .icon-next.disabled {
-  border-color: #b8b5c0;
-}
-
-.TemplateChoice .icon-next.disabled path {
-  fill: #b8b5c0;
+.TemplateChoice .icon-next.disabled g {
+  stroke: #b8b5c0;
 }
 .TemplateChoice .Button {
   margin-left: 0px;

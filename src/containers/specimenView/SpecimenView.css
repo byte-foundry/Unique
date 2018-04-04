@@ -54,16 +54,9 @@
   height: auto;
   cursor: pointer;
   position: relative;
-  border: 2px solid #5320ee;
   background: transparent;
   padding: 0px;
   z-index: 10;
-  border-radius: 50%;
-}
-
-.SpecimenView .icon-back path,
-.SpecimenView .icon-next path {
-  fill: #5320ee;
 }
 
 

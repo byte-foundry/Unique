@@ -7,7 +7,7 @@
   background: #fff;
   margin-bottom: 5px;
   cursor: pointer;
-  border: 3px solid transparent;
+  border: 2px solid transparent;
   user-select: none;
   transition: color .3s ease, background .3s ease, border-color .3s ease;
   margin-bottom: 20px;
