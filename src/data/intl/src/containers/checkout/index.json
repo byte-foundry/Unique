@@ -10,21 +10,6 @@
     "defaultMessage": "Specimen"
   },
   {
-    "id": "CheckoutView.LightOption",
-    "description": "Light",
-    "defaultMessage": "Light variant"
-  },
-  {
-    "id": "CheckoutView.BoldOption",
-    "description": "Bold",
-    "defaultMessage": "Bold variant"
-  },
-  {
-    "id": "CheckoutView.ItalicOption",
-    "description": "Italic",
-    "defaultMessage": "Italic variant"
-  },
-  {
     "id": "CheckoutView.LaunchDiscountOption",
     "description": "Launch discount",
     "defaultMessage": "Launch discount"

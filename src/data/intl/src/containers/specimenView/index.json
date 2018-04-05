@@ -1,5 +1,25 @@
 [
   {
+    "id": "SpecimenView.modalTitle",
+    "description": "Speciem view name font modal title",
+    "defaultMessage": "One more thing,"
+  },
+  {
+    "id": "SpecimenView.modalDescription",
+    "description": "Speciem view name font modal description",
+    "defaultMessage": "A unique font deserves a unique name. What would be the name of your font?"
+  },
+  {
+    "id": "SpecimenView.nameAction",
+    "description": "SpecimenView - name action",
+    "defaultMessage": "My font name"
+  },
+  {
+    "id": "SpecimenView.closeModalAction",
+    "description": "SpecimenView - Close modal action",
+    "defaultMessage": "Done"
+  },
+  {
     "id": "SpecimenView.title",
     "description": "Speciem view title",
     "defaultMessage": "Congrats, you're almost done!"

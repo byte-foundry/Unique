@@ -151,7 +151,7 @@ class SpecimenView extends React.Component {
             </h2>
             <p>
               <FormattedMessage
-                id="SpecimenView.modalTitle"
+                id="SpecimenView.modalDescription"
                 defaultMessage="A unique font deserves a unique name. What would be the name of your font?"
                 description="Speciem view name font modal description"
               />

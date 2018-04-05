@@ -22,7 +22,7 @@
   {
     "id": "Landing.descriptionText",
     "description": "Unique description text",
-    "defaultMessage": "A custom font goes a long way, giving you that special extra. \r\n                      With Unique you get just what you need – a custom font ready for use!\r\n\r\n                      Simply select, customize and off you go! \r\n                      It’s that easy."
+    "defaultMessage": "A custom font goes a long way, giving you that special extra.\r\n                      With Unique you get just what you need – a custom font ready for use!\r\n\r\n                      Simply select, customize and off you go!\r\n                      It’s that easy."
   },
   {
     "id": "Landing.descriptionCTA",
@@ -127,7 +127,7 @@
   {
     "id": "Landing.prototypoDescription",
     "description": "Unique prototypo description",
-    "defaultMessage": "Powered by Prototypo’s tech using algorithms to generate\r\n                    fonts/ typefaces, Unique offers the largest font variation out\r\n                    there! Open up countless possibilities with each choice you\r\n                    make! Our passionate team of designers is constantly adding\r\n                    new templates/ font models, multiplying the range of choices\r\n                    available."
+    "defaultMessage": "Powered by Prototypo’s tech using algorithms to generate\r\n                    fonts / typefaces, Unique offers the largest font variation out\r\n                    there! Open up countless possibilities with each choice you\r\n                    make! Our passionate team of designers is constantly adding\r\n                    new templates/ font models, multiplying the range of choices\r\n                    available."
   },
   {
     "id": "Landing.footerCopyright",
