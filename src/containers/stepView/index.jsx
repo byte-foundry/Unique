@@ -15,7 +15,9 @@ import {
   finishEditing,
   goToStep
 } from "../../data/font";
-import { storeChosenWord, storeChosenGlyph } from "../../data/user";
+import { storeChosenWord, storeChosenGlyph ,
+  switchBlackOnWhite,
+  switchGlyphMode, } from "../../data/user";
 import Choice from "../../components/choice/";
 import WordView from "../wordView/";
 import Sliders from "../sliders/";
@@ -93,24 +95,11 @@ class StepView extends React.Component {
     if (!this.state.isInputFocused) {
       switch (action) {
         case "CHOICE_PREVIOUS":
-          if (this.state.choice) {
-            if (this.state.choice.name === "Custom") {
-              this.setState({ choice: { name: "No choice", values: {} } });
-              break;
-            }
-
+          if (this.state.choice) {           
             const choiceIndex = this.props.stepValues.choices.findIndex(
               choice => choice.name === this.state.choice.name
             );
-            if (this.state.choice.name === "No choice") {
-              this.setState({
-                choice: this.props.stepValues.choices[
-                  this.props.stepValues.choices.length - 1
-                ]
-              });
-              break;
-            }
-            if (choiceIndex === 0) {
+            if (choiceIndex <= 0) {
               this.setState({
                 choice: this.props.stepValues.choices[
                   this.props.stepValues.choices.length - 1
@@ -133,14 +122,6 @@ class StepView extends React.Component {
           }
         case "CHOICE_NEXT":
           if (this.state.choice) {
-            if (this.state.choice.name === "Custom") {
-              this.setState({ choice: this.props.stepValues.choices[0] });
-              break;
-            }
-            if (this.state.choice.name === "No choice") {
-              this.setState({ choice: this.props.stepValues.choices[0] });
-              break;
-            }
             const choiceIndex = this.props.stepValues.choices.findIndex(
               choice => choice.name === this.state.choice.name
             );
@@ -156,14 +137,7 @@ class StepView extends React.Component {
           } else {
             this.setState({ choice: this.props.stepValues.choices[0] });
             break;
-          }
-        case "CHOICE_CUSTOM":
-          if (this.state.choice && this.state.choice.name === "Custom") {
-            this.setState({ choice: { name: "No choice", values: {} } });
-          } else {
-            this.markChoiceActive({ name: "Custom", values: {} });
-          }
-          break;
+          }        
         case "CHOICE_SELECT":
           this.props.selectChoice(this.state.choice);
           break;
@@ -379,7 +353,9 @@ const mapDispatchToProps = dispatch =>
       finishEditing,
       storeChosenWord,
       storeChosenGlyph,
-      goToStep
+      goToStep,      
+      switchBlackOnWhite,
+      switchGlyphMode,
     },
     dispatch
   );

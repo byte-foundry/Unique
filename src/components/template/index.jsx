@@ -13,23 +13,16 @@ class Template extends React.Component {
     super(props);
     this.state = {
       tags: props.font.tags,
-      interval: undefined,
     };
     this.shuffleTags = this.shuffleTags.bind(this);
   }
   componentDidMount() {
     this.shuffleTags();
   }
-  componentWillUnmount() {
-    clearInterval(this.state.interval);
-  }
   shuffleTags() {
-    let interval = setInterval(() => {
-      let tags = this.state.tags;
-      shuffleArray(tags);
-      this.setState({ tags });
-    }, 6000);
-    this.setState({ interval });
+    let tags = this.state.tags;
+    shuffleArray(tags);
+    this.setState({ tags });
   }
   render() {
     let tags = [...this.state.tags];

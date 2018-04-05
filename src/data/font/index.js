@@ -155,6 +155,8 @@ export default (state = initialState, action) => {
 
 export const selectFont = (font, step) => (dispatch, getState) => {
   console.log('==========font/selectFont============');
+  /* global Intercom*/
+  Intercom("trackEvent", "unique-selected-font", { unique_preset: font.variant.family.name });
   dispatch(resetCheckout());
   console.log(step);
   const { chosenWord } = getState().user;
@@ -170,7 +172,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
   }
   const selectedFontName = `${selectedFont.variant.family.name}${
     selectedFont.variant.name
-  }`;
+    }`;
   console.log(selectedFontName);
 
   //* *********  PREPARE FONT ***********/
@@ -232,7 +234,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
           selectedFontName,
           templateNames[templates[selectedFont.template]],
           true,
-        )
+      )
         .then((createdFont) => {
           dispatch(storeCreatedFont(createdFont, selectedFontName));
           resolve(true);
@@ -249,7 +251,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
             `choiceFont${i}`,
             templateNames[templates[selectedFont.template]],
             true,
-          )
+        )
           .then((createdFont) => {
             resolve(true);
             dispatch(storeCreatedFont(createdFont, `choiceFont${i}`));
@@ -268,7 +270,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
           sliderFontName,
           templateNames[templates[selectedFont.template]],
           true,
-        )
+      )
         .then((createdFont) => {
           dispatch(storeCreatedFont(createdFont, sliderFontName));
           resolve(true);
@@ -601,7 +603,7 @@ export const clearFontIsLoading = () => (dispatch) => {
 export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
   console.log('==========font/goToStep============');
   console.log(step);
-  const { currentPreset } = getState().font;
+  const { currentPreset, choicesMade } = getState().font;
   const previousStep = getState().font.step;
   console.log(currentPreset);
   switch (step) {
@@ -617,13 +619,26 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
       dispatch(updateValues(undefined, true));
       console.log('Going to /specimen');
       dispatch(push('/app/specimen'));
+      /* global Intercom*/
+      Intercom("trackEvent", "unique-finished-font", {
+        preset_name: currentPreset.variant.family.name,
+        choices_made: choicesMade
+          .map((choice, index) => {
+            if (index !== 0) return choice.name;
+            return (
+              currentPreset.variant.family.name +
+              currentPreset.variant.name
+            );
+          })
+          .toString()
+      });
       break;
     default:
       dispatch({
         type: CHANGE_STEP,
         step: step || previousStep,
       });
-      dispatch(updateValues(step, step === currentPreset.steps.length));
+      dispatch(updateValues(step, fromSpecimen || step === currentPreset.steps.length));
       if (fromSpecimen) dispatch(push('/app/customize'));
       break;
   }
@@ -649,6 +664,8 @@ export const selectChoice = (choice, isSpecimen = false) => (
   ) {
     return;
   }
+
+
 
   // If choice already saved for this step, reset those
   const paramsToReset = {};
@@ -764,6 +781,8 @@ export const selectChoice = (choice, isSpecimen = false) => (
     dispatch(goToStep((step += 1)));
   }
 
+  /* global Intercom*/
+  Intercom("trackEvent", "unique-chose-choice", { choice_name: choice.name });
   // Tracking : update selected count
   if (
     choice.name === 'Custom' ||
@@ -855,7 +874,7 @@ export const createFontVariants = () => (dispatch, getState) => {
             `${fontName}Variant${choice.name}`,
             templateNames[templates[currentPreset.template]],
             true,
-          )
+        )
           .then((createdFont) => {
             possibleVariants.push({
               name: `${fontName}Variant${choice.name}`,
@@ -991,7 +1010,7 @@ export const loadLibrary = () => (dispatch, getState) => {
                   `project${project.id}`,
                   templateNames[templates[project.preset.template]],
                   true,
-                )
+              )
                 .then((createdFont) => {
                   createdFont.changeParams(project.preset.baseValues);
                   project.choicesMade.map(choiceMade =>

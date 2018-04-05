@@ -44,19 +44,7 @@ class DefineNeed extends React.Component {
   }
   render() {
     return (
-      <div className="DefineNeed container">
-        <Back
-          className="icon-back"
-          onClick={() => {
-            this.props.redirectToLanding();
-          }}
-        />
-        <Next
-          className={`icon-next ${!this.state.selected ? "disabled" : ""}`}
-          onClick={e => {
-            this.handleSubmit(e);
-          }}
-        />
+      <div className="DefineNeed container">        
         {this.props.isLoading ? <h2>Creating font...</h2> : false}
         <div className="row justify-content-sm-center">
           <div className="col-sm-12 col-md-11 col-lg-10">
@@ -205,6 +193,18 @@ class DefineNeed extends React.Component {
         ) : (
           false
         )}
+        <Back
+          className="icon-back"
+          onClick={() => {
+            this.props.redirectToLanding();
+          }}
+        />
+        <Next
+          className={`icon-next ${!this.state.selected ? "disabled" : ""}`}
+          onClick={e => {
+            this.handleSubmit(e);
+          }}
+        />
       </div>
     );
   }
