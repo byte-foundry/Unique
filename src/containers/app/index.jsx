@@ -67,6 +67,9 @@ class App extends React.Component {
   }
   componentWillReceiveProps(newProps) {
     if (newProps.shouldLogout) this.props.logout();
+    if (newProps.pathname !== "/app/customize" && !newProps.isBlackOnWhite) {
+      newProps.switchBlackOnWhite();
+    }
   }
   hasSelectedFont() {
     console.log("=========HAS SELECTED FONT ============");

@@ -24,7 +24,7 @@
 .DefineNeed .needs div {
   cursor: pointer;
   color: #b8b5c0;
-  margin-bottom: 3px;
+  margin-bottom: 20px;
   transition: color .3s ease;
 }
 
@@ -37,19 +37,28 @@
   height: auto;
   cursor: pointer;
   position: absolute;
-  top: calc(50% + 40px);;
+  top: calc(50% + 25px);
   transform: translateY(-50%);
   right: 0;
   background: transparent;
   transition: all .3s ease;
   padding: 0px;
+  border-radius: 50%;
   z-index: 3;
 }
 .DefineNeed .icon-back {
-  top: calc(50% - 40px);
+  top: calc(50% - 25px);
 }
 .DefineNeed .icon-next.disabled {
   border-color: #b8b5c0;
+}
+
+.DefineNeed .icon-next:not(.disabled):hover, .DefineNeed .icon-back:hover {
+  background: #5320ee;
+}
+
+.DefineNeed .icon-next:not(.disabled):hover g path, .DefineNeed .icon-back:hover g path{
+  stroke: white;
 }
 
 .DefineNeed .icon-next.disabled g {
@@ -102,7 +111,7 @@
   margin-top: 5px;
   height: 50px;
   width: 75%;
-  font-size: 14px;
+  font-size: 20px;
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #b8b5c0;

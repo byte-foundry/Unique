@@ -8,7 +8,7 @@ import { FormattedMessage } from "react-intl";
 import PropTypes from "prop-types";
 import Button from "../../components/button/";
 import { loadProject, download, reloadFonts } from "../../data/font";
-import { deleteUserProject } from "../../data/user";
+import { deleteUserProject, logout } from "../../data/user";
 import "./Library.css";
 
 class Library extends React.Component {
@@ -73,6 +73,16 @@ class Library extends React.Component {
                   description="Libraryaction restart project"
                 />
               </p>
+              <p
+                className="action"
+                onClick={() => this.props.logout()}
+              >
+                <FormattedMessage
+                  id="Library.actionLogout"
+                  defaultMessage="Logout"
+                  description="Libraryaction logout"
+                />
+              </p>
             </div>
           </div>
           <div className="row projects">
@@ -132,7 +142,7 @@ class Library extends React.Component {
                             this.props.loadProject(project.id, project.name)
                           }
                           label={text}
-                          mode="hollow"
+                          mode="full"
                           className="action-open"
                         />
                       )}
@@ -186,7 +196,7 @@ class Library extends React.Component {
                             )
                           }
                           label={text}
-                          mode="hollow"
+                          mode="full"
                           className="action-open"
                         />
                       )}
@@ -214,7 +224,8 @@ Library.propTypes = {
   loadProject: PropTypes.func.isRequired,
   download: PropTypes.func.isRequired,
   deleteUserProject: PropTypes.func.isRequired,
-  reloadFonts: PropTypes.func.isRequired
+  reloadFonts: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   projects: state.user.projects
@@ -226,7 +237,8 @@ const mapDispatchToProps = dispatch =>
       loadProject,
       download,
       deleteUserProject,
-      reloadFonts
+      reloadFonts,
+      logout
     },
     dispatch
   );

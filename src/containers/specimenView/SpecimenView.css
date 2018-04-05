@@ -32,7 +32,7 @@
 }
 
 .SpecimenView .buttons {
-  margin-top: 20px;
+  margin-top: 80px;
   margin-bottom: 80px;
 }
 
@@ -44,6 +44,8 @@
 
 .SpecimenView .buttons .button-download {
   float: right;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 .SpecimenView .buttons .button-save {
   float: right;
@@ -55,9 +57,20 @@
   cursor: pointer;
   position: relative;
   background: transparent;
+  border-radius: 50%;
   padding: 0px;
   z-index: 10;
+  transition: all .3s ease;
 }
+
+.SpecimenView .icon-back:hover {
+  background: #5320ee;
+}
+
+.SpecimenView .icon-back:hover g path{
+  stroke: white;
+}
+
 
 
 .SpecimenView .hooray {
@@ -277,6 +290,10 @@
   border: solid 1px #cdcad6;
   padding: 10px 15px;
   color: black;
+}
+
+.modal input:focus {
+  outline: none;
 }
 
 .modal input::placeholder {
