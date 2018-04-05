@@ -80,10 +80,17 @@
 	"WelcomeBack.createNewProject": "Crea un nuovo progetto",
 	"Landing.headerTitle": "Ottieni facilmente dei caratteri che non vedrai mai da nessun’altra parte",
 	"Landing.headerInputPlaceholder": "Scrivi qualche cosa",
+<<<<<<< HEAD
 	"Landing.headerInputCTA": "Crea il tuo carattere",
 	"Landing.descriptionTitle": "Ottieni i tuoi caratteri personalizzati con qualche semplice passaggio",
 	"Landing.descriptionText": "Un font personalizzato fa tutta la differenza dandoti quel tocco speciale in più.\nUnique ti permette di ottenere quello che hai bisogno , dei caratteri personalizzati pronti per l’uso!\n\nSeleziona semplicemente, personalizza e vai!\n\nFacile come pensarlo.",
 	"Landing.descriptionCTA": "Scarica il tuo carattere Unique",
+=======
+	"Landing.headerInputCTA": "Ottieni il tuo carattere",
+	"Landing.descriptionTitle": "OTTIENI I TUOI CARATTERI PERSONALIZZATI IN QUALCHE SEMPLICE PASSO",
+	"Landing.descriptionText": "Un font personalizzato fa tutta la differenza dandoti quel tocco speciale in più. Unique ti permette di ottenere quello che hai bisogno , dei caratteri personalizzati pronti per l’uso!\n\nSeleziona semplicemente, personalizza e vai!\nFacile come pensarlo.",
+	"Landing.descriptionCTA": "OTTIENI I TUOI CARATTERI PERSONALIZZATI",
+>>>>>>> some css adjustments
 	"Landing.featureListItem1": "Risparmia un sacco di tempo",
 	"Landing.featureListItem2": "Ottieni la tua custom font in pochi passi",
 	"Landing.featureListItem3": "Suggerimenti e aiuti su richiesta",

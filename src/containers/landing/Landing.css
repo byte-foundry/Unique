@@ -60,6 +60,11 @@
   width: 235px;
 }
 
+.Landing .Button:hover,
+.Landing .profile-icon:hover {
+    transform: scale(1.1);
+}
+
 .Landing .header input {
   background: transparent;
   border: 2px solid white;
@@ -124,6 +129,10 @@
 }
 
 .Landing .description .uniqueVisual {
+<<<<<<< HEAD
+=======
+  width: 80%;
+>>>>>>> some css adjustments
   height: auto;
   margin-bottom: 10%;
   width: 80%;
@@ -285,9 +294,17 @@
 }
 
 .Landing .howItWorks .Button {
-  padding-left: 0;
+  padding: 0;
   color: #632bdd;
   font-size: 16px;
+
+  text-decoration: none;
+  padding-bottom: .1em;
+  border-bottom: 2px solid #632bdd;
+}
+
+.Landing .howItWorks .Button:hover {
+    border-bottom: 2px solid transparent;
 }
 
 .Landing .prototypo {
