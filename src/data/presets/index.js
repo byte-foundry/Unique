@@ -1,25 +1,25 @@
-import { templateNames } from "prototypo-library";
-import { push } from "react-router-redux";
-import { setUnstable, setStable } from "../ui";
-import { storeCreatedFont, createPrototypoFactory } from "../createdFonts";
-import { clearFontIsLoading } from "../font";
+import { templateNames } from 'prototypo-library';
+import { push } from 'react-router-redux';
+import { setUnstable, setStable } from '../ui';
+import { storeCreatedFont, createPrototypoFactory } from '../createdFonts';
+import { clearFontIsLoading } from '../font';
 
-export const IMPORT_PRESETS_REQUESTED = "presets/IMPORT_PRESETS_REQUESTED";
-export const IMPORT_PRESETS = "presets/IMPORT_PRESETS";
-export const LOAD_PRESETS_REQUESTED = "presets/LOAD_PRESETS_REQUESTED";
-export const LOAD_PRESETS = "presets/LOAD_PRESETS";
+export const IMPORT_PRESETS_REQUESTED = 'presets/IMPORT_PRESETS_REQUESTED';
+export const IMPORT_PRESETS = 'presets/IMPORT_PRESETS';
+export const LOAD_PRESETS_REQUESTED = 'presets/LOAD_PRESETS_REQUESTED';
+export const LOAD_PRESETS = 'presets/LOAD_PRESETS';
 const initialState = {
   loadedPresetsName: [],
   importedPresets: [],
-  isLoading: false
+  isLoading: false,
 };
 
 const templates = {
-  "elzevir.ptf": "ELZEVIR",
-  "venus.ptf": "GROTESK",
-  "john-fell.ptf": "FELL",
-  "gfnt.ptf": "SPECTRAL",
-  "antique.ptf": "ANTIQUE"
+  'elzevir.ptf': 'ELZEVIR',
+  'venus.ptf': 'GROTESK',
+  'john-fell.ptf': 'FELL',
+  'gfnt.ptf': 'SPECTRAL',
+  'antique.ptf': 'ANTIQUE',
 };
 
 export default (state = initialState, action) => {
@@ -27,26 +27,26 @@ export default (state = initialState, action) => {
     case LOAD_PRESETS_REQUESTED:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
 
     case LOAD_PRESETS:
       return {
         ...state,
         isLoading: false,
-        loadedPresetsName: action.loadedPresetsName
+        loadedPresetsName: action.loadedPresetsName,
       };
 
     case IMPORT_PRESETS_REQUESTED:
       return {
-        ...state
+        ...state,
       };
 
     case IMPORT_PRESETS:
       return {
         ...state,
         importedPresets: action.importedPresets,
-        isLoading: false
+        isLoading: false,
       };
 
     default:
@@ -54,20 +54,20 @@ export default (state = initialState, action) => {
   }
 };
 
-export const importPresets = presets => dispatch => {
-  console.log("-- ImportPresets");
+export const importPresets = presets => (dispatch) => {
+  console.log('-- ImportPresets');
   dispatch({
-    type: IMPORT_PRESETS_REQUESTED
+    type: IMPORT_PRESETS_REQUESTED,
   });
   console.log(presets);
   dispatch({
     type: IMPORT_PRESETS,
-    importedPresets: presets
+    importedPresets: presets,
   });
 };
 
 export const loadPresets = (reloading = false) => (dispatch, getState) => {
-  console.log("========LOAD PRESETS=======");
+  console.log('========LOAD PRESETS=======');
   if (reloading) {
     dispatch(setUnstable());
   }
@@ -75,55 +75,51 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
   const { need } = getState().font;
   if (isLoading) return;
   dispatch({
-    type: LOAD_PRESETS_REQUESTED
+    type: LOAD_PRESETS_REQUESTED,
   });
   console.log(importedPresets);
   const promiseArray = [];
   const loadedPresetsName = [];
   importedPresets.forEach((preset, index) => {
     if (preset.variant && preset.variant.family) {
-      promiseArray.push(
-        new Promise(resolve => {
-          dispatch(createPrototypoFactory()).then(prototypoFontFactory => {
-            console.log("--Creating font--");
-            console.log(preset);
-            prototypoFontFactory
-              .createFont(
+      promiseArray.push(new Promise((resolve) => {
+        dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+          console.log('--Creating font--');
+          console.log(preset);
+          prototypoFontFactory
+            .createFont(
+              `${preset.variant.family.name}${preset.variant.name}`,
+              templateNames[templates[preset.template]],
+              true,
+            )
+            .then((createdFont) => {
+              createdFont.changeParams(preset.baseValues, preset.tags.map(tag => tag.charAt(0).toUpperCase() + tag.slice(1)).join(','));
+              resolve(true);
+              loadedPresetsName[index] = `${preset.variant.family.name}${
+                preset.variant.name
+              }`;
+              dispatch(storeCreatedFont(
+                createdFont,
                 `${preset.variant.family.name}${preset.variant.name}`,
-                templateNames[templates[preset.template]],
-                true
-              )
-              .then(createdFont => {
-                createdFont.changeParams(preset.baseValues);
-                resolve(true);
-                loadedPresetsName[index] = `${preset.variant.family.name}${
-                  preset.variant.name
-                }`;
-                dispatch(
-                  storeCreatedFont(
-                    createdFont,
-                    `${preset.variant.family.name}${preset.variant.name}`
-                  )
-                );
-              });
-          });
-        })
-      );
+              ));
+            });
+        });
+      }));
     }
   });
   Promise.all(promiseArray).then(() => {
-    console.log("> All presets loaded");
+    console.log('> All presets loaded');
     dispatch({
       type: LOAD_PRESETS,
-      loadedPresetsName
+      loadedPresetsName,
     });
     dispatch(clearFontIsLoading());
-    dispatch(push("/app/select"));
+    dispatch(push('/app/select'));
     dispatch(setStable());
   });
-  console.log("======END LOAD PRESETS=======");
+  console.log('======END LOAD PRESETS=======');
 };
 
-export const reloadPresets = () => dispatch => {
+export const reloadPresets = () => (dispatch) => {
   dispatch(loadPresets(true));
 };
