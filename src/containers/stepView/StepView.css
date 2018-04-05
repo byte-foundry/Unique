@@ -68,6 +68,7 @@
   top: calc(50% - 25px);
   right: -50px;
   transform: translateY(calc(-50%)) translateZ(0px);
+  z-index: 10;
 }
 
 .StepView .icon-next-wrapper {
@@ -75,6 +76,7 @@
   top: calc(50% + 25px);
   right: -50px;
   transform: translateY(-50%) translateZ(0);
+  z-index: 10;
 }
 
 .StepView .icon-back,
@@ -174,16 +176,36 @@
 
 @media (max-width: 576px) {
   .StepView .Choice {
-    width: 92%;
+    width: 100%;
   }
 
   .StepView .icon-next-wrapper {
-    right: 5px;
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    left: inherit;
+    right: inherit;
+    top: inherit;
+    bottom: inherit;
   }
   .StepView .icon-back-wrapper {
-    right: 5px;
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    left: inherit;
+    right: inherit;
+    top: inherit;
+    bottom: inherit;
   }
   .StepView .icon-finish {
-    right: 5px;
+    position: relative;
+    display: inline-block;
+    left: inherit;
+    right: inherit;
+    top: inherit;
+    bottom: inherit;
+    transform: translateY(-56%);
   }
 }

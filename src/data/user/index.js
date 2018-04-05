@@ -288,11 +288,11 @@ export const storeProject = (fontName, bought = false) => (
               };
               /* global Intercom*/
               Intercom("update", {
-                unique_finished_fonts:
+                unique_saved_fonts:
                   res.createUniqueProject.user.uniqueProjects.length
               });
               /* global Intercom*/
-              Intercom("trackEvent", "unique-finished-font", metadata);
+              Intercom("trackEvent", "unique-saved-font", metadata);
               dispatch({
                 type: STORE_PROJECT,
                 projectID: res.createUniqueProject.id,
@@ -419,6 +419,8 @@ export const afterPayment = res => (dispatch, getState) => {
   const { data } = res;
   const isPayed = data.paid;
   const userStripeEmail = data.source.metadata.name;
+  /* global Intercom*/
+  Intercom("trackEvent", "unique-bought-font");
   if (graphQLToken) {
     dispatch(storeProject(userFontName, isPayed));
   } else {

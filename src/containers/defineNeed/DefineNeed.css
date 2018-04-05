@@ -53,6 +53,36 @@
   border-color: #b8b5c0;
 }
 
+@media (max-width: 576px) {
+
+  .DefineNeed {
+    margin-bottom: 100px;
+  }
+
+  .DefineNeed .icon-next {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    left: inherit;
+    right: inherit;
+    top: inherit;
+    bottom: inherit;
+    transform: inherit;
+    transform: translate(150%, -100%);
+  }
+  .DefineNeed .icon-back {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    margin-top: 20px;
+    left: inherit;
+    right: inherit;
+    top: inherit;
+    bottom: inherit;
+    transform: inherit;
+  }
+}
+
 .DefineNeed .icon-next:not(.disabled):hover, .DefineNeed .icon-back:hover {
   background: #5320ee;
 }

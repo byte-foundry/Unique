@@ -88,6 +88,7 @@
 }
 .Library .project .actions .action-delete{
   display: inline-block;
+  border-bottom: none;
   float: left;
 }
 
