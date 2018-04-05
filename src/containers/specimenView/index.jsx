@@ -147,8 +147,7 @@ class SpecimenView extends React.Component {
       "«",
       "»",
       "‹",
-      "›",
-      "©"
+      "›"
     ];
     const diacritics = [
       "À",
@@ -178,7 +177,6 @@ class SpecimenView extends React.Component {
       "Û",
       "Ü",
       "Ý",
-      "Þ",
       "à",
       "á",
       "â",
@@ -206,8 +204,7 @@ class SpecimenView extends React.Component {
       "û",
       "ü",
       "ý",
-      "ÿ",
-      "þ"
+      "ÿ"
     ];
     return (
       <div

@@ -123,6 +123,7 @@
   margin-bottom: 0;
   font-size: 14px;
   transform: translateY(-2px);
+  color: #b8b5c0;
 }
 
 .Checkout .checkout-options .option.selected .option-title {
@@ -153,7 +154,9 @@
 
 .Checkout .checkout-options .option.specimen-logo svg {
   height: auto;
-  width: 100%;
+  width: 300px;
+  margin: 0 auto;
+  transform: translateX(25%);
 }
 
 .Checkout .checkout-options .option.variant .font-wrapper {

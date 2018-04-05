@@ -3997,44 +3997,44 @@
         <translation_file>
             <language>Lt-sr-SP</language>
             <file>language_def.json</file>
-            <file_size>6339</file_size>
-            <modification_timestamp>1522941655</modification_timestamp>
+            <file_size>6412</file_size>
+            <modification_timestamp>1522943583</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>en-US</language>
             <file>language_en.json</file>
-            <file_size>6406</file_size>
-            <modification_timestamp>1522941655</modification_timestamp>
+            <file_size>6466</file_size>
+            <modification_timestamp>1522943583</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>de-DE</language>
             <file>language_de.json</file>
-            <file_size>6796</file_size>
-            <modification_timestamp>1522941655</modification_timestamp>
+            <file_size>6857</file_size>
+            <modification_timestamp>1522943583</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>fr-FR</language>
             <file>language_fr.json</file>
-            <file_size>7368</file_size>
-            <modification_timestamp>1522941655</modification_timestamp>
+            <file_size>7429</file_size>
+            <modification_timestamp>1522943583</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>it-IT</language>
             <file>language_it.json</file>
-            <file_size>6815</file_size>
-            <modification_timestamp>1522941655</modification_timestamp>
+            <file_size>7152</file_size>
+            <modification_timestamp>1522943583</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>es-ES</language>
             <file>language_es.json</file>
-            <file_size>6914</file_size>
-            <modification_timestamp>1522941655</modification_timestamp>
+            <file_size>6913</file_size>
+            <modification_timestamp>1522943583</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>pt-PT</language>
             <file>language_pt.json</file>
-            <file_size>6551</file_size>
-            <modification_timestamp>1522941655</modification_timestamp>
+            <file_size>7016</file_size>
+            <modification_timestamp>1522943583</modification_timestamp>
         </translation_file>
     </translation_files>
     <editor_configuration>
