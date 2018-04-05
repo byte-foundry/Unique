@@ -455,7 +455,7 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
   const { fonts } = getState().createdFonts;
   const stepToUpdate = step || getState().font.step;
   const subset = isSpecimen
-    ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&@,?!“”()<>°+-$ '
+    ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890$£€¥¢%‰#<+=−×÷>¡!¿?.,:;…-–—()[]{}/\\&*@“”‘’„‚«»‹›©ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåçèéêëìíîïñòóôõöøùúûüýÿþ '
     : chosenWord + chosenGlyph;
 
   // Update choice fonts

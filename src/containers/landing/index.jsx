@@ -57,7 +57,7 @@ class Landing extends React.Component {
           </div>
           <div className="container catch">
             <div className="row">
-              <div className="col-sm-12 col-lg-6">
+              <div className="col-sm-12 col-md-12 col-lg-6">
                 <div className="float-left">
                   <h2>
                     <FormattedMessage
@@ -68,7 +68,7 @@ class Landing extends React.Component {
                   </h2>
                 </div>
               </div>
-              <div className="col-sm-12 col-lg-6">
+              <div className="col-sm-12 col-md-12 col-lg-6">
                 <div className="float-right">
                   <FormattedMessage
                     id="Landing.headerInputPlaceholder"
@@ -367,8 +367,8 @@ class Landing extends React.Component {
           <div className="container">
             <One5 className="one-5" />
             <div className="row">
-              <div className="col-sm-12 col-md-8" />
-              <div className="col-sm-12 col-md-4">
+              <div className="col-sm-12 col-md-4 col-lg-6" />
+              <div className="col-sm-12 col-md-8 col-lg-6">
                 <h1>
                   <FormattedMessage
                     id="Landing.prototypoTitle"

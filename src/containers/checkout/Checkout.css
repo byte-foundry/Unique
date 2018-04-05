@@ -11,10 +11,37 @@
   font-weight: 400;
 }
 
+.Checkout .container {
+  padding: 0;
+}
+
 .Checkout .checkout-options {
-  max-width: 75%;
   margin: 0 auto;
 }
+
+.Checkout .icon-back {
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+  position: fixed;
+  top: 50%;
+  left: 50px;
+  transform: translateY(-50%);
+  background: transparent;
+  border-radius: 50%;
+  padding: 0px;
+  z-index: 10;
+  transition: all .3s ease;
+}
+
+.Checkout .icon-back:hover {
+  background: #5320ee;
+}
+
+.Checkout .icon-back:hover g path{
+  stroke: white;
+}
+
 
 .Checkout .checkout-options .option {
   width: 100%;
@@ -90,9 +117,16 @@
   font-size: 14px;
 }
 
-.Checkout .checkout-options .option svg {
-  padding: 20px 10%;
-  margin: auto;
+
+.Checkout .checkout-options .option .option-title {
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 14px;
+  transform: translateY(-2px);
+}
+
+.Checkout .checkout-options .option.selected .option-title {
+  color: #5f1ffc;
 }
 
 .Checkout .checkout-options .option.otf-logo .logo {

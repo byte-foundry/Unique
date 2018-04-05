@@ -11,6 +11,7 @@ import { updateCheckoutOptions } from "../../data/user";
 import { createFontVariants } from "../../data/font";
 import { ReactComponent as OtfLogo } from "./otf.svg";
 import { ReactComponent as SpecimenLogo } from "./specimen.svg";
+import { ReactComponent as Back } from "../stepView/back.svg";
 
 import "./Checkout.css";
 
@@ -33,7 +34,7 @@ class Checkout extends React.Component {
           price: 0,
           selected: true,
           dbName: "baseFont",
-          visible: true,
+          visible: true
         },
         {
           name: (
@@ -49,9 +50,9 @@ class Checkout extends React.Component {
           type: "logo",
           price: 0,
           selected: true,
-          visible: true,
-        },     
-        
+          visible: true
+        },
+
         {
           name: (
             <FormattedMessage
@@ -65,8 +66,8 @@ class Checkout extends React.Component {
           type: "discount",
           price: -20,
           selected: true,
-          visible: false,
-        },
+          visible: false
+        }
       ]
     };
     props.updateCheckoutOptions(
@@ -97,29 +98,33 @@ class Checkout extends React.Component {
     );
   }
   componentWillReceiveProps(newProps) {
-    const {selectedOptions} = this.state;
-    let filteredSelectedOption = selectedOptions.filter(e => e.type !== 'font');
+    const { selectedOptions } = this.state;
+    let filteredSelectedOption = selectedOptions.filter(e => e.type !== "font");
     newProps.possibleVariants.forEach(option => {
-      filteredSelectedOption.push(
-        {
-          name: option.variant,
-          class: "variant",
-          type: "font",
-          dbName: "italicOption",
-          fontName: option.name,
-          price: 5,
-          selected: false,
-          visible: true,
-        }
-      )
+      filteredSelectedOption.push({
+        name: option.variant,
+        class: "variant",
+        type: "font",
+        dbName: "italicOption",
+        fontName: option.name,
+        price: 5,
+        selected: false,
+        visible: true
+      });
     });
-    this.setState({selectedOptions: filteredSelectedOption});
+    this.setState({ selectedOptions: filteredSelectedOption });
   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div className="Checkout">
         <div className="container">
+          <Back
+            className="icon-back"
+            onClick={() => {
+              this.props.goBack();
+            }}
+          />
           <h2>
             <FormattedMessage
               id="CheckoutView.title"
@@ -129,43 +134,49 @@ class Checkout extends React.Component {
           </h2>
           <div className="checkout-options">
             <Masonry breakPoints={[350]}>
-              {this.state.selectedOptions.filter(e => e.visible).map((checkoutOption, index) => (
-                <div
-                  className={`option ${checkoutOption.class} ${
-                    checkoutOption.selected ? "selected" : ""
-                  }`}
-                  onClick={() => {
-                    if (index !== 0) {
-                      this.toggleChoice(checkoutOption.name);
-                    }
-                  }}
-                >
-                  {checkoutOption.type === "logo" && (
-                    <div className="logo">{checkoutOption.logo}</div>
-                  )}
-                  {checkoutOption.type === "font" && (
-                    <div className="font-wrapper">
-                      <span style={{ fontFamily: `'${checkoutOption.fontName}'` }}>{this.props.chosenWord}</span>
-                    </div>
-                  )}
-                  <input
-                    type="checkbox"
-                    id={`${checkoutOption.type}${index}`}
-                    value={checkoutOption.selected}
-                    checked={checkoutOption.selected}
-                  />
-                  <label
-                    htmlFor={`${checkoutOption.type}${index}`}
-                    className="check-box"
+              {this.state.selectedOptions
+                .filter(e => e.visible)
+                .map((checkoutOption, index) => (
+                  <div
+                    className={`option ${checkoutOption.class} ${
+                      checkoutOption.selected ? "selected" : ""
+                    }`}
                     onClick={() => {
                       if (index !== 0) {
                         this.toggleChoice(checkoutOption.name);
                       }
                     }}
-                  />
-                  <p className="option-title">{checkoutOption.name}</p>
-                </div>
-              ))}
+                  >
+                    {checkoutOption.type === "logo" && (
+                      <div className="logo">{checkoutOption.logo}</div>
+                    )}
+                    {checkoutOption.type === "font" && (
+                      <div className="font-wrapper">
+                        <span
+                          style={{ fontFamily: `'${checkoutOption.fontName}'` }}
+                        >
+                          {this.props.chosenWord}
+                        </span>
+                      </div>
+                    )}
+                    <input
+                      type="checkbox"
+                      id={`${checkoutOption.type}${index}`}
+                      value={checkoutOption.selected}
+                      checked={checkoutOption.selected}
+                    />
+                    <label
+                      htmlFor={`${checkoutOption.type}${index}`}
+                      className="check-box"
+                      onClick={() => {
+                        if (index !== 0) {
+                          this.toggleChoice(checkoutOption.name);
+                        }
+                      }}
+                    />
+                    <p className="option-title">{checkoutOption.name}</p>
+                  </div>
+                ))}
             </Masonry>
           </div>
         </div>
@@ -179,12 +190,16 @@ const mapStateToProps = state => ({
   possibleVariants: state.font.possibleVariants,
   fontName:
     state.font.currentPreset.variant.family.name +
-    state.font.currentPreset.variant.name,
+    state.font.currentPreset.variant.name
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { goBack: () => push("/app/specimen"), updateCheckoutOptions, createFontVariants },
+    {
+      goBack: () => push("/app/specimen"),
+      updateCheckoutOptions,
+      createFontVariants
+    },
     dispatch
   );
 
@@ -193,6 +208,7 @@ Checkout.propTypes = {
   chosenWord: PropTypes.string.isRequired,
   fontName: PropTypes.string,
   createFontVariants: PropTypes.func.isRequired,
+  goBack: PropTypes.func.isRequired
 };
 
 export default withRouter(

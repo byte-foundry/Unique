@@ -112,7 +112,7 @@ class TemplateChoice extends React.Component {
                 leaveAnimation="none"
               >
                 {this.props.presets.map((font, index) => (
-                  <div className="col-sm-12 col-md-11 col-lg-6">
+                  <div className="col-sm-9 col-md-10 col-lg-6">
                     <Template
                       font={font}
                       onClick={() => this.setState({ templateIndex: index })}

@@ -13,6 +13,7 @@
 	justify-content: flex-start;
 	align-content: stretch;
 	flex-grow: 1;
+	margin: -5px;
 }
 
 .masonry .column .wrapper {

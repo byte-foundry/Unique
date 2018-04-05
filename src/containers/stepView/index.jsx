@@ -79,18 +79,10 @@ class StepView extends React.Component {
   }
   setChoiceSelected(props) {
     let choice = {};
-    if (props.choicesMade[props.step]) {
-      if (props.choicesMade[props.step].name === "Custom") {
-        choice = {
-          name: props.choicesMade[props.step].name,
-          values: { ...props.choicesMade[props.step] }
-        };
-        delete choice.values.name;
-      } else {
+    if (props.choicesMade[props.step - 1]) {
         choice = props.stepValues.choices.find(
-          c => c.name === props.choicesMade[props.step].name
+          c => c.name === props.choicesMade[props.step - 1].name
         );
-      }
     }
     this.setState({
       choice,
@@ -214,7 +206,11 @@ class StepView extends React.Component {
                 <div className="step-bubbles">
                   {[...Array(this.props.stepLength)].map((e, i) => (
                     <span
-                      className={`step-bubble ${this.props.step > i || this.props.choicesMade[i] ? "past" : ""} ${i === this.props.step - 1 ? 'current' : ''}`}
+                      className={`step-bubble ${
+                        this.props.step > i || this.props.choicesMade[i]
+                          ? "past"
+                          : ""
+                      } ${i === this.props.step - 1 ? "current" : ""}`}
                       onClick={() => {
                         if (this.props.step > i || this.props.choicesMade[i]) {
                           this.props.goToStep(i + 1);
@@ -339,17 +335,15 @@ class StepView extends React.Component {
                     </div>
                   )}
                 </FormattedMessage>
-
                 <Finish
                   className={`icon-finish ${
-                    this.props.choicesMade.length - 1 === this.props.stepLength
+                    this.props.choicesMade.length === this.props.stepLength
                       ? ""
                       : "disabled"
                   }`}
                   onClick={() => {
                     if (
-                      this.props.choicesMade.length - 1 ===
-                      this.props.stepLength
+                      this.props.choicesMade.length === this.props.stepLength
                     ) {
                       this.props.finishEditing(this.state.choice);
                     }
@@ -385,7 +379,7 @@ const mapDispatchToProps = dispatch =>
       finishEditing,
       storeChosenWord,
       storeChosenGlyph,
-      goToStep,
+      goToStep
     },
     dispatch
   );
@@ -419,7 +413,7 @@ StepView.propTypes = {
   storeChosenGlyph: PropTypes.func.isRequired,
   shouldShowTooltips: PropTypes.bool.isRequired,
   fontSize: PropTypes.number.isRequired,
-  goToStep: PropTypes.func.isRequired,
+  goToStep: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);

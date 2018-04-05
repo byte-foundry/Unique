@@ -1353,9 +1353,9 @@
                     <concept_node>
                         <name>Display</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Website need</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>Website</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1390,9 +1390,9 @@
                     <concept_node>
                         <name>DisplayTooltip</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Website need tooltip</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>A website font is blablabla blablabla blablabla</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3923,44 +3923,44 @@
         <translation_file>
             <language>Lt-sr-SP</language>
             <file>language_def.json</file>
-            <file_size>5970</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6339</file_size>
+            <modification_timestamp>1522937840</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>en-US</language>
             <file>language_en.json</file>
-            <file_size>6111</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6406</file_size>
+            <modification_timestamp>1522937840</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>de-DE</language>
             <file>language_de.json</file>
-            <file_size>6470</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6796</file_size>
+            <modification_timestamp>1522937840</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>fr-FR</language>
             <file>language_fr.json</file>
-            <file_size>6978</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>7368</file_size>
+            <modification_timestamp>1522937840</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>it-IT</language>
             <file>language_it.json</file>
-            <file_size>6687</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6815</file_size>
+            <modification_timestamp>1522937840</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>es-ES</language>
             <file>language_es.json</file>
-            <file_size>6369</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6914</file_size>
+            <modification_timestamp>1522937840</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>pt-PT</language>
             <file>language_pt.json</file>
-            <file_size>6458</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6551</file_size>
+            <modification_timestamp>1522937840</modification_timestamp>
         </translation_file>
     </translation_files>
     <editor_configuration>

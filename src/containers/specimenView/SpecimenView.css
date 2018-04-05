@@ -32,7 +32,7 @@
 }
 
 .SpecimenView .buttons {
-  margin-top: 20px;
+  margin-top: 80px;
   margin-bottom: 80px;
 }
 
@@ -44,6 +44,8 @@
 
 .SpecimenView .buttons .button-download {
   float: right;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 .SpecimenView .buttons .button-save {
   float: right;
@@ -55,9 +57,20 @@
   cursor: pointer;
   position: relative;
   background: transparent;
+  border-radius: 50%;
   padding: 0px;
   z-index: 10;
+  transition: all .3s ease;
 }
+
+.SpecimenView .icon-back:hover {
+  background: #5320ee;
+}
+
+.SpecimenView .icon-back:hover g path{
+  stroke: white;
+}
+
 
 
 .SpecimenView .hooray {
@@ -124,13 +137,15 @@
 }
 
 .SpecimenView .word {
-  font-size: 68px;
-  margin-top: 40px;
-  margin-bottom: 65px;
+  font-size: 75px;
+  margin-bottom: 40px;
 }
 
 .SpecimenView .characters .set {
   margin: calc(4rem - 1px) auto;
+}
+.SpecimenView .characters .set.first {
+  margin-top: 10px;
 }
 
 @media (min-width: 800px) {
@@ -275,6 +290,10 @@
   border: solid 1px #cdcad6;
   padding: 10px 15px;
   color: black;
+}
+
+.modal input:focus {
+  outline: none;
 }
 
 .modal input::placeholder {
