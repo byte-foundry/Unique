@@ -122,7 +122,7 @@ class Landing extends React.Component {
               </div>
             </div>
             <div className="row justify-content-center">
-              <div className="col-sm-12 col-md-6">
+              <div className="col-sm-12 col-md-8">
                 <p style={{ whiteSpace: "pre-line" }}>
                   <FormattedMessage
                     id="Landing.descriptionText"

@@ -60,6 +60,11 @@
   width: 235px;
 }
 
+.Landing .Button:hover,
+.Landing .profile-icon:hover {
+    transform: scale(1.1);
+}
+
 .Landing .header input {
   background: transparent;
   border: 2px solid white;
@@ -124,10 +129,16 @@
 }
 
 .Landing .description .uniqueVisual {
-  width: 100%;
+<<<<<<< HEAD
+=======
+  width: 80%;
+>>>>>>> some css adjustments
   height: auto;
-  margin-top: -40vw;
   margin-bottom: 10%;
+  width: 80%;
+  margin-top: -42vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .Landing .description h1 {
@@ -256,7 +267,9 @@
     margin-bottom: inherit;
     height: inherit;
   }
-  .Landing .howItWorks .howItWorks-icon1, .Landing .howItWorks .howItWorks-icon2, .Landing .howItWorks .howItWorks-icon3 {
+  .Landing .howItWorks .howItWorks-icon1,
+  .Landing .howItWorks .howItWorks-icon2,
+  .Landing .howItWorks .howItWorks-icon3 {
     position: relative;
     width: 100%;
     top: inherit;
@@ -281,9 +294,17 @@
 }
 
 .Landing .howItWorks .Button {
-  padding-left: 0;
+  padding: 0;
   color: #632bdd;
   font-size: 16px;
+
+  text-decoration: none;
+  padding-bottom: .1em;
+  border-bottom: 2px solid #632bdd;
+}
+
+.Landing .howItWorks .Button:hover {
+    border-bottom: 2px solid transparent;
 }
 
 .Landing .prototypo {
@@ -304,16 +325,17 @@
   z-index: 2;
 }
 
-
 @media (max-width: 775px) {
   .Landing .one-5 {
-   display: none;
+    display: none;
   }
   .Landing .howItWorks .image-wrapper {
     margin-bottom: inherit;
     height: inherit;
   }
-  .Landing .howItWorks .howItWorks-icon1, .Landing .howItWorks .howItWorks-icon2, .Landing .howItWorks .howItWorks-icon3 {
+  .Landing .howItWorks .howItWorks-icon1,
+  .Landing .howItWorks .howItWorks-icon2,
+  .Landing .howItWorks .howItWorks-icon3 {
     position: relative;
     width: 100%;
     top: inherit;
@@ -324,7 +346,6 @@
     clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
   }
 }
-
 
 .Landing .prototypo h1 {
   font-weight: 400;
