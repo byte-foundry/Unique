@@ -138,25 +138,25 @@ class DefineNeed extends React.Component {
           </div>
           <div
             className={`col-sm-12 col-md-11 col-lg-10 ${
-              this.state.selected === "website" ? "selected" : ""
+              this.state.selected === "display" ? "selected" : ""
             }`}
-            onClick={() => this.setState({ selected: "website" })}
+            onClick={() => this.setState({ selected: "display" })}
             onDoubleClick={e => {
-              this.setState({ selected: "website" });
+              this.setState({ selected: "display" });
               this.handleSubmit(e);
             }}
           >
             <FormattedMessage
-              id="DefineNeed.website"
-              defaultMessage="Website"
-              description="Website need"
+              id="DefineNeed.Display"
+              defaultMessage="Display"
+              description="Display need"
             />
             <span>
               {" "}
               <FormattedMessage
-                id="DefineNeed.websiteTooltip"
-                defaultMessage="A website font is blablabla blablabla blablabla"
-                description="Website need tooltip"
+                id="DefineNeed.DisplayTooltip"
+                defaultMessage="A display font is blablabla blablabla blablabla"
+                description="Display need tooltip"
               >
                 {text => (
                   <Tooltip

@@ -39,6 +39,8 @@
 	"DefineNeed.DisplayTooltip": "Une police de titrage peut avoir des finesses dans son dessin, ça n'altère pas sa lisibilité.",
 	"DefineNeed.brandTitle": "Quel est le nom de votre marque?",
 	"DefineNeed.brandInput": "Écrivez quelque chose",
+	"DefineNeed.website": "",
+	"DefineNeed.websiteTooltip": "",
 	"Library.title": "Bonjour!",
 	"Library.actionCreate": "Créer un nouveau projet",
 	"Library.actionReload": "Reprendre votre projet en cours",

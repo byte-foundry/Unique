@@ -124,13 +124,15 @@
 }
 
 .SpecimenView .word {
-  font-size: 68px;
-  margin-top: 40px;
-  margin-bottom: 65px;
+  font-size: 75px;
+  margin-bottom: 40px;
 }
 
 .SpecimenView .characters .set {
   margin: calc(4rem - 1px) auto;
+}
+.SpecimenView .characters .set.first {
+  margin-top: 10px;
 }
 
 @media (min-width: 800px) {

@@ -93,8 +93,7 @@ class SpecimenView extends React.Component {
       "y",
       "z"
     ];
-    const symbols = [
-      "0",
+    const numerals = [
       "1",
       "2",
       "3",
@@ -104,22 +103,111 @@ class SpecimenView extends React.Component {
       "7",
       "8",
       "9",
-      "&",
-      "@",
+      "0",
+      "$",
+      "€",
+      "¢",
+      "%",
+      "‰",
+      "#",
+      "<",
+      "+",
+      "=",
+      "−",
+      ">"
+    ];
+    const symbols = [
+      "¡",
+      "!",
+      "¿",
+      "?",
       ".",
       ",",
-      "?",
-      "!",
-      "“",
-      "”",
+      ":",
+      ";",
+      "…",
+      "-",
+      "–",
+      "—",
       "(",
       ")",
-      "<",
-      ">",
-      "°",
-      "+",
-      "-",
-      "$"
+      "[",
+      "]",
+      "{",
+      "}",
+      "/",
+      "\\",
+      "&",
+      "*",
+      "@",
+      "“",
+      "”",
+      "‘",
+      "’",
+      "«",
+      "»",
+      "‹",
+      "›",
+      "©"
+    ];
+    const diacritics = [
+      "À",
+      "Á",
+      "Â",
+      "Ã",
+      "Ä",
+      "Å",
+      "Ç",
+      "È",
+      "É",
+      "Ê",
+      "Ë",
+      "Ì",
+      "Í",
+      "Î",
+      "Ï",
+      "Ñ",
+      "Ò",
+      "Ó",
+      "Ô",
+      "Õ",
+      "Ö",
+      "Ø",
+      "Ù",
+      "Ú",
+      "Û",
+      "Ü",
+      "Ý",
+      "Þ",
+      "à",
+      "á",
+      "â",
+      "ã",
+      "ä",
+      "å",
+      "ç",
+      "è",
+      "é",
+      "ê",
+      "ë",
+      "ì",
+      "í",
+      "î",
+      "ï",
+      "ñ",
+      "ò",
+      "ó",
+      "ô",
+      "õ",
+      "ö",
+      "ø",
+      "ù",
+      "ú",
+      "û",
+      "ü",
+      "ý",
+      "ÿ",
+      "þ"
     ];
     return (
       <div
@@ -133,13 +221,13 @@ class SpecimenView extends React.Component {
           <Modal
             open={this.state.isModalOpened}
             onClose={() => {
-              this.setState({ fontName: "", isModalOpened: false })
+              this.setState({ fontName: "", isModalOpened: false });
             }}
             showCloseIcon={false}
             little
             classNames={{
-              modal: 'modal',
-              overlay: 'overlay'
+              modal: "modal",
+              overlay: "overlay"
             }}
           >
             <h2>
@@ -370,7 +458,7 @@ class SpecimenView extends React.Component {
                 />
               </h3>
               <div className="characters">
-                <div className="set">
+                <div className="set first">
                   <div className="sub-set-characters-wrap">
                     <div className="sub-set-characters">
                       {uppercase.map(glyph => (
@@ -397,7 +485,31 @@ class SpecimenView extends React.Component {
                 <div className="set">
                   <div className="sub-set-characters-wrap">
                     <div className="sub-set-characters">
+                      {numerals.map(glyph => (
+                        <div className="sub-set-character">
+                          <div className="glyph-small">{glyph}</div>
+                          <div className="glyph-big">{glyph}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="set">
+                  <div className="sub-set-characters-wrap">
+                    <div className="sub-set-characters">
                       {symbols.map(glyph => (
+                        <div className="sub-set-character">
+                          <div className="glyph-small">{glyph}</div>
+                          <div className="glyph-big">{glyph}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="set">
+                  <div className="sub-set-characters-wrap">
+                    <div className="sub-set-characters">
+                      {diacritics.map(glyph => (
                         <div className="sub-set-character">
                           <div className="glyph-small">{glyph}</div>
                           <div className="glyph-big">{glyph}</div>

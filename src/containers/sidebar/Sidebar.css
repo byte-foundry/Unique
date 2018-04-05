@@ -105,3 +105,10 @@
     fill: black;
   }
 }
+
+@media (max-width: 891px) {
+  .Sidebar.checkout {
+    max-width: inherit;
+    position: relative;
+  }
+}

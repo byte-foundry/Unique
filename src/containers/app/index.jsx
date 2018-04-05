@@ -232,7 +232,7 @@ class App extends React.Component {
             </div>
             {this.props.location.pathname !== "/app/auth" && (
               <div
-                className={`right col-sm-2 ${
+                className={`right col-sm-${this.props.location.pathname !== "/app/checkout" ? "2" : "12 col-md-12"} col-lg-2 ${
                   this.props.isBlackOnWhite ||
                   this.props.location.pathname !== "/app/customize"
                     ? ""

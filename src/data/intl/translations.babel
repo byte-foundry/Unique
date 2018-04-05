@@ -1353,9 +1353,9 @@
                     <concept_node>
                         <name>Display</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Website need</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>Website</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1390,9 +1390,9 @@
                     <concept_node>
                         <name>DisplayTooltip</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Website need tooltip</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>A website font is blablabla blablabla blablabla</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1490,6 +1490,80 @@
                             </translation>
                             <translation>
                                 <language>es-ES</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>pt-PT</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>website</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Website need</description>
+                        <comment></comment>
+                        <default_text>Website</default_text>
+                        <translations>
+                            <translation>
+                                <language>Lt-sr-SP</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>de-DE</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>es-ES</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>it-IT</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>pt-PT</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>websiteTooltip</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Website need tooltip</description>
+                        <comment></comment>
+                        <default_text>A website font is blablabla blablabla blablabla</default_text>
+                        <translations>
+                            <translation>
+                                <language>Lt-sr-SP</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>de-DE</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>es-ES</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>it-IT</language>
                                 <approved>false</approved>
                             </translation>
                             <translation>
@@ -3923,44 +3997,44 @@
         <translation_file>
             <language>Lt-sr-SP</language>
             <file>language_def.json</file>
-            <file_size>5970</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6221</file_size>
+            <modification_timestamp>1522919241</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>en-US</language>
             <file>language_en.json</file>
-            <file_size>6111</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6308</file_size>
+            <modification_timestamp>1522919241</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>de-DE</language>
             <file>language_de.json</file>
-            <file_size>6470</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6671</file_size>
+            <modification_timestamp>1522919241</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>fr-FR</language>
             <file>language_fr.json</file>
-            <file_size>6978</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>7462</file_size>
+            <modification_timestamp>1522919241</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>it-IT</language>
             <file>language_it.json</file>
-            <file_size>6687</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6892</file_size>
+            <modification_timestamp>1522919241</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>es-ES</language>
             <file>language_es.json</file>
-            <file_size>6369</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6560</file_size>
+            <modification_timestamp>1522919241</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>pt-PT</language>
             <file>language_pt.json</file>
-            <file_size>6458</file_size>
-            <modification_timestamp>1522913290</modification_timestamp>
+            <file_size>6664</file_size>
+            <modification_timestamp>1522919241</modification_timestamp>
         </translation_file>
     </translation_files>
     <editor_configuration>

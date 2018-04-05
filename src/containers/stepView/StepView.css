@@ -150,15 +150,20 @@
     z-index: 10;
   }
   .StepView .icon-back-wrapper {
-    left: inherit;
     right: -20px;
-    top: 40%;
-    transform: translateY(-55%) translateZ(0px);
     z-index: 10;
   }
+}
 
-  .StepView .choices {
-    margin-left: 5px;
-    margin-right: 5px;
+@media (max-width: 576px) {
+  .StepView .Choice {
+    width: 92%;
+  }
+
+  .StepView .icon-next-wrapper {
+    right: 5px;
+  }
+  .StepView .icon-back-wrapper {
+    right: 5px;
   }
 }
