@@ -39,6 +39,8 @@
 	"DefineNeed.DisplayTooltip": "",
 	"DefineNeed.brandTitle": "Qual é o nome da sua marca? ",
 	"DefineNeed.brandInput": "Escreva algo ",
+	"DefineNeed.website": "",
+	"DefineNeed.websiteTooltip": "",
 	"Library.title": "Olá! ",
 	"Library.actionCreate": "Criar um novo projecto",
 	"Library.actionReload": "Recomeçe o seu projecto",

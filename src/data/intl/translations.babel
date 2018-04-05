@@ -1498,6 +1498,80 @@
                             </translation>
                         </translations>
                     </concept_node>
+                    <concept_node>
+                        <name>website</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Website need</description>
+                        <comment></comment>
+                        <default_text>Website</default_text>
+                        <translations>
+                            <translation>
+                                <language>Lt-sr-SP</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>de-DE</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>es-ES</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>it-IT</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>pt-PT</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>websiteTooltip</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Website need tooltip</description>
+                        <comment></comment>
+                        <default_text>A website font is blablabla blablabla blablabla</default_text>
+                        <translations>
+                            <translation>
+                                <language>Lt-sr-SP</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>de-DE</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>es-ES</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>it-IT</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>pt-PT</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
                 </children>
             </folder_node>
             <folder_node>
@@ -3924,43 +3998,43 @@
             <language>Lt-sr-SP</language>
             <file>language_def.json</file>
             <file_size>6339</file_size>
-            <modification_timestamp>1522937840</modification_timestamp>
+            <modification_timestamp>1522941655</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>en-US</language>
             <file>language_en.json</file>
             <file_size>6406</file_size>
-            <modification_timestamp>1522937840</modification_timestamp>
+            <modification_timestamp>1522941655</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>de-DE</language>
             <file>language_de.json</file>
             <file_size>6796</file_size>
-            <modification_timestamp>1522937840</modification_timestamp>
+            <modification_timestamp>1522941655</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>fr-FR</language>
             <file>language_fr.json</file>
             <file_size>7368</file_size>
-            <modification_timestamp>1522937840</modification_timestamp>
+            <modification_timestamp>1522941655</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>it-IT</language>
             <file>language_it.json</file>
             <file_size>6815</file_size>
-            <modification_timestamp>1522937840</modification_timestamp>
+            <modification_timestamp>1522941655</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>es-ES</language>
             <file>language_es.json</file>
             <file_size>6914</file_size>
-            <modification_timestamp>1522937840</modification_timestamp>
+            <modification_timestamp>1522941655</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>pt-PT</language>
             <file>language_pt.json</file>
             <file_size>6551</file_size>
-            <modification_timestamp>1522937840</modification_timestamp>
+            <modification_timestamp>1522941655</modification_timestamp>
         </translation_file>
     </translation_files>
     <editor_configuration>
