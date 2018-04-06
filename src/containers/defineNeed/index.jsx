@@ -44,7 +44,7 @@ class DefineNeed extends React.Component {
   }
   render() {
     return (
-      <div className="DefineNeed container">        
+      <div className="DefineNeed container">
         {this.props.isLoading ? <h2>Creating font...</h2> : false}
         <div className="row justify-content-sm-center">
           <div className="col-sm-12 col-md-11 col-lg-10">
@@ -149,6 +149,41 @@ class DefineNeed extends React.Component {
                 {text => (
                   <Tooltip
                     title={text}
+                    position="top"
+                    trigger="mouseenter"
+                    arrow="true"
+                  >
+                    <span className="tooltip">?</span>
+                  </Tooltip>
+                )}
+              </FormattedMessage>
+            </span>
+          </div>
+          <div
+            className={`col-sm-12 col-md-11 col-lg-10 ${
+              this.state.selected === "dunno" ? "selected" : ""
+            }`}
+            onClick={() => this.setState({ selected: "dunno" })}
+            onDoubleClick={e => {
+              this.setState({ selected: "dunno" });
+              this.handleSubmit(e);
+            }}
+          >
+            <FormattedMessage
+              id="DefineNeed.dunno"
+              defaultMessage="Dunno"
+              description="Dunno need"
+            />
+            <span>
+              {" "}
+              <FormattedMessage
+                id="DefineNeed.dunnoTooltip"
+                defaultMessage="I don’t know yet what I want to do."
+                description="dunno need tooltip"
+              >
+                {dunno => (
+                  <Tooltip
+                    title={dunno}
                     position="top"
                     trigger="mouseenter"
                     arrow="true"
