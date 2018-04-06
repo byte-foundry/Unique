@@ -49,6 +49,11 @@
 }
 .SpecimenView .buttons .button-save {
   float: right;
+  margin-right: 3em;
+  opacity: .5;
+}
+.SpecimenView .buttons .button-save:hover {
+  opacity: 1;
 }
 
 .SpecimenView .icon-back {
@@ -309,3 +314,9 @@
   padding-bottom: 15px;
 }
 
+.middle-cta {
+    margin: 0 0 40px 0;
+    text-align: right;
+    font-family: unique, sans-serif;
+    font-weight: 400;
+}
