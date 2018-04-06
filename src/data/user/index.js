@@ -414,7 +414,7 @@ export const afterPayment = res => (dispatch, getState) => {
   const { userFontName, graphQLToken } = getState().user;
   const { data } = res;
   const isPayed = data.paid;
-  const userStripeEmail = data.source.metadata.name;
+  const userStripeEmail = data.email;
   /* global Intercom */
   Intercom('trackEvent', 'unique-bought-font');
   if (graphQLToken) {

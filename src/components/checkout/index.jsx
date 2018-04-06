@@ -80,7 +80,12 @@ const onToken = (
         console.log(pack);
         const blob = new Blob([new DataView(pack.data)], { type: 'application/zip' });
         saveAs(blob, 'purchase.zip');
-        // successPayment(res, callback);
+        successPayment({
+          data: {
+            paid: true,
+            email: token.email,
+          },
+        }, callback);
       })
       .catch((err) => {
         setStable();

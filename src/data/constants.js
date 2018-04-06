@@ -5,7 +5,7 @@ export const STRIPE_PUBLISHABLE =
 export const PAYMENT_SERVER_URL =
   process.env.NODE_ENV === 'production'
     ? 'https://bzawttxlqh.execute-api.eu-west-1.amazonaws.com/local/unique/fonts/buy'
-    : 'http://localhost:8003/create-package/';
+    : 'https://unique-back.prototypo.io/dev/create-package/';
 // : 'https://bzawttxlqh.execute-api.eu-west-1.amazonaws.com/local/unique/fonts/buy';
 export const VALIDATION_SERVER_URL = 'https://unique-back.prototypo.io/create-package/';
 export const DEFAULT_UI_WORD = 'Hamburgefonstiv ABC 123';
