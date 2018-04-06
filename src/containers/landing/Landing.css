@@ -57,7 +57,7 @@
   font-size: 14px;
   padding: 14px 30px;
   display: inline-block;
-  width: 235px;
+  width: auto;
 }
 
 .Landing .Button:hover,
