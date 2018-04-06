@@ -71,15 +71,6 @@ class Landing extends React.Component {
               <div className="col-sm-12 col-md-12 col-lg-6">
                 <div className="float-right">
                   <FormattedMessage
-                    id="Landing.headerInputPlaceholder"
-                    defaultMessage="Type a little something"
-                    description="Landing page header input placeholder"
-                  >
-                    {text => (
-                      <input type="text" placeholder={text} value={this.state.chosenWord} onChange={(e) => { this.setState({ chosenWord: e.target.value }) }} name="text" />
-                    )}
-                  </FormattedMessage>
-                  <FormattedMessage
                     id="Landing.headerInputCTA"
                     defaultMessage="Get your font"
                     description="Landing page header CTA"
@@ -89,9 +80,6 @@ class Landing extends React.Component {
                         mode="hollow"
                         label={text}
                         onClick={() => {
-                          if (this.state.chosenWord !== "") {
-                            this.props.storeChosenWord(this.state.chosenWord);
-                          }
                           this.props.goToApp();
                         }}
                       />
