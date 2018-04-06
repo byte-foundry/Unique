@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="668" height="530">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="668" height="400">
 <defs><path id="a" d="M122 79h356v83H122z"/><path id="b" d="M122 325h356v83H122z"/><path id="c" d="M122 201h356v83H122z"/>
 <path id="d" d="M122 447h356v83H122z"/></defs><g fill="#FFF" fill-rule="evenodd"><path fill="#EAF0F9" d="M0 0h653v468H0z"/>
 <use fill="#FFF" xlink:href="#a"/><path stroke="#EAF0F9" fill="#6029E0" stroke-opacity=".82354" d="M122.5 79.5h355v82h-355z"/>

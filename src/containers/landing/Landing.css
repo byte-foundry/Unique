@@ -129,10 +129,6 @@
 }
 
 .Landing .description .uniqueVisual {
-<<<<<<< HEAD
-=======
-  width: 80%;
->>>>>>> some css adjustments
   height: auto;
   margin-bottom: 10%;
   width: 80%;
@@ -220,7 +216,7 @@
 }
 
 .Landing .howItWorks .row {
-  margin-bottom: 20%;
+  margin-bottom: 150px;
 }
 
 .Landing .howItWorks h1 {
@@ -300,6 +296,7 @@
 
   text-decoration: none;
   padding-bottom: .1em;
+  border: 0;
   border-bottom: 2px solid #632bdd;
 }
 
