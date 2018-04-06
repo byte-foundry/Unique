@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ContentEditable from '../contentEditable';
 import './Choice.css';
-import { ReactComponent as EditIcon } from './t.svg';
+import { ReactComponent as EditIcon } from './pencil.svg';
 
 class Choice extends React.Component {
   constructor(props) {

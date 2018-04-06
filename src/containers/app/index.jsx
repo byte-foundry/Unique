@@ -186,7 +186,7 @@ class App extends React.Component {
               />
             </div>
           </div>
-          <div className="row">
+          <div className="row content-wrapper">
             <div
               className={`left col-sm-${
                 this.props.location.pathname !== "/app/auth" ? "10" : "12"

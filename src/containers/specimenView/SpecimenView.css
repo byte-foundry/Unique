@@ -49,6 +49,11 @@
 }
 .SpecimenView .buttons .button-save {
   float: right;
+  margin-right: 3em;
+  opacity: .5;
+}
+.SpecimenView .buttons .button-save:hover {
+  opacity: 1;
 }
 
 .SpecimenView .icon-back {
@@ -94,7 +99,8 @@
   width: 75%;
 }
 
-.SpecimenView .hooray .subtitle-two {
+.SpecimenView .hooray .subtitle-two,
+.SpecimenView .container .subtitle-two {
   font-weight: 400;
   font-size: 18px;
   color: #d0cdd6;
@@ -309,3 +315,9 @@
   padding-bottom: 15px;
 }
 
+.middle-cta {
+    margin: 0 0 40px 0;
+    text-align: right;
+    font-family: unique, sans-serif;
+    font-weight: 400;
+}

@@ -308,13 +308,6 @@ class SpecimenView extends React.Component {
                 description="Speciem view subtitle"
               />
             </p>
-            <p className="subtitle-two">
-              <FormattedMessage
-                id="SpecimenView.subtitleBack"
-                defaultMessage="Not quite right? Just click trough the menu to edit"
-                description="Speciem view back subtitle"
-              />
-            </p>
             <div className="buttons">
               <Back
                 className="icon-back"
@@ -447,6 +440,36 @@ class SpecimenView extends React.Component {
                   <p className="text-label">12px</p>
                 </div>
               </div>
+
+              <div className="middle-cta">
+                <div className="right">
+                  <FormattedMessage
+                    id="SpecimenView.downloadAction"
+                    defaultMessage="Download"
+                    description="SpecimenView - Download action"
+                  >
+                    {text => (
+                      <Button
+                        className="button-download"
+                        onClick={() => {
+                          if (this.state.fontName) {
+                            this.props.goToCheckout(this.state.fontName);
+                          } else {
+                            this.setState({
+                              isModalOpened: true,
+                              fromModal: "checkout"
+                            });
+                          }
+                        }}
+                        mode="full"
+                        label={text}
+                      />
+                    )}
+                  </FormattedMessage>
+                </div>
+              </div>
+
+
               <h3>
                 <FormattedMessage
                   id="SpecimenView.characters"
@@ -518,7 +541,21 @@ class SpecimenView extends React.Component {
               </div>
             </div>
           </div>
+
+          <p className="subtitle-two">
+            <FormattedMessage
+              id="SpecimenView.subtitleBack"
+              defaultMessage="Not quite right? Just click trough the menu to edit"
+              description="Speciem view back subtitle"
+            />
+          </p>
           <div className="buttons">
+            <Back
+              className="icon-back"
+              onClick={() => {
+                this.props.goBack();
+              }}
+            />
             <FormattedMessage
               id="SpecimenView.downloadActionBottom"
               defaultMessage="Download"
