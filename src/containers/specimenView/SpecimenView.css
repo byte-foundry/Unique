@@ -99,7 +99,8 @@
   width: 75%;
 }
 
-.SpecimenView .hooray .subtitle-two {
+.SpecimenView .hooray .subtitle-two,
+.SpecimenView .container .subtitle-two {
   font-weight: 400;
   font-size: 18px;
   color: #d0cdd6;

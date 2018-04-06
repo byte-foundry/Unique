@@ -308,13 +308,6 @@ class SpecimenView extends React.Component {
                 description="Speciem view subtitle"
               />
             </p>
-            <p className="subtitle-two">
-              <FormattedMessage
-                id="SpecimenView.subtitleBack"
-                defaultMessage="Not quite right? Just click trough the menu to edit"
-                description="Speciem view back subtitle"
-              />
-            </p>
             <div className="buttons">
               <Back
                 className="icon-back"
