@@ -32,7 +32,7 @@
 .FontControls .font-size input[type="range"] {
   display: inline-block;
   -webkit-appearance: none;
-  background-color: #b2b2b2;
+  background-color: #CCC;
   width: 100px;
   height: 2px;
   border-radius: 2px;

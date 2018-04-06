@@ -194,6 +194,10 @@
   margin: 0 auto;
 }
 
+.App-content .content-wrapper {
+    padding-left: 1.2em;
+}
+
 .tippy-tooltip {
   font-size: 0.8rem !important;
   border-radius: 0px !important;
@@ -255,5 +259,8 @@
   .App .logo-mobile svg{
     margin-left: -20px;
     margin-top: -5px;
+  }
+  .App-content .content-wrapper {
+      padding-left: 0;
   }
 }
