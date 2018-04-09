@@ -24,14 +24,6 @@ class Checkout extends React.Component {
     const widthStepIndex = steps.findIndex(step => step.name === 'Width');
     const italicStepIndex = steps.findIndex(step => step.name === 'Slant');
     const defaultThicknessName = choicesMade[thicknessStepIndex].name;
-    let baseSuffix = '';
-
-    if (widthStepIndex !== -1) {
-      baseSuffix += ` ${choicesMade[widthStepIndex].name}`;
-    }
-    if (italicStepIndex !== -1) {
-      baseSuffix += ` ${choicesMade[italicStepIndex].name}`;
-    }
     this.state = {
       selectedOptions: [
         {
@@ -49,7 +41,7 @@ class Checkout extends React.Component {
           selected: true,
           dbName: 'baseFont',
           visible: true,
-          styleName: defaultThicknessName + baseSuffix,
+          styleName: defaultThicknessName,
         },
         {
           name: (
@@ -89,7 +81,7 @@ class Checkout extends React.Component {
       this.state.selectedOptions,
       props.history.location.fontName,
     );
-    props.createFontVariants(baseSuffix);
+    props.createFontVariants();
     this.toggleChoice = this.toggleChoice.bind(this);
   }
   toggleChoice(name) {

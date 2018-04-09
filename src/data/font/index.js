@@ -881,7 +881,7 @@ export const createFontVariants = baseSuffix => (dispatch, getState) => {
           .then((createdFont) => {
             possibleVariants.push({
               name: `${fontName}Variant${choice.name}`,
-              variant: choice.name + baseSuffix,
+              variant: choice.name,
             });
             const params = getCalculatedValues(choice, choicesToKeep, currentPreset);
             createdFont.changeParams(params, chosenWord);
