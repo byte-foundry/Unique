@@ -20,9 +20,7 @@ class Checkout extends React.Component {
     super(props);
 
     const { steps, choicesMade } = props;
-    const thicknessStepIndex = steps.findIndex(step => step.name === 'Thickness');
-    const widthStepIndex = steps.findIndex(step => step.name === 'Width');
-    const italicStepIndex = steps.findIndex(step => step.name === 'Slant');
+    const thicknessStepIndex = steps.findIndex(step => step.name.toUpperCase() === 'THICKNESS');
     const defaultThicknessName = choicesMade[thicknessStepIndex].name;
     this.state = {
       selectedOptions: [
