@@ -100,7 +100,7 @@ export const addProjectToUser = (
   name,
   bought,
   need,
-  checkoutOptions
+  checkoutOptions,
 ) => `
     mutation{
         createUniqueProject(
@@ -160,7 +160,7 @@ export const updateProject = (
   choicesMade,
   name,
   bought,
-  checkoutOptions
+  checkoutOptions,
 ) => `
     mutation{
         updateUniqueProject(
@@ -244,7 +244,7 @@ export const authenticateUser = (email, password) => `
     }
 `;
 
-export const authenticateFacebookUser = (token) => `
+export const authenticateFacebookUser = token => `
     mutation {
         authenticateFacebookUser(
             facebookToken:"${token}"
@@ -268,7 +268,7 @@ export const authenticateTwitterUser = (token, verifier) => `
 `;
 
 
-export const authenticateGoogleUser = (token) => `
+export const authenticateGoogleUser = token => `
     mutation {
         authenticateGoogleUser(
             googleToken:"${token}"
