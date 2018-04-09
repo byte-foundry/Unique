@@ -841,19 +841,19 @@ export const download = (name, filename) => (dispatch, getState) => {
   });
 };
 
-export const createFontVariants = baseSuffix => (dispatch, getState) => {
+export const createFontVariants = () => (dispatch, getState) => {
   dispatch(setUnstable());
   console.log('========font/createFontVariants===========');
   const { currentPreset, choicesMade, fontName } = getState().font;
   const { chosenWord } = getState().user;
   const createdVariants = [];
   const possibleThickness = [
-    'Light',
-    'Medium',
-    'Bold',
-    'Regular',
-    'Extra Bold',
-    'Ultra Light',
+    'LIGHT',
+    'MEDIUM',
+    'BOLD',
+    'REGULAR',
+    'EXTRA BOLD',
+    'ULTRA LIGHT',
   ];
   //  --  Create thickness variant
   const thicknessChoices = currentPreset.steps.find(e => e.name.toUpperCase() === 'THICKNESS')
@@ -861,7 +861,7 @@ export const createFontVariants = baseSuffix => (dispatch, getState) => {
   const thicknessChoiceIndex = currentPreset.steps.findIndex(e => e.name.toUpperCase() === 'THICKNESS');
   // Check which possibleThickness are in the presets
   const thicknessVariantPossibilities = thicknessChoices.filter(e =>
-    possibleThickness.includes(e.name));
+    possibleThickness.includes(e.name.toUpperCase()));
   // Remove selected thickness
 
   const filteredThicknessVariantPossibilities = thicknessVariantPossibilities.filter(e => e.name !== choicesMade[thicknessChoiceIndex].name);
