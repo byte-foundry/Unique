@@ -18,6 +18,20 @@ import './Checkout.css';
 class Checkout extends React.Component {
   constructor(props) {
     super(props);
+
+    const { steps, choicesMade } = props;
+    const thicknessStepIndex = steps.findIndex(step => step.name === 'Thickness');
+    const widthStepIndex = steps.findIndex(step => step.name === 'Width');
+    const italicStepIndex = steps.findIndex(step => step.name === 'Slant');
+    const defaultThicknessName = choicesMade[thicknessStepIndex].name;
+    let baseSuffix = '';
+
+    if (widthStepIndex !== -1) {
+      baseSuffix += ` ${choicesMade[widthStepIndex].name}`;
+    }
+    if (italicStepIndex !== -1) {
+      baseSuffix += ` ${choicesMade[italicStepIndex].name}`;
+    }
     this.state = {
       selectedOptions: [
         {
@@ -35,6 +49,7 @@ class Checkout extends React.Component {
           selected: true,
           dbName: 'baseFont',
           visible: true,
+          styleName: defaultThicknessName + baseSuffix,
         },
         {
           name: (
@@ -74,7 +89,7 @@ class Checkout extends React.Component {
       this.state.selectedOptions,
       props.history.location.fontName,
     );
-    props.createFontVariants();
+    props.createFontVariants(baseSuffix);
     this.toggleChoice = this.toggleChoice.bind(this);
   }
   toggleChoice(name) {
@@ -186,6 +201,8 @@ class Checkout extends React.Component {
 const mapStateToProps = state => ({
   chosenWord: state.user.chosenWord,
   possibleVariants: state.font.possibleVariants,
+  choicesMade: state.font.choicesMade,
+  steps: state.font.currentPreset.steps,
   fontName:
     state.font.currentPreset.variant.family.name +
     state.font.currentPreset.variant.name,

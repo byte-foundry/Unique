@@ -52,7 +52,7 @@ const onToken = (
     const fonts = buffers.map((buffer, index) => {
       const intArray = new Uint8Array(buffer);
       return {
-        variant: fontsSelected[index].type === 'font' ? fontsSelected[index].name : 'Regular',
+        variant: fontsSelected[index].type === 'font' ? fontsSelected[index].name : fontsSelected[index].styleName,
         data: Array.from(intArray),
       };
     });

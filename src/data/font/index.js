@@ -193,10 +193,10 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     }
 
     // If no default choice, create it
-    if (!step.choices.find(e => e.name === 'Default')) {
+    if (!step.choices.find(e => e.name === step.defaultStepName)) {
       // Push default choice to the font steps
-      selectedFont.steps[index].choices.push({
-        name: 'Default',
+      step.choices.push({
+        name: step.defaultStepName,
         values: {},
         id: `default${step.name}`,
       });
@@ -841,7 +841,7 @@ export const download = (name, filename) => (dispatch, getState) => {
   });
 };
 
-export const createFontVariants = () => (dispatch, getState) => {
+export const createFontVariants = baseSuffix => (dispatch, getState) => {
   dispatch(setUnstable());
   console.log('========font/createFontVariants===========');
   const { currentPreset, choicesMade, fontName } = getState().font;
@@ -865,6 +865,7 @@ export const createFontVariants = () => (dispatch, getState) => {
   // Remove selected thickness
 
   const filteredThicknessVariantPossibilities = thicknessVariantPossibilities.filter(e => e.name !== choicesMade[thicknessChoiceIndex].name);
+  const choicesToKeep = choicesMade.filter((e, index) => index !== thicknessChoiceIndex);
   // Create fonts - Apply currentParams then thickness choice values
   const promiseArray = [];
   const possibleVariants = [];
@@ -880,9 +881,9 @@ export const createFontVariants = () => (dispatch, getState) => {
           .then((createdFont) => {
             possibleVariants.push({
               name: `${fontName}Variant${choice.name}`,
-              variant: choice.name,
+              variant: choice.name + baseSuffix,
             });
-            const params = getCalculatedValues(choice, choicesMade, currentPreset);
+            const params = getCalculatedValues(choice, choicesToKeep, currentPreset);
             createdFont.changeParams(params, chosenWord);
             dispatch(storeCreatedFont(
               createdFont,
