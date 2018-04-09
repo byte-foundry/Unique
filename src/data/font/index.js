@@ -841,7 +841,7 @@ export const download = (name, filename) => (dispatch, getState) => {
   });
 };
 
-export const createFontVariants = baseSuffix => (dispatch, getState) => {
+export const createFontVariants = () => (dispatch, getState) => {
   dispatch(setUnstable());
   console.log('========font/createFontVariants===========');
   const { currentPreset, choicesMade, fontName } = getState().font;
@@ -856,9 +856,9 @@ export const createFontVariants = baseSuffix => (dispatch, getState) => {
     'Ultra Light',
   ];
   //  --  Create thickness variant
-  const thicknessChoices = currentPreset.steps.find(e => e.name === 'Thickness')
+  const thicknessChoices = currentPreset.steps.find(e => e.name.toUpperCase() === 'THICKNESS')
     .choices;
-  const thicknessChoiceIndex = currentPreset.steps.findIndex(e => e.name === 'Thickness');
+  const thicknessChoiceIndex = currentPreset.steps.findIndex(e => e.name.toUpperCase() === 'THICKNESS');
   // Check which possibleThickness are in the presets
   const thicknessVariantPossibilities = thicknessChoices.filter(e =>
     possibleThickness.includes(e.name));
@@ -881,7 +881,7 @@ export const createFontVariants = baseSuffix => (dispatch, getState) => {
           .then((createdFont) => {
             possibleVariants.push({
               name: `${fontName}Variant${choice.name}`,
-              variant: choice.name + baseSuffix,
+              variant: choice.name,
             });
             const params = getCalculatedValues(choice, choicesToKeep, currentPreset);
             createdFont.changeParams(params, chosenWord);

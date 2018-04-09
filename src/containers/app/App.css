@@ -140,6 +140,7 @@
   animation: animLoadedHeader 1s cubic-bezier(0.7, 0, 0.3, 1) forwards;
   background-color: #fff;
   position: absolute;
+  height: auto;
 }
 
 .loaded .App-content .DefineNeed,
