@@ -139,22 +139,6 @@ class App extends React.Component {
   }
   render() {
     console.log(this.props.location.pathname);
-    if (this.props.isLoading && this.props.location.pathname !== '/app/auth') {
-      // load animation
-      clearInterval(interval);
-      const letters = document.querySelectorAll('.letter');
-      let activeLetter = 0;
-      interval = setInterval(() => {
-        for (let i = 0; i < letters.length; i++) {
-          letters[i].classList.remove('animate');
-        }
-        letters[activeLetter].classList.add('animate');
-        activeLetter =
-          activeLetter + 1 === letters.length ? 0 : activeLetter + 1;
-      }, 800);
-    } else {
-      clearInterval(interval);
-    }
     return (
       <main className={`App ${this.props.isLoading ? 'loading' : 'loaded'}`}>
         {this.props.location.pathname !== '/app/auth' && (

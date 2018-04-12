@@ -1,35 +1,36 @@
 // @flow
-import React from "react";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
-import { push } from "react-router-redux";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { ReactComponent as Logo } from "../app/logo.svg";
-import { ReactComponent as ProfileIcon } from "../sidebar/profile.svg";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import { push } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { ReactComponent as Logo } from '../app/logo.svg';
+import { ReactComponent as ProfileIcon } from '../sidebar/profile.svg';
 
-import { ReactComponent as One1 } from "./number1.svg";
-import { ReactComponent as One2 } from "./number2.svg";
-import { ReactComponent as One3 } from "./number3.svg";
-import { ReactComponent as One4 } from "./number4.svg";
-import { ReactComponent as One5 } from "./number5.svg";
+import { ReactComponent as One1 } from './number1.svg';
+import { ReactComponent as One2 } from './number2.svg';
+import { ReactComponent as One3 } from './number3.svg';
+import { ReactComponent as One4 } from './number4.svg';
+import { ReactComponent as One5 } from './number5.svg';
 
-import { ReactComponent as UniqueVisual } from "./unique_visual.svg";
+import { ReactComponent as UniqueVisual } from './unique_visual.svg';
 
-import { ReactComponent as HowItWorks1 } from "./howitworks_1.svg";
-import { ReactComponent as HowItWorks2 } from "./howitworks_2.svg";
-import { ReactComponent as HowItWorks3 } from "./howitworks_3.svg";
+import { ReactComponent as HowItWorks1 } from './howitworks_1.svg';
+import { ReactComponent as HowItWorks2 } from './howitworks_2.svg';
+import { ReactComponent as HowItWorks3 } from './howitworks_3.svg';
 
-import { createPrototypoFactory } from "../../data/createdFonts";
-import { loadLibrary } from "../../data/font";
-import { setLocale } from "../../data/ui";
-import { storeChosenWord } from "../../data/user";
+import { createPrototypoFactory } from '../../data/createdFonts';
+import { loadLibrary } from '../../data/font';
+import { setLocale } from '../../data/ui';
+import { storeChosenWord } from '../../data/user';
 
-import LanguageSelect from "../../components/languageSelect";
-import Button from "../../components/button";
+import LanguageSelect from '../../components/languageSelect';
+import Button from '../../components/button';
 
-import "./Landing.css";
+import './Landing.css';
+
 class Landing extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +38,7 @@ class Landing extends React.Component {
       props.createPrototypoFactory();
     }
     this.state = {
-      chosenWord: "",
+      chosenWord: '',
     };
   }
   render() {
@@ -58,7 +59,7 @@ class Landing extends React.Component {
           <div className="container catch">
             <div className="row">
               <div className="col-sm-12 col-md-12 col-lg-6">
-                <div className="float-left">
+                <div className="float-left header-title">
                   <h2>
                     <FormattedMessage
                       id="Landing.headerTitle"
@@ -68,7 +69,7 @@ class Landing extends React.Component {
                   </h2>
                 </div>
               </div>
-              <div className="col-sm-12 col-md-12 col-lg-6">
+              <div className="col-sm-12 col-md-12 col-lg-6 header-CTA">
                 <div className="float-right">
                   <FormattedMessage
                     id="Landing.headerInputCTA"
@@ -111,7 +112,7 @@ class Landing extends React.Component {
             </div>
             <div className="row justify-content-center">
               <div className="col-sm-12 col-md-8">
-                <p style={{ whiteSpace: "pre-line" }}>
+                <p style={{ whiteSpace: 'pre-line' }}>
                   <FormattedMessage
                     id="Landing.descriptionText"
                     defaultMessage="
@@ -221,7 +222,7 @@ class Landing extends React.Component {
         </div>
         <div className="howItWorks">
           <div className="container">
-            <div className="row">
+            <div className="row row-sm">
               <div className="col-sm-12">
                 <h1>
                   <FormattedMessage
@@ -232,8 +233,11 @@ class Landing extends React.Component {
                 </h1>
               </div>
             </div>
-            <div className="row">
-              <div className="col-sm-12 col-md-4">
+            <div className="row row-md">
+              <div className="col-sm-12 d-lg-none image-wrapper">
+                <HowItWorks1 className="howItWorks-icon1" />
+              </div>
+              <div className="col-sm-12 offset-md-1 offset-lg-0 col-md-6 col-lg-4">
                 <p className="stepNumber">01.</p>
                 <h3>
                   <FormattedMessage
@@ -267,15 +271,15 @@ class Landing extends React.Component {
                   </FormattedMessage>
                 </p>
               </div>
-              <div className="col-sm-12 col-md-8 image-wrapper">
+              <div className="d-none d-lg-block col-lg-8 image-wrapper">
                 <HowItWorks1 className="howItWorks-icon1" />
               </div>
             </div>
-            <div className="row">
-              <div className="col-sm-12 col-md-8 image-wrapper">
+            <div className="row row-md">
+              <div className="col-sm-12 col-lg-8 image-wrapper">
                 <HowItWorks2 className="howItWorks-icon2" />
               </div>
-              <div className="col-sm-12 col-md-4">
+              <div className="col-sm-12 offset-md-1 offset-lg-0 col-md-6 col-lg-4">
                 <p className="stepNumber">02.</p>
                 <h3>
                   <FormattedMessage
@@ -310,8 +314,11 @@ class Landing extends React.Component {
                 </p>
               </div>
             </div>
-            <div className="row">
-              <div className="col-sm-12 col-md-4">
+            <div className="row row-md">
+              <div className="col-sm-12 d-lg-none image-wrapper">
+                <HowItWorks3 className="howItWorks-icon3" />
+              </div>
+              <div className="col-sm-12 offset-md-1 offset-lg-0 col-md-6 col-lg-4">
                 <p className="stepNumber">03.</p>
                 <h3>
                   <FormattedMessage
@@ -345,18 +352,18 @@ class Landing extends React.Component {
                   </FormattedMessage>
                 </p>
               </div>
-              <div className="col-sm-12 col-md-8 image-wrapper">
+              <div className="d-none d-lg-block col-lg-8 image-wrapper">
                 <HowItWorks3 className="howItWorks-icon3" />
               </div>
             </div>
           </div>
         </div>
         <div className="prototypo">
+          <div className="background" />
           <div className="container">
             <One5 className="one-5" />
             <div className="row">
-              <div className="col-sm-12 col-md-4 col-lg-6" />
-              <div className="col-sm-12 col-md-8 col-lg-6">
+              <div className="col-sm-12 col-md-8 col-lg-6 offset-lg-6">
                 <h1>
                   <FormattedMessage
                     id="Landing.prototypoTitle"
@@ -364,7 +371,7 @@ class Landing extends React.Component {
                     description="Unique prototypo title"
                   />
                 </h1>
-                <p style={{ whiteSpace: "pre-line" }}>
+                <p style={{ whiteSpace: 'pre-line' }}>
                   <FormattedMessage
                     id="Landing.prototypoDescription"
                     defaultMessage="Powered by Prototypo’s tech using algorithms to generate
@@ -383,7 +390,7 @@ class Landing extends React.Component {
         <div className="footer">
           <div className="container">
             <span className="credits">
-              {new Date().getFullYear()} -{" "}
+              {new Date().getFullYear()} -{' '}
               <FormattedMessage
                 id="Landing.footerCopyright"
                 defaultMessage="Unique © Powered by Prototypo"
@@ -410,15 +417,15 @@ Landing.propTypes = {
   createPrototypoFactory: PropTypes.func.isRequired,
   isBlackOnWhite: PropTypes.string.isRequired,
   setLocale: PropTypes.func.isRequired,
-  locale: PropTypes.string.isRequired
+  locale: PropTypes.string.isRequired,
 };
 
 Landing.defaultProps = {
-  isAuthenticated: false
+  isAuthenticated: false,
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: typeof state.user.graphqlID === "string",
+  isAuthenticated: typeof state.user.graphqlID === 'string',
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
   isBlackOnWhite: state.user.isBlackOnWhite,
@@ -430,15 +437,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      goToApp: () => push("/app"),
+      goToApp: () => push('/app'),
       createPrototypoFactory,
       setLocale,
       loadLibrary,
-      goToAuth: () => push({ pathname: "/app/auth", authData: {} }),
-      storeChosenWord
+      goToAuth: () => push({ pathname: '/app/auth', authData: {} }),
+      storeChosenWord,
     },
-    dispatch
+    dispatch,
   );
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Landing)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Landing));

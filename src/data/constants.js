@@ -38,3 +38,5 @@ export const GOOGLE_CLIENT_ID = `498899515436-${
     ? '7c84imarpufkvf56olbpodnks3d3kg2p'
     : '7c84imarpufkvf56olbpodnks3d3kg2p'
 }.apps.googleusercontent.com`;
+
+export const EXPORT_SUBSET = ' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890$€¢%‰#<+=−>¡!¿?.:;…-–—()[]{}/\\&*@“”‘’«»‹›ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöøùúûüýÿ,';

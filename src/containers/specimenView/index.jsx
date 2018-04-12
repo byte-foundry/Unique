@@ -457,7 +457,7 @@ class SpecimenView extends React.Component {
                           } else {
                             this.setState({
                               isModalOpened: true,
-                              fromModal: "checkout"
+                              fromModal: 'checkout',
                             });
                           }
                         }}

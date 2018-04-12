@@ -1,9 +1,16 @@
 .TemplateChoice {
   position: relative;
   min-height: calc(100vh - 270px);
-  padding-top: 100px;
+  padding-top: 0;
   margin-bottom: 100px;
 }
+
+@media (min-width: 768px) {
+  .TemplateChoice {
+    padding-top: x00px;
+  }
+}
+
 @media (min-width: 1800px) {
   .TemplateChoice {
     margin-top: 85px;
@@ -13,9 +20,17 @@
 .TemplateChoice h1, .TemplateChoice h2 {
   display: inline-block;
   font-weight: 400;
-  margin-bottom: 40px;
-  font-size: 2.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
   color: black;
+  margin-left: 20px;
+}
+
+@media (min-width: 768px) {
+  .TemplateChoice h1, .TemplateChoice h2 {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
 }
 
 .TemplateChoice .back {
@@ -28,14 +43,6 @@
   position: relative;
 }
 
-.TemplateChoice h1, .TemplateChoice h2 {
-  display: inline-block;
-  font-weight: 400;
-  margin-bottom: 40px;
-  font-size: 28px;
-  color: black;
-}
-
 .TemplateChoice .icon-back, .TemplateChoice .icon-next {
   width: 40px;
   height: auto;
@@ -44,18 +51,18 @@
   top: calc(50% + 25px);
   transform: translateY(-50%);
   border-radius: 50%;
-  transition: transform .3s ease, background .3s ease, border-color .3s ease;  
+  transition: transform .3s ease, background .3s ease, border-color .3s ease;
   background: transparent;
   padding: 0px;
   z-index: 10;
 }
 
-.TemplateChoice .icon-back { 
+.TemplateChoice .icon-back {
   top: calc(50% - 25px);
   right: 150px;
 }
 
-.TemplateChoice .icon-next {  
+.TemplateChoice .icon-next {
   right: 150px;
 }
 
@@ -77,16 +84,19 @@
 
 .TemplateChoice .template-wrapper {}
 
-@media (max-width: 768px) {
+@media (max-width: 575px) {
   .TemplateChoice .icon-next {
-    right: 15px;
-    z-index: 10;
+    position: relative;
+    right: 0;
+    top: 0;
+    margin-left:20px;
+    margin-top:20px;
   }
   .TemplateChoice .icon-back {
-    left: inherit;
-    right: 15px;
-    top: 40%;
-    transform: translateY(-55%) translateZ(0px);
-    z-index: 10;
+    position:relative;
+    left: 0;
+    top: 0;
+    margin-left: 20px;
+    margin-top:20px;
   }
 }
