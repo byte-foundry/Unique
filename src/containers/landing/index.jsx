@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import unorphan from 'unorphan';
 import { ReactComponent as Logo } from '../app/logo.svg';
 import { ReactComponent as ProfileIcon } from '../sidebar/profile.svg';
 
@@ -43,6 +44,7 @@ class Landing extends React.Component {
   }
   componentDidMount() {
     window.scrollTo(0, 0)
+    unorphan('h1, h2, h3, p, span');
   }
   render() {
     return (

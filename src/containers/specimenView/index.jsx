@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-responsive-modal';
 import { push } from 'react-router-redux';
 import { FormattedMessage } from 'react-intl';
+import unorphan from 'unorphan';
 import './SpecimenView.css';
 import Button from '../../components/button/';
 import { storeProject } from '../../data/user';
@@ -27,15 +28,13 @@ class SpecimenView extends React.Component {
   componentDidMount() {
     this.specimenViewWrapper.focus();
     window.scrollTo(0, 0);
+    unorphan('h1, h2, h3, p, span');
   }
   onFocus() {
     this.setState({ isInputFocused: true });
   }
   onBlur() {
     this.setState({ isInputFocused: false });
-  }
-  componentDidMount() {
-    window.scrollTo(0, 0);
   }
   render() {
     const uppercase = [

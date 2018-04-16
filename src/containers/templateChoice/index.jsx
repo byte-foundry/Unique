@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FlipMove from 'react-flip-move';
 import { FormattedMessage } from 'react-intl';
+import unorphan from 'unorphan';
 import { Shortcuts } from 'react-shortcuts';
 import './TemplateChoice.css';
 import Template from '../../components/template/';
@@ -38,6 +39,7 @@ class TemplateChoice extends React.Component {
   componentDidMount() {
     this.templateChoiceWrapper.focus();
     window.scrollTo(0, 0);
+    unorphan('h1, h2, h3, p, span');
   }
   handleShortcuts(action, event) {
     switch (action) {

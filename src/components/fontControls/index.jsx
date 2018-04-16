@@ -21,6 +21,9 @@ const FontControls = props => (
         max="140"
         step="2"
         value={props.fontSize}
+        onChange={e =>
+          props.changeFontSize(e.target.value)
+        }
       />
       <HighFontSizeIcon className="icon-highFontSize" onClick={() => props.changeFontSize(140)} />
     </span>
