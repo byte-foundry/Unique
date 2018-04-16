@@ -59,6 +59,25 @@
   padding-right: 20px;
 }
 
+.Sidebar.checkout .sidebar-checkout .baseprice {
+  position: relative;
+  display: inline-block;
+  font-size: 30px;
+  margin-bottom: -10px;
+  opacity: 0.6;
+}
+
+.Sidebar.checkout .sidebar-checkout .baseprice::after {
+  content: ' ';
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
 .Sidebar.checkout .sidebar-checkout .price {
   font-size: 52px;
 }

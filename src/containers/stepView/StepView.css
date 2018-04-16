@@ -41,11 +41,11 @@
 }
 
 .StepView .step-name {
-  color: #5f1ffb;
+  color: #5320ee;
 }
 
 .StepView .step-bubble.past {
-  background-color: #5f1ffb;
+  background-color: #5320ee;
   cursor: pointer;
 }
 

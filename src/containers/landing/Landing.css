@@ -239,7 +239,7 @@
 
 .Landing .howItWorks h1 {
   font-weight: 400;
-  color: #632bdd;
+  color: #5320ee;
   text-transform: uppercase;
   text-align: center;
   font-size: 1.3rem;
@@ -310,7 +310,7 @@
 
 .Landing .howItWorks .stepNumber {
   font-size: 18px;
-  color: #632bdd;
+  color: #5320ee;
   margin-bottom: 10px;
 }
 
@@ -333,13 +333,13 @@
 
 .Landing .howItWorks .Button {
   padding: 0;
-  color: #632bdd;
+  color: #5320ee;
   font-size: 16px;
 
   text-decoration: none;
   padding-bottom: .1em;
   border: 0;
-  border-bottom: 2px solid #632bdd;
+  border-bottom: 2px solid #5320ee;
 }
 
 .Landing .howItWorks .Button:hover {

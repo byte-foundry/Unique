@@ -40,15 +40,15 @@
 
 .Button.white {
   background-color: #fff;
-  color: #6b00ff;
+  color: #5320ee;
   border: 2px solid #fff;
 }
 
 
 .Button.hollow:hover {
-  background-color: #6b00ff;
+  background-color: #5320ee;
   color: #fff;
-  border: 2px solid #6b00ff;
+  border: 2px solid #5320ee;
 }
 
 .Button.full {
