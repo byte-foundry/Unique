@@ -27,6 +27,9 @@ class DefineNeed extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleLogoNeed = this.toggleLogoNeed.bind(this);
   }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
   toggleLogoNeed() {
     this.setState({ logoNeedOpened: !this.state.logoNeedOpened });
   }

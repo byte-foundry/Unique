@@ -26,6 +26,7 @@ class SpecimenView extends React.Component {
   }
   componentDidMount() {
     this.specimenViewWrapper.focus();
+    window.scrollTo(0, 0);
   }
   onFocus() {
     this.setState({ isInputFocused: true });

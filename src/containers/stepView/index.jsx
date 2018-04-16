@@ -69,6 +69,7 @@ class StepView extends React.Component {
   }
   componentDidMount() {
     this.stepViewWrapper.focus();
+    window.scrollTo(0, 0);
   }
   componentWillReceiveProps(newProps) {
     this.setChoiceSelected(newProps);
@@ -173,19 +174,27 @@ class StepView extends React.Component {
               <div className="col-md-4 col-sm-12">
                 <div className="step-bubbles">
                   {[...Array(this.props.stepLength)].map((e, i) => (
-                    <span
-                      className={`step-bubble ${
-                        this.props.step > i || this.props.choicesMade[i]
-                          ? 'past'
-                          : ''
-                      } ${i === this.props.step - 1 ? 'current' : ''}`}
-                      onClick={() => {
-                        if (this.props.step > i || this.props.choicesMade[i]) {
-                          this.props.goToStep(i + 1);
-                        }
-                      }}
-                      key={`stepbubble-${i}`}
-                    />
+                    <Tooltip
+                      title={this.props.steps[i].name}
+                      position="top"
+                      trigger="mouseenter"
+                      arrow="true"
+                      delay={200}
+                    >
+                      <span
+                        className={`step-bubble ${
+                          this.props.step > i || this.props.choicesMade[i]
+                            ? 'past'
+                            : ''
+                        } ${i === this.props.step - 1 ? 'current' : ''}`}
+                        onClick={() => {
+                          if (this.props.step > i || this.props.choicesMade[i]) {
+                            this.props.goToStep(i + 1);
+                          }
+                        }}
+                        key={`stepbubble-${i}`}
+                      />
+                    </Tooltip>
                   ))}
                 </div>
               </div>
@@ -328,6 +337,7 @@ class StepView extends React.Component {
 
 const mapStateToProps = state => ({
   stepValues: state.font.currentPreset.steps[state.font.step - 1],
+  steps: state.font.currentPreset.steps,
   step: state.font.step,
   choicesMade: state.font.choicesMade,
   chosenWord: state.user.chosenWord,

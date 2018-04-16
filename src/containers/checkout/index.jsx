@@ -82,6 +82,9 @@ class Checkout extends React.Component {
     props.createFontVariants();
     this.toggleChoice = this.toggleChoice.bind(this);
   }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
   toggleChoice(name) {
     const { selectedOptions } = this.state;
     const selectedIndex = selectedOptions.findIndex(option => option.name === name);

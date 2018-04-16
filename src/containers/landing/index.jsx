@@ -41,6 +41,9 @@ class Landing extends React.Component {
       chosenWord: '',
     };
   }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
   render() {
     return (
       <div className="Landing">

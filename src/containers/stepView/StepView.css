@@ -209,3 +209,7 @@
     transform: translateY(-56%);
   }
 }
+
+#tippy-tooltip-7, #tippy-tooltip-8, #tippy-tooltip-9, #tippy-tooltip-10 {
+  left: -5px!important;
+}

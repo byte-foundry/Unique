@@ -37,6 +37,7 @@ class TemplateChoice extends React.Component {
   }
   componentDidMount() {
     this.templateChoiceWrapper.focus();
+    window.scrollTo(0, 0);
   }
   handleShortcuts(action, event) {
     switch (action) {
