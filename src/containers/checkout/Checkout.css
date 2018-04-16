@@ -157,7 +157,8 @@
 
 .Checkout .checkout-options .option.specimen-logo svg {
   height: auto;
-  width: 300px;
+  width: 23vw;
+  max-width: 350px;
   margin: 0 auto;
   transform: translateX(25%);
 }
@@ -177,7 +178,10 @@
 .Checkout .checkout-options .option.variant .font-wrapper {
   text-align: center;
   padding: 100px 80px;
+  padding: 20% 15%;
+  overflow: hidden;
   min-width: 300px;
+  text-overflow: ellipsis;
 }
 
 .Checkout .checkout-options .option.variant .font-wrapper span {

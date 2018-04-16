@@ -20,3 +20,19 @@
 .masonry .column .wrapper {
     margin: 0px 20px 20px 0px;
 }
+
+
+@media (max-width: 891px) {
+	.masonry {
+		flex-direction: column;
+	}
+	.masonry .column {
+		width: 100%;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+
+	.masonry .column .wrapper {
+		margin-right: 0px;
+	}
+  }
