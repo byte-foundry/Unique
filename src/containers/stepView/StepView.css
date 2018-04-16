@@ -35,7 +35,8 @@
   height: 10px;
   background-color: #d8d8d8;
   border-radius: 50%;
-  margin-right: 10px;  
+  margin-right: 5px;
+  margin-left: 5px;
   display: inline-block;
 }
 
@@ -208,8 +209,4 @@
     bottom: inherit;
     transform: translateY(-56%);
   }
-}
-
-#tippy-tooltip-7, #tippy-tooltip-8, #tippy-tooltip-9, #tippy-tooltip-10 {
-  left: -5px!important;
 }
