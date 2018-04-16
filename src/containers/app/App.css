@@ -70,42 +70,52 @@
 
 .App-logo-wrapper .letter-1 {
   animation-name: animate-1;
+  will-change: 'transform, opacity';
 }
 
 .App-logo-wrapper .letter-2 {
   animation-name: animate-2;
+  will-change: 'transform, opacity';
 }
 
 .App-logo-wrapper .letter-3 {
   animation-name: animate-3;
+  will-change: 'transform, opacity';
 }
 
 .App-logo-wrapper .letter-4 {
   animation-name: animate-4;
+  will-change: 'transform, opacity';
 }
 
 .App-logo-wrapper .letter-5 {
   animation-name: animate-5;
+  will-change: 'transform, opacity';
 }
 
 .App-logo-wrapper .letter-6 {
   animation-name: animate-6;
+  will-change: 'transform, opacity';
 }
 
 .App-logo-wrapper .letter-7 {
   animation-name: animate-7;
+  will-change: 'transform, opacity';
 }
 
 .App-logo-wrapper .letter-8 {
   animation-name: animate-8;
+  will-change: 'transform, opacity';
 }
 
 .App-logo-wrapper .letter-9 {
   animation-name: animate-9;
+  will-change: 'transform, opacity';
 }
 
 .App-logo-wrapper .letter-10 {
   animation-name: animate-10;
+  will-change: 'transform, opacity';
 }
 
 .App-loader-wrapper {
