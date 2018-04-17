@@ -1,6 +1,15 @@
 .Checkout {
   margin-top: 0;
   padding-bottom: 150px;
+  padding-right: 250px;
+}
+
+@media (max-width: 891px) {
+  .Checkout {
+    margin-top: 0;
+    padding-bottom: 20px;
+    padding-right: inherit;
+  }
 }
 
 @media (min-width: 1800px) {

@@ -160,6 +160,12 @@
   margin-bottom: 30px;
 }
 
+.StepView .helper-wrapper {
+  position: absolute;
+  top: 32px;
+  right: 80px;
+}
+
 @media (max-width: 768px) {
   .StepView .icon-next-wrapper {
     right: -20px;

@@ -10,8 +10,7 @@
   border-left: 1px solid white;
   margin-left: auto;
   transition: width 0.3s ease, background .3s ease;
-  width: 100%;
-  max-width: 16.666667%;
+  width: 300px;
   z-index: 10;
 }
 
@@ -128,6 +127,7 @@
 @media (max-width: 891px) {
   .Sidebar.checkout {
     max-width: inherit;
+    width: 250px;
     position: relative;
   }
 }

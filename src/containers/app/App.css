@@ -10,6 +10,7 @@
 
 .App .left {
   padding: 0;
+  padding-right: 50px;
 }
 .App .right {
   padding: 0;

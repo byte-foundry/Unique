@@ -7,7 +7,7 @@ import FlipMove from "react-flip-move";
 import { Shortcuts } from "react-shortcuts";
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "react-tippy";
-import unorphan from 'unorphan';
+import unorphan from "unorphan";
 import "react-tippy/dist/tippy.css";
 import {
   stepBack,
@@ -26,6 +26,7 @@ import Choice from "../../components/choice/";
 import WordView from "../wordView/";
 import Sliders from "../sliders/";
 import Button from "../../components/button/";
+import Tips from "../../components/tips";
 import "./StepView.css";
 
 import { ReactComponent as Back } from "./back.svg";
@@ -74,7 +75,7 @@ class StepView extends React.Component {
   componentDidMount() {
     this.stepViewWrapper.focus();
     window.scrollTo(0, 0);
-    unorphan('h1, h2, h3, p, span');
+    unorphan("h1, h2, h3, p, span");
   }
   componentWillReceiveProps(newProps) {
     this.setChoiceSelected(newProps);
@@ -177,6 +178,13 @@ class StepView extends React.Component {
           }}
           tabIndex="-1"
         >
+          <div className="helper-wrapper">
+            <Tips
+              choicesMade={this.props.choicesMade}
+              stepName={this.props.stepValues.name}
+              need={this.props.need}
+            />
+          </div>
           <div className="container">
             <div className="row justify-content-md-between step-description">
               <div className="col-md-4 col-sm-12">
@@ -215,7 +223,7 @@ class StepView extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="row justify-content-center">
+            <div className="row">
               <div className="col-sm-12 choices-wrapper">
                 <FormattedMessage
                   id="Shortcuts.chooseChoice"
@@ -362,7 +370,8 @@ const mapStateToProps = state => ({
   isGlyphMode: state.user.isGlyphMode,
   stepLength: state.font.currentPreset.steps.length,
   shouldShowTooltips: state.ui.shouldShowTooltips,
-  fontSize: state.user.fontSize
+  fontSize: state.user.fontSize,
+  need: state.font.need
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -409,7 +418,8 @@ StepView.propTypes = {
   storeChosenGlyph: PropTypes.func.isRequired,
   shouldShowTooltips: PropTypes.bool.isRequired,
   fontSize: PropTypes.number.isRequired,
-  goToStep: PropTypes.func.isRequired
+  goToStep: PropTypes.func.isRequired,
+  need: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);

@@ -61,7 +61,7 @@ class DefineNeed extends React.Component {
             this.handleSubmit(e);
           }}
         />
-        <div className="row justify-content-sm-center">
+        <div className="row">
           <div className="col-sm-12 col-md-11 col-lg-10">
             <h1>
               <FormattedMessage
@@ -72,7 +72,7 @@ class DefineNeed extends React.Component {
             </h1>
           </div>
         </div>
-        <div className="needs row justify-content-sm-center">
+        <div className="needs row">
           <div
             className={`col-sm-12 col-md-11 col-lg-10 ${
               this.state.selected === 'logo' ? 'selected' : ''
@@ -211,7 +211,7 @@ class DefineNeed extends React.Component {
           </div>
         </div>
         {this.state.selected === 'logo' ? (
-          <div className="row justify-content-sm-center logoName">
+          <div className="row logoName">
             <div className="col-sm-12 col-md-11 col-lg-10">
               <h1>
                 <FormattedMessage

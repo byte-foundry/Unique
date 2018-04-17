@@ -683,6 +683,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
   // Save choice made
   choicesMade[step - 1] = choice.values || {};
   choicesMade[step - 1].name = choice.name;
+  choicesMade[step - 1].stepName = currentPreset.steps[step - 1].name;
   const manualChanges = {};
   const baseManualChanges = currentPreset.baseValues.manualChanges || {};
   const choiceManualChangeKeys = [];
