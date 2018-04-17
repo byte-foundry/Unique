@@ -58,11 +58,12 @@
   padding: 14px 30px;
   display: inline-block;
   width: auto;
+  border: 1px solid transparent;
 }
 
-.Landing .Button:hover,
-.Landing .profile-icon:hover {
-    transform: scale(1.1);
+.Landing .Button:hover {
+    background: #5320ee;
+    border: 2px solid white;
 }
 
 .Landing .header input {
