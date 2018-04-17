@@ -16,7 +16,7 @@ import { ReactComponent as One3 } from './number3.svg';
 import { ReactComponent as One4 } from './number4.svg';
 import { ReactComponent as One5 } from './number5.svg';
 
-import { ReactComponent as UniqueVisual } from './unique_visual.svg';
+import video from './unique_intro.mp4';
 
 import { ReactComponent as HowItWorks1 } from './howitworks_1.svg';
 import { ReactComponent as HowItWorks2 } from './howitworks_2.svg';
@@ -101,7 +101,7 @@ class Landing extends React.Component {
             <One1 className="one-1" />
             <div className="row">
               <div className="col-sm-12">
-                <UniqueVisual className="uniqueVisual" />
+                <video autoPlay loop src={video} className="uniqueVisual" />
               </div>
             </div>
             <div className="row">
@@ -388,6 +388,21 @@ class Landing extends React.Component {
                     description="Unique prototypo description"
                   />
                 </p>
+                <FormattedMessage
+                  id="Landing.headerInputCTA"
+                  defaultMessage="Get your font"
+                  description="Landing page header CTA"
+                >
+                  {text => (
+                    <Button
+                      mode="hollow"
+                      label={text}
+                      onClick={() => {
+                        this.props.goToApp();
+                      }}
+                    />
+                  )}
+                </FormattedMessage>
               </div>
             </div>
           </div>
