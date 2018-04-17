@@ -69,7 +69,11 @@ class Sidebar extends React.Component {
                       <span className="left">{option.name}</span>
                       <span className="right">
                         {option.price === 0
-                          ? 'included'
+                          ? <FormattedMessage
+                              id="Checkout.included"
+                              defaultMessage="included"
+                              description="Checkout - Included price"
+                            />
                           : parseFloat(option.type === 'discount'
                                 ? this.props.option20Price
                                 : this.props.option5Price).toLocaleString(this.props.locale_full, {

@@ -899,6 +899,48 @@
                 </children>
             </folder_node>
             <folder_node>
+                <name>Checkout</name>
+                <children>
+                    <concept_node>
+                        <name>included</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Checkout - Included price</description>
+                        <comment></comment>
+                        <default_text>included</default_text>
+                        <translations>
+                            <translation>
+                                <language>Lt-sr-SP</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>de-DE</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>es-ES</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>it-IT</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>pt-PT</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                </children>
+            </folder_node>
+            <folder_node>
                 <name>CheckoutView</name>
                 <children>
                     <concept_node>
@@ -1168,9 +1210,9 @@
                     <concept_node>
                         <name>Display</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Display need</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Display</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1205,9 +1247,9 @@
                     <concept_node>
                         <name>DisplayTooltip</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Display need tooltip</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>A display font is blablabla blablabla blablabla</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1316,9 +1358,9 @@
                     <concept_node>
                         <name>dunno</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Dunno need</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Dunno</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1353,9 +1395,9 @@
                     <concept_node>
                         <name>dunnoTooltip</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>dunno need tooltip</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>I don’t know yet what I want to do.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1575,9 +1617,9 @@
                     <concept_node>
                         <name>website</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Website need</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>Website</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1612,9 +1654,9 @@
                     <concept_node>
                         <name>websiteTooltip</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Website need tooltip</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>A website font is blablabla blablabla blablabla</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2139,9 +2181,9 @@
                     <concept_node>
                         <name>headerInputPlaceholder</name>
                         <definition_loaded>false</definition_loaded>
-                        <description>Landing page header input placeholder</description>
+                        <description></description>
                         <comment></comment>
-                        <default_text>Type a little something</default_text>
+                        <default_text></default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2693,6 +2735,43 @@
                             </translation>
                             <translation>
                                 <language>es-ES</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>pt-PT</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>actionLogout</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description>Libraryaction logout</description>
+                        <comment></comment>
+                        <default_text>Logout</default_text>
+                        <translations>
+                            <translation>
+                                <language>Lt-sr-SP</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>de-DE</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>es-ES</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>it-IT</language>
                                 <approved>false</approved>
                             </translation>
                             <translation>
