@@ -388,6 +388,21 @@ class Landing extends React.Component {
                     description="Unique prototypo description"
                   />
                 </p>
+                <FormattedMessage
+                  id="Landing.headerInputCTA"
+                  defaultMessage="Get your font"
+                  description="Landing page header CTA"
+                >
+                  {text => (
+                    <Button
+                      mode="hollow"
+                      label={text}
+                      onClick={() => {
+                        this.props.goToApp();
+                      }}
+                    />
+                  )}
+                </FormattedMessage>
               </div>
             </div>
           </div>

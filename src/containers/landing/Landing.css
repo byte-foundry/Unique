@@ -400,6 +400,11 @@
   font-size: 0.9rem;
 }
 
+.Landing .prototypo .container .Button {
+    margin-top: 1em;
+    display: inline-block;
+}
+
 .Landing .prototypo .container {
   padding-right: 30px;
   padding-left: 30px;
