@@ -433,6 +433,12 @@
   opacity: 0.9;
 }
 
+.Landing .footer .credits a {
+    color: white;
+    text-decoration: underline;
+    padding-left: .5em;
+}
+
 .Landing .footer .LanguageSelect {
   float: right;
 }

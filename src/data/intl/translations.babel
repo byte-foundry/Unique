@@ -4150,30 +4150,44 @@
         <translation_file>
             <language>Lt-sr-SP</language>
             <file>language_def.json</file>
+            <file_size>6540</file_size>
+            <modification_timestamp>1523953825</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>en-US</language>
             <file>language_en.json</file>
+            <file_size>6594</file_size>
+            <modification_timestamp>1523953825</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>de-DE</language>
             <file>language_de.json</file>
+            <file_size>6994</file_size>
+            <modification_timestamp>1523953825</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>fr-FR</language>
             <file>language_fr.json</file>
+            <file_size>7676</file_size>
+            <modification_timestamp>1523953825</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>it-IT</language>
             <file>language_it.json</file>
+            <file_size>7280</file_size>
+            <modification_timestamp>1523953825</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>es-ES</language>
             <file>language_es.json</file>
+            <file_size>7120</file_size>
+            <modification_timestamp>1523953825</modification_timestamp>
         </translation_file>
         <translation_file>
             <language>pt-PT</language>
             <file>language_pt.json</file>
+            <file_size>7172</file_size>
+            <modification_timestamp>1523953825</modification_timestamp>
         </translation_file>
     </translation_files>
     <editor_configuration>
