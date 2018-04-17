@@ -398,9 +398,10 @@ class Landing extends React.Component {
               {new Date().getFullYear()} -{' '}
               <FormattedMessage
                 id="Landing.footerCopyright"
-                defaultMessage="Unique © Powered by Prototypo"
+                defaultMessage="Unique © Powered by "
                 description="Unique copyright footer"
               />
+              <a title="Prototypo website" href="https://www.prototypo.io" target="_blank">Prototypo</a>
               <LanguageSelect
                 pathname={this.props.location.pathname}
                 isBlackOnWhite={this.props.isBlackOnWhite}
