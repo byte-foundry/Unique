@@ -58,12 +58,11 @@
   padding: 14px 30px;
   display: inline-block;
   width: auto;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
 }
 
 .Landing .Button:hover {
-    background: #5320ee;
-    border: 2px solid white;
+    opacity: .9;
 }
 
 .Landing .header input {

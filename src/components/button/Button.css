@@ -1,7 +1,7 @@
 .Button {
   font-size: 0.8rem;
   background-color: #111;
-  border: 2px solid #111;
+  border: 2px solid green;
   color: #fff;
   padding: 8px 15px;
   cursor: pointer;
