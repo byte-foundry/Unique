@@ -46,6 +46,9 @@ class Landing extends React.Component {
     window.scrollTo(0, 0)
     unorphan('h1, h2, h3, p, span');
   }
+  componentWillReceiveProps() {
+    unorphan('h1, h2, h3, p, span');
+  }
   render() {
     return (
       <div className="Landing">
@@ -63,7 +66,7 @@ class Landing extends React.Component {
           </div>
           <div className="container catch">
             <div className="row">
-              <div className="col-sm-12 col-md-12 col-lg-6">
+              <div className="col-sm-12 col-md-12 col-lg-8">
                 <div className="float-left header-title">
                   <h2>
                     <FormattedMessage
@@ -74,7 +77,7 @@ class Landing extends React.Component {
                   </h2>
                 </div>
               </div>
-              <div className="col-sm-12 col-md-12 col-lg-6 header-CTA">
+              <div className="col-sm-12 col-md-12 col-lg-4 header-CTA">
                 <div className="float-right">
                   <FormattedMessage
                     id="Landing.headerInputCTA"

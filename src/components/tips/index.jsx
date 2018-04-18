@@ -2,6 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
+import unorphan from "unorphan";
 import "./Tips.css";
 
 const tipsData = [
@@ -43,6 +44,23 @@ const tipsData = [
       <FormattedMessage
         id="Tips.widthExtended"
         defaultMessage="WidthExtended Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis odio recusandae deleniti ut optio est adipisci nobis similique laudantium natus, fugiat libero quisquam nesciunt sequi aperiam ullam quas deserunt. Velit!"
+        description="Test"
+      />
+    )
+  },
+  {
+    context: [
+      {
+        stepName: "Thickness",
+        choices: ["Bold"]
+      }
+    ],
+    showOn: ["Width"],
+    recommanded: "Extended",
+    message: (
+      <FormattedMessage
+        id="Tips.widthExtendedSimple"
+        defaultMessage="WidthExtendedSimple Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis odio recusandae deleniti ut optio est adipisci nobis similique laudantium natus, fugiat libero quisquam nesciunt sequi aperiam ullam quas deserunt. Velit!"
         description="Test"
       />
     )
@@ -92,15 +110,18 @@ class Tips extends React.Component {
         }
       }
     });
-    tips.sort((a, b) => a.weight >= b.weight);
+    tips.sort((a, b) => a.weight <= b.weight);
     this.setState({ tips, tipIndex: 0 });
   }
   componentWillMount() {
     this.generateTips(this.props);
   }
-  componentDidMount() {}
+  componentDidMount() {
+    unorphan("h1, h2, h3, p, span");
+  }
   componentWillReceiveProps(newProps) {
     this.generateTips(newProps);
+    unorphan("h1, h2, h3, p, span");
   }
   render() {
     return this.state.tips.length > 0 ? (
@@ -119,7 +140,45 @@ class Tips extends React.Component {
               description="Tips box title"
             />{" "}
           </h4>
-          {this.state.tips[0].message}
+          <p>{this.state.tips[this.state.tipIndex].message}</p>
+          {this.state.tips.length > 1 && (
+            <div className="tips-pagination">
+              <span
+                className={`tips-prev ${
+                  this.state.tipIndex === 0 ? "disabled" : ""
+                }`}
+                onClick={() => {
+                  if (this.state.tipIndex !== 0) {
+                    this.setState({ tipIndex: this.state.tipIndex - 1 });
+                  }
+                }}
+              >
+                <FormattedMessage
+                  id="Tips.previous"
+                  defaultMessage="Prev"
+                  description="Tips previous button"
+                />
+              </span>
+              <span
+                className={`tips-next ${
+                  this.state.tipIndex + 1 === this.state.tips.length
+                    ? "disabled"
+                    : ""
+                }`}
+                onClick={() => {
+                  if (this.state.tipIndex + 1 < this.state.tips.length) {
+                    this.setState({ tipIndex: this.state.tipIndex + 1 });
+                  }
+                }}
+              >
+                <FormattedMessage
+                  id="Tips.next"
+                  defaultMessage="Next"
+                  description="Tips next button"
+                />
+              </span>
+            </div>
+          )}
         </div>
       </div>
     ) : (

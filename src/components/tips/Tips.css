@@ -31,6 +31,25 @@
     transform: scale(1);
 }
 
+.Tips .tips-pagination {
+    float: right;
+    margin-top: 10px;
+}
+
+.Tips .tips-next, .Tips .tips-prev {
+    cursor: pointer;
+    user-select: none;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #5320ee;
+    font-size: 13px;
+}
+
+.Tips .tips-next.disabled, .Tips .tips-prev.disabled {
+    cursor: initial;
+    color: #c7c3d1;
+}
+
 .tips-button {
     position: absolute;
     top: -15px;

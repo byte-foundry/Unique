@@ -1,7 +1,7 @@
 .Button {
   font-size: 0.8rem;
   background-color: #111;
-  border: 2px solid #111;
+  border: 2px solid green;
   color: #fff;
   padding: 8px 15px;
   cursor: pointer;
@@ -12,7 +12,7 @@
 }
 
 .Button + .Button {
-    margin-right: 1.5em;
+    margin-left: 1.5em;
 }
 
 .Button:hover {
@@ -56,6 +56,9 @@
   border-color: transparent;
   color: white;
 }
+/* .Button.full:hover {
+    opacity: .9;
+} */
 
 .Button.text {
   background-color: transparent;

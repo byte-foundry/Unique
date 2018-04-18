@@ -58,7 +58,7 @@
   border-radius: 50%;
   z-index: 3;
 }
-.DefineNeed .icon-back {
+.DefineNeed .icon-next {
   top: 350px;
 }
 .DefineNeed .icon-next.disabled {

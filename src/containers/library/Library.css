@@ -62,7 +62,7 @@
   padding: 15px 30px;
   color: white;
   background-color: #5320ee;
-  
+
 }
 
 .Library .project .fontName {
@@ -90,6 +90,8 @@
   display: inline-block;
   border-bottom: none;
   float: left;
+  color: #b8b5c0;
 }
-
-
+.Library .project .actions .action-delete:hover {
+    color: black;
+}

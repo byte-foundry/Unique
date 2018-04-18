@@ -13,7 +13,7 @@
 .Landing .header h2 {
   font-weight: 400;
   color: white;
-  font-size: 28px;
+  font-size: 32px;
 }
 
 .Landing .header .logos {
@@ -58,12 +58,12 @@
   padding: 14px 30px;
   display: inline-block;
   width: auto;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
 }
 
 .Landing .Button:hover {
-    background: #5320ee;
-    border: 2px solid white;
+    opacity: .9;
+    border-color: white;
 }
 
 .Landing .header input {

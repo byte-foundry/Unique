@@ -35,6 +35,7 @@
   .LanguageSelect .language-select p {
     cursor: pointer;  
     background-color: black;
+    z-index: 20;
     color: white;
     padding: 6px 10px;
     display: block;
