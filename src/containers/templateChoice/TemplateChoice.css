@@ -3,12 +3,7 @@
   min-height: calc(100vh - 270px);
   padding-top: 0;
   margin-bottom: 100px;
-}
-
-@media (min-width: 768px) {
-  .TemplateChoice {
-    padding-top: x00px;
-  }
+  margin-left: 50px;
 }
 
 @media (min-width: 1800px) {
@@ -59,11 +54,11 @@
 
 .TemplateChoice .icon-back {
   top: calc(50% - 25px);
-  right: 150px;
+  right: 90px;
 }
 
 .TemplateChoice .icon-next {
-  right: 150px;
+  right: 90px;
 }
 
 .TemplateChoice .icon-next.disabled g {

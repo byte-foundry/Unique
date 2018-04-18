@@ -3,7 +3,8 @@
   padding-top: 100px;
   color: white;
   min-height: 100vh;
-  height: 100%;
+  max-height: 100vh;
+  overflow-y: auto;
   position: fixed;
   top: 0;
   right: 0;
@@ -127,7 +128,7 @@
 @media (max-width: 891px) {
   .Sidebar.checkout {
     max-width: inherit;
-    width: 250px;
+    width: 100%;
     position: relative;
   }
 }

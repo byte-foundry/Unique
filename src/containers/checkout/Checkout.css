@@ -28,6 +28,7 @@
 
 .Checkout .container {
   padding: 0;
+  max-width: 720px;
 }
 
 .Checkout .checkout-options {
@@ -83,7 +84,7 @@
   position: absolute;
   height: 0;
   width: 2px;
-  background-color: #5f1ffc;
+  background-color:  #5320ee;
   display: inline-block;
   transform-origin: left top;
   content: " ";
@@ -102,7 +103,7 @@
 
 .Checkout .checkout-options .option input[type="checkbox"]:checked + .check-box,
 .check-box.checked {
-  border-color: #5f1ffc;
+  border-color: #5320ee;
 }
 .Checkout
   .checkout-options
@@ -143,7 +144,7 @@
 }
 
 .Checkout .checkout-options .option.otf-logo .logo {
-  padding: 10% 35%;
+  padding: 10% 30%;
   background: linear-gradient(#5f1ffc, #5f1ffc),
     linear-gradient(219deg, #5320ee, #5d28e2 68%, #622bdd);
 }
@@ -154,9 +155,9 @@
 }
 
 .Checkout .checkout-options .option.specimen-logo .logo {
-  padding: 10% 5%;
-  background: linear-gradient(#fff, #fff),
-    linear-gradient(219deg, #fff, #fff 68%, #fff);
+  padding: 10% 28%;
+  background: linear-gradient(#f2f2f2, #f2f2f2),
+    linear-gradient(219deg, #f2f2f2, #f2f2f2 68%, #f2f2f2);
   transition: background 0.3s ease;
 }
 .Checkout .checkout-options .option.specimen-logo.selected .logo {
@@ -166,15 +167,23 @@
 
 .Checkout .checkout-options .option.specimen-logo svg {
   height: auto;
-  width: 23vw;
+  width: 10vw;
   max-width: 350px;
   margin: 0 auto;
-  transform: translateX(25%);
+}
+
+
+.Checkout .checkout-options .option.specimen-logo svg .letters {
+  fill: black;
+}
+
+.Checkout .checkout-options .option.specimen-logo.selected svg .letters {
+  fill: #5320ee;
 }
 
 .Checkout .checkout-options .option.variant .font-wrapper {
-  background: linear-gradient(#fff, #fff),
-    linear-gradient(219deg, #fff, #fff 68%, #fff);
+  background: linear-gradient(#f2f2f2, #f2f2f2),
+    linear-gradient(219deg, #f2f2f2, #f2f2f2 68%, #f2f2f2);
   user-select: none;
   color: black;
 }
@@ -186,15 +195,14 @@
 }
 .Checkout .checkout-options .option.variant .font-wrapper {
   text-align: center;
-  padding: 100px 80px;
-  padding: 20% 15%;
+  padding: 20% 5%;
   overflow: hidden;
   min-width: 300px;
   text-overflow: ellipsis;
 }
 
 .Checkout .checkout-options .option.variant .font-wrapper span {
-  font-size: 40px;
+  font-size: 30px;
 }
 
 @keyframes dothabottomcheck {

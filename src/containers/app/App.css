@@ -12,6 +12,12 @@
   padding: 0;
   padding-right: 50px;
 }
+
+@media (max-width: 576px) {
+  .App .left {
+    padding: 0;
+  }  
+}
 .App .right {
   padding: 0;
 }
