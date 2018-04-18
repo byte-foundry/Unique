@@ -7,6 +7,7 @@
   flex-direction: column;
   justify-content: center;
   min-height: calc(100vh - 145px);
+  margin-right: 50px;
 }
 @media (min-width: 1800px) {
   .StepView {
@@ -27,7 +28,8 @@
 }
 
 .StepView .step-bubbles {
-  float: right;
+  float: right;  
+  margin-right: 50px;
 }
 
 .StepView .step-bubble {
@@ -35,16 +37,17 @@
   height: 10px;
   background-color: #d8d8d8;
   border-radius: 50%;
-  margin-right: 10px;  
+  margin-right: 5px;
+  margin-left: 5px;
   display: inline-block;
 }
 
 .StepView .step-name {
-  color: #5f1ffb;
+  color: #5320ee;
 }
 
 .StepView .step-bubble.past {
-  background-color: #5f1ffb;
+  background-color: #5320ee;
   cursor: pointer;
 }
 
@@ -53,6 +56,10 @@
 }
 
 .StepView .choices-wrapper {
+}
+
+.StepView .choices {  
+  margin-right: 50px;
 }
 
 .StepView h3:not(.currentState) {
@@ -65,16 +72,18 @@
 
 .StepView .icon-back-wrapper {
   position: absolute;
-  top: calc(50% - 60px);
+  top: calc(50% - 25px);
   right: -50px;
   transform: translateY(calc(-50%)) translateZ(0px);
+  z-index: 10;
 }
 
 .StepView .icon-next-wrapper {
   position: absolute;
-  top: 50%;
+  top: calc(50% + 25px);
   right: -50px;
   transform: translateY(-50%) translateZ(0);
+  z-index: 10;
 }
 
 .StepView .icon-back,
@@ -86,6 +95,7 @@
   transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
   padding: 0px;
   z-index: 10;
+  border-radius: 50%;
 }
 .StepView .icon-back {
   background: transparent;
@@ -96,19 +106,26 @@
   stroke: #b8b5c0;
 }
 
+.StepView .icon-next:not(.disabled):hover, .StepView .icon-back:hover, .StepView .icon-finish:hover {
+  background: #5320ee;
+}
+
+.StepView .icon-next:not(.disabled):hover g path, .StepView .icon-back:hover g path, .StepView .icon-finish:hover g path{
+  stroke: white;
+}
+
 .StepView .icon-finish.disabled {
   display: none;
 }
 
 .StepView .icon-finish {
   position: absolute;
-  right: 0;
-  top: calc(50% + 60px);
-  transform: translateY(-50%) translateZ(0px);
+  top: calc(50% + 50px);
+  right: -50px;
   background: transparent;
 }
 .StepView .icon-next {
-  right: -75px;
+  right: -50px;
   background: transparent;
 }
 
@@ -118,10 +135,15 @@
   background: transparent;
 }
 
-.StepView.whiteOnBlack .icon-next:not(.disabled) path,
-.StepView.whiteOnBlack .icon-back path {
-  fill: #5320ee;
+.StepView.whiteOnBlack .icon-next:not(.disabled) g,
+.StepView.whiteOnBlack .icon-back g {
+  stroke: #5320ee;
   transition: fill 0.3s ease;
+}
+
+.StepView.whiteOnBlack .icon-next:not(.disabled):hover,
+.StepView.whiteOnBlack .icon-back:hover{
+  background: #5320ee;
 }
 
 .StepView .choiceMore {
@@ -144,21 +166,65 @@
   margin-bottom: 30px;
 }
 
+.StepView .helper-wrapper {
+  position: absolute;
+  top: 32px;
+  right: 80px;
+}
+
+@media (max-width: 1800px) {
+  .StepView .helper-wrapper {
+    top: -52px;
+  }  
+}
+
 @media (max-width: 768px) {
   .StepView .icon-next-wrapper {
     right: -20px;
     z-index: 10;
   }
   .StepView .icon-back-wrapper {
-    left: inherit;
     right: -20px;
-    top: 40%;
-    transform: translateY(-55%) translateZ(0px);
     z-index: 10;
   }
+  .StepView .icon-finish {
+    right: -20px;
+    z-index: 10;
+  }
+}
 
-  .StepView .choices {
-    margin-left: 5px;
-    margin-right: 5px;
+@media (max-width: 576px) {
+  .StepView .Choice {
+    width: 100%;
+  }
+
+  .StepView .icon-next-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    left: inherit;
+    right: inherit;
+    top: inherit;
+    bottom: inherit;
+  }
+  .StepView .icon-back-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    left: inherit;
+    right: inherit;
+    top: inherit;
+    bottom: inherit;
+  }
+  .StepView .icon-finish {
+    position: relative;
+    display: inline-block;
+    left: inherit;
+    right: inherit;
+    top: inherit;
+    bottom: inherit;
+    transform: translateY(-56%);
   }
 }

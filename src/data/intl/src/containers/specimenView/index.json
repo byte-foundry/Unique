@@ -30,11 +30,6 @@
     "defaultMessage": "Embark on new adventures with your complete glyph set!"
   },
   {
-    "id": "SpecimenView.subtitleBack",
-    "description": "Speciem view back subtitle",
-    "defaultMessage": "Not quite right? Just click trough the menu to edit"
-  },
-  {
     "id": "SpecimenView.downloadAction",
     "description": "SpecimenView - Download action",
     "defaultMessage": "Download"
@@ -58,6 +53,11 @@
     "id": "SpecimenView.characters",
     "description": "Specimen view characters",
     "defaultMessage": "Characters"
+  },
+  {
+    "id": "SpecimenView.subtitleBack",
+    "description": "Speciem view back subtitle",
+    "defaultMessage": "Not quite right? Just click trough the menu to edit"
   },
   {
     "id": "SpecimenView.downloadActionBottom",

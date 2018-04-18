@@ -5,11 +5,6 @@
     "defaultMessage": "Easily get fonts that you'll never see anywhere else"
   },
   {
-    "id": "Landing.headerInputPlaceholder",
-    "description": "Landing page header input placeholder",
-    "defaultMessage": "Type a little something"
-  },
-  {
     "id": "Landing.headerInputCTA",
     "description": "Landing page header CTA",
     "defaultMessage": "Get your font"

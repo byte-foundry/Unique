@@ -1,0 +1,68 @@
+.tips-wrapper {
+    position: relative;
+}
+
+.Tips {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: solid 1px #c7c3d1;
+    color: #656565;
+    font-size: 12px;
+    padding: 0;
+    overflow: hidden;
+    width: 250px; 
+    transform-origin: top right;
+    transform: scale(0);
+    z-index: 11;    
+    padding: 20px 30px;
+    background-color: white;    
+    transition: all .2s ease-out;
+}
+
+.Tips h4{
+    color: #5320ee;
+    font-size: 14px;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.Tips.opened {
+    transform: scale(1);
+}
+
+.Tips .tips-pagination {
+    float: right;
+    margin-top: 10px;
+}
+
+.Tips .tips-next, .Tips .tips-prev {
+    cursor: pointer;
+    user-select: none;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #5320ee;
+    font-size: 13px;
+}
+
+.Tips .tips-next.disabled, .Tips .tips-prev.disabled {
+    cursor: initial;
+    color: #c7c3d1;
+}
+
+.tips-button {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    display: inline-block;
+    background-color: #5320ee;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 28px;
+    z-index: 12;
+    user-select: none;
+}

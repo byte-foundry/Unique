@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ContentEditable from '../contentEditable';
 import './Choice.css';
-import { ReactComponent as EditIcon } from './t.svg';
+import { ReactComponent as EditIcon } from './pencil.svg';
 
 class Choice extends React.Component {
   constructor(props) {
@@ -22,7 +22,11 @@ class Choice extends React.Component {
         }`}
         key={this.props.choice.name}
         onClick={() => this.props.markChoiceActive(this.props.choice)}
-        onDoubleClick={() => this.props.selectChoice(this.props.choice)}
+        onDoubleClick={() => {
+          if(!this.state.isEditable) {
+            this.props.selectChoice(this.props.choice)
+          }
+        }}
         role="option"
         aria-checked="false"
         aria-selected="false"
@@ -59,7 +63,9 @@ class Choice extends React.Component {
             this.props.disableShortcuts();
           }}
           onDoubleClick={() => {
-            this.props.selectChoice(this.props.choice);
+            if(!this.state.isEditable) {
+              this.props.selectChoice(this.props.choice)
+            }
           }}
           ref={c => (this.contentEditable = c)}
         />

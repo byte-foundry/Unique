@@ -72,14 +72,13 @@ class CustomLogo extends React.Component {
   }
   handleChange(color) {
     if (this.state.displayTextColorPicker) {
-        this.setState({
-            textColor: color.rgb,
-          });
-    }
-    else {
-        this.setState({
-            shadowColor: color.rgb,
-          });
+      this.setState({
+        textColor: color.rgb,
+      });
+    } else {
+      this.setState({
+        shadowColor: color.rgb,
+      });
     }
   }
   render() {
@@ -94,13 +93,13 @@ class CustomLogo extends React.Component {
           }, ${this.state.textColor.b}, ${this.state.textColor.a})`,
         },
         shadowColor: {
-            width: '36px',
-            height: '14px',
-            borderRadius: '2px',
-            background: `rgba(${this.state.shadowColor.r}, ${
-              this.state.shadowColor.g
-            }, ${this.state.shadowColor.b}, ${this.state.shadowColor.a})`,
-          },
+          width: '36px',
+          height: '14px',
+          borderRadius: '2px',
+          background: `rgba(${this.state.shadowColor.r}, ${
+            this.state.shadowColor.g
+          }, ${this.state.shadowColor.b}, ${this.state.shadowColor.a})`,
+        },
         swatch: {
           padding: '5px',
           background: '#fff',
@@ -123,55 +122,67 @@ class CustomLogo extends React.Component {
       },
     });
     return (
-      <div className='CustomLogo'>
+      <div className="CustomLogo">
         <svg
-          version='1.1'
-          xmlns='http://www.w3.org/2000/svg'
-          xmlnsXlink='http://www.w3.org/1999/xlink'
-          x='0px'
-          y='0px'
-          width='620px'
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          width="620px"
           height={`${this.state.fontSize * 2}px`}
-          xmlSpace='preserve'
+          xmlSpace="preserve"
         >
           <defs>
             <pattern
-              id='pattern'
+              id="pattern"
               width={this.state.shadowStrokeWidth}
               height={this.state.shadowStrokeSpacing}
-              patternUnits='userSpaceOnUse'
+              patternUnits="userSpaceOnUse"
               patternTransform={`rotate(${this.state.shadowStrokeAngle})`}
             >
-              <rect x='0' y='0' width={this.state.shadowStrokeWidth} height={this.state.shadowStrokeWidth} fill={`rgba(${this.state.shadowColor.r}, ${this.state.shadowColor.g}, ${
+              <rect
+                x="0"
+                y="0"
+                width={this.state.shadowStrokeWidth}
+                height={this.state.shadowStrokeWidth}
+                fill={`rgba(${this.state.shadowColor.r}, ${this.state.shadowColor.g}, ${
               this.state.shadowColor.b
-            }, ${this.state.shadowColor.a})`} />
+            }, ${this.state.shadowColor.a})`}
+              />
             </pattern>
 
             <text
-              id='text'
-              x='310'
+              id="text"
+              x="310"
               y={this.state.fontSize}
               fontFamily={this.props.fontName}
               fontSize={this.state.fontSize}
               letterSpacing={`${this.state.letterSpacing}px`}
-              textAnchor='middle'
+              textAnchor="middle"
             >
               {this.props.word}
             </text>
 
-            <mask id='mask'>
-              <rect x='0' y='0' width='100%' height='100%' fill={`rgba(${this.state.shadowColor.r}, ${this.state.shadowColor.g}, ${
+            <mask id="mask">
+              <rect
+                x="0"
+                y="0"
+                width="100%"
+                height="100%"
+                fill={`rgba(${this.state.shadowColor.r}, ${this.state.shadowColor.g}, ${
               this.state.shadowColor.b
-            }, ${this.state.shadowColor.a})`} />
+            }, ${this.state.shadowColor.a})`}
+              />
               <use
                 x={-this.state.shadowOffsetX}
                 y={-this.state.shadowOffsetY}
                 stroke={`rgba(${this.state.shadowColor.r}, ${this.state.shadowColor.g}, ${
                     this.state.shadowColor.b
                   }, ${this.state.shadowColor.a})`}
-                strokeWidth='1'
-                xlinkHref='#text'
-                opacity='1'
+                strokeWidth="1"
+                xlinkHref="#text"
+                opacity="1"
                 fill={`rgba(${this.state.shadowColor.r}, ${this.state.shadowColor.g}, ${
               this.state.shadowColor.b
             }, ${this.state.shadowColor.a})`}
@@ -182,22 +193,22 @@ class CustomLogo extends React.Component {
           <use
             x={this.state.shadowOffsetX}
             y={this.state.shadowOffsetY}
-            xlinkHref='#text'
-            opacity='1'
-            fill='url(#pattern)'
-            mask='url(#mask)'
+            xlinkHref="#text"
+            opacity="1"
+            fill="url(#pattern)"
+            mask="url(#mask)"
           />
 
           <use
-            x='0'
-            y='0'
-            xlinkHref='#text'
+            x="0"
+            y="0"
+            xlinkHref="#text"
             fill={`rgba(${this.state.textColor.r}, ${this.state.textColor.g}, ${
               this.state.textColor.b
             }, ${this.state.textColor.a})`}
           />
         </svg>
-        <div className='config' style={{ display: this.props.shouldShowControls ? 'block' : 'none' }}>
+        <div className="config" style={{ display: this.props.shouldShowControls ? 'block' : 'none' }}>
           <div>
             Text color:
             <div style={styles.swatch} onClick={() => { this.handleClick('text'); }}>
@@ -234,7 +245,8 @@ class CustomLogo extends React.Component {
               maxValue={20}
               minValue={-20}
               value={this.state.letterSpacing}
-              onChange={letterSpacing => this.setState({ letterSpacing })} />
+              onChange={letterSpacing => this.setState({ letterSpacing })}
+            />
           </div>
           <div>
             Font size :
@@ -242,7 +254,8 @@ class CustomLogo extends React.Component {
               maxValue={140}
               minValue={10}
               value={this.state.fontSize}
-              onChange={fontSize => this.setState({ fontSize })} />
+              onChange={fontSize => this.setState({ fontSize })}
+            />
           </div>
           <div>
             Shadow stroke width :
@@ -250,7 +263,8 @@ class CustomLogo extends React.Component {
               maxValue={20}
               minValue={0}
               value={this.state.shadowStrokeWidth}
-              onChange={shadowStrokeWidth => this.setState({ shadowStrokeWidth })} />
+              onChange={shadowStrokeWidth => this.setState({ shadowStrokeWidth })}
+            />
           </div>
           <div>
             Shadow stroke spacing :
@@ -258,7 +272,8 @@ class CustomLogo extends React.Component {
               maxValue={20}
               minValue={0}
               value={this.state.shadowStrokeSpacing}
-              onChange={shadowStrokeSpacing => this.setState({ shadowStrokeSpacing })} />
+              onChange={shadowStrokeSpacing => this.setState({ shadowStrokeSpacing })}
+            />
           </div>
           <div>
             Shadow stroke angle :
@@ -266,7 +281,8 @@ class CustomLogo extends React.Component {
               maxValue={180}
               minValue={0}
               value={this.state.shadowStrokeAngle}
-              onChange={shadowStrokeAngle => this.setState({ shadowStrokeAngle })} />
+              onChange={shadowStrokeAngle => this.setState({ shadowStrokeAngle })}
+            />
           </div>
           <div>
             Shadow offset X :
@@ -274,7 +290,8 @@ class CustomLogo extends React.Component {
               maxValue={30}
               minValue={-30}
               value={this.state.shadowOffsetX}
-              onChange={shadowOffsetX => this.setState({ shadowOffsetX })} />
+              onChange={shadowOffsetX => this.setState({ shadowOffsetX })}
+            />
           </div>
           <div>
             Shadow offset Y :
@@ -282,7 +299,8 @@ class CustomLogo extends React.Component {
               maxValue={30}
               minValue={-30}
               value={this.state.shadowOffsetY}
-              onChange={shadowOffsetY => this.setState({ shadowOffsetY })} />
+              onChange={shadowOffsetY => this.setState({ shadowOffsetY })}
+            />
           </div>
         </div>
       </div>

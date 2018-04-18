@@ -1,5 +1,10 @@
 [
   {
+    "id": "Checkout.included",
+    "description": "Checkout - Included price",
+    "defaultMessage": "included"
+  },
+  {
     "id": "Sidebar.checkoutAction",
     "description": "Sidebar - Checkout action",
     "defaultMessage": "Checkout"

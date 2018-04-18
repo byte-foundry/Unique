@@ -25,14 +25,24 @@
     "defaultMessage": "A text font is blablabla blablabla blablabla"
   },
   {
-    "id": "DefineNeed.website",
-    "description": "Website need",
-    "defaultMessage": "Website"
+    "id": "DefineNeed.Display",
+    "description": "Display need",
+    "defaultMessage": "Display"
   },
   {
-    "id": "DefineNeed.websiteTooltip",
-    "description": "Website need tooltip",
-    "defaultMessage": "A website font is blablabla blablabla blablabla"
+    "id": "DefineNeed.DisplayTooltip",
+    "description": "Display need tooltip",
+    "defaultMessage": "A display font is blablabla blablabla blablabla"
+  },
+  {
+    "id": "DefineNeed.dunno",
+    "description": "Dunno need",
+    "defaultMessage": "Dunno"
+  },
+  {
+    "id": "DefineNeed.dunnoTooltip",
+    "description": "dunno need tooltip",
+    "defaultMessage": "I don’t know yet what I want to do."
   },
   {
     "id": "DefineNeed.brandTitle",

@@ -1,22 +1,23 @@
 // @flow
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import saveAs from "save-as";
-import StripeCheckout from "react-stripe-checkout";
-import axios from "axios";
-import { afterPayment } from "../../data/user";
-import { setUnstable, setStable } from "../../data/ui";
-import { getArrayBuffer } from "../../data/font";
-import "./Checkout.css";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import saveAs from 'save-as';
+import StripeCheckout from 'react-stripe-checkout';
+import axios from 'axios';
+import { afterPayment } from '../../data/user';
+import { setUnstable, setStable } from '../../data/ui';
+import { getArrayBuffer } from '../../data/font';
+import { EXPORT_SUBSET } from '../../data/constants';
+import './Checkout.css';
 
 import {
   STRIPE_PUBLISHABLE,
   PAYMENT_SERVER_URL,
-  VALIDATION_SERVER_URL
-} from "../../data/constants";
+  VALIDATION_SERVER_URL,
+} from '../../data/constants';
 
 const fromValueToCent = amount => parseInt(amount.toFixed(2) * 100);
 
@@ -25,7 +26,7 @@ const successPayment = (data, callback) => {
   callback(data);
 };
 
-const errorPayment = data => {
+const errorPayment = (data) => {
   console.log(data);
 };
 
@@ -38,65 +39,66 @@ const onToken = (
   currency,
   getArrayBuffer,
   userFontName,
-  checkoutOptions
-) => token => {
+  checkoutOptions,
+) => (token) => {
   setUnstable();
-  axios
-    .post(PAYMENT_SERVER_URL, {
-      description,
-      source: token.id,
-      currency: currency,
-      amount: fromValueToCent(amount)
-    })
-    .then(res => {
-      const fonts = [];
-      const fontsSelected = checkoutOptions.filter(e => e.type === 'font' || e.dbName === "baseFont");
-      const promiseArray = [];
-      fontsSelected.forEach((fontSelected) => {
-        promiseArray.push(getArrayBuffer(fontSelected.fontName, userFontName || 'unique_font', fontSelected.type === 'font' ? fontSelected.name : 'Regular'))
-      });
-      Promise.all(promiseArray).then((buffers) => {
-        console.log(buffers);
-        let fonts = buffers.map((buffer, index) => {
-          const intArray = new Uint8Array(buffer);
-          return  {
-            variant: fontsSelected[index].type === 'font' ? fontsSelected[index].name : 'Regular',
-            data: Array.from(intArray)
-          }
-        });
-        const paymentNumber = res.data.id;
-        const family = userFontName || 'unique_font';
-        const invoice = {
+  const fonts = [];
+  const fontsSelected = checkoutOptions.filter(e => e.type === 'font' || e.dbName === 'baseFont');
+  const promiseArray = [];
+  fontsSelected.forEach((fontSelected) => {
+    promiseArray.push(getArrayBuffer(
+      fontSelected.fontName,
+      userFontName,
+      fontSelected.type === 'font' ? fontSelected.name : fontSelected.styleName,
+      EXPORT_SUBSET,
+    ));
+  });
+  Promise.all(promiseArray).then((buffers) => {
+    console.log(buffers);
+    const fonts = buffers.map((buffer, index) => {
+      const intArray = new Uint8Array(buffer);
+      return {
+        variant: fontsSelected[index].type === 'font' ? fontsSelected[index].name : fontsSelected[index].styleName,
+        data: Array.from(intArray),
+      };
+    });
+    const family = userFontName || 'unique_font';
+    const invoice = {
+      currency,
+      choices: checkoutOptions,
+    };
+    axios
+      .post(
+        PAYMENT_SERVER_URL,
+        {
+          description,
+          source: token.id,
           currency,
-          choices: checkoutOptions
-        };
-        axios
-          .post(
-            VALIDATION_SERVER_URL,
-            {
-              paymentNumber,
-              family,
-              invoice,
-              fonts,
-            },
-            { responseType: "arraybuffer" }
-          )
-          .then(pack => {
-            console.log(pack);
-            const blob = new Blob([new DataView(pack.data)], { type: "application/zip" });
-            saveAs(blob, `${userFontName || 'unique_purchase'}.zip`);
-            successPayment(res, callback);
-          })
-          .catch(err => {
-            errorPayment(err);
-            console.log(err);
-          });
-    });
-    })
-    .catch(data => {
-      setStable();
-      errorPayment(data);
-    });
+          amount: fromValueToCent(amount),
+          family,
+          invoice,
+          fonts,
+          email: token.email,
+        },
+        { responseType: 'arraybuffer' },
+      )
+      .then((pack) => {
+        console.log(pack);
+        const blob = new Blob([new DataView(pack.data)], { type: 'application/zip' });
+        saveAs(blob, 'purchase.zip');
+        successPayment({
+          data: {
+            paid: true,
+            email: token.email,
+          },
+        }, callback);
+      })
+      .catch((err) => {
+        setStable();
+        errorPayment(err);
+        console.log(err);
+      });
+  });
 };
 
 const Checkout = props => (
@@ -107,14 +109,14 @@ const Checkout = props => (
     amount={fromValueToCent(props.amount)}
     token={onToken(
       props.amount,
-      "Buy with stripe",
+      'Buy with stripe',
       props.afterPayment,
       props.setUnstable,
       props.setStable,
       props.currency,
       props.getArrayBuffer,
       props.userFontName,
-      props.checkoutOptions
+      props.checkoutOptions,
     )}
     currency={props.currency}
     stripeKey={STRIPE_PUBLISHABLE}
@@ -128,13 +130,15 @@ const mapStateToProps = state => ({
   email: state.user.email,
   currency: state.ui.currency,
   userFontName: state.user.userFontName,
-  checkoutOptions: state.user.checkoutOptions
+  checkoutOptions: state.user.checkoutOptions,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { afterPayment, setUnstable, setStable, getArrayBuffer },
-    dispatch
+    {
+      afterPayment, setUnstable, setStable, getArrayBuffer,
+    },
+    dispatch,
   );
 
 Checkout.propTypes = {
@@ -146,13 +150,11 @@ Checkout.propTypes = {
   afterPayment: PropTypes.func.isRequired,
   setUnstable: PropTypes.func.isRequired,
   setStable: PropTypes.func.isRequired,
-  userFontName: PropTypes.string.isRequired
+  userFontName: PropTypes.string.isRequired,
 };
 
 Checkout.defaultProps = {
-  email: ""
+  email: '',
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Checkout)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Checkout));

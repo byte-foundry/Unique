@@ -13,7 +13,7 @@
 .Landing .header h2 {
   font-weight: 400;
   color: white;
-  font-size: 28px;
+  font-size: 32px;
 }
 
 .Landing .header .logos {
@@ -56,6 +56,14 @@
   text-transform: uppercase;
   font-size: 14px;
   padding: 14px 30px;
+  display: inline-block;
+  width: auto;
+  border: 2px solid transparent;
+}
+
+.Landing .Button:hover {
+    opacity: .9;
+    border-color: white;
 }
 
 .Landing .header input {
@@ -64,6 +72,18 @@
   padding: 10px 20px;
   margin-right: 15px;
   color: white;
+}
+
+.Landing input:focus {
+  outline: none;
+}
+
+@media (max-width: 1200px) {
+  .Landing .header .Button {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .Landing .header input::placeholder {
@@ -86,27 +106,37 @@
   position: relative;
 }
 
-.Landing .description .one-1 {
+.Landing .one-1 {
   position: absolute;
   top: -15%;
   left: 5%;
   height: 250px;
   width: auto;
+  z-index: 2;
 }
-.Landing .description .one-2 {
-    position: absolute;
-    bottom: -20%;
-    left: 0;
-    height: 400px;
-    width: auto;
-    z-index: 2;
+
+@media (max-width: 1439px) {
+  .Landing .one-1 {
+    display: none;
+  }
+}
+.Landing .one-2 {
+  position: absolute;
+  bottom: -20%;
+  left: 0;
+  height: 400px;
+  width: auto;
+  z-index: 2;
 }
 
 .Landing .description .uniqueVisual {
-  width: 100%;
   height: auto;
-  margin-top: -40vw;
   margin-bottom: 10%;
+  width: 80%;
+  max-width: 850px;
+  margin-top: -42vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .Landing .description h1 {
@@ -120,12 +150,13 @@
   font-weight: 400;
   color: #b0b7bf;
   line-height: 30px;
+  font-size: 20px;
 }
 
 .Landing .description .Button {
   margin-top: 40px;
   text-transform: uppercase;
-  padding: 10px 20px;
+  padding: 20px 40px;
   font-size: 13px;
   font-weight: 400;
   display: inline-block;
@@ -144,13 +175,35 @@
   color: white;
 }
 
-.Landing .featureList .one-3 {
-    position: absolute;
-    bottom: 5%;
-    right: 6vw;
-    height: 200px;
-    width: auto;
-    z-index: 2;
+@media (max-width: 1060px) {
+  .Landing .featureList {
+    padding-top: 20%;
+    padding-bottom: 20%;
+  }
+}
+
+@media (max-width: 575px) {
+  .Landing .featureList {
+    padding-top: 30%;
+    padding-bottom: 30%;
+    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0% 100%);
+  }
+}
+
+.Landing .one-3 {
+  position: absolute;
+  bottom: 5%;
+  right: 6vw;
+  height: 200px;
+  width: auto;
+  z-index: 2;
+}
+
+@media (max-width: 1600px) {
+  .Landing .one-3,
+  .Landing .one-2 {
+    display: none;
+  }
 }
 
 .Landing .featureList li {
@@ -165,58 +218,114 @@
 }
 
 .Landing .howItWorks .row {
-  margin-bottom: 20%;
+  margin-bottom: 150px;
+}
+
+.Landing .howItWorks .row.row-sm {
+  margin-bottom: 50px;
+}
+
+.Landing .howItWorks .row.row-md {
+  margin-bottom: 85px;
+}
+
+@media (min-width: 576px) {
+  .Landing .howItWorks .row.row-sm {
+    margin-bottom: 150px;
+  }
+
+  .Landing .howItWorks .row.row-md {
+    margin-bottom: 150px;
+  }
 }
 
 .Landing .howItWorks h1 {
-    font-weight: 400;
-    color: #632bdd;
-    text-transform: uppercase;
-    text-align: center;
+  font-weight: 400;
+  color: #5320ee;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+@media (min-width: 576px) {
+  .Landing .howItWorks h1 {
+    font-size: 2rem;
     margin-bottom: 100px;
-    font-size: 35px;
+  }
 }
 
 .Landing .howItWorks .image-wrapper {
-    position: relative;
-    height: 170px;
-    margin-bottom: 50%;
+  position: relative;
+  margin-bottom: 105px;
+  height: inherit;
+}
+
+.Landing .howItWorks .howItWorks-icon1,
+.Landing .howItWorks .howItWorks-icon2,
+.Landing .howItWorks .howItWorks-icon3 {
+  position: relative;
+  width: 100%;
 }
 
 .Landing .howItWorks .howItWorks-icon1 {
-    position: absolute;
-    top: -100%;
-    left: 50px;
-    width: 120%;
-    height: auto;
+  height: auto;
+  left: 40px;
 }
 
-
 .Landing .howItWorks .howItWorks-icon2 {
-    position: absolute;
-    top: -100%;
-    right: 80px;
-    width: 120%;
-    height: auto;
+  height: auto;
+  right: 40px;
 }
 
 .Landing .howItWorks .howItWorks-icon3 {
+  height: auto;
+}
+
+@media (min-width: 992px) {
+  .Landing .howItWorks .image-wrapper {
+    height: 170px;
+    margin-bottom: 500px;
+  }
+
+  .Landing .howItWorks .howItWorks-icon1 {
+    top: -100%;
+    left: 115px;
+    width: 100%;
+    position: absolute;
+  }
+
+  .Landing .howItWorks .howItWorks-icon2 {
     position: absolute;
     top: -100%;
-    left: 50px;
-    width: 120%;
-    height: auto;
+    right: 135px;
+    width: 100%;
+  }
+
+  .Landing .howItWorks .howItWorks-icon3 {
+    position: absolute;
+    top: -100%;
+    left: 115px;
+    width: 100%;
+  }
 }
+
 
 .Landing .howItWorks .stepNumber {
   font-size: 18px;
-  color: #632bdd;
+  color: #5320ee;
   margin-bottom: 10px;
 }
 
 .Landing .howItWorks h3 {
-  font-size: 28px;
+  font-size: 1.4rem;
   font-weight: 400;
+}
+
+@media (min-width: 576px) {
+  .Landing .howItWorks h3 {
+    font-size: 1.9rem;
+    font-weight: 400;
+  }
 }
 
 .Landing .howItWorks .stepdescription {
@@ -225,38 +334,97 @@
 }
 
 .Landing .howItWorks .Button {
-  padding-left: 0;
-  color: #632bdd;
-  text-transform: uppercase;
+  padding: 0;
+  color: #5320ee;
   font-size: 16px;
+
+  text-decoration: none;
+  padding-bottom: .1em;
+  border: 0;
+  border-bottom: 2px solid #5320ee;
+}
+
+.Landing .howItWorks .Button:hover {
+    border-bottom: 2px solid transparent;
+}
+
+.Landing .prototypo .background {
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(246deg, #5320ee, #5d28e2 68%, #622bdd);
+  clip-path: polygon(0 20%, 100% 0, 100% 100%, 0% 100%);
+}
+
+.Landing .one-5 {
+  position: absolute;
+  top: 5%;
+  left: 10vw;
+  height: 450px;
+  width: auto;
+  z-index: 2;
 }
 
 .Landing .prototypo {
   position: relative;
   padding-top: 10%;
   padding-bottom: 10%;
-  background-image: linear-gradient(246deg, #5320ee, #5d28e2 68%, #622bdd);
-  clip-path: polygon(0 20%, 100% 0, 100% 100%, 0% 100%);
   color: white;
 }
 
-.Landing .prototypo .one-5 {
-    position: absolute;
-    top: 5%;
-    left: 20%;
-    height: 450px;
-    width: auto;
+@media (max-width: 775px) {
+  .Landing .one-5 {
+    display: none;
+  }
+  .Landing .prototypo {
+    padding-top: 20%;
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+
+@media (max-width: 575px) {
+  .Landing .prototypo {
+    padding-top: 40%;
+  }
 }
 
 .Landing .prototypo h1 {
   font-weight: 400;
   text-transform: uppercase;
   margin-bottom: 40px;
+    font-size: 1.3rem;
 }
 
 .Landing .prototypo p {
   line-height: 30px;
-  font-size: 20px;
+  font-size: 0.9rem;
+}
+
+.Landing .prototypo .container .Button {
+    margin-top: 1em;
+    display: inline-block;
+}
+
+.Landing .prototypo .container {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+@media (min-width: 576px) {
+  .Landing .prototypo .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .Landing .prototypo h1 {
+    font-size: 1.5rem;
+  }
+
+  .Landing .prototypo p {
+    font-size: 20px;
+  }
 }
 
 .Landing .footer {
@@ -272,6 +440,12 @@
   opacity: 0.9;
 }
 
+.Landing .footer .credits a {
+    color: white;
+    text-decoration: underline;
+    padding-left: .5em;
+}
+
 .Landing .footer .LanguageSelect {
   float: right;
 }
@@ -280,6 +454,38 @@
   float: left;
 }
 
+.Landing .header-title {
+  text-align: center;
+}
+
+.Landing .header-CTA {
+  margin-bottom: 60px;
+}
+
 .Landing .float-right {
-  float: right;
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .Landing .float-right {
+    float: right;
+  }
+
+  .Landing .header-CTA {
+    margin-bottom: inherit;
+  }
+
+  .Landing .header-title {
+    text-align: left;
+  }
+}
+
+.Landing h1 {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 576px) {
+  .Landing h1 {
+    font-size: 2rem;
+  }
 }

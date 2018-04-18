@@ -155,6 +155,12 @@ export default (state = initialState, action) => {
 
 export const selectFont = (font, step) => (dispatch, getState) => {
   console.log('==========font/selectFont============');
+  /* global Intercom */
+  try {
+    Intercom('trackEvent', 'unique-selected-font', { unique_preset: font.variant.family.name });
+  } catch (e) {
+    console.log(e);
+  }
   dispatch(resetCheckout());
   console.log(step);
   const { chosenWord } = getState().user;
@@ -187,10 +193,10 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     }
 
     // If no default choice, create it
-    if (!step.choices.find(e => e.name === 'Default')) {
+    if (!step.choices.find(e => e.name === step.defaultStepName)) {
       // Push default choice to the font steps
-      selectedFont.steps[index].choices.push({
-        name: 'Default',
+      step.choices.push({
+        name: step.defaultStepName,
         values: {},
         id: `default${step.name}`,
       });
@@ -455,7 +461,7 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
   const { fonts } = getState().createdFonts;
   const stepToUpdate = step || getState().font.step;
   const subset = isSpecimen
-    ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz?!;,;:/1234567890-àéè().&@,?!“”()<>°+-$ '
+    ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890$£€¥¢%‰#<+=−×÷>¡!¿?.,:;…-–—()[]{}/\\&*@“”‘’„‚«»‹›©ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåçèéêëìíîïñòóôõöøùúûüýÿþ '
     : chosenWord + chosenGlyph;
 
   // Update choice fonts
@@ -601,7 +607,7 @@ export const clearFontIsLoading = () => (dispatch) => {
 export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
   console.log('==========font/goToStep============');
   console.log(step);
-  const { currentPreset } = getState().font;
+  const { currentPreset, choicesMade } = getState().font;
   const previousStep = getState().font.step;
   console.log(currentPreset);
   switch (step) {
@@ -617,13 +623,26 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
       dispatch(updateValues(undefined, true));
       console.log('Going to /specimen');
       dispatch(push('/app/specimen'));
+      /* global Intercom */
+      Intercom('trackEvent', 'unique-finished-font', {
+        preset_name: currentPreset.variant.family.name,
+        choices_made: choicesMade
+          .map((choice, index) => {
+            if (index !== 0) return choice.name;
+            return (
+              currentPreset.variant.family.name +
+              currentPreset.variant.name
+            );
+          })
+          .toString(),
+      });
       break;
     default:
       dispatch({
         type: CHANGE_STEP,
         step: step || previousStep,
       });
-      dispatch(updateValues(step, step === currentPreset.steps.length));
+      dispatch(updateValues(step, fromSpecimen || step === currentPreset.steps.length));
       if (fromSpecimen) dispatch(push('/app/customize'));
       break;
   }
@@ -650,6 +669,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
     return;
   }
 
+
   // If choice already saved for this step, reset those
   const paramsToReset = {};
   if (choicesMade[step]) {
@@ -663,6 +683,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
   // Save choice made
   choicesMade[step - 1] = choice.values || {};
   choicesMade[step - 1].name = choice.name;
+  choicesMade[step - 1].stepName = currentPreset.steps[step - 1].name;
   const manualChanges = {};
   const baseManualChanges = currentPreset.baseValues.manualChanges || {};
   const choiceManualChangeKeys = [];
@@ -764,6 +785,8 @@ export const selectChoice = (choice, isSpecimen = false) => (
     dispatch(goToStep((step += 1)));
   }
 
+  /* global Intercom */
+  Intercom('trackEvent', 'unique-chose-choice', { choice_name: choice.name });
   // Tracking : update selected count
   if (
     choice.name === 'Custom' ||
@@ -798,13 +821,14 @@ export const finishEditing = choice => (dispatch, getState) => {
   dispatch(push('/app/specimen'));
 };
 
-export const getArrayBuffer = (name, familyName, variant) => (dispatch, getState) => {
+export const getArrayBuffer = (name, familyName, styleName, subset) => (dispatch, getState) => {
   console.log('==========font/getArrayBuffer============');
   const { fontName } = getState().font;
-  const { userFontName } = getState().user;
   const { fonts } = getState().createdFonts;
   return new Promise((resolve) => {
-    fonts[name || fontName].getArrayBuffer(familyName, variant).then((data) => {
+    fonts[name || fontName].getArrayBuffer({
+      familyName, styleName, merge: true, subset,
+    }).then((data) => {
       resolve(data);
     });
   });
@@ -814,7 +838,7 @@ export const download = (name, filename) => (dispatch, getState) => {
   console.log('==========font/download============');
   const { fontName } = getState().font;
   const { fonts } = getState().createdFonts;
-  fonts[name || fontName].getArrayBuffer().then((data) => {
+  fonts[name || fontName].getArrayBuffer({ merge: true }).then((data) => {
     const blob = new Blob([data], { type: 'application/x-font-opentype' });
     saveAs(blob, `${filename}.otf`);
   });
@@ -827,23 +851,24 @@ export const createFontVariants = () => (dispatch, getState) => {
   const { chosenWord } = getState().user;
   const createdVariants = [];
   const possibleThickness = [
-    'Light',
-    'Medium',
-    'Bold',
-    'Regular',
-    'Extra Bold',
-    'Ultra Light',
+    'LIGHT',
+    'MEDIUM',
+    'BOLD',
+    'REGULAR',
+    'EXTRA BOLD',
+    'ULTRA LIGHT',
   ];
   //  --  Create thickness variant
-  const thicknessChoices = currentPreset.steps.find(e => e.name === 'Thickness')
+  const thicknessChoices = currentPreset.steps.find(e => e.name.toUpperCase() === 'THICKNESS')
     .choices;
-  const thicknessChoiceIndex = currentPreset.steps.findIndex(e => e.name === 'Thickness');
+  const thicknessChoiceIndex = currentPreset.steps.findIndex(e => e.name.toUpperCase() === 'THICKNESS');
   // Check which possibleThickness are in the presets
   const thicknessVariantPossibilities = thicknessChoices.filter(e =>
-    possibleThickness.includes(e.name));
+    possibleThickness.includes(e.name.toUpperCase()));
   // Remove selected thickness
 
   const filteredThicknessVariantPossibilities = thicknessVariantPossibilities.filter(e => e.name !== choicesMade[thicknessChoiceIndex].name);
+  const choicesToKeep = choicesMade.filter((e, index) => index !== thicknessChoiceIndex);
   // Create fonts - Apply currentParams then thickness choice values
   const promiseArray = [];
   const possibleVariants = [];
@@ -861,7 +886,7 @@ export const createFontVariants = () => (dispatch, getState) => {
               name: `${fontName}Variant${choice.name}`,
               variant: choice.name,
             });
-            const params = getCalculatedValues(choice, choicesMade, currentPreset);
+            const params = getCalculatedValues(choice, choicesToKeep, currentPreset);
             createdFont.changeParams(params, chosenWord);
             dispatch(storeCreatedFont(
               createdFont,

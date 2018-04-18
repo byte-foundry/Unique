@@ -1,7 +1,7 @@
 .Button {
   font-size: 0.8rem;
   background-color: #111;
-  border: 2px solid #111;
+  border: 2px solid green;
   color: #fff;
   padding: 8px 15px;
   cursor: pointer;
@@ -12,7 +12,7 @@
 }
 
 .Button + .Button {
-    margin-right: 1.5em;
+    margin-left: 1.5em;
 }
 
 .Button:hover {
@@ -30,22 +30,25 @@
 .Button.light {
   background-color: transparent;
   color: #b8b5c0;
-  text-decoration: underline;
-  border: 2px solid transparent;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-bottom-color: #b8b5c0;
+  padding: 0;
+  margin: 8px 15px;
 }
 
 
 .Button.white {
   background-color: #fff;
-  color: #6b00ff;
+  color: #5320ee;
   border: 2px solid #fff;
 }
 
 
 .Button.hollow:hover {
-  background-color: #6b00ff;
+  background-color: #5320ee;
   color: #fff;
-  border: 2px solid #6b00ff;
+  border: 2px solid #5320ee;
 }
 
 .Button.full {
@@ -53,12 +56,17 @@
   border-color: transparent;
   color: white;
 }
+/* .Button.full:hover {
+    opacity: .9;
+} */
 
 .Button.text {
   background-color: transparent;
   border-color: transparent;
   color: black;
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
 }
 
 .Button.text.isConfigure {

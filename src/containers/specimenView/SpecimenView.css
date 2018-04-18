@@ -32,7 +32,7 @@
 }
 
 .SpecimenView .buttons {
-  margin-top: 20px;
+  margin-top: 80px;
   margin-bottom: 80px;
 }
 
@@ -44,9 +44,16 @@
 
 .SpecimenView .buttons .button-download {
   float: right;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 .SpecimenView .buttons .button-save {
   float: right;
+  margin-right: 3em;
+  opacity: .5;
+}
+.SpecimenView .buttons .button-save:hover {
+  opacity: 1;
 }
 
 .SpecimenView .icon-back {
@@ -55,9 +62,19 @@
   cursor: pointer;
   position: relative;
   background: transparent;
+  border-radius: 50%;
   padding: 0px;
-  z-index: 10;
+  transition: all .3s ease;
 }
+
+.SpecimenView .icon-back:hover {
+  background: #5320ee;
+}
+
+.SpecimenView .icon-back:hover g path{
+  stroke: white;
+}
+
 
 
 .SpecimenView .hooray {
@@ -81,7 +98,8 @@
   width: 75%;
 }
 
-.SpecimenView .hooray .subtitle-two {
+.SpecimenView .hooray .subtitle-two,
+.SpecimenView .container .subtitle-two {
   font-weight: 400;
   font-size: 18px;
   color: #d0cdd6;
@@ -124,13 +142,15 @@
 }
 
 .SpecimenView .word {
-  font-size: 68px;
-  margin-top: 40px;
-  margin-bottom: 65px;
+  font-size: 75px;
+  margin-bottom: 40px;
 }
 
 .SpecimenView .characters .set {
   margin: calc(4rem - 1px) auto;
+}
+.SpecimenView .characters .set.first {
+  margin-top: 10px;
 }
 
 @media (min-width: 800px) {
@@ -277,6 +297,10 @@
   color: black;
 }
 
+.modal input:focus {
+  outline: none;
+}
+
 .modal input::placeholder {
   color: #cdcad6;
 }
@@ -290,3 +314,9 @@
   padding-bottom: 15px;
 }
 
+.middle-cta {
+    margin: 0 0 40px 0;
+    text-align: right;
+    font-family: unique, sans-serif;
+    font-weight: 400;
+}

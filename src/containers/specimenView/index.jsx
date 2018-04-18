@@ -1,17 +1,18 @@
 // @flow
-import React from "react";
-import ReactDOM from "react-dom";
-import { withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import Modal from "react-responsive-modal";
-import { push } from "react-router-redux";
-import { FormattedMessage } from "react-intl";
-import "./SpecimenView.css";
-import Button from "../../components/button/";
-import { storeProject } from "../../data/user";
-import { ReactComponent as Back } from "../stepView/back.svg";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Modal from 'react-responsive-modal';
+import { push } from 'react-router-redux';
+import { FormattedMessage } from 'react-intl';
+import unorphan from 'unorphan';
+import './SpecimenView.css';
+import Button from '../../components/button/';
+import { storeProject } from '../../data/user';
+import { ReactComponent as Back } from '../stepView/back.svg';
 
 class SpecimenView extends React.Component {
   constructor(props) {
@@ -19,13 +20,15 @@ class SpecimenView extends React.Component {
     this.state = {
       fontName: props.projectName,
       isInputFocused: false,
-      isModalOpened: false
+      isModalOpened: false,
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
   }
   componentDidMount() {
     this.specimenViewWrapper.focus();
+    window.scrollTo(0, 0);
+    unorphan('h1, h2, h3, p, span');
   }
   onFocus() {
     this.setState({ isInputFocused: true });
@@ -33,98 +36,180 @@ class SpecimenView extends React.Component {
   onBlur() {
     this.setState({ isInputFocused: false });
   }
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
   render() {
     const uppercase = [
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "O",
-      "P",
-      "Q",
-      "R",
-      "S",
-      "T",
-      "U",
-      "V",
-      "W",
-      "X",
-      "Y",
-      "Z"
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z',
     ];
     const lowercase = [
-      "a",
-      "b",
-      "c",
-      "d",
-      "e",
-      "f",
-      "g",
-      "h",
-      "i",
-      "j",
-      "k",
-      "l",
-      "m",
-      "n",
-      "o",
-      "p",
-      "q",
-      "r",
-      "s",
-      "t",
-      "u",
-      "v",
-      "w",
-      "x",
-      "y",
-      "z"
+      'a',
+      'b',
+      'c',
+      'd',
+      'e',
+      'f',
+      'g',
+      'h',
+      'i',
+      'j',
+      'k',
+      'l',
+      'm',
+      'n',
+      'o',
+      'p',
+      'q',
+      'r',
+      's',
+      't',
+      'u',
+      'v',
+      'w',
+      'x',
+      'y',
+      'z',
+    ];
+    const numerals = [
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '0',
+      '$',
+      '€',
+      '¢',
+      '%',
+      '‰',
+      '#',
+      '<',
+      '+',
+      '=',
+      '−',
+      '>',
     ];
     const symbols = [
-      "0",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "&",
-      "@",
-      ".",
-      ",",
-      "?",
-      "!",
-      "“",
-      "”",
-      "(",
-      ")",
-      "<",
-      ">",
-      "°",
-      "+",
-      "-",
-      "$"
+      '¡',
+      '!',
+      '¿',
+      '?',
+      '.',
+      ',',
+      ':',
+      ';',
+      '…',
+      '-',
+      '–',
+      '—',
+      '(',
+      ')',
+      '[',
+      ']',
+      '{',
+      '}',
+      '/',
+      '\\',
+      '&',
+      '*',
+      '@',
+      '“',
+      '”',
+      '‘',
+      '’',
+      '«',
+      '»',
+      '‹',
+      '›',
+    ];
+    const diacritics = [
+      'À',
+      'Á',
+      'Â',
+      'Ã',
+      'Ä',
+      'Å',
+      'Ç',
+      'È',
+      'É',
+      'Ê',
+      'Ë',
+      'Ì',
+      'Í',
+      'Î',
+      'Ï',
+      'Ñ',
+      'Ò',
+      'Ó',
+      'Ô',
+      'Õ',
+      'Ö',
+      'Ø',
+      'Ù',
+      'Ú',
+      'Û',
+      'Ü',
+      'Ý',
+      'à',
+      'á',
+      'â',
+      'ã',
+      'ä',
+      'å',
+      'ç',
+      'è',
+      'é',
+      'ê',
+      'ë',
+      'ì',
+      'í',
+      'î',
+      'ï',
+      'ñ',
+      'ò',
+      'ó',
+      'ô',
+      'õ',
+      'ö',
+      'ø',
+      'ù',
+      'ú',
+      'û',
+      'ü',
+      'ý',
+      'ÿ',
     ];
     return (
       <div
         className="SpecimenView"
-        ref={c => {
+        ref={(c) => {
           this.specimenViewWrapper = c;
         }}
         tabIndex="-1"
@@ -133,13 +218,13 @@ class SpecimenView extends React.Component {
           <Modal
             open={this.state.isModalOpened}
             onClose={() => {
-              this.setState({ fontName: "", isModalOpened: false })
+              this.setState({ fontName: '', isModalOpened: false });
             }}
             showCloseIcon={false}
             little
             classNames={{
               modal: 'modal',
-              overlay: 'overlay'
+              overlay: 'overlay',
             }}
           >
             <h2>
@@ -166,7 +251,7 @@ class SpecimenView extends React.Component {
                   <input
                     type="text"
                     value={this.state.fontName}
-                    onChange={e => {
+                    onChange={(e) => {
                       this.setState({ fontName: e.target.value });
                     }}
                     placeholder={text}
@@ -185,14 +270,14 @@ class SpecimenView extends React.Component {
                 <Button
                   className="button-closeModal"
                   onClick={() => {
-                    if (this.state.fontName !== "") {
-                      if (this.state.fromModal === "save") {
+                    if (this.state.fontName !== '') {
+                      if (this.state.fromModal === 'save') {
                         if (this.props.isAuthenticated) {
                           this.props.storeProject(this.state.fontName);
                         } else {
                           this.props.authenticate(
                             this.props.storeProject,
-                            this.state.fontName
+                            this.state.fontName,
                           );
                         }
                       } else {
@@ -223,13 +308,6 @@ class SpecimenView extends React.Component {
                 description="Speciem view subtitle"
               />
             </p>
-            <p className="subtitle-two">
-              <FormattedMessage
-                id="SpecimenView.subtitleBack"
-                defaultMessage="Not quite right? Just click trough the menu to edit"
-                description="Speciem view back subtitle"
-              />
-            </p>
             <div className="buttons">
               <Back
                 className="icon-back"
@@ -251,7 +329,7 @@ class SpecimenView extends React.Component {
                       } else {
                         this.setState({
                           isModalOpened: true,
-                          fromModal: "checkout"
+                          fromModal: 'checkout',
                         });
                       }
                     }}
@@ -276,13 +354,13 @@ class SpecimenView extends React.Component {
                         } else {
                           this.props.authenticate(
                             this.props.storeProject,
-                            this.state.fontName
+                            this.state.fontName,
                           );
                         }
                       } else {
                         this.setState({
                           isModalOpened: true,
-                          fromModal: "save"
+                          fromModal: 'save',
                         });
                       }
                     }}
@@ -362,6 +440,36 @@ class SpecimenView extends React.Component {
                   <p className="text-label">12px</p>
                 </div>
               </div>
+
+              <div className="middle-cta">
+                <div className="right">
+                  <FormattedMessage
+                    id="SpecimenView.downloadAction"
+                    defaultMessage="Download"
+                    description="SpecimenView - Download action"
+                  >
+                    {text => (
+                      <Button
+                        className="button-download"
+                        onClick={() => {
+                          if (this.state.fontName) {
+                            this.props.goToCheckout(this.state.fontName);
+                          } else {
+                            this.setState({
+                              isModalOpened: true,
+                              fromModal: 'checkout',
+                            });
+                          }
+                        }}
+                        mode="full"
+                        label={text}
+                      />
+                    )}
+                  </FormattedMessage>
+                </div>
+              </div>
+
+
               <h3>
                 <FormattedMessage
                   id="SpecimenView.characters"
@@ -370,7 +478,7 @@ class SpecimenView extends React.Component {
                 />
               </h3>
               <div className="characters">
-                <div className="set">
+                <div className="set first">
                   <div className="sub-set-characters-wrap">
                     <div className="sub-set-characters">
                       {uppercase.map(glyph => (
@@ -397,7 +505,31 @@ class SpecimenView extends React.Component {
                 <div className="set">
                   <div className="sub-set-characters-wrap">
                     <div className="sub-set-characters">
+                      {numerals.map(glyph => (
+                        <div className="sub-set-character">
+                          <div className="glyph-small">{glyph}</div>
+                          <div className="glyph-big">{glyph}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="set">
+                  <div className="sub-set-characters-wrap">
+                    <div className="sub-set-characters">
                       {symbols.map(glyph => (
+                        <div className="sub-set-character">
+                          <div className="glyph-small">{glyph}</div>
+                          <div className="glyph-big">{glyph}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="set">
+                  <div className="sub-set-characters-wrap">
+                    <div className="sub-set-characters">
+                      {diacritics.map(glyph => (
                         <div className="sub-set-character">
                           <div className="glyph-small">{glyph}</div>
                           <div className="glyph-big">{glyph}</div>
@@ -409,7 +541,21 @@ class SpecimenView extends React.Component {
               </div>
             </div>
           </div>
+
+          <p className="subtitle-two">
+            <FormattedMessage
+              id="SpecimenView.subtitleBack"
+              defaultMessage="Not quite right? Just click trough the menu to edit"
+              description="Speciem view back subtitle"
+            />
+          </p>
           <div className="buttons">
+            <Back
+              className="icon-back"
+              onClick={() => {
+                this.props.goBack();
+              }}
+            />
             <FormattedMessage
               id="SpecimenView.downloadActionBottom"
               defaultMessage="Download"
@@ -424,7 +570,7 @@ class SpecimenView extends React.Component {
                     } else {
                       this.setState({
                         isModalOpened: true,
-                        fromModal: "checkout"
+                        fromModal: 'checkout',
                       });
                     }
                   }}
@@ -449,22 +595,22 @@ const mapStateToProps = state => ({
   need: state.font.need,
   word: state.user.chosenWord,
   projectName: state.user.projectName,
-  isAuthenticated: typeof state.user.graphqlID === "string"
+  isAuthenticated: typeof state.user.graphqlID === 'string',
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       storeProject,
-      goToCheckout: fontName => push({ pathname: "/app/checkout", fontName }),
-      goBack: fontName => push("/app/customize"),
+      goToCheckout: fontName => push({ pathname: '/app/checkout', fontName }),
+      goBack: fontName => push('/app/customize'),
       authenticate: (callback, fontName) =>
         push({
-          pathname: "/app/auth",
-          authData: { callback, fontName, type: "saveFont" }
-        })
+          pathname: '/app/auth',
+          authData: { callback, fontName, type: 'saveFont' },
+        }),
     },
-    dispatch
+    dispatch,
   );
 
 SpecimenView.propTypes = {
@@ -476,20 +622,18 @@ SpecimenView.propTypes = {
   word: PropTypes.string.isRequired,
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.func.isRequired,
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
   }).isRequired,
   projectName: PropTypes.string,
   goToCheckout: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  authenticate: PropTypes.func.isRequired
+  authenticate: PropTypes.func.isRequired,
 };
 
 SpecimenView.defaultProps = {
-  fontName: "ptypo",
-  email: "",
-  projectName: ""
+  fontName: 'ptypo',
+  email: '',
+  projectName: '',
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SpecimenView)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpecimenView));

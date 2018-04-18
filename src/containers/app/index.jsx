@@ -67,19 +67,18 @@ class App extends React.Component {
   }
   componentWillReceiveProps(newProps) {
     if (newProps.shouldLogout) this.props.logout();
+    if (newProps.pathname !== "/app/customize" && !newProps.isBlackOnWhite) {
+      newProps.switchBlackOnWhite();
+    }
   }
   hasSelectedFont() {
-    console.log("=========HAS SELECTED FONT ============");
-    console.log(this.props.selectedFontLoaded);
-    console.log(this.props.selectedFont);
-    console.log("========================================");
     if (
       this.props.selectedFont !== "" &&
       (this.props.pathname === "/app/customize" ||
         this.props.pathname === "/app/specimen") &&
       !(typeof this.props.selectedFontLoaded === "object")
     ) {
-      this.props.reloadFonts();
+      console.log("Selected font but font not loaded");
       return true;
     }
     return this.props.selectedFont !== "";
@@ -90,7 +89,6 @@ class App extends React.Component {
       !(typeof this.props.selectedFontLoaded === "object")
     ) {
       console.log("Payment successful but font not loaded");
-      this.props.reloadFonts();
       return true;
     }
     console.log(`Payment: ${this.props.hasPayed === true}`);
@@ -102,7 +100,6 @@ class App extends React.Component {
       !(typeof this.props.selectedFontLoaded === "object")
     ) {
       console.log("Mail registered but font not loaded");
-      this.props.reloadFonts();
       return true;
     }
     console.log(`Mail registered: ${this.props.userEmail !== ""}`);
@@ -136,22 +133,6 @@ class App extends React.Component {
   }
   render() {
     console.log(this.props.location.pathname);
-    if (this.props.isLoading && this.props.location.pathname !== "/app/auth") {
-      // load animation
-      clearInterval(interval);
-      const letters = document.querySelectorAll(".letter");
-      let activeLetter = 0;
-      interval = setInterval(function() {
-        for (let i = 0; i < letters.length; i++) {
-          letters[i].classList.remove("animate");
-        }
-        letters[activeLetter].classList.add("animate");
-        activeLetter =
-          activeLetter + 1 === letters.length ? 0 : activeLetter + 1;
-      }, 800);
-    } else {
-      clearInterval(interval);
-    }
     return (
       <main className={`App ${this.props.isLoading ? "loading" : "loaded"}`}>
         {this.props.location.pathname !== "/app/auth" && (
@@ -172,7 +153,7 @@ class App extends React.Component {
         >
           <div
             className={`row logo-mobile ${
-              this.props.location.pathname === "/app/auth"  ? "auth" : ""
+              this.props.location.pathname === "/app/auth" ? "auth" : ""
             }`}
           >
             <div className="col-sm-12">
@@ -183,12 +164,8 @@ class App extends React.Component {
               />
             </div>
           </div>
-          <div className="row">
-            <div
-              className={`left col-sm-${
-                this.props.location.pathname !== "/app/auth" ? "10" : "12"
-              }`}
-            >
+          <div className="row content-wrapper">
+            <div className={`left col-sm-12`}>
               <Switch>
                 <Route
                   exact
@@ -229,28 +206,32 @@ class App extends React.Component {
                   component={Authenticate}
                 />
               </Switch>
+              {this.props.location.pathname !== "/app/auth" && (
+                <div
+                  className={`right col-sm-${
+                    this.props.location.pathname !== "/app/checkout"
+                      ? "2"
+                      : "12 col-md-12"
+                  } col-lg-2 ${
+                    this.props.isBlackOnWhite ||
+                    this.props.location.pathname !== "/app/customize"
+                      ? ""
+                      : "whiteOnBlack"
+                  }`}
+                >
+                  <Sidebar
+                    pathName={this.props.location.pathname}
+                    isAuthenticated={this.props.isAuthenticated}
+                    mode={
+                      this.props.location.pathname === "/app/checkout"
+                        ? "checkout"
+                        : "default"
+                    }
+                    {...this.props}
+                  />
+                </div>
+              )}
             </div>
-            {this.props.location.pathname !== "/app/auth" && (
-              <div
-                className={`right col-sm-2 ${
-                  this.props.isBlackOnWhite ||
-                  this.props.location.pathname !== "/app/customize"
-                    ? ""
-                    : "whiteOnBlack"
-                }`}
-              >
-                <Sidebar
-                  pathName={this.props.location.pathname}
-                  isAuthenticated={this.props.isAuthenticated}
-                  mode={
-                    this.props.location.pathname === "/app/checkout"
-                      ? "checkout"
-                      : "default"
-                  }
-                  {...this.props}
-                />
-              </div>
-            )}
           </div>
           <Footer
             fontSize={this.props.fontSize}

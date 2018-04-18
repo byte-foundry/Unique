@@ -32,9 +32,13 @@
 .Library .actions .action {
   cursor: pointer;
   color: #b8b5c0;
-  margin-bottom: 3px;
+  margin-bottom: 15px;
   transition: color 0.3s ease;
-  font-size: 18px;
+  font-size: 22px;
+}
+
+.Library .actions .action:hover {
+  color: #5320ee;
 }
 
 .Library .projects {
@@ -49,7 +53,7 @@
 .Library .project .preview {
   text-align: center;
   padding: 20px 10px;
-  font-size: 25px;
+  font-size: 35px;
   color: #b8b5c0;
 }
 
@@ -58,7 +62,7 @@
   padding: 15px 30px;
   color: white;
   background-color: #5320ee;
-  
+
 }
 
 .Library .project .fontName {
@@ -84,7 +88,10 @@
 }
 .Library .project .actions .action-delete{
   display: inline-block;
+  border-bottom: none;
   float: left;
+  color: #b8b5c0;
 }
-
-
+.Library .project .actions .action-delete:hover {
+    color: black;
+}

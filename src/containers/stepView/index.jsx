@@ -7,6 +7,7 @@ import FlipMove from "react-flip-move";
 import { Shortcuts } from "react-shortcuts";
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "react-tippy";
+import unorphan from "unorphan";
 import "react-tippy/dist/tippy.css";
 import {
   stepBack,
@@ -15,11 +16,17 @@ import {
   finishEditing,
   goToStep
 } from "../../data/font";
-import { storeChosenWord, storeChosenGlyph } from "../../data/user";
+import {
+  storeChosenWord,
+  storeChosenGlyph,
+  switchBlackOnWhite,
+  switchGlyphMode
+} from "../../data/user";
 import Choice from "../../components/choice/";
 import WordView from "../wordView/";
 import Sliders from "../sliders/";
 import Button from "../../components/button/";
+import Tips from "../../components/tips";
 import "./StepView.css";
 
 import { ReactComponent as Back } from "./back.svg";
@@ -67,6 +74,8 @@ class StepView extends React.Component {
   }
   componentDidMount() {
     this.stepViewWrapper.focus();
+    window.scrollTo(0, 0);
+    unorphan("h1, h2, h3, p, span");
   }
   componentWillReceiveProps(newProps) {
     this.setChoiceSelected(newProps);
@@ -79,18 +88,10 @@ class StepView extends React.Component {
   }
   setChoiceSelected(props) {
     let choice = {};
-    if (props.choicesMade[props.step]) {
-      if (props.choicesMade[props.step].name === "Custom") {
-        choice = {
-          name: props.choicesMade[props.step].name,
-          values: { ...props.choicesMade[props.step] }
-        };
-        delete choice.values.name;
-      } else {
-        choice = props.stepValues.choices.find(
-          c => c.name === props.choicesMade[props.step].name
-        );
-      }
+    if (props.choicesMade[props.step - 1]) {
+      choice = props.stepValues.choices.find(
+        c => c.name === props.choicesMade[props.step - 1].name
+      );
     }
     this.setState({
       choice,
@@ -102,23 +103,10 @@ class StepView extends React.Component {
       switch (action) {
         case "CHOICE_PREVIOUS":
           if (this.state.choice) {
-            if (this.state.choice.name === "Custom") {
-              this.setState({ choice: { name: "No choice", values: {} } });
-              break;
-            }
-
             const choiceIndex = this.props.stepValues.choices.findIndex(
               choice => choice.name === this.state.choice.name
             );
-            if (this.state.choice.name === "No choice") {
-              this.setState({
-                choice: this.props.stepValues.choices[
-                  this.props.stepValues.choices.length - 1
-                ]
-              });
-              break;
-            }
-            if (choiceIndex === 0) {
+            if (choiceIndex <= 0) {
               this.setState({
                 choice: this.props.stepValues.choices[
                   this.props.stepValues.choices.length - 1
@@ -141,14 +129,6 @@ class StepView extends React.Component {
           }
         case "CHOICE_NEXT":
           if (this.state.choice) {
-            if (this.state.choice.name === "Custom") {
-              this.setState({ choice: this.props.stepValues.choices[0] });
-              break;
-            }
-            if (this.state.choice.name === "No choice") {
-              this.setState({ choice: this.props.stepValues.choices[0] });
-              break;
-            }
             const choiceIndex = this.props.stepValues.choices.findIndex(
               choice => choice.name === this.state.choice.name
             );
@@ -165,13 +145,6 @@ class StepView extends React.Component {
             this.setState({ choice: this.props.stepValues.choices[0] });
             break;
           }
-        case "CHOICE_CUSTOM":
-          if (this.state.choice && this.state.choice.name === "Custom") {
-            this.setState({ choice: { name: "No choice", values: {} } });
-          } else {
-            this.markChoiceActive({ name: "Custom", values: {} });
-          }
-          break;
         case "CHOICE_SELECT":
           this.props.selectChoice(this.state.choice);
           break;
@@ -205,6 +178,13 @@ class StepView extends React.Component {
           }}
           tabIndex="-1"
         >
+          <div className="helper-wrapper">
+            <Tips
+              choicesMade={this.props.choicesMade}
+              stepName={this.props.stepValues.name}
+              need={this.props.need}
+            />
+          </div>
           <div className="container">
             <div className="row justify-content-md-between step-description">
               <div className="col-md-4 col-sm-12">
@@ -212,21 +192,38 @@ class StepView extends React.Component {
               </div>
               <div className="col-md-4 col-sm-12">
                 <div className="step-bubbles">
-                  {[...Array(this.props.stepLength)].map((e, i) => (
-                    <span
-                      className={`step-bubble ${this.props.step > i || this.props.choicesMade[i] ? "past" : ""} ${i === this.props.step - 1 ? 'current' : ''}`}
-                      onClick={() => {
-                        if (this.props.step > i || this.props.choicesMade[i]) {
-                          this.props.goToStep(i + 1);
-                        }
-                      }}
-                      key={`stepbubble-${i}`}
-                    />
-                  ))}
+                  {[...Array(this.props.stepLength)].map(
+                    (e, i) =>
+                      this.props.step > i || this.props.choicesMade[i] ? (
+                        <Tooltip
+                          title={this.props.steps[i].name}
+                          position="top"
+                          trigger="mouseenter"
+                          arrow="true"
+                          delay={200}
+                        >
+                          <span
+                            className={`step-bubble past ${
+                              i === this.props.step - 1 ? "current" : ""
+                            }`}
+                            onClick={() => {
+                              this.props.goToStep(i + 1);
+                            }}
+                            key={`stepbubble-${i}`}
+                          />
+                        </Tooltip>
+                      ) : (
+                        <span
+                          className={`step-bubble
+                        } ${i === this.props.step - 1 ? "current" : ""}`}
+                          key={`stepbubble-${i}`}
+                        />
+                      )
+                  )}
                 </div>
               </div>
             </div>
-            <div className="row justify-content-center">
+            <div className="row">
               <div className="col-sm-12 choices-wrapper">
                 <FormattedMessage
                   id="Shortcuts.chooseChoice"
@@ -339,17 +336,15 @@ class StepView extends React.Component {
                     </div>
                   )}
                 </FormattedMessage>
-
                 <Finish
                   className={`icon-finish ${
-                    this.props.choicesMade.length - 1 === this.props.stepLength
+                    this.props.choicesMade.length === this.props.stepLength
                       ? ""
                       : "disabled"
                   }`}
                   onClick={() => {
                     if (
-                      this.props.choicesMade.length - 1 ===
-                      this.props.stepLength
+                      this.props.choicesMade.length === this.props.stepLength
                     ) {
                       this.props.finishEditing(this.state.choice);
                     }
@@ -366,6 +361,7 @@ class StepView extends React.Component {
 
 const mapStateToProps = state => ({
   stepValues: state.font.currentPreset.steps[state.font.step - 1],
+  steps: state.font.currentPreset.steps,
   step: state.font.step,
   choicesMade: state.font.choicesMade,
   chosenWord: state.user.chosenWord,
@@ -374,7 +370,8 @@ const mapStateToProps = state => ({
   isGlyphMode: state.user.isGlyphMode,
   stepLength: state.font.currentPreset.steps.length,
   shouldShowTooltips: state.ui.shouldShowTooltips,
-  fontSize: state.user.fontSize
+  fontSize: state.user.fontSize,
+  need: state.font.need
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -386,6 +383,8 @@ const mapDispatchToProps = dispatch =>
       storeChosenWord,
       storeChosenGlyph,
       goToStep,
+      switchBlackOnWhite,
+      switchGlyphMode
     },
     dispatch
   );
@@ -420,6 +419,7 @@ StepView.propTypes = {
   shouldShowTooltips: PropTypes.bool.isRequired,
   fontSize: PropTypes.number.isRequired,
   goToStep: PropTypes.func.isRequired,
+  need: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);

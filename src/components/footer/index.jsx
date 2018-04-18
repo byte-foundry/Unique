@@ -14,34 +14,42 @@ class Footer extends React.Component {
     this.state = {};
   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div
-        className={`Footer ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"} ${this.props.pathname === "/app/auth" ? "whiteOnBlack" : ""}`}
+        className={`Footer ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"} ${
+          this.props.pathname === "/app/auth" ? "whiteOnBlack" : ""
+        }`}
       >
         <div className="row">
           <div className="col-lg-12 col-sm-12 footer-wrapper">
-            <LanguageSelect
-              pathname={this.props.pathName}
-              isBlackOnWhite={this.props.pathname === "/app/auth" ? this.props.isBlackOnWhite : true}
-              setLocale={this.props.setLocale}
-              locale={this.props.locale}
-            />
-            {this.props.pathname === "/app/customize" && (
-              <ShortcutsHelper
-                shouldShowTooltips={this.props.shouldShowTooltips}
-                toggleTooltips={this.props.toggleTooltips}
+            <div className="container">
+              <LanguageSelect
+                pathname={this.props.pathName}
+                isBlackOnWhite={
+                  this.props.pathname === "/app/auth"
+                    ? this.props.isBlackOnWhite
+                    : true
+                }
+                setLocale={this.props.setLocale}
+                locale={this.props.locale}
               />
-            )}
-            {this.props.pathname === "/app/customize" && (
-              <FontControls
-                shouldShowTooltips={this.props.shouldShowTooltips}
-                switchGlyphMode={this.props.switchGlyphMode}
-                switchBlackOnWhite={this.props.switchBlackOnWhite}
-                changeFontSize={this.props.changeFontSize}
-                fontSize={this.props.fontSize}
-              />
-            )}
+              {this.props.pathname === "/app/customize" && (
+                <ShortcutsHelper
+                  shouldShowTooltips={this.props.shouldShowTooltips}
+                  toggleTooltips={this.props.toggleTooltips}
+                />
+              )}
+              {this.props.pathname === "/app/customize" && (
+                <FontControls
+                  shouldShowTooltips={this.props.shouldShowTooltips}
+                  switchGlyphMode={this.props.switchGlyphMode}
+                  switchBlackOnWhite={this.props.switchBlackOnWhite}
+                  changeFontSize={this.props.changeFontSize}
+                  fontSize={this.props.fontSize}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

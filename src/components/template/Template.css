@@ -1,8 +1,8 @@
 .Template {
   position: relative;
   width: 100%;
-  padding: 30px 15px 20px 20px;
-  font-size: 6vh;
+  padding: 10px 15px 10px 20px;
+  font-size: 5.5vh;
   line-height: 1;
   background: #fff;
   margin-bottom: 5px;
@@ -13,9 +13,17 @@
   margin-bottom: 20px;
   white-space: nowrap;
   text-overflow: "...";
-  overflow: hidden;
+  overflow: visible;
   align-self: baseline;
   text-transform: capitalize;
+}
+
+@media (min-width: 768px) {
+  .Template {
+    font-size:6vh;
+    padding: 30px 15px 20px 20px;
+    overflow: hidden;
+  }
 }
 
 .Template.selected,
@@ -44,4 +52,10 @@
   border-radius: 5px;
   padding: 4px 8px;
   border: 2px solid #111;
+}
+
+@media (max-width: 576px) {
+  .Template {
+    width: 85%;
+  }
 }

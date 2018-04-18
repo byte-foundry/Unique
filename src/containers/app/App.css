@@ -10,6 +10,13 @@
 
 .App .left {
   padding: 0;
+  padding-right: 50px;
+}
+
+@media (max-width: 576px) {
+  .App .left {
+    padding: 0;
+  }  
 }
 .App .right {
   padding: 0;
@@ -63,13 +70,59 @@
 .App-logo-wrapper .letter {
   opacity: 0;
   fill: white;
-}
-
-.App-logo-wrapper .letter.animate {
-  animation-duration: 0.8s;
-  animation-name: animate;
+  animation-duration: 8s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
+}
+
+.App-logo-wrapper .letter-1 {
+  animation-name: animate-1;
+  will-change: 'transform, opacity';
+}
+
+.App-logo-wrapper .letter-2 {
+  animation-name: animate-2;
+  will-change: 'transform, opacity';
+}
+
+.App-logo-wrapper .letter-3 {
+  animation-name: animate-3;
+  will-change: 'transform, opacity';
+}
+
+.App-logo-wrapper .letter-4 {
+  animation-name: animate-4;
+  will-change: 'transform, opacity';
+}
+
+.App-logo-wrapper .letter-5 {
+  animation-name: animate-5;
+  will-change: 'transform, opacity';
+}
+
+.App-logo-wrapper .letter-6 {
+  animation-name: animate-6;
+  will-change: 'transform, opacity';
+}
+
+.App-logo-wrapper .letter-7 {
+  animation-name: animate-7;
+  will-change: 'transform, opacity';
+}
+
+.App-logo-wrapper .letter-8 {
+  animation-name: animate-8;
+  will-change: 'transform, opacity';
+}
+
+.App-logo-wrapper .letter-9 {
+  animation-name: animate-9;
+  will-change: 'transform, opacity';
+}
+
+.App-logo-wrapper .letter-10 {
+  animation-name: animate-10;
+  will-change: 'transform, opacity';
 }
 
 .App-loader-wrapper {
@@ -140,6 +193,7 @@
   animation: animLoadedHeader 1s cubic-bezier(0.7, 0, 0.3, 1) forwards;
   background-color: #fff;
   position: absolute;
+  height: auto;
 }
 
 .loaded .App-content .DefineNeed,
@@ -170,20 +224,210 @@
   }
 }
 
-@keyframes animate {
+@keyframes animate-1 {
   0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  5.2% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  9.1% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+  96.1% {
     opacity: 0;
     transform: translate3d(0, -20%, 0);
   }
-  30% {
+}
+
+@keyframes animate-2 {
+  5.2% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+  9.1% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
-  70% {
+  14.3% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
-  100% {
+  18.2% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+}
+
+@keyframes animate-3 {
+  14.3% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+  18.2% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  23.4% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  27.3% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+}
+
+@keyframes animate-4 {
+  23.4% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+  27.3% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  32.5% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  36.4% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+}
+
+@keyframes animate-5 {
+  32.5% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+  36.4% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  41.6% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  45.5% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+}
+
+@keyframes animate-6 {
+  41.6% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+  45.5% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  50.7% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  54.6% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+}
+
+@keyframes animate-7 {
+  50.7% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+  54.6% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  59.7% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  63.6% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+}
+
+@keyframes animate-7 {
+  59.7% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+  63.6% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  68.8% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  72.7% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+}
+
+@keyframes animate-8 {
+  68.8% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+  72.7% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  77.9% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  81.8% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+}
+
+@keyframes animate-9 {
+  77.9% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+  81.8% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  87% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  90.9% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+}
+
+@keyframes animate-10 {
+  87% {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+  90.9% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  96.1% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  0% {
     opacity: 0;
     transform: translate3d(0, 20%, 0);
   }
@@ -192,6 +436,10 @@
 .App-content {
   overflow-x: hidden;
   margin: 0 auto;
+}
+
+.App-content .content-wrapper {
+    padding-left: 1.2em;
 }
 
 .tippy-tooltip {
@@ -255,5 +503,8 @@
   .App .logo-mobile svg{
     margin-left: -20px;
     margin-top: -5px;
+  }
+  .App-content .content-wrapper {
+      padding-left: 0;
   }
 }

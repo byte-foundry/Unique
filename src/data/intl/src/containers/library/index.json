@@ -15,6 +15,11 @@
     "defaultMessage": "Restart your project"
   },
   {
+    "id": "Library.actionLogout",
+    "description": "Libraryaction logout",
+    "defaultMessage": "Logout"
+  },
+  {
     "id": "Library.savedProjectsTitle",
     "description": "Library saved projects title",
     "defaultMessage": "Saved Projects"
