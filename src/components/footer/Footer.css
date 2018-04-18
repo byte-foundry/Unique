@@ -10,7 +10,8 @@
   padding-top: 15px;
   padding-right: 50px;
   padding-bottom: 15px;
-  position: relative;
+  position: relative;  
+  min-height: 54px;
 }
 
 .Footer .footer-wrapper:after {
