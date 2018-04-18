@@ -35,16 +35,17 @@
   height: 10px;
   background-color: #d8d8d8;
   border-radius: 50%;
-  margin-right: 10px;  
+  margin-right: 5px;
+  margin-left: 5px;
   display: inline-block;
 }
 
 .StepView .step-name {
-  color: #5f1ffb;
+  color: #5320ee;
 }
 
 .StepView .step-bubble.past {
-  background-color: #5f1ffb;
+  background-color: #5320ee;
   cursor: pointer;
 }
 
@@ -157,6 +158,12 @@
   font-family: "sliderFont";
   display: block;
   margin-bottom: 30px;
+}
+
+.StepView .helper-wrapper {
+  position: absolute;
+  top: 32px;
+  right: 80px;
 }
 
 @media (max-width: 768px) {

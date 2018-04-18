@@ -44,6 +44,15 @@ class Sidebar extends React.Component {
         />
         {this.props.mode === 'checkout' && (
           <div className="sidebar-checkout">
+            <h2 className="baseprice">
+              {parseFloat(this.props.basePrice).toLocaleString(
+                this.props.locale_full,
+                {
+                  style: 'currency',
+                  currency: this.props.currency,
+                },
+              )}
+            </h2>
             <h2 className="price">
               {parseFloat(this.props.checkoutPrice).toLocaleString(
                 this.props.locale_full,
@@ -60,7 +69,11 @@ class Sidebar extends React.Component {
                       <span className="left">{option.name}</span>
                       <span className="right">
                         {option.price === 0
-                          ? 'included'
+                          ? <FormattedMessage
+                              id="Checkout.included"
+                              defaultMessage="included"
+                              description="Checkout - Included price"
+                            />
                           : parseFloat(option.type === 'discount'
                                 ? this.props.option20Price
                                 : this.props.option5Price).toLocaleString(this.props.locale_full, {
@@ -123,6 +136,7 @@ Sidebar.propTypes = {
   locale_full: PropTypes.string.isRequired,
   option5Price: PropTypes.number.isRequired,
   option20Price: PropTypes.number.isRequired,
+  basePrice: PropTypes.number.isRequired,
 };
 
 Sidebar.defaultProps = {
@@ -139,6 +153,7 @@ const mapStateToProps = state => ({
   step: state.font.step,
   choicesMade: state.font.choicesMade,
   checkoutPrice: state.user.checkoutPrice,
+  basePrice: state.user.basePrice,
   checkoutOptions: state.user.checkoutOptions,
   locale_full: state.ui.locale_full,
   currency: state.ui.currency,

@@ -63,6 +63,7 @@ const initialState = {
   option5Price: 5,
   option20Price: -20,
   graphQLToken: undefined,
+  basePrice: BASE_PACK_PRICE,
   authError: '',
 };
 
@@ -179,6 +180,7 @@ export default (state = initialState, action) => {
         userFontName: action.fontName,
         option5Price: action.option5Price,
         option20Price: action.option20Price,
+        basePrice: action.basePrice,
       };
 
     case RESET_CHECKOUT_OPTIONS:
@@ -439,18 +441,23 @@ export const updateCheckoutOptions = (checkoutOptions, fontName) => (
   fx.rates = currencyRates.rates;
   fx.base = currencyRates.base;
   let price = BASE_PACK_PRICE;
+  let basePrice = BASE_PACK_PRICE;
   checkoutOptions.forEach((option) => {
     if (option.selected) {
       price += option.price;
+      if (option.price > 0) {
+        basePrice += option.price;
+      }
     }
   });
-  const checkoutPrice = fx.convert(price, { from: 'USD', to: currency });
+  const checkoutPrice = Math.round(fx.convert(price, { from: 'USD', to: currency })*2)/2 - 0.01;
   dispatch({
     type: CHANGE_CHECKOUT_ORDER,
     checkoutOptions: [...checkoutOptions],
     checkoutPrice,
-    option5Price: fx.convert(5, { from: 'USD', to: currency }),
-    option20Price: fx.convert(-20, { from: 'USD', to: currency }),
+    option5Price: Math.round(fx.convert(5, { from: 'USD', to: currency })*2)/2 - 0.01,
+    option20Price: Math.round(fx.convert(-20, { from: 'USD', to: currency })*2)/2 - 0.01,
+    basePrice: Math.round(fx.convert(basePrice, { from: 'USD', to: currency })*2)/2 - 0.01,
     fontName,
   });
 };

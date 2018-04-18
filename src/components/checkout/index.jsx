@@ -10,6 +10,7 @@ import axios from 'axios';
 import { afterPayment } from '../../data/user';
 import { setUnstable, setStable } from '../../data/ui';
 import { getArrayBuffer } from '../../data/font';
+import { EXPORT_SUBSET } from '../../data/constants';
 import './Checkout.css';
 
 import {
@@ -45,7 +46,12 @@ const onToken = (
   const fontsSelected = checkoutOptions.filter(e => e.type === 'font' || e.dbName === 'baseFont');
   const promiseArray = [];
   fontsSelected.forEach((fontSelected) => {
-    promiseArray.push(getArrayBuffer(fontSelected.fontName, userFontName, fontSelected.type === 'font' ? fontSelected.name : 'Regular'));
+    promiseArray.push(getArrayBuffer(
+      fontSelected.fontName,
+      userFontName,
+      fontSelected.type === 'font' ? fontSelected.name : fontSelected.styleName,
+      EXPORT_SUBSET,
+    ));
   });
   Promise.all(promiseArray).then((buffers) => {
     console.log(buffers);

@@ -1,9 +1,15 @@
 .DefineNeed {
   position: relative;
   display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: calc(100vh - 200px);
+  flex-direction: column;
+  padding-top: 0;
+  min-height: calc(100vh - 200px);
+}
+
+@media (min-width: 768px) {
+  .DefineNeed {
+    padding-top: 150px;
+  }
 }
 
 @media (min-width: 1800px) {
@@ -13,10 +19,17 @@
 }
 
 .DefineNeed .needs {
-  font-size: 24px;
+  font-size: 18px;
   line-height: 1.4;
   user-select: none;
 }
+
+@media (min-width: 768px) {
+  .DefineNeed .needs {
+    font-size: 24px;
+  }
+}
+
 .DefineNeed .needs span:hover {
     color: #5320ee;
 }
@@ -37,8 +50,7 @@
   height: auto;
   cursor: pointer;
   position: absolute;
-  top: calc(50% + 25px);
-  transform: translateY(-50%);
+  top: 300px;
   right: 0;
   background: transparent;
   transition: all .3s ease;
@@ -47,7 +59,7 @@
   z-index: 3;
 }
 .DefineNeed .icon-back {
-  top: calc(50% - 25px);
+  top: 350px;
 }
 .DefineNeed .icon-next.disabled {
   border-color: #b8b5c0;
@@ -99,13 +111,26 @@
   display: inline-block;
   font-weight: 400;
   margin-bottom: 40px;
-  font-size: 28px;
+  font-size: 20px;
   color: black;
 }
 
+@media (min-width: 768px) {
+  .DefineNeed h1, .DefineNeed h2 {
+    font-size: 28px;
+  }
+}
+
 .DefineNeed .logoName {
-  margin-top: 50px;
-  padding-bottom: 100px;
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+  .DefineNeed .logoName {
+    margin-top: 50px;
+    padding-bottom: 100px;
+  }
 }
 
 .DefineNeed .logoName h1{

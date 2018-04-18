@@ -6,11 +6,9 @@
 }
 
 .Footer .footer-wrapper {
-  background-color: rgba(255,255,255,0.7);
-  margin-left: -15px;
-  padding-left: 65px;
+  background-color: rgba(255,255,255,1);
   padding-top: 15px;
-  padding-right: 16.666667%;
+  padding-right: 50px;
   padding-bottom: 15px;
 }
 

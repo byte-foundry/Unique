@@ -25,6 +25,9 @@ class Library extends React.Component {
       savedProjects
     };
   }
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   componentWillReceiveProps(newProps) {
     const payedProjects = newProps.projects.filter(
       project => project.bought === true

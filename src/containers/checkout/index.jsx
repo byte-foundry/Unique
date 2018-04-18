@@ -82,6 +82,9 @@ class Checkout extends React.Component {
     props.createFontVariants();
     this.toggleChoice = this.toggleChoice.bind(this);
   }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
   toggleChoice(name) {
     const { selectedOptions } = this.state;
     const selectedIndex = selectedOptions.findIndex(option => option.name === name);
@@ -122,19 +125,19 @@ class Checkout extends React.Component {
     return (
       <div className="Checkout">
         <div className="container">
-          <Back
-            className="icon-back"
-            onClick={() => {
-              this.props.goBack();
-            }}
-          />
           <h2>
             <FormattedMessage
               id="CheckoutView.title"
               defaultMessage="Create your Unique package:"
               description="Checkout view title"
             />
-          </h2>
+          </h2>          
+          <Back
+            className="icon-back"
+            onClick={() => {
+              this.props.goBack();
+            }}
+          />
           <div className="checkout-options">
             <Masonry breakPoints={[350]}>
               {this.state.selectedOptions

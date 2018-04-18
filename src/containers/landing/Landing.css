@@ -58,11 +58,12 @@
   padding: 14px 30px;
   display: inline-block;
   width: auto;
+  border: 1px solid transparent;
 }
 
-.Landing .Button:hover,
-.Landing .profile-icon:hover {
-    transform: scale(1.1);
+.Landing .Button:hover {
+    background: #5320ee;
+    border: 2px solid white;
 }
 
 .Landing .header input {
@@ -114,7 +115,7 @@
   z-index: 2;
 }
 
-@media (max-width: 1560px) {
+@media (max-width: 1439px) {
   .Landing .one-1 {
     display: none;
   }
@@ -132,6 +133,7 @@
   height: auto;
   margin-bottom: 10%;
   width: 80%;
+  max-width: 850px;
   margin-top: -42vw;
   margin-left: auto;
   margin-right: auto;
@@ -219,69 +221,111 @@
   margin-bottom: 150px;
 }
 
+.Landing .howItWorks .row.row-sm {
+  margin-bottom: 50px;
+}
+
+.Landing .howItWorks .row.row-md {
+  margin-bottom: 85px;
+}
+
+@media (min-width: 576px) {
+  .Landing .howItWorks .row.row-sm {
+    margin-bottom: 150px;
+  }
+
+  .Landing .howItWorks .row.row-md {
+    margin-bottom: 150px;
+  }
+}
+
 .Landing .howItWorks h1 {
   font-weight: 400;
-  color: #632bdd;
+  color: #5320ee;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 100px;
-  font-size: 35px;
+  font-size: 1.3rem;
+}
+
+@media (min-width: 576px) {
+  .Landing .howItWorks h1 {
+    font-size: 2rem;
+    margin-bottom: 100px;
+  }
 }
 
 .Landing .howItWorks .image-wrapper {
   position: relative;
-  height: 170px;
-  margin-bottom: 50%;
+  margin-bottom: 105px;
+  height: inherit;
+}
+
+.Landing .howItWorks .howItWorks-icon1,
+.Landing .howItWorks .howItWorks-icon2,
+.Landing .howItWorks .howItWorks-icon3 {
+  position: relative;
+  width: 100%;
 }
 
 .Landing .howItWorks .howItWorks-icon1 {
-  position: absolute;
-  top: -100%;
-  left: 50px;
-  width: 120%;
   height: auto;
+  left: 40px;
 }
 
 .Landing .howItWorks .howItWorks-icon2 {
-  position: absolute;
-  top: -100%;
-  right: 80px;
-  width: 120%;
   height: auto;
+  right: 40px;
 }
 
 .Landing .howItWorks .howItWorks-icon3 {
-  position: absolute;
-  top: -100%;
-  left: 50px;
-  width: 120%;
   height: auto;
 }
 
-@media (max-width: 775px) {
+@media (min-width: 992px) {
   .Landing .howItWorks .image-wrapper {
-    margin-bottom: inherit;
-    height: inherit;
+    height: 170px;
+    margin-bottom: 500px;
   }
-  .Landing .howItWorks .howItWorks-icon1,
-  .Landing .howItWorks .howItWorks-icon2,
-  .Landing .howItWorks .howItWorks-icon3 {
-    position: relative;
+
+  .Landing .howItWorks .howItWorks-icon1 {
+    top: -100%;
+    left: 115px;
     width: 100%;
-    top: inherit;
-    left: inherit;
+    position: absolute;
+  }
+
+  .Landing .howItWorks .howItWorks-icon2 {
+    position: absolute;
+    top: -100%;
+    right: 135px;
+    width: 100%;
+  }
+
+  .Landing .howItWorks .howItWorks-icon3 {
+    position: absolute;
+    top: -100%;
+    left: 115px;
+    width: 100%;
   }
 }
 
+
 .Landing .howItWorks .stepNumber {
   font-size: 18px;
-  color: #632bdd;
+  color: #5320ee;
   margin-bottom: 10px;
 }
 
 .Landing .howItWorks h3 {
-  font-size: 28px;
+  font-size: 1.4rem;
   font-weight: 400;
+}
+
+@media (min-width: 576px) {
+  .Landing .howItWorks h3 {
+    font-size: 1.9rem;
+    font-weight: 400;
+  }
 }
 
 .Landing .howItWorks .stepdescription {
@@ -291,26 +335,27 @@
 
 .Landing .howItWorks .Button {
   padding: 0;
-  color: #632bdd;
+  color: #5320ee;
   font-size: 16px;
 
   text-decoration: none;
   padding-bottom: .1em;
   border: 0;
-  border-bottom: 2px solid #632bdd;
+  border-bottom: 2px solid #5320ee;
 }
 
 .Landing .howItWorks .Button:hover {
     border-bottom: 2px solid transparent;
 }
 
-.Landing .prototypo {
-  position: relative;
-  padding-top: 10%;
-  padding-bottom: 10%;
+.Landing .prototypo .background {
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   background-image: linear-gradient(246deg, #5320ee, #5d28e2 68%, #622bdd);
   clip-path: polygon(0 20%, 100% 0, 100% 100%, 0% 100%);
-  color: white;
 }
 
 .Landing .one-5 {
@@ -322,21 +367,16 @@
   z-index: 2;
 }
 
+.Landing .prototypo {
+  position: relative;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  color: white;
+}
+
 @media (max-width: 775px) {
   .Landing .one-5 {
     display: none;
-  }
-  .Landing .howItWorks .image-wrapper {
-    margin-bottom: inherit;
-    height: inherit;
-  }
-  .Landing .howItWorks .howItWorks-icon1,
-  .Landing .howItWorks .howItWorks-icon2,
-  .Landing .howItWorks .howItWorks-icon3 {
-    position: relative;
-    width: 100%;
-    top: inherit;
-    left: inherit;
   }
   .Landing .prototypo {
     padding-top: 20%;
@@ -344,15 +384,47 @@
   }
 }
 
+@media (max-width: 575px) {
+  .Landing .prototypo {
+    padding-top: 40%;
+  }
+}
+
 .Landing .prototypo h1 {
   font-weight: 400;
   text-transform: uppercase;
   margin-bottom: 40px;
+    font-size: 1.3rem;
 }
 
 .Landing .prototypo p {
   line-height: 30px;
-  font-size: 20px;
+  font-size: 0.9rem;
+}
+
+.Landing .prototypo .container .Button {
+    margin-top: 1em;
+    display: inline-block;
+}
+
+.Landing .prototypo .container {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+@media (min-width: 576px) {
+  .Landing .prototypo .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .Landing .prototypo h1 {
+    font-size: 1.5rem;
+  }
+
+  .Landing .prototypo p {
+    font-size: 20px;
+  }
 }
 
 .Landing .footer {
@@ -368,6 +440,12 @@
   opacity: 0.9;
 }
 
+.Landing .footer .credits a {
+    color: white;
+    text-decoration: underline;
+    padding-left: .5em;
+}
+
 .Landing .footer .LanguageSelect {
   float: right;
 }
@@ -376,12 +454,38 @@
   float: left;
 }
 
-.Landing .float-right {
-  float: right;
+.Landing .header-title {
+  text-align: center;
 }
 
-@media (max-width: 993px) {
+.Landing .header-CTA {
+  margin-bottom: 60px;
+}
+
+.Landing .float-right {
+  text-align: center;
+}
+
+@media (min-width: 992px) {
   .Landing .float-right {
-    float: left;
+    float: right;
+  }
+
+  .Landing .header-CTA {
+    margin-bottom: inherit;
+  }
+
+  .Landing .header-title {
+    text-align: left;
+  }
+}
+
+.Landing h1 {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 576px) {
+  .Landing h1 {
+    font-size: 2rem;
   }
 }

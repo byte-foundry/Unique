@@ -683,6 +683,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
   // Save choice made
   choicesMade[step - 1] = choice.values || {};
   choicesMade[step - 1].name = choice.name;
+  choicesMade[step - 1].stepName = currentPreset.steps[step - 1].name;
   const manualChanges = {};
   const baseManualChanges = currentPreset.baseValues.manualChanges || {};
   const choiceManualChangeKeys = [];
@@ -820,12 +821,14 @@ export const finishEditing = choice => (dispatch, getState) => {
   dispatch(push('/app/specimen'));
 };
 
-export const getArrayBuffer = (name, familyName, styleName) => (dispatch, getState) => {
+export const getArrayBuffer = (name, familyName, styleName, subset) => (dispatch, getState) => {
   console.log('==========font/getArrayBuffer============');
   const { fontName } = getState().font;
   const { fonts } = getState().createdFonts;
   return new Promise((resolve) => {
-    fonts[name || fontName].getArrayBuffer({ familyName, styleName, merge: true }).then((data) => {
+    fonts[name || fontName].getArrayBuffer({
+      familyName, styleName, merge: true, subset,
+    }).then((data) => {
       resolve(data);
     });
   });
