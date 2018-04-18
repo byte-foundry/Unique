@@ -72,17 +72,13 @@ class App extends React.Component {
     }
   }
   hasSelectedFont() {
-    console.log("=========HAS SELECTED FONT ============");
-    console.log(this.props.selectedFontLoaded);
-    console.log(this.props.selectedFont);
-    console.log("========================================");
     if (
       this.props.selectedFont !== "" &&
       (this.props.pathname === "/app/customize" ||
         this.props.pathname === "/app/specimen") &&
       !(typeof this.props.selectedFontLoaded === "object")
     ) {
-      this.props.reloadFonts();
+      console.log("Selected font but font not loaded");
       return true;
     }
     return this.props.selectedFont !== "";
@@ -93,7 +89,6 @@ class App extends React.Component {
       !(typeof this.props.selectedFontLoaded === "object")
     ) {
       console.log("Payment successful but font not loaded");
-      this.props.reloadFonts();
       return true;
     }
     console.log(`Payment: ${this.props.hasPayed === true}`);
@@ -105,7 +100,6 @@ class App extends React.Component {
       !(typeof this.props.selectedFontLoaded === "object")
     ) {
       console.log("Mail registered but font not loaded");
-      this.props.reloadFonts();
       return true;
     }
     console.log(`Mail registered: ${this.props.userEmail !== ""}`);
