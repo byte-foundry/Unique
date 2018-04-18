@@ -172,6 +172,12 @@
   right: 80px;
 }
 
+@media (max-width: 1800px) {
+  .StepView .helper-wrapper {
+    top: -52px;
+  }  
+}
+
 @media (max-width: 768px) {
   .StepView .icon-next-wrapper {
     right: -20px;
