@@ -63,6 +63,7 @@
 
 .Landing .Button:hover {
     opacity: .9;
+    border-color: white;
 }
 
 .Landing .header input {

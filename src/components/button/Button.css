@@ -56,6 +56,9 @@
   border-color: transparent;
   color: white;
 }
+/* .Button.full:hover {
+    opacity: .9;
+} */
 
 .Button.text {
   background-color: transparent;
