@@ -42,6 +42,7 @@ export const CHANGE_CHECKOUT_ORDER = 'user/CHANGE_CHECKOUT_ORDER';
 export const RESET_CHECKOUT_OPTIONS = 'user/RESET_CHECKOUT_OPTIONS';
 export const DELETE_PROJECT = 'user/DELETE_PROJECT';
 export const LOGOUT = 'user/LOGOUT';
+export const UPDATE_RECOMMANDATIONS = 'user/UPDATE_RECOMMANDATIONS';
 
 const initialState = {
   email: '',
@@ -65,6 +66,7 @@ const initialState = {
   graphQLToken: undefined,
   basePrice: BASE_PACK_PRICE,
   authError: '',
+  recommandations: {},
 };
 
 export default (state = initialState, action) => {
@@ -195,6 +197,11 @@ export default (state = initialState, action) => {
         ...state,
         authError: action.authError,
       };
+    case UPDATE_RECOMMANDATIONS:
+      return {
+        ...state,
+        recommandations: action.recommandations,
+      }
     default:
       return state;
   }
@@ -362,6 +369,7 @@ export const switchBlackOnWhite = () => (dispatch) => {
   });
 };
 
+
 export const switchGlyphMode = () => (dispatch) => {
   dispatch({
     type: SWITCH_GLYPH_MODE,
@@ -372,6 +380,17 @@ export const changeFontSize = fontSize => (dispatch) => {
   dispatch({
     type: CHANGE_FONT_SIZE,
     fontSize,
+  });
+};
+
+export const storeRecommandations = (recommandations, currentStep) => (dispatch, getState) => {
+  const currentReco = getState().user.recommandations;
+  dispatch({
+    type: UPDATE_RECOMMANDATIONS,
+    recommandations: {
+      ...currentReco,
+      [currentStep]: recommandations,
+    },
   });
 };
 

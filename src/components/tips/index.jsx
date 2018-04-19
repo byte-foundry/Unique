@@ -18,7 +18,7 @@ const tipsData = [
       }
     ],
     showOn: ["Width", "X-Height"],
-    recommanded: "Condensed",
+    recommanded: ["Condensed"],
     message: (
       <FormattedMessage
         id="Tips.widthCondensed"
@@ -39,7 +39,7 @@ const tipsData = [
       }
     ],
     showOn: ["Width"],
-    recommanded: "Extended",
+    recommanded: ["Extended"],
     message: (
       <FormattedMessage
         id="Tips.widthExtended"
@@ -56,11 +56,28 @@ const tipsData = [
       }
     ],
     showOn: ["Width"],
-    recommanded: "Extended",
+    recommanded: ["Extended"],
     message: (
       <FormattedMessage
         id="Tips.widthExtendedSimple"
         defaultMessage="WidthExtendedSimple Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis odio recusandae deleniti ut optio est adipisci nobis similique laudantium natus, fugiat libero quisquam nesciunt sequi aperiam ullam quas deserunt. Velit!"
+        description="Test"
+      />
+    )
+  },
+  {
+    context: [
+      {
+        stepName: "Width",
+        choices: ["Extended"]
+      }
+    ],
+    showOn: ["Slant"],
+    recommanded: ["Default"],
+    message: (
+      <FormattedMessage
+        id="Tips.slantDefaultSimple"
+        defaultMessage="SlantDefaultSimple Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis odio recusandae deleniti ut optio est adipisci nobis similique laudantium natus, fugiat libero quisquam nesciunt sequi aperiam ullam quas deserunt. Velit!"
         description="Test"
       />
     )
@@ -79,6 +96,7 @@ class Tips extends React.Component {
   generateTips(props) {
     const { choicesMade, stepName, need } = props;
     const tips = [];
+    const recommanded = [];
     tipsData.forEach(tip => {
       if (tip.showOn.findIndex(e => e === stepName) !== -1) {
         let shouldIncludeTip = true;
@@ -106,11 +124,13 @@ class Tips extends React.Component {
           }
         });
         if (shouldIncludeTip) {
+          tip.recommanded.forEach(reco => recommanded.push(reco));
           tips.push({ message: tip.message, weight: tipWeight });
         }
       }
     });
     tips.sort((a, b) => a.weight <= b.weight);
+    this.props.storeRecommandations(recommanded, stepName);
     this.setState({ tips, tipIndex: 0 });
   }
   componentWillMount() {
@@ -120,8 +140,11 @@ class Tips extends React.Component {
     unorphan("h1, h2, h3, p, span");
   }
   componentWillReceiveProps(newProps) {
-    this.generateTips(newProps);
-    unorphan("h1, h2, h3, p, span");
+    if (this.props.stepName !== newProps.stepName) {
+      this.generateTips(newProps);
+      unorphan("h1, h2, h3, p, span");
+      this.setState({ opened: false });
+    }    
   }
   render() {
     return this.state.tips.length > 0 ? (

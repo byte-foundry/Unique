@@ -167,15 +167,9 @@
 }
 
 .StepView .helper-wrapper {
-  position: absolute;
+  position: fixed;
   top: 32px;
   right: 80px;
-}
-
-@media (max-width: 1800px) {
-  .StepView .helper-wrapper {
-    top: -52px;
-  }  
 }
 
 @media (max-width: 768px) {

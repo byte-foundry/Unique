@@ -20,13 +20,15 @@ import {
   storeChosenWord,
   storeChosenGlyph,
   switchBlackOnWhite,
-  switchGlyphMode
+  switchGlyphMode,
+  storeRecommandations
 } from "../../data/user";
 import Choice from "../../components/choice/";
 import WordView from "../wordView/";
 import Sliders from "../sliders/";
 import Button from "../../components/button/";
 import Tips from "../../components/tips";
+import Cheers from "../../components/cheers";
 import "./StepView.css";
 
 import { ReactComponent as Back } from "./back.svg";
@@ -183,7 +185,20 @@ class StepView extends React.Component {
               choicesMade={this.props.choicesMade}
               stepName={this.props.stepValues.name}
               need={this.props.need}
+              storeRecommandations={this.props.storeRecommandations}
             />
+            {this.props.choicesMade[this.props.step - 2] && (
+              <Cheers
+                recommandations={
+                  this.props.recommandations[
+                    this.props.choicesMade[this.props.step - 2].stepName
+                  ]
+                }
+                previousChoiceMade={
+                  this.props.choicesMade[this.props.step - 2].name
+                }
+              />
+            )}
           </div>
           <div className="container">
             <div className="row justify-content-md-between step-description">
@@ -371,7 +386,8 @@ const mapStateToProps = state => ({
   stepLength: state.font.currentPreset.steps.length,
   shouldShowTooltips: state.ui.shouldShowTooltips,
   fontSize: state.user.fontSize,
-  need: state.font.need
+  need: state.font.need,
+  recommandations: state.user.recommandations
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -384,7 +400,8 @@ const mapDispatchToProps = dispatch =>
       storeChosenGlyph,
       goToStep,
       switchBlackOnWhite,
-      switchGlyphMode
+      switchGlyphMode,
+      storeRecommandations
     },
     dispatch
   );
@@ -419,7 +436,8 @@ StepView.propTypes = {
   shouldShowTooltips: PropTypes.bool.isRequired,
   fontSize: PropTypes.number.isRequired,
   goToStep: PropTypes.func.isRequired,
-  need: PropTypes.string.isRequired
+  need: PropTypes.string.isRequired,
+  storeRecommandations: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);
