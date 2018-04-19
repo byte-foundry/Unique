@@ -431,6 +431,7 @@ export const afterPayment = res => (dispatch, getState) => {
       },
     }));
   }
+  dispatch(setStable());
 };
 
 export const updateCheckoutOptions = (checkoutOptions, fontName) => (

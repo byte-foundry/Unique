@@ -438,9 +438,6 @@
   margin: 0 auto;
 }
 
-.App-content .content-wrapper {
-    padding-left: 1.2em;
-}
 
 .tippy-tooltip {
   font-size: 0.8rem !important;
