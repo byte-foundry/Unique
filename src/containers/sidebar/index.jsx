@@ -114,7 +114,7 @@ class Sidebar extends React.Component {
                     }
                   )}
             </h2>
-            <CouponInput storeCoupon={this.props.storeCoupon} />
+            <CouponInput storeCoupon={this.props.storeCoupon} coupon={this.props.coupon}/>
             <FormattedMessage
               id="Sidebar.checkoutAction"
               defaultMessage="Checkout"

@@ -456,6 +456,7 @@ export const afterPayment = res => (dispatch, getState) => {
   const { data } = res;
   const isPayed = data.paid;
   const userStripeEmail = data.email;
+  dispatch(storeCoupon({}));
   /* global Intercom */
   Intercom("trackEvent", "unique-bought-font");
   if (graphQLToken) {

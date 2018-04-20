@@ -21,6 +21,15 @@ class CouponInput extends React.Component {
   }
   componentWillMount() {
     this.timer = null;
+    if (this.props.coupon.code) {
+      this.setState({
+        coupon: this.props.coupon.code,
+        isOpened: true,
+        errorCoupon: false,
+        validCoupon: false
+      });
+      this.checkCoupon(this.props.coupon.code);
+    }
   }
 
   handleCoupon(e) {
@@ -38,9 +47,9 @@ class CouponInput extends React.Component {
       this.props.storeCoupon({});
     }
   }
-  checkCoupon() {
+  checkCoupon(code) {
     axios
-      .get(`${COUPON_SERVER_URL}${this.state.coupon}`)
+      .get(`${COUPON_SERVER_URL}${code || this.state.coupon}`)
       .then(res => {
         const { label, percentOff, name } = res.data;
         this.props.storeCoupon({ label, discount: percentOff, code: name });
