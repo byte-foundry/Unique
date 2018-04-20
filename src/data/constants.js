@@ -45,6 +45,6 @@ export const EXPORT_SUBSET =
 
 export const COUPON_SERVER_URL = `${
   process.env.NODE_ENV === "production"
-    ? "https://tc1b6vq6o8.execute-api.eu-west-1.amazonaws.com/prod/unique/coupons/"
+    ? "https://tc1b6vq6o8.execute-api.eu-west-1.amazonaws.com/dev/unique/coupons/"
     : "https://tc1b6vq6o8.execute-api.eu-west-1.amazonaws.com/dev/unique/coupons/"
 }`;
