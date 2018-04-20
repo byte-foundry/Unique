@@ -64,13 +64,14 @@
   display: inline-block;
   font-size: 30px;
   margin-bottom: -10px;
+  font-weight: 400;
   opacity: 0.6;
 }
 
 .Sidebar.checkout .sidebar-checkout .baseprice::after {
   content: ' ';
   width: 100%;
-  height: 2px;
+  height: 3px;
   background-color: white;
   position: absolute;
   top: 50%;
@@ -78,12 +79,19 @@
   transform: translateY(-50%);
 }
 
+.Sidebar.checkout .sidebar-checkout .sidebar-checkout-title  {
+  font-size: 32px;
+  font-weight: 400;
+}
+
 .Sidebar.checkout .sidebar-checkout .price {
   font-size: 52px;
+  font-weight: 400;
 }
 
 .Sidebar.checkout .sidebar-checkout .choices {
   margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .Sidebar.checkout .sidebar-checkout .choices .choice {
@@ -110,7 +118,6 @@
 .Sidebar.checkout .button-checkout {
   display: block;
   text-align: center;
-  margin-top: 80px;
 }
 
 @media (max-width: 576px) {

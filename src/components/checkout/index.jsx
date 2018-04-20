@@ -40,6 +40,7 @@ const onToken = (
   getArrayBuffer,
   userFontName,
   checkoutOptions,
+  coupon
 ) => (token) => {
   setUnstable();
   const fonts = [];
@@ -79,6 +80,7 @@ const onToken = (
           invoice,
           fonts,
           email: token.email,
+          coupon: coupon.code,
         },
         { responseType: 'arraybuffer' },
       )
@@ -106,7 +108,7 @@ const Checkout = props => (
     name={props.title}
     description={props.description}
     image="https://assets.awwwards.com/awards/media/cache/thumb_user_70/avatar/338028/594bd5ef47c4f.PNG"
-    amount={fromValueToCent(props.amount)}
+    amount={props.coupon.discount ? fromValueToCent(props.amount - props.amount * props.coupon.discount/100) : fromValueToCent(props.amount) }
     token={onToken(
       props.amount,
       'Buy with stripe',
@@ -117,6 +119,7 @@ const Checkout = props => (
       props.getArrayBuffer,
       props.userFontName,
       props.checkoutOptions,
+      props.coupon,
     )}
     currency={props.currency}
     stripeKey={STRIPE_PUBLISHABLE}
@@ -131,6 +134,7 @@ const mapStateToProps = state => ({
   currency: state.ui.currency,
   userFontName: state.user.userFontName,
   checkoutOptions: state.user.checkoutOptions,
+  coupon: state.user.coupon,
 });
 
 const mapDispatchToProps = dispatch =>
