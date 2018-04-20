@@ -150,10 +150,10 @@ class Tips extends React.Component {
     return this.state.tips.length > 0 ? (
       <div className="tips-wrapper">
         <div
-          className="tips-button"
+          className={`tips-button ${this.state.opened ? 'opened' : ''}`}
           onClick={() => this.setState({ opened: !this.state.opened })}
         >
-          {this.state.opened ? "x" : "?"}
+          {this.state.opened ? "x" : this.state.tips.length}
         </div>
         <div className={`Tips ${this.state.opened ? "opened" : ""}`}>
           <h4>
