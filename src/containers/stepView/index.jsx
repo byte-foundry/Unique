@@ -180,26 +180,6 @@ class StepView extends React.Component {
           }}
           tabIndex="-1"
         >
-          <div className="helper-wrapper">
-            <Tips
-              choicesMade={this.props.choicesMade}
-              stepName={this.props.stepValues.name}
-              need={this.props.need}
-              storeRecommandations={this.props.storeRecommandations}
-            />
-            {this.props.choicesMade[this.props.step - 2] && (
-              <Cheers
-                recommandations={
-                  this.props.recommandations[
-                    this.props.choicesMade[this.props.step - 2].stepName
-                  ]
-                }
-                previousChoiceMade={
-                  this.props.choicesMade[this.props.step - 2].name
-                }
-              />
-            )}
-          </div>
           <div className="container">
             <div className="row justify-content-md-between step-description">
               <div className="col-md-4 col-sm-12">
@@ -366,6 +346,26 @@ class StepView extends React.Component {
                   }}
                 />
               </div>
+            </div>
+            <div className="helper-wrapper">
+              <Tips
+                choicesMade={this.props.choicesMade}
+                stepName={this.props.stepValues.name}
+                need={this.props.need}
+                storeRecommandations={this.props.storeRecommandations}
+              />
+              {this.props.choicesMade[this.props.step - 2] && (
+                <Cheers
+                  recommandations={
+                    this.props.recommandations[
+                      this.props.choicesMade[this.props.step - 2].stepName
+                    ]
+                  }
+                  previousChoiceMade={
+                    this.props.choicesMade[this.props.step - 2].name
+                  }
+                />
+              )}
             </div>
           </div>
         </div>
