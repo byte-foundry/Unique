@@ -52,7 +52,7 @@
 }
 
 .StepView .step-bubble.current {
-  transform: scale(1.4);
+  box-shadow: 0 0 0 4px rgba(83,32,238, 0.3);
 }
 
 .StepView .choices-wrapper {

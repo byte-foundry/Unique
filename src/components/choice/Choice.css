@@ -55,6 +55,11 @@
   font-size: 14px;
   color: #b8b5c0;
 }
+.Choice .choiceName span {
+  margin-top: 5px;
+  color: #5320ee;
+  display: inline-block;
+}
 
 .Choice .mostSelected {
   position: absolute;
