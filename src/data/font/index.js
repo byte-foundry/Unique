@@ -192,16 +192,8 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       maxChoices = step.choices.length;
     }
 
-    // If no default choice, create it
-    if (!step.choices.find(e => e.name === step.defaultStepName)) {
-      // Push default choice to the font steps
-      step.choices.push({
-        name: step.defaultStepName,
-        values: {},
-        id: `default${step.name}`,
-      });
-    }
 
+    
     // Sort choices
     let stepParams = {};
     // Get all step params
@@ -217,9 +209,53 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       ...params
     } = stepParams;
 
-    // Sort by the first useful param //todo : find a master param
-    const paramToSort = Object.keys(params)[0];
+    
+    let paramToSort;
+    switch (step.name) {
+      case 'Thickness':
+        paramToSort = 'thickness';
+        break;
+      case 'Width':
+        paramToSort = 'width';
+        break;
+      case 'Slant':
+        paramToSort = 'slant';
+        break;
+      case 'Contrast':
+        paramToSort = 'contrast';
+        break;
+      case 'X height':
+        paramToSort = 'xHeight';
+        break;
+      case 'X-Height':
+        paramToSort = 'xHeight';
+        break;
+      case 'Curviness':
+        paramToSort = 'curviness';
+        break;
+      case 'Serifs':
+        paramToSort = 'serifHeight';
+        break;
+      case 'Ascenders/Descenders':
+        paramToSort = 'ascenders';
+        break;
+      default:
+        paramToSort = Object.keys(params)[0];
+        break;
+    }
+    // If no default choice, create it
+    if (!step.choices.find(e => e.name === step.defaultStepName)) {
+      // Push default choice to the font steps
+      step.choices.push({
+        name: step.defaultStepName,
+        values: {
+          [paramToSort]: selectedFont.baseValues[paramToSort],
+        },
+        id: `default${step.name}`,
+      });
+    }
 
+    // Sort by the first useful param //todo : find a master param    
     step.choices.sort((a, b) => a.values[paramToSort] - b.values[paramToSort]);
   });
 
