@@ -20,9 +20,13 @@
   clear: both;
 }
 
+.Footer .container {
+  padding-left: 0;
+}
+
 .Footer .FontControls {
   display: inline-block;
-  float: right;
+  float: left;
   margin-right: 20px;
 }
 

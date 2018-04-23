@@ -22,6 +22,7 @@ class DefineNeed extends React.Component {
       word: '',
       logoNeedOpened: false,
       selected: undefined,
+      isLoading: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,7 +41,8 @@ class DefineNeed extends React.Component {
     if (this.state.word !== '') {
       this.props.storeChosenWord(this.state.word);
     }
-    if (!this.props.isLoading) {
+    if (!this.state.isLoading) {
+      this.setState({isLoading: true})
       this.props.defineNeed(this.state.selected);
     }
     event.preventDefault();

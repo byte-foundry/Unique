@@ -124,7 +124,8 @@ class Sidebar extends React.Component {
                 <Checkout
                   title="Unique"
                   amount={this.props.checkoutPrice}
-                  description="Your unique package"
+                  description="Your unique package"                  
+                  skipCard={this.props.coupon.discount === 100}
                 >
                   <Button
                     className="button-checkout"
