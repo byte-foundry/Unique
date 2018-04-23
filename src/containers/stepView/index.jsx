@@ -47,6 +47,65 @@ const isMostSelected = choices => {
   return value > 0 && most;
 };
 
+const stepTranslations = {
+  Thickness: (
+    <FormattedMessage
+      id="StepView.thickness"
+      defaultMessage="What kind of thickness do you want?"
+      description="Stepview - Thickness question"
+    />
+  ),
+  Width: (
+    <FormattedMessage
+      id="StepView.width"
+      defaultMessage="What would be the width of your font?"
+      description="Stepview - Width question"
+    />
+  ),
+  Slant: (
+    <FormattedMessage
+      id="StepView.slant"
+      defaultMessage="Choose your desired slant"
+      description="Stepview - Slant question"
+    />
+  ),
+  Serifs: (
+    <FormattedMessage
+      id="StepView.serifs"
+      defaultMessage="Pick your preferred serif style"
+      description="Stepview - Serifs question"
+    />
+  ),
+  "X-Height": (
+    <FormattedMessage
+      id="StepView.xHeight"
+      defaultMessage="What would be the letter height of your font?"
+      description="Stepview - xHeight question"
+    />
+  ),
+  Contrast: (
+    <FormattedMessage
+      id="StepView.contrast"
+      defaultMessage="Choose your preferred contrast"
+      description="Stepview - Contrast question"
+    />
+  ),
+  Curviness: (
+    <FormattedMessage
+      id="StepView.curviness"
+      defaultMessage="Squared? Rounded? Pick your curviness"
+      description="Stepview - Curviness question"
+    />
+  ),
+  "Ascenders/Descenders": (
+    <FormattedMessage
+      id="StepView.ascendersDescenders"
+      defaultMessage="Choose the height of your ascenders and descenders"
+      description="Stepview - Ascenders/Descenders question"
+    />
+  ),
+};
+
 class StepView extends React.Component {
   constructor(props) {
     super(props);
@@ -182,10 +241,7 @@ class StepView extends React.Component {
         >
           <div className="container">
             <div className="row justify-content-md-between step-description">
-              <div className="col-md-4 col-sm-12">
-                <p className="step-name">{this.props.stepValues.name}</p>
-              </div>
-              <div className="col-md-4 col-sm-12">
+              <div className="col-md-6 col-sm-12">
                 <div className="step-bubbles">
                   {[...Array(this.props.stepLength)].map(
                     (e, i) =>
@@ -214,6 +270,30 @@ class StepView extends React.Component {
                           key={`stepbubble-${i}`}
                         />
                       )
+                  )}
+                </div>
+                <p className="step-name">{stepTranslations[this.props.stepValues.name]}</p>
+              </div>
+
+              <div className="col-md-4 col-sm-12 relative">
+                <div className="helper-wrapper">
+                  <Tips
+                    choicesMade={this.props.choicesMade}
+                    stepName={this.props.stepValues.name}
+                    need={this.props.need}
+                    storeRecommandations={this.props.storeRecommandations}
+                  />
+                  {this.props.choicesMade[this.props.step - 2] && (
+                    <Cheers
+                      recommandations={
+                        this.props.recommandations[
+                          this.props.choicesMade[this.props.step - 2].stepName
+                        ]
+                      }
+                      previousChoiceMade={
+                        this.props.choicesMade[this.props.step - 2].name
+                      }
+                    />
                   )}
                 </div>
               </div>
@@ -346,26 +426,6 @@ class StepView extends React.Component {
                   }}
                 />
               </div>
-            </div>
-            <div className="helper-wrapper">
-              <Tips
-                choicesMade={this.props.choicesMade}
-                stepName={this.props.stepValues.name}
-                need={this.props.need}
-                storeRecommandations={this.props.storeRecommandations}
-              />
-              {this.props.choicesMade[this.props.step - 2] && (
-                <Cheers
-                  recommandations={
-                    this.props.recommandations[
-                      this.props.choicesMade[this.props.step - 2].stepName
-                    ]
-                  }
-                  previousChoiceMade={
-                    this.props.choicesMade[this.props.step - 2].name
-                  }
-                />
-              )}
             </div>
           </div>
         </div>
