@@ -58,8 +58,8 @@
 .tips-button {
   position: absolute;
   display: inline-block;
-  background-color: #FF5B5C;
-  box-shadow: 0 0 0 0 rgba(255,91,92, 0.5);
+  background-color: #5320ee;
+  box-shadow: 0 0 0 0 rgba(83,32,238, 0.5);
   color: white;
   border-radius: 50%;
   cursor: pointer;
@@ -87,10 +87,10 @@
   }
   70% {
     transform: translateZ(0) scale(1);
-    box-shadow: 0 0 0 10px rgba(255,91,92, 0);
+    box-shadow: 0 0 0 10px rgba(83,32,238, 0);
   }
   100% {
     transform: translateZ(0) scale(0.9);
-    box-shadow: 0 0 0 0 rgba(255,91,92, 0);
+    box-shadow: 0 0 0 0 rgba(83,32,238, 0);
   }
 }
