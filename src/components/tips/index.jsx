@@ -10,20 +10,17 @@ const tipsData = [
     context: [
       {
         stepName: "need",
-        choices: ["text", "others"]
-      },
-      {
-        stepName: "Thickness",
-        choices: ["Light"]
+        choices: ["text", "Text"]
       }
     ],
-    showOn: ["Width", "X-Height"],
-    recommanded: ["Condensed"],
+    showOn: ["Thickness"],
+    recommanded: ["Regular", "Medium", "Normal"],
     message: (
       <FormattedMessage
-        id="Tips.widthCondensed"
-        defaultMessage="WidthCondensed Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis odio recusandae deleniti ut optio est adipisci nobis similique laudantium natus, fugiat libero quisquam nesciunt sequi aperiam ullam quas deserunt. Velit!"
-        description="Test"
+        id="Tips.textThickness"
+        defaultMessage="If you want to use your font at 8 to 14 pt, an Extra-light or Extra Bold font might be hard to read. 
+        That’s why we recommend you to stay in the Light to Bold range of weight."
+        description="Tip thickness for text"
       />
     )
   },
@@ -31,54 +28,35 @@ const tipsData = [
     context: [
       {
         stepName: "need",
-        choices: ["display"]
-      },
-      {
-        stepName: "Thickness",
-        choices: ["Bold"]
+        choices: ["text", "Text"]
       }
     ],
     showOn: ["Width"],
-    recommanded: ["Extended"],
+    recommanded: ["Normal"],
     message: (
       <FormattedMessage
-        id="Tips.widthExtended"
-        defaultMessage="WidthExtended Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis odio recusandae deleniti ut optio est adipisci nobis similique laudantium natus, fugiat libero quisquam nesciunt sequi aperiam ullam quas deserunt. Velit!"
-        description="Test"
+        id="Tips.textWidth"
+        defaultMessage="If you want to make long paragraphs of text, a Condensed or Extended font might be too hard to read. 
+        That’s why we recommend you to stay in the Normal width."
+        description="Tip width for text"
       />
     )
   },
   {
     context: [
       {
-        stepName: "Thickness",
-        choices: ["Bold"]
+        stepName: "need",
+        choices: ["Text", "text"]
       }
     ],
-    showOn: ["Width"],
-    recommanded: ["Extended"],
+    showOn: ["Contrast"],
+    recommanded: ["Normal"],
     message: (
       <FormattedMessage
-        id="Tips.widthExtendedSimple"
-        defaultMessage="WidthExtendedSimple Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis odio recusandae deleniti ut optio est adipisci nobis similique laudantium natus, fugiat libero quisquam nesciunt sequi aperiam ullam quas deserunt. Velit!"
-        description="Test"
-      />
-    )
-  },
-  {
-    context: [
-      {
-        stepName: "Width",
-        choices: ["Extended"]
-      }
-    ],
-    showOn: ["Slant"],
-    recommanded: ["Default"],
-    message: (
-      <FormattedMessage
-        id="Tips.slantDefaultSimple"
-        defaultMessage="SlantDefaultSimple Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis odio recusandae deleniti ut optio est adipisci nobis similique laudantium natus, fugiat libero quisquam nesciunt sequi aperiam ullam quas deserunt. Velit!"
-        description="Test"
+        id="Tips.textContrast"
+        defaultMessage="When using a highly contrasted typeface in small sizes 6–16 pt, fine parts of the letters (upstroke) will disappear and directly affect the legibility of your text.
+        That’s why we recommend you to use a low contrast font."
+        description="Tip contrast for text"
       />
     )
   }
@@ -144,13 +122,13 @@ class Tips extends React.Component {
       this.generateTips(newProps);
       unorphan("h1, h2, h3, p, span");
       this.setState({ opened: false });
-    }    
+    }
   }
   render() {
     return this.state.tips.length > 0 ? (
       <div className="tips-wrapper">
         <div
-          className={`tips-button ${this.state.opened ? 'opened' : ''}`}
+          className={`tips-button ${this.state.opened ? "opened" : ""}`}
           onClick={() => this.setState({ opened: !this.state.opened })}
         >
           {this.state.opened ? "x" : this.state.tips.length}
@@ -163,7 +141,7 @@ class Tips extends React.Component {
               description="Tips box title"
             />{" "}
           </h4>
-          <p>{this.state.tips[this.state.tipIndex].message}</p>
+          <p style={{ whiteSpace: 'pre-line' }}>{this.state.tips[this.state.tipIndex].message}</p>
           {this.state.tips.length > 1 && (
             <div className="tips-pagination">
               <span
