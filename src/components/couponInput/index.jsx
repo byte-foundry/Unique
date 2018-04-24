@@ -49,7 +49,7 @@ class CouponInput extends React.Component {
   }
   checkCoupon(code) {
     axios
-      .get(`${COUPON_SERVER_URL}${code || this.state.coupon}`)
+      .get(`${COUPON_SERVER_URL}${code || this.state.coupon.toUpperCase()}`)
       .then(res => {
         const { label, percentOff, name } = res.data;
         this.props.storeCoupon({ label, discount: percentOff, code: name });
