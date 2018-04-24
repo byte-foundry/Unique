@@ -60,9 +60,7 @@
   color: #b8b5c0;
 }
 .Choice .choiceName span {
-  margin-top: 5px;
   color: #5320ee;
-  display: inline-block;
 }
 
 .Choice .mostSelected {
@@ -83,9 +81,10 @@
   width: 35px;
   position: absolute;
   top: 0px;
-  right: 0;
+  right: -1px;
   cursor: pointer;
   background: #5320ee;
+  transform: scaleX(-1);
 }
 
 .Choice .icon-edit svg{

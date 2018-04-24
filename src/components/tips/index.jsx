@@ -137,7 +137,7 @@ class Tips extends React.Component {
           <h4>
             <FormattedMessage
               id="Tips.title"
-              defaultMessage="We recommend"
+              defaultMessage="Unique team tips"
               description="Tips box title"
             />{" "}
           </h4>

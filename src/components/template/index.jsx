@@ -43,14 +43,7 @@ class Template extends React.Component {
       >
         {tags[0]}
         <p className="templateName">
-          {`${tags[1]}, ${tags[2]}`}<br/>
-          {this.props.mostSelected && (
-            <FormattedMessage
-              id="StepView.mostSelected"
-              defaultMessage="Recommended"
-              description="Stepview - Most selected label"
-            />
-          )}
+          {`${tags[1]}, ${tags[2]}`}
         </p>
       </div>
     );

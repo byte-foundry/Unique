@@ -10,6 +10,8 @@
   font-size: 14px;
   border-radius: 40px;
   z-index: 20;
+  user-select: none;
+  cursor: pointer;
 }
 
 .cheer-wrapper.hidden {

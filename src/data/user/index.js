@@ -432,7 +432,7 @@ export const storeChosenWord = chosenWord => dispatch => {
     chosenWord:
       chosenWord.length > 1
         ? chosenWord.trim().replace(/&nbsp;/gi, "")
-        : DEFAULT_UI_WORD
+        : '&nbsp;'
   });
   dispatch(updateSubset());
 };
@@ -446,7 +446,7 @@ export const storeChosenGlyph = chosenGlyph => dispatch => {
             .trim()
             .replace(/&nbsp;/gi, "")
             .substr(chosenGlyph.length - 1)
-        : DEFAULT_UI_GLYPH
+        : '&nbsp;'
   });
   dispatch(updateSubset());
 };

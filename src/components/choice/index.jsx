@@ -94,13 +94,17 @@ class Choice extends React.Component {
           </span>
         )}
         <p className="choiceName">
-          {this.props.choice.name}<br/>
+          {this.props.choice.name}
           {this.props.mostSelected && (
-            <FormattedMessage
-              id="StepView.mostSelected"
-              defaultMessage="Recommended"
-              description="Stepview - Most selected label"
-            />
+            <span>
+              &nbsp;|&nbsp;
+              <FormattedMessage
+                className="mostSelected"
+                id="StepView.mostSelected"
+                defaultMessage="Recommended"
+                description="Stepview - Most selected label"
+              />
+            </span>
           )}
         </p>
       </div>
