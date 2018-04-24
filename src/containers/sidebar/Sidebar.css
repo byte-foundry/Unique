@@ -118,6 +118,7 @@
 .Sidebar.checkout .button-checkout {
   display: block;
   text-align: center;
+  margin-bottom: 40px;
 }
 
 @media (max-width: 576px) {

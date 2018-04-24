@@ -78,6 +78,7 @@ class CouponInput extends React.Component {
           >
             <input
               type="text"
+              autoFocus
               value={this.state.coupon}
               onChange={e => {
                 this.handleCoupon(e);

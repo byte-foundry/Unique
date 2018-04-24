@@ -48,6 +48,9 @@ class ContentEditable extends React.Component {
       // rerendering) did not update the DOM. So we update it manually now.
       this.htmlEl.innerHTML = this.props.html;
     }
+    if(!this.props.disabled) {
+      this.htmlEl.focus();
+    }
   }
 
   onKeyDown(evt) {
