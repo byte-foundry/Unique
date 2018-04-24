@@ -59,6 +59,7 @@
 }
 
 .FontControls .icon-lowFontSize {
+  margin-left: 0;
   transform: translateY(-5px);
 }
 .FontControls .icon-highFontSize,
