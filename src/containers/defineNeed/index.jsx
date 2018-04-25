@@ -41,7 +41,7 @@ class DefineNeed extends React.Component {
     if (this.state.word !== '') {
       this.props.storeChosenWord(this.state.word);
     }
-    if (!this.state.isLoading) {
+    if (!this.state.isLoading && this.state.selected) {
       this.setState({isLoading: true})
       this.props.defineNeed(this.state.selected);
     }

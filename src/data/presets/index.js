@@ -9,8 +9,9 @@ export const IMPORT_PRESETS = 'presets/IMPORT_PRESETS';
 export const LOAD_PRESETS_REQUESTED = 'presets/LOAD_PRESETS_REQUESTED';
 export const LOAD_PRESETS = 'presets/LOAD_PRESETS';
 const initialState = {
-  loadedPresetsName: [],
+  filteredPresets: [],
   importedPresets: [],
+  loadedPresetsName: [],
   isLoading: false,
 };
 
@@ -35,6 +36,7 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         loadedPresetsName: action.loadedPresetsName,
+        filteredPresets: action.filteredPresets,
       };
 
     case IMPORT_PRESETS_REQUESTED:
@@ -80,7 +82,8 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
   console.log(importedPresets);
   const promiseArray = [];
   const loadedPresetsName = [];
-  importedPresets.forEach((preset, index) => {
+  let filteredPresets = importedPresets.filter(preset => (need === 'dunno') || (preset.needs.findIndex(e => e === need) !== -1));
+  filteredPresets.forEach((preset, index) => {
     if (preset.variant && preset.variant.family) {
       promiseArray.push(new Promise((resolve) => {
         dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
@@ -112,6 +115,7 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
     dispatch({
       type: LOAD_PRESETS,
       loadedPresetsName,
+      filteredPresets,
     });
     dispatch(clearFontIsLoading());
     dispatch(push('/app/select'));

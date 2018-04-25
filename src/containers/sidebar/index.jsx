@@ -37,6 +37,7 @@ class Sidebar extends React.Component {
         {this.props.mode === "checkout" && (
           <div className="sidebar-checkout">
             <h2 className="sidebar-checkout-title">
+              {this.props.userFontName}&nbsp;
               <FormattedMessage
                 id="Checkout.sidebarTitle"
                 defaultMessage="Package"
@@ -173,7 +174,8 @@ Sidebar.propTypes = {
   locale_full: PropTypes.string.isRequired,
   option5Price: PropTypes.number.isRequired,
   option20Price: PropTypes.number.isRequired,
-  basePrice: PropTypes.number.isRequired
+  basePrice: PropTypes.number.isRequired,
+  userFontName: PropTypes.string.isRequired,
 };
 
 Sidebar.defaultProps = {
@@ -196,7 +198,8 @@ const mapStateToProps = state => ({
   currency: state.ui.currency,
   option5Price: state.user.option5Price,
   option20Price: state.user.option20Price,
-  coupon: state.user.coupon
+  coupon: state.user.coupon,
+  userFontName: state.user.userFontName,
 });
 
 const mapDispatchToProps = dispatch =>
