@@ -23,7 +23,7 @@ class Checkout extends React.Component {
     const thicknessStepIndex = steps.findIndex(
       step => step.name.toUpperCase() === "THICKNESS"
     );
-    const defaultThicknessName = choicesMade[thicknessStepIndex].name;
+    const defaultThicknessName = choicesMade[thicknessStepIndex] ? choicesMade[thicknessStepIndex].name : 'regular';
     this.state = {
       selectedOptions: [
         {

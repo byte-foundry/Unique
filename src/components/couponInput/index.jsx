@@ -84,6 +84,15 @@ class CouponInput extends React.Component {
                 this.handleCoupon(e);
               }}
             />
+            {this.state.errorCoupon && (
+              <p className="coupon-error">
+                <FormattedMessage
+                  id="Checkout.sidebarCouponError"
+                  defaultMessage="Invalid coupon"
+                  description="Checkout - Sidebar coupon error"
+                />
+              </p>
+            )}
           </div>
         ) : (
           <div
