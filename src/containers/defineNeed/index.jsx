@@ -71,12 +71,14 @@ class DefineNeed extends React.Component {
         </div>
         <div className="needs row">
           <div
-            className={`col-sm-12 col-md-4 col-lg-4 ${
-              this.state.selected === "logo" ? "selected" : ""
-            }`}
+            className={`col-sm-12 col-md-4 col-lg-4`}
             onClick={() => this.setState({ selected: "logo" })}
           >
-            <div className="need">
+            <div
+              className={`need ${
+                this.state.selected === "logo" ? "selected" : ""
+              }`}
+            >
               <LogoIcon className="need-icon" />
               <p className="need-title">
                 <FormattedMessage
@@ -95,16 +97,18 @@ class DefineNeed extends React.Component {
             </div>
           </div>
           <div
-            className={`col-sm-12 col-md-4 col-lg-4 ${
-              this.state.selected === "text" ? "selected" : ""
-            }`}
+            className={`col-sm-12 col-md-4 col-lg-4`}
             onClick={() => this.setState({ selected: "text" })}
             onDoubleClick={e => {
               this.setState({ selected: "text" });
               this.handleSubmit(e);
             }}
           >
-            <div className="need">
+            <div
+              className={`need ${
+                this.state.selected === "text" ? "selected" : ""
+              }`}
+            >
               <TextIcon className="need-icon" />
               <p className="need-title">
                 <FormattedMessage
@@ -123,16 +127,18 @@ class DefineNeed extends React.Component {
             </div>
           </div>
           <div
-            className={`col-sm-12 col-md-4 col-lg-4 ${
-              this.state.selected === "display" ? "selected" : ""
-            }`}
+            className={`col-sm-12 col-md-4 col-lg-4 `}
             onClick={() => this.setState({ selected: "display" })}
             onDoubleClick={e => {
               this.setState({ selected: "display" });
               this.handleSubmit(e);
             }}
           >
-            <div className="need">
+            <div
+              className={`need ${
+                this.state.selected === "display" ? "selected" : ""
+              }`}
+            >
               <DisplayIcon className="need-icon" />
               <p className="need-title">
                 <FormattedMessage
