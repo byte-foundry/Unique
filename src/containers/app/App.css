@@ -196,11 +196,6 @@
   height: auto;
 }
 
-.loaded .App-content .DefineNeed,
-.loaded .App-content .DefineNeed div {
-  animation: animLoadedContent 1s cubic-bezier(0.7, 0, 0.3, 1) both;
-}
-
 .loaded .App-content.whiteOnBlack {
   background-color: black;
 }

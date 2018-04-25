@@ -142,7 +142,9 @@ class App extends React.Component {
             <h1 className="App-logo-wrapper">
               <Logo
                 onClick={() => {
-                  this.props.goToHome();
+                  this.props.location.pathname === "/app"
+                    ? this.props.goToLanding()
+                    : this.props.goToHome();
                 }}
               />
             </h1>
@@ -161,7 +163,9 @@ class App extends React.Component {
             <div className="col-sm-12">
               <Logo
                 onClick={() => {
-                  this.props.goToHome();
+                  this.props.location.pathname === "/app"
+                    ? this.props.goToLanding()
+                    : this.props.goToHome();
                 }}
               />
             </div>
@@ -333,6 +337,7 @@ const mapDispatchToProps = dispatch =>
       reloadFonts,
       setLocale,
       goToHome: () => push("/app"),
+      goToLanding: () => push("/"),
       createPrototypoFactory,
       toggleTooltips,
       logout,

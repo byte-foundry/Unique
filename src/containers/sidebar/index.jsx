@@ -114,8 +114,7 @@ class Sidebar extends React.Component {
                       currency: this.props.currency
                     }
                   )}
-            </h2>
-            <CouponInput storeCoupon={this.props.storeCoupon} coupon={this.props.coupon}/>
+            </h2>            
             <FormattedMessage
               id="Sidebar.checkoutAction"
               defaultMessage="Checkout"
@@ -138,6 +137,7 @@ class Sidebar extends React.Component {
                 </Checkout>
               )}
             </FormattedMessage>
+            <CouponInput storeCoupon={this.props.storeCoupon} coupon={this.props.coupon}/>
           </div>
         )}
       </div>

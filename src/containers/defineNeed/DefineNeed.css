@@ -3,35 +3,26 @@
   display: flex;
   flex-direction: column;
   padding-top: 0;
-  min-height: calc(100vh - 200px);
+  padding-bottom: 90px;
+  margin-bottom: 80px;
 }
 
 @media (min-width: 768px) {
   .DefineNeed {
-    padding-top: 150px;
+    padding-top: 50px;
   }
 }
 
 @media (min-width: 1800px) {
   .DefineNeed {
-    margin-top: 85px;
+    padding-top: 85px;
   }
 }
 
 .DefineNeed .needs {
-  font-size: 18px;
   line-height: 1.4;
   user-select: none;
-}
-
-@media (min-width: 768px) {
-  .DefineNeed .needs {
-    font-size: 24px;
-  }
-}
-
-.DefineNeed .needs span:hover {
-    color: #5320ee;
+  margin-top: 50px;
 }
 
 .DefineNeed .needs div {
@@ -41,71 +32,16 @@
   transition: color .3s ease;
 }
 
-.DefineNeed .needs .selected {
-  color: #5320ee;
-}
-
-.DefineNeed .icon-next, .DefineNeed .icon-back {
-  width: 40px;
-  height: auto;
-  cursor: pointer;
-  position: absolute;
-  top: 300px;
-  right: 0;
-  background: transparent;
+.DefineNeed .need {
+  border: 2px solid transparent;
   transition: all .3s ease;
-  padding: 0px;
-  border-radius: 50%;
-  z-index: 3;
-}
-.DefineNeed .icon-next {
-  top: 350px;
-}
-.DefineNeed .icon-next.disabled {
-  border-color: #b8b5c0;
+  padding: 40px 30px;
 }
 
-@media (max-width: 576px) {
-
-  .DefineNeed {
-    margin-bottom: 100px;
-  }
-
-  .DefineNeed .icon-next {
-    position: relative;
-    display: inline-block;
-    margin-right: 20px;
-    left: inherit;
-    right: inherit;
-    top: inherit;
-    bottom: inherit;
-    transform: inherit;
-    transform: translate(150%, -100%);
-  }
-  .DefineNeed .icon-back {
-    position: relative;
-    display: inline-block;
-    margin-right: 20px;
-    margin-top: 20px;
-    left: inherit;
-    right: inherit;
-    top: inherit;
-    bottom: inherit;
-    transform: inherit;
-  }
+.DefineNeed .need:hover, .DefineNeed .need.selected {
+  border-color: #5320ee;
 }
 
-.DefineNeed .icon-next:not(.disabled):hover, .DefineNeed .icon-back:hover {
-  background: #5320ee;
-}
-
-.DefineNeed .icon-next:not(.disabled):hover g path, .DefineNeed .icon-back:hover g path{
-  stroke: white;
-}
-
-.DefineNeed .icon-next.disabled g {
-  stroke: #b8b5c0;
-}
 
 .DefineNeed h1, .DefineNeed h2 {
   display: inline-block;
@@ -121,50 +57,49 @@
   }
 }
 
+.DefineNeed .needs .need .need-icon {
+  margin: 40px auto;
+  display: block;
+}
+
+.DefineNeed .needs .need .need-title {
+  color: black;
+  font-size: 22px;
+  margin-top: 80px;
+  margin-bottom: 10px;
+}
+.DefineNeed .needs .need .need-description {
+  color: #b8b5c0;
+  font-size: 18px;
+}
+
 .DefineNeed .logoName {
   margin-top: 30px;
   padding-bottom: 30px;
+  animation: fadeIn .3s cubic-bezier(0.7, 0, 0.3, 1) both;
 }
 
 @media (min-width: 768px) {
   .DefineNeed .logoName {
-    margin-top: 50px;
-    padding-bottom: 100px;
+    margin-top: 0px;
+    padding-bottom: 0px;
   }
 }
 
 .DefineNeed .logoName h1{
-  margin-bottom: 20px;
+  font-size: 22px;
+  margin-bottom: 0px;
+  margin-top: 20px;
 }
 
 .DefineNeed .needs .selected {
-  color: #5320ee;
-}
-
-.DefineNeed .tooltip {
-  vertical-align: top;
-  font-size:  10px;
-  border: 1px solid #b8b5c0;
-  padding: 2px 6px;
-  border-radius: 50%;
-  transition: color .3s ease, background-color .3s ease;
-  display: none;
-}
-
-.DefineNeed .needs div:hover .tooltip {
-  display: inherit;
-}
-
-.DefineNeed .selected .tooltip {
-  color: #5320ee;
   border-color: #5320ee;
 }
-
 
 .DefineNeed form {}
 
 .DefineNeed form input {
-  margin-top: 5px;
+  margin-top: 0px;
   height: 50px;
   width: 75%;
   font-size: 20px;
@@ -182,8 +117,41 @@
 .DefineNeed form input:focus {
   outline: none;
 }
+.DefineNeed .actions {
+  margin-top: 0;
+  margin-bottom: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
 
-@keyframes translateTop {
-  from {transform: translateY(-120%)}
-  to {transform: translateY(0%)}
+.DefineNeed .actions .need-dunno {
+  color: #b8b5c0;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  margin-right: 50px;
+  border-bottom: 1px solid #b8b5c0;
+  cursor: pointer;
+  user-select: none;
+  float: right;
+}
+
+.DefineNeed .actions .need-submit {
+  float: right;
+  display: inline-block;
+  padding: 10px 50px;
+  border: 1px solid transparent;
+}
+
+.DefineNeed .actions .need-submit.disabled {
+  border-color: #b8b5c0;
+  background: transparent;
+  background-image: none;
+  color: #b8b5c0;
+  cursor: initial;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
 }
