@@ -1,6 +1,6 @@
 .Checkout {
   margin-top: 0;
-  padding-bottom: 150px;
+  padding-bottom: 50px;
   padding-right: 250px;
 }
 
@@ -26,6 +26,21 @@
   font-weight: 400;
 }
 
+.Checkout .checkout-description {
+  font-size: 22px;
+  color: #b9b5c1;
+}
+
+.Checkout .checkout-goback {
+  font-size: 14px;
+  display: inline-block;
+  color: black;
+  border-bottom: 1px solid black;
+  padding-bottom: 1px;
+  user-select: none;
+  cursor: pointer;
+}
+
 .Checkout .container {
   padding: 0;
   max-width: 720px;
@@ -33,6 +48,7 @@
 
 .Checkout .checkout-options {
   margin: 0 auto;
+  margin-top: 25px;
 }
 
 .Checkout .icon-back {
@@ -59,6 +75,8 @@
 .Checkout .checkout-options .option {
   width: 100%;
   cursor: pointer;
+  padding: 0;
+  margin-bottom: 25px;
 }
 
 .Checkout .checkout-options .option input[type="checkbox"] {
@@ -195,14 +213,14 @@
 }
 .Checkout .checkout-options .option.variant .font-wrapper {
   text-align: center;
-  padding: 20% 5%;
+  padding: 10% 5%;
   overflow: hidden;
   min-width: 300px;
   text-overflow: ellipsis;
 }
 
 .Checkout .checkout-options .option.variant .font-wrapper span {
-  font-size: 30px;
+  font-size: 45px;
 }
 
 @keyframes dothabottomcheck {

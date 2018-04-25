@@ -24,6 +24,7 @@ class SpecimenView extends React.Component {
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
   }
   componentDidMount() {
     this.specimenViewWrapper.focus();
@@ -35,6 +36,23 @@ class SpecimenView extends React.Component {
   }
   onBlur() {
     this.setState({ isInputFocused: false });
+  }
+  onKeyDown(e) {
+    if (this.state.fontName !== '' && e.keyCode === 13) {
+      if (this.state.fromModal === 'save') {
+        if (this.props.isAuthenticated) {
+          this.props.storeProject(this.state.fontName);
+        } else {
+          this.props.authenticate(
+            this.props.storeProject,
+            this.state.fontName,
+          );
+        }
+      } else {
+        this.props.goToCheckout(this.state.fontName);
+      }
+      this.setState({ isModalOpened: false });
+    }
   }
   render() {
     const uppercase = [
@@ -257,6 +275,7 @@ class SpecimenView extends React.Component {
                     placeholder={text}
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
+                    onKeyDown={this.onKeyDown}
                   />
                 )}
               </FormattedMessage>

@@ -166,7 +166,7 @@ class TemplateChoice extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  presets: state.presets.importedPresets,
+  presets: state.presets.filteredPresets,
   isLoading: state.font.isLoading,
   chosenWord: state.user.chosenWord,
 });

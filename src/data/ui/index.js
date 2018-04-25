@@ -12,7 +12,7 @@ const initialState = {
   locale: navigator.language.split(/[-_]/)[0],
   shouldShowTooltips: false,
   currencyRates: undefined,
-  currency: LocaleCurrency.getCurrency(navigator.language),
+  currency: LocaleCurrency.getCurrency(navigator.language) ? LocaleCurrency.getCurrency(navigator.language) : "USD",
 };
 
 export default (state = initialState, action) => {

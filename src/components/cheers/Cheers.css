@@ -1,0 +1,48 @@
+.cheer-wrapper {
+  position: fixed;
+  top: 60px;
+  right: -300px;
+  opacity: 0;
+  background: black;
+  color: white;
+  padding: 20px 30px;
+  width: max-content;
+  font-size: 14px;
+  border-radius: 40px;
+  z-index: 20;
+  user-select: none;
+  cursor: pointer;
+}
+
+.cheer-wrapper.hidden {
+  animation: tipOut 0.5s ease-in forwards;
+}
+
+.cheer-wrapper.visible {
+  animation: tipIn 0.5s ease-out forwards;
+}
+
+.Cheer {
+}
+
+@keyframes tipIn {
+  from {
+    opacity: 0;
+    right: -300px;
+  }
+  to {
+    opacity: 1;
+    right: 65px;
+  }
+}
+
+@keyframes tipOut {
+  from {
+    opacity: 1;
+    right: 65px;
+  }
+  to {
+    opacity: 0;
+    right: -300px;
+  }
+}

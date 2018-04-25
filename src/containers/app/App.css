@@ -34,7 +34,7 @@
   width: 100%;
   height: 100%;
   background: #5320ee;
-  background-image: linear-gradient(209deg, #5320ee, #5d28e2 68%, #622bdd);
+  background-image: linear-gradient(265deg, #5320ee, #5d28e2 21%, #622bdd);
   transition: background-color 1s ease;
 }
 
@@ -160,7 +160,7 @@
 
 .loaded .App-logo-wrapper {
   top: initial;
-  bottom: -90px;
+  bottom: -100px;
   left: 20px;
   width: auto;
   height: 75px;
@@ -194,11 +194,6 @@
   background-color: #fff;
   position: absolute;
   height: auto;
-}
-
-.loaded .App-content .DefineNeed,
-.loaded .App-content .DefineNeed div {
-  animation: animLoadedContent 1s cubic-bezier(0.7, 0, 0.3, 1) both;
 }
 
 .loaded .App-content.whiteOnBlack {
@@ -438,9 +433,6 @@
   margin: 0 auto;
 }
 
-.App-content .content-wrapper {
-    padding-left: 1.2em;
-}
 
 .tippy-tooltip {
   font-size: 0.8rem !important;

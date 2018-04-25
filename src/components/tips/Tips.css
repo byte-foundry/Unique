@@ -1,68 +1,96 @@
 .tips-wrapper {
-    position: relative;
+  position: relative;
+  perspective: 1000;
+  backface-visibility: hidden;
 }
 
 .Tips {
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: solid 1px #c7c3d1;
-    color: #656565;
-    font-size: 12px;
-    padding: 0;
-    overflow: hidden;
-    width: 250px; 
-    transform-origin: top right;
-    transform: scale(0);
-    z-index: 11;    
-    padding: 20px 30px;
-    background-color: white;    
-    transition: all .2s ease-out;
+  position: absolute;
+  top: 15px;
+  right: -15px;
+  border: solid 1px #5320ee;
+  color: #656565;
+  font-size: 12px;
+  padding: 0;
+  overflow: hidden;
+  width: 250px;
+  transform-origin: top right;
+  transform: scale(0);
+  z-index: 11;
+  padding: 20px 30px;
+  background-color: white;
+  transition: all 0.2s ease-out;
+  z-index: 20;
 }
 
-.Tips h4{
-    color: #5320ee;
-    font-size: 14px;
-    margin-bottom: 20px;
-    font-weight: 400;
+.Tips h4 {
+  color: #5320ee;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-weight: 400;
 }
 
 .Tips.opened {
-    transform: scale(1);
+  transform: scale(1);
 }
 
 .Tips .tips-pagination {
-    float: right;
-    margin-top: 10px;
+  float: right;
+  margin-top: 10px;
 }
 
-.Tips .tips-next, .Tips .tips-prev {
-    cursor: pointer;
-    user-select: none;
-    margin-left: 5px;
-    margin-right: 5px;
-    color: #5320ee;
-    font-size: 13px;
+.Tips .tips-next,
+.Tips .tips-prev {
+  cursor: pointer;
+  user-select: none;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: #5320ee;
+  font-size: 13px;
 }
 
-.Tips .tips-next.disabled, .Tips .tips-prev.disabled {
-    cursor: initial;
-    color: #c7c3d1;
+.Tips .tips-next.disabled,
+.Tips .tips-prev.disabled {
+  cursor: initial;
+  color: #c7c3d1;
 }
 
 .tips-button {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    display: inline-block;
-    background-color: #5320ee;
-    color: white;
-    border-radius: 50%;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    line-height: 28px;
-    z-index: 12;
-    user-select: none;
+  position: absolute;
+  display: inline-block;
+  background-color: #5320ee;
+  box-shadow: 0 0 0 0 rgba(83,32,238, 0.5);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 28px;
+  z-index: 30;
+  user-select: none;
+  animation: pulse 1.5s infinite;
+  font-smoothing: antialiased !important;
+  -webkit-font-smoothing: antialiased !important;
+  backface-visibility: hidden;
+  transform: translateZ(0) scale(1, 1);
+  perspective: 1000;
+}
+
+.tips-button:hover,  .tips-button.opened {
+  animation: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateZ(0) scale(0.9);
+  }
+  70% {
+    transform: translateZ(0) scale(1);
+    box-shadow: 0 0 0 10px rgba(83,32,238, 0);
+  }
+  100% {
+    transform: translateZ(0) scale(0.9);
+    box-shadow: 0 0 0 0 rgba(83,32,238, 0);
+  }
 }
