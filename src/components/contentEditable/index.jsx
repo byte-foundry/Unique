@@ -6,6 +6,7 @@ export default class ContentEditable extends React.Component {
   constructor() {
     super();
     this.emitChange = this.emitChange.bind(this);
+    this.onFocus = this.onFocus.bind(this);
   }
 
   render() {
@@ -19,9 +20,24 @@ export default class ContentEditable extends React.Component {
         onInput: this.emitChange,
         onBlur: this.props.onBlur || this.emitChange,
         contentEditable: !this.props.disabled,
-        dangerouslySetInnerHTML: {__html: html}
+        dangerouslySetInnerHTML: {__html: html},
+        onFocus: this.onFocus
       },
       this.props.children);
+  }
+
+  onFocus(e) {
+    // move caret at the end
+    var range,selection;
+    if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
+    {
+        range = document.createRange();//Create a range (a range is a like the selection but invisible)
+        range.selectNodeContents(this.htmlEl);//Select the entire contents of the element with the range
+        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+        selection = window.getSelection();//get the selection object (allows you to change selection)
+        selection.removeAllRanges();//remove any selections already made
+        selection.addRange(range);//make the range you have just created the visible selection
+    }
   }
 
   shouldComponentUpdate(nextProps) {
