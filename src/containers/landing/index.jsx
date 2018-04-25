@@ -25,7 +25,7 @@ import { ReactComponent as HowItWorks3 } from './howitworks_3.svg';
 import { createPrototypoFactory } from '../../data/createdFonts';
 import { loadLibrary } from '../../data/font';
 import { setLocale } from '../../data/ui';
-import { storeChosenWord } from '../../data/user';
+import { storeChosenWord, storeCoupon } from '../../data/user';
 
 import LanguageSelect from '../../components/languageSelect';
 import Button from '../../components/button';
@@ -45,6 +45,11 @@ class Landing extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0)
     unorphan('h1, h2, h3, p, span');
+    const query = new URLSearchParams(this.props.location.search)
+    const coupon = query.get('coupon')
+    if(coupon) {
+      this.props.storeCoupon({code: coupon});
+    }
   }
   componentWillReceiveProps() {
     unorphan('h1, h2, h3, p, span');
@@ -442,6 +447,9 @@ Landing.propTypes = {
   isBlackOnWhite: PropTypes.string.isRequired,
   setLocale: PropTypes.func.isRequired,
   locale: PropTypes.string.isRequired,
+  storeCoupon: PropTypes.func.isRequired,  
+  loadLibrary: PropTypes.func.isRequired,
+  storeChosenWord: PropTypes.func.isRequired,
 };
 
 Landing.defaultProps = {
@@ -454,8 +462,6 @@ const mapStateToProps = state => ({
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
   isBlackOnWhite: state.user.isBlackOnWhite,
   locale: state.ui.locale,
-  loadLibrary: PropTypes.func.isRequired,
-  storeChosenWord: PropTypes.func.isRequired,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -467,6 +473,7 @@ const mapDispatchToProps = dispatch =>
       loadLibrary,
       goToAuth: () => push({ pathname: '/app/auth', authData: {} }),
       storeChosenWord,
+      storeCoupon,
     },
     dispatch,
   );

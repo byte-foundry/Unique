@@ -40,6 +40,10 @@
   outline: none;
 }
 
+.Choice span:focus {
+  outline: none;
+}
+
 .Choice.selected {
   border-color: #5320ee;
 }
@@ -57,16 +61,7 @@
 }
 
 .Choice .mostSelected {
-  position: absolute;
-  top: 0px;
-  right: -3%;
-  font-size: 14px;
-  font-family: duA5LDxD8w, 'Sans-Serif';
-  transform: rotate(45deg);
-  background: #fff;
-  border-radius: 5px;
-  padding: 4px 8px;
-  border: 2px solid #111;
+  color: #5320ee;
 }
 
 .Choice .icon-edit{
@@ -74,9 +69,10 @@
   width: 35px;
   position: absolute;
   top: 0px;
-  right: 0;
+  right: -1px;
   cursor: pointer;
   background: #5320ee;
+  transform: scaleX(-1);
 }
 
 .Choice .icon-edit svg{
@@ -89,6 +85,5 @@
 
 
 .Choice span[contenteditable="true"] {
-  border: 1px dotted #5320ee;
-  padding: 5px 10px;
+  border-bottom: 2px solid #111;
 }

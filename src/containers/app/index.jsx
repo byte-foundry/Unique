@@ -28,6 +28,7 @@ import { ReactComponent as Logo } from "./logo.svg";
 
 import ProtectedRoute from "../../components/protectedRoute/";
 import Footer from "../../components/footer/";
+import Banner from "../../components/banner/";
 
 import DefineNeed from "../defineNeed/";
 import TemplateChoice from "../templateChoice/";
@@ -135,12 +136,15 @@ class App extends React.Component {
     console.log(this.props.location.pathname);
     return (
       <main className={`App ${this.props.isLoading ? "loading" : "loaded"}`}>
+        <Banner />
         {this.props.location.pathname !== "/app/auth" && (
           <header className="App-header">
             <h1 className="App-logo-wrapper">
               <Logo
                 onClick={() => {
-                  this.props.goToHome();
+                  this.props.location.pathname === "/app"
+                    ? this.props.goToLanding()
+                    : this.props.goToHome();
                 }}
               />
             </h1>
@@ -159,7 +163,9 @@ class App extends React.Component {
             <div className="col-sm-12">
               <Logo
                 onClick={() => {
-                  this.props.goToHome();
+                  this.props.location.pathname === "/app"
+                    ? this.props.goToLanding()
+                    : this.props.goToHome();
                 }}
               />
             </div>
@@ -331,6 +337,7 @@ const mapDispatchToProps = dispatch =>
       reloadFonts,
       setLocale,
       goToHome: () => push("/app"),
+      goToLanding: () => push("/"),
       createPrototypoFactory,
       toggleTooltips,
       logout,

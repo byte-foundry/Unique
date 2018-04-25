@@ -41,6 +41,12 @@
   text-transform: capitalize;
 }
 
+.Template .templateName span {
+  margin-top: 5px;
+  color: #5320ee;
+  display: inline-block;
+}
+
 .Template .mostSelected {
   position: absolute;
   top: 0px;

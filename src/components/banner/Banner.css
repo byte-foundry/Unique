@@ -1,0 +1,9 @@
+.Banner {
+  background-color: #5320ee;
+  color: white;
+  width: 100%;
+  padding: 5px 10px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}

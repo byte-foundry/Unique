@@ -1,0 +1,52 @@
+.CouponInput {
+  margin-bottom: 50px;
+}
+
+.CouponInput .coupon-box {
+  font-size: 13px;
+  text-align: center;
+  padding: 9px 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.CouponInput .coupon-input {
+    position: relative;
+}
+
+.CouponInput .coupon-input input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  text-transform: uppercase;
+  padding: 5px 30px;
+  text-align: center;
+}
+
+.CouponInput .coupon-input.error input {
+  border-color: #F67B7B;
+}
+.CouponInput .coupon-error {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #F67B7B;
+  text-align: center;
+}
+
+.CouponInput .coupon-input.valid::after {
+    position: absolute;
+    top: 45%;
+    right: 18px;
+    content: "";
+    display: block;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translateY(-60%);
+}
+
+.CouponInput .coupon-input input:focus {
+  outline: none;
+}
