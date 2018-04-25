@@ -67,9 +67,7 @@ class Choice extends React.Component {
             this.props.enableShortcuts();
             this.setState({ isEditable: false });
           }}
-          onFocus={() => {
-            this.props.disableShortcuts();
-          }}
+          disableShortcuts={this.props.disableShortcuts}
           onClick={() => {
             this.props.disableShortcuts();
           }}
