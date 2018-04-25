@@ -36,6 +36,8 @@
   border: 2px solid transparent;
   transition: all .3s ease;
   padding: 40px 30px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .DefineNeed .need:hover, .DefineNeed .need.selected {
@@ -148,7 +150,7 @@
   background: transparent;
   background-image: none;
   color: #b8b5c0;
-  cursor: initial;
+  cursor: default;
 }
 
 @keyframes fadeIn {

@@ -71,29 +71,31 @@ class DefineNeed extends React.Component {
         </div>
         <div className="needs row">
           <div
-            className={`need col-sm-12 col-md-4 col-lg-4 ${
+            className={`col-sm-12 col-md-4 col-lg-4 ${
               this.state.selected === "logo" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "logo" })}
           >
-            <LogoIcon className="need-icon"/>
-            <p className="need-title">
-              <FormattedMessage
-                id="DefineNeed.logo"
-                defaultMessage="Logotype"
-                description="Logo need"
-              />
-            </p>
-            <p className="need-description">
-              <FormattedMessage
-                id="DefineNeed.logoTooltip"
-                defaultMessage="A logo font is blablabla blablabla blablabla"
-                description="logo need tooltip"
-              />
-            </p>
+            <div className="need">
+              <LogoIcon className="need-icon" />
+              <p className="need-title">
+                <FormattedMessage
+                  id="DefineNeed.logo"
+                  defaultMessage="Logotype"
+                  description="Logo need"
+                />
+              </p>
+              <p className="need-description">
+                <FormattedMessage
+                  id="DefineNeed.logoTooltip"
+                  defaultMessage="A logo font is blablabla blablabla blablabla"
+                  description="logo need tooltip"
+                />
+              </p>
+            </div>
           </div>
           <div
-            className={`need col-sm-12 col-md-4 col-lg-4 ${
+            className={`col-sm-12 col-md-4 col-lg-4 ${
               this.state.selected === "text" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "text" })}
@@ -102,24 +104,26 @@ class DefineNeed extends React.Component {
               this.handleSubmit(e);
             }}
           >
-            <TextIcon className="need-icon"/>
-            <p className="need-title">
-              <FormattedMessage
-                id="DefineNeed.text"
-                defaultMessage="Text"
-                description="Text need"
-              />
-            </p>
-            <p className="need-description">
-              <FormattedMessage
-                id="DefineNeed.textTooltip"
-                defaultMessage="A text font is blablabla blablabla blablabla"
-                description="text need tooltip"
-              />
-            </p>
+            <div className="need">
+              <TextIcon className="need-icon" />
+              <p className="need-title">
+                <FormattedMessage
+                  id="DefineNeed.text"
+                  defaultMessage="Text"
+                  description="Text need"
+                />
+              </p>
+              <p className="need-description">
+                <FormattedMessage
+                  id="DefineNeed.textTooltip"
+                  defaultMessage="A text font is blablabla blablabla blablabla"
+                  description="text need tooltip"
+                />
+              </p>
+            </div>
           </div>
           <div
-            className={`need col-sm-12 col-md-4 col-lg-4 ${
+            className={`col-sm-12 col-md-4 col-lg-4 ${
               this.state.selected === "display" ? "selected" : ""
             }`}
             onClick={() => this.setState({ selected: "display" })}
@@ -128,62 +132,64 @@ class DefineNeed extends React.Component {
               this.handleSubmit(e);
             }}
           >
-            <DisplayIcon className="need-icon"/>
-            <p className="need-title">
-              <FormattedMessage
-                id="DefineNeed.Display"
-                defaultMessage="Display"
-                description="Display need"
-              />
-            </p>
-            <p className="need-description">
-              <FormattedMessage
-                id="DefineNeed.DisplayTooltip"
-                defaultMessage="A display font is blablabla blablabla blablabla"
-                description="Display need tooltip"
-              />
-            </p>
+            <div className="need">
+              <DisplayIcon className="need-icon" />
+              <p className="need-title">
+                <FormattedMessage
+                  id="DefineNeed.Display"
+                  defaultMessage="Display"
+                  description="Display need"
+                />
+              </p>
+              <p className="need-description">
+                <FormattedMessage
+                  id="DefineNeed.DisplayTooltip"
+                  defaultMessage="A display font is blablabla blablabla blablabla"
+                  description="Display need tooltip"
+                />
+              </p>
+            </div>
           </div>
         </div>
         {this.state.selected === "logo" ? (
           <div className="logoName">
             <div className="row">
-            <div className="col-sm-12 col-md-4">
-              <h1>
-                <FormattedMessage
-                  id="DefineNeed.brandTitle"
-                  defaultMessage="What is your brand name?"
-                  description="Brand name question"
-                />
-              </h1>
-            </div>
+              <div className="col-sm-12 col-md-4">
+                <h1>
+                  <FormattedMessage
+                    id="DefineNeed.brandTitle"
+                    defaultMessage="What is your brand name?"
+                    description="Brand name question"
+                  />
+                </h1>
+              </div>
             </div>
             <div className="row">
-            <div className="col-sm-12 col-md-4">
-              <form onSubmit={this.handleSubmit}>
-                <FormattedMessage
-                  id="DefineNeed.brandInput"
-                  defaultMessage="Type something"
-                  description="Brand input placeholder"
-                >
-                  {text => (
-                    <input
-                      type="text"
-                      placeholder={text}
-                      name="text"
-                      onChange={this.handleChange}
-                    />
-                  )}
-                </FormattedMessage>
-              </form>
-            </div>
+              <div className="col-sm-12 col-md-4">
+                <form onSubmit={this.handleSubmit}>
+                  <FormattedMessage
+                    id="DefineNeed.brandInput"
+                    defaultMessage="Type something"
+                    description="Brand input placeholder"
+                  >
+                    {text => (
+                      <input
+                        type="text"
+                        placeholder={text}
+                        name="text"
+                        onChange={this.handleChange}
+                      />
+                    )}
+                  </FormattedMessage>
+                </form>
+              </div>
             </div>
           </div>
         ) : (
           false
         )}
         <div className="row actions">
-          <div className="col-sm-12">            
+          <div className="col-sm-12">
             <FormattedMessage
               id="DefineNeed.CTA"
               defaultMessage="Let's begin."
@@ -193,7 +199,9 @@ class DefineNeed extends React.Component {
                 <Button
                   mode="full"
                   label={text}
-                  className={`need-submit ${!this.state.selected ? 'disabled' : ''}`}
+                  className={`need-submit ${
+                    !this.state.selected ? "disabled" : ""
+                  }`}
                   onClick={e => {
                     this.handleSubmit(e);
                   }}
