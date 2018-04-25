@@ -59,6 +59,76 @@ const tipsData = [
         description="Tip contrast for text"
       />
     )
+  },
+  {
+    context: [
+      {
+        stepName: "need",
+        choices: ["logo"]
+      }
+    ],
+    showOn: ["Contrast", "Thickness", "Curviness"],
+    recommanded: [],
+    message: (
+      <FormattedMessage
+        id="Tips.logoContrastThicknessFontSize"
+        defaultMessage="When designing a Logotype you want to make sure it works at different scales, both big and in reduction.
+        Don’t hesitate to use the scaling slider in the bottom right tool bar to test your font in small and large size."
+        description="Tip contrast and thickness for logo - Font size"
+      />
+    )
+  },
+  {
+    context: [
+      {
+        stepName: "need",
+        choices: ["logo"]
+      }
+    ],
+    showOn: ["Contrast", "Thickness", "Curviness"],
+    recommanded: [],
+    message: (
+      <FormattedMessage
+        id="Tips.logoContrastThicknessBGColor"
+        defaultMessage="When designing a Logotype you want to make sure it works within different contexts, black type on white background and white type on black background.
+        Don’t hesitate to change the color background in the bottom right tool bar."
+        description="Tip contrast and thickness for logo - backgroundColor"
+      />
+    )
+  },
+  {
+    context: [
+      {
+        stepName: "need",
+        choices: ["logo, text, display, dunno"]
+      }
+    ],
+    showOn: ["Curviness"],
+    recommanded: [],
+    message: (
+      <FormattedMessage
+        id="Tips.GlyphMode"
+        defaultMessage="If you want to clearly see your changes on the curviness of the fonts, you can jump to the Glyph view in the bottom right tool bar."
+        description="Tip curviness - glyph mode"
+      />
+    )
+  },
+  {
+    context: [
+      {
+        stepName: "need",
+        choices: ["text"]
+      }
+    ],
+    showOn: ["Ascender/Descender","Ascenders/Descenders"],
+    recommanded: ["Normal"],
+    message: (
+      <FormattedMessage
+        id="Tips.TextAscender"
+        defaultMessage="If you increase or decrease the size of the ascender and descender, you will loose in readability."
+        description="Tip Ascender / Descender - text mode"
+      />
+    )
   }
 ];
 
@@ -141,7 +211,9 @@ class Tips extends React.Component {
               description="Tips box title"
             />{" "}
           </h4>
-          <p style={{ whiteSpace: 'pre-line' }}>{this.state.tips[this.state.tipIndex].message}</p>
+          <p style={{ whiteSpace: "pre-line" }}>
+            {this.state.tips[this.state.tipIndex].message}
+          </p>
           {this.state.tips.length > 1 && (
             <div className="tips-pagination">
               <span

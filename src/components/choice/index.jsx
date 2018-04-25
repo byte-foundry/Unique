@@ -95,13 +95,14 @@ class Choice extends React.Component {
           {this.props.choice.name}
           {this.props.mostSelected && (
             <span>
-              &nbsp;|&nbsp;
+              &nbsp;-&nbsp;
+              <span className="mostSelected">
               <FormattedMessage
-                className="mostSelected"
                 id="StepView.mostSelected"
                 defaultMessage="Recommended"
                 description="Stepview - Most selected label"
               />
+              </span>
             </span>
           )}
         </p>

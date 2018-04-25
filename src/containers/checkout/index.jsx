@@ -124,7 +124,7 @@ class Checkout extends React.Component {
           <p className="checkout-description">
             <FormattedMessage
               id="CheckoutView.description"
-              defaultMessage="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet rutrum risus.sdsdsds"
+              defaultMessage="Your font is ready for download as an OTF file and you get your font sample included in your package. Feel free to add variants of your font by selecting the ones you’d like to buy."
               description="Checkout view description"
             />
           </p>
