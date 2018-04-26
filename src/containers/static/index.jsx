@@ -5,6 +5,10 @@ import { FormattedMessage } from "react-intl";
 
 import LanguageSelect from "../../components/languageSelect";
 
+import { ReactComponent as FacebookLogo } from "./facebook.svg";
+import { ReactComponent as TwitterLogo } from "./twitter.svg";
+import { ReactComponent as InstagramLogo } from "./instagram.svg";
+
 import { setLocale } from "../../data/ui";
 import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
@@ -14,7 +18,7 @@ import "./Static.css";
 const Static = props => (
   <div className="Static">
     {props.children}
-    
+
     <div className="footer">
       <div className="container">
         <div className="row block clearfix">
@@ -46,7 +50,29 @@ const Static = props => (
               />
             </Link>
           </div>
-          <div className="social float-right" />
+          <div className="social float-right">
+            <a
+              title="Unique Facebool"
+              href="https://www.facebook.com/fontsbyunique/"
+              target="_blank"
+            >
+              <FacebookLogo className="social-icon facebook" />
+            </a>
+            <a
+              title="Unique Instagram"
+              href="https://www.instagram.com/fontsbyunique/"
+              target="_blank"
+            >
+              <InstagramLogo className="social-icon instagram" />
+            </a>
+            <a
+              title="Unique Twitter"
+              href="https://twitter.com/fontsbyUnique/"
+              target="_blank"
+            >
+              <TwitterLogo className="social-icon twitter" />
+            </a>
+          </div>
         </div>
         <div className="row block clearfix">
           <LanguageSelect
@@ -77,21 +103,16 @@ const Static = props => (
 );
 
 const mapStateToProps = state => ({
-    isBlackOnWhite: state.user.isBlackOnWhite,
-    locale: state.ui.locale
-  });
-  
-  const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-      {
-        goToApp: () => push("/app"),
-        setLocale,
-      },
-      dispatch
-    );
-  export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(Static)
+  isBlackOnWhite: state.user.isBlackOnWhite,
+  locale: state.ui.locale
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      goToApp: () => push("/app"),
+      setLocale
+    },
+    dispatch
   );
-  
-
-
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Static));

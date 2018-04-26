@@ -46,6 +46,16 @@
     color: white;
     text-decoration: none;
    }
+
+   .Static .footer .social .social-icon {
+    width: 25px;
+    height: auto;
+    margin-left: 15px;
+  }
+  .Static .footer .social .social-icon path {
+    fill: white;
+  }
+  
   
   .Static .footer .credits a {
       color: white;
