@@ -28,6 +28,7 @@ import FAQ from './containers/static/faq/';
 import TOS from './containers/static/tos/';
 import Landing from './containers/static/landing/';
 import App from './containers/app/';
+import Page404 from './containers/404/';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
@@ -57,6 +58,7 @@ const Index = props => (
         <StaticRoute exact path="/faq" component={FAQ} />
         <StaticRoute exact path="/tos" component={TOS} />
         <Route path="/app" component={App} />
+        <Route component={Page404} />
       </Switch>
     </ConnectedRouter>
   </IntlProvider>

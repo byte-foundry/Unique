@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { push } from "react-router-redux";
 import { connect } from "react-redux";
+import { request } from "graphql-request";
 import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
 import { Tooltip } from "react-tippy";
@@ -11,6 +12,10 @@ import "react-tippy/dist/tippy.css";
 import Button from "../../components/button";
 import { defineNeed } from "../../data/font";
 import { storeChosenWord } from "../../data/user";
+import { importPresets } from "../../data/presets";
+import { GRAPHQL_API } from "../../data/constants";
+import { getAllPresets } from "../../data/queries";
+import { setErrorPresets } from "../../data/ui";
 import "./DefineNeed.css";
 
 import { ReactComponent as DisplayIcon } from "./display_icon.svg";
@@ -43,9 +48,9 @@ class DefineNeed extends React.Component {
     if (this.state.word !== "") {
       this.props.storeChosenWord(this.state.word);
     }
-    if (!this.state.isLoading) {
+    if (!this.state.isLoading && !this.props.errorPresets) {
       this.setState({ isLoading: true });
-      this.props.defineNeed(this.state.selected || 'dunno');
+      this.props.defineNeed(this.state.selected || "dunno");
     }
     event.preventDefault();
   }
@@ -194,6 +199,36 @@ class DefineNeed extends React.Component {
         ) : (
           false
         )}
+        {this.props.errorPresets && (
+          <div className="need-errorpresets">
+            <FormattedMessage
+              id="DefineNeed.error-presets"
+              defaultMessage="Something happened while fetching the presets."
+              description="Define need error presets text"
+            />
+            <FormattedMessage
+              id="efineNeed.error-presets-text"
+              defaultMessage="Retry?"
+              description="Define need error presets button"
+            >
+              {text => (
+                <Button
+                  mode="text"
+                  label={text}
+                  className="need-error-presets-button"
+                  onClick={e => {
+                    this.props.setErrorPresets(false);
+                    request(GRAPHQL_API, getAllPresets)
+                      .then(data =>
+                        this.props.importPresets(data.getAllUniquePresets.presets)
+                      )
+                      .catch(error => this.props.setErrorPresets(true));
+                  }}
+                />
+              )}
+            </FormattedMessage>
+          </div>
+        )}
         <div className="row actions">
           <div className="col-sm-12">
             <FormattedMessage
@@ -206,7 +241,9 @@ class DefineNeed extends React.Component {
                   mode="full"
                   label={text}
                   className={`need-submit ${
-                    !this.state.selected ? "disabled" : ""
+                    this.props.errorPresets || !this.state.selected
+                      ? "disabled"
+                      : ""
                   }`}
                   onClick={e => {
                     this.handleSubmit(e);
@@ -235,7 +272,8 @@ class DefineNeed extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isLoading: state.presets.isLoading
+  isLoading: state.presets.isLoading,
+  errorPresets: state.ui.errorPresets
 });
 
 const mapDispatchToProps = dispatch =>
@@ -243,7 +281,9 @@ const mapDispatchToProps = dispatch =>
     {
       defineNeed,
       storeChosenWord,
-      redirectToLanding: () => push("/")
+      importPresets,
+      redirectToLanding: () => push("/"),
+      setErrorPresets
     },
     dispatch
   );

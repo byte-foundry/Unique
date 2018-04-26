@@ -18,7 +18,7 @@ import {
   switchGlyphMode,
   changeFontSize
 } from "../../data/user";
-import { setLocale, toggleTooltips, getCurrencyRates } from "../../data/ui";
+import { setLocale, toggleTooltips, getCurrencyRates, setErrorPresets } from "../../data/ui";
 import { GRAPHQL_API } from "../../data/constants";
 import { getAllPresets } from "../../data/queries";
 import "./bootstrap-reboot.css";
@@ -39,6 +39,7 @@ import Library from "../library/";
 import StepView from "../stepView/";
 import Sidebar from "../sidebar/";
 import Authenticate from "../authenticate/";
+import Page404 from '../404/';
 
 let interval;
 
@@ -48,7 +49,7 @@ class App extends React.Component {
     super(props);
     request(GRAPHQL_API, getAllPresets)
       .then(data => props.importPresets(data.getAllUniquePresets.presets))
-      .catch(error => console.log(error));
+      .catch(error => props.setErrorPresets(true));
     if (props.userEmail !== "") {
       Intercom("update", { email: props.userEmail });
     }
@@ -211,6 +212,7 @@ class App extends React.Component {
                   path="/app/auth"
                   component={Authenticate}
                 />
+                <Route component={Page404} />
               </Switch>
               {this.props.location.pathname !== "/app/auth" && (
                 <div
@@ -344,7 +346,8 @@ const mapDispatchToProps = dispatch =>
       getCurrencyRates,
       switchBlackOnWhite,
       switchGlyphMode,
-      changeFontSize
+      changeFontSize,
+      setErrorPresets,
     },
     dispatch
   );

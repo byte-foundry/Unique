@@ -146,6 +146,22 @@
   opacity: 1;
 }
 
+.DefineNeed .need-errorpresets {
+  margin-top: 20px;
+  color: #F67B7B;
+  padding: 10px 20px;
+  border: 2px solid #F67B7B;
+}
+
+.DefineNeed .need-error-presets-button{
+  color: #F67B7B;
+  padding: 0;
+  padding-bottom: 2px;
+  margin-left: 15px;
+  border-bottom: 2px solid #F67B7B;
+}
+
+
 .DefineNeed .actions .need-submit {
   float: right;
   display: inline-block;

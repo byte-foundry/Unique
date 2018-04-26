@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="904px" height="397px" viewBox="0 0 904 397" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="108.355959%" y1="17.6050647%" x2="42.4880642%" y2="62.791817%" id="linearGradient-1">
+            <stop stop-color="#5320EE" offset="0%"></stop>
+            <stop stop-color="#5D28E2" offset="32.6042999%"></stop>
+            <stop stop-color="#622BDD" offset="100%"></stop>
+        </linearGradient>
+        <path d="M149.29661,228.951087 L149.29661,125.875 L77.9555085,228.951087 L149.29661,228.951087 Z M280.167373,292.309783 L231.504237,292.309783 L231.504237,371.271739 L149.29661,371.271739 L149.29661,292.309783 L0,292.309783 L0,236.043478 L142.209746,30.8369565 L231.504237,30.8369565 L231.504237,228.951087 L280.167373,228.951087 L280.167373,292.309783 Z M585.847458,202 C585.847458,301.766304 541.436441,376 447.417373,376 C348.673729,376 308.514831,302.23913 308.514831,202 C308.514831,101.76087 351.980932,28 447.417373,28 C541.436441,28 585.847458,102.233696 585.847458,202 Z M447.889831,305.076087 C482.379237,305.076087 501.75,270.086957 501.75,202.472826 C501.75,134.858696 482.379237,99.3967391 447.417373,99.3967391 C412.455508,99.3967391 392.612288,134.858696 392.612288,202.472826 C392.612288,270.086957 413.400424,305.076087 447.889831,305.076087 Z M761.129237,228.951087 L761.129237,125.875 L689.788136,228.951087 L761.129237,228.951087 Z M892,292.309783 L843.336864,292.309783 L843.336864,371.271739 L761.129237,371.271739 L761.129237,292.309783 L611.832627,292.309783 L611.832627,236.043478 L754.042373,30.8369565 L843.336864,30.8369565 L843.336864,228.951087 L892,228.951087 L892,292.309783 Z" id="path-2"></path>
+        <filter x="-1.1%" y="-2.3%" width="102.2%" height="105.7%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.325490196   0 0 0 0 0.125490196   0 0 0 0 0.933333333  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="404" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-186.000000, -297.000000)">
+        <g id="Group" transform="translate(192.000000, 297.000000)">
+            <rect id="Rectangle-28" fill="#EEF4FF" x="171" y="0" width="651" height="397"></rect>
+            <g id="404">
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+            </g>
+        </g>
+    </g>
+</svg>

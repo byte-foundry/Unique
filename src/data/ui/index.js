@@ -5,6 +5,7 @@ export const SET_UI_STABLE = 'ui/SET_STABLE';
 export const SET_LOCALE = 'ui/SET_LOCALE';
 export const SET_CURRENCY_RATES = 'ui/SET_CURRENCY_RATES';
 export const TOGGLE_TOOLTIPS = 'ui/TOGGLE_TOOLTIPS';
+export const SET_ERROR_PRESETS = 'ui/SET_ERROR_PRESETS';
 
 const initialState = {
   unstable: false,
@@ -13,6 +14,7 @@ const initialState = {
   shouldShowTooltips: false,
   currencyRates: undefined,
   currency: LocaleCurrency.getCurrency(navigator.language) ? LocaleCurrency.getCurrency(navigator.language) : "USD",
+  errorPresets: false,
 };
 
 export default (state = initialState, action) => {
@@ -47,6 +49,12 @@ export default (state = initialState, action) => {
         currencyRates: action.currencyRates,
       };
 
+    case SET_ERROR_PRESETS:
+      return {
+        ...state,
+        errorPresets: action.errorPresets,
+      };
+
     default:
       return state;
   }
@@ -76,6 +84,14 @@ export const setLocale = locale => (dispatch) => {
     locale: locale.toString(),
   });
 };
+
+export const setErrorPresets = status => (dispatch) => {
+  dispatch({
+    type: SET_ERROR_PRESETS,
+    errorPresets: status,
+  })
+};
+
 
 export const getCurrencyRates = () => (dispatch) => {
   fetch('https://bzawttxlqh.execute-api.eu-west-1.amazonaws.com/local/exchangeRates')
