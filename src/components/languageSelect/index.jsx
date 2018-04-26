@@ -29,6 +29,8 @@ class LanguageSelect extends React.Component {
             backgroundColor:
               this.props.pathname === "/app/auth" ||
               this.props.pathname === "/" ||
+              this.props.pathname === "/faq" ||
+              this.props.pathname === "/tos" ||
               (!this.props.isBlackOnWhite &&
                 this.props.pathname === "/app/customize")
                 ? "black"
@@ -79,7 +81,9 @@ class LanguageSelect extends React.Component {
                 )
             )}
           </div>
-          {supportedLanguages[this.props.locale] ? supportedLanguages[this.props.locale] : supportedLanguages.en}
+          {supportedLanguages[this.props.locale]
+            ? supportedLanguages[this.props.locale]
+            : supportedLanguages.en}
         </div>
       </div>
     );

@@ -62,6 +62,8 @@
 .DefineNeed .needs .need .need-icon {
   margin: 40px auto;
   display: block;
+  height: 120px;
+  width: auto;
 }
 
 .DefineNeed .needs .need .need-title {

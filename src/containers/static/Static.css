@@ -1,0 +1,55 @@
+.Static {
+
+}
+
+
+.Static .block {
+    display: block;
+}
+
+.Static .float-right {
+    display: block;
+}
+
+
+.Static .footer {
+    position: relative;
+    color: white;
+    background: black;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+  
+  .Static .footer .credits {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  
+  .Static .footer .pages {
+    margin-bottom: 15px;
+  }
+  
+  
+  .Static .footer .pages p{
+   margin-bottom: 0;
+   cursor: pointer;
+  }
+  
+  .Static .footer .pages a{
+    color: white;
+    text-decoration: none;
+   }
+   .Static .footer .pages a:hover{
+    color: white;
+    text-decoration: none;
+   }
+  
+  .Static .footer .credits a {
+      color: white;
+      text-decoration: underline;
+      padding-left: .5em;
+  }
+  
+  .Static .footer .LanguageSelect {
+    float: left;
+  }

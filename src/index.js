@@ -23,7 +23,7 @@ import messages_it from './data/intl/language_it';
 import messages_pt from './data/intl/language_pt';
 
 import store, { history } from './data/create-store';
-import Landing from './containers/landing/';
+import Static from './containers/static/';
 import App from './containers/app/';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
@@ -43,7 +43,7 @@ const Index = props => (
   <IntlProvider locale={props.locale} messages={messages[props.locale]}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path="/" component={Landing} />
+        <Route path="/" component={Static} />
         <Route path="/app" component={App} />
       </Switch>
     </ConnectedRouter>

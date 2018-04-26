@@ -21,7 +21,8 @@ export default class ContentEditable extends React.Component {
         onBlur: this.props.onBlur || this.emitChange,
         contentEditable: !this.props.disabled,
         dangerouslySetInnerHTML: {__html: html},
-        onFocus: this.onFocus
+        onFocus: this.onFocus,
+        spellCheck: false
       },
       this.props.children);
   }
