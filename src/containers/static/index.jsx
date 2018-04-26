@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 
 import Landing from "./landing/";
 import FAQ from "./faq/";
+import TOS from "./tos/";
 import "./Static.css";
 
 const Static = props => (
@@ -19,6 +20,7 @@ const Static = props => (
     <Switch>
       <Route exact path="/" component={Landing} />
       <Route path="/faq" component={FAQ} />
+      <Route path="/tos" component={TOS} />
     </Switch>
     <div className="footer">
       <div className="container">

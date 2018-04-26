@@ -1,0 +1,77 @@
+.TOS {
+}
+
+.TOS .banner {
+  background-image: linear-gradient(265deg, #5320ee, #5d28e2 21%, #622bdd);
+  padding-bottom: 20px;
+  height: 80px;
+}
+
+.TOS .banner .logos {
+  position: relative;
+  height: 50px;
+}
+
+.TOS .banner .logos.logo {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 150px;
+  height: auto;
+  cursor: pointer;
+}
+
+.TOS .banner .logos.logo .logo-main {
+  fill: white;
+}
+
+.TOS .banner .logos.logo .letter {
+  opacity: 0;
+}
+
+.TOS .banner .logos.logo .letter-1 {
+  opacity: 1;
+  fill: white;
+}
+
+.TOS .banner .logos.profile {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  width: 25px;
+  height: auto;
+  cursor: pointer;
+  z-index: 10;
+}
+
+
+.TOS .banner .logos.profile  path,
+.TOS .banner .logos.profile  circle {
+  fill: white;
+}
+
+.TOS h1 {
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  font-size: 1.8rem;
+}
+
+.TOS .content {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.TOS .content h2 {
+    font-weight: 400;
+}
+
+.TOS .content h3 {
+    font-weight: 400;
+}
+
+.TOS .content p,  .TOS .content li{
+    color: #b0b7bf;
+}
+

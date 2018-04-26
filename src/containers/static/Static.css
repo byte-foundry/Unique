@@ -27,16 +27,19 @@
   
   .Static .footer .pages {
     margin-bottom: 15px;
+    font-size: 14px;
   }
   
   
   .Static .footer .pages p{
-   margin-bottom: 0;
+   margin-bottom: 5px;
    cursor: pointer;
   }
   
   .Static .footer .pages a{
     color: white;
+    display: inline-block;
+    margin-bottom: 5px;
     text-decoration: none;
    }
    .Static .footer .pages a:hover{
