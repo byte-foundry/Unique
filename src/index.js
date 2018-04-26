@@ -24,6 +24,9 @@ import messages_pt from './data/intl/language_pt';
 
 import store, { history } from './data/create-store';
 import Static from './containers/static/';
+import FAQ from './containers/static/faq/';
+import TOS from './containers/static/tos/';
+import Landing from './containers/static/landing/';
 import App from './containers/app/';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
@@ -39,11 +42,20 @@ const messages = {
   pt: messages_pt,
 };
 
+const StaticRoute = ({ component:Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    <Static>
+      <Component {...props} />
+    </Static>
+  )} />
+)
 const Index = props => (
   <IntlProvider locale={props.locale} messages={messages[props.locale]}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route path="/" component={Static} />
+        <StaticRoute exact path="/" component={Landing} />
+        <StaticRoute exact path="/faq" component={FAQ} />
+        <StaticRoute exact path="/tos" component={TOS} />
         <Route path="/app" component={App} />
       </Switch>
     </ConnectedRouter>

@@ -9,19 +9,12 @@ import { setLocale } from "../../data/ui";
 import { push } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-
-import Landing from "./landing/";
-import FAQ from "./faq/";
-import TOS from "./tos/";
 import "./Static.css";
 
 const Static = props => (
   <div className="Static">
-    <Switch>
-      <Route exact path="/" component={Landing} />
-      <Route path="/faq" component={FAQ} />
-      <Route path="/tos" component={TOS} />
-    </Switch>
+    {props.children}
+    
     <div className="footer">
       <div className="container">
         <div className="row block clearfix">
