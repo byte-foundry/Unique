@@ -44,11 +44,12 @@
   outline: none;
 }
 
-.Choice.selected {
+.Choice.selected,
+.Choice.selected:hover {
   border-color: #5320ee;
 }
 .Choice:hover {
-  border-color: #5320ee;
+  border-color: #ccc;
 }
 
 .Choice .choiceName {
@@ -64,23 +65,30 @@
   color: #5320ee;
 }
 
-.Choice .icon-edit{
+.Choice .icon-edit {
   height: 35px;
   width: 35px;
   position: absolute;
   top: 0px;
-  right: -1px;
+  right: 0px;
   cursor: pointer;
-  background: #5320ee;
   transform: scaleX(-1);
 }
+.Choice .icon-edit:hover {
+    background: #5320ee;
+    fill: white;
+    cursor: pointer;
+}
 
-.Choice .icon-edit svg{
+.Choice .icon-edit {
+    fill: #5320ee;
+}
+.Choice .icon-edit svg {
   height: 20px;
   width: auto;
   position: absolute;
   top: 7px;
-  left: 9px;
+  left: 7px;
 }
 
 

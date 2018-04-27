@@ -40,8 +40,11 @@
   margin-right: 5px;
 }
 
-.DefineNeed .need:hover, .DefineNeed .need.selected {
+.DefineNeed .need.selected {
   border-color: #5320ee;
+}
+.DefineNeed .need:hover {
+    border-color: #ccc;
 }
 
 
@@ -142,7 +145,7 @@
   transition: opacity .2s ease;
 }
 
-.DefineNeed .actions .need-dunno:hover {  
+.DefineNeed .actions .need-dunno:hover {
   opacity: 1;
 }
 

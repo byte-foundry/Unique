@@ -241,7 +241,7 @@ class StepView extends React.Component {
         >
           <div className="container">
             <div className="row justify-content-md-between step-description">
-              <div className="col-md-6 col-sm-12">
+              <div className="col-md-9 col-sm-12">
                 <div className="step-bubbles">
                   {[...Array(this.props.stepLength)].map(
                     (e, i) =>
@@ -275,7 +275,7 @@ class StepView extends React.Component {
                 <p className="step-name">{stepTranslations[this.props.stepValues.name]}</p>
               </div>
 
-              <div className="col-md-4 col-sm-12 relative">
+              <div className="col-md-3 col-sm-12 relative">
                 <div className="helper-wrapper">
                   <Tips
                     choicesMade={this.props.choicesMade}

@@ -26,10 +26,13 @@
   }
 }
 
-.Template.selected,
-.Template:hover {
+.Template.selected {
   border-color: #5320ee;
 }
+.Template:hover {
+    border-color: #ccc;
+}
+
 
 .Template .templateName {
   font-family: unique, sans-serif;
