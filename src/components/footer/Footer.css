@@ -31,7 +31,8 @@
 }
 
 .Footer .ShortcutsHelper {
-  float: left;
+  float: right;
+  margin-left: 20px;
 }
 
 .Footer.whiteOnBlack .footer-wrapper {
