@@ -43,12 +43,12 @@ class Landing extends React.Component {
     };
   }
   componentDidMount() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     unorphan('h1, h2, h3, p, span');
-    const query = new URLSearchParams(this.props.location.search)
-    const coupon = query.get('coupon')
-    if(coupon) {
-      this.props.storeCoupon({code: coupon});
+    const query = new URLSearchParams(this.props.location.search);
+    const coupon = query.get('coupon');
+    if (coupon) {
+      this.props.storeCoupon({ code: coupon });
     }
   }
   componentWillReceiveProps() {
@@ -447,7 +447,7 @@ Landing.propTypes = {
   isBlackOnWhite: PropTypes.string.isRequired,
   setLocale: PropTypes.func.isRequired,
   locale: PropTypes.string.isRequired,
-  storeCoupon: PropTypes.func.isRequired,  
+  storeCoupon: PropTypes.func.isRequired,
   loadLibrary: PropTypes.func.isRequired,
   storeChosenWord: PropTypes.func.isRequired,
 };

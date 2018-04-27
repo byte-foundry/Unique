@@ -290,10 +290,9 @@ class SpecimenView extends React.Component {
                   className="button-closeModal"
                   onClick={() => {
                     if (this.state.fontName !== '') {
+                      this.props.storeProject(this.state.fontName);
                       if (this.state.fromModal === 'save') {
-                        if (this.props.isAuthenticated) {
-                          this.props.storeProject(this.state.fontName);
-                        } else {
+                        if (!this.props.isAuthenticated) {
                           this.props.authenticate(
                             this.props.storeProject,
                             this.state.fontName,

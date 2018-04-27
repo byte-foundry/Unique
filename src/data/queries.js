@@ -70,7 +70,7 @@ export const getSpecialChoiceSelectedCount = name => `
       selected
     }
   }
-  
+
 `;
 
 export const getPresetExportedCount = id => `
@@ -130,8 +130,8 @@ export const addProjectToUser = (
                                 name
                             }
                         }
-                        template 
-                        baseValues                    
+                        template
+                        baseValues
                     }
                 }
             }
@@ -188,8 +188,8 @@ export const updateProject = (
                                 name
                             }
                         }
-                        template 
-                        baseValues                    
+                        template
+                        baseValues
                     }
                 }
             }
@@ -239,6 +239,15 @@ export const authenticateUser = (email, password) => `
             password:"${password}"
         )
         {
+            token
+        }
+    }
+`;
+
+export const authenticateAnonymousUser = `
+    mutation {
+        authenticateAnonymousUser {
+            id
             token
         }
     }
@@ -296,7 +305,7 @@ mutation {
 export const getUserProjects = graphQLID => `
     query {
         user
-        {   
+        {
             id
             email
             uniqueProjects(orderBy: createdAt_ASC) {
@@ -312,8 +321,8 @@ export const getUserProjects = graphQLID => `
                             name
                         }
                     }
-                    template 
-                    baseValues                    
+                    template
+                    baseValues
                 }
             }
         }

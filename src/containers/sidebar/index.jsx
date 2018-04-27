@@ -1,19 +1,19 @@
 // @flow
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { push } from "react-router-redux";
-import { bindActionCreators } from "redux";
-import { FormattedMessage } from "react-intl";
-import Step from "../../components/step/";
-import { goToStep, loadLibrary } from "../../data/font";
-import { storeCoupon } from "../../data/user";
-import Button from "../../components/button/";
-import Checkout from "../../components/checkout";
-import CouponInput from "../../components/couponInput";
-import "./Sidebar.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
+import { FormattedMessage } from 'react-intl';
+import Step from '../../components/step/';
+import { goToStep, loadLibrary } from '../../data/font';
+import { storeCoupon } from '../../data/user';
+import Button from '../../components/button/';
+import Checkout from '../../components/checkout';
+import CouponInput from '../../components/couponInput';
+import './Sidebar.css';
 
-import { ReactComponent as ProfileIcon } from "./profile.svg";
+import { ReactComponent as ProfileIcon } from './profile.svg';
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -22,8 +22,8 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div
-        className={`Sidebar ${this.props.mode !== "checkout" ? "small" : ""} ${
-          this.props.mode === "checkout" ? "checkout" : ""
+        className={`Sidebar ${this.props.mode !== 'checkout' ? 'small' : ''} ${
+          this.props.mode === 'checkout' ? 'checkout' : ''
         }`}
       >
         <ProfileIcon
@@ -34,7 +34,7 @@ class Sidebar extends React.Component {
               : this.props.goToAuth();
           }}
         />
-        {this.props.mode === "checkout" && (
+        {this.props.mode === 'checkout' && (
           <div className="sidebar-checkout">
             <h2 className="sidebar-checkout-title">
               {this.props.userFontName}&nbsp;
@@ -45,8 +45,7 @@ class Sidebar extends React.Component {
               />
             </h2>
             <div className="choices">
-              {this.props.checkoutOptions.map(
-                option =>
+              {this.props.checkoutOptions.map(option =>
                   option.selected && (
                     <div className="choice">
                       <span className="left">{option.name}</span>
@@ -58,20 +57,17 @@ class Sidebar extends React.Component {
                             description="Checkout - Included price"
                           />
                         ) : (
-                          parseFloat(
-                            option.type === "discount"
+                          parseFloat(option.type === 'discount'
                               ? this.props.option20Price
-                              : this.props.option5Price
-                          ).toLocaleString(this.props.locale_full, {
-                            style: "currency",
+                              : this.props.option5Price).toLocaleString(this.props.locale_full, {
+                            style: 'currency',
                             currency: this.props.currency,
-                            maximumSignificantDigits: 3
+                            maximumSignificantDigits: 3,
                           })
                         )}
                       </span>
                     </div>
-                  )
-              )}
+                  ))}
               {this.props.coupon.discount && (
                 <div className="choice">
                   <span className="left">
@@ -91,30 +87,28 @@ class Sidebar extends React.Component {
               {parseFloat(this.props.basePrice).toLocaleString(
                 this.props.locale_full,
                 {
-                  style: "currency",
-                  currency: this.props.currency
-                }
+                  style: 'currency',
+                  currency: this.props.currency,
+                },
               )}
             </h2>
             <h2 className="price">
               {this.props.coupon.discount
-                ? parseFloat(
-                    this.props.checkoutPrice -
+                ? parseFloat(this.props.checkoutPrice -
                       this.props.checkoutPrice *
                         this.props.coupon.discount /
-                        100
-                  ).toLocaleString(this.props.locale_full, {
-                    style: "currency",
-                    currency: this.props.currency
+                        100).toLocaleString(this.props.locale_full, {
+                    style: 'currency',
+                    currency: this.props.currency,
                   })
                 : parseFloat(this.props.checkoutPrice).toLocaleString(
                     this.props.locale_full,
                     {
-                      style: "currency",
-                      currency: this.props.currency
-                    }
+                      style: 'currency',
+                      currency: this.props.currency,
+                    },
                   )}
-            </h2>            
+            </h2>
             <FormattedMessage
               id="Sidebar.checkoutAction"
               defaultMessage="Checkout"
@@ -124,7 +118,7 @@ class Sidebar extends React.Component {
                 <Checkout
                   title="Unique"
                   amount={this.props.checkoutPrice}
-                  description="Your unique package"                  
+                  description="Your unique package"
                   skipCard={this.props.coupon.discount === 100}
                 >
                   <Button
@@ -137,7 +131,7 @@ class Sidebar extends React.Component {
                 </Checkout>
               )}
             </FormattedMessage>
-            <CouponInput storeCoupon={this.props.storeCoupon} coupon={this.props.coupon}/>
+            <CouponInput storeCoupon={this.props.storeCoupon} coupon={this.props.coupon} />
           </div>
         )}
       </div>
@@ -147,22 +141,16 @@ class Sidebar extends React.Component {
 
 Sidebar.propTypes = {
   step: PropTypes.number.isRequired,
-  steps: PropTypes.arrayOf(
-    PropTypes.shape({
+  steps: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    choices: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      choices: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired
-        })
-      )
-    })
-  ).isRequired,
-  choicesMade: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired,
+    })),
+  })).isRequired,
+  choicesMade: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  })).isRequired,
   pathName: PropTypes.string.isRequired,
   fontName: PropTypes.string.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
@@ -180,7 +168,7 @@ Sidebar.propTypes = {
 
 Sidebar.defaultProps = {
   specimen: false,
-  mode: "default"
+  mode: 'default',
 };
 
 const mapStateToProps = state => ({
@@ -208,9 +196,9 @@ const mapDispatchToProps = dispatch =>
       goToStep,
       loadLibrary,
       storeCoupon,
-      goToAuth: () => push({ pathname: "/app/auth", authData: {} })
+      goToAuth: () => push({ pathname: '/app/auth', authData: {} }),
     },
-    dispatch
+    dispatch,
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
