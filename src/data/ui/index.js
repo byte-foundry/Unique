@@ -6,6 +6,7 @@ export const SET_LOCALE = 'ui/SET_LOCALE';
 export const SET_CURRENCY_RATES = 'ui/SET_CURRENCY_RATES';
 export const TOGGLE_TOOLTIPS = 'ui/TOGGLE_TOOLTIPS';
 export const SET_ERROR_PRESETS = 'ui/SET_ERROR_PRESETS';
+export const SET_FETCHING_PRESETS = 'ui/SET_FETCHING_PRESETS';
 
 const initialState = {
   unstable: false,
@@ -15,6 +16,7 @@ const initialState = {
   currencyRates: undefined,
   currency: LocaleCurrency.getCurrency(navigator.language) ? LocaleCurrency.getCurrency(navigator.language) : "USD",
   errorPresets: false,
+  fetchingPresets: false,
 };
 
 export default (state = initialState, action) => {
@@ -54,6 +56,12 @@ export default (state = initialState, action) => {
         ...state,
         errorPresets: action.errorPresets,
       };
+    
+    case SET_FETCHING_PRESETS:
+      return {
+        ...state,
+        fetchingPresets: action.fetchingPresets,
+      }
 
     default:
       return state;
@@ -91,6 +99,14 @@ export const setErrorPresets = status => (dispatch) => {
     errorPresets: status,
   })
 };
+
+export const setFetchingPresets = status => (dispatch) => {
+  dispatch({
+    type: SET_FETCHING_PRESETS,
+    fetchingPresets: status,
+  })
+};
+
 
 
 export const getCurrencyRates = () => (dispatch) => {

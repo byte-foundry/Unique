@@ -177,6 +177,15 @@
   cursor: default;
 }
 
+.DefineNeed .actions .need-submit.need-submit-loading {
+  min-height: 40px;
+  min-width: 150px;
+}
+
+.DefineNeed .actions .need-submit.disabled.need-submit-loading svg rect {
+  fill:#5320ee;
+}
+
 @keyframes fadeIn {
   from {opacity: 0}
   to {opacity: 1}

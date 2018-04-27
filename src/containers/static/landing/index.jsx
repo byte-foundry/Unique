@@ -16,6 +16,7 @@ import { ReactComponent as One3 } from "./number3.svg";
 import { ReactComponent as One4 } from "./number4.svg";
 import { ReactComponent as One5 } from "./number5.svg";
 
+
 import video from "./unique_intro.mp4";
 
 import { ReactComponent as HowItWorks1 } from "./howitworks_1.svg";

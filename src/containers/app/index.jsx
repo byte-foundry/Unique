@@ -18,7 +18,7 @@ import {
   switchGlyphMode,
   changeFontSize
 } from "../../data/user";
-import { setLocale, toggleTooltips, getCurrencyRates, setErrorPresets } from "../../data/ui";
+import { setLocale, toggleTooltips, getCurrencyRates, setErrorPresets, setFetchingPresets } from "../../data/ui";
 import { GRAPHQL_API } from "../../data/constants";
 import { getAllPresets } from "../../data/queries";
 import "./bootstrap-reboot.css";
@@ -47,9 +47,16 @@ class App extends React.Component {
   /* global Intercom */
   constructor(props) {
     super(props);
+    props.setFetchingPresets(true);
     request(GRAPHQL_API, getAllPresets)
-      .then(data => props.importPresets(data.getAllUniquePresets.presets))
-      .catch(error => props.setErrorPresets(true));
+      .then(data => {
+        props.setFetchingPresets(false);
+        props.importPresets(data.getAllUniquePresets.presets);
+      })
+      .catch(error => {;
+        props.setErrorPresets(true)
+        props.setFetchingPresets(false);
+      });
     if (props.userEmail !== "") {
       Intercom("update", { email: props.userEmail });
     }
@@ -292,7 +299,9 @@ App.propTypes = {
   switchBlackOnWhite: PropTypes.func.isRequired,
   switchGlyphMode: PropTypes.func.isRequired,
   changeFontSize: PropTypes.func.isRequired,
-  fontSize: PropTypes.number.isRequired
+  fontSize: PropTypes.number.isRequired,
+  setErrorPresets: PropTypes.func.isRequired,
+  setFetchingPresets: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
@@ -348,6 +357,7 @@ const mapDispatchToProps = dispatch =>
       switchGlyphMode,
       changeFontSize,
       setErrorPresets,
+      setFetchingPresets,
     },
     dispatch
   );

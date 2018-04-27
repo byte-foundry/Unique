@@ -15,7 +15,7 @@ import { storeChosenWord } from "../../data/user";
 import { importPresets } from "../../data/presets";
 import { GRAPHQL_API } from "../../data/constants";
 import { getAllPresets } from "../../data/queries";
-import { setErrorPresets } from "../../data/ui";
+import { setErrorPresets, setFetchingPresets } from "../../data/ui";
 import "./DefineNeed.css";
 
 import { ReactComponent as DisplayIcon } from "./display_icon.svg";
@@ -48,7 +48,7 @@ class DefineNeed extends React.Component {
     if (this.state.word !== "") {
       this.props.storeChosenWord(this.state.word);
     }
-    if (!this.state.isLoading && !this.props.errorPresets) {
+    if (!this.state.isLoading && !this.props.errorPresets && !this.props.fetchingPresets) {
       this.setState({ isLoading: true });
       this.props.defineNeed(this.state.selected || "dunno");
     }
@@ -216,13 +216,21 @@ class DefineNeed extends React.Component {
                   mode="text"
                   label={text}
                   className="need-error-presets-button"
+                  loading={this.props.fetchingPresets}
                   onClick={e => {
                     this.props.setErrorPresets(false);
+                    this.props.setFetchingPresets(true);
                     request(GRAPHQL_API, getAllPresets)
-                      .then(data =>
-                        this.props.importPresets(data.getAllUniquePresets.presets)
-                      )
-                      .catch(error => this.props.setErrorPresets(true));
+                      .then(data => {
+                        this.props.setFetchingPresets(false);
+                        this.props.importPresets(
+                          data.getAllUniquePresets.presets
+                        );
+                      })
+                      .catch(error => {
+                        this.props.setErrorPresets(true);
+                        this.props.setFetchingPresets(false);
+                      });
                   }}
                 />
               )}
@@ -240,11 +248,12 @@ class DefineNeed extends React.Component {
                 <Button
                   mode="full"
                   label={text}
+                  loading={this.props.fetchingPresets}
                   className={`need-submit ${
                     this.props.errorPresets || !this.state.selected
                       ? "disabled"
                       : ""
-                  }`}
+                  } ${this.props.fetchingPresets ? 'need-submit-loading' : ''}`}
                   onClick={e => {
                     this.handleSubmit(e);
                   }}
@@ -273,7 +282,8 @@ class DefineNeed extends React.Component {
 
 const mapStateToProps = state => ({
   isLoading: state.presets.isLoading,
-  errorPresets: state.ui.errorPresets
+  errorPresets: state.ui.errorPresets,
+  fetchingPresets: state.ui.fetchingPresets,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -283,7 +293,8 @@ const mapDispatchToProps = dispatch =>
       storeChosenWord,
       importPresets,
       redirectToLanding: () => push("/"),
-      setErrorPresets
+      setErrorPresets,
+      setFetchingPresets
     },
     dispatch
   );
@@ -292,7 +303,11 @@ DefineNeed.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   defineNeed: PropTypes.func.isRequired,
   storeChosenWord: PropTypes.func.isRequired,
-  redirectToLanding: PropTypes.func.isRequired
+  redirectToLanding: PropTypes.func.isRequired,
+  setErrorPresets: PropTypes.func.isRequired,
+  setFetchingPresets: PropTypes.func.isRequired,
+  errorPresets: PropTypes.bool.isRequired,
+  fetchingPresets: PropTypes.bool.isRequired,
 };
 
 export default withRouter(
