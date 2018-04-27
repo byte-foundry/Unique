@@ -39,11 +39,11 @@
 }
 
 .TemplateChoice .icon-back, .TemplateChoice .icon-next {
-  width: 40px;
+  width: 50px;
   height: auto;
   cursor: pointer;
-  position: fixed;
-  top: calc(50% + 25px);
+  position: absolute;
+  top: calc(50% + 30px);
   transform: translateY(-50%);
   border-radius: 50%;
   transition: transform .3s ease, background .3s ease, border-color .3s ease;
@@ -53,12 +53,12 @@
 }
 
 .TemplateChoice .icon-back {
-  top: calc(50% - 25px);
-  right: 90px;
+  top: calc(50% - 30px);
+  right: 10px;
 }
 
 .TemplateChoice .icon-next {
-  right: 90px;
+  right: 10px;
 }
 
 .TemplateChoice .icon-next.disabled g {
@@ -77,7 +77,9 @@
   margin-left: 0px;
 }
 
-.TemplateChoice .template-wrapper {}
+.TemplateChoice .template-wrapper {
+  margin-right: 50px;
+}
 
 @media (max-width: 575px) {
   .TemplateChoice .icon-next {

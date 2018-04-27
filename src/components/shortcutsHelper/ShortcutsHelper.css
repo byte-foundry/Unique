@@ -5,24 +5,15 @@
 .ShortcutsHelper .tooltip-button {
     position: relative;
     display: inline-block;
-    border: 2px solid black;
-    cursor: pointer;
-    padding-left: 1px;
-    height: 21px;
-    width: 21px;
-    transform: translateY(-1px);
-    border-radius: 50%;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-
+    font-family: unique-icon;
     transition: all 200ms ease;
+    font-size: 25px;
+    user-select: none;
+    cursor: pointer;
 }
 
 .ShortcutsHelper .tooltip-button:hover {
-    background-color: #5320ee;
-    border-color: #5320ee;
-    color: white;
+    transform: scale3d(1.1,1.1,1);
 }
 
 .ShortcutsHelper .tooltip-backdrop {

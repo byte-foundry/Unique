@@ -73,7 +73,7 @@
 
 .StepView .icon-back-wrapper {
   position: absolute;
-  top: calc(50% - 25px);
+  top: calc(50% - 30px);
   right: -50px;
   transform: translateY(calc(-50%)) translateZ(0px);
   z-index: 10;
@@ -81,7 +81,7 @@
 
 .StepView .icon-next-wrapper {
   position: absolute;
-  top: calc(50% + 25px);
+  top: calc(50% + 30px);
   right: -50px;
   transform: translateY(-50%) translateZ(0);
   z-index: 10;
@@ -90,7 +90,7 @@
 .StepView .icon-back,
 .StepView .icon-next,
 .StepView .icon-finish {
-  width: 40px;
+  width: 50px;
   height: auto;
   cursor: pointer;
   transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
@@ -121,7 +121,7 @@
 
 .StepView .icon-finish {
   position: absolute;
-  top: calc(50% + 50px);
+  top: calc(50% + 55px);
   right: -50px;
   background: transparent;
 }

@@ -31,7 +31,7 @@
 }
 
 .Footer .ShortcutsHelper {
-  float: right;
+  float: left;
 }
 
 .Footer.whiteOnBlack .footer-wrapper {
@@ -65,9 +65,8 @@
   border: 2px solid white;
 }
 
-.Footer.whiteOnBlack svg path {
-  fill: white;
-  stroke: white;
+.Footer.whiteOnBlack {
+  color: white;
 }
 
 .Footer.whiteOnBlack .tooltip-button {

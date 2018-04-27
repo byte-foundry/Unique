@@ -5,26 +5,21 @@
 }
 
 .FontControls .icon-background {
-  margin-right: 10px;
+  font-family: unique-icon;
+  font-size: 24px;
+  user-select: none;
 }
 
 .FontControls .icon-glyph,
 .FontControls .icon-background {
-  width: 23px;
-  padding: 0px 5px;
-  height: auto;
   cursor: pointer;
-  transition: fill 0.3s ease;
 }
 
 .FontControls .icon-glyph {
-  width: 20px;
+  font-family: unique-icon;
+  font-size: 24px;
+  user-select: none;
 }
-
-.FontControls .icon-glyph path {
-  fill: black;
-}
-
 .FontControls .font-size {
   margin-right: 10px;
 }
@@ -59,16 +54,15 @@
 }
 
 .FontControls .icon-lowFontSize {
-  margin-left: 0;
-  transform: translateY(-5px);
+  font-family: unique-icon;
+  font-size: 24px;
 }
 .FontControls .icon-highFontSize,
 .FontControls .icon-lowFontSize {
-  margin: 0px 10px;
   cursor: pointer;
-}
-
-.FontControls .icon-highFontSize path,
-.FontControls .icon-lowFontSize path {
-  fill: black;
+  font-family: unique-icon;
+  font-size: 24px;
+  margin-left: 5px;
+  margin-right: 5px;
+  user-select: none;
 }

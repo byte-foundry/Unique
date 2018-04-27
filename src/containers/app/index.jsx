@@ -259,6 +259,7 @@ class App extends React.Component {
             changeFontSize={this.props.changeFontSize}
             setLocale={this.props.setLocale}
             locale={this.props.locale}
+            isGlyphMode={this.props.isGlyphMode}
           />
         </div>
       </main>
@@ -302,6 +303,7 @@ App.propTypes = {
   fontSize: PropTypes.number.isRequired,
   setErrorPresets: PropTypes.func.isRequired,
   setFetchingPresets: PropTypes.func.isRequired,
+  isGlyphMode: PropTypes.bool.isRequired,
 };
 
 App.defaultProps = {
@@ -338,7 +340,8 @@ const mapStateToProps = state => ({
   shouldShowTooltips: state.ui.shouldShowTooltips,
   userId: state.user.graphqlID,
   locale: state.ui.locale,
-  fontSize: state.user.fontSize
+  fontSize: state.user.fontSize,
+  isGlyphMode: state.user.isGlyphMode,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
