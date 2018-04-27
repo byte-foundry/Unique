@@ -1,0 +1,17 @@
+[
+  {
+    "id": "404.Title",
+    "description": "Unique 404 Title",
+    "defaultMessage": "Page not found"
+  },
+  {
+    "id": "404.Subtitle",
+    "description": "Unique 404 Subtitle",
+    "defaultMessage": "The page you were looking for doesn’t exist :("
+  },
+  {
+    "id": "404.homeButton",
+    "description": "404 home button",
+    "defaultMessage": "Home"
+  }
+]

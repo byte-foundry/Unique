@@ -1,0 +1,22 @@
+[
+  {
+    "id": "Landing.footerFAQ",
+    "description": "Unique FAQ footer",
+    "defaultMessage": "FAQ"
+  },
+  {
+    "id": "Landing.footerSupport",
+    "description": "Unique Support footer",
+    "defaultMessage": "Support"
+  },
+  {
+    "id": "Landing.footerTOS",
+    "description": "Unique TOS footer",
+    "defaultMessage": "Terms of use"
+  },
+  {
+    "id": "Landing.footerCopyright",
+    "description": "Unique copyright footer",
+    "defaultMessage": "Unique © Powered by"
+  }
+]

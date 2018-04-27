@@ -1,5 +1,10 @@
 [
   {
+    "id": "DefineNeed.welcome",
+    "description": "Define need page welcome",
+    "defaultMessage": "Welcome to Unique,"
+  },
+  {
     "id": "DefineNeed.title",
     "description": "Define need page title",
     "defaultMessage": "What kind of need do you have?"
@@ -35,16 +40,6 @@
     "defaultMessage": "A display font is blablabla blablabla blablabla"
   },
   {
-    "id": "DefineNeed.dunno",
-    "description": "Dunno need",
-    "defaultMessage": "Dunno"
-  },
-  {
-    "id": "DefineNeed.dunnoTooltip",
-    "description": "dunno need tooltip",
-    "defaultMessage": "I don’t know yet what I want to do."
-  },
-  {
     "id": "DefineNeed.brandTitle",
     "description": "Brand name question",
     "defaultMessage": "What is your brand name?"
@@ -53,5 +48,25 @@
     "id": "DefineNeed.brandInput",
     "description": "Brand input placeholder",
     "defaultMessage": "Type something"
+  },
+  {
+    "id": "DefineNeed.error-presets",
+    "description": "Define need error presets text",
+    "defaultMessage": "Something happened while fetching the presets."
+  },
+  {
+    "id": "efineNeed.error-presets-text",
+    "description": "Define need error presets button",
+    "defaultMessage": "Retry?"
+  },
+  {
+    "id": "DefineNeed.CTA",
+    "description": "Define need CTA",
+    "defaultMessage": "Let's begin."
+  },
+  {
+    "id": "DefineNeed.dunno",
+    "description": "Dunno need",
+    "defaultMessage": "Dunno"
   }
 ]

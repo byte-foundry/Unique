@@ -1,5 +1,45 @@
 [
   {
+    "id": "StepView.thickness",
+    "description": "Stepview - Thickness question",
+    "defaultMessage": "What kind of thickness do you want?"
+  },
+  {
+    "id": "StepView.width",
+    "description": "Stepview - Width question",
+    "defaultMessage": "What would be the width of your font?"
+  },
+  {
+    "id": "StepView.slant",
+    "description": "Stepview - Slant question",
+    "defaultMessage": "Choose your desired slant"
+  },
+  {
+    "id": "StepView.serifs",
+    "description": "Stepview - Serifs question",
+    "defaultMessage": "Pick your preferred serif style"
+  },
+  {
+    "id": "StepView.xHeight",
+    "description": "Stepview - xHeight question",
+    "defaultMessage": "What would be the letter height of your font?"
+  },
+  {
+    "id": "StepView.contrast",
+    "description": "Stepview - Contrast question",
+    "defaultMessage": "Choose your preferred contrast"
+  },
+  {
+    "id": "StepView.curviness",
+    "description": "Stepview - Curviness question",
+    "defaultMessage": "Squared? Rounded? Pick your curviness"
+  },
+  {
+    "id": "StepView.ascendersDescenders",
+    "description": "Stepview - Ascenders/Descenders question",
+    "defaultMessage": "Choose the height of your ascenders and descenders"
+  },
+  {
     "id": "Shortcuts.chooseChoice",
     "description": "Shortcut - up down choice action",
     "defaultMessage": "Press up and down keys to choose the most suitable option"
