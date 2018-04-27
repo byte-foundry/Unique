@@ -193,7 +193,6 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     }
 
 
-    
     // Sort choices
     let stepParams = {};
     // Get all step params
@@ -209,7 +208,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       ...params
     } = stepParams;
 
-    
+
     let paramToSort;
     switch (step.name) {
       case 'Thickness':
@@ -244,19 +243,22 @@ export const selectFont = (font, step) => (dispatch, getState) => {
         break;
     }
     // If no default choice, create it
+    let defaultStep = { values: {} };
     if (!step.choices.find(e => e.name === step.defaultStepName)) {
-      // Push default choice to the font steps
-      step.choices.push({
+      defaultStep = {
         name: step.defaultStepName,
         values: {
           [paramToSort]: selectedFont.baseValues[paramToSort],
         },
         id: `default${step.name}`,
-      });
+      };
+      // Push default choice to the font steps
+      step.choices.push(defaultStep);
     }
 
-    // Sort by the first useful param //todo : find a master param    
+    // Sort by the first useful param //todo : find a master param
     step.choices.sort((a, b) => a.values[paramToSort] - b.values[paramToSort]);
+    delete defaultStep.values[paramToSort];
   });
 
   /** ******************** Create fonts ****************** */
