@@ -3,26 +3,26 @@
   display: flex;
   flex-direction: column;
   padding-top: 0;
-  padding-bottom: 90px;
+  padding-bottom: 80px;
   margin-bottom: 80px;
 }
 
 @media (min-width: 768px) {
   .DefineNeed {
-    padding-top: 50px;
+    padding-top: 20px;
   }
 }
 
 @media (min-width: 1800px) {
   .DefineNeed {
-    padding-top: 85px;
+    padding-top: 55px;
   }
 }
 
 .DefineNeed .needs {
   line-height: 1.4;
   user-select: none;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 .DefineNeed .needs div {
