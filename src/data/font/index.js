@@ -193,7 +193,6 @@ export const selectFont = (font, step) => (dispatch, getState) => {
     }
 
 
-    
     // Sort choices
     let stepParams = {};
     // Get all step params
@@ -209,7 +208,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       ...params
     } = stepParams;
 
-    
+
     let paramToSort;
     switch (step.name) {
       case 'Thickness':
@@ -255,7 +254,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       });
     }
 
-    // Sort by the first useful param //todo : find a master param    
+    // Sort by the first useful param //todo : find a master param
     step.choices.sort((a, b) => a.values[paramToSort] - b.values[paramToSort]);
   });
 
@@ -1000,6 +999,13 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
         console.log(data.UniqueProject);
         const baseValues = data.UniqueProject.preset.baseValues;
         const currentPreset = data.UniqueProject.preset;
+        currentPreset.steps.forEach((step) => {
+          step.choices.forEach((choice) => {
+            if (!choice.name) {
+              choice.name = step.defaultStepName;
+            }
+          });
+        });
         console.log(currentPreset);
         const step = currentPreset.steps.length;
         const currentParams = {};

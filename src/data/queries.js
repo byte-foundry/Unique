@@ -26,6 +26,7 @@ export const getUserProject = id => `
         needs
         baseValues
         steps {
+          defaultStepName
           id
           name
           description

@@ -25,11 +25,33 @@ class SpecimenView extends React.Component {
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.storeOrAuthenticate = this.storeOrAuthenticate.bind(this);
   }
   componentDidMount() {
     this.specimenViewWrapper.focus();
     window.scrollTo(0, 0);
     unorphan('h1, h2, h3, p, span');
+  }
+  storeOrAuthenticate() {
+    if (this.state.fontName !== '') {
+      if (this.state.fromModal === 'save') {
+        this.props.storeProject(this.state.fontName, {
+          noRedirect: true,
+        });
+        if (this.props.isAuthenticated) {
+          this.props.goToLibrary();
+        } else {
+          this.props.authenticate();
+        }
+      } else {
+        this.props.storeProject(this.state.fontName, {
+          noRedirect: true,
+        });
+        this.props.goToCheckout();
+      }
+
+      this.setState({ isModalOpened: false });
+    }
   }
   onFocus() {
     this.setState({ isInputFocused: true });
@@ -38,20 +60,8 @@ class SpecimenView extends React.Component {
     this.setState({ isInputFocused: false });
   }
   onKeyDown(e) {
-    if (this.state.fontName !== '' && e.keyCode === 13) {
-      if (this.state.fromModal === 'save') {
-        if (this.props.isAuthenticated) {
-          this.props.storeProject(this.state.fontName);
-        } else {
-          this.props.authenticate(
-            this.props.storeProject,
-            this.state.fontName,
-          );
-        }
-      } else {
-        this.props.goToCheckout(this.state.fontName);
-      }
-      this.setState({ isModalOpened: false });
+    if (e.keyCode === 13) {
+      this.storeOrAuthenticate();
     }
   }
   render() {
@@ -288,23 +298,7 @@ class SpecimenView extends React.Component {
               {text => (
                 <Button
                   className="button-closeModal"
-                  onClick={() => {
-                    if (this.state.fontName !== '') {
-                      this.props.storeProject(this.state.fontName);
-                      if (this.state.fromModal === 'save') {
-                        if (!this.props.isAuthenticated) {
-                          this.props.authenticate(
-                            this.props.storeProject,
-                            this.state.fontName,
-                          );
-                        }
-                      } else {
-                        this.props.goToCheckout(this.state.fontName);
-                      }
-
-                      this.setState({ isModalOpened: false });
-                    }
-                  }}
+                  onClick={this.storeOrAuthenticate}
                   mode="full"
                   label={text}
                 />
@@ -367,14 +361,7 @@ class SpecimenView extends React.Component {
                     className="button-save"
                     onClick={() => {
                       if (this.state.fontName) {
-                        if (this.props.isAuthenticated) {
-                          this.props.storeProject(this.state.fontName);
-                        } else {
-                          this.props.authenticate(
-                            this.props.storeProject,
-                            this.state.fontName,
-                          );
-                        }
+                        this.props.storeProject(this.state.fontName);
                       } else {
                         this.setState({
                           isModalOpened: true,
@@ -613,7 +600,7 @@ const mapStateToProps = state => ({
   need: state.font.need,
   word: state.user.chosenWord,
   projectName: state.user.projectName,
-  isAuthenticated: typeof state.user.graphqlID === 'string',
+  isAuthenticated: typeof state.user.graphqlID === 'string' && !state.user.anonymous,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -622,10 +609,13 @@ const mapDispatchToProps = dispatch =>
       storeProject,
       goToCheckout: fontName => push({ pathname: '/app/checkout', fontName }),
       goBack: fontName => push('/app/customize'),
-      authenticate: (callback, fontName) =>
+      authenticate: () =>
         push({
           pathname: '/app/auth',
-          authData: { callback, fontName, type: 'saveFont' },
+        }),
+      goToLibrary: () =>
+        push({
+          pathname: '/app/library',
         }),
     },
     dispatch,
@@ -644,6 +634,7 @@ SpecimenView.propTypes = {
   }).isRequired,
   projectName: PropTypes.string,
   goToCheckout: PropTypes.func.isRequired,
+  goToLibrary: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   authenticate: PropTypes.func.isRequired,
 };

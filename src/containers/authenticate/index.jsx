@@ -100,22 +100,11 @@ class Authenticate extends React.Component {
         return;
       }
       if (!this.state.isConnecting) {
-        if (this.props.location.authData && this.props.location.authData.type) {
-          this.props.loginWithEmail(
-            this.state.formValues.email,
-            this.state.formValues.password,
-            this.state.formValues.firstName,
-            this.state.formValues.lastName,
-            this.props.location.authData,
-          );
-        } else {
-          this.props.loginWithEmail(
-            this.state.formValues.email,
-            this.state.formValues.password,
-            this.state.formValues.firstName,
-            this.state.formValues.lastName,
-          );
-        }
+        this.props.loginWithEmail(
+          this.state.formValues.email,
+          this.state.formValues.password,
+          this.props.graphQLToken,
+        );
         this.setState({
           isConnecting: true,
           serviceConnecting: {
@@ -189,22 +178,13 @@ class Authenticate extends React.Component {
         return;
       }
       if (!this.state.isConnecting) {
-        if (this.props.location.authData && this.props.location.authData.type) {
-          this.props.signupWithEmail(
-            this.state.formValues.email,
-            this.state.formValues.password,
-            this.state.formValues.firstName,
-            this.state.formValues.lastName,
-            this.props.location.authData,
-          );
-        } else {
-          this.props.signupWithEmail(
-            this.state.formValues.email,
-            this.state.formValues.password,
-            this.state.formValues.firstName,
-            this.state.formValues.lastName,
-          );
-        }
+        this.props.signupWithEmail(
+          this.state.formValues.email,
+          this.state.formValues.password,
+          this.state.formValues.firstName,
+          this.state.formValues.lastName,
+          this.props.graphQLToken,
+        );
         this.setState({
           isConnecting: true,
           serviceConnecting: {
@@ -258,14 +238,7 @@ class Authenticate extends React.Component {
   }
   loginFacebook(response) {
     if (!this.state.isConnecting) {
-      if (
-        this.props.location.authData &&
-        this.props.location.authData.type !== ''
-      ) {
-        this.props.loginWithFacebook(response, this.props.location.authData);
-      } else {
-        this.props.loginWithFacebook(response);
-      }
+      this.props.loginWithFacebook(response, this.props.graphQLToken);
       this.setState({
         isConnecting: true,
         serviceConnecting: {
@@ -293,15 +266,7 @@ class Authenticate extends React.Component {
   }
   loginGoogle(response) {
     if (!this.state.isConnecting) {
-      if (
-        this.props.location.authData &&
-        this.props.location.authData.type !== ''
-      ) {
-        this.props.loginWithGoogle(response, this.props.location.authData);
-        console.log('with authdata');
-      } else {
-        this.props.loginWithGoogle(response);
-      }
+      this.props.loginWithGoogle(response, this.props.graphQLToken);
       this.setState({
         isConnecting: true,
         serviceConnecting: {
@@ -329,14 +294,7 @@ class Authenticate extends React.Component {
   }
   loginTwitter(response) {
     if (!this.state.isConnecting) {
-      if (
-        this.props.location.authData &&
-        this.props.location.authData.type !== ''
-      ) {
-        this.props.loginWithTwitter(response, this.props.location.authData);
-      } else {
-        this.props.loginWithTwitter(response);
-      }
+      this.props.loginWithTwitter(response, this.props.graphQLToken);
       this.setState({
         isConnecting: true,
         serviceConnecting: {
@@ -711,8 +669,7 @@ class Authenticate extends React.Component {
           return (
             <div className="header">
               <h2>
-                {this.props.location.authData &&
-                this.props.location.authData.type === 'boughtFont' ? (
+                {this.props.projectBought ? (
                   <FormattedMessage
                     id="Auth.SignInHeaderBoughtFont"
                     defaultMessage="Thank you!"
@@ -726,26 +683,24 @@ class Authenticate extends React.Component {
                   />
                 )}
               </h2>
-              {this.props.location.authData &&
-                this.props.location.authData.type === 'saveFont' && (
-                  <p>
-                    <FormattedMessage
-                      id="Auth.SaveFontMessage"
-                      defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
-                      description="Sign in header message if the user has saved a font"
-                    />
-                  </p>
+              {this.props.projectId && !this.props.projectBought && (
+              <p>
+                <FormattedMessage
+                  id="Auth.SaveFontMessage"
+                  defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                  description="Sign in header message if the user has saved a font"
+                />
+              </p>
                 )}
-              {this.props.location.authData &&
-                this.props.location.authData.type === 'boughtFont' && (
-                  <p>
-                    {happyMessages[happyIndex]}
-                    <FormattedMessage
-                      id="Auth.BoughtFontMessage"
-                      defaultMessage="Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
-                      description="Sign in header message if the user has bought a font"
-                    />
-                  </p>
+              {this.props.projectBought && (
+              <p>
+                {happyMessages[happyIndex]}
+                <FormattedMessage
+                  id="Auth.BoughtFontMessage"
+                  defaultMessage="Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                  description="Sign in header message if the user has bought a font"
+                />
+              </p>
                 )}
             </div>
           );
@@ -753,13 +708,12 @@ class Authenticate extends React.Component {
         return (
           <div className="header">
             <h2>
-              {this.props.location.authData &&
-                this.props.location.authData.type === 'boughtFont' ? (
-                  <FormattedMessage
-                    id="Auth.SignInHeaderBoughtFont"
-                    defaultMessage="Thank you!"
-                    description="Sign in header message if font bought"
-                  />
+              {this.props.projectBought ? (
+                <FormattedMessage
+                  id="Auth.SignInHeaderBoughtFont"
+                  defaultMessage="Thank you!"
+                  description="Sign in header message if font bought"
+                />
                 ) : (
                   <FormattedMessage
                     id="Auth.SignUpHeader"
@@ -768,25 +722,23 @@ class Authenticate extends React.Component {
                   />
                 )}
             </h2>
-            {this.props.location.authData &&
-                this.props.location.authData.type === 'saveFont' && (
-                  <p>
-                    <FormattedMessage
-                      id="Auth.SaveFontMessage"
-                      defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
-                      description="Sign in header message if the user has saved a font"
-                    />
-                  </p>
+            {this.props.projectId && !this.props.projectBought && (
+            <p>
+              <FormattedMessage
+                id="Auth.SaveFontMessage"
+                defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                description="Sign in header message if the user has saved a font"
+              />
+            </p>
                 )}
-            {this.props.location.authData &&
-                this.props.location.authData.type === 'boughtFont' && (
-                  <p>
-                    <FormattedMessage
-                      id="Auth.BoughtFontMessage"
-                      defaultMessage="Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
-                      description="Sign in header message if the user has bought a font"
-                    />
-                  </p>
+            {this.props.projectBought && (
+            <p>
+              <FormattedMessage
+                id="Auth.BoughtFontMessage"
+                defaultMessage="Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                description="Sign in header message if the user has bought a font"
+              />
+            </p>
                 )}
           </div>
         );
@@ -803,7 +755,7 @@ class Authenticate extends React.Component {
           <Close
             className="closeIcon"
             onClick={() => {
-              if (this.props.location.authData.type === 'boughtFont') {
+              if (this.props.projectBought === 'boughtFont') {
                 this.props.goToHome();
               } else {
                 this.props.reloadFonts();
@@ -977,6 +929,9 @@ class Authenticate extends React.Component {
 
 const mapStateToProps = state => ({
   authError: state.user.authError,
+  graphQLToken: state.user.graphQLToken,
+  projectBought: state.user.projectBought,
+  projectId: state.user.projectID,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -1003,10 +958,14 @@ Authenticate.propTypes = {
   signupWithEmail: PropTypes.func.isRequired,
   reloadFonts: PropTypes.func.isRequired,
   authError: PropTypes.string.isRequired,
+  graphQLToken: PropTypes.string,
+  projectBought: PropTypes.bool.isRequired,
+  projectId: PropTypes.string,
 };
 
 Authenticate.defaultProps = {
   hasBoughtFont: false,
+  projectBought: false,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Authenticate));

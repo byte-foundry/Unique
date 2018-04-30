@@ -471,7 +471,7 @@ const mapDispatchToProps = dispatch =>
       createPrototypoFactory,
       setLocale,
       loadLibrary,
-      goToAuth: () => push({ pathname: '/app/auth', authData: {} }),
+      goToAuth: () => push({ pathname: '/app/auth' }),
       storeChosenWord,
       storeCoupon,
     },

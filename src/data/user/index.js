@@ -121,6 +121,7 @@ export default (state = initialState, action) => {
     case STORE_PROJECT:
       return {
         ...state,
+        projectBought: action.projectBought,
         projectID: action.projectID,
         projects: action.projects,
         projectName: action.projectName,
@@ -216,7 +217,7 @@ export default (state = initialState, action) => {
   }
 };
 
-export const storeProject = (fontName, bought = false) => (
+export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
   dispatch,
   getState,
 ) => {
@@ -266,11 +267,14 @@ export const storeProject = (fontName, bought = false) => (
               console.log(res);
               dispatch({
                 type: STORE_PROJECT,
+                projectBought: bought,
                 projectID: res.updateUniqueProject.id,
                 projects: res.updateUniqueProject.user.uniqueProjects,
                 projectName: fontName,
               });
-              dispatch(loadLibrary());
+              if (!noRedirect) {
+                dispatch(loadLibrary());
+              }
               dispatch(setStable());
             })
             .catch(err => console.log(err));
@@ -309,11 +313,14 @@ export const storeProject = (fontName, bought = false) => (
               Intercom('trackEvent', 'unique-saved-font', metadata);
               dispatch({
                 type: STORE_PROJECT,
+                projectBought: bought,
                 projectID: res.createUniqueProject.id,
                 projects: res.createUniqueProject.user.uniqueProjects,
                 projectName: fontName,
               });
-              dispatch(loadLibrary());
+              if (!noRedirect) {
+                dispatch(loadLibrary());
+              }
               dispatch(setStable());
             });
         }
@@ -451,23 +458,19 @@ export const storeChosenGlyph = chosenGlyph => (dispatch) => {
 };
 
 export const afterPayment = res => (dispatch, getState) => {
-  const { userFontName, graphQLToken } = getState().user;
+  const { userFontName, graphQLToken, anonymous } = getState().user;
   const { data } = res;
   const isPayed = data.paid;
   const userStripeEmail = data.email;
   dispatch(storeCoupon({}));
   /* global Intercom */
   Intercom('trackEvent', 'unique-bought-font');
-  if (graphQLToken) {
-    dispatch(storeProject(userFontName, isPayed));
+  if (graphQLToken && !anonymous) {
+    dispatch(storeProject(userFontName, { bought: isPayed }));
   } else {
+    dispatch(storeProject(userFontName, { bought: isPayed, noRedirect: true }));
     dispatch(push({
       pathname: '/app/auth',
-      authData: {
-        callback: storeProject,
-        fontName: userFontName,
-        type: 'boughtFont',
-      },
     }));
   }
   dispatch(setStable());
@@ -509,11 +512,16 @@ export const updateCheckoutOptions = (checkoutOptions, fontName) => (
 
 export const loginWithTwitter = (
   { oauthVerifier, oauthToken, error },
-  authData,
+  token,
 ) => (dispatch) => {
-  request(GRAPHQL_API, authenticateTwitterUser(oauthToken, oauthVerifier))
+  const client = new GraphQLClient(GRAPHQL_API, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  client.request(authenticateTwitterUser(oauthToken, oauthVerifier))
     .then((res) => {
-      dispatch(loginToGraphCool(res.authenticateTwitterUser.token, authData));
+      dispatch(loginToGraphCool(res.authenticateTwitterUser.token));
     })
     .catch((err) => {
       console.log(err);
@@ -524,11 +532,16 @@ export const loginWithTwitter = (
     });
 };
 
-export const loginWithFacebook = (response, authData) => (dispatch) => {
-  const token = response.accessToken;
-  request(GRAPHQL_API, authenticateFacebookUser(token))
+export const loginWithFacebook = (response, token) => (dispatch) => {
+  const { accessToken } = response;
+  const client = new GraphQLClient(GRAPHQL_API, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  client.request(authenticateFacebookUser(accessToken))
     .then((res) => {
-      dispatch(loginToGraphCool(res.authenticateFacebookUser.token, authData));
+      dispatch(loginToGraphCool(res.authenticateFacebookUser.token));
     })
     .catch((err) => {
       console.log(err);
@@ -539,13 +552,17 @@ export const loginWithFacebook = (response, authData) => (dispatch) => {
     });
 };
 
-export const loginWithGoogle = (response, authData) => (dispatch) => {
+export const loginWithGoogle = (response, token) => (dispatch) => {
   console.log('logging in with google');
-  console.log(authData);
-  const token = response.accessToken;
-  request(GRAPHQL_API, authenticateGoogleUser(token))
+  const { accessToken } = response;
+  const client = new GraphQLClient(GRAPHQL_API, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  client.request(authenticateGoogleUser(accessToken))
     .then((res) => {
-      dispatch(loginToGraphCool(res.authenticateGoogleUser.token, authData));
+      dispatch(loginToGraphCool(res.authenticateGoogleUser.token));
     })
     .catch((err) => {
       console.log(err);
@@ -556,10 +573,15 @@ export const loginWithGoogle = (response, authData) => (dispatch) => {
     });
 };
 
-export const loginWithEmail = (email, password, authData) => (dispatch) => {
-  request(GRAPHQL_API, authenticateUser(email, password))
+export const loginWithEmail = (email, password, token) => (dispatch) => {
+  const client = new GraphQLClient(GRAPHQL_API, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  client.request(authenticateUser(email, password))
     .then((res) => {
-      dispatch(loginToGraphCool(res.authenticateEmailUser.token, authData));
+      dispatch(loginToGraphCool(res.authenticateEmailUser.token));
     })
     .catch((err) => {
       console.log(err);
@@ -575,11 +597,16 @@ export const signupWithEmail = (
   password,
   firstName,
   lastName,
-  authData,
+  token,
 ) => (dispatch) => {
-  request(GRAPHQL_API, signupUser(email, password, firstName, lastName))
+  const client = new GraphQLClient(GRAPHQL_API, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  client.request(signupUser(email, password, firstName, lastName))
     .then((res) => {
-      dispatch(loginWithEmail(email, password, authData));
+      dispatch(loginWithEmail(email, password));
     })
     .catch(err => console.log(err));
 };
@@ -608,7 +635,7 @@ export const anonymousAuth = () => (dispatch) => {
   }
 };
 
-export const loginToGraphCool = (accessToken, authData) => (dispatch) => {
+export const loginToGraphCool = accessToken => (dispatch) => {
   localStorage.setItem('uniqueGraphcoolToken', accessToken);
   console.log('=========CONNECTING TO GRAPHCOOL DATABASE============');
   const client = new GraphQLClient(GRAPHQL_API, {
@@ -631,9 +658,7 @@ export const loginToGraphCool = (accessToken, authData) => (dispatch) => {
       });
       /* global Intercom */
       Intercom('update', { email: res.user.email });
-      if (authData && Object.keys(authData).length > 1) {
-        dispatch(authData.callback(authData.fontName, authData.type === 'boughtFont'));
-      } else dispatch(loadLibrary());
+      dispatch(loadLibrary());
     })
     .catch((error) => {
       console.log(error);

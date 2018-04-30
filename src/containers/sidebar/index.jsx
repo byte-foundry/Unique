@@ -196,7 +196,7 @@ const mapDispatchToProps = dispatch =>
       goToStep,
       loadLibrary,
       storeCoupon,
-      goToAuth: () => push({ pathname: '/app/auth', authData: {} }),
+      goToAuth: () => push({ pathname: '/app/auth' }),
     },
     dispatch,
   );
