@@ -187,7 +187,7 @@ const mapStateToProps = state => ({
   option5Price: state.user.option5Price,
   option20Price: state.user.option20Price,
   coupon: state.user.coupon,
-  userFontName: state.user.userFontName,
+  userFontName: state.user.currentProject.name,
 });
 
 const mapDispatchToProps = dispatch =>

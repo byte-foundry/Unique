@@ -599,7 +599,7 @@ const mapStateToProps = state => ({
   email: state.user.email,
   need: state.font.need,
   word: state.user.chosenWord,
-  projectName: state.user.projectName,
+  projectName: state.user.currentProject.name,
   isAuthenticated: typeof state.user.graphqlID === 'string' && !state.user.anonymous,
 });
 

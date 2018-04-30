@@ -10,6 +10,7 @@ import Button from '../../components/button/';
 import { loadProject, download, reloadFonts } from '../../data/font';
 import { deleteUserProject, logout } from '../../data/user';
 import './Library.css';
+import { S3_URL } from '../../data/constants.js';
 
 class Library extends React.Component {
   constructor(props) {
@@ -184,12 +185,12 @@ class Library extends React.Component {
                     >
                       {text => (
                         <Button
-                          onClick={() =>
-                            this.props.download(
-                              `project${project.id}`,
-                              project.name || 'Undefined',
-                            )
-                          }
+                          onClick={() => {
+                            const tempLink = document.createElement('a');
+                            tempLink.href = `${S3_URL}${this.props.userId}/${project.id}.zip`;
+                            tempLink.download = `${project.name}.zip`;
+                            tempLink.dispatchEvent(new MouseEvent('click'));
+                          }}
                           label={text}
                           mode="full"
                           className="action-open"
@@ -219,9 +220,11 @@ Library.propTypes = {
   deleteUserProject: PropTypes.func.isRequired,
   reloadFonts: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 const mapStateToProps = state => ({
   projects: state.user.projects,
+  userId: state.user.graphqlID,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

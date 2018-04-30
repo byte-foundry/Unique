@@ -53,8 +53,7 @@ const initialState = {
   chosenWord: DEFAULT_UI_WORD,
   graphqlID: undefined,
   projects: [],
-  projectID: undefined,
-  projectName: undefined,
+  currentProject: { id: undefined, name: undefined },
   shouldLogout: false,
   fontSize: 50,
   isBlackOnWhite: true,
@@ -62,7 +61,6 @@ const initialState = {
   chosenGlyph: DEFAULT_UI_GLYPH,
   checkoutOptions: [],
   checkoutPrice: BASE_PACK_PRICE,
-  userFontName: '',
   option5Price: 5,
   option20Price: -20,
   graphQLToken: undefined,
@@ -121,10 +119,8 @@ export default (state = initialState, action) => {
     case STORE_PROJECT:
       return {
         ...state,
-        projectBought: action.projectBought,
-        projectID: action.projectID,
+        currentProject: action.currentProject,
         projects: action.projects,
-        projectName: action.projectName,
       };
 
     case DELETE_PROJECT:
@@ -149,7 +145,7 @@ export default (state = initialState, action) => {
         graphqlID: undefined,
         graphQLToken: undefined,
         projects: [],
-        projectID: undefined,
+        currentProject: {},
         projectName: undefined,
         shouldLogout: false,
       };
@@ -157,8 +153,11 @@ export default (state = initialState, action) => {
     case STORE_PROJECT_INFOS:
       return {
         ...state,
-        projectID: action.projectID,
-        projectName: action.projectName,
+        currentProject: {
+          id: action.id,
+          name: action.name,
+          bought: action.bought,
+        },
       };
 
     case CHANGE_FONT_SIZE:
@@ -184,7 +183,6 @@ export default (state = initialState, action) => {
         ...state,
         checkoutOptions: action.checkoutOptions,
         checkoutPrice: action.checkoutPrice,
-        userFontName: action.fontName,
         option5Price: action.option5Price,
         option20Price: action.option20Price,
         basePrice: action.basePrice,
@@ -227,7 +225,7 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
   const { currentPreset, choicesMade, need } = getState().font;
   console.log(choicesMade);
   const {
-    projectID,
+    currentProject: { id: projectId },
     graphqlID,
     checkoutOptions,
     graphQLToken,
@@ -252,25 +250,28 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
       .request(getUserProjects())
       .then((data) => {
         if (
-          data.user.uniqueProjects.find(project => project.id === projectID)
+          data.user.uniqueProjects.find(project => project.id === projectId)
         ) {
           console.log('project already found on database. updating it');
           client
             .request(updateProject(
-              projectID,
+              projectId,
               choicesMade,
               fontName,
               bought,
               filteredCheckoutOptions,
             ))
             .then((res) => {
+              const { bought, name, id } = res.updateUniqueProject;
               console.log(res);
               dispatch({
                 type: STORE_PROJECT,
-                projectBought: bought,
-                projectID: res.updateUniqueProject.id,
+                currentProject: {
+                  bought,
+                  name,
+                  id,
+                },
                 projects: res.updateUniqueProject.user.uniqueProjects,
-                projectName: fontName,
               });
               if (!noRedirect) {
                 dispatch(loadLibrary());
@@ -292,8 +293,9 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
             ))
             .then((res) => {
               console.log(res);
+              const { bought, name, id } = res.createUniqueProject;
               const metadata = {
-                unique_preset: res.createUniqueProject.id,
+                unique_preset: id,
                 choices_made: choicesMade
                   .map((choice, index) => {
                     if (index !== 0) return choice.name;
@@ -313,10 +315,15 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
               Intercom('trackEvent', 'unique-saved-font', metadata);
               dispatch({
                 type: STORE_PROJECT,
-                projectBought: bought,
-                projectID: res.createUniqueProject.id,
+                currentProject: {
+                  bought,
+                  name,
+                  id,
+                },
+                // projectBought: bought,
+                // projectID: res.createUniqueProject.id,
                 projects: res.createUniqueProject.user.uniqueProjects,
-                projectName: fontName,
+                // projectName: fontName,
               });
               if (!noRedirect) {
                 dispatch(loadLibrary());
@@ -329,7 +336,7 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
   }
 };
 
-export const deleteUserProject = projectID => (dispatch, getState) => {
+export const deleteUserProject = projectId => (dispatch, getState) => {
   console.log('========DELETE PROJECT========');
   const { graphQLToken, graphqlID, projects } = getState().user;
   const newProjects = [...projects];
@@ -344,12 +351,12 @@ export const deleteUserProject = projectID => (dispatch, getState) => {
       .request(getUserProjects(graphqlID))
       .then((data) => {
         if (
-          data.user.uniqueProjects.find(project => project.id === projectID)
+          data.user.uniqueProjects.find(project => project.id === projectId)
         ) {
           console.log('project found on database. deleting it');
-          client.request(deleteProject(projectID)).then((res) => {
+          client.request(deleteProject(projectId)).then((res) => {
             newProjects.splice(
-              newProjects.findIndex(e => (e.id = projectID)),
+              newProjects.findIndex(e => (e.id === projectId)),
               1,
             );
             dispatch({
@@ -365,11 +372,12 @@ export const deleteUserProject = projectID => (dispatch, getState) => {
   }
 };
 
-export const updateProjectInfos = (projectID, projectName) => (dispatch) => {
+export const updateProjectInfos = (id, name, bought) => (dispatch) => {
   dispatch({
     type: STORE_PROJECT_INFOS,
-    projectID,
-    projectName,
+    id,
+    name,
+    bought,
   });
 };
 
@@ -458,7 +466,7 @@ export const storeChosenGlyph = chosenGlyph => (dispatch) => {
 };
 
 export const afterPayment = res => (dispatch, getState) => {
-  const { userFontName, graphQLToken, anonymous } = getState().user;
+  const { currentProject: { name }, graphQLToken, anonymous } = getState().user;
   const { data } = res;
   const isPayed = data.paid;
   const userStripeEmail = data.email;
@@ -466,9 +474,9 @@ export const afterPayment = res => (dispatch, getState) => {
   /* global Intercom */
   Intercom('trackEvent', 'unique-bought-font');
   if (graphQLToken && !anonymous) {
-    dispatch(storeProject(userFontName, { bought: isPayed }));
+    dispatch(storeProject(name, { bought: isPayed }));
   } else {
-    dispatch(storeProject(userFontName, { bought: isPayed, noRedirect: true }));
+    dispatch(storeProject(name, { bought: isPayed, noRedirect: true }));
     dispatch(push({
       pathname: '/app/auth',
     }));

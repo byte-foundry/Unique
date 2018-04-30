@@ -361,7 +361,7 @@ export const defineNeed = need => (dispatch) => {
     type: DEFINE_NEED,
     need,
   });
-  dispatch(updateProjectInfos(undefined, undefined));
+  dispatch(updateProjectInfos());
   dispatch(loadPresets());
 };
 
@@ -976,12 +976,12 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
   getState,
 ) => {
   console.log('==========font/loadProject============');
-  const { projectID, graphQLToken } = getState().user;
+  const { currentProject: { id: projectId }, graphQLToken } = getState().user;
   console.log('> Loading project');
-  console.log(projectID);
+  console.log(projectId);
   console.log(loadedProjectID);
   console.log(loadedProjectName);
-  if (projectID === loadedProjectID) {
+  if (projectId === loadedProjectID) {
     console.log('Same project loaded, going to specimen');
     dispatch(push('/app/specimen'));
   } else {
@@ -997,8 +997,11 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
       .request(getUserProject(loadedProjectID))
       .then((data) => {
         console.log(data.UniqueProject);
-        const baseValues = data.UniqueProject.preset.baseValues;
-        const currentPreset = data.UniqueProject.preset;
+        const {
+          choicesMade, preset, bought, id, name,
+        } = data.UniqueProject;
+        const baseValues = preset.baseValues;
+        const currentPreset = preset;
         currentPreset.steps.forEach((step) => {
           step.choices.forEach((choice) => {
             if (!choice.name) {
@@ -1009,11 +1012,11 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
         console.log(currentPreset);
         const step = currentPreset.steps.length;
         const currentParams = {};
-        data.UniqueProject.choicesMade.forEach((choice, index) => {
+        choicesMade.forEach((choice, index) => {
           if (choice !== null) {
             Object.keys(choice).forEach((key) => {
               if (key !== 'name') {
-                currentParams[key] = data.UniqueProject.choicesMade[index][key];
+                currentParams[key] = choicesMade[index][key];
               }
             });
           }
@@ -1024,10 +1027,10 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
           currentParams,
           baseValues,
           step,
-          choicesMade: data.UniqueProject.choicesMade,
-          bought: data.UniqueProject.bought,
+          choicesMade,
+          bought,
         });
-        dispatch(updateProjectInfos(loadedProjectID, loadedProjectName));
+        dispatch(updateProjectInfos(id, name, bought));
         dispatch(reloadFonts(false));
       })
       .catch(error => console.log(error));

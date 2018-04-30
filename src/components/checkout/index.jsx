@@ -47,6 +47,8 @@ const onToken = (
   projectId,
 ) => (token) => {
   console.log('Handling purchase....');
+  console.log(projectId);
+  console.log(userFontName);
   setUnstable();
   const fonts = [];
   const fontsSelected = checkoutOptions.filter(e => e.type === 'font' || e.dbName === 'baseFont');
@@ -195,10 +197,10 @@ const Checkout = props =>
 const mapStateToProps = state => ({
   email: state.user.email,
   currency: state.ui.currency,
-  userFontName: state.user.userFontName,
+  userFontName: state.user.currentProject.name,
   checkoutOptions: state.user.checkoutOptions,
   coupon: state.user.coupon,
-  projectId: state.user.projectID,
+  projectId: state.user.currentProject.id,
 });
 
 const mapDispatchToProps = dispatch =>

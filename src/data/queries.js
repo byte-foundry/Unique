@@ -116,6 +116,7 @@ export const addProjectToUser = (
             id
             createdAt
             name
+            bought
             user {
                 uniqueProjects {
                     id
@@ -174,6 +175,7 @@ export const updateProject = (
             id
             createdAt
             name
+            bought
             user {
                 uniqueProjects {
                     id

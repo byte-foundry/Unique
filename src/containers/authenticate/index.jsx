@@ -930,8 +930,8 @@ class Authenticate extends React.Component {
 const mapStateToProps = state => ({
   authError: state.user.authError,
   graphQLToken: state.user.graphQLToken,
-  projectBought: state.user.projectBought,
-  projectId: state.user.projectID,
+  projectBought: state.user.currentProject.bought,
+  projectId: state.user.currentProject.id,
 });
 
 const mapDispatchToProps = dispatch =>
