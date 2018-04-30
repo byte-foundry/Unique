@@ -69,6 +69,7 @@
 
 .StepView .pagination {
   float: right;
+  margin-bottom: 30px;
 }
 .StepView .pagination .pagination-next,
 .StepView .pagination .pagination-prev,

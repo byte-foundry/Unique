@@ -805,7 +805,7 @@ class Authenticate extends React.Component {
           <Close
             className="closeIcon"
             onClick={() => {
-              if (this.props.location.authData.type === "boughtFont") {
+              if (this.props.location.authData && this.props.location.authData.type === "boughtFont") {
                 this.props.goToHome();
               } else {
                 this.props.reloadFonts();

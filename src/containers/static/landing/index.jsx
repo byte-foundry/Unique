@@ -16,7 +16,6 @@ import { ReactComponent as One3 } from "./number3.svg";
 import { ReactComponent as One4 } from "./number4.svg";
 import { ReactComponent as One5 } from "./number5.svg";
 
-
 import video from "./unique_intro.mp4";
 
 import { ReactComponent as HowItWorks1 } from "./howitworks_1.svg";
@@ -94,6 +93,8 @@ class Landing extends React.Component {
                         label={text}
                         onClick={() => {
                           this.props.goToApp();
+                          /* global ga */
+                          ga("send", "event", "Home", "Click", "CTA1");
                         }}
                       />
                     )}
@@ -152,6 +153,8 @@ class Landing extends React.Component {
                       label={text}
                       onClick={() => {
                         this.props.goToApp();
+                        /* global ga */
+                        ga("send", "event", "Home", "Click", "CTA2");
                       }}
                     />
                   )}
@@ -277,6 +280,8 @@ class Landing extends React.Component {
                         label={text}
                         onClick={() => {
                           this.props.goToApp();
+                          /* global ga */
+                          ga("send", "event", "Home", "Click", "CTA3");
                         }}
                       />
                     )}
@@ -319,6 +324,8 @@ class Landing extends React.Component {
                         label={text}
                         onClick={() => {
                           this.props.goToApp();
+                          /* global ga */
+                          ga("send", "event", "Home", "Click", "CTA4");
                         }}
                       />
                     )}
@@ -358,6 +365,8 @@ class Landing extends React.Component {
                         label={text}
                         onClick={() => {
                           this.props.goToApp();
+                          /* global ga */
+                          ga("send", "event", "Home", "Click", "CTA5");
                         }}
                       />
                     )}
@@ -406,6 +415,8 @@ class Landing extends React.Component {
                       label={text}
                       onClick={() => {
                         this.props.goToApp();
+                        /* global ga */
+                        ga("send", "event", "Home", "Click", "CTA6");
                       }}
                     />
                   )}
@@ -413,7 +424,7 @@ class Landing extends React.Component {
               </div>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
     );
   }

@@ -45,7 +45,7 @@ const onToken = (
   checkoutOptions,
   coupon
 ) => token => {
-  console.log('Handling purchase....')
+  console.log("Handling purchase....");
   setUnstable();
   const fonts = [];
   const fontsSelected = checkoutOptions.filter(
@@ -186,6 +186,26 @@ const Checkout = props =>
         props.coupon,
         false
       )}
+      opened={() => {
+        /* global fbq */
+        try {
+          fbq("track", "InitiateCheckout", {
+            content_name: "Package",
+            currency: props.currency,
+            value: props.coupon.discount
+              ? fromValueToCent(
+                  props.amount - props.amount * props.coupon.discount / 100
+                )
+              : fromValueToCent(props.amount),
+            contents: props.checkoutOptions,
+            referrer: document.referrer,
+            userAgent: navigator.userAgent,
+            language: navigator.language
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      }}
       currency={props.currency}
       stripeKey={STRIPE_PUBLISHABLE}
       email={props.email}

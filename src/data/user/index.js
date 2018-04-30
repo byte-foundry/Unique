@@ -303,12 +303,30 @@ export const storeProject = (fontName, bought = false) => (
                   .toString()
               };
               /* global Intercom */
-              Intercom("update", {
-                unique_saved_fonts:
-                  res.createUniqueProject.user.uniqueProjects.length
-              });
-              /* global Intercom */
-              Intercom("trackEvent", "unique-saved-font", metadata);
+              /* global fbq */
+              /* global ga */
+              try {
+                fbq("track", "AddToWishlist", {
+                  content_name: currentPreset.variant.family.name,
+                  content_category: "Font",
+                  referrer: document.referrer,
+                  userAgent: navigator.userAgent,
+                  language: navigator.language
+                });
+                ga("send", {
+                  hitType: "event",
+                  eventCategory: "Font",
+                  eventAction: "Saved",
+                  eventLabel: currentPreset.variant.family.name
+                });
+                Intercom("update", {
+                  unique_saved_fonts:
+                    res.createUniqueProject.user.uniqueProjects.length
+                });
+                Intercom("trackEvent", "unique-saved-font", metadata);
+              } catch (e) {
+                console.log(e);
+              }
               dispatch({
                 type: STORE_PROJECT,
                 projectID: res.createUniqueProject.id,
@@ -432,7 +450,7 @@ export const storeChosenWord = chosenWord => dispatch => {
     chosenWord:
       chosenWord.length > 1
         ? chosenWord.trim().replace(/&nbsp;/gi, "")
-        : '&nbsp;'
+        : "&nbsp;"
   });
   dispatch(updateSubset());
 };
@@ -446,19 +464,49 @@ export const storeChosenGlyph = chosenGlyph => dispatch => {
             .trim()
             .replace(/&nbsp;/gi, "")
             .substr(chosenGlyph.length - 1)
-        : '&nbsp;'
+        : "&nbsp;"
   });
   dispatch(updateSubset());
 };
 
 export const afterPayment = res => (dispatch, getState) => {
-  const { userFontName, graphQLToken } = getState().user;
+  const {
+    userFontName,
+    graphQLToken,
+    checkoutOptions,
+    checkoutPrice
+  } = getState().user;
+  const { currency } = getState().ui;
   const { data } = res;
   const isPayed = data.paid;
   const userStripeEmail = data.email;
   dispatch(storeCoupon({}));
   /* global Intercom */
-  Intercom("trackEvent", "unique-bought-font");
+  /* global fbq */
+  /* global ga */
+  try {
+    fbq("track", "Purchase", {
+      content_name: "Package",
+      content_type: "Font",
+      currency,
+      contents: checkoutOptions,
+      num_items: checkoutOptions.length,
+      value: checkoutPrice,
+      referrer: document.referrer,
+      userAgent: navigator.userAgent,
+      language: navigator.language
+    });
+    ga("send", {
+      hitType: "event",
+      eventCategory: "Font",
+      eventAction: "Bought",
+      eventLabel: "Package"
+    });
+
+    Intercom("trackEvent", "unique-bought-font");
+  } catch (e) {
+    console.log(e);
+  }
   if (graphQLToken) {
     dispatch(storeProject(userFontName, isPayed));
   } else {
@@ -508,6 +556,20 @@ export const updateCheckoutOptions = (checkoutOptions, fontName) => (
       0.01,
     fontName
   });
+  /* global fbq */
+  try {
+    fbq("track", "AddToCart", {
+      content_name: "Package",
+      currency,
+      value: checkoutPrice,
+      contents: checkoutOptions,
+      referrer: document.referrer,
+      userAgent: navigator.userAgent,
+      language: navigator.language
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const loginWithTwitter = (
@@ -589,6 +651,25 @@ export const signupWithEmail = (
 
 export const loginToGraphCool = (accessToken, authData) => dispatch => {
   console.log("=========CONNECTING TO GRAPHCOOL DATABASE============");
+  /* global fbq */
+  /* global ga */
+  try {
+    fbq("track", "CompleteRegistration", {
+      content_name: "Logged In",
+      status: authData.type,
+      referrer: document.referrer,
+      userAgent: navigator.userAgent,
+      language: navigator.language
+    });
+    ga("send", {
+      hitType: "event",
+      eventCategory: "User",
+      eventAction: "LoggedIn",
+      eventLabel: authData.type
+    });
+  } catch (e) {
+    console.log(e);
+  }
   const client = new GraphQLClient(GRAPHQL_API, {
     headers: {
       Authorization: `Bearer ${accessToken}`
