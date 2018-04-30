@@ -66,3 +66,23 @@
   .Static .footer .LanguageSelect {
     float: left;
   }
+
+  @media (max-width: 576px) {
+    .Static .footer .float-right {
+      float: none;
+    }
+    .Static .footer .float-left {
+      float: none;
+    }
+    .Static .footer .LanguageSelect {
+      margin-top: 10px;
+    }
+    .Static .footer .LanguageSelect, .Static .footer .credits  {
+      float: none;
+      margin-left: 15px;
+    }
+    .Static .footer .pages {
+      margin-left: 15px;
+    }
+  }
+  

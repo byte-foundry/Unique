@@ -3,7 +3,6 @@
   min-height: calc(100vh - 270px);
   padding-top: 0;
   margin-bottom: 100px;
-  margin-left: 50px;
 }
 
 @media (min-width: 1800px) {
@@ -38,6 +37,7 @@
 }
 .TemplateChoice .pagination .pagination-next {
   margin-left: 20px;
+  margin-right: 20px;
   color: #5320ee;
   transition: color 0.3s ease;
 }
@@ -93,4 +93,12 @@
 
 .TemplateChoice .Button {
   margin-left: 0px;
+}
+
+@media (max-width: 576px) {
+  .TemplateChoice .pagination {
+    float: none;
+    margin-top: 20px;
+    margin-left: 40px;
+  }
 }

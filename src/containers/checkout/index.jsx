@@ -23,7 +23,9 @@ class Checkout extends React.Component {
     const thicknessStepIndex = steps.findIndex(
       step => step.name.toUpperCase() === "THICKNESS"
     );
-    const defaultThicknessName = choicesMade[thicknessStepIndex] ? choicesMade[thicknessStepIndex].name : 'regular';
+    const defaultThicknessName = choicesMade[thicknessStepIndex]
+      ? choicesMade[thicknessStepIndex].name
+      : "regular";
     this.state = {
       selectedOptions: [
         {
@@ -114,83 +116,89 @@ class Checkout extends React.Component {
     return (
       <div className="Checkout">
         <div className="container">
-          <h2>
-            <FormattedMessage
-              id="CheckoutView.title"
-              defaultMessage="Create your Unique package:"
-              description="Checkout view title"
-            />
-          </h2>
-          <p className="checkout-description">
-            <FormattedMessage
-              id="CheckoutView.description"
-              defaultMessage="Your font is ready for download as an OTF file and you get your font sample included in your package. Feel free to add variants of your font by selecting the ones you’d like to buy."
-              description="Checkout view description"
-            />
-          </p>
-          <p
-            className="checkout-goback"
-            onClick={() => {
-              this.props.goBack();
-            }}
-          >
-            <FormattedMessage
-              id="CheckoutView.goBack"
-              defaultMessage="Back to edit mode"
-              description="Checkout view go back text"
-            />
-          </p>
-          <div className="checkout-options row">            
-              {this.state.selectedOptions
-                .filter(e => e.visible)
-                .map((checkoutOption, index) => (
-                  <div
-                    className={`option col-sm-12 ${checkoutOption.class} ${
-                      checkoutOption.selected ? "selected" : ""
-                    }`}
-                    onClick={() => {
-                      if (index !== 0) {
-                        this.toggleChoice(checkoutOption.name);
-                      }
-                    }}
-                  >
-                    {checkoutOption.type === "logo" && (
-                      <div className="logo">{checkoutOption.logo}</div>
-                    )}
-                    {checkoutOption.type === "font" && (
-                      <div className="font-wrapper">
-                        <span
-                          style={{ fontFamily: `'${checkoutOption.fontName}'` }}
-                        >
-                          {this.props.chosenWord}
-                        </span>
-                      </div>
-                    )}
-                    <input
-                      type="checkbox"
-                      id={`${checkoutOption.type}${index}`}
-                      value={checkoutOption.selected}
-                      checked={checkoutOption.selected}
-                    />
-                    <label
-                      htmlFor={`${checkoutOption.type}${index}`}
-                      className="check-box"
+          <div className="row">
+            <div className="col-sm-12">
+              <h2>
+                <FormattedMessage
+                  id="CheckoutView.title"
+                  defaultMessage="Create your Unique package:"
+                  description="Checkout view title"
+                />
+              </h2>
+              <p className="checkout-description">
+                <FormattedMessage
+                  id="CheckoutView.description"
+                  defaultMessage="Your font is ready for download as an OTF file and you get your font sample included in your package. Feel free to add variants of your font by selecting the ones you’d like to buy."
+                  description="Checkout view description"
+                />
+              </p>
+              <p
+                className="checkout-goback"
+                onClick={() => {
+                  this.props.goBack();
+                }}
+              >
+                <FormattedMessage
+                  id="CheckoutView.goBack"
+                  defaultMessage="Back to edit mode"
+                  description="Checkout view go back text"
+                />
+              </p>
+              <div className="checkout-options row">
+                {this.state.selectedOptions
+                  .filter(e => e.visible)
+                  .map((checkoutOption, index) => (
+                    <div
+                      className={`option col-sm-12 ${checkoutOption.class} ${
+                        checkoutOption.selected ? "selected" : ""
+                      }`}
                       onClick={() => {
                         if (index !== 0) {
                           this.toggleChoice(checkoutOption.name);
                         }
                       }}
-                    />
-                    <p className="option-title">
-                      {checkoutOption.type === "font" && (
-                        <span>
-                          {this.props.history.location.fontName}&nbsp;
-                        </span>
+                    >
+                      {checkoutOption.type === "logo" && (
+                        <div className="logo">{checkoutOption.logo}</div>
                       )}
-                      {checkoutOption.name}
-                    </p>
-                  </div>
-                ))}
+                      {checkoutOption.type === "font" && (
+                        <div className="font-wrapper">
+                          <span
+                            style={{
+                              fontFamily: `'${checkoutOption.fontName}'`
+                            }}
+                          >
+                            {this.props.chosenWord}
+                          </span>
+                        </div>
+                      )}
+                      <input
+                        type="checkbox"
+                        id={`${checkoutOption.type}${index}`}
+                        value={checkoutOption.selected}
+                        checked={checkoutOption.selected}
+                      />
+                      <label
+                        htmlFor={`${checkoutOption.type}${index}`}
+                        className="check-box"
+                        onClick={() => {
+                          if (index !== 0) {
+                            this.toggleChoice(checkoutOption.name);
+                          }
+                        }}
+                      />
+                      <p className="option-title">
+                        {checkoutOption.type === "font" && (
+                          <span>
+                            {this.props.history.location.fontName}&nbsp;
+                          </span>
+                        )}
+                        {checkoutOption.name}
+                      </p>
+                    </div>
+                  ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

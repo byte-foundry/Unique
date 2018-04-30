@@ -18,6 +18,18 @@
   }
 }
 
+@media (max-width: 576px) {
+  .Checkout .checkout-description {
+    padding: 15px;
+  }
+  .Checkout h2 {
+    padding: 15px;
+  }
+  .Checkout .checkout-goback {
+    margin: 15px;
+  }
+}
+
 
 .Checkout h2 {
   font-size: 26px;

@@ -7,7 +7,6 @@
   flex-direction: column;
   justify-content: center;
   min-height: calc(100vh - 145px);
-  margin-right: 50px;
 }
 @media (min-width: 1800px) {
   .StepView {
@@ -94,6 +93,7 @@
 }
 .StepView .pagination .pagination-next {
   margin-left: 20px;
+  margin-right: 20px;
   color: #5320ee;
   transition: color 0.3s ease;
 }
@@ -120,7 +120,8 @@
 }
 
 .StepView .pagination .pagination-finish {
-  margin-left: 30px;
+  margin-left: 10px;
+  margin-right: 20px;
   color: #5320ee;
   transition: color 0.3s ease;
 }
@@ -239,4 +240,23 @@
 
 .StepView .relative {
   position: relative;
+}
+
+@media (max-width: 576px) {
+  .StepView .pagination {
+    float: none;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 5Px;
+  }
+  .StepView .helper-wrapper {
+    top: 10px;
+    right: 60px;
+  }
+  .StepView .step-description {
+    margin-left: 0;
+  }
+  .StepView .step-description .col-sm-12 {
+    padding: 0;
+  }
 }
