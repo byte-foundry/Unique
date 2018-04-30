@@ -11,9 +11,9 @@
                     <concept_node>
                         <name>Subtitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique 404 Subtitle</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>The page you were looking for doesn’t exist :(</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -48,9 +48,9 @@
                     <concept_node>
                         <name>Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique 404 Title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Page not found</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -85,9 +85,9 @@
                     <concept_node>
                         <name>homeButton</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>404 home button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Home</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -127,9 +127,9 @@
                     <concept_node>
                         <name>BoughtFontMessage</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign in header message if the user has bought a font</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -164,9 +164,9 @@
                     <concept_node>
                         <name>GeneralError</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Login page general error</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Woops, something happened</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -201,9 +201,9 @@
                     <concept_node>
                         <name>HappyMessage1</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign in happy word 1</description>
                         <comment>These should go as part of the sentence above with a comma, integrate other options ("Hats off to you!", "Yay, you made it!", "Look at you!")</comment>
-                        <default_text></default_text>
+                        <default_text>Yay</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -238,9 +238,9 @@
                     <concept_node>
                         <name>HappyMessage2</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign in happy word 2</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Hooray</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -275,9 +275,9 @@
                     <concept_node>
                         <name>HappyMessage3</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign in happy word 3</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Woo</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -312,9 +312,9 @@
                     <concept_node>
                         <name>InvalidEmailError</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Form error Email invalid</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Email invalid</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -349,9 +349,9 @@
                     <concept_node>
                         <name>LogInFormButton</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Login page log in form button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Log in</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -386,9 +386,9 @@
                     <concept_node>
                         <name>RequiredEmailError</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Form error email required</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Email required</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -423,9 +423,9 @@
                     <concept_node>
                         <name>RequiredFirstNameError</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Form error first name required</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>First name required</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -460,9 +460,9 @@
                     <concept_node>
                         <name>RequiredPasswordError</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Form error Password required</description>
                         <comment>is this the one for "I feel empty :(" ?</comment>
-                        <default_text></default_text>
+                        <default_text>Password required</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -497,9 +497,9 @@
                     <concept_node>
                         <name>SaveFontMessage</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign in header message if the user has saved a font</description>
                         <comment>check with julien</comment>
-                        <default_text></default_text>
+                        <default_text>Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -534,9 +534,9 @@
                     <concept_node>
                         <name>SignInButton</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Login page sign in switch button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Login</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -571,9 +571,9 @@
                     <concept_node>
                         <name>SignInCTA</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Login page sign in CTA</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Already have an account ?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -608,9 +608,9 @@
                     <concept_node>
                         <name>SignInHeader</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign in header message</description>
                         <comment>check with julien, integrate alternatives:“So, we meet again”, “It’s you again!”, “ Why hello there”, “ Good to have you back”, “Yay, you’re back!”, “It hasn’t been the same without you here”</comment>
-                        <default_text></default_text>
+                        <default_text>Welcome back</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -645,9 +645,9 @@
                     <concept_node>
                         <name>SignInHeaderBoughtFont</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign in header message if font bought</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Thank you!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -682,9 +682,9 @@
                     <concept_node>
                         <name>SignUpButton</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Login page sign up switch button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Create an account</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -719,9 +719,9 @@
                     <concept_node>
                         <name>SignUpCTA</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Login page sign up CTA</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>New here ?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -756,9 +756,9 @@
                     <concept_node>
                         <name>SignUpEmailLabel</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign up form email label</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Email</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -793,9 +793,9 @@
                     <concept_node>
                         <name>SignUpFirstNameLabel</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign up form first name label</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>First name</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -830,9 +830,9 @@
                     <concept_node>
                         <name>SignUpFormButton</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Login page sign up form button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Sign up</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -867,9 +867,9 @@
                     <concept_node>
                         <name>SignUpHeader</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign up header title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Nice to meet you</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -904,9 +904,9 @@
                     <concept_node>
                         <name>SignUpLastNameLabel</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign up form last name label</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Last name</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -941,9 +941,9 @@
                     <concept_node>
                         <name>SignUpPasswordLabel</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sign up form password label</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Password</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -978,9 +978,9 @@
                     <concept_node>
                         <name>SocialMessage</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Login page social auth CTA message</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Or sign up with</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1020,9 +1020,9 @@
                     <concept_node>
                         <name>beta</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Banner beta message</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Say hello to Unique’s beta! Let us know what you think!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1062,9 +1062,9 @@
                     <concept_node>
                         <name>discount</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Checkout - Coupon label</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Coupon</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1099,9 +1099,9 @@
                     <concept_node>
                         <name>included</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Checkout - Included price</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>included</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1136,9 +1136,9 @@
                     <concept_node>
                         <name>sidebarCoupon</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Checkout - Sidebar coupon button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Got a promocode?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1173,9 +1173,9 @@
                     <concept_node>
                         <name>sidebarCouponError</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Checkout - Sidebar coupon error</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Invalid coupon</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1210,9 +1210,9 @@
                     <concept_node>
                         <name>sidebarTitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Checkout - Sidebar title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Package</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1326,9 +1326,9 @@
                     <concept_node>
                         <name>LaunchDiscountOption</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Launch discount</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Launch discount</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1400,9 +1400,9 @@
                     <concept_node>
                         <name>OtfOption</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Otf</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Font package</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1474,9 +1474,9 @@
                     <concept_node>
                         <name>description</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Checkout view description</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Your font is ready for download as an OTF file and you get your font sample included in your package. Feel free to add variants of your font by selecting the ones you’d like to buy.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1511,9 +1511,9 @@
                     <concept_node>
                         <name>goBack</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Checkout view go back text</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Back to edit mode</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1548,9 +1548,9 @@
                     <concept_node>
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Checkout view title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Create your Unique package:</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1590,9 +1590,9 @@
                     <concept_node>
                         <name>simpleCheer1</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Simple cheer 1</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Looking good!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1627,9 +1627,9 @@
                     <concept_node>
                         <name>simpleCheer2</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Simple cheer 2</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Great choice!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1664,9 +1664,9 @@
                     <concept_node>
                         <name>simpleCheer3</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Simple cheer 3</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>It's coming together!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1701,9 +1701,9 @@
                     <concept_node>
                         <name>simpleCheer4</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Simple cheer 4</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Looking fabulous!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1738,9 +1738,9 @@
                     <concept_node>
                         <name>simpleCheer5</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Simple cheer 5</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>You have this in the bag!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1775,9 +1775,9 @@
                     <concept_node>
                         <name>simpleCheer6</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Simple cheer 6</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>#winning!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1812,9 +1812,9 @@
                     <concept_node>
                         <name>simpleCheer7</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Simple cheer 7</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Nice one!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1849,9 +1849,9 @@
                     <concept_node>
                         <name>simpleCheer8</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Simple cheer 8</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>You've got this!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1886,9 +1886,9 @@
                     <concept_node>
                         <name>simpleCheer9</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Simple cheer 9</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Looking sharp!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1928,9 +1928,9 @@
                     <concept_node>
                         <name>CTA</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Define need CTA</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Let's begin.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -1965,9 +1965,9 @@
                     <concept_node>
                         <name>Display</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Display need</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Display</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2002,9 +2002,9 @@
                     <concept_node>
                         <name>DisplayTooltip</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Display need tooltip</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>A display font is blablabla blablabla blablabla</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2039,9 +2039,9 @@
                     <concept_node>
                         <name>brandInput</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Brand input placeholder</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Type something</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2076,9 +2076,9 @@
                     <concept_node>
                         <name>brandTitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Brand name question</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>What is your brand name?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2113,9 +2113,9 @@
                     <concept_node>
                         <name>dunno</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Dunno need</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Dunno</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2187,9 +2187,9 @@
                     <concept_node>
                         <name>error-presets</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Define need error presets text</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Something happened while fetching the presets.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2224,9 +2224,9 @@
                     <concept_node>
                         <name>logo</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Logo need</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Logotype</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2261,9 +2261,9 @@
                     <concept_node>
                         <name>logoTooltip</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>logo need tooltip</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>A logo font is blablabla blablabla blablabla</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2298,9 +2298,9 @@
                     <concept_node>
                         <name>text</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Text need</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Text</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2335,9 +2335,9 @@
                     <concept_node>
                         <name>textTooltip</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>text need tooltip</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>A text font is blablabla blablabla blablabla</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2372,9 +2372,9 @@
                     <concept_node>
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Define need page title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>What kind of need do you have?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2409,9 +2409,9 @@
                     <concept_node>
                         <name>welcome</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Define need page welcome</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Welcome to Unique,</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2451,9 +2451,9 @@
                     <concept_node>
                         <name>question10Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 10 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Web hosting, or simply hosting, is necessary in order to get something live on the Internet. If you build a website that serves a custom font, you will need to host it somewhere. That way your visitors can see it displayed when they will come to your website. When you buy web hosting you basically rent server space on a server where your files will be placed.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2488,9 +2488,9 @@
                     <concept_node>
                         <name>question10Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 10 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>What is hosting and why do I need it?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2525,9 +2525,9 @@
                     <concept_node>
                         <name>question11Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 11 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>We are sad to see you go. Please send us your request at contact@prototypo.io and we will take care of the rest.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2562,9 +2562,9 @@
                     <concept_node>
                         <name>question11Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 11 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>How do I delete my account?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2599,9 +2599,9 @@
                     <concept_node>
                         <name>question1Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 1 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Just like any other software out there, we cannot guarantee that somebody won’t have the exact same idea. (Unless, you’re psychic, in which case we’d love to learn more about mind control.) Tell you what though, you’re more likely to win the lottery than getting the same outcome as another Unique User. The possibilities are virtually endless, especially if you use the “More customization” option to fine-tune your font.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2636,9 +2636,9 @@
                     <concept_node>
                         <name>question1Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 1 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>How can you guarantee the uniqueness of my font?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2673,9 +2673,9 @@
                     <concept_node>
                         <name>question2Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 2 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>While in the application, you can go back and forth to change your font before you download it. If you choose to save it for later, you can make alterations to it at a later point in time. Once downloaded though, the font cannot be re-imported into Unique.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2710,9 +2710,9 @@
                     <concept_node>
                         <name>question2Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 2 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Can I re-edit my fonts in Unique?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2747,9 +2747,9 @@
                     <concept_node>
                         <name>question3Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 3 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Yes, you most certainly are! Our fonts are sold under the Creative Commons 0 (CC0) licence. This license makes you the sole owner of the fonts you created, giving you all the rights to edit them as much as you like.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2784,9 +2784,9 @@
                     <concept_node>
                         <name>question3Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 3 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Am I allowed to modify my font after purchase?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2821,9 +2821,9 @@
                     <concept_node>
                         <name>question4Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 4 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Yes, as long as you have an account, you can save your project to your Unique library and come back to it later on. Don’t fret, the account is free and it’s just a way to save your projects for a later time.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2858,9 +2858,9 @@
                     <concept_node>
                         <name>question4Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 4 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Can I save my font, even if I don’t buy it?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2895,9 +2895,9 @@
                     <concept_node>
                         <name>question5Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 5 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>There’s no such thing as a bad Unique font. We remind you when you need to look out for some things, like when your font is becoming a tad too thin or thick etc. In general though, do what feels right and it’ll turn out just fine!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2932,9 +2932,9 @@
                     <concept_node>
                         <name>question5Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 5 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>How do I know that my font is “good”?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -2969,9 +2969,9 @@
                     <concept_node>
                         <name>question6Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 6 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Yes, of course! You can do whatever you’d like with them! Keep them hidden from the world or use them for commercial purposes, all fine with us!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3006,9 +3006,9 @@
                     <concept_node>
                         <name>question6Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 6 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Can I sell Unique fonts?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3043,9 +3043,9 @@
                     <concept_node>
                         <name>question7Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 7 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>A webfont is a font especially designed for use in web pages, and is loaded with CSS @ font-face declaration. Basically, all this means is that the user’s browser downloads web fonts and renders text correctly.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3080,9 +3080,9 @@
                     <concept_node>
                         <name>question7Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 7 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>What is a webfont?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3117,9 +3117,9 @@
                     <concept_node>
                         <name>question8Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 8 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>You have a logo. You have a type. Logotype! All jokes aside, you see logotypes everywhere around you. Officially, a logotype is a single piece of type (font) that prints a certain word, group of letters or a logo. Take Google or Coca-Cola for example, these are very well-known logotypes.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3154,9 +3154,9 @@
                     <concept_node>
                         <name>question8Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 8 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>What is a logotype?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3191,9 +3191,11 @@
                     <concept_node>
                         <name>question9Answer</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 9 answer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>- Make sure your logotype itself is recognizable and does not rely on a color alone. Also, keep in mind what the logotype might look like on a dark background!&#xd;
+        - Make sure that text and fine lines are still legible when the logotype is scaled down to use it for various sizes&#xd;
+        - We love colors, but they can be distracting. Limit your colour palette, if possible.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3228,9 +3230,9 @@
                     <concept_node>
                         <name>question9Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ question 9 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>What do I need to look out for when making a logotype?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3265,9 +3267,9 @@
                     <concept_node>
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>FAQ title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Frequently Asqued Questions</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3307,9 +3309,9 @@
                     <concept_node>
                         <name>descriptionCTA</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Landing description CTA</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Get your unique font</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3344,9 +3346,13 @@
                     <concept_node>
                         <name>descriptionText</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique description text</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>A custom font goes a long way, giving you that special extra.&#xd;
+                      With Unique you get just what you need – a custom font ready for use!&#xd;
+&#xd;
+                      Simply select, customize and off you go!&#xd;
+                      It’s that easy.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3381,9 +3387,9 @@
                     <concept_node>
                         <name>descriptionTitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique description title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Get your custom fonts in a few steps</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3418,9 +3424,9 @@
                     <concept_node>
                         <name>featureListItem1</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique feature list item 1</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Save oodles of time!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3455,9 +3461,9 @@
                     <concept_node>
                         <name>featureListItem2</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique feature list item 2</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Get your custom fonts in a few steps!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3492,9 +3498,9 @@
                     <concept_node>
                         <name>featureListItem3</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique feature list item 3</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Get expert tips and tricks!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3529,9 +3535,9 @@
                     <concept_node>
                         <name>featureListItem4</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique feature list item 4</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Break free of marketplaces!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3566,9 +3572,9 @@
                     <concept_node>
                         <name>featureListItem5</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique feature list item 5</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>No more recycling fonts!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3603,9 +3609,9 @@
                     <concept_node>
                         <name>featureListItem6</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique feature list item 6</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>On demand - no subscription!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3640,9 +3646,9 @@
                     <concept_node>
                         <name>featureListItem7</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique feature list item 7</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Unlimited usages!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3677,9 +3683,9 @@
                     <concept_node>
                         <name>featureListItem8</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique feature list item 8</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>No royalties!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3714,9 +3720,9 @@
                     <concept_node>
                         <name>footerCopyright</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique copyright footer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Unique © Powered by</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3751,9 +3757,9 @@
                     <concept_node>
                         <name>footerFAQ</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique FAQ footer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>FAQ</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3788,9 +3794,9 @@
                     <concept_node>
                         <name>footerSupport</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique Support footer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Support</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3825,9 +3831,9 @@
                     <concept_node>
                         <name>footerTOS</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique TOS footer</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Terms of use</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3862,9 +3868,9 @@
                     <concept_node>
                         <name>headerInputCTA</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Landing page header CTA</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Get your font</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3936,9 +3942,9 @@
                     <concept_node>
                         <name>headerTitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique header title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Easily get fonts that you'll never see anywhere else</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -3973,9 +3979,9 @@
                     <concept_node>
                         <name>howItWorksStep1CTA</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique how it works step 1 CTA</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Get your Unique font</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4010,9 +4016,9 @@
                     <concept_node>
                         <name>howItWorksStep1Description</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique how it works step 1 description</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>What are you looking for? A logo? A display? Just tell us what you need.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4047,9 +4053,9 @@
                     <concept_node>
                         <name>howItWorksStep1Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique how it works step 1 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Specify your need</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4084,9 +4090,9 @@
                     <concept_node>
                         <name>howItWorksStep2CTA</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique how it works step 2 CTA</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Get your Unique font</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4121,9 +4127,9 @@
                     <concept_node>
                         <name>howItWorksStep2Description</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique how it works step 2 description</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Select the thickness, slant, etc. for your font by clicking on your favorite choice.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4158,9 +4164,9 @@
                     <concept_node>
                         <name>howItWorksStep2Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique how it works step 2 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Pick your choices</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4195,9 +4201,9 @@
                     <concept_node>
                         <name>howItWorksStep3CTA</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique how it works step 3 CTA</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Get your Unique font</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4232,9 +4238,9 @@
                     <concept_node>
                         <name>howItWorksStep3Description</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique how it works step 3 description</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Love it? Download your font and use it right away!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4269,9 +4275,9 @@
                     <concept_node>
                         <name>howItWorksStep3Title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique how it works step 3 title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Download your font</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4306,9 +4312,9 @@
                     <concept_node>
                         <name>howItWorksTitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique how it works title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>How it works</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4343,9 +4349,14 @@
                     <concept_node>
                         <name>prototypoDescription</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique prototypo description</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Powered by Prototypo’s tech using algorithms to generate&#xd;
+                    fonts / typefaces, Unique offers the largest font variation out&#xd;
+                    there! Open up countless possibilities with each choice you&#xd;
+                    make! Our passionate team of designers is constantly adding&#xd;
+                    new templates/ font models, multiplying the range of choices&#xd;
+                    available.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4380,9 +4391,9 @@
                     <concept_node>
                         <name>prototypoTitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Unique prototypo title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Get started</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4422,9 +4433,9 @@
                     <concept_node>
                         <name>actionCreate</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Library action new project</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Create a new project</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4459,9 +4470,9 @@
                     <concept_node>
                         <name>actionLogout</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Libraryaction logout</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Logout</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4496,9 +4507,9 @@
                     <concept_node>
                         <name>actionReload</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Libraryaction restart project</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Restart your project</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4533,9 +4544,9 @@
                     <concept_node>
                         <name>boughtProjectsTitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Library bought projects title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Bought Projects</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4570,9 +4581,9 @@
                     <concept_node>
                         <name>deleteAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Library delete project button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Delete</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4607,9 +4618,9 @@
                     <concept_node>
                         <name>downloadAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Library download project button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Download</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4644,9 +4655,9 @@
                     <concept_node>
                         <name>openAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Library open project button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Open</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4681,9 +4692,9 @@
                     <concept_node>
                         <name>savedProjectsTitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Library saved projects title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Saved Projects</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4718,9 +4729,9 @@
                     <concept_node>
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Library page title</description>
                         <comment>check with julien</comment>
-                        <default_text></default_text>
+                        <default_text>Hello!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4760,9 +4771,9 @@
                     <concept_node>
                         <name>blackOnWhiteAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Black on white mode - toggle</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Press G key to toggle white on black mode</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4797,9 +4808,9 @@
                     <concept_node>
                         <name>chooseChoice</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Shortcut - up down choice action</description>
                         <comment>what is this </comment>
-                        <default_text></default_text>
+                        <default_text>Press up and down keys to choose the most suitable option</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4834,9 +4845,9 @@
                     <concept_node>
                         <name>glyphAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Glyph mode - toggle</description>
                         <comment>is the audience aware of this terminology? </comment>
-                        <default_text></default_text>
+                        <default_text>Press G key to toggle glyph mode</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4871,9 +4882,9 @@
                     <concept_node>
                         <name>nextAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Shortcut - next action</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Press right key to move forward</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4908,9 +4919,9 @@
                     <concept_node>
                         <name>previousAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Shortcut - previous action</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Press left key to go back</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4950,9 +4961,9 @@
                     <concept_node>
                         <name>checkoutAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Sidebar - Checkout action</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Checkout</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -4992,9 +5003,9 @@
                     <concept_node>
                         <name>characters</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Specimen view characters</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Characters</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5029,9 +5040,9 @@
                     <concept_node>
                         <name>closeModalAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>SpecimenView - Close modal action</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Done</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5066,9 +5077,9 @@
                     <concept_node>
                         <name>display</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Specimen view display</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Display</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5103,9 +5114,9 @@
                     <concept_node>
                         <name>downloadAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>SpecimenView - Download action</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Download</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5140,9 +5151,9 @@
                     <concept_node>
                         <name>downloadActionBottom</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>SpecimenView - Download action Bottom</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Download</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5177,9 +5188,9 @@
                     <concept_node>
                         <name>modalDescription</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Speciem view name font modal description</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>A unique font deserves a unique name. What would be the name of your font?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5214,9 +5225,9 @@
                     <concept_node>
                         <name>modalTitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Speciem view name font modal title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>One more thing,</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5251,9 +5262,9 @@
                     <concept_node>
                         <name>nameAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>SpecimenView - name action</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>My font name</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5325,9 +5336,9 @@
                     <concept_node>
                         <name>saveAction</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>SpecimenView - Save action</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Save it for later</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5362,9 +5373,9 @@
                     <concept_node>
                         <name>subtitle</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Speciem view subtitle</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Embark on new adventures with your complete glyph set!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5399,9 +5410,9 @@
                     <concept_node>
                         <name>subtitleBack</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Speciem view back subtitle</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Not quite right? Just click trough the menu to edit</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5436,9 +5447,9 @@
                     <concept_node>
                         <name>text</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Speciem view text</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Text</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5473,9 +5484,9 @@
                     <concept_node>
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Speciem view title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Congrats, you're almost done!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5515,9 +5526,9 @@
                     <concept_node>
                         <name>ascendersDescenders</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Stepview - Ascenders/Descenders question</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Choose the height of your ascenders and descenders</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5552,9 +5563,9 @@
                     <concept_node>
                         <name>blackOnWhiteTooltip</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Black on white mode - toggle</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Toggle black on white mode</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5589,9 +5600,9 @@
                     <concept_node>
                         <name>contrast</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Stepview - Contrast question</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Choose your preferred contrast</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5626,9 +5637,9 @@
                     <concept_node>
                         <name>curviness</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Stepview - Curviness question</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Squared? Rounded? Pick your curviness</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5774,9 +5785,9 @@
                     <concept_node>
                         <name>glyphTooltip</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Glyph mode - toggle</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Toggle glyph mode</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5811,9 +5822,9 @@
                     <concept_node>
                         <name>mostSelected</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Stepview - Most selected label</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Recommended</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5848,9 +5859,9 @@
                     <concept_node>
                         <name>serifs</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Stepview - Serifs question</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Pick your preferred serif style</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5885,9 +5896,9 @@
                     <concept_node>
                         <name>slant</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Stepview - Slant question</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Choose your desired slant</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5922,9 +5933,9 @@
                     <concept_node>
                         <name>thickness</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Stepview - Thickness question</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>What kind of thickness do you want?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5959,9 +5970,9 @@
                     <concept_node>
                         <name>width</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Stepview - Width question</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>What would be the width of your font?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -5996,9 +6007,9 @@
                     <concept_node>
                         <name>xHeight</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Stepview - xHeight question</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>What would be the letter height of your font?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6038,9 +6049,9 @@
                     <concept_node>
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>TOS title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Terms of service</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6080,9 +6091,9 @@
                     <concept_node>
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>TemplateChoice page title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Pick one of our templates and get started!</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6122,9 +6133,9 @@
                     <concept_node>
                         <name>GlyphMode</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Tip curviness - glyph mode</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>If you want to clearly see your changes on the curviness of the fonts, you can jump to the Glyph view in the bottom right tool bar.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6159,9 +6170,9 @@
                     <concept_node>
                         <name>TextAscender</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Tip Ascender / Descender - text mode</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>If you increase or decrease the size of the ascender and descender, you will loose in readability.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6196,9 +6207,10 @@
                     <concept_node>
                         <name>logoContrastThicknessBGColor</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Tip contrast and thickness for logo - backgroundColor</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>When designing a Logotype you want to make sure it works within different contexts, black type on white background and white type on black background.&#xd;
+        Don’t hesitate to change the color background in the bottom right tool bar.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6233,9 +6245,10 @@
                     <concept_node>
                         <name>logoContrastThicknessFontSize</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Tip contrast and thickness for logo - Font size</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>When designing a Logotype you want to make sure it works at different scales, both big and in reduction.&#xd;
+        Don’t hesitate to use the scaling slider in the bottom right tool bar to test your font in small and large size.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6270,9 +6283,9 @@
                     <concept_node>
                         <name>next</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Tips next button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Next</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6307,9 +6320,9 @@
                     <concept_node>
                         <name>previous</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Tips previous button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Prev</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6344,9 +6357,10 @@
                     <concept_node>
                         <name>textContrast</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Tip contrast for text</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>When using a highly contrasted typeface in small sizes 6–16 pt, fine parts of the letters (upstroke) will disappear and directly affect the legibility of your text.&#xd;
+        That’s why we recommend you to use a low contrast font.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6381,9 +6395,10 @@
                     <concept_node>
                         <name>textThickness</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Tip thickness for text</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>If you want to use your font at 8 to 14 pt, an Extra-light or Extra Bold font might be hard to read. &#xd;
+        That’s why we recommend you to stay in the Light to Bold range of weight.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6418,9 +6433,10 @@
                     <concept_node>
                         <name>textWidth</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Tip width for text</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>If you want to make long paragraphs of text, a Condensed or Extended font might be too hard to read. &#xd;
+        That’s why we recommend you to stay in the Normal width.</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6455,9 +6471,9 @@
                     <concept_node>
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Tips box title</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Unique team tips</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6497,9 +6513,9 @@
                     <concept_node>
                         <name>createNewProject</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Welcome back create new project</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Create a new one</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6534,9 +6550,9 @@
                     <concept_node>
                         <name>resumeProject</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Welcome back resume project</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Resume your project</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6571,9 +6587,9 @@
                     <concept_node>
                         <name>title</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Welcome back page title</description>
                         <comment>should have alternatives: “So, we meet again”, “It’s you again!”, “ Why hello there”, “ Good to have you back”, “Yay, you’re back!”, “It hasn’t been the same without you here”</comment>
-                        <default_text></default_text>
+                        <default_text>Welcome back,</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
@@ -6613,9 +6629,9 @@
                     <concept_node>
                         <name>error-presets-text</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>Define need error presets button</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Retry?</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
