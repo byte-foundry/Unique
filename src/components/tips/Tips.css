@@ -66,7 +66,6 @@
   width: 40px;
   height: 40px;
   text-align: center;
-  line-height: 38px;
   z-index: 30;
   user-select: none;
   animation: pulse 1.5s infinite;
@@ -75,6 +74,12 @@
   backface-visibility: hidden;
   transform: translateZ(0) scale(1, 1);
   perspective: 1000;
+  line-height: 38px;
+}
+
+.tips-button.opened {  
+  font-family: unique-icon;  
+  line-height: 35px;
 }
 
 .tips-button:hover,  .tips-button.opened, .tips-button.seen {

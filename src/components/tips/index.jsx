@@ -203,7 +203,7 @@ class Tips extends React.Component {
           className={`tips-button ${this.state.opened ? "opened" : ""} ${this.state.hasBeenOpened ? "seen" : ''}`}
           onClick={() => this.setState({ opened: !this.state.opened, hasBeenOpened: true })}
         >
-          {this.state.opened ? "x" : this.state.tips.length}
+          {this.state.opened ? "f" : this.state.tips.length}
         </div>
         <div className={`Tips ${this.state.opened ? "opened" : ""}`}>
           <h4>
