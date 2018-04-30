@@ -103,7 +103,7 @@ const stepTranslations = {
       defaultMessage="Choose the height of your ascenders and descenders"
       description="Stepview - Ascenders/Descenders question"
     />
-  ),
+  )
 };
 
 class StepView extends React.Component {
@@ -272,10 +272,96 @@ class StepView extends React.Component {
                       )
                   )}
                 </div>
-                <p className="step-name">{stepTranslations[this.props.stepValues.name]}</p>
+                <p className="step-name">
+                  {stepTranslations[this.props.stepValues.name]}
+                </p>
               </div>
 
               <div className="col-md-3 col-sm-12 relative">
+                <div className="pagination">
+                  <FormattedMessage
+                    id="Shortcuts.previousAction"
+                    defaultMessage="Press left key to go back"
+                    description="Shortcut - previous action"
+                  >
+                    {text => (
+                      <Tooltip
+                        title={text}
+                        position="top"
+                        open={this.props.shouldShowTooltips}
+                        arrow="true"
+                        delay={200}
+                      >
+                        <span
+                          className="pagination-prev"
+                          onClick={() => {
+                            this.props.stepBack();
+                          }}
+                        >
+                          <FormattedMessage
+                            id="App.prevAction"
+                            defaultMessage="Back"
+                            description="Back"
+                          />
+                        </span>
+                      </Tooltip>
+                    )}
+                  </FormattedMessage>
+                  <FormattedMessage
+                    id="Shortcuts.nextAction"
+                    defaultMessage="Press right key to move forward"
+                    description="Shortcut - next action"
+                  >
+                    {text => (
+                      <Tooltip
+                        title={text}
+                        position="top"
+                        open={this.props.shouldShowTooltips}
+                        arrow="true"
+                        delay={200}
+                      >
+                        <span
+                          className={`pagination-next ${
+                            !(this.state.choice && this.state.choice.name)
+                              ? "disabled"
+                              : ""
+                          }`}
+                          onClick={() => {
+                            if (this.state.choice && this.state.choice.name) {
+                              this.props.selectChoice(this.state.choice);
+                            }
+                          }}
+                        >
+                          <FormattedMessage
+                            id="App.nextAction"
+                            defaultMessage="Next"
+                            description="Next"
+                          />
+                        </span>
+                      </Tooltip>
+                    )}
+                  </FormattedMessage>
+                  <span
+                    className={`pagination-finish ${
+                      this.props.choicesMade.length === this.props.stepLength
+                        ? ""
+                        : "disabled"
+                    }`}
+                    onClick={() => {
+                      if (
+                        this.props.choicesMade.length === this.props.stepLength
+                      ) {
+                        this.props.finishEditing(this.state.choice);
+                      }
+                    }}
+                  >
+                    <FormattedMessage
+                      id="App.finishAction"
+                      defaultMessage="Finish"
+                      description="Finish"
+                    />
+                  </span>
+                </div>
                 <div className="helper-wrapper">
                   <Tips
                     choicesMade={this.props.choicesMade}
@@ -355,76 +441,6 @@ class StepView extends React.Component {
                     </Tooltip>
                   )}
                 </FormattedMessage>
-
-                <FormattedMessage
-                  id="Shortcuts.previousAction"
-                  defaultMessage="Press left key to go back"
-                  description="Shortcut - previous action"
-                >
-                  {text => (
-                    <div className="icon-back-wrapper">
-                      <Tooltip
-                        title={text}
-                        position="top"
-                        open={this.props.shouldShowTooltips}
-                        arrow="true"
-                        delay={200}
-                      >
-                        <Back
-                          className="icon-back"
-                          onClick={() => {
-                            this.props.stepBack();
-                          }}
-                        />
-                      </Tooltip>
-                    </div>
-                  )}
-                </FormattedMessage>
-
-                <FormattedMessage
-                  id="Shortcuts.nextAction"
-                  defaultMessage="Press right key to move forward"
-                  description="Shortcut - next action"
-                >
-                  {text => (
-                    <div className="icon-next-wrapper">
-                      <Tooltip
-                        title={text}
-                        position="top"
-                        open={this.props.shouldShowTooltips}
-                        arrow="true"
-                        delay={200}
-                      >
-                        <Next
-                          className={`icon-next ${
-                            !(this.state.choice && this.state.choice.name)
-                              ? "disabled"
-                              : ""
-                          }`}
-                          onClick={() => {
-                            if (this.state.choice && this.state.choice.name) {
-                              this.props.selectChoice(this.state.choice);
-                            }
-                          }}
-                        />
-                      </Tooltip>
-                    </div>
-                  )}
-                </FormattedMessage>
-                <Finish
-                  className={`icon-finish ${
-                    this.props.choicesMade.length === this.props.stepLength
-                      ? ""
-                      : "disabled"
-                  }`}
-                  onClick={() => {
-                    if (
-                      this.props.choicesMade.length === this.props.stepLength
-                    ) {
-                      this.props.finishEditing(this.state.choice);
-                    }
-                  }}
-                />
               </div>
             </div>
           </div>

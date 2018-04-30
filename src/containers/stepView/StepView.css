@@ -53,14 +53,10 @@
 }
 
 .StepView .step-bubble.current {
-  box-shadow: 0 0 0 4px rgba(83,32,238, 0.3);
+  box-shadow: 0 0 0 4px rgba(83, 32, 238, 0.3);
 }
 
 .StepView .choices-wrapper {
-}
-
-.StepView .choices {  
-  margin-right: 50px;
 }
 
 .StepView h3:not(.currentState) {
@@ -71,80 +67,95 @@
   color: white;
 }
 
-.StepView .icon-back-wrapper {
-  position: absolute;
-  top: calc(50% - 30px);
-  right: -50px;
-  transform: translateY(calc(-50%)) translateZ(0px);
-  z-index: 10;
+.StepView .pagination {
+  float: right;
 }
-
-.StepView .icon-next-wrapper {
-  position: absolute;
-  top: calc(50% + 30px);
-  right: -50px;
-  transform: translateY(-50%) translateZ(0);
-  z-index: 10;
-}
-
-.StepView .icon-back,
-.StepView .icon-next,
-.StepView .icon-finish {
-  width: 50px;
-  height: auto;
+.StepView .pagination .pagination-next,
+.StepView .pagination .pagination-prev,
+.StepView .pagination .pagination-finish {
+  position: relative;
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-  padding: 0px;
-  z-index: 10;
-  border-radius: 50%;
+  user-select: none;
 }
-.StepView .icon-back {
-  background: transparent;
-  left: -75px;
+.StepView .pagination .pagination-prev::before {
+  content: " ";
+  position: absolute;
+  top: 5px;
+  left: -15px;
+  height: 10px;
+  width: 10px;
+  border: 1px solid #333;
+  border-width: 2px 2px 0 0;
+  transform: rotate(225deg);
+}
+.StepView .pagination .pagination-prev {
+  color: #333;
+}
+.StepView .pagination .pagination-next {
+  margin-left: 20px;
+  color: #5320ee;
+  transition: color 0.3s ease;
 }
 
-.StepView .icon-next.disabled g {
-  stroke: #b8b5c0;
+.StepView .pagination .pagination-next.disabled {
+  color: #e9e8ec;
+}
+.StepView .pagination .pagination-next.disabled::after {
+  border-color: #e9e8ec;
+  cursor: default;
 }
 
-.StepView .icon-next:not(.disabled):hover, .StepView .icon-back:hover, .StepView .icon-finish:hover {
-  background: #5320ee;
+.StepView .pagination .pagination-next::after {
+  content: " ";
+  position: absolute;
+  top: 5px;
+  right: -15px;
+  height: 10px;
+  width: 10px;
+  border: 1px solid #5320ee;
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg);
+  transition: border-color 0.3s ease;
 }
 
-.StepView .icon-next:not(.disabled):hover g path, .StepView .icon-back:hover g path, .StepView .icon-finish:hover g path{
-  stroke: white;
+.StepView .pagination .pagination-finish {
+  margin-left: 30px;
+  color: #5320ee;
+  transition: color 0.3s ease;
 }
 
-.StepView .icon-finish.disabled {
+.StepView .pagination .pagination-finish.disabled {
   display: none;
 }
+.StepView .pagination .pagination-finish.disabled::after,
+.StepView .pagination .pagination-finish.disabled::before {
+  content: none;
+}
 
-.StepView .icon-finish {
+.StepView .pagination .pagination-finish::before {
+  content: " ";
   position: absolute;
-  top: calc(50% + 55px);
-  right: -50px;
-  background: transparent;
-}
-.StepView .icon-next {
-  right: -50px;
-  background: transparent;
-}
-
-.StepView.whiteOnBlack .icon-back,
-.StepView.whiteOnBlack .icon-next,
-.StepView.whiteOnBlack .icon-finish {
-  background: transparent;
+  top: 5px;
+  right: -15px;
+  height: 10px;
+  width: 10px;
+  border: 1px solid #5320ee;
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg);
+  transition: border-color 0.3s ease;
 }
 
-.StepView.whiteOnBlack .icon-next:not(.disabled) g,
-.StepView.whiteOnBlack .icon-back g {
-  stroke: #5320ee;
-  transition: fill 0.3s ease;
-}
-
-.StepView.whiteOnBlack .icon-next:not(.disabled):hover,
-.StepView.whiteOnBlack .icon-back:hover{
-  background: #5320ee;
+.StepView .pagination .pagination-finish::after {
+  content: " ";
+  position: absolute;
+  top: 5px;
+  right: -20px;
+  height: 10px;
+  width: 10px;
+  border: 1px solid #5320ee;
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg);
+  transition: border-color 0.3s ease;
 }
 
 .StepView .choiceMore {
@@ -169,8 +180,8 @@
 
 .StepView .helper-wrapper {
   position: absolute;
-  top: 10px;
-  right: -15px;
+  top: 35px;
+  right: 35px;
   z-index: 10;
 }
 
