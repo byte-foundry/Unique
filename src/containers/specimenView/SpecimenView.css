@@ -146,6 +146,10 @@
   margin-bottom: 40px;
 }
 
+.SpecimenView .word span:focus {
+  outline: none;
+}
+
 .SpecimenView .characters .set {
   margin: calc(4rem - 1px) auto;
 }
