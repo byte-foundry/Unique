@@ -94,7 +94,7 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga("send", "event", "Home", "Click", "CTA1");
+                          ga && ga("send", "event", "Home", "Click", "CTA1");
                         }}
                       />
                     )}
@@ -154,7 +154,7 @@ class Landing extends React.Component {
                       onClick={() => {
                         this.props.goToApp();
                         /* global ga */
-                        ga("send", "event", "Home", "Click", "CTA2");
+                        ga && ga("send", "event", "Home", "Click", "CTA2");
                       }}
                     />
                   )}
@@ -281,7 +281,7 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga("send", "event", "Home", "Click", "CTA3");
+                          ga && ga("send", "event", "Home", "Click", "CTA3");
                         }}
                       />
                     )}
@@ -325,7 +325,7 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga("send", "event", "Home", "Click", "CTA4");
+                          ga && ga("send", "event", "Home", "Click", "CTA4");
                         }}
                       />
                     )}
@@ -366,7 +366,7 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga("send", "event", "Home", "Click", "CTA5");
+                          ga && ga("send", "event", "Home", "Click", "CTA5");
                         }}
                       />
                     )}
@@ -416,7 +416,7 @@ class Landing extends React.Component {
                       onClick={() => {
                         this.props.goToApp();
                         /* global ga */
-                        ga("send", "event", "Home", "Click", "CTA6");
+                        ga && ga("send", "event", "Home", "Click", "CTA6");
                       }}
                     />
                   )}
