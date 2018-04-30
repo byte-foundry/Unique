@@ -37,7 +37,7 @@ class Checkout extends React.Component {
             />
           ),
           class: "otf-logo",
-          logo: <OtfLogo />,
+          logo: <OtfLogo  style={{ fontFamily: `'${props.fontName}'` }}/>,
           type: "logo",
           price: 0,
           selected: true,
@@ -60,7 +60,8 @@ class Checkout extends React.Component {
           selected: true,
           visible: false
         }
-      ]
+      ],
+      defaultThicknessName,
     };
     props.updateCheckoutOptions(
       this.state.selectedOptions,
@@ -71,6 +72,8 @@ class Checkout extends React.Component {
   }
   componentDidMount() {
     window.scrollTo(0, 0);
+    document.querySelector('.otfLogoTextSpecimenName').innerHTML = this.props.history.location.fontName;
+    document.querySelector('.otfLogoTextSpecimenVariant').innerHTML = this.state.defaultThicknessName;  
   }
   toggleChoice(name) {
     const { selectedOptions } = this.state;

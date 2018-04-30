@@ -24,17 +24,10 @@
 <rect x="207.224" y="0" fill="#FFFFFF" width="310.775" height="235.826"/>
 <g>
 	<g>
-		<path fill="#5425E7" d="M58.724,146.229H46.943l0.059-0.236v-0.059l10.604-43.711c0-0.118,0.059-0.236,0.059-0.236h17.084
-			l10.721,43.946v0.059l0.059,0.236H73.157l-0.059-0.295l-1.355-8.365H60.315l-1.532,8.365
-			C58.724,145.993,58.724,146.17,58.724,146.229z M62.023,128.261h8.129l-3.888-23.387L62.023,128.261z"/>
-		<path fill="#5425E7" d="M108.856,114.948c11.546,0,17.201,5.066,17.201,12.724v18.556h-10.604v-9.779
-			c-1.355,6.303-6.185,10.368-13.844,10.368s-11.723-3.476-11.723-8.895c0-5.655,5.479-9.367,16.966-9.425
-			c5.125-0.059,8.542-0.236,8.542-2.533c0-2.003-2.18-3.358-6.185-3.358c-4.477,0-7.481,1.708-7.481,4.3H90.83
-			C90.83,119.72,98.017,114.948,108.856,114.948z M107.796,134.506c-4.536,0-7.246,1.119-7.246,3.122
-			c0,1.591,1.885,2.651,5.479,2.651c5.832,0,9.131-2.71,9.425-6.892v-0.059C113.51,134.329,110.859,134.506,107.796,134.506z"/>
+		<text transform="matrix(1 0 0 1 35 146)"><tspan x="0" y="0" fill="#5425E7" font-size="80">Aa</tspan></text>
 	</g>
 </g>
 <rect x="226.813" y="0" fill="#F3F3F3" width="271.094" height="175.724"/>
 <rect x="241.876" y="31.912" fill="none" width="181.716" height="114.905"/>
-<text transform="matrix(1 0 0 1 241.8755 55.3814)"><tspan x="0" y="0" fill="#5425E7" font-family="'WideGrotesk-Bold'" font-size="32">My Font</tspan><tspan x="0" y="38.4" fill="#5425E7" font-family="'WideGrotesk-Bold'" font-size="32">Name </tspan><tspan x="0" y="76.8" fill="#5425E7" font-family="'WideGrotesk-Bold'" font-size="32">Regular</tspan></text>
+<text transform="matrix(1 0 0 1 241.8755 55.3814)"><tspan x="0" y="0" fill="#5425E7" class="otfLogoTextSpecimenName" font-size="32">My Font</tspan><tspan class="otfLogoTextSpecimenVariant" x="0" y="38.4" fill="#5425E7" font-size="32">Regular </tspan></text>
 </svg>

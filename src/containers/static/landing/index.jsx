@@ -109,7 +109,7 @@ class Landing extends React.Component {
             <One1 className="one-1" />
             <div className="row">
               <div className="col-sm-12">
-                <video autoPlay loop src={video} className="uniqueVisual" />
+                <video autoPlay loop muted src={video} className="uniqueVisual" />
               </div>
             </div>
             <div className="row">
