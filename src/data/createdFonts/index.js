@@ -73,10 +73,10 @@ export const createPrototypoFactory = () => (dispatch, getState) => {
   } = getState().createdFonts;
 
   if (isPrototypoLoaded) {
-    console.log('> Prototypo factory already loaded')
+    console.log('> Prototypo factory already loaded');
     return new Promise(resolve => resolve(prototypoFontFactory));
   } else if (isPrototypoLoading) {
-    console.log('> Prototypo factory already creating, please wait....')
+    console.log('> Prototypo factory already creating, please wait....');
     return prototypoLoadingPromise;
   }
   console.log('> Creating Prototypo factory....');

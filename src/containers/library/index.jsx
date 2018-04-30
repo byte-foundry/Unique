@@ -1,47 +1,40 @@
 // @flow
-import React from "react";
-import { bindActionCreators } from "redux";
-import { push } from "react-router-redux";
-import { connect } from "react-redux";
-import FlipMove from "react-flip-move";
-import { FormattedMessage } from "react-intl";
-import PropTypes from "prop-types";
-import Button from "../../components/button/";
-import { loadProject, download, reloadFonts } from "../../data/font";
-import { deleteUserProject, logout } from "../../data/user";
-import "./Library.css";
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
+import { connect } from 'react-redux';
+import FlipMove from 'react-flip-move';
+import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
+import Button from '../../components/button/';
+import { loadProject, download, reloadFonts } from '../../data/font';
+import { deleteUserProject, logout } from '../../data/user';
+import './Library.css';
+import { S3_URL } from '../../data/constants.js';
 
 class Library extends React.Component {
   constructor(props) {
     super(props);
-    const payedProjects = props.projects.filter(
-      project => project.bought === true
-    );
-    const savedProjects = props.projects.filter(
-      project => project.bought === false
-    );
+    const payedProjects = props.projects.filter(project => project.bought === true);
+    const savedProjects = props.projects.filter(project => project.bought === false);
     this.state = {
       payedProjects,
-      savedProjects
+      savedProjects,
     };
   }
   componentDidMount() {
     window.scrollTo(0, 0);
   }
   componentWillReceiveProps(newProps) {
-    const payedProjects = newProps.projects.filter(
-      project => project.bought === true
-    );
-    const savedProjects = newProps.projects.filter(
-      project => project.bought === false
-    );
+    const payedProjects = newProps.projects.filter(project => project.bought === true);
+    const savedProjects = newProps.projects.filter(project => project.bought === false);
     this.setState({
       payedProjects,
-      savedProjects
+      savedProjects,
     });
   }
   render() {
-    console.log("Library render");
+    console.log('Library render');
     console.log(this.props.projects);
     return (
       <div className="Library">
@@ -105,7 +98,7 @@ class Library extends React.Component {
               leaveAnimation="elevator"
               staggerDurationBy="10"
               staggerDelayBy="20"
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
             >
               {this.state.savedProjects.map(project => (
                 <div className="col-sm-3 project" key={project.id}>
@@ -116,7 +109,7 @@ class Library extends React.Component {
                     AaBbCc
                   </div>
                   <div className="need">{project.need}</div>
-                  <div className="fontName">{project.name || "Undefined"}</div>
+                  <div className="fontName">{project.name || 'Undefined'}</div>
                   <div className="actions">
                     <FormattedMessage
                       id="Library.deleteAction"
@@ -172,7 +165,7 @@ class Library extends React.Component {
               leaveAnimation="elevator"
               staggerDurationBy="10"
               staggerDelayBy="20"
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
             >
               {this.state.payedProjects.map(project => (
                 <div className="col-sm-3 project" key={project.id}>
@@ -183,7 +176,7 @@ class Library extends React.Component {
                     AaBbCc
                   </div>
                   <div className="need">{project.need}</div>
-                  <div className="fontName">{project.name || "Undefined"}</div>
+                  <div className="fontName">{project.name || 'Undefined'}</div>
                   <div className="actions">
                     <FormattedMessage
                       id="Library.downloadAction"
@@ -192,12 +185,12 @@ class Library extends React.Component {
                     >
                       {text => (
                         <Button
-                          onClick={() =>
-                            this.props.download(
-                              `project${project.id}`,
-                              project.name || "Undefined"
-                            )
-                          }
+                          onClick={() => {
+                            const tempLink = document.createElement('a');
+                            tempLink.href = `${S3_URL}${this.props.userId}/${project.id}.zip`;
+                            tempLink.download = `${project.name}.zip`;
+                            tempLink.dispatchEvent(new MouseEvent('click'));
+                          }}
                           label={text}
                           mode="full"
                           className="action-open"
@@ -216,34 +209,34 @@ class Library extends React.Component {
 }
 
 Library.propTypes = {
-  projects: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      bought: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired,
+  projects: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    bought: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+  })).isRequired,
   goToHome: PropTypes.func.isRequired,
   loadProject: PropTypes.func.isRequired,
   download: PropTypes.func.isRequired,
   deleteUserProject: PropTypes.func.isRequired,
   reloadFonts: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 const mapStateToProps = state => ({
-  projects: state.user.projects
+  projects: state.user.projects,
+  userId: state.user.graphqlID,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      goToHome: () => push("/app/"),
+      goToHome: () => push('/app/'),
       loadProject,
       download,
       deleteUserProject,
       reloadFonts,
-      logout
+      logout,
     },
-    dispatch
+    dispatch,
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Library);

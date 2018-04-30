@@ -1,19 +1,19 @@
 // @flow
-import React from "react";
-import ReactDOM from "react-dom";
-import { withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import Modal from "react-responsive-modal";
-import { push } from "react-router-redux";
-import { FormattedMessage } from "react-intl";
-import unorphan from "unorphan";
-import "./SpecimenView.css";
-import Button from "../../components/button/";
-import ContentEditable from "../../components/contentEditable";
-import { storeProject, storeChosenWord } from "../../data/user";
-import { ReactComponent as Back } from "../stepView/back.svg";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Modal from 'react-responsive-modal';
+import { push } from 'react-router-redux';
+import { FormattedMessage } from 'react-intl';
+import unorphan from 'unorphan';
+import './SpecimenView.css';
+import Button from '../../components/button/';
+import ContentEditable from '../../components/contentEditable';
+import { storeProject, storeChosenWord } from '../../data/user';
+import { ReactComponent as Back } from '../stepView/back.svg';
 
 class SpecimenView extends React.Component {
   constructor(props) {
@@ -21,16 +21,38 @@ class SpecimenView extends React.Component {
     this.state = {
       fontName: props.projectName,
       isInputFocused: false,
-      isModalOpened: false
+      isModalOpened: false,
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.storeOrAuthenticate = this.storeOrAuthenticate.bind(this);
   }
   componentDidMount() {
     this.specimenViewWrapper.focus();
     window.scrollTo(0, 0);
-    unorphan("h1, h2, h3, p, span");
+    unorphan('h1, h2, h3, p, span');
+  }
+  storeOrAuthenticate() {
+    if (this.state.fontName !== '') {
+      if (this.state.fromModal === 'save') {
+        this.props.storeProject(this.state.fontName, {
+          noRedirect: true,
+        });
+        if (this.props.isAuthenticated) {
+          this.props.goToLibrary();
+        } else {
+          this.props.authenticate();
+        }
+      } else {
+        this.props.storeProject(this.state.fontName, {
+          noRedirect: true,
+        });
+        this.props.goToCheckout();
+      }
+
+      this.setState({ isModalOpened: false });
+    }
   }
   onFocus() {
     this.setState({ isInputFocused: true });
@@ -39,193 +61,184 @@ class SpecimenView extends React.Component {
     this.setState({ isInputFocused: false });
   }
   onKeyDown(e) {
-    if (this.state.fontName !== "" && e.keyCode === 13) {
-      if (this.state.fromModal === "save") {
-        if (this.props.isAuthenticated) {
-          this.props.storeProject(this.state.fontName);
-        } else {
-          this.props.authenticate(this.props.storeProject, this.state.fontName);
-        }
-      } else {
-        this.props.goToCheckout(this.state.fontName);
-      }
-      this.setState({ isModalOpened: false });
+    if (e.keyCode === 13) {
+      this.storeOrAuthenticate();
     }
   }
   render() {
     const uppercase = [
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "O",
-      "P",
-      "Q",
-      "R",
-      "S",
-      "T",
-      "U",
-      "V",
-      "W",
-      "X",
-      "Y",
-      "Z"
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z',
     ];
     const lowercase = [
-      "a",
-      "b",
-      "c",
-      "d",
-      "e",
-      "f",
-      "g",
-      "h",
-      "i",
-      "j",
-      "k",
-      "l",
-      "m",
-      "n",
-      "o",
-      "p",
-      "q",
-      "r",
-      "s",
-      "t",
-      "u",
-      "v",
-      "w",
-      "x",
-      "y",
-      "z"
+      'a',
+      'b',
+      'c',
+      'd',
+      'e',
+      'f',
+      'g',
+      'h',
+      'i',
+      'j',
+      'k',
+      'l',
+      'm',
+      'n',
+      'o',
+      'p',
+      'q',
+      'r',
+      's',
+      't',
+      'u',
+      'v',
+      'w',
+      'x',
+      'y',
+      'z',
     ];
     const numerals = [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "0",
-      "$",
-      "€",
-      "¢",
-      "%",
-      "‰",
-      "#",
-      "<",
-      "+",
-      "=",
-      "−",
-      ">"
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '0',
+      '$',
+      '€',
+      '¢',
+      '%',
+      '‰',
+      '#',
+      '<',
+      '+',
+      '=',
+      '−',
+      '>',
     ];
     const symbols = [
-      "¡",
-      "!",
-      "¿",
-      "?",
-      ".",
-      ",",
-      ":",
-      ";",
-      "…",
-      "-",
-      "–",
-      "—",
-      "(",
-      ")",
-      "[",
-      "]",
-      "{",
-      "}",
-      "/",
-      "\\",
-      "&",
-      "*",
-      "@",
-      "“",
-      "”",
-      "‘",
-      "’",
-      "«",
-      "»",
-      "‹",
-      "›"
+      '¡',
+      '!',
+      '¿',
+      '?',
+      '.',
+      ',',
+      ':',
+      ';',
+      '…',
+      '-',
+      '–',
+      '—',
+      '(',
+      ')',
+      '[',
+      ']',
+      '{',
+      '}',
+      '/',
+      '\\',
+      '&',
+      '*',
+      '@',
+      '“',
+      '”',
+      '‘',
+      '’',
+      '«',
+      '»',
+      '‹',
+      '›',
     ];
     const diacritics = [
-      "À",
-      "Á",
-      "Â",
-      "Ã",
-      "Ä",
-      "Å",
-      "Ç",
-      "È",
-      "É",
-      "Ê",
-      "Ë",
-      "Ì",
-      "Í",
-      "Î",
-      "Ï",
-      "Ñ",
-      "Ò",
-      "Ó",
-      "Ô",
-      "Õ",
-      "Ö",
-      "Ø",
-      "Ù",
-      "Ú",
-      "Û",
-      "Ü",
-      "Ý",
-      "à",
-      "á",
-      "â",
-      "ã",
-      "ä",
-      "å",
-      "ç",
-      "è",
-      "é",
-      "ê",
-      "ë",
-      "ì",
-      "í",
-      "î",
-      "ï",
-      "ñ",
-      "ò",
-      "ó",
-      "ô",
-      "õ",
-      "ö",
-      "ø",
-      "ù",
-      "ú",
-      "û",
-      "ü",
-      "ý",
-      "ÿ"
+      'À',
+      'Á',
+      'Â',
+      'Ã',
+      'Ä',
+      'Å',
+      'Ç',
+      'È',
+      'É',
+      'Ê',
+      'Ë',
+      'Ì',
+      'Í',
+      'Î',
+      'Ï',
+      'Ñ',
+      'Ò',
+      'Ó',
+      'Ô',
+      'Õ',
+      'Ö',
+      'Ø',
+      'Ù',
+      'Ú',
+      'Û',
+      'Ü',
+      'Ý',
+      'à',
+      'á',
+      'â',
+      'ã',
+      'ä',
+      'å',
+      'ç',
+      'è',
+      'é',
+      'ê',
+      'ë',
+      'ì',
+      'í',
+      'î',
+      'ï',
+      'ñ',
+      'ò',
+      'ó',
+      'ô',
+      'õ',
+      'ö',
+      'ø',
+      'ù',
+      'ú',
+      'û',
+      'ü',
+      'ý',
+      'ÿ',
     ];
     return (
       <div
         className="SpecimenView"
-        ref={c => {
+        ref={(c) => {
           this.specimenViewWrapper = c;
         }}
         tabIndex="-1"
@@ -234,13 +247,13 @@ class SpecimenView extends React.Component {
           <Modal
             open={this.state.isModalOpened}
             onClose={() => {
-              this.setState({ fontName: "", isModalOpened: false });
+              this.setState({ fontName: '', isModalOpened: false });
             }}
             showCloseIcon={false}
             little
             classNames={{
-              modal: "modal",
-              overlay: "overlay"
+              modal: 'modal',
+              overlay: 'overlay',
             }}
           >
             <h2>
@@ -267,7 +280,7 @@ class SpecimenView extends React.Component {
                   <input
                     type="text"
                     value={this.state.fontName}
-                    onChange={e => {
+                    onChange={(e) => {
                       this.setState({ fontName: e.target.value });
                     }}
                     placeholder={text}
@@ -286,24 +299,7 @@ class SpecimenView extends React.Component {
               {text => (
                 <Button
                   className="button-closeModal"
-                  onClick={() => {
-                    if (this.state.fontName !== "") {
-                      if (this.state.fromModal === "save") {
-                        if (this.props.isAuthenticated) {
-                          this.props.storeProject(this.state.fontName);
-                        } else {
-                          this.props.authenticate(
-                            this.props.storeProject,
-                            this.state.fontName
-                          );
-                        }
-                      } else {
-                        this.props.goToCheckout(this.state.fontName);
-                      }
-
-                      this.setState({ isModalOpened: false });
-                    }
-                  }}
+                  onClick={this.storeOrAuthenticate}
                   mode="full"
                   label={text}
                 />
@@ -346,7 +342,7 @@ class SpecimenView extends React.Component {
                       } else {
                         this.setState({
                           isModalOpened: true,
-                          fromModal: "checkout"
+                          fromModal: 'checkout',
                         });
                       }
                     }}
@@ -366,18 +362,11 @@ class SpecimenView extends React.Component {
                     className="button-save"
                     onClick={() => {
                       if (this.state.fontName) {
-                        if (this.props.isAuthenticated) {
-                          this.props.storeProject(this.state.fontName);
-                        } else {
-                          this.props.authenticate(
-                            this.props.storeProject,
-                            this.state.fontName
-                          );
-                        }
+                        this.props.storeProject(this.state.fontName);
                       } else {
                         this.setState({
                           isModalOpened: true,
-                          fromModal: "save"
+                          fromModal: 'save',
                         });
                       }
                     }}
@@ -403,7 +392,7 @@ class SpecimenView extends React.Component {
               <p className="word">
                 <ContentEditable
                   html={this.props.word}
-                  onChange={event => {}}
+                  onChange={(event) => {}}
                   onBlur={this.onBlur}
                   disableShortcuts={() => {
                     this.setState({ isInputFocused: true });
@@ -487,7 +476,7 @@ class SpecimenView extends React.Component {
                           } else {
                             this.setState({
                               isModalOpened: true,
-                              fromModal: "checkout"
+                              fromModal: 'checkout',
                             });
                           }
                         }}
@@ -599,7 +588,7 @@ class SpecimenView extends React.Component {
                     } else {
                       this.setState({
                         isModalOpened: true,
-                        fromModal: "checkout"
+                        fromModal: 'checkout',
                       });
                     }
                   }}
@@ -623,8 +612,8 @@ const mapStateToProps = state => ({
   email: state.user.email,
   need: state.font.need,
   word: state.user.chosenWord,
-  projectName: state.user.projectName,
-  isAuthenticated: typeof state.user.graphqlID === "string"
+  projectName: state.user.currentProject.name,
+  isAuthenticated: typeof state.user.graphqlID === 'string' && !state.user.anonymous,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -632,15 +621,18 @@ const mapDispatchToProps = dispatch =>
     {
       storeProject,
       storeChosenWord,
-      goToCheckout: fontName => push({ pathname: "/app/checkout", fontName }),
-      goBack: fontName => push("/app/customize"),
-      authenticate: (callback, fontName) =>
+      goToCheckout: fontName => push({ pathname: '/app/checkout', fontName }),
+      goBack: fontName => push('/app/customize'),
+      authenticate: () =>
         push({
-          pathname: "/app/auth",
-          authData: { callback, fontName, type: "saveFont" }
-        })
+          pathname: '/app/auth',
+        }),
+      goToLibrary: () =>
+        push({
+          pathname: '/app/library',
+        }),
     },
-    dispatch
+    dispatch,
   );
 
 SpecimenView.propTypes = {
@@ -652,21 +644,20 @@ SpecimenView.propTypes = {
   word: PropTypes.string.isRequired,
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.func.isRequired,
-    login: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired,
   }).isRequired,
   projectName: PropTypes.string,
   goToCheckout: PropTypes.func.isRequired,
+  goToLibrary: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   authenticate: PropTypes.func.isRequired,
-  storeChosenWord: PropTypes.func.isRequired
+  storeChosenWord: PropTypes.func.isRequired,
 };
 
 SpecimenView.defaultProps = {
-  fontName: "ptypo",
-  email: "",
-  projectName: ""
+  fontName: 'ptypo',
+  email: '',
+  projectName: '',
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SpecimenView)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SpecimenView));

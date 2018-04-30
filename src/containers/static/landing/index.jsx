@@ -1,34 +1,34 @@
 // @flow
-import React from "react";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
-import { push } from "react-router-redux";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import unorphan from "unorphan";
-import { ReactComponent as Logo } from "../../app/logo.svg";
-import { ReactComponent as ProfileIcon } from "../../sidebar/profile.svg";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import { push } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import unorphan from 'unorphan';
+import { ReactComponent as Logo } from '../../app/logo.svg';
+import { ReactComponent as ProfileIcon } from '../../sidebar/profile.svg';
 
-import { ReactComponent as One1 } from "./number1.svg";
-import { ReactComponent as One2 } from "./number2.svg";
-import { ReactComponent as One3 } from "./number3.svg";
-import { ReactComponent as One4 } from "./number4.svg";
-import { ReactComponent as One5 } from "./number5.svg";
+import { ReactComponent as One1 } from './number1.svg';
+import { ReactComponent as One2 } from './number2.svg';
+import { ReactComponent as One3 } from './number3.svg';
+import { ReactComponent as One4 } from './number4.svg';
+import { ReactComponent as One5 } from './number5.svg';
 
-import video from "./unique_intro.mp4";
+import video from './unique_intro.mp4';
 
-import { ReactComponent as HowItWorks1 } from "./howitworks_1.svg";
-import { ReactComponent as HowItWorks2 } from "./howitworks_2.svg";
-import { ReactComponent as HowItWorks3 } from "./howitworks_3.svg";
+import { ReactComponent as HowItWorks1 } from './howitworks_1.svg';
+import { ReactComponent as HowItWorks2 } from './howitworks_2.svg';
+import { ReactComponent as HowItWorks3 } from './howitworks_3.svg';
 
-import { createPrototypoFactory } from "../../../data/createdFonts";
-import { loadLibrary } from "../../../data/font";
-import { storeChosenWord, storeCoupon } from "../../../data/user";
+import { createPrototypoFactory } from '../../../data/createdFonts';
+import { loadLibrary } from '../../../data/font';
+import { storeChosenWord, storeCoupon } from '../../../data/user';
 
-import Button from "../../../components/button";
+import Button from '../../../components/button';
 
-import "./Landing.css";
+import './Landing.css';
 
 class Landing extends React.Component {
   constructor(props) {
@@ -37,20 +37,20 @@ class Landing extends React.Component {
       props.createPrototypoFactory();
     }
     this.state = {
-      chosenWord: ""
+      chosenWord: '',
     };
   }
   componentDidMount() {
     window.scrollTo(0, 0);
-    unorphan("h1, h2, h3, p, span");
+    unorphan('h1, h2, h3, p, span');
     const query = new URLSearchParams(this.props.location.search);
-    const coupon = query.get("coupon");
+    const coupon = query.get('coupon');
     if (coupon) {
       this.props.storeCoupon({ code: coupon });
     }
   }
   componentWillReceiveProps() {
-    unorphan("h1, h2, h3, p, span");
+    unorphan('h1, h2, h3, p, span');
   }
   render() {
     return (
@@ -94,7 +94,7 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga && ga("send", "event", "Home", "Click", "CTA1");
+                          ga && ga('send', 'event', 'Home', 'Click', 'CTA1');
                         }}
                       />
                     )}
@@ -125,7 +125,7 @@ class Landing extends React.Component {
             </div>
             <div className="row justify-content-center">
               <div className="col-sm-12 col-md-8">
-                <p style={{ whiteSpace: "pre-line" }}>
+                <p style={{ whiteSpace: 'pre-line' }}>
                   <FormattedMessage
                     id="Landing.descriptionText"
                     defaultMessage="
@@ -154,7 +154,7 @@ class Landing extends React.Component {
                       onClick={() => {
                         this.props.goToApp();
                         /* global ga */
-                        ga && ga("send", "event", "Home", "Click", "CTA2");
+                        ga && ga('send', 'event', 'Home', 'Click', 'CTA2');
                       }}
                     />
                   )}
@@ -281,7 +281,7 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga && ga("send", "event", "Home", "Click", "CTA3");
+                          ga && ga('send', 'event', 'Home', 'Click', 'CTA3');
                         }}
                       />
                     )}
@@ -325,7 +325,7 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga && ga("send", "event", "Home", "Click", "CTA4");
+                          ga && ga('send', 'event', 'Home', 'Click', 'CTA4');
                         }}
                       />
                     )}
@@ -366,7 +366,7 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga && ga("send", "event", "Home", "Click", "CTA5");
+                          ga && ga('send', 'event', 'Home', 'Click', 'CTA5');
                         }}
                       />
                     )}
@@ -392,7 +392,7 @@ class Landing extends React.Component {
                     description="Unique prototypo title"
                   />
                 </h1>
-                <p style={{ whiteSpace: "pre-line" }}>
+                <p style={{ whiteSpace: 'pre-line' }}>
                   <FormattedMessage
                     id="Landing.prototypoDescription"
                     defaultMessage="Powered by Prototypo’s tech using algorithms to generate
@@ -416,7 +416,7 @@ class Landing extends React.Component {
                       onClick={() => {
                         this.props.goToApp();
                         /* global ga */
-                        ga && ga("send", "event", "Home", "Click", "CTA6");
+                        ga && ga('send', 'event', 'Home', 'Click', 'CTA6');
                       }}
                     />
                   )}
@@ -440,33 +440,31 @@ Landing.propTypes = {
   locale: PropTypes.string.isRequired,
   storeCoupon: PropTypes.func.isRequired,
   loadLibrary: PropTypes.func.isRequired,
-  storeChosenWord: PropTypes.func.isRequired
+  storeChosenWord: PropTypes.func.isRequired,
 };
 
 Landing.defaultProps = {
-  isAuthenticated: false
+  isAuthenticated: false,
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: typeof state.user.graphqlID === "string",
+  isAuthenticated: typeof state.user.graphqlID === 'string',
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
   isBlackOnWhite: state.user.isBlackOnWhite,
-  locale: state.ui.locale
+  locale: state.ui.locale,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      goToApp: () => push("/app"),
+      goToApp: () => push('/app'),
       createPrototypoFactory,
       loadLibrary,
-      goToAuth: () => push({ pathname: "/app/auth", authData: {} }),
+      goToAuth: () => push({ pathname: '/app/auth' }),
       storeChosenWord,
-      storeCoupon
+      storeCoupon,
     },
-    dispatch
+    dispatch,
   );
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Landing)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Landing));
