@@ -14,6 +14,7 @@
 
 .TemplateChoice .pagination {
   float: right;
+  margin-bottom: 30px;
 }
 .TemplateChoice .pagination .pagination-next,
 .TemplateChoice .pagination .pagination-prev {
@@ -92,8 +93,4 @@
 
 .TemplateChoice .Button {
   margin-left: 0px;
-}
-
-.TemplateChoice .template-wrapper {
-  margin-right: 50px;
 }
