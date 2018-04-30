@@ -137,7 +137,9 @@ class Tips extends React.Component {
     super(props);
     this.state = {
       tips: [],
-      tipIndex: 0
+      tipIndex: 0,
+      hasBeenOpened: false,
+      opened: false,
     };
     this.generateTips = this.generateTips.bind(this);
   }
@@ -198,8 +200,8 @@ class Tips extends React.Component {
     return this.state.tips.length > 0 ? (
       <div className="tips-wrapper">
         <div
-          className={`tips-button ${this.state.opened ? "opened" : ""}`}
-          onClick={() => this.setState({ opened: !this.state.opened })}
+          className={`tips-button ${this.state.opened ? "opened" : ""} ${this.state.hasBeenOpened ? "seen" : ''}`}
+          onClick={() => this.setState({ opened: !this.state.opened, hasBeenOpened: true })}
         >
           {this.state.opened ? "x" : this.state.tips.length}
         </div>

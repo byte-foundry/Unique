@@ -182,8 +182,8 @@
 
 .StepView .helper-wrapper {
   position: absolute;
-  top: 35px;
-  right: 35px;
+  top: 55px;
+  right: 45px;
   z-index: 10;
 }
 
@@ -247,7 +247,7 @@
     float: none;
     margin-top: 20px;
     margin-left: 20px;
-    margin-bottom: 5Px;
+    margin-bottom: 5px;
   }
   .StepView .helper-wrapper {
     top: 10px;

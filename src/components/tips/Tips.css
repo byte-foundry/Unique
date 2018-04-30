@@ -77,7 +77,7 @@
   perspective: 1000;
 }
 
-.tips-button:hover,  .tips-button.opened {
+.tips-button:hover,  .tips-button.opened, .tips-button.seen {
   animation: none;
 }
 
