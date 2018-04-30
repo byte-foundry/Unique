@@ -174,14 +174,15 @@
 }
 
 .Checkout .checkout-options .option.otf-logo .logo {
-  padding: 10% 30%;
+  padding: 10%;
+  text-align: center;
   background: linear-gradient(#5f1ffc, #5f1ffc),
     linear-gradient(219deg, #5320ee, #5d28e2 68%, #622bdd);
 }
 
 .Checkout .checkout-options .option.otf-logo svg {
   height: auto;
-  width: 150px;
+  width: 80%;
 }
 
 .Checkout .checkout-options .option.specimen-logo .logo {
