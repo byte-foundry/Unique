@@ -522,7 +522,7 @@ export const afterPayment = res => (dispatch, getState) => {
   } catch (e) {
     console.log(e);
   }
-  if (graphQLToken) {
+  if (graphQLToken && !anonymous) {
     dispatch(storeProject(name, { bought: isPayed }));
   } else {
     dispatch(storeProject(name, { bought: isPayed, noRedirect: true }));
