@@ -826,7 +826,7 @@ class Authenticate extends React.Component {
                   description="Login page social auth CTA message"
                 />
               </div>
-              <div className="social-buttons">
+              <div className="sso-buttons">
                 <FacebookLogin
                   appId={FACEBOOK_APP_ID}
                   autoLoad={false}
@@ -835,7 +835,7 @@ class Authenticate extends React.Component {
                   render={renderProps => (
                     <Button
                       label="Facebook"
-                      mode="social-facebook"
+                      mode="sso-fa"
                       onClick={!this.state.isConnecting && renderProps.onClick}
                       loading={
                         this.state.isConnecting &&
@@ -850,7 +850,7 @@ class Authenticate extends React.Component {
                   render={renderProps => (
                     <Button
                       label="Twitter"
-                      mode="social-twitter"
+                      mode="sso-tw"
                       onClick={!this.state.isConnecting && renderProps.onClick}
                       loading={
                         this.state.isConnecting &&
@@ -867,7 +867,7 @@ class Authenticate extends React.Component {
                   render={renderProps => (
                     <Button
                       label="Google"
-                      mode="social-google"
+                      mode="sso-go"
                       onClick={!this.state.isConnecting && renderProps.onClick}
                       loading={
                         this.state.isConnecting &&
