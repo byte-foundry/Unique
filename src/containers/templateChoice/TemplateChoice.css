@@ -79,6 +79,10 @@
     font-size: 28px;
     margin-bottom: 40px;
   }
+  .TemplateChoice h1 .tip {
+    color: #5320ee;
+    font-size: .7em;
+  }
 }
 
 .TemplateChoice .back {

@@ -98,6 +98,13 @@ class TemplateChoice extends React.Component {
                     defaultMessage="Pick one of our templates and get started!"
                     description="TemplateChoice page title"
                   />
+                  <div className="tip">
+                    <FormattedMessage
+                       id="TemplateChoice.dbClick"
+                       defaultMessage="Double-click to select an option and go straight to the next step"
+                       description="TemplateChoice double-click hint"
+                     />
+                   </div>
                 </h1>
               </div>
             </div>
@@ -178,7 +185,7 @@ class TemplateChoice extends React.Component {
                       text={this.props.chosenWord}
                       mostSelected={isMostSelected(this.props.presets, font)}
                       isLoading={this.props.isLoading}
-                      index={index + 1}                      
+                      index={index + 1}
                     />
                   </div>
                 ))}
