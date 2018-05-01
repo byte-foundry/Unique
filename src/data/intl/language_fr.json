@@ -168,6 +168,7 @@
 	"StepView.width": "Quelle largeur de lettre correspond à vos besoins?",
 	"StepView.xHeight": "Quelle hauteur de lettre préférez-vous?",
 	"TOS.title": "Conditions d'utilisation",
+	"TemplateChoice.dbClick": "Double-cliquez pour valider et passer à l'étape suivante",
 	"TemplateChoice.title": "Sélectionnez un modèle et commencez à le personnaliser !",
 	"Tips.GlyphMode": "Si vous souhaitez voir les détails de tension de plus près, vous pouvez passer en mode \"Glyphe\" via la barre d'outil en bas.",
 	"Tips.TextAscender": "Si vous augmentez/diminuez trop les hauteurs de lettres, cela peut diminuer la lisibilité.",
