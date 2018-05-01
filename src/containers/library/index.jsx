@@ -196,7 +196,7 @@ class Library extends React.Component {
                         <Button
                           onClick={() => {
                             const tempLink = document.createElement('a');
-                            tempLink.href = `${S3_URL}${this.props.userId}/${project.id}.zip`;
+                            tempLink.href = `${S3_URL}${project.id}.zip`;
                             tempLink.download = `${project.name}.zip`;
                             tempLink.dispatchEvent(new MouseEvent('click'));
                           }}
