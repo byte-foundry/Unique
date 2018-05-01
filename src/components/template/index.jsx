@@ -34,6 +34,7 @@ class Template extends React.Component {
         className={`Template ${this.props.selected ? "selected" : ""}`}
         onClick={this.props.onClick}
         onDoubleClick={this.props.onDoubleClick}
+        onTouchTap={this.props.onTouchTap}
         style={{
           fontFamily: `'${this.props.font.variant.family.name}${
             this.props.font.variant.name

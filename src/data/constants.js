@@ -34,3 +34,23 @@ export const EXPORT_SUBSET =
   ' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890$€¢%‰#<+=−>¡!¿?.:;…-–—()[]{}/\\&*@“”‘’«»‹›ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöøùúûüýÿ,';
 
 export const COUPON_SERVER_URL = `${AWS_URL}/unique/coupons/`;
+
+
+const dblTouchTapMaxDelay = 300
+let latestTouchTap = {
+  time: 0,
+  target: null,
+}
+
+export const isDblTouchTap = function(event) {
+  const touchTap = {
+    time: new Date().getTime(),
+    target: event.currentTarget,
+  }
+  const isFastDblTouchTap = (
+    touchTap.target === latestTouchTap.target &&
+    touchTap.time - latestTouchTap.time < dblTouchTapMaxDelay
+  )
+  latestTouchTap = touchTap
+  return isFastDblTouchTap
+}

@@ -19,12 +19,9 @@ const FontControls = props => (
         type="range"
         min="20"
         max="140"
-        draggable="true"
         step="2"
         value={props.fontSize}
         onChange={e => props.changeFontSize(e.target.value)}
-        onDrag={e => props.changeFontSize(e.target.value)}
-        onInput={e => props.changeFontSize(e.target.value)}
       />
       <span
         className="icon-highFontSize"

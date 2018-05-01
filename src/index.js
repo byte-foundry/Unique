@@ -49,6 +49,11 @@ const StaticRoute = ({ component:Component, ...rest }) => (
     </Static>
   )} />
 )
+
+
+const injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
+
 const Index = props => (
   <IntlProvider locale={props.locale} messages={messages[props.locale]}>
     <ConnectedRouter history={history}>
