@@ -13,6 +13,7 @@
   transition: width 0.3s ease, background .3s ease;
   width: 300px;
   z-index: 10;
+  font-size: 14px;
 }
 
 .Sidebar.small {
@@ -109,6 +110,8 @@
 
 .Sidebar.checkout .sidebar-checkout .choices .choice .left {
   float: left;
+  padding-right: 0;
+  width: 75%;
 }
 
 .Sidebar.checkout .sidebar-checkout .choices .choice .right {
@@ -139,13 +142,5 @@
     max-width: inherit;
     width: 100%;
     position: relative;
-  }
-}
-
-@media (max-width: 1450px) {
-  .Sidebar.checkout .sidebar-checkout .choices .choice .right {
-    display: block;
-    float: left;
-    width: 100%;
   }
 }

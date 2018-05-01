@@ -3,26 +3,26 @@
   display: flex;
   flex-direction: column;
   padding-top: 0;
-  padding-bottom: 90px;
+  padding-bottom: 80px;
   margin-bottom: 80px;
 }
 
 @media (min-width: 768px) {
   .DefineNeed {
-    padding-top: 50px;
+    padding-top: 20px;
   }
 }
 
 @media (min-width: 1800px) {
   .DefineNeed {
-    padding-top: 85px;
+    padding-top: 55px;
   }
 }
 
 .DefineNeed .needs {
   line-height: 1.4;
   user-select: none;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 .DefineNeed .needs div {
@@ -40,8 +40,11 @@
   margin-right: 5px;
 }
 
-.DefineNeed .need:hover, .DefineNeed .need.selected {
+.DefineNeed .need.selected {
   border-color: #5320ee;
+}
+.DefineNeed .need:hover {
+    border-color: #ccc;
 }
 
 
@@ -62,6 +65,8 @@
 .DefineNeed .needs .need .need-icon {
   margin: 40px auto;
   display: block;
+  height: 120px;
+  width: auto;
 }
 
 .DefineNeed .needs .need .need-title {
@@ -140,9 +145,25 @@
   transition: opacity .2s ease;
 }
 
-.DefineNeed .actions .need-dunno:hover {  
+.DefineNeed .actions .need-dunno:hover {
   opacity: 1;
 }
+
+.DefineNeed .need-errorpresets {
+  margin-top: 20px;
+  color: #F67B7B;
+  padding: 10px 20px;
+  border: 2px solid #F67B7B;
+}
+
+.DefineNeed .need-error-presets-button{
+  color: #F67B7B;
+  padding: 0;
+  padding-bottom: 2px;
+  margin-left: 15px;
+  border-bottom: 2px solid #F67B7B;
+}
+
 
 .DefineNeed .actions .need-submit {
   float: right;
@@ -159,7 +180,25 @@
   cursor: default;
 }
 
+.DefineNeed .actions .need-submit.need-submit-loading {
+  min-height: 40px;
+  min-width: 150px;
+}
+
+.DefineNeed .actions .need-submit.disabled.need-submit-loading svg rect {
+  fill:#5320ee;
+}
+
 @keyframes fadeIn {
   from {opacity: 0}
   to {opacity: 1}
+}
+
+@media (max-width: 576px) {
+  .DefineNeed .actions .need-submit{
+    margin-right: 30px;
+  }
+  .DefineNeed .actions .need-dunno {
+    margin-right: 30px;
+  }
 }

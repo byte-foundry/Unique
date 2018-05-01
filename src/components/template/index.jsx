@@ -1,7 +1,6 @@
 // @flow
 import React from "react";
 import PropTypes from "prop-types";
-import { FormattedMessage } from "react-intl";
 import "./Template.css";
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -35,6 +34,7 @@ class Template extends React.Component {
         className={`Template ${this.props.selected ? "selected" : ""}`}
         onClick={this.props.onClick}
         onDoubleClick={this.props.onDoubleClick}
+        onTouchTap={this.props.onTouchTap}
         style={{
           fontFamily: `'${this.props.font.variant.family.name}${
             this.props.font.variant.name
@@ -51,10 +51,6 @@ class Template extends React.Component {
 }
 
 Template.propTypes = {
-  font: PropTypes.shape({
-    preset: PropTypes.string.isRequired,
-    variant: PropTypes.string.isRequired
-  }).isRequired,
   onClick: PropTypes.func.isRequired,
   onDoubleClick: PropTypes.func.isRequired,
   text: PropTypes.string,

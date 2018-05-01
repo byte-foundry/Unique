@@ -3,5 +3,15 @@
     "id": "TemplateChoice.title",
     "description": "TemplateChoice page title",
     "defaultMessage": "Pick one of our templates and get started!"
+  },
+  {
+    "id": "App.prevAction",
+    "description": "Back",
+    "defaultMessage": "Back"
+  },
+  {
+    "id": "App.nextAction",
+    "description": "Next",
+    "defaultMessage": "Next"
   }
 ]

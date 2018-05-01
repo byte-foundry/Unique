@@ -26,6 +26,7 @@ export const getUserProject = id => `
         needs
         baseValues
         steps {
+          defaultStepName
           id
           name
           description
@@ -70,7 +71,7 @@ export const getSpecialChoiceSelectedCount = name => `
       selected
     }
   }
-  
+
 `;
 
 export const getPresetExportedCount = id => `
@@ -115,6 +116,7 @@ export const addProjectToUser = (
             id
             createdAt
             name
+            bought
             user {
                 uniqueProjects {
                     id
@@ -130,8 +132,8 @@ export const addProjectToUser = (
                                 name
                             }
                         }
-                        template 
-                        baseValues                    
+                        template
+                        baseValues
                     }
                 }
             }
@@ -173,6 +175,7 @@ export const updateProject = (
             id
             createdAt
             name
+            bought
             user {
                 uniqueProjects {
                     id
@@ -188,8 +191,8 @@ export const updateProject = (
                                 name
                             }
                         }
-                        template 
-                        baseValues                    
+                        template
+                        baseValues
                     }
                 }
             }
@@ -244,6 +247,15 @@ export const authenticateUser = (email, password) => `
     }
 `;
 
+export const authenticateAnonymousUser = `
+    mutation {
+        authenticateAnonymousUser {
+            id
+            token
+        }
+    }
+`;
+
 export const authenticateFacebookUser = token => `
     mutation {
         authenticateFacebookUser(
@@ -293,10 +305,10 @@ mutation {
 }
 `;
 
-export const getUserProjects = graphQLID => `
+export const getUserProjects = () => `
     query {
         user
-        {   
+        {
             id
             email
             uniqueProjects(orderBy: createdAt_ASC) {
@@ -312,8 +324,8 @@ export const getUserProjects = graphQLID => `
                             name
                         }
                     }
-                    template 
-                    baseValues                    
+                    template
+                    baseValues
                 }
             }
         }

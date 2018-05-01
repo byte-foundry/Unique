@@ -16,7 +16,7 @@
 @media (max-width: 576px) {
   .App .left {
     padding: 0;
-  }  
+  }
 }
 .App .right {
   padding: 0;
@@ -50,8 +50,8 @@
 .App-logo-wrapper {
   top: 50%;
   left: 50%;
-	transform: translate(-50%, -50%);
-	transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
+  transform: translate(-50%, -50%);
+  transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .App-logo-wrapper svg {
@@ -77,52 +77,52 @@
 
 .App-logo-wrapper .letter-1 {
   animation-name: animate-1;
-  will-change: 'transform, opacity';
+  will-change: "transform, opacity";
 }
 
 .App-logo-wrapper .letter-2 {
   animation-name: animate-2;
-  will-change: 'transform, opacity';
+  will-change: "transform, opacity";
 }
 
 .App-logo-wrapper .letter-3 {
   animation-name: animate-3;
-  will-change: 'transform, opacity';
+  will-change: "transform, opacity";
 }
 
 .App-logo-wrapper .letter-4 {
   animation-name: animate-4;
-  will-change: 'transform, opacity';
+  will-change: "transform, opacity";
 }
 
 .App-logo-wrapper .letter-5 {
   animation-name: animate-5;
-  will-change: 'transform, opacity';
+  will-change: "transform, opacity";
 }
 
 .App-logo-wrapper .letter-6 {
   animation-name: animate-6;
-  will-change: 'transform, opacity';
+  will-change: "transform, opacity";
 }
 
 .App-logo-wrapper .letter-7 {
   animation-name: animate-7;
-  will-change: 'transform, opacity';
+  will-change: "transform, opacity";
 }
 
 .App-logo-wrapper .letter-8 {
   animation-name: animate-8;
-  will-change: 'transform, opacity';
+  will-change: "transform, opacity";
 }
 
 .App-logo-wrapper .letter-9 {
   animation-name: animate-9;
-  will-change: 'transform, opacity';
+  will-change: "transform, opacity";
 }
 
 .App-logo-wrapper .letter-10 {
   animation-name: animate-10;
-  will-change: 'transform, opacity';
+  will-change: "transform, opacity";
 }
 
 .App-loader-wrapper {
@@ -182,7 +182,21 @@
 }
 .loaded .App-logo-wrapper .letter-1 {
   opacity: 1;
+  animation: none;
   fill: #5320ee;
+}
+
+.loaded .App-logo-wrapper .letter-2,
+.loaded .App-logo-wrapper .letter-3,
+.loaded .App-logo-wrapper .letter-4,
+.loaded .App-logo-wrapper .letter-5,
+.loaded .App-logo-wrapper .letter-6,
+.loaded .App-logo-wrapper .letter-7,
+.loaded .App-logo-wrapper .letter-8,
+.loaded .App-logo-wrapper .letter-9,
+.loaded .App-logo-wrapper .letter-10 {
+  opacity: 0;
+  animation: none;
 }
 
 .loaded .App-loader-wrapper {
@@ -433,7 +447,6 @@
   margin: 0 auto;
 }
 
-
 .tippy-tooltip {
   font-size: 0.8rem !important;
   border-radius: 0px !important;
@@ -448,10 +461,9 @@
   border-bottom-color: #5320ee !important;
 }
 
-.tippy-popper[x-placement^=left] [x-arrow] {
+.tippy-popper[x-placement^="left"] [x-arrow] {
   border-left-color: #5320ee !important;
 }
-
 
 .App .logo-mobile {
   display: none;
@@ -492,11 +504,11 @@
 }
 
 @media (max-width: 576px) {
-  .App .logo-mobile svg{
+  .App .logo-mobile svg {
     margin-left: -20px;
     margin-top: -5px;
   }
   .App-content .content-wrapper {
-      padding-left: 0;
+    padding-left: 0;
   }
 }

@@ -1,0 +1,117 @@
+[
+  {
+    "id": "FAQ.question1Title",
+    "description": "FAQ question 1 title",
+    "defaultMessage": "How can you guarantee the uniqueness of my font?"
+  },
+  {
+    "id": "FAQ.question1Answer",
+    "description": "FAQ question 1 answer",
+    "defaultMessage": "Just like any other software out there, we cannot guarantee that somebody won’t have the exact same idea. (Unless, you’re psychic, in which case we’d love to learn more about mind control.) Tell you what though, you’re more likely to win the lottery than getting the same outcome as another Unique User. The possibilities are virtually endless, especially if you use the “More customization” option to fine-tune your font."
+  },
+  {
+    "id": "FAQ.question2Title",
+    "description": "FAQ question 2 title",
+    "defaultMessage": "Can I re-edit my fonts in Unique?"
+  },
+  {
+    "id": "FAQ.question2Answer",
+    "description": "FAQ question 2 answer",
+    "defaultMessage": "While in the application, you can go back and forth to change your font before you download it. If you choose to save it for later, you can make alterations to it at a later point in time. Once downloaded though, the font cannot be re-imported into Unique."
+  },
+  {
+    "id": "FAQ.question3Title",
+    "description": "FAQ question 3 title",
+    "defaultMessage": "Am I allowed to modify my font after purchase?"
+  },
+  {
+    "id": "FAQ.question3Answer",
+    "description": "FAQ question 3 answer",
+    "defaultMessage": "Yes, you most certainly are! Our fonts are sold under the Creative Commons 0 (CC0) licence. This license makes you the sole owner of the fonts you created, giving you all the rights to edit them as much as you like."
+  },
+  {
+    "id": "FAQ.question4Title",
+    "description": "FAQ question 4 title",
+    "defaultMessage": "Can I save my font, even if I don’t buy it?"
+  },
+  {
+    "id": "FAQ.question4Answer",
+    "description": "FAQ question 4 answer",
+    "defaultMessage": "Yes, as long as you have an account, you can save your project to your Unique library and come back to it later on. Don’t fret, the account is free and it’s just a way to save your projects for a later time."
+  },
+  {
+    "id": "FAQ.question5Title",
+    "description": "FAQ question 5 title",
+    "defaultMessage": "How do I know that my font is “good”?"
+  },
+  {
+    "id": "FAQ.question5Answer",
+    "description": "FAQ question 5 answer",
+    "defaultMessage": "There’s no such thing as a bad Unique font. We remind you when you need to look out for some things, like when your font is becoming a tad too thin or thick etc. In general though, do what feels right and it’ll turn out just fine!"
+  },
+  {
+    "id": "FAQ.question6Title",
+    "description": "FAQ question 6 title",
+    "defaultMessage": "Can I sell Unique fonts?"
+  },
+  {
+    "id": "FAQ.question6Answer",
+    "description": "FAQ question 6 answer",
+    "defaultMessage": "Yes, of course! You can do whatever you’d like with them! Keep them hidden from the world or use them for commercial purposes, all fine with us!"
+  },
+  {
+    "id": "FAQ.question7Title",
+    "description": "FAQ question 7 title",
+    "defaultMessage": "What is a webfont?"
+  },
+  {
+    "id": "FAQ.question7Answer",
+    "description": "FAQ question 7 answer",
+    "defaultMessage": "A webfont is a font especially designed for use in web pages, and is loaded with CSS @ font-face declaration. Basically, all this means is that the user’s browser downloads web fonts and renders text correctly."
+  },
+  {
+    "id": "FAQ.question8Title",
+    "description": "FAQ question 8 title",
+    "defaultMessage": "What is a logotype?"
+  },
+  {
+    "id": "FAQ.question8Answer",
+    "description": "FAQ question 8 answer",
+    "defaultMessage": "You have a logo. You have a type. Logotype! All jokes aside, you see logotypes everywhere around you. Officially, a logotype is a single piece of type (font) that prints a certain word, group of letters or a logo. Take Google or Coca-Cola for example, these are very well-known logotypes."
+  },
+  {
+    "id": "FAQ.question9Title",
+    "description": "FAQ question 9 title",
+    "defaultMessage": "What do I need to look out for when making a logotype?"
+  },
+  {
+    "id": "FAQ.question9Answer",
+    "description": "FAQ question 9 answer",
+    "defaultMessage": "- Make sure your logotype itself is recognizable and does not rely on a color alone. Also, keep in mind what the logotype might look like on a dark background!\r\n        - Make sure that text and fine lines are still legible when the logotype is scaled down to use it for various sizes\r\n        - We love colors, but they can be distracting. Limit your colour palette, if possible."
+  },
+  {
+    "id": "FAQ.question10Title",
+    "description": "FAQ question 10 title",
+    "defaultMessage": "What is hosting and why do I need it?"
+  },
+  {
+    "id": "FAQ.question10Answer",
+    "description": "FAQ question 10 answer",
+    "defaultMessage": "Web hosting, or simply hosting, is necessary in order to get something live on the Internet. If you build a website that serves a custom font, you will need to host it somewhere. That way your visitors can see it displayed when they will come to your website. When you buy web hosting you basically rent server space on a server where your files will be placed."
+  },
+  {
+    "id": "FAQ.question11Title",
+    "description": "FAQ question 11 title",
+    "defaultMessage": "How do I delete my account?"
+  },
+  {
+    "id": "FAQ.question11Answer",
+    "description": "FAQ question 11 answer",
+    "defaultMessage": "We are sad to see you go. Please send us your request at contact@prototypo.io and we will take care of the rest."
+  },
+  {
+    "id": "FAQ.title",
+    "description": "FAQ title",
+    "defaultMessage": "Frequently Asqued Questions"
+  }
+]

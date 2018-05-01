@@ -10,7 +10,7 @@ const ShortcutsHelper = props => (
       : false
     }
     <div className="tooltip-button" onClick={() => { props.toggleTooltips() }}>
-      ?
+      {props.isBlackOnWhite ? 'c' : 'b'}
     </div>
   </div>
 );

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "Banner.beta",
+    "description": "Banner beta message",
+    "defaultMessage": "Say hello to Unique’s beta! Let us know what you think!"
+  },
+  {
+    "id": "Banner.launch",
+    "description": "Banner launch message",
+    "defaultMessage": "We’re on Product Hunt today! 👉"
+  },
+  {
+    "id": "Banner.launch2",
+    "description": "Banner launch message 2",
+    "defaultMessage": "Support us with an upvote!"
+  }
+]

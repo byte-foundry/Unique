@@ -1,0 +1,47 @@
+[
+  {
+    "id": "Cheer.simpleCheer1",
+    "description": "Simple cheer 1",
+    "defaultMessage": "Looking good!"
+  },
+  {
+    "id": "Cheer.simpleCheer2",
+    "description": "Simple cheer 2",
+    "defaultMessage": "Great choice!"
+  },
+  {
+    "id": "Cheer.simpleCheer3",
+    "description": "Simple cheer 3",
+    "defaultMessage": "It's coming together!"
+  },
+  {
+    "id": "Cheer.simpleCheer4",
+    "description": "Simple cheer 4",
+    "defaultMessage": "Looking fabulous!"
+  },
+  {
+    "id": "Cheer.simpleCheer5",
+    "description": "Simple cheer 5",
+    "defaultMessage": "You have this in the bag!"
+  },
+  {
+    "id": "Cheer.simpleCheer6",
+    "description": "Simple cheer 6",
+    "defaultMessage": "#winning!"
+  },
+  {
+    "id": "Cheer.simpleCheer7",
+    "description": "Simple cheer 7",
+    "defaultMessage": "Nice one!"
+  },
+  {
+    "id": "Cheer.simpleCheer8",
+    "description": "Simple cheer 8",
+    "defaultMessage": "You've got this!"
+  },
+  {
+    "id": "Cheer.simpleCheer9",
+    "description": "Simple cheer 9",
+    "defaultMessage": "Looking sharp!"
+  }
+]

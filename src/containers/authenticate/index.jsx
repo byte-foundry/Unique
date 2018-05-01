@@ -1,32 +1,32 @@
 // @flow
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { push } from "react-router-redux";
-import PropTypes from "prop-types";
-import { FormattedMessage } from "react-intl";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import TwitterLogin from "react-twitter-auth";
-import GoogleLogin from "react-google-login";
-import Button from "../../components/button/";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import TwitterLogin from 'react-twitter-auth';
+import GoogleLogin from 'react-google-login';
+import Button from '../../components/button/';
 import {
   TWITTER_REQUEST_TOKEN_URL,
   GOOGLE_CLIENT_ID,
-  FACEBOOK_APP_ID
-} from "../../data/constants";
+  FACEBOOK_APP_ID,
+} from '../../data/constants';
 import {
   loginWithGoogle,
   loginWithFacebook,
   loginWithTwitter,
   loginWithEmail,
-  signupWithEmail
-} from "../../data/user/";
-import { reloadFonts } from "../../data/font/";
-import { ReactComponent as Logo } from "../app/logo.svg";
-import { ReactComponent as Eye } from "./eye.svg";
-import { ReactComponent as Close } from "./close.svg";
-import "./Authenticate.css";
+  signupWithEmail,
+} from '../../data/user/';
+import { reloadFonts } from '../../data/font/';
+import { ReactComponent as Logo } from '../app/logo.svg';
+import { ReactComponent as Eye } from './eye.svg';
+import { ReactComponent as Close } from './close.svg';
+import './Authenticate.css';
 
 class Authenticate extends React.Component {
   constructor(props) {
@@ -38,29 +38,29 @@ class Authenticate extends React.Component {
         mail: false,
         google: false,
         facebook: false,
-        twitter: false
+        twitter: false,
       },
       errors: {
         email: false,
         password: false,
         firstName: false,
         lastName: false,
-        general: false
+        general: false,
       },
       errorMessages: {
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        general: ""
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        general: '',
       },
       formValues: {
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: ""
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
       },
-      shouldShowPassword: false
+      shouldShowPassword: false,
     };
     this.renderSignIn = this.renderSignIn.bind(this);
     this.renderSignUp = this.renderSignUp.bind(this);
@@ -74,11 +74,12 @@ class Authenticate extends React.Component {
     this.loginTwitter = this.loginTwitter.bind(this);
   }
   loginEmailUser() {
-    //todo : loading, errors
+    // todo : loading, errors
+    /*eslint no-useless-escape: 0*/
     const isEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (
-      this.state.formValues.email !== "" &&
-      this.state.formValues.password !== ""
+      this.state.formValues.email !== '' &&
+      this.state.formValues.password !== ''
     ) {
       if (!isEmail.test(this.state.formValues.email)) {
         this.setState({
@@ -87,87 +88,76 @@ class Authenticate extends React.Component {
             password: false,
             firstName: false,
             lastName: false,
-            general: false
+            general: false,
           },
           errorMessages: {
-            email: "invalid",
-            password: "",
-            firstName: "",
-            lastName: "",
-            general: ""
-          }
+            email: 'invalid',
+            password: '',
+            firstName: '',
+            lastName: '',
+            general: '',
+          },
         });
         return;
       }
       if (!this.state.isConnecting) {
-        if (this.props.location.authData && this.props.location.authData.type) {
-          this.props.loginWithEmail(
-            this.state.formValues.email,
-            this.state.formValues.password,
-            this.state.formValues.firstName,
-            this.state.formValues.lastName,
-            this.props.location.authData
-          );
-        } else {
-          this.props.loginWithEmail(
-            this.state.formValues.email,
-            this.state.formValues.password,
-            this.state.formValues.firstName,
-            this.state.formValues.lastName
-          );
-        }
+        this.props.loginWithEmail(
+          this.state.formValues.email,
+          this.state.formValues.password,
+          this.props.graphQLToken,
+        );
         this.setState({
           isConnecting: true,
           serviceConnecting: {
             mail: true,
             google: false,
             facebook: false,
-            twitter: false
+            twitter: false,
           },
           errors: {
             email: false,
             password: false,
             firstName: false,
             lastName: false,
-            general: false
+            general: false,
           },
           errorMessages: {
-            email: "",
-            password: "",
-            firstName: "",
-            lastName: "",
-            general: ""
-          }
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            general: '',
+          },
         });
       }
     } else {
       this.setState({
         errors: {
           email:
-            this.state.formValues.email === "" ||
+            this.state.formValues.email === '' ||
             !isEmail.test(this.state.formValues.email),
-          password: this.state.formValues.password === "",
+          password: this.state.formValues.password === '',
           firstName: false,
           lastName: false,
-          general: false
+          general: false,
         },
         errorMessages: {
-          email: this.state.formValues.email === "" ? "required" : "invalid",
-          password: "required",
-          firstName: "",
-          lastName: "",
-          general: ""
-        }
+          email: this.state.formValues.email === '' ? 'required' : 'invalid',
+          password: 'required',
+          firstName: '',
+          lastName: '',
+          general: '',
+        },
       });
     }
   }
   signupEmailUser() {
-    //todo : loading, errors
+    // todo : loading, errors
     const isEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (
-      this.state.formValues.email !== "" &&
-      this.state.formValues.password !== "" &&
-      this.state.formValues.firstName !== ""
+      this.state.formValues.email !== '' &&
+      this.state.formValues.password !== '' &&
+      this.state.formValues.firstName !== ''
     ) {
       if (!isEmail.test(this.state.formValues.email)) {
         this.setState({
@@ -176,218 +166,185 @@ class Authenticate extends React.Component {
             password: false,
             firstName: false,
             lastName: false,
-            general: false
+            general: false,
           },
           errorMessages: {
-            email: "invalid",
-            password: "",
-            firstName: "",
-            lastName: "",
-            general: ""
-          }
+            email: 'invalid',
+            password: '',
+            firstName: '',
+            lastName: '',
+            general: '',
+          },
         });
         return;
       }
       if (!this.state.isConnecting) {
-        if (this.props.location.authData && this.props.location.authData.type) {
-          this.props.signupWithEmail(
-            this.state.formValues.email,
-            this.state.formValues.password,
-            this.state.formValues.firstName,
-            this.state.formValues.lastName,
-            this.props.location.authData
-          );
-        } else {
-          this.props.signupWithEmail(
-            this.state.formValues.email,
-            this.state.formValues.password,
-            this.state.formValues.firstName,
-            this.state.formValues.lastName
-          );
-        }
+        this.props.signupWithEmail(
+          this.state.formValues.email,
+          this.state.formValues.password,
+          this.state.formValues.firstName,
+          this.state.formValues.lastName,
+          this.props.graphQLToken,
+        );
         this.setState({
           isConnecting: true,
           serviceConnecting: {
             mail: true,
             google: false,
             facebook: false,
-            twitter: false
+            twitter: false,
           },
           errors: {
             email: false,
             password: false,
             firstName: false,
             lastName: false,
-            general: false
+            general: false,
           },
           errorMessages: {
-            email: "",
-            password: "",
-            firstName: "",
-            lastName: "",
-            general: ""
-          }
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            general: '',
+          },
         });
       }
     } else {
       this.setState({
         errors: {
           email:
-            this.state.formValues.email === "" ||
+            this.state.formValues.email === '' ||
             !isEmail.test(this.state.formValues.email),
-          password: this.state.formValues.password === "",
-          firstName: this.state.formValues.firstName === "",
+          password: this.state.formValues.password === '',
+          firstName: this.state.formValues.firstName === '',
           lastName: false,
-          general: false
+          general: false,
         },
         errorMessages: {
-          email: this.state.formValues.email === "" ? "required" : "invalid",
-          password: "required",
-          firstName: "required",
-          lastName: "",
-          general: ""
-        }
+          email: this.state.formValues.email === '' ? 'required' : 'invalid',
+          password: 'required',
+          firstName: 'required',
+          lastName: '',
+          general: '',
+        },
       });
     }
   }
   showPassword() {
-    if (!this.state.shouldShowPassword)
-      this.setState({ shouldShowPassword: true });
+    if (!this.state.shouldShowPassword) { this.setState({ shouldShowPassword: true }); }
   }
   hidePassword() {
-    if (this.state.shouldShowPassword)
-      this.setState({ shouldShowPassword: false });
+    if (this.state.shouldShowPassword) { this.setState({ shouldShowPassword: false }); }
   }
   loginFacebook(response) {
     if (!this.state.isConnecting) {
-      if (
-        this.props.location.authData &&
-        this.props.location.authData.type !== ""
-      ) {
-        this.props.loginWithFacebook(response, this.props.location.authData);
-      } else {
-        this.props.loginWithFacebook(response);
-      }
+      this.props.loginWithFacebook(response, this.props.graphQLToken);
       this.setState({
         isConnecting: true,
         serviceConnecting: {
           mail: false,
           google: false,
           facebook: true,
-          twitter: false
+          twitter: false,
         },
         errors: {
           email: false,
           password: false,
           firstName: false,
           lastName: false,
-          general: false
+          general: false,
         },
         errorMessages: {
-          email: "",
-          password: "",
-          firstName: "",
-          lastName: "",
-          general: ""
-        }
+          email: '',
+          password: '',
+          firstName: '',
+          lastName: '',
+          general: '',
+        },
       });
     }
   }
   loginGoogle(response) {
     if (!this.state.isConnecting) {
-      if (
-        this.props.location.authData &&
-        this.props.location.authData.type !== ""
-      ) {
-        this.props.loginWithGoogle(response, this.props.location.authData);
-        console.log("with authdata");
-      } else {
-        this.props.loginWithGoogle(response);
-      }
+      this.props.loginWithGoogle(response, this.props.graphQLToken);
       this.setState({
         isConnecting: true,
         serviceConnecting: {
           mail: false,
           google: true,
           facebook: false,
-          twitter: false
+          twitter: false,
         },
         errors: {
           email: false,
           password: false,
           firstName: false,
           lastName: false,
-          general: false
+          general: false,
         },
         errorMessages: {
-          email: "",
-          password: "",
-          firstName: "",
-          lastName: "",
-          general: ""
-        }
+          email: '',
+          password: '',
+          firstName: '',
+          lastName: '',
+          general: '',
+        },
       });
     }
   }
   loginTwitter(response) {
     if (!this.state.isConnecting) {
-      if (
-        this.props.location.authData &&
-        this.props.location.authData.type !== ""
-      ) {
-        this.props.loginWithTwitter(response, this.props.location.authData);
-      } else {
-        this.props.loginWithTwitter(response);
-      }
+      this.props.loginWithTwitter(response, this.props.graphQLToken);
       this.setState({
         isConnecting: true,
         serviceConnecting: {
           mail: false,
           google: false,
           facebook: false,
-          twitter: true
+          twitter: true,
         },
         errors: {
           email: false,
           password: false,
           firstName: false,
           lastName: false,
-          general: false
+          general: false,
         },
         errorMessages: {
-          email: "",
-          password: "",
-          firstName: "",
-          lastName: "",
-          general: ""
-        }
+          email: '',
+          password: '',
+          firstName: '',
+          lastName: '',
+          general: '',
+        },
       });
     }
   }
   componentWillReceiveProps(newProps) {
-    if (newProps.authError !== "") {
+    if (newProps.authError !== '') {
       this.setState({
         errors: {
           email: false,
           password: false,
           firstName: false,
           lastName: false,
-          general: true
+          general: true,
         },
         errorMessages: {
-          email: "",
-          password: "",
-          firstName: "",
-          lastName: "",
-          general: newProps.authError
+          email: '',
+          password: '',
+          firstName: '',
+          lastName: '',
+          general: newProps.authError,
         },
         isConnecting: false,
         serviceConnecting: {
           mail: false,
           google: false,
           facebook: false,
-          twitter: false
-        }
+          twitter: false,
+        },
       });
     }
   }
@@ -407,19 +364,19 @@ class Authenticate extends React.Component {
               key="signinEmail"
               placeholder="john.doe@example.com"
               type="email"
-              className={this.state.errors.email ? "isError" : ""}
+              className={this.state.errors.email ? 'isError' : ''}
               value={this.state.formValues.email}
-              onChange={e => {
+              onChange={(e) => {
                 this.setState({
                   formValues: {
                     ...this.state.formValues,
-                    email: e.target.value
-                  }
+                    email: e.target.value,
+                  },
                 });
               }}
             />
             {this.state.errors.email &&
-              this.state.errorMessages.email === "required" && (
+              this.state.errorMessages.email === 'required' && (
                 <p className="error">
                   <FormattedMessage
                     id="Auth.RequiredEmailError"
@@ -429,7 +386,7 @@ class Authenticate extends React.Component {
                 </p>
               )}
             {this.state.errors.email &&
-              this.state.errorMessages.email === "invalid" && (
+              this.state.errorMessages.email === 'invalid' && (
                 <p className="error">
                   <FormattedMessage
                     id="Auth.InvalidEmailError"
@@ -452,15 +409,15 @@ class Authenticate extends React.Component {
             <input
               placeholder="xxxxxxx"
               key="signinPassword"
-              type={this.state.shouldShowPassword ? "text" : "password"}
-              className={this.state.errors.password ? "isError" : ""}
+              type={this.state.shouldShowPassword ? 'text' : 'password'}
+              className={this.state.errors.password ? 'isError' : ''}
               value={this.state.formValues.password}
-              onChange={e => {
+              onChange={(e) => {
                 this.setState({
                   formValues: {
                     ...this.state.formValues,
-                    password: e.target.value
-                  }
+                    password: e.target.value,
+                  },
                 });
               }}
             />
@@ -470,7 +427,7 @@ class Authenticate extends React.Component {
               onMouseUp={this.hidePassword}
             />
             {this.state.errors.password &&
-              this.state.errorMessages.password === "required" && (
+              this.state.errorMessages.password === 'required' && (
                 <p className="error">
                   <FormattedMessage
                     id="Auth.RequiredPasswordError"
@@ -525,19 +482,19 @@ class Authenticate extends React.Component {
               key="signupFirstName"
               type="text"
               placeholder="John"
-              className={this.state.errors.firstName ? "isError" : ""}
+              className={this.state.errors.firstName ? 'isError' : ''}
               value={this.state.formValues.firstName}
-              onChange={e => {
+              onChange={(e) => {
                 this.setState({
                   formValues: {
                     ...this.state.formValues,
-                    firstName: e.target.value
-                  }
+                    firstName: e.target.value,
+                  },
                 });
               }}
             />
             {this.state.errors.firstName &&
-              this.state.errorMessages.firstName === "required" && (
+              this.state.errorMessages.firstName === 'required' && (
                 <p className="error">
                   <FormattedMessage
                     id="Auth.RequiredFirstNameError"
@@ -559,14 +516,14 @@ class Authenticate extends React.Component {
               key="signupLastName"
               type="text"
               placeholder="Doe"
-              className={this.state.errors.lastName ? "isError" : ""}
+              className={this.state.errors.lastName ? 'isError' : ''}
               value={this.state.formValues.lastName}
-              onChange={e => {
+              onChange={(e) => {
                 this.setState({
                   formValues: {
                     ...this.state.formValues,
-                    lastName: e.target.value
-                  }
+                    lastName: e.target.value,
+                  },
                 });
               }}
             />
@@ -585,19 +542,19 @@ class Authenticate extends React.Component {
               key="signupEmail"
               placeholder="john.doe@example.com"
               type="email"
-              className={this.state.errors.email ? "isError" : ""}
+              className={this.state.errors.email ? 'isError' : ''}
               value={this.state.formValues.email}
-              onChange={e => {
+              onChange={(e) => {
                 this.setState({
                   formValues: {
                     ...this.state.formValues,
-                    email: e.target.value
-                  }
+                    email: e.target.value,
+                  },
                 });
               }}
             />
             {this.state.errors.email &&
-              this.state.errorMessages.email === "required" && (
+              this.state.errorMessages.email === 'required' && (
                 <p className="error">
                   <FormattedMessage
                     id="Auth.RequiredEmailError"
@@ -607,7 +564,7 @@ class Authenticate extends React.Component {
                 </p>
               )}
             {this.state.errors.email &&
-              this.state.errorMessages.email === "invalid" && (
+              this.state.errorMessages.email === 'invalid' && (
                 <p className="error">
                   <FormattedMessage
                     id="Auth.InvalidEmailError"
@@ -630,15 +587,15 @@ class Authenticate extends React.Component {
             <input
               key="signupPassword"
               placeholder="xxxxxxx"
-              type={this.state.shouldShowPassword ? "text" : "password"}
-              className={this.state.errors.password ? "isError" : ""}
+              type={this.state.shouldShowPassword ? 'text' : 'password'}
+              className={this.state.errors.password ? 'isError' : ''}
               value={this.state.formValues.password}
-              onChange={e => {
+              onChange={(e) => {
                 this.setState({
                   formValues: {
                     ...this.state.formValues,
-                    password: e.target.value
-                  }
+                    password: e.target.value,
+                  },
                 });
               }}
             />
@@ -649,7 +606,7 @@ class Authenticate extends React.Component {
               onMouseUp={this.hidePassword}
             />
             {this.state.errors.password &&
-              this.state.errorMessages.password === "required" && (
+              this.state.errorMessages.password === 'required' && (
                 <p className="error">
                   <FormattedMessage
                     id="Auth.RequiredPasswordError"
@@ -704,7 +661,7 @@ class Authenticate extends React.Component {
         id="Auth.HappyMessage3"
         defaultMessage="Woo"
         description="Sign in happy word 3"
-      />
+      />,
     ];
     const happyIndex = Math.floor(Math.random() * 3);
     switch (this.props.headerMode) {
@@ -713,8 +670,7 @@ class Authenticate extends React.Component {
           return (
             <div className="header">
               <h2>
-                {this.props.location.authData &&
-                this.props.location.authData.type === "boughtFont" ? (
+                {this.props.projectBought ? (
                   <FormattedMessage
                     id="Auth.SignInHeaderBoughtFont"
                     defaultMessage="Thank you!"
@@ -728,40 +684,37 @@ class Authenticate extends React.Component {
                   />
                 )}
               </h2>
-              {this.props.location.authData &&
-                this.props.location.authData.type === "saveFont" && (
-                  <p>
-                    <FormattedMessage
-                      id="Auth.SaveFontMessage"
-                      defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
-                      description="Sign in header message if the user has saved a font"
-                    />
-                  </p>
+              {this.props.projectId && !this.props.projectBought && (
+              <p>
+                <FormattedMessage
+                  id="Auth.SaveFontMessage"
+                  defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                  description="Sign in header message if the user has saved a font"
+                />
+              </p>
                 )}
-              {this.props.location.authData &&
-                this.props.location.authData.type === "boughtFont" && (
-                  <p>
-                    {happyMessages[happyIndex]}
-                    <FormattedMessage
-                      id="Auth.BoughtFontMessage"
-                      defaultMessage="Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
-                      description="Sign in header message if the user has bought a font"
-                    />
-                  </p>
+              {this.props.projectBought && (
+              <p>
+                {happyMessages[happyIndex]}
+                <FormattedMessage
+                  id="Auth.BoughtFontMessage"
+                  defaultMessage="Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                  description="Sign in header message if the user has bought a font"
+                />
+              </p>
                 )}
             </div>
           );
-        } else {
-          return (
-            <div className="header">
-              <h2>
-                {this.props.location.authData &&
-                this.props.location.authData.type === "boughtFont" ? (
-                  <FormattedMessage
-                    id="Auth.SignInHeaderBoughtFont"
-                    defaultMessage="Thank you!"
-                    description="Sign in header message if font bought"
-                  />
+        }
+        return (
+          <div className="header">
+            <h2>
+              {this.props.projectBought ? (
+                <FormattedMessage
+                  id="Auth.SignInHeaderBoughtFont"
+                  defaultMessage="Thank you!"
+                  description="Sign in header message if font bought"
+                />
                 ) : (
                   <FormattedMessage
                     id="Auth.SignUpHeader"
@@ -769,43 +722,37 @@ class Authenticate extends React.Component {
                     description="Sign up header title"
                   />
                 )}
-              </h2>
-              {this.props.location.authData &&
-                this.props.location.authData.type === "saveFont" && (
-                  <p>
-                    <FormattedMessage
-                      id="Auth.SaveFontMessage"
-                      defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
-                      description="Sign in header message if the user has saved a font"
-                    />
-                  </p>
+            </h2>
+            {this.props.projectId && !this.props.projectBought && (
+            <p>
+              <FormattedMessage
+                id="Auth.SaveFontMessage"
+                defaultMessage="Congratulations for creating your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                description="Sign in header message if the user has saved a font"
+              />
+            </p>
                 )}
-              {this.props.location.authData &&
-                this.props.location.authData.type === "boughtFont" && (
-                  <p>
-                    <FormattedMessage
-                      id="Auth.BoughtFontMessage"
-                      defaultMessage="Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
-                      description="Sign in header message if the user has bought a font"
-                    />
-                  </p>
+            {this.props.projectBought && (
+            <p>
+              <FormattedMessage
+                id="Auth.BoughtFontMessage"
+                defaultMessage="Congratulations for buying your font .... - Log in or create an account to save your font ---- [PlaceHolder] ---"
+                description="Sign in header message if the user has bought a font"
+              />
+            </p>
                 )}
-            </div>
-          );
-        }
-        break;
+          </div>
+        );
     }
   }
   render() {
-    console.log(this.props);
-    console.log(this.state);
     return (
       <div className="Authenticate">
         <div className="container">
           <Close
             className="closeIcon"
             onClick={() => {
-              if (this.props.location.authData.type === "boughtFont") {
+              if (this.props.projectBought === 'boughtFont') {
                 this.props.goToHome();
               } else {
                 this.props.reloadFonts();
@@ -826,7 +773,7 @@ class Authenticate extends React.Component {
                   description="Login page social auth CTA message"
                 />
               </div>
-              <div className="social-buttons">
+              <div className="sso-buttons">
                 <FacebookLogin
                   appId={FACEBOOK_APP_ID}
                   autoLoad={false}
@@ -835,7 +782,7 @@ class Authenticate extends React.Component {
                   render={renderProps => (
                     <Button
                       label="Facebook"
-                      mode="social-facebook"
+                      mode="sso-fa"
                       onClick={!this.state.isConnecting && renderProps.onClick}
                       loading={
                         this.state.isConnecting &&
@@ -850,7 +797,7 @@ class Authenticate extends React.Component {
                   render={renderProps => (
                     <Button
                       label="Twitter"
-                      mode="social-twitter"
+                      mode="sso-tw"
                       onClick={!this.state.isConnecting && renderProps.onClick}
                       loading={
                         this.state.isConnecting &&
@@ -867,7 +814,7 @@ class Authenticate extends React.Component {
                   render={renderProps => (
                     <Button
                       label="Google"
-                      mode="social-google"
+                      mode="sso-go"
                       onClick={!this.state.isConnecting && renderProps.onClick}
                       loading={
                         this.state.isConnecting &&
@@ -878,7 +825,7 @@ class Authenticate extends React.Component {
                 />
               </div>
               <div className="general-error">
-                {this.state.errorMessages.general !== "" && (
+                {this.state.errorMessages.general !== '' && (
                   <FormattedMessage
                     id="Auth.GeneralError"
                     defaultMessage="Woops, something happened"
@@ -912,15 +859,15 @@ class Authenticate extends React.Component {
                                 password: false,
                                 firstName: false,
                                 lastName: false,
-                                general: false
+                                general: false,
                               },
                               errorMessages: {
-                                email: "",
-                                password: "",
-                                firstName: "",
-                                lastName: "",
-                                general: ""
-                              }
+                                email: '',
+                                password: '',
+                                firstName: '',
+                                lastName: '',
+                                general: '',
+                              },
                             });
                           }}
                         />
@@ -952,15 +899,15 @@ class Authenticate extends React.Component {
                                 password: false,
                                 firstName: false,
                                 lastName: false,
-                                general: false
+                                general: false,
                               },
                               errorMessages: {
-                                email: "",
-                                password: "",
-                                firstName: "",
-                                lastName: "",
-                                general: ""
-                              }
+                                email: '',
+                                password: '',
+                                firstName: '',
+                                lastName: '',
+                                general: '',
+                              },
                             });
                           }}
                         />
@@ -978,21 +925,24 @@ class Authenticate extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  authError: state.user.authError
+  authError: state.user.authError,
+  graphQLToken: state.user.graphQLToken,
+  projectBought: state.user.currentProject.bought,
+  projectId: state.user.currentProject.id,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      goToHome: () => push("/app/"),
+      goToHome: () => push('/app/'),
       loginWithGoogle,
       loginWithFacebook,
       loginWithTwitter,
       loginWithEmail,
       signupWithEmail,
-      reloadFonts
+      reloadFonts,
     },
-    dispatch
+    dispatch,
   );
 
 Authenticate.propTypes = {
@@ -1004,13 +954,15 @@ Authenticate.propTypes = {
   loginWithEmail: PropTypes.func.isRequired,
   signupWithEmail: PropTypes.func.isRequired,
   reloadFonts: PropTypes.func.isRequired,
-  authError: PropTypes.string.isRequired
+  authError: PropTypes.string.isRequired,
+  graphQLToken: PropTypes.string,
+  projectBought: PropTypes.bool.isRequired,
+  projectId: PropTypes.string,
 };
 
 Authenticate.defaultProps = {
-  hasBoughtFont: false
+  hasBoughtFont: false,
+  projectBought: false,
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Authenticate)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Authenticate));
