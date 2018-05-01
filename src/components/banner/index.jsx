@@ -23,6 +23,13 @@ class Banner extends React.Component {
             defaultMessage="We’re on Product Hunt today! 👉"
             description="Banner launch message"
           />
+      ),
+      launch2: (
+        <FormattedMessage
+            id="Banner.launch2"
+            defaultMessage="Support us with an upvote!"
+            description="Banner launch message 2"
+          />
       )
     }
   }
@@ -42,7 +49,7 @@ class Banner extends React.Component {
               rel="noopener noreferrer"
               target="_blank"
             >
-              Support us with an upvote!
+              {this.banners.launch2}
             </a>
         </div>
       )
