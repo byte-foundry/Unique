@@ -24,16 +24,9 @@ import {
   storeRecommandations,
 } from '../../data/user';
 import Choice from '../../components/choice/';
-import WordView from '../wordView/';
-import Sliders from '../sliders/';
-import Button from '../../components/button/';
 import Tips from '../../components/tips';
 import Cheers from '../../components/cheers';
 import './StepView.css';
-
-import { ReactComponent as Back } from './back.svg';
-import { ReactComponent as Next } from './next.svg';
-import { ReactComponent as Finish } from './finish.svg';
 
 const isMostSelected = (choices) => {
   let most = choices[0].id;
@@ -157,7 +150,7 @@ class StepView extends React.Component {
       mostSelected: isMostSelected(props.stepValues.choices),
     });
   }
-  handleShortcuts(action, event) {
+  handleShortcuts(action) {
     if (!this.state.isInputFocused) {
       switch (action) {
         case 'CHOICE_PREVIOUS':
@@ -221,7 +214,6 @@ class StepView extends React.Component {
     }
   }
   render() {
-    console.log(this.props);
     return (
       <Shortcuts name="CHOICES" handler={this.handleShortcuts}>
         <div
@@ -237,8 +229,8 @@ class StepView extends React.Component {
             <div className="row justify-content-md-between step-description">
               <div className="col-md-9 col-sm-12">
                 <div className="step-bubbles">
-                  {[...Array(this.props.stepLength)].map((e, i) =>
-                      (this.props.step > i || this.props.choicesMade[i] ? (
+                  {[...Array(this.props.stepLength)].map((el, i) =>
+                      (el && (this.props.step > i || this.props.choicesMade[i]) ? (
                         <Tooltip
                           title={this.props.steps[i].name}
                           position="top"
@@ -258,8 +250,7 @@ class StepView extends React.Component {
                         </Tooltip>
                       ) : (
                         <span
-                          className={`step-bubble
-                        } ${i === this.props.step - 1 ? 'current' : ''}`}
+                          className={`step-bubble ${i === this.props.step - 1 ? 'current' : ''}`}
                           key={`stepbubble-${i}`}
                         />
                       )))}

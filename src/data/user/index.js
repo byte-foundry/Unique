@@ -1,13 +1,9 @@
 import { push } from 'react-router-redux';
 import { request, GraphQLClient } from 'graphql-request';
 import fx from 'money';
-import { setUnstable, setStable } from '../ui';
+import { setStable } from '../ui';
 import {
   addProjectToUser,
-  getPresetExportedCount,
-  updatePresetExportedCount,
-  updateProjectBought,
-  getBoughtProjects,
   authenticateUser,
   authenticateFacebookUser,
   authenticateGoogleUser,
@@ -18,7 +14,7 @@ import {
   updateProject,
   deleteProject,
 } from '../queries';
-import { setFontBought, updateSubset, loadLibrary } from '../font';
+import {  updateSubset, loadLibrary } from '../font';
 import {
   DEFAULT_UI_WORD,
   DEFAULT_UI_GLYPH,
@@ -219,11 +215,7 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
   dispatch,
   getState,
 ) => {
-  console.log('========STORE PROJECT========');
-  console.log('Bought?');
-  console.log(bought);
   const { currentPreset, choicesMade, need } = getState().font;
-  console.log(choicesMade);
   const {
     currentProject: { id: projectId },
     graphqlID,
@@ -237,10 +229,8 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
         filteredCheckoutOptions.push(option.dbName);
       }
     });
-    console.log(filteredCheckoutOptions);
   }
   if (graphqlID) {
-    console.log(`Bearer ${graphQLToken}`);
     const client = new GraphQLClient(GRAPHQL_API, {
       headers: {
         Authorization: `Bearer ${graphQLToken}`,
@@ -252,7 +242,6 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
         if (
           data.user.uniqueProjects.find(project => project.id === projectId)
         ) {
-          console.log('project already found on database. updating it');
           client
             .request(updateProject(
               projectId,
@@ -263,7 +252,6 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
             ))
             .then((res) => {
               const { bought, name, id } = res.updateUniqueProject;
-              console.log(res);
               dispatch({
                 type: STORE_PROJECT,
                 currentProject: {
@@ -278,9 +266,7 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
               }
               dispatch(setStable());
             })
-            .catch(err => console.log(err));
         } else {
-          console.log('project not found, saving it on database');
           client
             .request(addProjectToUser(
               graphqlID,
@@ -292,7 +278,6 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
               filteredCheckoutOptions,
             ))
             .then((res) => {
-              console.log(res);
               const { bought, name, id } = res.createUniqueProject;
               const metadata = {
                 unique_preset: id,
@@ -329,7 +314,6 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
                 });
                 Intercom('trackEvent', 'unique-saved-font', metadata);
               } catch (e) {
-                console.log(e);
               }
               dispatch({
                 type: STORE_PROJECT,
@@ -350,12 +334,10 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
             });
         }
       })
-      .catch(error => console.log(error));
   }
 };
 
 export const deleteUserProject = projectId => (dispatch, getState) => {
-  console.log('========DELETE PROJECT========');
   const { graphQLToken, graphqlID, projects } = getState().user;
   const newProjects = [...projects];
   if (graphQLToken && graphqlID) {
@@ -371,8 +353,7 @@ export const deleteUserProject = projectId => (dispatch, getState) => {
         if (
           data.user.uniqueProjects.find(project => project.id === projectId)
         ) {
-          console.log('project found on database. deleting it');
-          client.request(deleteProject(projectId)).then((res) => {
+          client.request(deleteProject(projectId)).then(() => {
             newProjects.splice(
               newProjects.findIndex(e => (e.id === projectId)),
               1,
@@ -383,10 +364,8 @@ export const deleteUserProject = projectId => (dispatch, getState) => {
             });
           });
         } else {
-          console.log('project not found in user DB');
         }
       })
-      .catch(error => console.log(error));
   }
 };
 
@@ -440,8 +419,6 @@ export const storeRecommandations = (recommandations, currentStep) => (
 };
 
 export const storeExportType = exportType => (dispatch) => {
-  console.log('> Storing export type');
-  console.log(exportType);
   dispatch({
     type: STORE_EXPORT_TYPE,
     exportType,
@@ -494,7 +471,6 @@ export const afterPayment = res => (dispatch, getState) => {
   const { currency } = getState().ui;
   const { data } = res;
   const isPayed = data.paid;
-  const userStripeEmail = data.email;
   dispatch(storeCoupon({}));
   /* global Intercom */
   /* global fbq */
@@ -520,7 +496,6 @@ export const afterPayment = res => (dispatch, getState) => {
 
     Intercom('trackEvent', 'unique-bought-font');
   } catch (e) {
-    console.log(e);
   }
   if (graphQLToken && !anonymous) {
     dispatch(storeProject(name, { bought: isPayed }));
@@ -577,12 +552,11 @@ export const updateCheckoutOptions = (checkoutOptions, fontName) => (
       language: navigator.language,
     });
   } catch (e) {
-    console.log(e);
   }
 };
 
 export const loginWithTwitter = (
-  { oauthVerifier, oauthToken, error },
+  { oauthVerifier, oauthToken },
   token,
 ) => (dispatch) => {
   const client = new GraphQLClient(GRAPHQL_API, {
@@ -595,7 +569,6 @@ export const loginWithTwitter = (
       dispatch(loginToGraphCool(res.authenticateTwitterUser.token));
     })
     .catch((err) => {
-      console.log(err);
       dispatch({
         type: LOGIN_ERROR,
         authError: err,
@@ -615,7 +588,6 @@ export const loginWithFacebook = (response, token) => (dispatch) => {
       dispatch(loginToGraphCool(res.authenticateFacebookUser.token));
     })
     .catch((err) => {
-      console.log(err);
       dispatch({
         type: LOGIN_ERROR,
         authError: err,
@@ -624,7 +596,6 @@ export const loginWithFacebook = (response, token) => (dispatch) => {
 };
 
 export const loginWithGoogle = (response, token) => (dispatch) => {
-  console.log('logging in with google');
   const { accessToken } = response;
   const client = new GraphQLClient(GRAPHQL_API, {
     headers: {
@@ -636,7 +607,6 @@ export const loginWithGoogle = (response, token) => (dispatch) => {
       dispatch(loginToGraphCool(res.authenticateGoogleUser.token));
     })
     .catch((err) => {
-      console.log(err);
       dispatch({
         type: LOGIN_ERROR,
         authError: err,
@@ -655,7 +625,6 @@ export const loginWithEmail = (email, password, token) => (dispatch) => {
       dispatch(loginToGraphCool(res.authenticateEmailUser.token));
     })
     .catch((err) => {
-      console.log(err);
       dispatch({
         type: LOGIN_ERROR,
         authError: err.response.errors[0].functionError,
@@ -676,10 +645,9 @@ export const signupWithEmail = (
     },
   });
   client.request(signupUser(email, password, firstName, lastName))
-    .then((res) => {
+    .then(() => {
       dispatch(loginWithEmail(email, password));
     })
-    .catch(err => console.log(err));
 };
 
 export const anonymousAuth = () => (dispatch) => {
@@ -709,7 +677,6 @@ export const anonymousAuth = () => (dispatch) => {
 export const loginToGraphCool = accessToken => (dispatch, getState) => {
   localStorage.setItem('uniqueGraphcoolToken', accessToken);
   const { bought } = getState().user.currentProject;
-  console.log('=========CONNECTING TO GRAPHCOOL DATABASE============');
   /* global fbq */
   /* global ga */
   try {
@@ -727,7 +694,6 @@ export const loginToGraphCool = accessToken => (dispatch, getState) => {
       eventLabel: bought ? 'bought' : 'save',
     });
   } catch (e) {
-    console.log(e);
   }
   const client = new GraphQLClient(GRAPHQL_API, {
     headers: {
@@ -737,8 +703,6 @@ export const loginToGraphCool = accessToken => (dispatch, getState) => {
   client
     .request(getUserProjects())
     .then((res) => {
-      console.log('> User connected on Prototypo Graphcool');
-      console.log(res);
       dispatch({
         type: CONNECT_TO_GRAPHCOOL,
         email: res.user.email,
@@ -751,8 +715,7 @@ export const loginToGraphCool = accessToken => (dispatch, getState) => {
       Intercom('update', { email: res.user.email });
       dispatch(loadLibrary());
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       dispatch({
         type: CONNECT_TO_GRAPHCOOL,
         email: undefined,

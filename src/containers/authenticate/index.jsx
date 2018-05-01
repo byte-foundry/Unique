@@ -75,6 +75,7 @@ class Authenticate extends React.Component {
   }
   loginEmailUser() {
     // todo : loading, errors
+    /*eslint no-useless-escape: 0*/
     const isEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (
       this.state.formValues.email !== '' &&
@@ -742,13 +743,9 @@ class Authenticate extends React.Component {
                 )}
           </div>
         );
-
-        break;
     }
   }
   render() {
-    console.log(this.props);
-    console.log(this.state);
     return (
       <div className="Authenticate">
         <div className="container">

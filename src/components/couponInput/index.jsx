@@ -1,6 +1,5 @@
 // @flow
 import React from "react";
-import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { FormattedMessage } from "react-intl";
@@ -58,8 +57,7 @@ class CouponInput extends React.Component {
           validCoupon: true
         });
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
         this.props.storeCoupon({});
         this.setState({
           errorCoupon: true,

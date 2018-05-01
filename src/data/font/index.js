@@ -7,15 +7,13 @@ import { request, GraphQLClient } from 'graphql-request';
 import { loadPresets } from '../presets';
 import { setUnstable, setStable } from '../ui';
 import {
-  storeChosenWord,
   updateProjectInfos,
   resetCheckout,
   STORE_PROJECTS,
 } from '../user';
-import { DEFAULT_UI_WORD, GRAPHQL_API } from '../constants';
+import { GRAPHQL_API } from '../constants';
 import {
   storeCreatedFont,
-  deleteCreatedFont,
   createPrototypoFactory,
 } from '../createdFonts';
 import {
@@ -65,8 +63,6 @@ const templates = {
 };
 
 export default (state = initialState, action) => {
-  console.log(action.type);
-  console.log(action);
   switch (action.type) {
     case DEFINE_NEED:
       return {
@@ -154,7 +150,6 @@ export default (state = initialState, action) => {
 };
 
 export const selectFont = (font, step) => (dispatch, getState) => {
-  console.log('==========font/selectFont============');
   /* global Intercom */
   /* global fbq */
   /* global ga */
@@ -176,11 +171,8 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       eventLabel: font.variant.family.name,
     });
   } catch (e) {
-    console.log(e);
   }
   dispatch(resetCheckout());
-  console.log(step);
-  const { chosenWord } = getState().user;
   const { currentParams, choicesMade } = getState().font;
   const selectedFont = { ...font };
   dispatch({
@@ -194,7 +186,6 @@ export const selectFont = (font, step) => (dispatch, getState) => {
   const selectedFontName = `${selectedFont.variant.family.name}${
     selectedFont.variant.name
   }`;
-  console.log(selectedFontName);
 
   //* *********  PREPARE FONT ***********/
 
@@ -203,7 +194,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
   // Sort choices
 
   let maxChoices = 0;
-  selectedFont.steps.forEach((step, index) => {
+  selectedFont.steps.forEach((step) => {
     // Max choices
     if (step.choices.length > maxChoices) {
       maxChoices = step.choices.length;
@@ -344,7 +335,6 @@ export const selectFont = (font, step) => (dispatch, getState) => {
           GRAPHQL_API,
           updateSelectedCount('Preset', font.id, data.Preset.selected + 1),
         ))
-      .catch(error => console.log(error));
 
     // All set, ready to customize
     dispatch({
@@ -374,7 +364,6 @@ export const selectFont = (font, step) => (dispatch, getState) => {
 };
 
 export const defineNeed = need => (dispatch) => {
-  console.log('==========font/defineNeed============');
   dispatch({
     type: DEFINE_NEED,
     need,
@@ -384,14 +373,12 @@ export const defineNeed = need => (dispatch) => {
 };
 
 export const setFontBought = () => (dispatch) => {
-  console.log('==========font/setFontBought============');
   dispatch({
     type: SET_FONT_BOUGHT,
   });
 };
 
 export const updateSubset = () => (dispatch, getState) => {
-  console.log('==========font/updateSubset============');
   const { step } = getState().font;
   if (step) {
     dispatch(updateValues(step));
@@ -400,7 +387,7 @@ export const updateSubset = () => (dispatch, getState) => {
 
 const getCalculatedValues = (choice, choicesMade, currentPreset) => {
   const stepChoices = { ...choice.values };
-  const choiceWithoutCurrentStep = choicesMade.filter((item, i) => item.name !== choice.name);
+  const choiceWithoutCurrentStep = choicesMade.filter((item) => item.name !== choice.name);
 
   const manualChanges = {};
   const baseManualChanges = currentPreset.baseValues.manualChanges || {};
@@ -499,9 +486,6 @@ const getCalculatedValues = (choice, choicesMade, currentPreset) => {
 
 const updateValues = (step, isSpecimen) => (dispatch, getState) => {
   const { chosenWord, chosenGlyph } = getState().user;
-  console.log('========font/updateValues===========');
-  console.log('is Specimen ?');
-  console.log(isSpecimen);
   const {
     choicesFontsName,
     currentPreset,
@@ -520,7 +504,7 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
   // Update choice fonts
   currentPreset.steps[stepToUpdate - 1].choices.forEach((choice, index) => {
     const stepChoices = { ...choice.values };
-    const choiceWithoutCurrentStep = choicesMade.filter((item, i) => stepToUpdate - 1 !== i);
+    const choiceWithoutCurrentStep = choicesMade.filter((item, i) => item && (stepToUpdate - 1 !== i));
 
     const manualChanges = {};
     const baseManualChanges = currentPreset.baseValues.manualChanges || {};
@@ -622,7 +606,6 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
       fonts[choicesFontsName[index]].changeParams(params, subset);
     } else {
       // Error : no choiceFont for this choice
-      console.log('// Error : no choiceFont for this choice');
     }
   });
   // Update slider font
@@ -633,7 +616,6 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
     );
   } else {
     // Error, no slider font
-    console.log('// Error, no slider font');
   }
 
   // If exists, change user font
@@ -651,18 +633,14 @@ const updateValues = (step, isSpecimen) => (dispatch, getState) => {
 };
 
 export const clearFontIsLoading = () => (dispatch) => {
-  console.log('==========font/clearFontIsLoading============');
   dispatch({
     type: CLEAR_IS_LOADING,
   });
 };
 
 export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
-  console.log('==========font/goToStep============');
-  console.log(step);
   const { currentPreset, choicesMade } = getState().font;
   const previousStep = getState().font.step;
-  console.log(currentPreset);
   switch (step) {
     case 0:
       dispatch(loadPresets());
@@ -674,7 +652,6 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
         step: currentPreset.steps.length,
       });
       dispatch(updateValues(undefined, true));
-      console.log('Going to /specimen');
       dispatch(push('/app/specimen'));
 
       /* global Intercom */
@@ -706,7 +683,6 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
           eventLabel: currentPreset.steps[step - 1].name,
         });
       } catch (e) {
-        console.log(e);
       }
 
       break;
@@ -730,7 +706,6 @@ export const selectChoice = (choice, isSpecimen = false) => (
   dispatch,
   getState,
 ) => {
-  console.log('==========font/selectChoice============');
   const { choicesMade, currentPreset } = getState().font;
   let { step, currentParams } = getState().font;
 
@@ -864,7 +839,6 @@ export const selectChoice = (choice, isSpecimen = false) => (
       eventLabel: currentPreset.steps[step - 1].name,
     });
   } catch (e) {
-    console.log(e);
   }
   // Tracking : update selected count
   if (
@@ -882,7 +856,6 @@ export const selectChoice = (choice, isSpecimen = false) => (
             data.allChoices[0].selected + 1,
           ),
         ))
-      .catch(error => console.log(error));
   } else {
     request(GRAPHQL_API, getSelectedCount('Choice', choice.id))
       .then(data =>
@@ -890,7 +863,6 @@ export const selectChoice = (choice, isSpecimen = false) => (
           GRAPHQL_API,
           updateSelectedCount('Choice', choice.id, data.Choice.selected + 1),
         ))
-      .catch(error => console.log(error));
   }
 
   dispatch({
@@ -906,8 +878,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
   }
 };
 
-export const finishEditing = choice => (dispatch, getState) => {
-  console.log('==========font/finishEditing============');
+export const finishEditing = choice => (dispatch) => {
   dispatch(selectChoice(choice, true));
   dispatch(push('/app/specimen'));
 };
@@ -916,9 +887,11 @@ export const getArrayBuffer = (name, familyName, styleName, subset) => (
   dispatch,
   getState,
 ) => {
-  console.log('==========font/getArrayBuffer============');
   const { fontName } = getState().font;
-  const { fonts } = getState().createdFonts;
+  const { fonts } = getState().createdFonts;  
+  dispatch({
+    type: 'font/GET_ARRAY_BUFFER',
+  });
   return new Promise((resolve) => {
     fonts[name || fontName]
       .getArrayBuffer({
@@ -934,21 +907,21 @@ export const getArrayBuffer = (name, familyName, styleName, subset) => (
 };
 
 export const download = (name, filename) => (dispatch, getState) => {
-  console.log('==========font/download============');
   const { fontName } = getState().font;
   const { fonts } = getState().createdFonts;
   fonts[name || fontName].getArrayBuffer({ merge: true }).then((data) => {
     const blob = new Blob([data], { type: 'application/x-font-opentype' });
     saveAs(blob, `${filename}.otf`);
   });
+  dispatch({
+    type: 'font/DOWNLOAD',
+  });
 };
 
 export const createFontVariants = () => (dispatch, getState) => {
   dispatch(setUnstable());
-  console.log('========font/createFontVariants===========');
   const { currentPreset, choicesMade, fontName } = getState().font;
   const { chosenWord } = getState().user;
-  const createdVariants = [];
   const possibleThickness = [
     'LIGHT',
     'MEDIUM',
@@ -966,7 +939,7 @@ export const createFontVariants = () => (dispatch, getState) => {
   // Remove selected thickness
 
   const filteredThicknessVariantPossibilities = thicknessVariantPossibilities.filter(e => e.name !== choicesMade[thicknessChoiceIndex].name);
-  const choicesToKeep = choicesMade.filter((e, index) => index !== thicknessChoiceIndex);
+  const choicesToKeep = choicesMade.filter((e, index) => e && (index !== thicknessChoiceIndex));
   // Create fonts - Apply currentParams then thickness choice values
   const promiseArray = [];
   const possibleVariants = [];
@@ -1010,7 +983,6 @@ export const createFontVariants = () => (dispatch, getState) => {
 };
 
 export const updateSliderFont = newParams => (dispatch, getState) => {
-  console.log('==========font/updateSliderFont============');
   const { chosenWord } = getState().user;
   const { sliderFontName } = getState().font;
   const { fonts } = getState().createdFonts;
@@ -1019,10 +991,12 @@ export const updateSliderFont = newParams => (dispatch, getState) => {
     parseFloat(newParams.value),
     chosenWord,
   );
+  dispatch({
+    type: 'font/UPDATE_SLIDER_FONT',
+  });
 };
 
 export const resetSliderFont = () => (dispatch, getState) => {
-  console.log('==========font/resetSliderFont============');
   const { chosenWord } = getState().user;
   const { currentParams, stepBaseValues, sliderFontName } = getState().font;
   const { fonts } = getState().createdFonts;
@@ -1030,31 +1004,26 @@ export const resetSliderFont = () => (dispatch, getState) => {
     mergeWith({}, stepBaseValues, currentParams),
     chosenWord,
   );
+  dispatch({
+    type: 'font/RESET_SLIDER_FONT',
+  });
 };
 
-export const reloadFonts = (restart = true) => (dispatch, getState) => {
-  console.log('==========font/reloadFonts============');
-  const { currentPreset, step, isLoading } = getState().font;
+export const reloadFonts = () => (dispatch, getState) => {
+  const { currentPreset, step } = getState().font;
   dispatch(selectFont(currentPreset, step));
 };
 
-export const loadProject = (loadedProjectID, loadedProjectName) => (
+export const loadProject = (loadedProjectID) => (
   dispatch,
   getState,
 ) => {
-  console.log('==========font/loadProject============');
   const { currentProject: { id: projectId }, graphQLToken } = getState().user;
-  console.log('> Loading project');
-  console.log(projectId);
-  console.log(loadedProjectID);
-  console.log(loadedProjectName);
   if (projectId === loadedProjectID) {
-    console.log('Same project loaded, going to specimen');
     dispatch(push('/app/specimen'));
   } else {
     dispatch(setUnstable());
     // fetch preset and project infos
-    console.log('===========Loading preset infos ============');
     const client = new GraphQLClient(GRAPHQL_API, {
       headers: {
         Authorization: `Bearer ${graphQLToken}`,
@@ -1063,7 +1032,6 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
     client
       .request(getUserProject(loadedProjectID))
       .then((data) => {
-        console.log(data.UniqueProject);
         const {
           choicesMade, preset, bought, id, name,
         } = data.UniqueProject;
@@ -1076,7 +1044,6 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
             }
           });
         });
-        console.log(currentPreset);
         const step = currentPreset.steps.length;
         const currentParams = {};
         choicesMade.forEach((choice, index) => {
@@ -1100,13 +1067,11 @@ export const loadProject = (loadedProjectID, loadedProjectName) => (
         dispatch(updateProjectInfos(id, name, bought));
         dispatch(reloadFonts(false));
       })
-      .catch(error => console.log(error));
   }
 };
 
 export const loadLibrary = () => (dispatch, getState) => {
-  console.log('==========font/loadLibrary============');
-  const { graphqlID, graphQLToken } = getState().user;
+  const { graphQLToken } = getState().user;
   if (!graphQLToken) {
   } else {
     dispatch(setUnstable());
@@ -1121,7 +1086,7 @@ export const loadLibrary = () => (dispatch, getState) => {
         // Create fonts
         const promiseArray = [];
         dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
-          data.user.uniqueProjects.map((project) => {
+          data.user.uniqueProjects.forEach((project) => {
             promiseArray.push(new Promise((resolve) => {
               prototypoFontFactory
                 .createFont(
@@ -1148,6 +1113,5 @@ export const loadLibrary = () => (dispatch, getState) => {
           dispatch(push('/app/library'));
         });
       })
-      .catch(error => console.log(error));
   }
 };

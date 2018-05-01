@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { request } from 'graphql-request';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
 import Button from '../../components/button';
 import { defineNeed } from '../../data/font';
@@ -223,7 +222,7 @@ class DefineNeed extends React.Component {
                   label={text}
                   className="need-error-presets-button"
                   loading={this.props.fetchingPresets}
-                  onClick={(e) => {
+                  onClick={() => {
                     this.props.setErrorPresets(false);
                     this.props.setFetchingPresets(true);
                     request(GRAPHQL_API, getAllPresets)
@@ -231,7 +230,7 @@ class DefineNeed extends React.Component {
                         this.props.setFetchingPresets(false);
                         this.props.importPresets(data.getAllUniquePresets.presets);
                       })
-                      .catch((error) => {
+                      .catch(() => {
                         this.props.setErrorPresets(true);
                         this.props.setFetchingPresets(false);
                       });

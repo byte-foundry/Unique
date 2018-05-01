@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -392,7 +391,7 @@ class SpecimenView extends React.Component {
               <p className="word">
                 <ContentEditable
                   html={this.props.word}
-                  onChange={(event) => {}}
+                  onChange={() => {}}
                   onBlur={this.onBlur}
                   disableShortcuts={() => {
                     this.setState({ isInputFocused: true });
@@ -622,7 +621,7 @@ const mapDispatchToProps = dispatch =>
       storeProject,
       storeChosenWord,
       goToCheckout: fontName => push({ pathname: '/app/checkout', fontName }),
-      goBack: fontName => push('/app/customize'),
+      goBack: () => push('/app/customize'),
       authenticate: () =>
         push({
           pathname: '/app/auth',

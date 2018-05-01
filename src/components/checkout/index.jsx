@@ -19,18 +19,16 @@ import './Checkout.css';
 import {
   STRIPE_PUBLISHABLE,
   PAYMENT_SERVER_URL,
-  VALIDATION_SERVER_URL,
 } from '../../data/constants';
 
 const fromValueToCent = amount => parseInt(amount.toFixed(2) * 100);
 
 const successPayment = (data, callback) => {
-  console.log(data);
   callback(data);
 };
 
 const errorPayment = (data) => {
-  console.log(data);
+  console.error(data);
 };
 
 const onToken = (
@@ -46,9 +44,7 @@ const onToken = (
   coupon,
   projectId,
 ) => (token) => {
-  console.log('Handling purchase....');
   setUnstable();
-  const fonts = [];
   const fontsSelected = checkoutOptions.filter(e => e.type === 'font' || e.dbName === 'baseFont');
   const promiseArray = [];
   fontsSelected.forEach((fontSelected) => {
@@ -62,7 +58,6 @@ const onToken = (
     ));
   });
   Promise.all(promiseArray).then((buffers) => {
-    console.log(buffers);
     const fonts = buffers.map((buffer, index) => {
       const intArray = new Uint8Array(buffer);
       return {
@@ -96,7 +91,6 @@ const onToken = (
         { responseType: 'arraybuffer' },
       )
       .then((pack) => {
-        console.log(pack);
         const blob = new Blob([new DataView(pack.data)], {
           type: 'application/zip',
         });
@@ -114,18 +108,11 @@ const onToken = (
       .catch((err) => {
         setStable();
         errorPayment(err);
-        console.log(err);
       });
   });
 };
 
-class SkipCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { props } = this;
-    return (
+const SkipCard = props => (
       <FormattedMessage
         id="Sidebar.checkoutAction"
         defaultMessage="Checkout"
@@ -154,8 +141,6 @@ class SkipCard extends React.Component {
         )}
       </FormattedMessage>
     );
-  }
-}
 
 const Checkout = props =>
   (props.skipCard ? (
@@ -199,7 +184,6 @@ const Checkout = props =>
             language: navigator.language,
           });
         } catch (e) {
-          console.log(e);
         }
       }}
       currency={props.currency}

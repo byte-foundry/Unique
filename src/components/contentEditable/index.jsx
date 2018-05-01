@@ -1,5 +1,4 @@
 import React from "react";
-
 let stripNbsp = str => str.replace(/&nbsp;|\u202F|\u00A0/g, " ");
 
 export default class ContentEditable extends React.Component {
@@ -11,7 +10,7 @@ export default class ContentEditable extends React.Component {
 
   render() {
     var { tagName, html, ...props } = this.props;
-
+    /*eslint-disable */
     return React.createElement(
       tagName || "span",
       {
@@ -26,9 +25,10 @@ export default class ContentEditable extends React.Component {
       },
       this.props.children
     );
+    /*eslint-enable */
   }
 
-  onFocus(e) {
+  onFocus() {
     // move caret at the end
     var range, selection;
     if (document.createRange) {
@@ -96,12 +96,12 @@ export default class ContentEditable extends React.Component {
     if (this.props.onChange && html !== this.lastHtml) {
       // Clone event with Object.assign to avoid
       // "Cannot assign to read only property 'target' of object"
-      var evt = Object.assign({}, evt, {
+      var e = Object.assign({}, evt, {
         target: {
           value: html
         }
       });
-      this.props.onChange(evt);
+      this.props.onChange(e);
     }
     this.lastHtml = html;
   }

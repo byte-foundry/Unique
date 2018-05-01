@@ -13,7 +13,6 @@ import { ReactComponent as ProfileIcon } from '../../sidebar/profile.svg';
 import { ReactComponent as One1 } from './number1.svg';
 import { ReactComponent as One2 } from './number2.svg';
 import { ReactComponent as One3 } from './number3.svg';
-import { ReactComponent as One4 } from './number4.svg';
 import { ReactComponent as One5 } from './number5.svg';
 
 import video from './unique_intro.mp4';
@@ -92,9 +91,11 @@ class Landing extends React.Component {
                         mode="hollow"
                         label={text}
                         onClick={() => {
-                          this.props.goToApp();
+                          this.props.goToApp();                          
                           /* global ga */
-                          ga && ga('send', 'event', 'Home', 'Click', 'CTA1');
+                          if (typeof ga === 'function') {
+                            ga('send', 'event', 'Home', 'Click', 'CTA1');
+                          }
                         }}
                       />
                     )}
@@ -154,7 +155,9 @@ class Landing extends React.Component {
                       onClick={() => {
                         this.props.goToApp();
                         /* global ga */
-                        ga && ga('send', 'event', 'Home', 'Click', 'CTA2');
+                        if (typeof ga === 'function') {
+                          ga('send', 'event', 'Home', 'Click', 'CTA2');
+                        }
                       }}
                     />
                   )}
@@ -281,7 +284,9 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga && ga('send', 'event', 'Home', 'Click', 'CTA3');
+                          if (typeof ga === 'function') {
+                            ga('send', 'event', 'Home', 'Click', 'CTA3');
+                          }
                         }}
                       />
                     )}
@@ -325,7 +330,9 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga && ga('send', 'event', 'Home', 'Click', 'CTA4');
+                          if (typeof ga === 'function') {
+                            ga('send', 'event', 'Home', 'Click', 'CTA4');
+                          }
                         }}
                       />
                     )}
@@ -366,7 +373,9 @@ class Landing extends React.Component {
                         onClick={() => {
                           this.props.goToApp();
                           /* global ga */
-                          ga && ga('send', 'event', 'Home', 'Click', 'CTA5');
+                          if (typeof ga === 'function') {
+                            ga('send', 'event', 'Home', 'Click', 'CTA5');
+                          }
                         }}
                       />
                     )}
@@ -416,7 +425,9 @@ class Landing extends React.Component {
                       onClick={() => {
                         this.props.goToApp();
                         /* global ga */
-                        ga && ga('send', 'event', 'Home', 'Click', 'CTA6');
+                        if (typeof ga === 'function') {                          
+                          ga('send', 'event', 'Home', 'Click', 'CTA6');
+                        }
                       }}
                     />
                   )}

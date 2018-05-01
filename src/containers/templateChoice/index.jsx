@@ -13,9 +13,6 @@ import Template from "../../components/template/";
 
 import { selectFont } from "../../data/font";
 
-import { ReactComponent as Back } from "../stepView/back.svg";
-import { ReactComponent as Next } from "../stepView/next.svg";
-
 const isMostSelected = (presets, font) => {
   let most = presets[0].id;
   let value = 0;
@@ -41,7 +38,7 @@ class TemplateChoice extends React.Component {
     window.scrollTo(0, 0);
     unorphan("h1, h2, h3, p, span");
   }
-  handleShortcuts(action, event) {
+  handleShortcuts(action) {
     switch (action) {
       case "CHOICE_PREVIOUS":
         if (this.state.templateIndex !== -1) {

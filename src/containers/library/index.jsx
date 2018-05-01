@@ -34,8 +34,6 @@ class Library extends React.Component {
     });
   }
   render() {
-    console.log('Library render');
-    console.log(this.props.projects);
     return (
       <div className="Library">
         <div className="container">

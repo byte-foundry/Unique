@@ -1,10 +1,8 @@
 // @flow
 import React from "react";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { push } from "react-router-redux";
-import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
 import { loadLibrary } from "../../../data/font";
 import { ReactComponent as Logo } from "../../app/logo.svg";
@@ -12,9 +10,6 @@ import { ReactComponent as Profile } from "../../sidebar/profile.svg";
 import "./TOS.css";
 
 class TOS extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     window.scrollTo(0, 0);
   }

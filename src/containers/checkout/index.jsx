@@ -6,12 +6,9 @@ import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import Masonry from '../../components/masonry';
 import { updateCheckoutOptions } from '../../data/user';
 import { createFontVariants } from '../../data/font';
 import { ReactComponent as OtfLogo } from './otf.svg';
-import { ReactComponent as SpecimenLogo } from './specimen.svg';
-import { ReactComponent as Back } from '../stepView/back.svg';
 
 import './Checkout.css';
 
@@ -112,7 +109,6 @@ class Checkout extends React.Component {
     this.setState({ selectedOptions: filteredSelectedOption });
   }
   render() {
-    console.log(this.props);
     return (
       <div className="Checkout">
         <div className="container">

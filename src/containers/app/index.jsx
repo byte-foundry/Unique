@@ -41,7 +41,6 @@ import Sidebar from '../sidebar/';
 import Authenticate from '../authenticate/';
 import Page404 from '../404/';
 
-let interval;
 
 class App extends React.Component {
   /* global Intercom */
@@ -53,7 +52,7 @@ class App extends React.Component {
         props.setFetchingPresets(false);
         props.importPresets(data.getAllUniquePresets.presets);
       })
-      .catch((error) => {
+      .catch(() => {
         props.setErrorPresets(true);
         props.setFetchingPresets(false);
       });
@@ -62,7 +61,6 @@ class App extends React.Component {
     }
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.shortcutManager = new ShortcutManager(keymap);
-    console.log(props);
     if (!props.isPrototypoLoaded && !props.isPrototypoLoading) {
       props.createPrototypoFactory();
     }
@@ -87,7 +85,6 @@ class App extends React.Component {
         this.props.pathname === '/app/specimen') &&
       !(typeof this.props.selectedFontLoaded === 'object')
     ) {
-      console.log('Selected font but font not loaded');
       return true;
     }
     return this.props.selectedFont !== '';
@@ -97,10 +94,8 @@ class App extends React.Component {
       this.props.hasPayed === true &&
       !(typeof this.props.selectedFontLoaded === 'object')
     ) {
-      console.log('Payment successful but font not loaded');
       return true;
     }
-    console.log(`Payment: ${this.props.hasPayed === true}`);
     return this.props.hasPayed === true;
   }
   hasMailRegistered() {
@@ -108,40 +103,30 @@ class App extends React.Component {
       this.props.userEmail !== '' &&
       !(typeof this.props.selectedFontLoaded === 'object')
     ) {
-      console.log('Mail registered but font not loaded');
       return true;
     }
-    console.log(`Mail registered: ${this.props.userEmail !== ''}`);
     return this.props.userEmail !== '';
   }
   isLoggedIn() {
     return this.props.userId !== '';
   }
-  handleAuthentication(nextState, replace) {
+  handleAuthentication(nextState) {
     if (/access_token|id_token|error/.test(nextState.location.hash)) {
       this.auth.handleAuthentication();
     }
   }
   hasSelectedNeed() {
-    console.log('=========HAS SELECTED NEED ============');
-    console.log(this.props.hasPresetsLoaded);
-    console.log(this.props.need);
-    console.log(this.props.pathname);
-    console.log('========================================');
     if (
       this.props.need !== '' &&
       this.props.pathname === '/app/select' &&
       !this.props.hasPresetsLoaded
     ) {
-      console.log('Has selected need but do not have presets loaded');
       this.props.reloadPresets();
       return true;
     }
-    console.log(`Need selected: ${this.props.need !== ''}`);
     return this.props.need !== '';
   }
   render() {
-    console.log(this.props.location.pathname);
     return (
       <main className={`App ${this.props.isLoading ? 'loading' : 'loaded'}`}>
         <Banner />
@@ -275,9 +260,7 @@ App.propTypes = {
   selectedFontLoaded: PropTypes.shape({
     fontName: PropTypes.string.isRequired,
   }),
-  hasPresetsLoaded: PropTypes.shape({
-    fontName: PropTypes.string.isRequired,
-  }),
+  hasPresetsLoaded: PropTypes.bool.isRequired,
   pathname: PropTypes.string.isRequired,
   need: PropTypes.string.isRequired,
   reloadPresets: PropTypes.func.isRequired,

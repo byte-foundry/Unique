@@ -305,7 +305,7 @@ mutation {
 }
 `;
 
-export const getUserProjects = graphQLID => `
+export const getUserProjects = () => `
     query {
         user
         {

@@ -44,7 +44,6 @@ export default (state = initialState, action) => {
 
 export const storeCreatedFont = (createdFont, fontName) => (dispatch, getState) => {
   const { fonts } = getState().createdFonts;
-  console.log(`> Created ${fontName}`);
   dispatch({
     type: STORE_CREATED_FONT,
     fonts: {
@@ -56,7 +55,6 @@ export const storeCreatedFont = (createdFont, fontName) => (dispatch, getState) 
 
 export const deleteCreatedFont = fontName => (dispatch, getState) => {
   const { fonts } = getState().createdFonts;
-  console.log(`> Deleted ${fontName}`);
   delete fonts[fontName];
   dispatch({
     type: DELETE_CREATED_FONT,
@@ -73,17 +71,13 @@ export const createPrototypoFactory = () => (dispatch, getState) => {
   } = getState().createdFonts;
 
   if (isPrototypoLoaded) {
-    console.log('> Prototypo factory already loaded');
     return new Promise(resolve => resolve(prototypoFontFactory));
   } else if (isPrototypoLoading) {
-    console.log('> Prototypo factory already creating, please wait....');
     return prototypoLoadingPromise;
   }
-  console.log('> Creating Prototypo factory....');
   const createdPrototypoLoadingPromise = new Promise((resolve) => {
     const createdPrototypoFontFactory = new Ptypo('b1f4fb23-7784-456e-840b-f37f5a647b1c');
     createdPrototypoFontFactory.init().then(() => {
-      console.log('> Prototypo factory created !');
       dispatch({
         type: SET_PROTOTYPO_LOADED,
         prototypoFontFactory: createdPrototypoFontFactory,

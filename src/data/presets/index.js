@@ -57,11 +57,9 @@ export default (state = initialState, action) => {
 };
 
 export const importPresets = presets => (dispatch) => {
-  console.log('-- ImportPresets');
   dispatch({
     type: IMPORT_PRESETS_REQUESTED,
   });
-  console.log(presets);
   dispatch({
     type: IMPORT_PRESETS,
     importedPresets: presets,
@@ -69,7 +67,6 @@ export const importPresets = presets => (dispatch) => {
 };
 
 export const loadPresets = (reloading = false) => (dispatch, getState) => {
-  console.log('========LOAD PRESETS=======');
   if (reloading) {
     dispatch(setUnstable());
   }
@@ -79,7 +76,6 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
   dispatch({
     type: LOAD_PRESETS_REQUESTED,
   });
-  console.log(importedPresets);
   const promiseArray = [];
   const loadedPresetsName = [];
   let filteredPresets = importedPresets.filter(preset => (need === 'dunno') || (preset.needs.findIndex(e => e === need) !== -1));
@@ -87,8 +83,6 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
     if (preset.variant && preset.variant.family) {
       promiseArray.push(new Promise((resolve) => {
         dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
-          console.log('--Creating font--');
-          console.log(preset);
           prototypoFontFactory
             .createFont(
               `${preset.variant.family.name}${preset.variant.name}`,
@@ -111,7 +105,6 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
     }
   });
   Promise.all(promiseArray).then(() => {
-    console.log('> All presets loaded');
     dispatch({
       type: LOAD_PRESETS,
       loadedPresetsName,
@@ -121,7 +114,6 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
     dispatch(push('/app/select'));
     dispatch(setStable());
   });
-  console.log('======END LOAD PRESETS=======');
 };
 
 export const reloadPresets = () => (dispatch) => {

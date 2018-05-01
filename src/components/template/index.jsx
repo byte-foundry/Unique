@@ -1,7 +1,6 @@
 // @flow
 import React from "react";
 import PropTypes from "prop-types";
-import { FormattedMessage } from "react-intl";
 import "./Template.css";
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {

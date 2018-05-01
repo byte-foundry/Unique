@@ -1,10 +1,8 @@
 // @flow
 import React from "react";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { push } from "react-router-redux";
-import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
 import { loadLibrary } from "../../../data/font";
 import { ReactComponent as Logo } from "../../app/logo.svg";
