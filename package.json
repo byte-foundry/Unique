@@ -30,6 +30,7 @@
     "react-router-transition": "^0.1.1",
     "react-shortcuts": "^2.0.0",
     "react-stripe-checkout": "^2.6.3",
+    "react-tap-event-plugin": "2.0.1",
     "react-tippy": "^1.2.2",
     "react-twitter-auth": "YoruNoHikage/react-twitter-auth",
     "reactcss": "^1.2.3",
