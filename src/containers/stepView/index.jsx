@@ -229,8 +229,10 @@ class StepView extends React.Component {
             <div className="row justify-content-md-between step-description">
               <div className="col-md-9 col-sm-12">
                 <div className="step-bubbles">
-                  {[...Array(this.props.stepLength)].map((el, i) =>
-                      (el && (this.props.step > i || this.props.choicesMade[i]) ? (
+                  { /*eslint-disable */
+                    [...Array(this.props.stepLength)].map((el, i) =>
+                      /*eslint-enable */
+                      (this.props.step > i || this.props.choicesMade[i] ? (
                         <Tooltip
                           title={this.props.steps[i].name}
                           position="top"
@@ -397,6 +399,7 @@ class StepView extends React.Component {
                             className={`${
                               this.props.isGlyphMode ? 'col-sm-4' : 'col-sm-12'
                             }`}
+                            key={`choice${choice.id}wrapper`}
                           >
                             <Choice
                               choice={choice}
@@ -492,7 +495,7 @@ StepView.propTypes = {
   fontSize: PropTypes.number.isRequired,
   goToStep: PropTypes.func.isRequired,
   need: PropTypes.string.isRequired,
-  storeRecommandations: PropTypes.string.isRequired,
+  storeRecommandations: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);

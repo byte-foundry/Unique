@@ -844,7 +844,9 @@ export const selectChoice = (choice, isSpecimen = false) => (
   if (
     choice.name === 'Custom' ||
     choice.name === 'No choice' ||
-    choice.name === 'Default'
+    choice.name === 'Default' ||
+    choice.name === 'Normal' ||
+    choice.id === 'defaultThickness'
   ) {
     request(GRAPHQL_API, getSpecialChoiceSelectedCount(choice.name))
       .then(data =>
@@ -861,7 +863,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
       .then(data =>
         request(
           GRAPHQL_API,
-          updateSelectedCount('Choice', choice.id, data.Choice.selected + 1),
+          updateSelectedCount('Choice', choice.id, data.Choice ? data.Choice.selected + 1 : 1),
         ))
   }
 

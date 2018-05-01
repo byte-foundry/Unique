@@ -148,7 +148,7 @@ class TemplateChoice extends React.Component {
                 leaveAnimation="none"
               >
                 {this.props.presets.map((font, index) => (
-                  <div className="col-sm-9 col-md-10 col-lg-6">
+                  <div className="col-sm-9 col-md-10 col-lg-6" key={`Template${font.variant.family.name}${font.variant.name}`}>
                     <Template
                       font={font}
                       onClick={() => this.setState({ templateIndex: index })}
@@ -168,7 +168,7 @@ class TemplateChoice extends React.Component {
                       text={this.props.chosenWord}
                       mostSelected={isMostSelected(this.props.presets, font)}
                       isLoading={this.props.isLoading}
-                      index={index + 1}
+                      index={index + 1}                      
                     />
                   </div>
                 ))}
@@ -197,12 +197,6 @@ TemplateChoice.propTypes = {
   selectFont: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   redirectToHome: PropTypes.func.isRequired,
-  presets: PropTypes.arrayOf(
-    PropTypes.shape({
-      preset: PropTypes.string.isRequired,
-      variant: PropTypes.string.isRequired
-    })
-  ).isRequired,
   chosenWord: PropTypes.string
 };
 

@@ -40,7 +40,9 @@ export default class ContentEditable extends React.Component {
       selection.removeAllRanges(); //remove any selections already made
       selection.addRange(range); //make the range you have just created the visible selection
     }
-    this.props.disableShortcuts();
+    if (this.props.disableShortcuts) {
+      this.props.disableShortcuts();
+    }
   }
 
   shouldComponentUpdate(nextProps) {

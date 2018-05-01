@@ -499,7 +499,7 @@ class SpecimenView extends React.Component {
                   <div className="sub-set-characters-wrap">
                     <div className="sub-set-characters">
                       {uppercase.map(glyph => (
-                        <div className="sub-set-character">
+                        <div key={`uppercase${glyph}`} className="sub-set-character">
                           <div className="glyph-small">{glyph}</div>
                           <div className="glyph-big">{glyph}</div>
                         </div>
@@ -511,7 +511,7 @@ class SpecimenView extends React.Component {
                   <div className="sub-set-characters-wrap">
                     <div className="sub-set-characters">
                       {lowercase.map(glyph => (
-                        <div className="sub-set-character">
+                        <div key={`lowercase${glyph}`} className="sub-set-character">
                           <div className="glyph-small">{glyph}</div>
                           <div className="glyph-big">{glyph}</div>
                         </div>
@@ -523,7 +523,7 @@ class SpecimenView extends React.Component {
                   <div className="sub-set-characters-wrap">
                     <div className="sub-set-characters">
                       {numerals.map(glyph => (
-                        <div className="sub-set-character">
+                        <div key={`numerals${glyph}`} className="sub-set-character">
                           <div className="glyph-small">{glyph}</div>
                           <div className="glyph-big">{glyph}</div>
                         </div>
@@ -535,7 +535,7 @@ class SpecimenView extends React.Component {
                   <div className="sub-set-characters-wrap">
                     <div className="sub-set-characters">
                       {symbols.map(glyph => (
-                        <div className="sub-set-character">
+                        <div key={`symbols${glyph}`} className="sub-set-character">
                           <div className="glyph-small">{glyph}</div>
                           <div className="glyph-big">{glyph}</div>
                         </div>
@@ -547,7 +547,7 @@ class SpecimenView extends React.Component {
                   <div className="sub-set-characters-wrap">
                     <div className="sub-set-characters">
                       {diacritics.map(glyph => (
-                        <div className="sub-set-character">
+                        <div key={`diacritics${glyph}`} className="sub-set-character">
                           <div className="glyph-small">{glyph}</div>
                           <div className="glyph-big">{glyph}</div>
                         </div>
@@ -641,10 +641,6 @@ SpecimenView.propTypes = {
   email: PropTypes.string,
   need: PropTypes.string.isRequired,
   word: PropTypes.string.isRequired,
-  auth: PropTypes.shape({
-    isAuthenticated: PropTypes.func.isRequired,
-    login: PropTypes.func.isRequired,
-  }).isRequired,
   projectName: PropTypes.string,
   goToCheckout: PropTypes.func.isRequired,
   goToLibrary: PropTypes.func.isRequired,

@@ -50,10 +50,6 @@ class Template extends React.Component {
 }
 
 Template.propTypes = {
-  font: PropTypes.shape({
-    preset: PropTypes.string.isRequired,
-    variant: PropTypes.string.isRequired
-  }).isRequired,
   onClick: PropTypes.func.isRequired,
   onDoubleClick: PropTypes.func.isRequired,
   text: PropTypes.string,

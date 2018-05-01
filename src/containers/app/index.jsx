@@ -146,12 +146,12 @@ class App extends React.Component {
         <div
           className={`App-content container-fluid ${
             this.props.isBlackOnWhite ? '' : 'whiteOnBlack'
-          }`}
+            }`}
         >
           <div
             className={`row logo-mobile ${
               this.props.location.pathname === '/app/auth' ? 'auth' : ''
-            }`}
+              }`}
           >
             <div className="col-sm-12">
               <Logo
@@ -212,12 +212,12 @@ class App extends React.Component {
                     this.props.location.pathname !== '/app/checkout'
                       ? '2'
                       : '12 col-md-12'
-                  } col-lg-2 ${
+                    } col-lg-2 ${
                     this.props.isBlackOnWhite ||
-                    this.props.location.pathname !== '/app/customize'
+                      this.props.location.pathname !== '/app/customize'
                       ? ''
                       : 'whiteOnBlack'
-                  }`}
+                    }`}
                 >
                   <Sidebar
                     pathName={this.props.location.pathname}
@@ -313,7 +313,7 @@ const mapStateToProps = state => ({
   hasPayed: state.user.hasPayed,
   need: state.font.need,
   hasPresetsLoaded:
-    state.createdFonts.fonts[state.presets.loadedPresetsName[0]],
+    state.createdFonts.fonts[state.presets.loadedPresetsName[0]] && Object.keys(state.createdFonts.fonts[state.presets.loadedPresetsName[0]]).length > 0,
   isLoading: state.ui.unstable || state.createdFonts.isPrototypoLoading,
   shouldLogout: state.user.shouldLogout,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
