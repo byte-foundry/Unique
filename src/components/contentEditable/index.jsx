@@ -104,6 +104,9 @@ export default class ContentEditable extends React.Component {
         }
       });
       this.props.onChange(e);
+      if (this.props.disableShortcuts) {
+        this.props.disableShortcuts();
+      }
     }
     this.lastHtml = html;
   }
