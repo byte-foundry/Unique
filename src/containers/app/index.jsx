@@ -1,47 +1,46 @@
 // @flow
-import React from "react";
-import PropTypes from "prop-types";
-import { Switch, Route, withRouter } from "react-router-dom";
-import { push } from "react-router-redux";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { request } from "graphql-request";
-import { ShortcutManager } from "react-shortcuts";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import { push } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { request } from 'graphql-request';
+import { ShortcutManager } from 'react-shortcuts';
 
-import keymap from "../../data/keymap";
-import { createPrototypoFactory } from "../../data/createdFonts";
-import { importPresets, reloadPresets } from "../../data/presets";
-import { reloadFonts } from "../../data/font";
+import keymap from '../../data/keymap';
+import { createPrototypoFactory } from '../../data/createdFonts';
+import { importPresets, reloadPresets } from '../../data/presets';
+import { reloadFonts } from '../../data/font';
 import {
   logout,
   switchBlackOnWhite,
   switchGlyphMode,
-  changeFontSize
-} from "../../data/user";
-import { setLocale, toggleTooltips, getCurrencyRates, setErrorPresets, setFetchingPresets } from "../../data/ui";
-import { GRAPHQL_API } from "../../data/constants";
-import { getAllPresets } from "../../data/queries";
-import "./bootstrap-reboot.css";
-import "./bootstrap-grid.css";
-import "./App.css";
-import { ReactComponent as Logo } from "./logo.svg";
+  changeFontSize,
+} from '../../data/user';
+import { setLocale, toggleTooltips, getCurrencyRates, setErrorPresets, setFetchingPresets } from '../../data/ui';
+import { GRAPHQL_API } from '../../data/constants';
+import { getAllPresets } from '../../data/queries';
+import './bootstrap-reboot.css';
+import './bootstrap-grid.css';
+import './App.css';
+import { ReactComponent as Logo } from './logo.svg';
 
-import ProtectedRoute from "../../components/protectedRoute/";
-import Footer from "../../components/footer/";
-import Banner from "../../components/banner/";
+import ProtectedRoute from '../../components/protectedRoute/';
+import Footer from '../../components/footer/';
+import Banner from '../../components/banner/';
 
-import DefineNeed from "../defineNeed/";
-import TemplateChoice from "../templateChoice/";
-import SpecimenView from "../specimenView/";
-import Checkout from "../checkout/";
-import WelcomeBack from "../welcomeBack/";
-import Library from "../library/";
-import StepView from "../stepView/";
-import Sidebar from "../sidebar/";
-import Authenticate from "../authenticate/";
+import DefineNeed from '../defineNeed/';
+import TemplateChoice from '../templateChoice/';
+import SpecimenView from '../specimenView/';
+import Checkout from '../checkout/';
+import WelcomeBack from '../welcomeBack/';
+import Library from '../library/';
+import StepView from '../stepView/';
+import Sidebar from '../sidebar/';
+import Authenticate from '../authenticate/';
 import Page404 from '../404/';
 
-let interval;
 
 class App extends React.Component {
   /* global Intercom */
@@ -49,26 +48,25 @@ class App extends React.Component {
     super(props);
     props.setFetchingPresets(true);
     request(GRAPHQL_API, getAllPresets)
-      .then(data => {
+      .then((data) => {
         props.setFetchingPresets(false);
         props.importPresets(data.getAllUniquePresets.presets);
       })
-      .catch(error => {;
-        props.setErrorPresets(true)
+      .catch(() => {
+        props.setErrorPresets(true);
         props.setFetchingPresets(false);
       });
-    if (props.userEmail !== "") {
-      Intercom("update", { email: props.userEmail });
+    if (props.userEmail !== '') {
+      Intercom('update', { email: props.userEmail });
     }
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.shortcutManager = new ShortcutManager(keymap);
-    console.log(props);
     if (!props.isPrototypoLoaded && !props.isPrototypoLoading) {
       props.createPrototypoFactory();
     }
     props.getCurrencyRates();
     this.state = {
-      isLanguageMenuOpen: false
+      isLanguageMenuOpen: false,
     };
   }
   getChildContext() {
@@ -76,81 +74,68 @@ class App extends React.Component {
   }
   componentWillReceiveProps(newProps) {
     if (newProps.shouldLogout) this.props.logout();
-    if (newProps.pathname !== "/app/customize" && !newProps.isBlackOnWhite) {
+    if (newProps.pathname !== '/app/customize' && !newProps.isBlackOnWhite) {
       newProps.switchBlackOnWhite();
     }
   }
   hasSelectedFont() {
     if (
-      this.props.selectedFont !== "" &&
-      (this.props.pathname === "/app/customize" ||
-        this.props.pathname === "/app/specimen") &&
-      !(typeof this.props.selectedFontLoaded === "object")
+      this.props.selectedFont !== '' &&
+      (this.props.pathname === '/app/customize' ||
+        this.props.pathname === '/app/specimen') &&
+      !(typeof this.props.selectedFontLoaded === 'object')
     ) {
-      console.log("Selected font but font not loaded");
       return true;
     }
-    return this.props.selectedFont !== "";
+    return this.props.selectedFont !== '';
   }
   hasSuccessfulPayment() {
     if (
       this.props.hasPayed === true &&
-      !(typeof this.props.selectedFontLoaded === "object")
+      !(typeof this.props.selectedFontLoaded === 'object')
     ) {
-      console.log("Payment successful but font not loaded");
       return true;
     }
-    console.log(`Payment: ${this.props.hasPayed === true}`);
     return this.props.hasPayed === true;
   }
   hasMailRegistered() {
     if (
-      this.props.userEmail !== "" &&
-      !(typeof this.props.selectedFontLoaded === "object")
+      this.props.userEmail !== '' &&
+      !(typeof this.props.selectedFontLoaded === 'object')
     ) {
-      console.log("Mail registered but font not loaded");
       return true;
     }
-    console.log(`Mail registered: ${this.props.userEmail !== ""}`);
-    return this.props.userEmail !== "";
+    return this.props.userEmail !== '';
   }
   isLoggedIn() {
-    return this.props.userId !== "";
+    return this.props.userId !== '';
   }
-  handleAuthentication(nextState, replace) {
+  handleAuthentication(nextState) {
     if (/access_token|id_token|error/.test(nextState.location.hash)) {
       this.auth.handleAuthentication();
     }
   }
   hasSelectedNeed() {
-    console.log("=========HAS SELECTED NEED ============");
-    console.log(this.props.hasPresetsLoaded);
-    console.log(this.props.need);
-    console.log(this.props.pathname);
-    console.log("========================================");
     if (
-      this.props.need !== "" &&
-      this.props.pathname === "/app/select" &&
+      this.props.need !== '' &&
+      this.props.pathname === '/app/select' &&
       !this.props.hasPresetsLoaded
     ) {
-      console.log("Has selected need but do not have presets loaded");
       this.props.reloadPresets();
       return true;
     }
-    console.log(`Need selected: ${this.props.need !== ""}`);
-    return this.props.need !== "";
+    return this.props.need !== '';
   }
   render() {
-    console.log(this.props.location.pathname);
     return (
-      <main className={`App ${this.props.isLoading ? "loading" : "loaded"}`}>
+      <main className={`App ${this.props.isLoading ? 'loading' : 'loaded'}`}>
         <Banner />
-        {this.props.location.pathname !== "/app/auth" && (
+        {this.props.location.pathname !== '/app/auth' && (
           <header className="App-header">
             <h1 className="App-logo-wrapper">
               <Logo
                 onClick={() => {
-                  this.props.location.pathname === "/app"
+                  this.props.location.pathname === '/app'
                     ? this.props.goToLanding()
                     : this.props.goToHome();
                 }}
@@ -160,18 +145,18 @@ class App extends React.Component {
         )}
         <div
           className={`App-content container-fluid ${
-            this.props.isBlackOnWhite ? "" : "whiteOnBlack"
-          }`}
+            this.props.isBlackOnWhite ? '' : 'whiteOnBlack'
+            }`}
         >
           <div
             className={`row logo-mobile ${
-              this.props.location.pathname === "/app/auth" ? "auth" : ""
-            }`}
+              this.props.location.pathname === '/app/auth' ? 'auth' : ''
+              }`}
           >
             <div className="col-sm-12">
               <Logo
                 onClick={() => {
-                  this.props.location.pathname === "/app"
+                  this.props.location.pathname === '/app'
                     ? this.props.goToLanding()
                     : this.props.goToHome();
                 }}
@@ -179,7 +164,7 @@ class App extends React.Component {
             </div>
           </div>
           <div className="row content-wrapper">
-            <div className={`left col-sm-12`}>
+            <div className="left col-sm-12">
               <Switch>
                 <Route
                   exact
@@ -221,26 +206,26 @@ class App extends React.Component {
                 />
                 <Route component={Page404} />
               </Switch>
-              {this.props.location.pathname !== "/app/auth" && (
+              {this.props.location.pathname !== '/app/auth' && (
                 <div
                   className={`right col-sm-${
-                    this.props.location.pathname !== "/app/checkout"
-                      ? "2"
-                      : "12 col-md-12"
-                  } col-lg-2 ${
+                    this.props.location.pathname !== '/app/checkout'
+                      ? '2'
+                      : '12 col-md-12'
+                    } col-lg-2 ${
                     this.props.isBlackOnWhite ||
-                    this.props.location.pathname !== "/app/customize"
-                      ? ""
-                      : "whiteOnBlack"
-                  }`}
+                      this.props.location.pathname !== '/app/customize'
+                      ? ''
+                      : 'whiteOnBlack'
+                    }`}
                 >
                   <Sidebar
                     pathName={this.props.location.pathname}
                     isAuthenticated={this.props.isAuthenticated}
                     mode={
-                      this.props.location.pathname === "/app/checkout"
-                        ? "checkout"
-                        : "default"
+                      this.props.location.pathname === '/app/checkout'
+                        ? 'checkout'
+                        : 'default'
                     }
                     {...this.props}
                   />
@@ -273,11 +258,9 @@ App.propTypes = {
   userEmail: PropTypes.string,
   hasPayed: PropTypes.bool.isRequired,
   selectedFontLoaded: PropTypes.shape({
-    fontName: PropTypes.string.isRequired
+    fontName: PropTypes.string.isRequired,
   }),
-  hasPresetsLoaded: PropTypes.shape({
-    fontName: PropTypes.string.isRequired
-  }),
+  hasPresetsLoaded: PropTypes.bool.isRequired,
   pathname: PropTypes.string.isRequired,
   need: PropTypes.string.isRequired,
   reloadPresets: PropTypes.func.isRequired,
@@ -307,17 +290,17 @@ App.propTypes = {
 };
 
 App.defaultProps = {
-  selectedFont: "",
+  selectedFont: '',
   selectedFontLoaded: undefined,
-  userEmail: "",
+  userEmail: '',
   hasPresetsLoaded: false,
   isAuthenticated: false,
-  locale: "en",
-  userId: ""
+  locale: 'en',
+  userId: '',
 };
 
 App.childContextTypes = {
-  shortcuts: PropTypes.object.isRequired
+  shortcuts: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -330,11 +313,11 @@ const mapStateToProps = state => ({
   hasPayed: state.user.hasPayed,
   need: state.font.need,
   hasPresetsLoaded:
-    state.createdFonts.fonts[state.presets.loadedPresetsName[0]],
+    state.createdFonts.fonts[state.presets.loadedPresetsName[0]] && Object.keys(state.createdFonts.fonts[state.presets.loadedPresetsName[0]]).length > 0,
   isLoading: state.ui.unstable || state.createdFonts.isPrototypoLoading,
   shouldLogout: state.user.shouldLogout,
   isPrototypoLoaded: state.createdFonts.isPrototypoLoaded,
-  isAuthenticated: typeof state.user.graphqlID === "string",
+  isAuthenticated: typeof state.user.graphqlID === 'string' && !state.user.anonymous,
   isPrototypoLoading: state.createdFonts.isPrototypoLoading,
   isBlackOnWhite: state.user.isBlackOnWhite,
   shouldShowTooltips: state.ui.shouldShowTooltips,
@@ -350,8 +333,8 @@ const mapDispatchToProps = dispatch =>
       reloadPresets,
       reloadFonts,
       setLocale,
-      goToHome: () => push("/app"),
-      goToLanding: () => push("/"),
+      goToHome: () => push('/app'),
+      goToLanding: () => push('/'),
       createPrototypoFactory,
       toggleTooltips,
       logout,
@@ -362,6 +345,6 @@ const mapDispatchToProps = dispatch =>
       setErrorPresets,
       setFetchingPresets,
     },
-    dispatch
+    dispatch,
   );
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

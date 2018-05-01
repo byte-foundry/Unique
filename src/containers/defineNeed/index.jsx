@@ -1,40 +1,45 @@
 // @flow
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { push } from "react-router-redux";
-import { connect } from "react-redux";
-import { request } from "graphql-request";
-import PropTypes from "prop-types";
-import { FormattedMessage } from "react-intl";
-import { Tooltip } from "react-tippy";
-import "react-tippy/dist/tippy.css";
-import Button from "../../components/button";
-import { defineNeed } from "../../data/font";
-import { storeChosenWord } from "../../data/user";
-import { importPresets } from "../../data/presets";
-import { GRAPHQL_API } from "../../data/constants";
-import { getAllPresets } from "../../data/queries";
-import { setErrorPresets, setFetchingPresets } from "../../data/ui";
-import "./DefineNeed.css";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
+import { connect } from 'react-redux';
+import { request } from 'graphql-request';
+import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+import 'react-tippy/dist/tippy.css';
+import Button from '../../components/button';
+import { defineNeed } from '../../data/font';
+import { storeChosenWord, anonymousAuth } from '../../data/user';
+import { importPresets } from '../../data/presets';
+import { GRAPHQL_API } from '../../data/constants';
+import { getAllPresets } from '../../data/queries';
+import { setErrorPresets, setFetchingPresets } from '../../data/ui';
+import './DefineNeed.css';
 
-import { ReactComponent as DisplayIcon } from "./display_icon.svg";
-import { ReactComponent as TextIcon } from "./text_icon.svg";
-import { ReactComponent as LogoIcon } from "./logotype_icon.svg";
+import { ReactComponent as DisplayIcon } from './display_icon.svg';
+import { ReactComponent as TextIcon } from './text_icon.svg';
+import { ReactComponent as LogoIcon } from './logotype_icon.svg';
 
 class DefineNeed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      word: "",
+      word: '',
       logoNeedOpened: false,
       selected: undefined,
-      isLoading: false
+      isLoading: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleLogoNeed = this.toggleLogoNeed.bind(this);
   }
+  componentWillMount() {
+    if (!this.props.isAuthenticated) {
+      this.props.anonymousAuth();
+    }
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -45,12 +50,12 @@ class DefineNeed extends React.Component {
     this.setState({ word: event.target.value });
   }
   handleSubmit(event) {
-    if (this.state.word !== "") {
+    if (this.state.word !== '') {
       this.props.storeChosenWord(this.state.word);
     }
     if (!this.state.isLoading && !this.props.errorPresets && !this.props.fetchingPresets) {
       this.setState({ isLoading: true });
-      this.props.defineNeed(this.state.selected || "dunno");
+      this.props.defineNeed(this.state.selected || 'dunno');
     }
     event.preventDefault();
   }
@@ -76,12 +81,12 @@ class DefineNeed extends React.Component {
         </div>
         <div className="needs row">
           <div
-            className={`col-sm-12 col-md-4 col-lg-4`}
-            onClick={() => this.setState({ selected: "logo" })}
+            className="col-sm-12 col-md-4 col-lg-4"
+            onClick={() => this.setState({ selected: 'logo' })}
           >
             <div
               className={`need ${
-                this.state.selected === "logo" ? "selected" : ""
+                this.state.selected === 'logo' ? 'selected' : ''
               }`}
             >
               <LogoIcon className="need-icon" />
@@ -102,16 +107,16 @@ class DefineNeed extends React.Component {
             </div>
           </div>
           <div
-            className={`col-sm-12 col-md-4 col-lg-4`}
-            onClick={() => this.setState({ selected: "text" })}
-            onDoubleClick={e => {
-              this.setState({ selected: "text" });
+            className="col-sm-12 col-md-4 col-lg-4"
+            onClick={() => this.setState({ selected: 'text' })}
+            onDoubleClick={(e) => {
+              this.setState({ selected: 'text' });
               this.handleSubmit(e);
             }}
           >
             <div
               className={`need ${
-                this.state.selected === "text" ? "selected" : ""
+                this.state.selected === 'text' ? 'selected' : ''
               }`}
             >
               <TextIcon className="need-icon" />
@@ -132,16 +137,16 @@ class DefineNeed extends React.Component {
             </div>
           </div>
           <div
-            className={`col-sm-12 col-md-4 col-lg-4 `}
-            onClick={() => this.setState({ selected: "display" })}
-            onDoubleClick={e => {
-              this.setState({ selected: "display" });
+            className="col-sm-12 col-md-4 col-lg-4 "
+            onClick={() => this.setState({ selected: 'display' })}
+            onDoubleClick={(e) => {
+              this.setState({ selected: 'display' });
               this.handleSubmit(e);
             }}
           >
             <div
               className={`need ${
-                this.state.selected === "display" ? "selected" : ""
+                this.state.selected === 'display' ? 'selected' : ''
               }`}
             >
               <DisplayIcon className="need-icon" />
@@ -162,7 +167,7 @@ class DefineNeed extends React.Component {
             </div>
           </div>
         </div>
-        {this.state.selected === "logo" ? (
+        {this.state.selected === 'logo' ? (
           <div className="logoName">
             <div className="row">
               <div className="col-sm-12 col-md-4">
@@ -217,17 +222,15 @@ class DefineNeed extends React.Component {
                   label={text}
                   className="need-error-presets-button"
                   loading={this.props.fetchingPresets}
-                  onClick={e => {
+                  onClick={() => {
                     this.props.setErrorPresets(false);
                     this.props.setFetchingPresets(true);
                     request(GRAPHQL_API, getAllPresets)
-                      .then(data => {
+                      .then((data) => {
                         this.props.setFetchingPresets(false);
-                        this.props.importPresets(
-                          data.getAllUniquePresets.presets
-                        );
+                        this.props.importPresets(data.getAllUniquePresets.presets);
                       })
-                      .catch(error => {
+                      .catch(() => {
                         this.props.setErrorPresets(true);
                         this.props.setFetchingPresets(false);
                       });
@@ -251,10 +254,10 @@ class DefineNeed extends React.Component {
                   loading={this.props.fetchingPresets}
                   className={`need-submit ${
                     this.props.errorPresets || !this.state.selected
-                      ? "disabled"
-                      : ""
+                      ? 'disabled'
+                      : ''
                   } ${this.props.fetchingPresets ? 'need-submit-loading' : ''}`}
-                  onClick={e => {
+                  onClick={(e) => {
                     this.handleSubmit(e);
                   }}
                 />
@@ -262,8 +265,8 @@ class DefineNeed extends React.Component {
             </FormattedMessage>
             <span
               className="need-dunno"
-              onClick={e => {
-                this.setState({ selected: "dunno" });
+              onClick={(e) => {
+                this.setState({ selected: 'dunno' });
                 this.handleSubmit(e);
               }}
             >
@@ -284,6 +287,7 @@ const mapStateToProps = state => ({
   isLoading: state.presets.isLoading,
   errorPresets: state.ui.errorPresets,
   fetchingPresets: state.ui.fetchingPresets,
+  isAuthenticated: typeof state.user.graphqlID === 'string',
 });
 
 const mapDispatchToProps = dispatch =>
@@ -292,14 +296,16 @@ const mapDispatchToProps = dispatch =>
       defineNeed,
       storeChosenWord,
       importPresets,
-      redirectToLanding: () => push("/"),
+      redirectToLanding: () => push('/'),
       setErrorPresets,
-      setFetchingPresets
+      setFetchingPresets,
+      anonymousAuth,
     },
-    dispatch
+    dispatch,
   );
 
 DefineNeed.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   defineNeed: PropTypes.func.isRequired,
   storeChosenWord: PropTypes.func.isRequired,
@@ -308,8 +314,7 @@ DefineNeed.propTypes = {
   setFetchingPresets: PropTypes.func.isRequired,
   errorPresets: PropTypes.bool.isRequired,
   fetchingPresets: PropTypes.bool.isRequired,
+  anonymousAuth: PropTypes.func.isRequired,
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(DefineNeed)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DefineNeed));

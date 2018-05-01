@@ -1,44 +1,37 @@
 // @flow
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import PropTypes from "prop-types";
-import FlipMove from "react-flip-move";
-import { Shortcuts } from "react-shortcuts";
-import { FormattedMessage } from "react-intl";
-import { Tooltip } from "react-tippy";
-import unorphan from "unorphan";
-import "react-tippy/dist/tippy.css";
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import FlipMove from 'react-flip-move';
+import { Shortcuts } from 'react-shortcuts';
+import { FormattedMessage } from 'react-intl';
+import { Tooltip } from 'react-tippy';
+import unorphan from 'unorphan';
+import 'react-tippy/dist/tippy.css';
 import {
   stepBack,
   selectChoice,
   updateSliderFont,
   finishEditing,
-  goToStep
-} from "../../data/font";
+  goToStep,
+} from '../../data/font';
 import {
   storeChosenWord,
   storeChosenGlyph,
   switchBlackOnWhite,
   switchGlyphMode,
-  storeRecommandations
-} from "../../data/user";
-import Choice from "../../components/choice/";
-import WordView from "../wordView/";
-import Sliders from "../sliders/";
-import Button from "../../components/button/";
-import Tips from "../../components/tips";
-import Cheers from "../../components/cheers";
-import "./StepView.css";
+  storeRecommandations,
+} from '../../data/user';
+import Choice from '../../components/choice/';
+import Tips from '../../components/tips';
+import Cheers from '../../components/cheers';
+import './StepView.css';
 
-import { ReactComponent as Back } from "./back.svg";
-import { ReactComponent as Next } from "./next.svg";
-import { ReactComponent as Finish } from "./finish.svg";
-
-const isMostSelected = choices => {
+const isMostSelected = (choices) => {
   let most = choices[0].id;
   let value = 0;
-  choices.forEach(choice => {
+  choices.forEach((choice) => {
     if (choice.selected > value) {
       value = choice.selected;
       most = choice.id;
@@ -76,7 +69,7 @@ const stepTranslations = {
       description="Stepview - Serifs question"
     />
   ),
-  "X-Height": (
+  'X-Height': (
     <FormattedMessage
       id="StepView.xHeight"
       defaultMessage="What would be the letter height of your font?"
@@ -97,13 +90,13 @@ const stepTranslations = {
       description="Stepview - Curviness question"
     />
   ),
-  "Ascenders/Descenders": (
+  'Ascenders/Descenders': (
     <FormattedMessage
       id="StepView.ascendersDescenders"
       defaultMessage="Choose the height of your ascenders and descenders"
       description="Stepview - Ascenders/Descenders question"
     />
-  )
+  ),
 };
 
 class StepView extends React.Component {
@@ -111,14 +104,14 @@ class StepView extends React.Component {
     super(props);
     this.state = {
       choice: props.choicesMade[props.step],
-      isInputFocused: false
+      isInputFocused: false,
     };
 
-    this.markChoiceActive = choice => {
+    this.markChoiceActive = (choice) => {
       this.setState({ choice });
     };
 
-    this.onUpdate = updatedParam => {
+    this.onUpdate = (updatedParam) => {
       const currentParams = this.state.choice;
       this.props.updateSliderFont(updatedParam);
       currentParams.values[updatedParam.name] = parseFloat(updatedParam.value);
@@ -132,14 +125,17 @@ class StepView extends React.Component {
   }
   componentWillMount() {
     this.setChoiceSelected(this.props);
+    this.setState({ isInputFocused: false });
   }
   componentDidMount() {
     this.stepViewWrapper.focus();
     window.scrollTo(0, 0);
-    unorphan("h1, h2, h3, p, span");
+    unorphan('h1, h2, h3, p, span');
   }
   componentWillReceiveProps(newProps) {
     this.setChoiceSelected(newProps);
+    this.stepViewWrapper.focus();
+    this.setState({ isInputFocused: false });
   }
   disableShortcuts() {
     this.setState({ isInputFocused: true });
@@ -150,33 +146,29 @@ class StepView extends React.Component {
   setChoiceSelected(props) {
     let choice = {};
     if (props.choicesMade[props.step - 1]) {
-      choice = props.stepValues.choices.find(
-        c => c.name === props.choicesMade[props.step - 1].name
-      );
+      choice = props.stepValues.choices.find(c => c.name === props.choicesMade[props.step - 1].name);
     }
     this.setState({
       choice,
-      mostSelected: isMostSelected(props.stepValues.choices)
+      mostSelected: isMostSelected(props.stepValues.choices),
     });
   }
-  handleShortcuts(action, event) {
+  handleShortcuts(action) {
     if (!this.state.isInputFocused) {
       switch (action) {
-        case "CHOICE_PREVIOUS":
+        case 'CHOICE_PREVIOUS':
           if (this.state.choice) {
-            const choiceIndex = this.props.stepValues.choices.findIndex(
-              choice => choice.name === this.state.choice.name
-            );
+            const choiceIndex = this.props.stepValues.choices.findIndex(choice => choice.name === this.state.choice.name);
             if (choiceIndex <= 0) {
               this.setState({
                 choice: this.props.stepValues.choices[
                   this.props.stepValues.choices.length - 1
-                ]
+                ],
               });
               break;
             } else {
               this.setState({
-                choice: this.props.stepValues.choices[choiceIndex - 1]
+                choice: this.props.stepValues.choices[choiceIndex - 1],
               });
               break;
             }
@@ -184,21 +176,19 @@ class StepView extends React.Component {
             this.setState({
               choice: this.props.stepValues.choices[
                 this.props.stepValues.choices.length - 1
-              ]
+              ],
             });
             break;
           }
-        case "CHOICE_NEXT":
+        case 'CHOICE_NEXT':
           if (this.state.choice) {
-            const choiceIndex = this.props.stepValues.choices.findIndex(
-              choice => choice.name === this.state.choice.name
-            );
+            const choiceIndex = this.props.stepValues.choices.findIndex(choice => choice.name === this.state.choice.name);
             if (choiceIndex + 1 >= this.props.stepValues.choices.length) {
               this.setState({ choice: this.props.stepValues.choices[0] });
               break;
             } else {
               this.setState({
-                choice: this.props.stepValues.choices[choiceIndex + 1]
+                choice: this.props.stepValues.choices[choiceIndex + 1],
               });
               break;
             }
@@ -206,19 +196,19 @@ class StepView extends React.Component {
             this.setState({ choice: this.props.stepValues.choices[0] });
             break;
           }
-        case "CHOICE_SELECT":
+        case 'CHOICE_SELECT':
           this.props.selectChoice(this.state.choice);
           break;
-        case "STEP_BACK":
+        case 'STEP_BACK':
           this.props.stepBack();
           break;
-        case "BW_MODE":
+        case 'BW_MODE':
           this.props.switchBlackOnWhite();
           break;
-        case "GLYPH_MODE":
+        case 'GLYPH_MODE':
           this.props.switchGlyphMode();
           break;
-        case "FINISH_FONT":
+        case 'FINISH_FONT':
           this.props.finishEditing();
           break;
         default:
@@ -227,14 +217,13 @@ class StepView extends React.Component {
     }
   }
   render() {
-    console.log(this.props);
     return (
       <Shortcuts name="CHOICES" handler={this.handleShortcuts}>
         <div
           className={`StepView ${
-            this.props.isBlackOnWhite ? "" : "whiteOnBlack"
+            this.props.isBlackOnWhite ? '' : 'whiteOnBlack'
           }`}
-          ref={c => {
+          ref={(c) => {
             this.stepViewWrapper = c;
           }}
           tabIndex="-1"
@@ -243,9 +232,10 @@ class StepView extends React.Component {
             <div className="row justify-content-md-between step-description">
               <div className="col-md-9 col-sm-12">
                 <div className="step-bubbles">
-                  {[...Array(this.props.stepLength)].map(
-                    (e, i) =>
-                      this.props.step > i || this.props.choicesMade[i] ? (
+                  { /*eslint-disable */
+                    [...Array(this.props.stepLength)].map((el, i) =>
+                      /*eslint-enable */
+                      (this.props.step > i || this.props.choicesMade[i] ? (
                         <Tooltip
                           title={this.props.steps[i].name}
                           position="top"
@@ -255,7 +245,7 @@ class StepView extends React.Component {
                         >
                           <span
                             className={`step-bubble past ${
-                              i === this.props.step - 1 ? "current" : ""
+                              i === this.props.step - 1 ? 'current' : ''
                             }`}
                             onClick={() => {
                               this.props.goToStep(i + 1);
@@ -265,12 +255,10 @@ class StepView extends React.Component {
                         </Tooltip>
                       ) : (
                         <span
-                          className={`step-bubble
-                        } ${i === this.props.step - 1 ? "current" : ""}`}
+                          className={`step-bubble ${i === this.props.step - 1 ? 'current' : ''}`}
                           key={`stepbubble-${i}`}
                         />
-                      )
-                  )}
+                      )))}
                 </div>
                 <p className="step-name">
                   {stepTranslations[this.props.stepValues.name]}
@@ -323,8 +311,8 @@ class StepView extends React.Component {
                         <span
                           className={`pagination-next ${
                             !(this.state.choice && this.state.choice.name)
-                              ? "disabled"
-                              : ""
+                              ? 'disabled'
+                              : ''
                           }`}
                           onClick={() => {
                             if (this.state.choice && this.state.choice.name) {
@@ -344,8 +332,8 @@ class StepView extends React.Component {
                   <span
                     className={`pagination-finish ${
                       this.props.choicesMade.length === this.props.stepLength
-                        ? ""
-                        : "disabled"
+                        ? ''
+                        : 'disabled'
                     }`}
                     onClick={() => {
                       if (
@@ -412,8 +400,9 @@ class StepView extends React.Component {
                         {this.props.stepValues.choices.map((choice, index) => (
                           <div
                             className={`${
-                              this.props.isGlyphMode ? "col-sm-4" : "col-sm-12"
+                              this.props.isGlyphMode ? 'col-sm-4' : 'col-sm-12'
                             }`}
+                            key={`choice${choice.id}wrapper`}
                           >
                             <Choice
                               choice={choice}
@@ -463,7 +452,7 @@ const mapStateToProps = state => ({
   shouldShowTooltips: state.ui.shouldShowTooltips,
   fontSize: state.user.fontSize,
   need: state.font.need,
-  recommandations: state.user.recommandations
+  recommandations: state.user.recommandations,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -477,9 +466,9 @@ const mapDispatchToProps = dispatch =>
       goToStep,
       switchBlackOnWhite,
       switchGlyphMode,
-      storeRecommandations
+      storeRecommandations,
     },
-    dispatch
+    dispatch,
   );
 
 StepView.propTypes = {
@@ -489,19 +478,15 @@ StepView.propTypes = {
   updateSliderFont: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
   stepLength: PropTypes.number.isRequired,
-  choicesMade: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired,
+  choicesMade: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  })).isRequired,
   stepValues: PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    choices: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired
-      })
-    )
+    choices: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    })),
   }).isRequired,
   chosenWord: PropTypes.string.isRequired,
   chosenGlyph: PropTypes.string.isRequired,
@@ -513,7 +498,7 @@ StepView.propTypes = {
   fontSize: PropTypes.number.isRequired,
   goToStep: PropTypes.func.isRequired,
   need: PropTypes.string.isRequired,
-  storeRecommandations: PropTypes.string.isRequired
+  storeRecommandations: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepView);

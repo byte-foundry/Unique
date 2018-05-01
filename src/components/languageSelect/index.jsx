@@ -48,7 +48,7 @@ class LanguageSelect extends React.Component {
             }`}
           >
             {Object.keys(supportedLanguages).map(
-              (key, index) =>
+              key =>
                 key !== this.props.locale ? (
                   <p
                     style={{
@@ -67,6 +67,7 @@ class LanguageSelect extends React.Component {
                           ? "black"
                           : "white"
                     }}
+                    key={`language${key}`}
                     onClick={() => {
                       this.props.setLocale(key);
                       this.setState({
@@ -91,10 +92,14 @@ class LanguageSelect extends React.Component {
 }
 
 LanguageSelect.propTypes = {
-  pathname: PropTypes.string.isRequired,
-  isBlackOnWhite: PropTypes.string.isRequired,
+  pathname: PropTypes.string,
+  isBlackOnWhite: PropTypes.bool.isRequired,
   setLocale: PropTypes.func.isRequired,
   locale: PropTypes.string.isRequired
 };
+
+LanguageSelect.defaultProps = {
+  pathname: '',
+}
 
 export default LanguageSelect;

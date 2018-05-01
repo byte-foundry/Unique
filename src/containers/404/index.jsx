@@ -13,7 +13,6 @@ import "./404.css";
 class Page404 extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
     this.shuffleTags = this.shuffleTags.bind(this);
   }
   componentDidMount() {
@@ -61,7 +60,7 @@ class Page404 extends React.Component {
                     mode="full"
                     label={text}
                     className="page404-button"
-                    onClick={e => {
+                    onClick={() => {
                       this.props.redirectToLanding();
                     }}
                   />
@@ -75,7 +74,7 @@ class Page404 extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

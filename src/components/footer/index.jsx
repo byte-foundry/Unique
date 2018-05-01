@@ -14,7 +14,6 @@ class Footer extends React.Component {
     this.state = {};
   }
   render() {
-    console.log(this.props);
     return (
       <div
         className={`Footer ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"} ${

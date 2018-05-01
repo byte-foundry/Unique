@@ -1,6 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { Switch, Route, withRouter, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 
 import LanguageSelect from "../../components/languageSelect";
@@ -32,7 +31,6 @@ const Static = props => (
             </Link>
             <p
               onClick={() => {
-                /* global Intercom */
                 window.Intercom("show");
               }}
             >
@@ -54,6 +52,7 @@ const Static = props => (
             <a
               title="Unique Facebool"
               href="https://www.facebook.com/fontsbyunique/"
+              rel="noopener noreferrer"
               target="_blank"
             >
               <FacebookLogo className="social-icon facebook" />
@@ -61,12 +60,14 @@ const Static = props => (
             <a
               title="Unique Instagram"
               href="https://www.instagram.com/fontsbyunique/"
+              rel="noopener noreferrer"
               target="_blank"
             >
               <InstagramLogo className="social-icon instagram" />
             </a>
             <a
               title="Unique Twitter"
+              rel="noopener noreferrer"
               href="https://twitter.com/fontsbyUnique/"
               target="_blank"
             >
@@ -91,6 +92,7 @@ const Static = props => (
             <a
               title="Prototypo website"
               href="https://www.prototypo.io"
+              rel="noopener noreferrer"
               target="_blank"
             >
               Prototypo

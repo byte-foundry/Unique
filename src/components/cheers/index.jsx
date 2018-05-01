@@ -1,6 +1,5 @@
 // @flow
 import React from "react";
-import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
 import unorphan from "unorphan";
 import "./Cheers.css";
@@ -80,15 +79,12 @@ class Cheers extends React.Component {
     }
   }
   componentWillMount() {
-    console.log('cheer will mount')
     this.generateCheer(this.props);
   }
   componentDidMount() {
     unorphan("h1, h2, h3, p, span");
   }
   componentWillReceiveProps(newProps) {
-    console.log('cheer will receive props')
-    console.log(newProps)
     if (this.props.previousChoiceMade !== newProps.previousChoiceMade) {
       this.generateCheer(newProps);
       unorphan("h1, h2, h3, p, span");

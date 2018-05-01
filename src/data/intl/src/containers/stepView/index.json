@@ -40,18 +40,33 @@
     "defaultMessage": "Choose the height of your ascenders and descenders"
   },
   {
-    "id": "Shortcuts.chooseChoice",
-    "description": "Shortcut - up down choice action",
-    "defaultMessage": "Press up and down keys to choose the most suitable option"
-  },
-  {
     "id": "Shortcuts.previousAction",
     "description": "Shortcut - previous action",
     "defaultMessage": "Press left key to go back"
   },
   {
+    "id": "App.prevAction",
+    "description": "Back",
+    "defaultMessage": "Back"
+  },
+  {
     "id": "Shortcuts.nextAction",
     "description": "Shortcut - next action",
     "defaultMessage": "Press right key to move forward"
+  },
+  {
+    "id": "App.nextAction",
+    "description": "Next",
+    "defaultMessage": "Next"
+  },
+  {
+    "id": "App.finishAction",
+    "description": "Finish",
+    "defaultMessage": "Finish"
+  },
+  {
+    "id": "Shortcuts.chooseChoice",
+    "description": "Shortcut - up down choice action",
+    "defaultMessage": "Press up and down keys to choose the most suitable option"
   }
 ]

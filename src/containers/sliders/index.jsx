@@ -16,9 +16,6 @@ const getBaseParams = (values, choices, controls) => {
   const keys = {};
   choices.forEach(choice => {
     Object.keys(choice.values).forEach(key => {
-      console.log("> Adding custom slider");
-      console.log(key);
-      console.log(params[key]);
       if (
         !keys[key] &&
         key !== "manualChanges" &&

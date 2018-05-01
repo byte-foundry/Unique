@@ -12,9 +12,7 @@ import "./TemplateChoice.css";
 import Template from "../../components/template/";
 
 import { selectFont } from "../../data/font";
-
-import { ReactComponent as Back } from "../stepView/back.svg";
-import { ReactComponent as Next } from "../stepView/next.svg";
+import { isDblTouchTap } from "../../data/constants";
 
 const isMostSelected = (presets, font) => {
   let most = presets[0].id;
@@ -41,7 +39,7 @@ class TemplateChoice extends React.Component {
     window.scrollTo(0, 0);
     unorphan("h1, h2, h3, p, span");
   }
-  handleShortcuts(action, event) {
+  handleShortcuts(action) {
     switch (action) {
       case "CHOICE_PREVIOUS":
         if (this.state.templateIndex !== -1) {
@@ -100,6 +98,13 @@ class TemplateChoice extends React.Component {
                     defaultMessage="Pick one of our templates and get started!"
                     description="TemplateChoice page title"
                   />
+                  <div className="tip">
+                    <FormattedMessage
+                       id="TemplateChoice.dbClick"
+                       defaultMessage="Double-click to select an option and go straight to the next step"
+                       description="TemplateChoice double-click hint"
+                     />
+                   </div>
                 </h1>
               </div>
             </div>
@@ -151,12 +156,21 @@ class TemplateChoice extends React.Component {
                 leaveAnimation="none"
               >
                 {this.props.presets.map((font, index) => (
-                  <div className="col-sm-9 col-md-10 col-lg-6">
+                  <div className="col-sm-9 col-md-10 col-lg-6" key={`Template${font.variant.family.name}${font.variant.name}`}>
                     <Template
                       font={font}
                       onClick={() => this.setState({ templateIndex: index })}
                       onDoubleClick={() =>
                         this.props.selectFont(this.props.presets[index])
+                      }
+                      onTouchTap={
+                        (e) => {
+                          if (isDblTouchTap(e)) {
+                            this.props.selectFont(this.props.presets[index]);
+                          } else {
+                            this.setState({ templateIndex: index });
+                          }
+                        } 
                       }
                       selected={
                         this.state.templateIndex !== -1 &&
@@ -200,12 +214,6 @@ TemplateChoice.propTypes = {
   selectFont: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   redirectToHome: PropTypes.func.isRequired,
-  presets: PropTypes.arrayOf(
-    PropTypes.shape({
-      preset: PropTypes.string.isRequired,
-      variant: PropTypes.string.isRequired
-    })
-  ).isRequired,
   chosenWord: PropTypes.string
 };
 

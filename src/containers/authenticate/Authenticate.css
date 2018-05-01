@@ -160,14 +160,14 @@
   text-transform: uppercase;
 }
 
-.Authenticate .social-buttons {
+.Authenticate .sso-buttons {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   margin-bottom: 40px;
 }
 
-.Authenticate .social-buttons .Button{
+.Authenticate .sso-buttons .Button{
   text-align: center;
   width: 30%;
 }

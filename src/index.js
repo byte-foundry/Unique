@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { IntlProvider } from 'react-intl';
 import { addLocaleData } from 'react-intl';
@@ -29,7 +29,6 @@ import TOS from './containers/static/tos/';
 import Landing from './containers/static/landing/';
 import App from './containers/app/';
 import Page404 from './containers/404/';
-import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 addLocaleData([...locale_en, ...locale_fr, ...locale_de, ...locale_it, ...locale_es, ...locale_pt]);
@@ -50,6 +49,11 @@ const StaticRoute = ({ component:Component, ...rest }) => (
     </Static>
   )} />
 )
+
+
+const injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
+
 const Index = props => (
   <IntlProvider locale={props.locale} messages={messages[props.locale]}>
     <ConnectedRouter history={history}>

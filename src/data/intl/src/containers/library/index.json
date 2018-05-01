@@ -35,6 +35,11 @@
     "defaultMessage": "Open"
   },
   {
+    "id": "Library.emptySavedProject",
+    "description": "Library no project saved",
+    "defaultMessage": "Oops, no projects yet. Let's get to work!"
+  },
+  {
     "id": "Library.boughtProjectsTitle",
     "description": "Library bought projects title",
     "defaultMessage": "Bought Projects"
@@ -43,5 +48,10 @@
     "id": "Library.downloadAction",
     "description": "Library download project button",
     "defaultMessage": "Download"
+  },
+  {
+    "id": "Library.emptyBoughtProject",
+    "description": "Library no project bought",
+    "defaultMessage": "Aw, nothing here yet...Go on then, make a font:)"
   }
 ]
