@@ -653,7 +653,7 @@ export const signupWithEmail = (
 export const anonymousAuth = () => (dispatch) => {
   const graphcoolToken = localStorage.getItem('uniqueGraphcoolToken');
   if (graphcoolToken) {
-    dispatch(loginToGraphCool(graphcoolToken));
+    dispatch(loginToGraphCool(graphcoolToken, false));
   } else {
     request(GRAPHQL_API, authenticateAnonymousUser)
       .then((res) => {
@@ -674,7 +674,7 @@ export const anonymousAuth = () => (dispatch) => {
   }
 };
 
-export const loginToGraphCool = accessToken => (dispatch, getState) => {
+export const loginToGraphCool = (accessToken, shouldRedirect = true) => (dispatch, getState) => {
   localStorage.setItem('uniqueGraphcoolToken', accessToken);
   const { bought } = getState().user.currentProject;
   /* global fbq */
@@ -713,7 +713,9 @@ export const loginToGraphCool = accessToken => (dispatch, getState) => {
       });
       /* global Intercom */
       Intercom('update', { email: res.user.email });
-      dispatch(loadLibrary());
+      if (shouldRedirect) {
+        dispatch(loadLibrary());
+      }
     })
     .catch(() => {
       dispatch({
