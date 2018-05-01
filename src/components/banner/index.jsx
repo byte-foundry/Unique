@@ -9,6 +9,22 @@ class Banner extends React.Component {
     this.state = {
       shouldDisplayBanner: true
     };
+    this.banners = {
+      beta: (
+        <FormattedMessage
+            id="Banner.beta"
+            defaultMessage="Say hello to Unique’s beta! Let us know what you think!"
+            description="Banner beta message"
+          />
+      ),
+      launch: (
+        <FormattedMessage
+            id="Banner.launch"
+            defaultMessage="We’re on Product Hunt today! Vote for us! 👉"
+            description="Banner launch message"
+          />
+      )
+    }
   }
   render() {
     return (
@@ -19,11 +35,15 @@ class Banner extends React.Component {
             this.setState({ shouldDisplayBanner: false });
           }}
         >
-          <FormattedMessage
-            id="Banner.beta"
-            defaultMessage="Say hello to Unique’s beta! Let us know what you think!"
-            description="Banner beta message"
-          />
+          {this.banners.launch}
+          <a
+              title="Unique Product hunt"
+              href="https://www.producthunt.com/posts/unique"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              https://www.producthunt.com/posts/unique
+            </a>
         </div>
       )
     );

@@ -7,3 +7,7 @@
   cursor: pointer;
   user-select: none;
 }
+
+.Banner a {
+  color: white;
+}
