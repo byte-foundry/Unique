@@ -16,6 +16,7 @@ import { ReactComponent as One3 } from './number3.svg';
 import { ReactComponent as One5 } from './number5.svg';
 
 import video from './unique_intro.mp4';
+import gif from './unique_intro.gif';
 
 import { ReactComponent as HowItWorks1 } from './howitworks_1.svg';
 import { ReactComponent as HowItWorks2 } from './howitworks_2.svg';
@@ -35,6 +36,7 @@ class Landing extends React.Component {
     if (!props.isPrototypoLoaded && !props.isPrototypoLoading) {
       props.createPrototypoFactory();
     }
+    this.isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     this.state = {
       chosenWord: '',
     };
@@ -110,7 +112,11 @@ class Landing extends React.Component {
             <One1 className="one-1" />
             <div className="row">
               <div className="col-sm-12">
-                <video autoPlay loop muted src={video} className="uniqueVisual" />
+                {
+                  this.isIos ?
+                  (<img src={gif} alt="unique-visual gif" className="uniqueVisual"/>)
+                  : (<video autoPlay loop muted src={video} className="uniqueVisual" />)
+                }
               </div>
             </div>
             <div className="row">
