@@ -20,7 +20,7 @@ class Banner extends React.Component {
       launch: (
         <FormattedMessage
             id="Banner.launch"
-            defaultMessage="We’re on Product Hunt today! Vote for us! 👉"
+            defaultMessage="We’re on Product Hunt today! 👉"
             description="Banner launch message"
           />
       )
@@ -42,7 +42,7 @@ class Banner extends React.Component {
               rel="noopener noreferrer"
               target="_blank"
             >
-              https://www.producthunt.com/posts/unique
+              Support us with an upvote!
             </a>
         </div>
       )
