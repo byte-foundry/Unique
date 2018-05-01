@@ -135,7 +135,6 @@ class StepView extends React.Component {
   componentWillReceiveProps(newProps) {
     this.setChoiceSelected(newProps);
     this.stepViewWrapper.focus();
-    this.setState({ isInputFocused: false });
   }
   disableShortcuts() {
     this.setState({ isInputFocused: true });

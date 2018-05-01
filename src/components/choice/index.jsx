@@ -72,6 +72,7 @@ class Choice extends React.Component {
                     .replace(/<\/?span[^>]*>/g, "")
                     .replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, "")
                 );
+                this.props.disableShortcuts();
           }}
           onBlur={() => {
             this.props.enableShortcuts();
