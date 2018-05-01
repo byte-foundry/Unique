@@ -168,6 +168,7 @@
 	"StepView.width": "What width do you want for your font?",
 	"StepView.xHeight": "What letter height would you like for your font?",
 	"TOS.title": "Terms of use",
+	"TemplateChoice.dbClick": "Double-click to select an option and go straight to the next step",
 	"TemplateChoice.title": "Select a template and get started!",
 	"Tips.GlyphMode": "If you want to see the curviness changes in detail, you can jump to the Glyph view in the bottom right toolbar.",
 	"Tips.TextAscender": "If you increase or decrease the size of ascenders and descenders, you will lose in readability.",
