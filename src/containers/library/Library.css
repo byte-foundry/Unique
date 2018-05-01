@@ -45,6 +45,10 @@
   margin-top: 100px;
 }
 
+.Library .projects p {
+  color: #b8b5c0;
+}
+
 .Library .project {
   display: inline-block;
   margin-bottom: 20px;

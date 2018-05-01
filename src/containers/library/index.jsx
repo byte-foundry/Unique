@@ -145,6 +145,17 @@ class Library extends React.Component {
                 </div>
               ))}
             </FlipMove>
+            {this.state.savedProjects.length === 0 && (
+              <div className="col-sm-12">
+                <p>
+                  <FormattedMessage
+                    id="Library.emptySavedProject"
+                    defaultMessage="Oops, no projects yet. Let's get to work!"
+                    description="Library no project saved"
+                  />
+                </p>
+              </div>
+            )}
           </div>
           <div className="row projects">
             <div className="col-sm-12">
@@ -199,6 +210,17 @@ class Library extends React.Component {
                 </div>
               ))}
             </FlipMove>
+            {this.state.payedProjects.length === 0 && (
+              <div className="col-sm-12">
+                <p>
+                  <FormattedMessage
+                    id="Library.emptyBoughtProject"
+                    defaultMessage="Aw, nothing here yet...Go on then, make a font:)"
+                    description="Library no project bought"
+                  />
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
