@@ -1,36 +1,34 @@
 // @flow
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import saveAs from "save-as";
-import StripeCheckout from "react-stripe-checkout";
-import axios from "axios";
-import { FormattedMessage } from "react-intl";
-import { afterPayment } from "../../data/user";
-import { setUnstable, setStable } from "../../data/ui";
-import { getArrayBuffer } from "../../data/font";
-import { EXPORT_SUBSET } from "../../data/constants";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import saveAs from 'save-as';
+import StripeCheckout from 'react-stripe-checkout';
+import axios from 'axios';
+import { FormattedMessage } from 'react-intl';
+import { afterPayment } from '../../data/user';
+import { setUnstable, setStable } from '../../data/ui';
+import { getArrayBuffer } from '../../data/font';
+import { EXPORT_SUBSET } from '../../data/constants';
 
-import Button from "../button/";
-import "./Checkout.css";
+import Button from '../button/';
+import './Checkout.css';
 
 import {
   STRIPE_PUBLISHABLE,
   PAYMENT_SERVER_URL,
-  VALIDATION_SERVER_URL
-} from "../../data/constants";
+} from '../../data/constants';
 
 const fromValueToCent = amount => parseInt(amount.toFixed(2) * 100);
 
 const successPayment = (data, callback) => {
-  console.log(data);
   callback(data);
 };
 
-const errorPayment = data => {
-  console.log(data);
+const errorPayment = (data) => {
+  console.error(data);
 };
 
 const onToken = (
@@ -43,43 +41,37 @@ const onToken = (
   getArrayBuffer,
   userFontName,
   checkoutOptions,
-  coupon
-) => token => {
-  console.log('Handling purchase....')
+  coupon,
+  projectId,
+) => (token) => {
   setUnstable();
-  const fonts = [];
-  const fontsSelected = checkoutOptions.filter(
-    e => e.type === "font" || e.dbName === "baseFont"
-  );
+  const fontsSelected = checkoutOptions.filter(e => e.type === 'font' || e.dbName === 'baseFont');
   const promiseArray = [];
-  fontsSelected.forEach(fontSelected => {
-    promiseArray.push(
-      getArrayBuffer(
-        fontSelected.fontName,
-        userFontName,
-        fontSelected.type === "font"
-          ? fontSelected.name
-          : fontSelected.styleName,
-        EXPORT_SUBSET
-      )
-    );
+  fontsSelected.forEach((fontSelected) => {
+    promiseArray.push(getArrayBuffer(
+      fontSelected.fontName,
+      userFontName,
+      fontSelected.type === 'font'
+        ? fontSelected.name
+        : fontSelected.styleName,
+      EXPORT_SUBSET,
+    ));
   });
-  Promise.all(promiseArray).then(buffers => {
-    console.log(buffers);
+  Promise.all(promiseArray).then((buffers) => {
     const fonts = buffers.map((buffer, index) => {
       const intArray = new Uint8Array(buffer);
       return {
         variant:
-          fontsSelected[index].type === "font"
+          fontsSelected[index].type === 'font'
             ? fontsSelected[index].name
             : fontsSelected[index].styleName,
-        data: Array.from(intArray)
+        data: Array.from(intArray),
       };
     });
-    const family = userFontName || "unique_font";
+    const family = userFontName || 'unique_font';
     const invoice = {
       currency,
-      choices: checkoutOptions
+      choices: checkoutOptions,
     };
     axios
       .post(
@@ -93,41 +85,34 @@ const onToken = (
           invoice,
           fonts,
           email: token.email,
-          coupon: coupon.code
+          coupon: coupon.code,
+          projectId,
         },
-        { responseType: "arraybuffer" }
+        { responseType: 'arraybuffer' },
       )
-      .then(pack => {
-        console.log(pack);
+      .then((pack) => {
         const blob = new Blob([new DataView(pack.data)], {
-          type: "application/zip"
+          type: 'application/zip',
         });
-        saveAs(blob, "purchase.zip");
+        saveAs(blob, 'purchase.zip');
         successPayment(
           {
             data: {
               paid: true,
-              email: token.email
-            }
+              email: token.email,
+            },
           },
-          callback
+          callback,
         );
       })
-      .catch(err => {
+      .catch((err) => {
         setStable();
         errorPayment(err);
-        console.log(err);
       });
   });
 };
 
-class SkipCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { props } = this;
-    return (
+const SkipCard = props => (
       <FormattedMessage
         id="Sidebar.checkoutAction"
         defaultMessage="Checkout"
@@ -138,7 +123,7 @@ class SkipCard extends React.Component {
             className="button-checkout"
             onClick={onToken(
               props.amount,
-              "Buy with stripe",
+              'Buy with stripe',
               props.afterPayment,
               props.setUnstable,
               props.setStable,
@@ -147,7 +132,8 @@ class SkipCard extends React.Component {
               props.userFontName,
               props.checkoutOptions,
               props.coupon,
-              true
+              props.projectId,
+              true,
             )}
             mode="white"
             label={text}
@@ -155,11 +141,9 @@ class SkipCard extends React.Component {
         )}
       </FormattedMessage>
     );
-  }
-}
 
 const Checkout = props =>
-  props.skipCard ? (
+  (props.skipCard ? (
     <SkipCard {...props} />
   ) : (
     <StripeCheckout
@@ -168,14 +152,12 @@ const Checkout = props =>
       image="https://assets.awwwards.com/awards/media/cache/thumb_user_70/avatar/338028/594bd5ef47c4f.PNG"
       amount={
         props.coupon.discount
-          ? fromValueToCent(
-              props.amount - props.amount * props.coupon.discount / 100
-            )
+          ? fromValueToCent(props.amount - props.amount * props.coupon.discount / 100)
           : fromValueToCent(props.amount)
       }
       token={onToken(
         props.amount,
-        "Buy with stripe",
+        'Buy with stripe',
         props.afterPayment,
         props.setUnstable,
         props.setStable,
@@ -184,22 +166,41 @@ const Checkout = props =>
         props.userFontName,
         props.checkoutOptions,
         props.coupon,
-        false
+        props.projectId,
+        false,
       )}
+      opened={() => {
+        /* global fbq */
+        try {
+          fbq('track', 'InitiateCheckout', {
+            content_name: 'Package',
+            currency: props.currency,
+            value: props.coupon.discount
+              ? fromValueToCent(props.amount - props.amount * props.coupon.discount / 100)
+              : fromValueToCent(props.amount),
+            contents: props.checkoutOptions,
+            referrer: document.referrer,
+            userAgent: navigator.userAgent,
+            language: navigator.language,
+          });
+        } catch (e) {
+        }
+      }}
       currency={props.currency}
       stripeKey={STRIPE_PUBLISHABLE}
       email={props.email}
     >
       {props.children}
     </StripeCheckout>
-  );
+  ));
 
 const mapStateToProps = state => ({
   email: state.user.email,
   currency: state.ui.currency,
-  userFontName: state.user.userFontName,
-  checkoutOptions: state.user.checkoutOptions,
-  coupon: state.user.coupon
+  userFontName: state.user.currentProject.name,
+  checkoutOptions: state.user.checkoutOptions.filter(e => e.selected === true),
+  coupon: state.user.coupon,
+  projectId: state.user.currentProject.id,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -208,9 +209,9 @@ const mapDispatchToProps = dispatch =>
       afterPayment,
       setUnstable,
       setStable,
-      getArrayBuffer
+      getArrayBuffer,
     },
-    dispatch
+    dispatch,
   );
 
 Checkout.propTypes = {
@@ -223,13 +224,11 @@ Checkout.propTypes = {
   setUnstable: PropTypes.func.isRequired,
   setStable: PropTypes.func.isRequired,
   userFontName: PropTypes.string.isRequired,
-  skipCard: PropTypes.bool.isRequired
+  skipCard: PropTypes.bool.isRequired,
 };
 
 Checkout.defaultProps = {
-  email: ""
+  email: '',
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Checkout)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Checkout));

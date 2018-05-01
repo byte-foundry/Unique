@@ -63,10 +63,9 @@
   color: white;
   border-radius: 50%;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   text-align: center;
-  line-height: 28px;
   z-index: 30;
   user-select: none;
   animation: pulse 1.5s infinite;
@@ -75,9 +74,15 @@
   backface-visibility: hidden;
   transform: translateZ(0) scale(1, 1);
   perspective: 1000;
+  line-height: 38px;
 }
 
-.tips-button:hover,  .tips-button.opened {
+.tips-button.opened {  
+  font-family: unique-icon;  
+  line-height: 35px;
+}
+
+.tips-button:hover,  .tips-button.opened, .tips-button.seen {
   animation: none;
 }
 
@@ -87,7 +92,7 @@
   }
   70% {
     transform: translateZ(0) scale(1);
-    box-shadow: 0 0 0 10px rgba(83,32,238, 0);
+    box-shadow: 0 0 0 15px rgba(83,32,238, 0);
   }
   100% {
     transform: translateZ(0) scale(0.9);

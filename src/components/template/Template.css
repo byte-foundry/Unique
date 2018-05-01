@@ -26,10 +26,13 @@
   }
 }
 
-.Template.selected,
-.Template:hover {
+.Template.selected {
   border-color: #5320ee;
 }
+.Template:hover {
+    border-color: #ccc;
+}
+
 
 .Template .templateName {
   font-family: unique, sans-serif;
@@ -58,10 +61,4 @@
   border-radius: 5px;
   padding: 4px 8px;
   border: 2px solid #111;
-}
-
-@media (max-width: 576px) {
-  .Template {
-    width: 85%;
-  }
 }

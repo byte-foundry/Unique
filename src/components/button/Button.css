@@ -78,7 +78,7 @@
   border: none;
 }
 
-.Button.social-google {
+.Button.sso-go {
   background-color: #db4733;
   color: white;
   font-size: 14px;
@@ -88,7 +88,7 @@
   margin: 0;
 }
 
-.Button.social-facebook {
+.Button.sso-fa {
   background-color: #3b5998;
   font-size: 14px;
   color: white;
@@ -98,7 +98,7 @@
   margin: 0;
 }
 
-.Button.social-twitter {
+.Button.sso-tw {
   background-color: #00aced;
   color: white;
   font-size: 14px;

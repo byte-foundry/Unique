@@ -1,0 +1,88 @@
+.Static {
+
+}
+
+
+.Static .block {
+    display: block;
+}
+
+.Static .float-right {
+    display: block;
+}
+
+
+.Static .footer {
+    position: relative;
+    color: white;
+    background: black;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+  
+  .Static .footer .credits {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  
+  .Static .footer .pages {
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+  
+  
+  .Static .footer .pages p{
+   margin-bottom: 5px;
+   cursor: pointer;
+  }
+  
+  .Static .footer .pages a{
+    color: white;
+    display: inline-block;
+    margin-bottom: 5px;
+    text-decoration: none;
+   }
+   .Static .footer .pages a:hover{
+    color: white;
+    text-decoration: none;
+   }
+
+   .Static .footer .social .social-icon {
+    width: 25px;
+    height: auto;
+    margin-left: 15px;
+  }
+  .Static .footer .social .social-icon path {
+    fill: white;
+  }
+  
+  
+  .Static .footer .credits a {
+      color: white;
+      text-decoration: underline;
+      padding-left: .5em;
+  }
+  
+  .Static .footer .LanguageSelect {
+    float: left;
+  }
+
+  @media (max-width: 576px) {
+    .Static .footer .float-right {
+      float: none;
+    }
+    .Static .footer .float-left {
+      float: none;
+    }
+    .Static .footer .LanguageSelect {
+      margin-top: 10px;
+    }
+    .Static .footer .LanguageSelect, .Static .footer .credits  {
+      float: none;
+      margin-left: 15px;
+    }
+    .Static .footer .pages {
+      margin-left: 15px;
+    }
+  }
+  

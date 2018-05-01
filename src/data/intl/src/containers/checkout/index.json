@@ -2,12 +2,7 @@
   {
     "id": "CheckoutView.OtfOption",
     "description": "Otf",
-    "defaultMessage": "OTF file"
-  },
-  {
-    "id": "CheckoutView.SpecimenOption",
-    "description": "Specimen",
-    "defaultMessage": "Specimen"
+    "defaultMessage": "Font package"
   },
   {
     "id": "CheckoutView.LaunchDiscountOption",
@@ -18,5 +13,15 @@
     "id": "CheckoutView.title",
     "description": "Checkout view title",
     "defaultMessage": "Create your Unique package:"
+  },
+  {
+    "id": "CheckoutView.description",
+    "description": "Checkout view description",
+    "defaultMessage": "Your font is ready for download as an OTF file and you get your font sample included in your package. Feel free to add variants of your font by selecting the ones you’d like to buy."
+  },
+  {
+    "id": "CheckoutView.goBack",
+    "description": "Checkout view go back text",
+    "defaultMessage": "Back to edit mode"
   }
 ]

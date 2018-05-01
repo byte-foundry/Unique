@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
 import ContentEditable from "../contentEditable";
+import { isDblTouchTap } from "../../data/constants";
 import "./Choice.css";
 import { ReactComponent as EditIcon } from "./pencil.svg";
 
@@ -26,6 +27,15 @@ class Choice extends React.Component {
         onDoubleClick={() => {
           if (!this.state.isEditable) {
             this.props.selectChoice(this.props.choice);
+          }
+        }}
+        onTouchTap={(e) => {
+          if (!this.state.isEditable) {
+            if (isDblTouchTap(e)) {
+              this.props.selectChoice(this.props.choice);
+            } else {
+              this.props.markChoiceActive(this.props.choice);
+            }
           }
         }}
         role="option"
@@ -62,6 +72,7 @@ class Choice extends React.Component {
                     .replace(/<\/?span[^>]*>/g, "")
                     .replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, "")
                 );
+                this.props.disableShortcuts();
           }}
           onBlur={() => {
             this.props.enableShortcuts();

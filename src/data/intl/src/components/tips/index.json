@@ -1,0 +1,52 @@
+[
+  {
+    "id": "Tips.textThickness",
+    "description": "Tip thickness for text",
+    "defaultMessage": "If you want to use your font at 8 to 14 pt, an Extra-light or Extra Bold font might be hard to read. \r\n        That’s why we recommend you to stay in the Light to Bold range of weight."
+  },
+  {
+    "id": "Tips.textWidth",
+    "description": "Tip width for text",
+    "defaultMessage": "If you want to make long paragraphs of text, a Condensed or Extended font might be too hard to read. \r\n        That’s why we recommend you to stay in the Normal width."
+  },
+  {
+    "id": "Tips.textContrast",
+    "description": "Tip contrast for text",
+    "defaultMessage": "When using a highly contrasted typeface in small sizes 6–16 pt, fine parts of the letters (upstroke) will disappear and directly affect the legibility of your text.\r\n        That’s why we recommend you to use a low contrast font."
+  },
+  {
+    "id": "Tips.logoContrastThicknessFontSize",
+    "description": "Tip contrast and thickness for logo - Font size",
+    "defaultMessage": "When designing a Logotype you want to make sure it works at different scales, both big and in reduction.\r\n        Don’t hesitate to use the scaling slider in the bottom right tool bar to test your font in small and large size."
+  },
+  {
+    "id": "Tips.logoContrastThicknessBGColor",
+    "description": "Tip contrast and thickness for logo - backgroundColor",
+    "defaultMessage": "When designing a Logotype you want to make sure it works within different contexts, black type on white background and white type on black background.\r\n        Don’t hesitate to change the color background in the bottom right tool bar."
+  },
+  {
+    "id": "Tips.GlyphMode",
+    "description": "Tip curviness - glyph mode",
+    "defaultMessage": "If you want to clearly see your changes on the curviness of the fonts, you can jump to the Glyph view in the bottom right tool bar."
+  },
+  {
+    "id": "Tips.TextAscender",
+    "description": "Tip Ascender / Descender - text mode",
+    "defaultMessage": "If you increase or decrease the size of the ascender and descender, you will loose in readability."
+  },
+  {
+    "id": "Tips.title",
+    "description": "Tips box title",
+    "defaultMessage": "Unique team tips"
+  },
+  {
+    "id": "Tips.previous",
+    "description": "Tips previous button",
+    "defaultMessage": "Prev"
+  },
+  {
+    "id": "Tips.next",
+    "description": "Tips next button",
+    "defaultMessage": "Next"
+  }
+]

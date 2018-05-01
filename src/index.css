@@ -3,6 +3,11 @@
   src: url(fonts/unique_medium.otf) format("opentype");
   font-weight: 400;
 }
+@font-face {
+  font-family: unique-icon;
+  src: url(fonts/unique_icon.otf) format("opentype");
+  font-weight: 400;
+}
 body {
   margin: 0;
   padding: 0;

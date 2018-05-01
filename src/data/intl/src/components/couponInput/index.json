@@ -1,0 +1,12 @@
+[
+  {
+    "id": "Checkout.sidebarCouponError",
+    "description": "Checkout - Sidebar coupon error",
+    "defaultMessage": "Invalid coupon"
+  },
+  {
+    "id": "Checkout.sidebarCoupon",
+    "description": "Checkout - Sidebar coupon button",
+    "defaultMessage": "Got a promocode?"
+  }
+]

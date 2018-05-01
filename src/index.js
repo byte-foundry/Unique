@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { IntlProvider } from 'react-intl';
 import { addLocaleData } from 'react-intl';
@@ -23,9 +23,12 @@ import messages_it from './data/intl/language_it';
 import messages_pt from './data/intl/language_pt';
 
 import store, { history } from './data/create-store';
-import Landing from './containers/landing/';
+import Static from './containers/static/';
+import FAQ from './containers/static/faq/';
+import TOS from './containers/static/tos/';
+import Landing from './containers/static/landing/';
 import App from './containers/app/';
-import registerServiceWorker from './registerServiceWorker';
+import Page404 from './containers/404/';
 import './index.css';
 
 addLocaleData([...locale_en, ...locale_fr, ...locale_de, ...locale_it, ...locale_es, ...locale_pt]);
@@ -39,12 +42,27 @@ const messages = {
   pt: messages_pt,
 };
 
+const StaticRoute = ({ component:Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    <Static>
+      <Component {...props} />
+    </Static>
+  )} />
+)
+
+
+const injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
+
 const Index = props => (
   <IntlProvider locale={props.locale} messages={messages[props.locale]}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path="/" component={Landing} />
+        <StaticRoute exact path="/" component={Landing} />
+        <StaticRoute exact path="/faq" component={FAQ} />
+        <StaticRoute exact path="/tos" component={TOS} />
         <Route path="/app" component={App} />
+        <Route component={Page404} />
       </Switch>
     </ConnectedRouter>
   </IntlProvider>

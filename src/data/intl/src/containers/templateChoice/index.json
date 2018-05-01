@@ -3,5 +3,20 @@
     "id": "TemplateChoice.title",
     "description": "TemplateChoice page title",
     "defaultMessage": "Pick one of our templates and get started!"
+  },
+  {
+    "id": "TemplateChoice.dbClick",
+    "description": "TemplateChoice double-click hint",
+    "defaultMessage": "Double-click to select an option and go straight to the next step"
+  },
+  {
+    "id": "App.prevAction",
+    "description": "Back",
+    "defaultMessage": "Back"
+  },
+  {
+    "id": "App.nextAction",
+    "description": "Next",
+    "defaultMessage": "Next"
   }
 ]

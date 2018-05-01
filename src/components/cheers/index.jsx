@@ -1,6 +1,5 @@
 // @flow
 import React from "react";
-import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
 import unorphan from "unorphan";
 import "./Cheers.css";
@@ -79,10 +78,9 @@ class Cheers extends React.Component {
       this.setState({ cheer: undefined, shouldHideCheer: true });
     }
   }
-  componentWillMount() {
-    this.generateCheer(this.props);
-  }
   componentDidMount() {
+    
+    this.generateCheer(this.props);
     unorphan("h1, h2, h3, p, span");
   }
   componentWillReceiveProps(newProps) {

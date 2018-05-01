@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="129px" height="104px" viewBox="0 0 129 104" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="176px" height="147px" viewBox="0 0 176 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>Group 2</title>
-    <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="002_1-copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-662.000000, -438.000000)">
-        <g id="Group-2" transform="translate(662.000000, 439.000000)">
-            <rect id="Rectangle-28" fill="#EEF4FF" x="0" y="18" width="90" height="85"></rect>
-            <rect id="Rectangle-31" stroke="#621FFF" stroke-width="1.5" x="29" y="0" width="95" height="8"></rect>
-            <rect id="Rectangle-31-Copy-2" stroke="#621FFF" stroke-width="1.5" x="29" y="33" width="86" height="8"></rect>
-            <rect id="Rectangle-31-Copy" stroke="#621FFF" stroke-width="1.5" x="29" y="16" width="99" height="8"></rect>
-            <rect id="Rectangle-31-Copy-3" stroke="#621FFF" stroke-width="1.5" x="29" y="50" width="86" height="8"></rect>
-            <rect id="Rectangle-31-Copy-4" stroke="#621FFF" stroke-width="1.5" x="29" y="67" width="61" height="8"></rect>
+    <g id="Icons-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-313.000000, -220.000000)">
+        <g id="Group-2" transform="translate(313.000000, 221.000000)">
+            <rect id="Rectangle-28" fill="#EEF4FF" x="0" y="21.875" width="131.25" height="123.958333"></rect>
+            <rect id="Rectangle-31" stroke="#621FFF" stroke-width="1.5" x="30.625" y="0" width="138.541667" height="11.6666667"></rect>
+            <rect id="Rectangle-31-Copy-2" stroke="#621FFF" stroke-width="1.5" x="30.625" y="48.125" width="125.416667" height="11.6666667"></rect>
+            <rect id="Rectangle-31-Copy" stroke="#621FFF" stroke-width="1.5" x="30.625" y="23.3333333" width="144.375" height="11.6666667"></rect>
+            <rect id="Rectangle-31-Copy-3" stroke="#621FFF" stroke-width="1.5" x="30.625" y="72.9166667" width="125.416667" height="11.6666667"></rect>
+            <rect id="Rectangle-31-Copy-4" stroke="#621FFF" stroke-width="1.5" x="30.625" y="97.7083333" width="88.9583333" height="11.6666667"></rect>
         </g>
     </g>
 </svg>

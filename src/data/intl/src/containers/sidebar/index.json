@@ -1,8 +1,18 @@
 [
   {
+    "id": "Checkout.sidebarTitle",
+    "description": "Checkout - Sidebar title",
+    "defaultMessage": "Package"
+  },
+  {
     "id": "Checkout.included",
     "description": "Checkout - Included price",
     "defaultMessage": "included"
+  },
+  {
+    "id": "Checkout.discount",
+    "description": "Checkout - Coupon label",
+    "defaultMessage": "Coupon"
   },
   {
     "id": "Sidebar.checkoutAction",

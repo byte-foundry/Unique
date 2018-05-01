@@ -14,7 +14,6 @@ class Footer extends React.Component {
     this.state = {};
   }
   render() {
-    console.log(this.props);
     return (
       <div
         className={`Footer ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"} ${
@@ -38,6 +37,7 @@ class Footer extends React.Component {
                 <ShortcutsHelper
                   shouldShowTooltips={this.props.shouldShowTooltips}
                   toggleTooltips={this.props.toggleTooltips}
+                  isBlackOnWhite={this.props.isBlackOnWhite}
                 />
               )}
               {this.props.pathname === "/app/customize" && (
@@ -47,6 +47,8 @@ class Footer extends React.Component {
                   switchBlackOnWhite={this.props.switchBlackOnWhite}
                   changeFontSize={this.props.changeFontSize}
                   fontSize={this.props.fontSize}
+                  isBlackOnWhite={this.props.isBlackOnWhite}
+                  isGlyphMode={this.props.isGlyphMode}
                 />
               )}
             </div>
@@ -67,7 +69,8 @@ Footer.propTypes = {
   switchBlackOnWhite: PropTypes.func.isRequired,
   changeFontSize: PropTypes.func.isRequired,
   switchGlyphMode: PropTypes.func.isRequired,
-  fontSize: PropTypes.number.isRequired
+  fontSize: PropTypes.number.isRequired,
+  isGlyphMode: PropTypes.bool.isRequired,
 };
 
 Footer.defaultProps = {};
