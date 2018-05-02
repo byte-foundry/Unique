@@ -712,7 +712,11 @@ export const loginToGraphCool = (accessToken, shouldRedirect = true) => (dispatc
         shouldLogout: false,
       });
       /* global Intercom */
-      Intercom('update', { email: res.user.email });
+      Intercom('update', { email: res.user.email, occupation: 'unique_user'});
+      Intercom('update', {
+        'job-title': 'unique_user',
+      });
+      Intercom('trackEvent', 'logged-from-unique');
       if (shouldRedirect) {
         dispatch(loadLibrary());
       }
