@@ -35,7 +35,7 @@ class Authenticate extends React.Component {
       isSignIn: false,
       isConnecting: false,
       serviceConnecting: {
-        mail: false,
+        email: false,
         google: false,
         facebook: false,
         twitter: false,
@@ -109,7 +109,7 @@ class Authenticate extends React.Component {
         this.setState({
           isConnecting: true,
           serviceConnecting: {
-            mail: true,
+            email: true,
             google: false,
             facebook: false,
             twitter: false,
@@ -189,7 +189,7 @@ class Authenticate extends React.Component {
         this.setState({
           isConnecting: true,
           serviceConnecting: {
-            mail: true,
+            email: true,
             google: false,
             facebook: false,
             twitter: false,
@@ -243,7 +243,7 @@ class Authenticate extends React.Component {
       this.setState({
         isConnecting: true,
         serviceConnecting: {
-          mail: false,
+          email: false,
           google: false,
           facebook: true,
           twitter: false,
@@ -271,7 +271,7 @@ class Authenticate extends React.Component {
       this.setState({
         isConnecting: true,
         serviceConnecting: {
-          mail: false,
+          email: false,
           google: true,
           facebook: false,
           twitter: false,
@@ -299,7 +299,7 @@ class Authenticate extends React.Component {
       this.setState({
         isConnecting: true,
         serviceConnecting: {
-          mail: false,
+          email: false,
           google: false,
           facebook: false,
           twitter: true,
@@ -340,7 +340,7 @@ class Authenticate extends React.Component {
         },
         isConnecting: false,
         serviceConnecting: {
-          mail: false,
+          email: false,
           google: false,
           facebook: false,
           twitter: false,
@@ -448,6 +448,10 @@ class Authenticate extends React.Component {
               {text => (
                 <Button
                   mode="full"
+                  className={`email-button ${
+                    this.state.isConnecting &&
+                    this.state.serviceConnecting.email ? 'loading' : ''
+                  }`}
                   label={text}
                   onClick={() => {
                     if (!this.state.isConnecting) {
@@ -627,6 +631,10 @@ class Authenticate extends React.Component {
               {text => (
                 <Button
                   mode="full"
+                  className={`email-button ${
+                    this.state.isConnecting &&
+                    this.state.serviceConnecting.email ? 'loading' : ''
+                  }`}
                   label={text}
                   onClick={() => {
                     if (!this.state.isConnecting) {
