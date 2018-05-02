@@ -229,6 +229,11 @@ Checkout.propTypes = {
   fontName: PropTypes.string,
   createFontVariants: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
+  familyName: PropTypes.string.isRequired,
+};
+
+Checkout.defaultProps = {
+  familyName: '',
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Checkout));

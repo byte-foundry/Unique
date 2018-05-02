@@ -5,6 +5,7 @@ export const STRIPE_PUBLISHABLE =
 export const PAYMENT_SERVER_URL =
   process.env.REACT_APP_UNIQUE_ENV === 'production'
     ? 'https://unique-back.prototypo.io/create-package/'
+    //    : 'http://localhost:8004/create-package/';
     : 'https://unique-back.prototypo.io/dev/create-package/';
 export const S3_URL =
   process.env.REACT_APP_UNIQUE_ENV === 'production'
@@ -36,21 +37,21 @@ export const EXPORT_SUBSET =
 export const COUPON_SERVER_URL = `${AWS_URL}/unique/coupons/`;
 
 
-const dblTouchTapMaxDelay = 300
+const dblTouchTapMaxDelay = 300;
 let latestTouchTap = {
   time: 0,
   target: null,
-}
+};
 
-export const isDblTouchTap = function(event) {
+export const isDblTouchTap = function (event) {
   const touchTap = {
     time: new Date().getTime(),
     target: event.currentTarget,
-  }
+  };
   const isFastDblTouchTap = (
     touchTap.target === latestTouchTap.target &&
     touchTap.time - latestTouchTap.time < dblTouchTapMaxDelay
-  )
-  latestTouchTap = touchTap
-  return isFastDblTouchTap
-}
+  );
+  latestTouchTap = touchTap;
+  return isFastDblTouchTap;
+};

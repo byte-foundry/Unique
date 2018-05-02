@@ -125,6 +125,10 @@
   margin-bottom: 15px;
 }
 
+.Sidebar.checkout .button-checkout.disabled {
+  opacity: 0.4;
+}
+
 @media (max-width: 576px) {
   .Sidebar.small {
     background: none;
