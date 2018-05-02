@@ -113,15 +113,15 @@ const onToken = (
 };
 
 const SkipCard = props => (
-      <FormattedMessage
-        id="Sidebar.checkoutAction"
-        defaultMessage="Checkout"
-        description="Sidebar - Checkout action"
-      >
-        {text => (
-          <Button
-            className="button-checkout"
-            onClick={onToken(
+  <FormattedMessage
+    id="Sidebar.checkoutAction"
+    defaultMessage="Checkout"
+    description="Sidebar - Checkout action"
+  >
+    {text => (
+      <Button
+        className="button-checkout"
+        onClick={onToken(
               props.amount,
               'Buy with stripe',
               props.afterPayment,
@@ -135,12 +135,12 @@ const SkipCard = props => (
               props.projectId,
               true,
             )}
-            mode="white"
-            label={text}
-          />
+        mode="white"
+        label={text}
+      />
         )}
-      </FormattedMessage>
-    );
+  </FormattedMessage>
+);
 
 const Checkout = props =>
   (props.skipCard ? (
