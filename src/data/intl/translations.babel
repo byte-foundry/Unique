@@ -6355,9 +6355,9 @@
                     <concept_node>
                         <name>dbClick</name>
                         <definition_loaded>false</definition_loaded>
-                        <description></description>
+                        <description>TemplateChoice double-click hint</description>
                         <comment></comment>
-                        <default_text></default_text>
+                        <default_text>Double-click to select an option and go straight to the next step</default_text>
                         <translations>
                             <translation>
                                 <language>Lt-sr-SP</language>
