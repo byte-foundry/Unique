@@ -933,55 +933,65 @@ export const createFontVariants = () => (dispatch, getState) => {
     'ULTRA LIGHT',
   ];
   //  --  Create thickness variant
-  const thicknessChoices = currentPreset.steps.find(e => e.name.toUpperCase() === 'THICKNESS').choices;
-  const thicknessChoiceIndex = currentPreset.steps.findIndex(e => e.name.toUpperCase() === 'THICKNESS');
-  // Check which possibleThickness are in the presets
-  const thicknessVariantPossibilities = thicknessChoices.filter(e =>
-    possibleThickness.includes(e.name.toUpperCase()));
-  // Remove selected thickness
-
-  const filteredThicknessVariantPossibilities = thicknessVariantPossibilities.filter(e => e.name !== choicesMade[thicknessChoiceIndex].name);
-  const choicesToKeep = choicesMade.filter((e, index) => e && (index !== thicknessChoiceIndex));
-  // Create fonts - Apply currentParams then thickness choice values
-  const promiseArray = [];
-  const possibleVariants = [];
-  filteredThicknessVariantPossibilities.forEach((choice) => {
-    promiseArray.push(new Promise((resolve) => {
-      dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
-        prototypoFontFactory
-          .createFont(
-            `${fontName}Variant${choice.name}`,
-            templateNames[templates[currentPreset.template]],
-            true,
-          )
-          .then((createdFont) => {
-            possibleVariants.push({
-              name: `${fontName}Variant${choice.name}`,
-              variant: choice.name,
-            });
-            const params = getCalculatedValues(
-              choice,
-              choicesToKeep,
-              currentPreset,
-            );
-            createdFont.changeParams(params, chosenWord);
-            dispatch(storeCreatedFont(
-              createdFont,
+  const thicknessStep = currentPreset.steps.find(e => e.name.toUpperCase() === 'THICKNESS');
+  if (thicknessStep) {
+    const thicknessChoices = thicknessStep.choices;
+    const thicknessChoiceIndex = currentPreset.steps.findIndex(e => e.name.toUpperCase() === 'THICKNESS');
+    // Check which possibleThickness are in the presets
+    const thicknessVariantPossibilities = thicknessChoices.filter(e =>
+      possibleThickness.includes(e.name.toUpperCase()));
+    // Remove selected thickness
+  
+    const filteredThicknessVariantPossibilities = thicknessVariantPossibilities.filter(e => e.name !== choicesMade[thicknessChoiceIndex].name);
+    const choicesToKeep = choicesMade.filter((e, index) => e && (index !== thicknessChoiceIndex));
+    // Create fonts - Apply currentParams then thickness choice values
+    const promiseArray = [];
+    const possibleVariants = [];
+    filteredThicknessVariantPossibilities.forEach((choice) => {
+      promiseArray.push(new Promise((resolve) => {
+        dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+          prototypoFontFactory
+            .createFont(
               `${fontName}Variant${choice.name}`,
-            ));
-            resolve(true);
-          });
+              templateNames[templates[currentPreset.template]],
+              true,
+            )
+            .then((createdFont) => {
+              possibleVariants.push({
+                name: `${fontName}Variant${choice.name}`,
+                variant: choice.name,
+              });
+              const params = getCalculatedValues(
+                choice,
+                choicesToKeep,
+                currentPreset,
+              );
+              createdFont.changeParams(params, chosenWord);
+              dispatch(storeCreatedFont(
+                createdFont,
+                `${fontName}Variant${choice.name}`,
+              ));
+              resolve(true);
+            });
+        });
+      }));
+    });
+    Promise.all(promiseArray).then(() => {
+      // All set, ready to customize
+      dispatch({
+        type: CREATE_FONT_VARIANTS,
+        possibleVariants,
       });
-    }));
-  });
-  Promise.all(promiseArray).then(() => {
-    // All set, ready to customize
+      dispatch(setStable());
+    });
+  }
+  else {
     dispatch({
       type: CREATE_FONT_VARIANTS,
-      possibleVariants,
+      possibleVariants: [],
     });
     dispatch(setStable());
-  });
+  }
 };
 
 export const updateSliderFont = newParams => (dispatch, getState) => {
