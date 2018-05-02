@@ -172,6 +172,10 @@
   width: 30%;
 }
 
+.Authenticate .email-button.loading {
+  padding: 20px 40px;
+}
+
 .Authenticate .mode-switch {
   font-size: 12px;
   text-align: center;
