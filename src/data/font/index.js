@@ -164,12 +164,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
       userAgent: navigator.userAgent,
       language: navigator.language,
     });
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'Template',
-      eventAction: 'Selected',
-      eventLabel: font.variant.family.name,
-    });
+    ga('send', 'event', 'Template', 'Selected', font.variant.family.name);
   } catch (e) {
   }
   dispatch(resetCheckout());
@@ -676,12 +671,7 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
           userAgent: navigator.userAgent,
           language: navigator.language,
         });
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Font',
-          eventAction: 'Finished',
-          eventLabel: currentPreset.steps[step - 1].name,
-        });
+        ga('send', 'event', 'Font', 'Finished', currentPreset.steps[step - 1].name);
       } catch (e) {
       }
 
@@ -832,12 +822,7 @@ export const selectChoice = (choice, isSpecimen = false) => (
       userAgent: navigator.userAgent,
       language: navigator.language,
     });
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'Step',
-      eventAction: 'Selected',
-      eventLabel: currentPreset.steps[step - 1].name,
-    });
+    ga('send', 'event', 'Step', 'Selected', currentPreset.steps[step - 1].name);
   } catch (e) {
   }
   // Tracking : update selected count
