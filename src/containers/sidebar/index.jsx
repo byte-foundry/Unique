@@ -15,31 +15,31 @@ import './Sidebar.css';
 import { ReactComponent as ProfileIcon } from './profile.svg';
 
 const Sidebar = props => (
-      <div
-        className={`Sidebar ${props.mode !== 'checkout' ? 'small' : ''} ${
+  <div
+    className={`Sidebar ${props.mode !== 'checkout' ? 'small' : ''} ${
           props.mode === 'checkout' ? 'checkout' : ''
         }`}
-      >
-        <ProfileIcon
-          className="icon-profile"
-          onClick={() => {
+  >
+    <ProfileIcon
+      className="icon-profile"
+      onClick={() => {
             props.isAuthenticated
               ? props.loadLibrary()
               : props.goToAuth();
           }}
+    />
+    {props.mode === 'checkout' && (
+    <div className="sidebar-checkout">
+      <h2 className="sidebar-checkout-title">
+        {props.userFontName}&nbsp;
+        <FormattedMessage
+          id="Checkout.sidebarTitle"
+          defaultMessage="Package"
+          description="Checkout - Sidebar title"
         />
-        {props.mode === 'checkout' && (
-          <div className="sidebar-checkout">
-            <h2 className="sidebar-checkout-title">
-              {props.userFontName}&nbsp;
-              <FormattedMessage
-                id="Checkout.sidebarTitle"
-                defaultMessage="Package"
-                description="Checkout - Sidebar title"
-              />
-            </h2>
-            <div className="choices">
-              {props.checkoutOptions.map(option =>
+      </h2>
+      <div className="choices">
+        {props.checkoutOptions.map(option =>
                   option.selected && (
                     <div className="choice">
                       <span className="left">{option.name}</span>
@@ -62,32 +62,32 @@ const Sidebar = props => (
                       </span>
                     </div>
                   ))}
-              {props.coupon.discount && (
-                <div className="choice">
-                  <span className="left">
-                    <FormattedMessage
-                      id="Checkout.discount"
-                      defaultMessage="Coupon"
-                      description="Checkout - Coupon label"
-                    />
-                  </span>
-                  <span className="right">
-                    {`-${props.coupon.discount}%`}
-                  </span>
-                </div>
+        {props.coupon.discount && (
+        <div className="choice">
+          <span className="left">
+            <FormattedMessage
+              id="Checkout.discount"
+              defaultMessage="Coupon"
+              description="Checkout - Coupon label"
+            />
+          </span>
+          <span className="right">
+            {`-${props.coupon.discount}%`}
+          </span>
+        </div>
               )}
-            </div>
-            <h2 className="baseprice">
-              {parseFloat(props.basePrice).toLocaleString(
+      </div>
+      <h2 className="baseprice">
+        {parseFloat(props.basePrice).toLocaleString(
                 props.locale_full,
                 {
                   style: 'currency',
                   currency: props.currency,
                 },
               )}
-            </h2>
-            <h2 className="price">
-              {props.coupon.discount
+      </h2>
+      <h2 className="price">
+        {props.coupon.discount
                 ? parseFloat(props.checkoutPrice -
                       props.checkoutPrice *
                         props.coupon.discount /
@@ -102,34 +102,35 @@ const Sidebar = props => (
                       currency: props.currency,
                     },
                   )}
-            </h2>
-            <FormattedMessage
-              id="Sidebar.checkoutAction"
-              defaultMessage="Checkout"
-              description="Sidebar - Checkout action"
-            >
-              {text => (
-                <Checkout
-                  title="Unique"
-                  amount={props.checkoutPrice}
-                  description="Your unique package"
-                  skipCard={props.coupon.discount === 100}
-                >
-                  <Button
-                    className="button-checkout"
-                    onClick={() => {}}
-                    mode="white"
-                    label={text}
-                    checkoutOptions={props.checkoutOptions}
-                  />
-                </Checkout>
+      </h2>
+      <FormattedMessage
+        id="Sidebar.checkoutAction"
+        defaultMessage="Checkout"
+        description="Sidebar - Checkout action"
+      >
+        {text => (
+          <Checkout
+            title="Unique"
+            amount={props.checkoutPrice}
+            description="Your unique package"
+            skipCard={props.coupon.discount === 100}
+            disabled={props.userFontName === ''}
+          >
+            <Button
+              className={`button-checkout ${props.userFontName === '' ? 'disabled' : ''}`}
+              onClick={() => {}}
+              mode="white"
+              label={text}
+              checkoutOptions={props.checkoutOptions}
+            />
+          </Checkout>
               )}
-            </FormattedMessage>
-            <CouponInput storeCoupon={props.storeCoupon} coupon={props.coupon} />
-          </div>
+      </FormattedMessage>
+      <CouponInput storeCoupon={props.storeCoupon} coupon={props.coupon} />
+    </div>
         )}
-      </div>
-    );
+  </div>
+);
 
 Sidebar.propTypes = {
   step: PropTypes.number.isRequired,
