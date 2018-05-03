@@ -107,7 +107,7 @@ class Library extends React.Component {
                     AaBbCc
                   </div>
                   <div className="need">{project.need}</div>
-                  <div className="fontName">{project.name || 'Undefined'}</div>
+                  <div className="fontName">{decodeURI(project.name) || 'Undefined'}</div>
                   <div className="actions">
                     <FormattedMessage
                       id="Library.deleteAction"
@@ -133,7 +133,7 @@ class Library extends React.Component {
                       {text => (
                         <Button
                           onClick={() =>
-                            this.props.loadProject(project.id, project.name)
+                            this.props.loadProject(project.id, decodeURI(project.name))
                           }
                           label={text}
                           mode="full"
@@ -185,7 +185,7 @@ class Library extends React.Component {
                     AaBbCc
                   </div>
                   <div className="need">{project.need}</div>
-                  <div className="fontName">{project.name || 'Undefined'}</div>
+                  <div className="fontName">{decodeURI(project.name) || 'Undefined'}</div>
                   <div className="actions">
                     <FormattedMessage
                       id="Library.downloadAction"

@@ -197,7 +197,7 @@ const Checkout = props =>
 const mapStateToProps = state => ({
   email: state.user.email,
   currency: state.ui.currency,
-  userFontName: state.user.currentProject.name,
+  userFontName: decodeURI(state.user.currentProject.name),
   checkoutOptions: state.user.checkoutOptions.filter(e => e.selected === true),
   coupon: state.user.coupon,
   projectId: state.user.currentProject.id,
