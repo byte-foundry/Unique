@@ -9,6 +9,8 @@ import {
   authenticateGoogleUser,
   authenticateTwitterUser,
   authenticateAnonymousUser,
+  getPresetExportedCount,
+  updatePresetExportedCount,
   signupUser,
   getUserProjects,
   updateProject,
@@ -464,6 +466,7 @@ export const afterPayment = res => (dispatch, getState) => {
     anonymous,
   } = getState().user;
   const { currency } = getState().ui;
+  const { currentPreset } = getState().font;
   const { data } = res;
   const isPayed = data.paid;
   dispatch(storeCoupon({}));
@@ -494,6 +497,12 @@ export const afterPayment = res => (dispatch, getState) => {
     Intercom('trackEvent', 'unique-bought-font');
   } catch (e) {
   }
+  request(GRAPHQL_API, getPresetExportedCount(currentPreset.id))
+      .then(data =>
+        request(
+          GRAPHQL_API,
+          updatePresetExportedCount(currentPreset.id, data.Preset.exported ? data.Preset.exported + 1 : 1),
+        ))
   if (graphQLToken && !anonymous) {
     dispatch(storeProject(name, { bought: isPayed }));
   } else {
