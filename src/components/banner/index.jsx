@@ -42,14 +42,13 @@ class Banner extends React.Component {
             this.setState({ shouldDisplayBanner: false });
           }}
         >
-          {this.banners.launch}
           <a
               title="Unique Product hunt"
               href="https://www.producthunt.com/posts/unique"
               rel="noopener noreferrer"
               target="_blank"
             >
-              {this.banners.launch2}
+              {this.banners.launch}
             </a>
         </div>
       )
