@@ -248,7 +248,7 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
             .request(updateProject(
               projectId,
               choicesMade,
-              fontName,
+              encodeURI(fontName),
               bought,
               filteredCheckoutOptions,
             ))
@@ -274,7 +274,7 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
               graphqlID,
               currentPreset.id,
               choicesMade,
-              fontName,
+              encodeURI(fontName),
               bought,
               need,
               filteredCheckoutOptions,
