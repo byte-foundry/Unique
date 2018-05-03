@@ -114,7 +114,7 @@ const Sidebar = props => (
             amount={props.checkoutPrice}
             description="Your unique package"
             skipCard={props.coupon.discount === 100}
-            disabled={true}
+            disabled={props.userFontName === ''}
           >
             <Button
               className={`button-checkout ${props.userFontName === '' ? 'disabled' : ''}`}
