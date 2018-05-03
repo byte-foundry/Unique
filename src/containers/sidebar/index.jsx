@@ -114,11 +114,18 @@ const Sidebar = props => (
             amount={props.checkoutPrice}
             description="Your unique package"
             skipCard={props.coupon.discount === 100}
-            disabled={props.userFontName === ''}
+            disabled={true}
           >
             <Button
               className={`button-checkout ${props.userFontName === '' ? 'disabled' : ''}`}
-              onClick={() => {}}
+              loading={props.userFontName === ''}
+              onClick={(e) => {
+                if (props.userFontName === '') {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  return;
+                }
+              }}
               mode="white"
               label={text}
               checkoutOptions={props.checkoutOptions}
@@ -167,7 +174,7 @@ const mapStateToProps = state => ({
   option5Price: state.user.option5Price,
   option20Price: state.user.option20Price,
   coupon: state.user.coupon,
-  userFontName: state.user.currentProject.name,
+  userFontName: decodeURI(state.user.currentProject.name),
 });
 
 const mapDispatchToProps = dispatch =>

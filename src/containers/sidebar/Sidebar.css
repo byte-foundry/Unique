@@ -123,10 +123,13 @@
   text-align: center;
   margin-top: 50px;
   margin-bottom: 15px;
+  user-select: none;
 }
 
 .Sidebar.checkout .button-checkout.disabled {
-  opacity: 0.4;
+  background: rgba(255,255,255,0.4);
+  padding: 20px;
+  cursor: default;
 }
 
 @media (max-width: 576px) {

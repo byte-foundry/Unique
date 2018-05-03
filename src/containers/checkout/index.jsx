@@ -66,11 +66,11 @@ class Checkout extends React.Component {
     this.toggleChoice = this.toggleChoice.bind(this);
   }
   componentDidUpdate() {
-    document.querySelector('.otfLogoTextSpecimenName').innerHTML = this.props.familyName;
+    document.querySelector('.otfLogoTextSpecimenName').innerHTML = decodeURI(this.props.familyName);
   }
   componentDidMount() {
     window.scrollTo(0, 0);
-    document.querySelector('.otfLogoTextSpecimenName').innerHTML = this.props.familyName;
+    document.querySelector('.otfLogoTextSpecimenName').innerHTML = decodeURI(this.props.familyName);
     document.querySelector('.otfLogoTextSpecimenVariant').innerHTML = this.state.defaultThicknessName;
   }
   toggleChoice(name) {
@@ -100,7 +100,7 @@ class Checkout extends React.Component {
         class: 'variant',
         type: 'font',
         dbName: 'italicOption',
-        fontName: option.name,
+        fontName: decodeURI(option.name),
         price: 5,
         selected: false,
         visible: true,
