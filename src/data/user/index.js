@@ -302,12 +302,7 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
                   userAgent: navigator.userAgent,
                   language: navigator.language,
                 });
-                ga('send', {
-                  hitType: 'event',
-                  eventCategory: 'Font',
-                  eventAction: 'Saved',
-                  eventLabel: currentPreset.variant.family.name,
-                });
+                ga('send', 'event', 'Font', 'Saved', currentPreset.variant.family.name);
                 Intercom('update', {
                   unique_saved_fonts:
                     res.createUniqueProject.user.uniqueProjects.length,
@@ -487,12 +482,14 @@ export const afterPayment = res => (dispatch, getState) => {
       userAgent: navigator.userAgent,
       language: navigator.language,
     });
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'Font',
-      eventAction: 'Bought',
-      eventLabel: 'Package',
+    ga('send', 'event', 'Font', 'Bought', 'Package');
+    ga('ecommerce:addTransaction', {
+      id: graphQLToken,
+      affiliation: 'Unique',
+      revenue: checkoutPrice,
+      currency,
     });
+    ga('ecommerce:send');
 
     Intercom('trackEvent', 'unique-bought-font');
   } catch (e) {
@@ -687,12 +684,7 @@ export const loginToGraphCool = (accessToken, shouldRedirect = true) => (dispatc
       userAgent: navigator.userAgent,
       language: navigator.language,
     });
-    ga('send', {
-      hitType: 'event',
-      eventCategory: 'User',
-      eventAction: 'LoggedIn',
-      eventLabel: bought ? 'bought' : 'save',
-    });
+    ga('send', 'event', 'User', 'LoggedIn', bought ? 'bought' : 'save');
   } catch (e) {
   }
   const client = new GraphQLClient(GRAPHQL_API, {
