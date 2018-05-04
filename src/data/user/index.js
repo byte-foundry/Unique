@@ -282,6 +282,7 @@ export const storeProject = (fontName, { bought = false, noRedirect } = {}) => (
             .then((res) => {
               const { bought, name, id } = res.createUniqueProject;
               const metadata = {
+                fontName,
                 unique_preset: id,
                 choices_made: choicesMade
                   .map((choice, index) => {
