@@ -35,6 +35,7 @@ export const CLEAR_IS_LOADING = 'font/CLEAR_IS_LOADING';
 export const LOAD_FONT_DATA = 'font/LOAD_FONT_DATA';
 export const SET_FONT_BOUGHT = 'font/SET_FONT_BOUGHT';
 export const CREATE_FONT_VARIANTS = 'font/CREATE_FONT_VARIANTS';
+export const CLEAN_FONT_DATA = 'font/CLEAN_FONT_DATA';
 
 const initialState = {
   fontName: '',
@@ -138,6 +139,25 @@ export default (state = initialState, action) => {
         alreadyBought: action.bought,
         choicesMade: action.choicesMade,
       };
+    
+    case CLEAN_FONT_DATA:
+      return {
+        ...state,
+        fontName: '',
+        initialValues: {},
+        currentPreset: {
+          font: {},
+        },
+        step: 0,
+        isLoading: false,
+        stepBaseValues: {},
+        choicesMade: [null],
+        choicesFontsName: [],
+        sliderFontName: '',
+        currentParams: {},
+        alreadyBought: false,
+        possibleVariants: [],
+      }
 
     case CREATE_FONT_VARIANTS:
       return {
@@ -365,6 +385,23 @@ export const defineNeed = need => (dispatch) => {
   });
   dispatch(updateProjectInfos());
   dispatch(loadPresets());
+  /* global Intercom */
+  /* global fbq */
+  /* global ga */
+  try {
+    Intercom('trackEvent', 'unique-selected-need', {
+      need,
+    });
+    fbq('track', 'ViewContent', {
+      content_name: need,
+      content_category: 'Need',
+      referrer: document.referrer,
+      userAgent: navigator.userAgent,
+      language: navigator.language,
+    });
+    ga('send', 'event', 'Need', need, '');
+  } catch (e) {
+  }
 };
 
 export const setFontBought = () => (dispatch) => {
@@ -378,6 +415,20 @@ export const updateSubset = () => (dispatch, getState) => {
   if (step) {
     dispatch(updateValues(step));
   }
+};
+
+export const cleanData = () => (dispatch, getState) => {
+  const { currentPreset } = getState().font;
+  const { fonts } = getState().createdFonts;
+  fonts[`${currentPreset.variant.family.name}${currentPreset.variant.name}`].changeParams(
+    currentPreset.baseValues,
+    currentPreset.tags.map(
+      tag => tag.charAt(0).toUpperCase() + tag.slice(1)
+    ).join(',')
+  );
+  dispatch({
+    type: CLEAN_FONT_DATA,
+  });
 };
 
 const getCalculatedValues = (choice, choicesMade, currentPreset) => {
