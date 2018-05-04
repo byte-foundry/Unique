@@ -338,6 +338,10 @@ class SpecimenView extends React.Component {
                     onClick={() => {
                       if (this.state.fontName) {
                         this.props.goToCheckout(this.state.fontName);
+                        /* global ga */
+                        if (typeof ga === 'function') {
+                          ga('send', 'event', 'Specimen', 'Click', 'Download1');
+                        }
                       } else {
                         this.setState({
                           isModalOpened: true,
@@ -362,6 +366,10 @@ class SpecimenView extends React.Component {
                     onClick={() => {
                       if (this.state.fontName) {
                         this.props.storeProject(this.state.fontName);
+                        /* global ga */
+                        if (typeof ga === 'function') {
+                          ga('send', 'event', 'Specimen', 'Click', 'SaveButton');
+                        }
                       } else {
                         this.setState({
                           isModalOpened: true,
@@ -472,6 +480,10 @@ class SpecimenView extends React.Component {
                         onClick={() => {
                           if (this.state.fontName) {
                             this.props.goToCheckout(this.state.fontName);
+                            /* global ga */
+                          if (typeof ga === 'function') {
+                            ga('send', 'event', 'Specimen', 'Click', 'Download2');
+                          }
                           } else {
                             this.setState({
                               isModalOpened: true,
@@ -584,6 +596,10 @@ class SpecimenView extends React.Component {
                   onClick={() => {
                     if (this.state.fontName) {
                       this.props.goToCheckout(this.state.fontName);
+                      /* global ga */
+                      if (typeof ga === 'function') {
+                        ga('send', 'event', 'Specimen', 'Click', 'Download3');
+                      }
                     } else {
                       this.setState({
                         isModalOpened: true,
