@@ -31,6 +31,8 @@ const errorPayment = (data) => {
   console.error(data);
 };
 
+let successfullPayment = false;
+
 const onToken = (
   amount,
   description,
@@ -44,6 +46,7 @@ const onToken = (
   coupon,
   projectId,
 ) => (token) => {
+  successfullPayment = true;
   setUnstable();
   const fontsSelected = checkoutOptions.filter(e => e.type === 'font' || e.dbName === 'baseFont');
   const promiseArray = [];
@@ -170,7 +173,10 @@ const Checkout = props =>
         false,
       )}
       opened={() => {
-        /* global fbq */
+        successfullPayment = false;
+        /* global Intercom */
+  /* global fbq */
+  /* global ga */
         try {
           fbq('track', 'InitiateCheckout', {
             content_name: 'Package',
@@ -183,7 +189,21 @@ const Checkout = props =>
             userAgent: navigator.userAgent,
             language: navigator.language,
           });
+          Intercom('trackEvent', 'unique-opened-stripe-checkout');
+          ga('send', 'event', 'Checkout', 'Stripe', 'opened');
         } catch (e) {
+        }
+      }}
+      closed={() => {
+        if(!successfullPayment) {
+          /* global Intercom */
+          /* global fbq */
+          /* global ga */
+          try {
+            Intercom('trackEvent', 'unique-closed-stripe-checkout');
+            ga('send', 'event', 'Checkout', 'Stripe', 'closed');
+          } catch (e) {
+          }
         }
       }}
       currency={props.currency}
