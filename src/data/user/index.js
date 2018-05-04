@@ -486,7 +486,7 @@ export const afterPayment = res => (dispatch, getState) => {
       userAgent: navigator.userAgent,
       language: navigator.language,
     });
-    ga('send', 'event', 'Font', 'Bought', 'Package');
+    ga('send', 'event', 'Checkout', 'Stripe', 'Finished');
     ga('ecommerce:addTransaction', {
       id: graphQLToken,
       affiliation: 'Unique',

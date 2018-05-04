@@ -170,7 +170,9 @@ const Checkout = props =>
         false,
       )}
       opened={() => {
-        /* global fbq */
+        /* global Intercom */
+  /* global fbq */
+  /* global ga */
         try {
           fbq('track', 'InitiateCheckout', {
             content_name: 'Package',
@@ -183,6 +185,8 @@ const Checkout = props =>
             userAgent: navigator.userAgent,
             language: navigator.language,
           });
+          Intercom('trackEvent', 'unique-opened-stripe-checkout');
+          ga('send', 'event', 'Checkout', 'Stripe', 'opened');
         } catch (e) {
         }
       }}
