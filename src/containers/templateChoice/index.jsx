@@ -11,7 +11,7 @@ import { Shortcuts } from "react-shortcuts";
 import "./TemplateChoice.css";
 import Template from "../../components/template/";
 
-import { selectFont } from "../../data/font";
+import { selectFont, cleanData } from "../../data/font";
 import { isDblTouchTap } from "../../data/constants";
 
 const isMostSelected = (presets, font) => {
@@ -33,6 +33,9 @@ class TemplateChoice extends React.Component {
       templateIndex: -1
     };
     this.handleShortcuts = this.handleShortcuts.bind(this);
+    if (Object.keys(props.currentParams).length > 0) {
+      props.cleanData();
+    }
   }
   componentDidMount() {
     this.templateChoiceWrapper.focus();
@@ -202,11 +205,12 @@ class TemplateChoice extends React.Component {
 const mapStateToProps = state => ({
   presets: state.presets.filteredPresets,
   isLoading: state.font.isLoading,
-  chosenWord: state.user.chosenWord
+  chosenWord: state.user.chosenWord,
+  currentParams: state.font.currentParams,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { selectFont, redirectToHome: () => push("/app/") },
+    { selectFont, redirectToHome: () => push("/app/"), cleanData },
     dispatch
   );
 
@@ -214,7 +218,8 @@ TemplateChoice.propTypes = {
   selectFont: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   redirectToHome: PropTypes.func.isRequired,
-  chosenWord: PropTypes.string
+  chosenWord: PropTypes.string,
+  cleanData: PropTypes.func.isRequired,
 };
 
 TemplateChoice.defaultProps = {
