@@ -111,6 +111,13 @@ const onToken = (
       .catch((err) => {
         setStable();
         errorPayment(err);
+          /* global fbq */
+          /* global ga */
+          try {
+            Intercom('trackEvent', 'unique-error-checkout', err);
+            ga('send', 'event', 'Checkout', 'Stripe', 'error');
+          } catch (e) {
+          }
       });
   });
 };
