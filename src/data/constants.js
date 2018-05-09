@@ -35,7 +35,7 @@ export const EXPORT_SUBSET =
   ' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890$€¢%‰#<+=−>¡!¿?.:;…-–—()[]{}/\\&*@“”‘’«»‹›ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöøùúûüýÿ,';
 
 export const COUPON_SERVER_URL = `${AWS_URL}/unique/coupons/`;
-
+export const TEMPLATE_URL = `${AWS_URL}/fonts/`;
 
 const dblTouchTapMaxDelay = 300;
 let latestTouchTap = {

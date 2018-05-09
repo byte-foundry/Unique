@@ -7534,9 +7534,9 @@ prop-types@*, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-prototypo-library@^1.2.20:
-  version "1.2.20"
-  resolved "https://registry.yarnpkg.com/prototypo-library/-/prototypo-library-1.2.20.tgz#0dd0cc7ae2c1cc1d429b35d44f5fffbc5783a245"
+prototypo-library@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/prototypo-library/-/prototypo-library-1.3.0.tgz#c07cabd969af2237e62643e5439a005635f756b7"
   dependencies:
     lodash "~4.14.0"
 
