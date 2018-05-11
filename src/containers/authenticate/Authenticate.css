@@ -151,13 +151,29 @@
   float: right;
 }
 
+.Authenticate .signin .Button.full.reset-cancel-button {
+    float: left;
+}
+
+.Authenticate .signin .Button.full.reset-cancel-button, .Button.full.reset-button {
+  margin-top: 50px;
+}
+
 .Authenticate .auth-alternative {
   font-size: 12px;
-  color: #b8b5c0;
+  color: #1c0d47;
   padding-top: 30px;
   padding-bottom: 30px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.Authenticate .lost-button {
+  color: #b8b5c0;
+  border: none;
+  padding: 0;
+  padding-top: 10px;
+  display: inline-block;
 }
 
 .Authenticate .sso-buttons {
@@ -172,7 +188,7 @@
   width: 30%;
 }
 
-.Authenticate .email-button.loading {
+.Authenticate .email-button.loading, .Authenticate .reset-button.loading  {
   padding: 20px 40px;
 }
 

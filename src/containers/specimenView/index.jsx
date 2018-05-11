@@ -336,12 +336,12 @@ class SpecimenView extends React.Component {
                   <Button
                     className="button-download"
                     onClick={() => {
+                      /* global ga */
+                      if (typeof ga === 'function') {
+                        ga('send', 'event', 'Specimen', 'Click', 'Download1');
+                      }
                       if (this.state.fontName) {
-                        this.props.goToCheckout(this.state.fontName);
-                        /* global ga */
-                        if (typeof ga === 'function') {
-                          ga('send', 'event', 'Specimen', 'Click', 'Download1');
-                        }
+                        this.props.goToCheckout(this.state.fontName);                        
                       } else {
                         this.setState({
                           isModalOpened: true,
@@ -364,12 +364,12 @@ class SpecimenView extends React.Component {
                   <Button
                     className="button-save"
                     onClick={() => {
+                      /* global ga */
+                      if (typeof ga === 'function') {
+                        ga('send', 'event', 'Specimen', 'Click', 'SaveButton');
+                      }
                       if (this.state.fontName) {
-                        this.props.storeProject(this.state.fontName);
-                        /* global ga */
-                        if (typeof ga === 'function') {
-                          ga('send', 'event', 'Specimen', 'Click', 'SaveButton');
-                        }
+                        this.props.storeProject(this.state.fontName);                        
                       } else {
                         this.setState({
                           isModalOpened: true,
@@ -478,12 +478,12 @@ class SpecimenView extends React.Component {
                       <Button
                         className="button-download"
                         onClick={() => {
-                          if (this.state.fontName) {
-                            this.props.goToCheckout(this.state.fontName);
-                            /* global ga */
+                          /* global ga */   
                           if (typeof ga === 'function') {
                             ga('send', 'event', 'Specimen', 'Click', 'Download2');
                           }
+                          if (this.state.fontName) {
+                            this.props.goToCheckout(this.state.fontName);                                                   
                           } else {
                             this.setState({
                               isModalOpened: true,
@@ -594,12 +594,12 @@ class SpecimenView extends React.Component {
                 <Button
                   className="button-download download-bottom"
                   onClick={() => {
+                    /* global ga */
+                    if (typeof ga === 'function') {
+                      ga('send', 'event', 'Specimen', 'Click', 'Download3');
+                    }
                     if (this.state.fontName) {
-                      this.props.goToCheckout(this.state.fontName);
-                      /* global ga */
-                      if (typeof ga === 'function') {
-                        ga('send', 'event', 'Specimen', 'Click', 'Download3');
-                      }
+                      this.props.goToCheckout(this.state.fontName);                      
                     } else {
                       this.setState({
                         isModalOpened: true,
