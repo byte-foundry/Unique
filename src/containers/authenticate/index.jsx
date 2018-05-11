@@ -68,7 +68,8 @@ class Authenticate extends React.Component {
         firstName: "",
         lastName: ""
       },
-      shouldShowPassword: false
+      shouldShowPassword: false,
+      successReset: false
     };
     this.renderSignIn = this.renderSignIn.bind(this);
     this.renderSignUp = this.renderSignUp.bind(this);
@@ -190,14 +191,12 @@ class Authenticate extends React.Component {
             lastName: "",
             general: "",
             reset: "invalid"
-          }
+          },
+          successReset: false
         });
         return;
       }
       if (!this.state.isConnecting) {
-        // this.props.resetEmail(
-        //   this.state.formValues.email,
-        // );
         this.setState({
           isConnecting: true,
           serviceConnecting: {
@@ -222,21 +221,26 @@ class Authenticate extends React.Component {
             lastName: "",
             general: "",
             reset: ""
-          }
+          },
+          successReset: false
         });
         axios
-          .put(`${AWS_URL}/users/${this.state.formValues.email}/reset_password`)
+          .put(
+            `${AWS_URL}/users/${
+              this.state.formValues.email
+            }/reset_password?platform=unique`
+          )
           .then(() => {
             this.setState({
-              isConnecting: true,
+              isConnecting: false,
               serviceConnecting: {
                 email: false,
                 google: false,
                 facebook: false,
                 twitter: false,
-                reset: true
+                reset: false
               },
-              isReset: false,
+              isReset: true,
               errors: {
                 email: false,
                 password: false,
@@ -252,12 +256,23 @@ class Authenticate extends React.Component {
                 lastName: "",
                 general: "",
                 reset: ""
-              }
+              },
+              successReset: true
             });
           })
           .catch(err => {
             console.log(err);
-            this.setState({ isConnecting: false });
+            this.setState({
+              isConnecting: false,
+              errorMessages: {
+                email: "",
+                password: "",
+                firstName: "",
+                lastName: "",
+                general: "invalid",
+                reset: ""
+              }
+            });
           });
       }
     } else {
@@ -733,6 +748,30 @@ class Authenticate extends React.Component {
               )}
             </FormattedMessage>
           </div>
+        </div>
+        {this.state.successReset && (
+          <div className="row">
+            <div className="col-lg-12 clearfix">
+              <p className="reset-success">
+                <br />
+                <FormattedMessage
+                  id="Auth.ResetSuccess"
+                  defaultMessage="Thanks! We've sent you an email with all the details required in order to reset your password. See you there!"
+                  description="Reset page reset success test"
+                />
+              </p>
+            </div>
+          </div>
+        )}
+        <div className="general-error">
+          <br />
+          {this.state.errorMessages.general !== "" && (
+            <FormattedMessage
+              id="Auth.GeneralError"
+              defaultMessage="Woops, something happened"
+              description="Login page general error"
+            />
+          )}
         </div>
       </div>
     );
