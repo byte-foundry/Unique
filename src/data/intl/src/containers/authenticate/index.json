@@ -25,9 +25,34 @@
     "defaultMessage": "Password required"
   },
   {
+    "id": "Auth.lostPasswordButton",
+    "description": "Login page log in reset password button",
+    "defaultMessage": "Forgot your password?"
+  },
+  {
     "id": "Auth.LogInFormButton",
     "description": "Login page log in form button",
     "defaultMessage": "Log in"
+  },
+  {
+    "id": "Auth.ResetCancelButton",
+    "description": "Login page reset cancel button",
+    "defaultMessage": "Cancel"
+  },
+  {
+    "id": "Auth.ResetFormButton",
+    "description": "Reset page reset form button",
+    "defaultMessage": "Reset password"
+  },
+  {
+    "id": "Auth.ResetSuccess",
+    "description": "Reset page reset success test",
+    "defaultMessage": "Thanks! We've sent you an email with all the details required in order to reset your password. See you there!"
+  },
+  {
+    "id": "Auth.GeneralError",
+    "description": "Login page general error",
+    "defaultMessage": "Woops, something happened"
   },
   {
     "id": "Auth.SignUpFirstNameLabel",
@@ -65,6 +90,11 @@
     "defaultMessage": "Woo"
   },
   {
+    "id": "Auth.ResetHeader",
+    "description": "Sign in header message if reset password",
+    "defaultMessage": "Don't worry, everything is under control"
+  },
+  {
     "id": "Auth.SignInHeaderBoughtFont",
     "description": "Sign in header message if font bought",
     "defaultMessage": "Thank you!"
@@ -73,6 +103,11 @@
     "id": "Auth.SignInHeader",
     "description": "Sign in header message",
     "defaultMessage": "Welcome back"
+  },
+  {
+    "id": "Auth.ResetMessage",
+    "description": "Sign in header message if password reset",
+    "defaultMessage": "Please fill the following input with the email adress you've used to register and we will send you a link by email to reset your password."
   },
   {
     "id": "Auth.SaveFontMessage",
@@ -93,11 +128,6 @@
     "id": "Auth.SocialMessage",
     "description": "Login page social auth CTA message",
     "defaultMessage": "Or sign up with"
-  },
-  {
-    "id": "Auth.GeneralError",
-    "description": "Login page general error",
-    "defaultMessage": "Woops, something happened"
   },
   {
     "id": "Auth.SignUpCTA",
