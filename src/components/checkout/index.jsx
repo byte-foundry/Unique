@@ -9,7 +9,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 import { FormattedMessage } from 'react-intl';
 import { afterPayment } from '../../data/user';
-import { setUnstable, setStable } from '../../data/ui';
+import { setUnstable, setStable, setErrorPayment } from '../../data/ui';
 import { getArrayBuffer } from '../../data/font';
 import { EXPORT_SUBSET } from '../../data/constants';
 
@@ -45,6 +45,7 @@ const onToken = (
   checkoutOptions,
   coupon,
   projectId,
+  setErrorPayment,
 ) => (token) => {
   successfullPayment = true;
   setUnstable();
@@ -98,6 +99,7 @@ const onToken = (
           type: 'application/zip',
         });
         saveAs(blob, 'purchase.zip');
+        setErrorPayment(false);
         successPayment(
           {
             data: {
@@ -111,6 +113,7 @@ const onToken = (
       .catch((err) => {
         setStable();
         errorPayment(err);
+        setErrorPayment(true);
           /* global fbq */
           /* global ga */
           try {
@@ -143,7 +146,7 @@ const SkipCard = props => (
               props.checkoutOptions,
               props.coupon,
               props.projectId,
-              true,
+              props.setErrorPayment,
             )}
         mode="white"
         label={text}
@@ -177,10 +180,12 @@ const Checkout = props =>
         props.checkoutOptions,
         props.coupon,
         props.projectId,
+        props.setErrorPayment,
         false,
       )}
       opened={() => {
         successfullPayment = false;
+        props.setErrorPayment(false);
         /* global Intercom */
   /* global fbq */
   /* global ga */
@@ -237,6 +242,7 @@ const mapDispatchToProps = dispatch =>
       setUnstable,
       setStable,
       getArrayBuffer,
+      setErrorPayment,
     },
     dispatch,
   );
@@ -252,6 +258,7 @@ Checkout.propTypes = {
   setStable: PropTypes.func.isRequired,
   userFontName: PropTypes.string.isRequired,
   skipCard: PropTypes.bool.isRequired,
+  setErrorPayment: PropTypes.func.isRequired,
 };
 
 Checkout.defaultProps = {

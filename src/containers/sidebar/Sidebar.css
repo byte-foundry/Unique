@@ -126,6 +126,13 @@
   user-select: none;
 }
 
+.Sidebar.checkout .error-payment {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #F67B7B;
+  text-align: center;
+}
+
 .Sidebar.checkout .button-checkout.disabled {
   background: rgba(255,255,255,0.4);
   padding: 20px;
