@@ -1,0 +1,7 @@
+[
+  {
+    "id": "App.LoadingError",
+    "description": "Loading page error message",
+    "defaultMessage": "It looks like something went wrong on our end... Could you reload the page and try again? If it still does not work, please contact us using the in-app chat."
+  }
+]

@@ -47,6 +47,16 @@
   cursor: default;
 }
 
+.App .App-header .error-message {
+  position: absolute;
+  bottom: 30px;
+  font-size: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  max-width: 550px;
+}
+
 .App-logo-wrapper {
   top: 50%;
   left: 50%;

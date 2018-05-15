@@ -18,5 +18,10 @@
     "id": "Sidebar.checkoutAction",
     "description": "Sidebar - Checkout action",
     "defaultMessage": "Checkout"
+  },
+  {
+    "id": "App.errorPayment",
+    "description": "Error payment message",
+    "defaultMessage": "Something happened during the payment process. Do not worry, no charge was issued. Please retry, maybe with another card. If it fails again, please contact us!"
   }
 ]

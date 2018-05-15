@@ -13,6 +13,7 @@ const initialState = {
   isPrototypoLoading: false,
   prototypoFontFactory: undefined,
   prototypoLoadingPromise: undefined,
+  templateDown: false,
 };
 
 export default (state = initialState, action) => {
@@ -82,6 +83,13 @@ function initFontFactory(prototypoFontFactory, resolve, dispatch) {
     resolve(prototypoFontFactory);
     initTries = 0;
   }).catch(() => {
+    /* global Intercom */
+    /* global fbq */
+    /* global ga */
+    try {
+      Intercom('trackEvent', 'unique-error-loadtemplate');
+      ga('send', 'event', 'Errors', 'Library', 'LoadTemplates');
+    } catch (e) {}
     if (initTries < 3) {
       initTries++;
       initFontFactory(prototypoFontFactory, resolve, dispatch);

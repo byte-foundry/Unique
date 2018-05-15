@@ -17,16 +17,16 @@ class Footer extends React.Component {
     return (
       <div
         className={`Footer ${this.props.isBlackOnWhite ? "" : "whiteOnBlack"} ${
-          this.props.pathname === "/app/auth" ? "whiteOnBlack" : ""
+          this.props.pathname.includes('/app/auth') ? "whiteOnBlack" : ""
         }`}
       >
         <div className="row">
           <div className="col-lg-12 col-sm-12 footer-wrapper">
             <div className="container">
               <LanguageSelect
-                pathname={this.props.pathName}
+                pathname={this.props.pathname}
                 isBlackOnWhite={
-                  this.props.pathname === "/app/auth"
+                  this.props.pathname.includes('/app/auth')
                     ? this.props.isBlackOnWhite
                     : true
                 }
