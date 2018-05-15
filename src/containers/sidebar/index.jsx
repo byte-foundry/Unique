@@ -134,6 +134,17 @@ const Sidebar = props => (
               )}
       </FormattedMessage>
       <CouponInput storeCoupon={props.storeCoupon} coupon={props.coupon} />
+      {
+        props.errorPayment && (
+          <p className="error-payment">
+            <FormattedMessage
+              id="App.errorPayment"
+              defaultMessage="Something happened during the payment process. Do not worry, no charge was issued. Please retry, maybe with another card. If it fails again, please contact us!"
+              description="Error payment message"
+            />
+          </p>
+        )
+      }
     </div>
         )}
   </div>
@@ -155,6 +166,7 @@ Sidebar.propTypes = {
   option20Price: PropTypes.number.isRequired,
   basePrice: PropTypes.number.isRequired,
   userFontName: PropTypes.string,
+  errorPayment: PropTypes.bool.isRequired,
 };
 
 Sidebar.defaultProps = {
@@ -175,6 +187,7 @@ const mapStateToProps = state => ({
   option20Price: state.user.option20Price,
   coupon: state.user.coupon,
   userFontName: decodeURI(state.user.currentProject.name),
+  errorPayment: state.ui.errorPayment,
 });
 
 const mapDispatchToProps = dispatch =>

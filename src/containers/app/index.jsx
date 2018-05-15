@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { request } from 'graphql-request';
 import { ShortcutManager } from 'react-shortcuts';
+import { FormattedMessage } from "react-intl";
 
 import keymap from '../../data/keymap';
 import { createPrototypoFactory } from '../../data/createdFonts';
@@ -39,6 +40,7 @@ import Library from '../library/';
 import StepView from '../stepView/';
 import Sidebar from '../sidebar/';
 import Authenticate from '../authenticate/';
+import NewPassword from '../authenticate/newPassword';
 import Page404 from '../404/';
 
 
@@ -130,7 +132,7 @@ class App extends React.Component {
     return (
       <main className={`App ${this.props.isLoading ? 'loading' : 'loaded'}`}>
         <Banner />
-        {this.props.location.pathname !== '/app/auth' && (
+        {!this.props.location.pathname.includes('/app/auth') && (
           <header className="App-header">
             <h1 className="App-logo-wrapper">
               <Logo
@@ -141,6 +143,15 @@ class App extends React.Component {
                 }}
               />
             </h1>
+            {this.props.templateDown && (
+              <p className="error-message">
+                <FormattedMessage
+                  id="App.LoadingError"
+                  defaultMessage="It looks like something went wrong on our end... Could you reload the page and try again? If it still does not work, please contact us using the in-app chat."
+                  description="Loading page error message"
+                />
+              </p>
+            )}
           </header>
         )}
         <div
@@ -150,7 +161,7 @@ class App extends React.Component {
         >
           <div
             className={`row logo-mobile ${
-              this.props.location.pathname === '/app/auth' ? 'auth' : ''
+              this.props.location.pathname.includes('/app/auth') ? 'auth' : ''
               }`}
           >
             <div className="col-sm-12">
@@ -201,12 +212,18 @@ class App extends React.Component {
                 />
                 <ProtectedRoute
                   requirement={() => true}
+                  exact
                   path="/app/auth"
                   component={Authenticate}
                 />
+                <ProtectedRoute
+                  requirement={() => true}
+                  path="/app/auth/reset"
+                  component={NewPassword}
+                />
                 <Route component={Page404} />
               </Switch>
-              {this.props.location.pathname !== '/app/auth' && (
+              {!this.props.location.pathname.includes('/app/auth') && (
                 <div
                   className={`right col-sm-${
                     this.props.location.pathname !== '/app/checkout'
@@ -287,6 +304,7 @@ App.propTypes = {
   setErrorPresets: PropTypes.func.isRequired,
   setFetchingPresets: PropTypes.func.isRequired,
   isGlyphMode: PropTypes.bool.isRequired,
+  templateDown: PropTypes.bool.isRequired,
 };
 
 App.defaultProps = {
@@ -325,6 +343,7 @@ const mapStateToProps = state => ({
   locale: state.ui.locale,
   fontSize: state.user.fontSize,
   isGlyphMode: state.user.isGlyphMode,
+  templateDown: state.createdFonts.templateDown,
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
