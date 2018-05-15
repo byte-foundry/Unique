@@ -8,6 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { updateCheckoutOptions } from '../../data/user';
 import { createFontVariants } from '../../data/font';
+import { setErrorPayment } from '../../data/ui';
 import { ReactComponent as OtfLogo } from './otf.svg';
 
 import './Checkout.css';
@@ -90,6 +91,7 @@ class Checkout extends React.Component {
       this.state.selectedOptions,
       this.props.history.location.fontName,
     );
+    this.props.setErrorPayment(false);
   }
   componentWillReceiveProps(newProps) {
     const { selectedOptions } = this.state;
@@ -219,6 +221,7 @@ const mapDispatchToProps = dispatch =>
       goBack: () => push('/app/specimen'),
       updateCheckoutOptions,
       createFontVariants,
+      setErrorPayment,
     },
     dispatch,
   );
@@ -230,6 +233,7 @@ Checkout.propTypes = {
   createFontVariants: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
   familyName: PropTypes.string.isRequired,
+  setErrorPayment: PropTypes.func.isRequired,
 };
 
 Checkout.defaultProps = {
