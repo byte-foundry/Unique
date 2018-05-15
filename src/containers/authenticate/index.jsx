@@ -765,11 +765,18 @@ class Authenticate extends React.Component {
         )}
         <div className="general-error">
           <br />
-          {this.state.errorMessages.general !== "" && (
+          {this.state.errorMessages.general !== "" && this.state.errorMessages.general !== "invalid" && (
             <FormattedMessage
               id="Auth.GeneralError"
               defaultMessage="Woops, something happened"
               description="Login page general error"
+            />
+          )}
+          {this.state.errorMessages.general !== "" && this.state.errorMessages.general === "invalid" && (
+            <FormattedMessage
+              id="Auth.InvalidEmailError"
+              defaultMessage="Email invalid"
+              description="Login page invalid error"
             />
           )}
         </div>
@@ -1134,7 +1141,11 @@ class Authenticate extends React.Component {
                           label="Facebook"
                           mode="sso-fa"
                           onClick={
-                            !this.state.isConnecting && renderProps.onClick
+                            () => {
+                              if (!this.state.isConnecting) {
+                                renderProps.onClick();
+                              } 
+                            }
                           }
                           loading={
                             this.state.isConnecting &&
@@ -1151,7 +1162,11 @@ class Authenticate extends React.Component {
                           label="Twitter"
                           mode="sso-tw"
                           onClick={
-                            !this.state.isConnecting && renderProps.onClick
+                            () => {
+                              if (!this.state.isConnecting) {
+                                renderProps.onClick();
+                              } 
+                            }
                           }
                           loading={
                             this.state.isConnecting &&
@@ -1170,7 +1185,11 @@ class Authenticate extends React.Component {
                           label="Google"
                           mode="sso-go"
                           onClick={
-                            !this.state.isConnecting && renderProps.onClick
+                            () => {
+                              if (!this.state.isConnecting) {
+                                renderProps.onClick();
+                              } 
+                            }
                           }
                           loading={
                             this.state.isConnecting &&
