@@ -89,7 +89,7 @@ class NewPassword extends React.Component {
         const resetToken = query.get("resetToken");
         const id = query.get("id");
         axios
-          .put(`${AWS_URL}/local/users/${id}/password`, {
+          .put(`${AWS_URL}/users/${id}/password`, {
             resetToken,
             password: this.state.formValues.password,
           })
