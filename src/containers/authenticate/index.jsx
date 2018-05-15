@@ -1134,7 +1134,11 @@ class Authenticate extends React.Component {
                           label="Facebook"
                           mode="sso-fa"
                           onClick={
-                            !this.state.isConnecting && renderProps.onClick
+                            () => {
+                              if (!this.state.isConnecting) {
+                                renderProps.onClick();
+                              } 
+                            }
                           }
                           loading={
                             this.state.isConnecting &&
@@ -1151,7 +1155,11 @@ class Authenticate extends React.Component {
                           label="Twitter"
                           mode="sso-tw"
                           onClick={
-                            !this.state.isConnecting && renderProps.onClick
+                            () => {
+                              if (!this.state.isConnecting) {
+                                renderProps.onClick();
+                              } 
+                            }
                           }
                           loading={
                             this.state.isConnecting &&
@@ -1170,7 +1178,11 @@ class Authenticate extends React.Component {
                           label="Google"
                           mode="sso-go"
                           onClick={
-                            !this.state.isConnecting && renderProps.onClick
+                            () => {
+                              if (!this.state.isConnecting) {
+                                renderProps.onClick();
+                              } 
+                            }
                           }
                           loading={
                             this.state.isConnecting &&
