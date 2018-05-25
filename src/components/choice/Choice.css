@@ -94,4 +94,5 @@
 
 .Choice span[contenteditable="true"] {
   border-bottom: 2px solid #111;
+  user-select: initial;
 }
