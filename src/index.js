@@ -21,6 +21,7 @@ import messages_es from './data/intl/language_es';
 import messages_de from './data/intl/language_de';
 import messages_it from './data/intl/language_it';
 import messages_pt from './data/intl/language_pt';
+import messages_default from './data/intl/language_def';
 
 import store, { history } from './data/create-store';
 import Static from './containers/static/';
@@ -40,6 +41,7 @@ const messages = {
   de: messages_de,
   it: messages_it,
   pt: messages_pt,
+  def: messages_def,
 };
 
 const StaticRoute = ({ component:Component, ...rest }) => (
@@ -55,7 +57,7 @@ const injectTapEventPlugin = require("react-tap-event-plugin");
 injectTapEventPlugin();
 
 const Index = props => (
-  <IntlProvider locale={props.locale} messages={messages[props.locale]}>
+  <IntlProvider locale={props.locale} messages={messages[props.locale] ? messages[props.locale] : messages[def]}>
     <ConnectedRouter history={history}>
       <Switch>
         <StaticRoute exact path="/" component={Landing} />

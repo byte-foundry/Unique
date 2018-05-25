@@ -7,7 +7,7 @@
 	"App.finishAction": "Finish",
 	"App.nextAction": "Next",
 	"App.prevAction": "Previous",
-	"Auth.BoughtFontMessage": "You successfully purchased and downloaded your font. We hope you, that you'll have tons of fun with it! We will send you an email shortly with your invoice. \n\nDon’t forget to check your spam folder!",
+	"Auth.BoughtFontMessage": "You successfully purchased and downloaded your font. We hope that you'll have tons of fun with it! We will send you an email shortly with your invoice. \n\nDon’t forget to check your spam folder!",
 	"Auth.ChangePasswordHeader": "Change your password",
 	"Auth.ChangePasswordMessage": "Good to have you back! Enter your new password, confirm it and you're all set to create awesome fonts again!",
 	"Auth.GeneralError": "Woops, something went wrong.",
