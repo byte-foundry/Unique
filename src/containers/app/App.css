@@ -83,6 +83,7 @@
   animation-duration: 8s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
 }
 
 .App-logo-wrapper .letter-1 {
@@ -134,6 +135,12 @@
   animation-name: animate-10;
   will-change: "transform, opacity";
 }
+
+.App-logo-wrapper .letter-11 {
+  animation-name: animate-11;
+  will-change: "transform, opacity";
+}
+
 
 .App-loader-wrapper {
   bottom: 20%;
@@ -204,7 +211,8 @@
 .loaded .App-logo-wrapper .letter-7,
 .loaded .App-logo-wrapper .letter-8,
 .loaded .App-logo-wrapper .letter-9,
-.loaded .App-logo-wrapper .letter-10 {
+.loaded .App-logo-wrapper .letter-10,
+.loaded .App-logo-wrapper .letter-11 {
   opacity: 0;
   animation: none;
 }
@@ -376,7 +384,7 @@
   }
 }
 
-@keyframes animate-7 {
+@keyframes animate-8 {
   59.7% {
     opacity: 0;
     transform: translate3d(0, -20%, 0);
@@ -395,7 +403,7 @@
   }
 }
 
-@keyframes animate-8 {
+@keyframes animate-9 {
   68.8% {
     opacity: 0;
     transform: translate3d(0, -20%, 0);
@@ -414,7 +422,7 @@
   }
 }
 
-@keyframes animate-9 {
+@keyframes animate-10 {
   77.9% {
     opacity: 0;
     transform: translate3d(0, -20%, 0);
@@ -433,7 +441,7 @@
   }
 }
 
-@keyframes animate-10 {
+@keyframes animate-11 {
   87% {
     opacity: 0;
     transform: translate3d(0, -20%, 0);
