@@ -114,7 +114,6 @@
   border: none;
   border-bottom: 2px solid #b8b5c0;
   color: #b8b5c0;
-  user-select: none;
 }
 
 .DefineNeed form input::placeholder {
