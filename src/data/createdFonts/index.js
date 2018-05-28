@@ -83,18 +83,18 @@ function initFontFactory(prototypoFontFactory, resolve, dispatch) {
     resolve(prototypoFontFactory);
     initTries = 0;
   }).catch(() => {
-    /* global Intercom */
-    /* global fbq */
-    /* global ga */
-    try {
-      Intercom('trackEvent', 'unique-error-loadtemplate');
-      ga('send', 'event', 'Errors', 'Library', 'LoadTemplates');
-    } catch (e) {}
     if (initTries < 3) {
       initTries++;
       initFontFactory(prototypoFontFactory, resolve, dispatch);
     } else {
       console.log('templates are down');
+      /* global Intercom */
+      /* global fbq */
+      /* global ga */
+      try {
+        Intercom('trackEvent', 'unique-error-loadtemplate');
+        ga('send', 'event', 'Errors', 'Library', 'LoadTemplates');
+      } catch (e) {}
       initTries = 0;
       dispatch({
         type: SET_TEMPLATE_DOWN,
