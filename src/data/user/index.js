@@ -658,6 +658,12 @@ export const signupWithEmail = (
 	});
 	client.request(signupUser(email, password, firstName, lastName)).then(() => {
 		dispatch(loginWithEmail(email, password));
+    })
+    .catch((err) => {
+      dispatch({
+        type: LOGIN_ERROR,
+        authError: err.response.errors[0].functionError,
+      });
 	});
 };
 
