@@ -968,60 +968,152 @@ export const createFontVariants = () => (dispatch, getState) => {
     'EXTRA BOLD',
     'ULTRA LIGHT',
   ];
+  const possibleWidth = [
+    'CONDENSED',
+    'NORMAL',
+    'EXTENDED'
+  ];
+  const possibleSlant = [
+    'NORMAL',
+    'SLANTED'
+  ];
   //  --  Create thickness variant
   const thicknessStep = currentPreset.steps.find(e => e.name.toUpperCase() === 'THICKNESS');
+  const widthStep = currentPreset.steps.find(e => e.name.toUpperCase() === 'WIDTH');
+  const slantStep = currentPreset.steps.find(e => e.name.toUpperCase() === 'SLANT');
+
+  const promiseArray = [];
+  const possibleVariants = [];
+
   if (thicknessStep) {
     const thicknessChoices = thicknessStep.choices;
     const thicknessChoiceIndex = currentPreset.steps.findIndex(e => e.name.toUpperCase() === 'THICKNESS');
     // Check which possibleThickness are in the presets
     const thicknessVariantPossibilities = thicknessChoices.filter(e =>
       possibleThickness.includes(e.name.toUpperCase()));
-    // Remove selected thickness
-  
+    // Remove selected thickness  
     const filteredThicknessVariantPossibilities = thicknessVariantPossibilities.filter(e => e.name !== choicesMade[thicknessChoiceIndex].name);
-    const choicesToKeep = choicesMade.filter((e, index) => e && (index !== thicknessChoiceIndex));
+    const thicknessChoicesToKeep = choicesMade.filter((e, index) => e && (index !== thicknessChoiceIndex));
     // Create fonts - Apply currentParams then thickness choice values
-    const promiseArray = [];
-    const possibleVariants = [];
     filteredThicknessVariantPossibilities.forEach((choice) => {
       promiseArray.push(new Promise((resolve) => {
         dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
           prototypoFontFactory
             .createFont(
-              `${fontName}Variant${choice.name}`,
+              `${fontName}VariantThickness${choice.name}`,
               templateNames[templates[currentPreset.template]],
               true,
             )
             .then((createdFont) => {
               possibleVariants.push({
-                name: `${fontName}Variant${choice.name}`,
+                name: `${fontName}VariantThickness${choice.name}`,
                 variant: choice.name,
               });
               const params = getCalculatedValues(
                 choice,
-                choicesToKeep,
+                thicknessChoicesToKeep,
                 currentPreset,
               );
               createdFont.changeParams(params, chosenWord);
               dispatch(storeCreatedFont(
                 createdFont,
-                `${fontName}Variant${choice.name}`,
+                `${fontName}VariantThickness${choice.name}`,
               ));
               resolve(true);
             });
         });
       }));
-    });
-    Promise.all(promiseArray).then(() => {
-      // All set, ready to customize
-      dispatch({
-        type: CREATE_FONT_VARIANTS,
-        possibleVariants,
-      });
-      dispatch(setStable());
-    });
+    });    
   }
-  else {
+  if (widthStep) {
+    const widthChoices = widthStep.choices;
+    const widthChoiceIndex = currentPreset.steps.findIndex(e => e.name.toUpperCase() === 'WIDTH');
+    // Check which possibleSlant are in the presets
+    const widthVariantPossibilities = widthChoices.filter(e =>
+      possibleWidth.includes(e.name.toUpperCase()));
+    // Remove selected slant  
+    const filteredWidthVariantPossibilities = widthVariantPossibilities.filter(e => e.name !== choicesMade[widthChoiceIndex].name);
+    const widthChoicesToKeep = choicesMade.filter((e, index) => e && (index !== widthChoiceIndex));
+    // Create fonts - Apply currentParams then slant choice values
+    filteredWidthVariantPossibilities.forEach((choice) => {
+      promiseArray.push(new Promise((resolve) => {
+        dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+          prototypoFontFactory
+            .createFont(
+              `${fontName}VariantWidth${choice.name}`,
+              templateNames[templates[currentPreset.template]],
+              true,
+            )
+            .then((createdFont) => {
+              possibleVariants.push({
+                name: `${fontName}VariantWidth${choice.name}`,
+                variant: choice.name,
+              });
+              const params = getCalculatedValues(
+                choice,
+                widthChoicesToKeep,
+                currentPreset,
+              );
+              createdFont.changeParams(params, chosenWord);
+              dispatch(storeCreatedFont(
+                createdFont,
+                `${fontName}VariantWidth${choice.name}`,
+              ));
+              resolve(true);
+            });
+        });
+      }));
+    });    
+  }
+  if (slantStep) {
+    const slantChoices = slantStep.choices;
+    const slantChoiceIndex = currentPreset.steps.findIndex(e => e.name.toUpperCase() === 'SLANT');
+    // Check which possibleSlant are in the presets
+    const slantVariantPossibilities = slantChoices.filter(e =>
+      possibleSlant.includes(e.name.toUpperCase()));
+    // Remove selected slant  
+    const filteredSlantVariantPossibilities = slantVariantPossibilities.filter(e => e.name !== choicesMade[slantChoiceIndex].name);
+    const slantChoicesToKeep = choicesMade.filter((e, index) => e && (index !== slantChoiceIndex));
+    // Create fonts - Apply currentParams then slant choice values
+    filteredSlantVariantPossibilities.forEach((choice) => {
+      promiseArray.push(new Promise((resolve) => {
+        dispatch(createPrototypoFactory()).then((prototypoFontFactory) => {
+          prototypoFontFactory
+            .createFont(
+              `${fontName}VariantSlant${choice.name}`,
+              templateNames[templates[currentPreset.template]],
+              true,
+            )
+            .then((createdFont) => {
+              possibleVariants.push({
+                name: `${fontName}VariantSlant${choice.name}`,
+                variant: choice.name,
+              });
+              const params = getCalculatedValues(
+                choice,
+                slantChoicesToKeep,
+                currentPreset,
+              );
+              createdFont.changeParams(params, chosenWord);
+              dispatch(storeCreatedFont(
+                createdFont,
+                `${fontName}VariantSlant${choice.name}`,
+              ));
+              resolve(true);
+            });
+        });
+      }));
+    });    
+  }
+  Promise.all(promiseArray).then(() => {
+    // All set, ready to customize
+    dispatch({
+      type: CREATE_FONT_VARIANTS,
+      possibleVariants,
+    });
+    dispatch(setStable());
+  });
+  if(!thicknessStep && !widthStep && !slantStep) {
     dispatch({
       type: CREATE_FONT_VARIANTS,
       possibleVariants: [],
