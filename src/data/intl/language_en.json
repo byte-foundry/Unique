@@ -15,6 +15,7 @@
 	"Auth.HappyMessage2": "Hooray!",
 	"Auth.HappyMessage3": "Woo, woo!",
 	"Auth.IdenticalPasswordError": "Your passwords do not match.",
+	"Auth.Email already in use": "There is already an account with this email",
 	"Auth.InvalidEmailError": "This email is invalid :(",
 	"Auth.LogInFormButton": "Log in ",
 	"Auth.NewpasswordFormButton": "Change password",

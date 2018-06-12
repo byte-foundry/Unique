@@ -369,7 +369,11 @@ class SpecimenView extends React.Component {
                         ga('send', 'event', 'Specimen', 'Click', 'SaveButton');
                       }
                       if (this.state.fontName) {
-                        this.props.storeProject(this.state.fontName);                        
+                        if (this.props.isAuthenticated) {
+                          this.props.storeProject(this.state.fontName);
+                        } else {
+                          this.props.authenticate();
+                        }
                       } else {
                         this.setState({
                           isModalOpened: true,

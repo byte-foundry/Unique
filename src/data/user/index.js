@@ -655,6 +655,12 @@ export const signupWithEmail = (
     .then(() => {
       dispatch(loginWithEmail(email, password));
     })
+    .catch((err) => {
+      dispatch({
+        type: LOGIN_ERROR,
+        authError: err.response.errors[0].functionError,
+      });
+    });
 };
 
 export const anonymousAuth = () => (dispatch) => {

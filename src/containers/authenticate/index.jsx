@@ -1200,10 +1200,10 @@ class Authenticate extends React.Component {
                     />
                   </div>
                   <div className="general-error">
-                    {this.state.errorMessages.general !== "" && (
+                    {this.state.errorMessages.general !== '' && (
                       <FormattedMessage
-                        id="Auth.GeneralError"
-                        defaultMessage="Woops, something happened"
+                        id={`Auth.${this.state.errorMessages.general}`}
+                        defaultMessage={<FormattedMessage id="Auth.GeneralError" defaultMessage="Woops, something unexpected happened" />}
                         description="Login page general error"
                       />
                     )}
