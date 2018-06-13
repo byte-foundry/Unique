@@ -12,7 +12,7 @@
     "lodash.uniq": "^4.5.0",
     "money": "^0.2.0",
     "prop-types": "^15.5.10",
-    "prototypo-library": "^1.3.2",
+    "prototypo-library": "^1.3.3",
     "react": "^15.5.4",
     "react-color": "^2.13.8",
     "react-dom": "^15.5.4",
