@@ -139,7 +139,7 @@ export default (state = initialState, action) => {
         alreadyBought: action.bought,
         choicesMade: action.choicesMade,
       };
-    
+
     case CLEAN_FONT_DATA:
       return {
         ...state,
@@ -157,7 +157,7 @@ export default (state = initialState, action) => {
         currentParams: {},
         alreadyBought: false,
         possibleVariants: [],
-      }
+      };
 
     case CREATE_FONT_VARIANTS:
       return {
@@ -349,7 +349,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
         request(
           GRAPHQL_API,
           updateSelectedCount('Preset', font.id, data.Preset.selected + 1),
-        ))
+        ));
 
     // All set, ready to customize
     dispatch({
@@ -422,9 +422,7 @@ export const cleanData = () => (dispatch, getState) => {
   const { fonts } = getState().createdFonts;
   fonts[`${currentPreset.variant.family.name}${currentPreset.variant.name}`].changeParams(
     currentPreset.baseValues,
-    currentPreset.tags.map(
-      tag => tag.charAt(0).toUpperCase() + tag.slice(1)
-    ).join(',')
+    currentPreset.tags.map(tag => tag.charAt(0).toUpperCase() + tag.slice(1)).join(','),
   );
   dispatch({
     type: CLEAN_FONT_DATA,
@@ -433,7 +431,7 @@ export const cleanData = () => (dispatch, getState) => {
 
 const getCalculatedValues = (choice, choicesMade, currentPreset) => {
   const stepChoices = { ...choice.values };
-  const choiceWithoutCurrentStep = choicesMade.filter((item) => item.name !== choice.name);
+  const choiceWithoutCurrentStep = choicesMade.filter(item => item.name !== choice.name);
 
   const manualChanges = {};
   const baseManualChanges = currentPreset.baseValues.manualChanges || {};
@@ -893,14 +891,14 @@ export const selectChoice = (choice, isSpecimen = false) => (
             data.allChoices[0].id,
             data.allChoices[0].selected + 1,
           ),
-        ))
+        ));
   } else {
     request(GRAPHQL_API, getSelectedCount('Choice', choice.id))
       .then(data =>
         request(
           GRAPHQL_API,
           updateSelectedCount('Choice', choice.id, data.Choice ? data.Choice.selected + 1 : 1),
-        ))
+        ));
   }
 
   dispatch({
@@ -926,10 +924,11 @@ export const getArrayBuffer = (name, familyName, styleName, subset) => (
   getState,
 ) => {
   const { fontName } = getState().font;
-  const { fonts } = getState().createdFonts;  
+  const { fonts } = getState().createdFonts;
   dispatch({
     type: 'font/GET_ARRAY_BUFFER',
   });
+  console.log(name);
   return new Promise((resolve) => {
     fonts[name || fontName]
       .getArrayBuffer({
@@ -971,11 +970,11 @@ export const createFontVariants = () => (dispatch, getState) => {
   const possibleWidth = [
     'CONDENSED',
     'NORMAL',
-    'EXTENDED'
+    'EXTENDED',
   ];
   const possibleSlant = [
     'NORMAL',
-    'SLANTED'
+    'SLANTED',
   ];
   //  --  Create thickness variant
   const thicknessStep = currentPreset.steps.find(e => e.name.toUpperCase() === 'THICKNESS');
@@ -991,7 +990,7 @@ export const createFontVariants = () => (dispatch, getState) => {
     // Check which possibleThickness are in the presets
     const thicknessVariantPossibilities = thicknessChoices.filter(e =>
       possibleThickness.includes(e.name.toUpperCase()));
-    // Remove selected thickness  
+    // Remove selected thickness
     const filteredThicknessVariantPossibilities = thicknessVariantPossibilities.filter(e => e.name !== choicesMade[thicknessChoiceIndex].name);
     const thicknessChoicesToKeep = choicesMade.filter((e, index) => e && (index !== thicknessChoiceIndex));
     // Create fonts - Apply currentParams then thickness choice values
@@ -1023,7 +1022,7 @@ export const createFontVariants = () => (dispatch, getState) => {
             });
         });
       }));
-    });    
+    });
   }
   if (widthStep) {
     const widthChoices = widthStep.choices;
@@ -1031,7 +1030,7 @@ export const createFontVariants = () => (dispatch, getState) => {
     // Check which possibleSlant are in the presets
     const widthVariantPossibilities = widthChoices.filter(e =>
       possibleWidth.includes(e.name.toUpperCase()));
-    // Remove selected slant  
+    // Remove selected slant
     const filteredWidthVariantPossibilities = widthVariantPossibilities.filter(e => e.name !== choicesMade[widthChoiceIndex].name);
     const widthChoicesToKeep = choicesMade.filter((e, index) => e && (index !== widthChoiceIndex));
     // Create fonts - Apply currentParams then slant choice values
@@ -1063,7 +1062,7 @@ export const createFontVariants = () => (dispatch, getState) => {
             });
         });
       }));
-    });    
+    });
   }
   if (slantStep) {
     const slantChoices = slantStep.choices;
@@ -1071,7 +1070,7 @@ export const createFontVariants = () => (dispatch, getState) => {
     // Check which possibleSlant are in the presets
     const slantVariantPossibilities = slantChoices.filter(e =>
       possibleSlant.includes(e.name.toUpperCase()));
-    // Remove selected slant  
+    // Remove selected slant
     const filteredSlantVariantPossibilities = slantVariantPossibilities.filter(e => e.name !== choicesMade[slantChoiceIndex].name);
     const slantChoicesToKeep = choicesMade.filter((e, index) => e && (index !== slantChoiceIndex));
     // Create fonts - Apply currentParams then slant choice values
@@ -1103,7 +1102,7 @@ export const createFontVariants = () => (dispatch, getState) => {
             });
         });
       }));
-    });    
+    });
   }
   Promise.all(promiseArray).then(() => {
     // All set, ready to customize
@@ -1113,7 +1112,7 @@ export const createFontVariants = () => (dispatch, getState) => {
     });
     dispatch(setStable());
   });
-  if(!thicknessStep && !widthStep && !slantStep) {
+  if (!thicknessStep && !widthStep && !slantStep) {
     dispatch({
       type: CREATE_FONT_VARIANTS,
       possibleVariants: [],
@@ -1154,7 +1153,7 @@ export const reloadFonts = () => (dispatch, getState) => {
   dispatch(selectFont(currentPreset, step));
 };
 
-export const loadProject = (loadedProjectID) => (
+export const loadProject = loadedProjectID => (
   dispatch,
   getState,
 ) => {
@@ -1206,7 +1205,7 @@ export const loadProject = (loadedProjectID) => (
         });
         dispatch(updateProjectInfos(id, name, bought));
         dispatch(reloadFonts(false));
-      })
+      });
   }
 };
 
@@ -1252,6 +1251,6 @@ export const loadLibrary = () => (dispatch, getState) => {
           dispatch(setStable());
           dispatch(push('/app/library'));
         });
-      })
+      });
   }
 };
