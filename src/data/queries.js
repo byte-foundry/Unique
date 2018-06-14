@@ -6,7 +6,7 @@ export const getAllPresets = `
     }
 `;
 
-export const getUserProject = id => `
+export const getUserProject = (id) => `
 {
     UniqueProject(id: "${id}") {
       id
@@ -64,7 +64,7 @@ export const updateSelectedCount = (type, id, count) => `
     }
 `;
 
-export const getSpecialChoiceSelectedCount = name => `
+export const getSpecialChoiceSelectedCount = (name) => `
 {
     allChoices(filter: {name_contains: "${name}"}) {
       id
@@ -74,7 +74,7 @@ export const getSpecialChoiceSelectedCount = name => `
 
 `;
 
-export const getPresetExportedCount = id => `
+export const getPresetExportedCount = (id) => `
     query {
         Preset (id: "${id}") {
             exported
@@ -95,13 +95,13 @@ export const updatePresetExportedCount = (id, count) => `
 `;
 
 export const addProjectToUser = (
-  userId,
-  presetId,
-  choicesMade,
-  name,
-  bought,
-  need,
-  checkoutOptions,
+	userId,
+	presetId,
+	choicesMade,
+	name,
+	bought,
+	need,
+	checkoutOptions,
 ) => `
     mutation{
         createUniqueProject(
@@ -147,7 +147,7 @@ export const addProjectToUser = (
     }
 `;
 
-export const deleteProject = projectId => `
+export const deleteProject = (projectId) => `
     mutation{
         deleteUniqueProject(
             id:"${projectId}"
@@ -158,11 +158,11 @@ export const deleteProject = projectId => `
 `;
 
 export const updateProject = (
-  projectId,
-  choicesMade,
-  name,
-  bought,
-  checkoutOptions,
+	projectId,
+	choicesMade,
+	name,
+	bought,
+	checkoutOptions,
 ) => `
     mutation{
         updateUniqueProject(
@@ -206,7 +206,7 @@ export const updateProject = (
     }
 `;
 
-export const getBoughtProjects = userId => `
+export const getBoughtProjects = (userId) => `
     query {
         allUniqueProjects(
             filter: {
@@ -223,7 +223,7 @@ export const getBoughtProjects = userId => `
   }
 `;
 
-export const updateProjectBought = projectId => `
+export const updateProjectBought = (projectId) => `
     mutation {
         updateUniqueProject (
             id: "${projectId}"
@@ -256,7 +256,7 @@ export const authenticateAnonymousUser = `
     }
 `;
 
-export const authenticateFacebookUser = token => `
+export const authenticateFacebookUser = (token) => `
     mutation {
         authenticateFacebookUser(
             facebookToken:"${token}"
@@ -279,8 +279,7 @@ export const authenticateTwitterUser = (token, verifier) => `
     }
 `;
 
-
-export const authenticateGoogleUser = token => `
+export const authenticateGoogleUser = (token) => `
     mutation {
         authenticateGoogleUser(
             googleToken:"${token}"

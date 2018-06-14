@@ -1,12 +1,12 @@
 // @flow
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import './UnstableView.css';
 
 const UnstableView = () => (
-  <div className="UnstableView">
-    <h1>Recreating your project</h1>
-  </div>
+	<div className="UnstableView">
+		<h1>Recreating your project</h1>
+	</div>
 );
 
 UnstableView.propTypes = {};
