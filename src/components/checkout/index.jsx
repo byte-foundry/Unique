@@ -26,24 +26,27 @@ const successPayment = (data, callback) => {
 
 const errorPayment = (data) => {
 	console.error(data);
-	
 };
 
 let successfullPayment = false;
 
 const onToken = (
 	amount,
+
 	description,
 	callback,
 	setUnstable,
 	setStable,
 	currency,
 	getArrayBuffer,
+
 	userFontName,
 	checkoutOptions,
+
 	coupon,
 	projectId,
 	setErrorPayment,
+	
 ) => (token) => {
 	successfullPayment = true;
 	setUnstable();
