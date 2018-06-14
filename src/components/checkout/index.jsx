@@ -26,6 +26,7 @@ const successPayment = (data, callback) => {
 
 const errorPayment = (data) => {
 	console.error(data);
+	
 };
 
 let successfullPayment = false;
