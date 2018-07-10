@@ -40,6 +40,36 @@
     "defaultMessage": "Choose the height of your ascenders and descenders"
   },
   {
+    "id": "App.nextActionDisabledTooltip1",
+    "description": "Next button - Disabled tooltip",
+    "defaultMessage": "Hey, you forgot to make a choice."
+  },
+  {
+    "id": "App.nextActionDisabledTooltip2",
+    "description": "Next button - Disabled tooltip",
+    "defaultMessage": "Whoops, you need to make a choice first."
+  },
+  {
+    "id": "App.nextActionDisabledTooltip3",
+    "description": "Next button - Disabled tooltip",
+    "defaultMessage": "Not so fast! Choose an option first."
+  },
+  {
+    "id": "App.nextActionDisabledTooltip4",
+    "description": "Next button - Disabled tooltip",
+    "defaultMessage": "Hold on, choose an option first."
+  },
+  {
+    "id": "App.nextActionDisabledTooltip5",
+    "description": "Next button - Disabled tooltip",
+    "defaultMessage": "Hold on, choose an option first."
+  },
+  {
+    "id": "App.stepBubbleDisabledTooltip",
+    "description": "Tooltip - Disabled step bubble",
+    "defaultMessage": "You need to do the other steps first!"
+  },
+  {
     "id": "Shortcuts.previousAction",
     "description": "Shortcut - previous action",
     "defaultMessage": "Press left key to go back"

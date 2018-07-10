@@ -18,5 +18,10 @@
     "id": "App.nextAction",
     "description": "Next",
     "defaultMessage": "Next"
+  },
+  {
+    "id": "App.nextActionDisabledTooltip",
+    "description": "Next button - Disabled tooltip",
+    "defaultMessage": "Hold on, choose an option first."
   }
 ]

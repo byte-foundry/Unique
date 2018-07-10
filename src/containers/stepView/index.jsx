@@ -99,6 +99,69 @@ const stepTranslations = {
 	),
 };
 
+const disabledNextOption = [
+	{
+		id: "App.nextActionDisabledTooltip1",
+		defaultMessage: "Hey, you forgot to make a choice.",
+		description: "Next button - Disabled tooltip",
+		elem: (
+			<FormattedMessage
+				id="App.nextActionDisabledTooltip1"
+				defaultMessage="Hey, you forgot to make a choice."
+				description="Next button - Disabled tooltip"
+			/>
+		),
+	},
+	{
+		id: "App.nextActionDisabledTooltip2",
+		defaultMessage: "Whoops, you need to make a choice first.",
+		description: "Next button - Disabled tooltip",
+		elem: (
+			<FormattedMessage
+				id="App.nextActionDisabledTooltip2"
+				defaultMessage="Whoops, you need to make a choice first."
+				description="Next button - Disabled tooltip"
+			/>
+		),
+	},
+	{
+		id: "App.nextActionDisabledTooltip3",
+		defaultMessage: "Not so fast! Choose an option first.",
+		description: "Next button - Disabled tooltip",
+		elem: (
+			<FormattedMessage
+				id="App.nextActionDisabledTooltip3"
+				defaultMessage="Not so fast! Choose an option first."
+				description="Next button - Disabled tooltip"
+			/>
+		),
+	},
+	{
+		id: "App.nextActionDisabledTooltip4",
+		defaultMessage: "Hold on, choose an option first.",
+		description: "Next button - Disabled tooltip",
+		elem: (
+			<FormattedMessage
+				id="App.nextActionDisabledTooltip4"
+				defaultMessage="Hold on, choose an option first."
+				description="Next button - Disabled tooltip"
+			/>
+		),
+	},
+	{
+		id: "App.nextActionDisabledTooltip5",
+		defaultMessage: "Hold on, choose an option first.",
+		description: "Next button - Disabled tooltip",
+		elem: (
+			<FormattedMessage
+				id="App.nextActionDisabledTooltip5"
+				defaultMessage="Hold on, choose an option first."
+				description="Next button - Disabled tooltip"
+			/>
+		),
+	},
+];
+
 class StepView extends React.Component {
 	constructor(props) {
 		super(props);
@@ -222,6 +285,7 @@ class StepView extends React.Component {
 		}
 	}
 	render() {
+		const disabledNextOptionIndex = Math.floor(Math.random() * (disabledNextOption.length - 1)) + 1;
 		return (
 			<Shortcuts name="CHOICES" handler={this.handleShortcuts}>
 				<div
@@ -260,12 +324,28 @@ class StepView extends React.Component {
 													/>
 												</Tooltip>
 											) : (
-												<span
-													className={`step-bubble ${
-														i === this.props.step - 1 ? 'current' : ''
-													}`}
-													key={`stepbubble-${i}`}
-												/>
+												<FormattedMessage
+													id="App.stepBubbleDisabledTooltip"
+													defaultMessage="You need to do the other steps first!"
+													description="Tooltip - Disabled step bubble"
+												>
+													{(text) => (
+														<Tooltip
+															title={text}
+															position="top"
+															trigger={'mouseenter'}
+															arrow="true"
+															delay={500}
+														>
+															<span
+																className={`step-bubble ${
+																	i === this.props.step - 1 ? 'current' : ''
+																}`}
+																key={`stepbubble-${i}`}
+															/>
+														</Tooltip>
+													)}
+												</FormattedMessage>
 											),
 									)}
 								</div>
@@ -317,24 +397,69 @@ class StepView extends React.Component {
 												arrow="true"
 												delay={200}
 											>
-												<span
-													className={`pagination-next ${
-														!(this.state.choice && this.state.choice.name)
-															? 'disabled'
-															: ''
-													}`}
-													onClick={() => {
-														if (this.state.choice && this.state.choice.name) {
-															this.props.selectChoice(this.state.choice);
-														}
-													}}
-												>
+												{this.state.choice && this.state.choice.name ? (
+													<span
+														className={`pagination-next ${
+															!(this.state.choice && this.state.choice.name)
+																? 'disabled'
+																: ''
+														}`}
+														onClick={() => {
+															if (this.state.choice && this.state.choice.name) {
+																this.props.selectChoice(this.state.choice);
+															}
+														}}
+													>
+														<FormattedMessage
+															id="App.nextAction"
+															defaultMessage="Next"
+															description="Next"
+														/>
+													</span>
+												) : (
 													<FormattedMessage
-														id="App.nextAction"
-														defaultMessage="Next"
-														description="Next"
-													/>
-												</span>
+														id={disabledNextOption[disabledNextOptionIndex].id}
+														defaultMessage={disabledNextOption[disabledNextOptionIndex].defaultMessage}
+														description={disabledNextOption[disabledNextOptionIndex].description}
+													>
+														{(text) => (
+															<Tooltip
+																title={text}
+																position="top"
+																trigger={'mouseenter'}
+																arrow="true"
+																delay={200}
+															>
+																<span
+																	className={`pagination-next ${
+																		!(
+																			this.state.choice &&
+																			this.state.choice.name
+																		)
+																			? 'disabled'
+																			: ''
+																	}`}
+																	onClick={() => {
+																		if (
+																			this.state.choice &&
+																			this.state.choice.name
+																		) {
+																			this.props.selectChoice(
+																				this.state.choice,
+																			);
+																		}
+																	}}
+																>
+																	<FormattedMessage
+																		id="App.nextAction"
+																		defaultMessage="Next"
+																		description="Next"
+																	/>
+																</span>
+															</Tooltip>
+														)}
+													</FormattedMessage>
+												)}
 											</Tooltip>
 										)}
 									</FormattedMessage>
@@ -514,4 +639,7 @@ StepView.propTypes = {
 	storeRecommandations: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StepView);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(StepView);

@@ -5,6 +5,7 @@ import {push} from 'react-router-redux';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import FlipMove from 'react-flip-move';
+import {Tooltip} from 'react-tippy';
 import {FormattedMessage} from 'react-intl';
 import unorphan from 'unorphan';
 import {Shortcuts} from 'react-shortcuts';
@@ -126,24 +127,61 @@ class TemplateChoice extends React.Component {
 											description="Back"
 										/>
 									</span>
-									<span
-										className={`pagination-next ${
-											!(this.state.templateIndex >= 0) ? 'disabled' : ''
-										}`}
-										onClick={() => {
-											if (this.state.templateIndex >= 0) {
-												this.props.selectFont(
-													this.props.presets[this.state.templateIndex],
-												);
-											}
-										}}
-									>
+									{this.state.templateIndex >= 0 ? (
+										<span
+											className={`pagination-next ${
+												!(this.state.templateIndex >= 0) ? 'disabled' : ''
+											}`}
+											onClick={() => {
+												if (this.state.templateIndex >= 0) {
+													this.props.selectFont(
+														this.props.presets[this.state.templateIndex],
+													);
+												}
+											}}
+										>
+											<FormattedMessage
+												id="App.nextAction"
+												defaultMessage="Next"
+												description="Next"
+											/>
+										</span>
+									) : (
 										<FormattedMessage
-											id="App.nextAction"
-											defaultMessage="Next"
-											description="Next"
-										/>
-									</span>
+											id="App.nextActionDisabledTooltip"
+											defaultMessage="Hold on, choose an option first."
+											description="Next button - Disabled tooltip"
+										>
+											{(text) => (
+												<Tooltip
+													title={text}
+													position="top"
+													trigger={'mouseenter'}
+													arrow="true"
+													delay={200}
+												>
+													<span
+														className={`pagination-next ${
+															!(this.state.templateIndex >= 0) ? 'disabled' : ''
+														}`}
+														onClick={() => {
+															if (this.state.templateIndex >= 0) {
+																this.props.selectFont(
+																	this.props.presets[this.state.templateIndex],
+																);
+															}
+														}}
+													>
+														<FormattedMessage
+															id="App.nextAction"
+															defaultMessage="Next"
+															description="Next"
+														/>
+													</span>
+												</Tooltip>
+											)}
+										</FormattedMessage>
+									)}
 								</div>
 							</div>
 						</div>
@@ -229,4 +267,7 @@ TemplateChoice.defaultProps = {
 	chosenWord: 'Hamburgefonstiv - Abc 123',
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TemplateChoice);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(TemplateChoice);
