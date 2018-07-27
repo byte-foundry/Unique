@@ -51,9 +51,7 @@ const Sidebar = (props) => (
 											/>
 										) : (
 											parseFloat(
-												option.type === 'discount'
-													? props.option20Price
-													: props.option5Price,
+													props.option5Price,
 											).toLocaleString(props.locale_full, {
 												style: 'currency',
 												currency: props.currency,
@@ -77,12 +75,6 @@ const Sidebar = (props) => (
 						</div>
 					)}
 				</div>
-				<h2 className="baseprice">
-					{parseFloat(props.basePrice).toLocaleString(props.locale_full, {
-						style: 'currency',
-						currency: props.currency,
-					})}
-				</h2>
 				<h2 className="price">
 					{props.coupon.discount
 						? parseFloat(
@@ -162,7 +154,6 @@ Sidebar.propTypes = {
 	currency: PropTypes.string.isRequired,
 	locale_full: PropTypes.string.isRequired,
 	option5Price: PropTypes.number.isRequired,
-	option20Price: PropTypes.number.isRequired,
 	basePrice: PropTypes.number.isRequired,
 	userFontName: PropTypes.string,
 	errorPayment: PropTypes.bool.isRequired,
@@ -183,7 +174,6 @@ const mapStateToProps = (state) => ({
 	locale_full: state.ui.locale_full,
 	currency: state.ui.currency,
 	option5Price: state.user.option5Price,
-	option20Price: state.user.option20Price,
 	coupon: state.user.coupon,
 	userFontName: decodeURI(state.user.currentProject.name),
 	errorPayment: state.ui.errorPayment,

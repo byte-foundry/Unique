@@ -22,6 +22,7 @@ import {
 	DEFAULT_UI_GLYPH,
 	GRAPHQL_API,
 	BASE_PACK_PRICE,
+	BASE_VARIANT_PRICE,
 } from '../constants';
 
 export const STORE_USER_EMAIL = 'user/STORE_USER_EMAIL';
@@ -59,8 +60,7 @@ const initialState = {
 	chosenGlyph: DEFAULT_UI_GLYPH,
 	checkoutOptions: [],
 	checkoutPrice: BASE_PACK_PRICE,
-	option5Price: 5,
-	option20Price: -20,
+	option5Price: BASE_VARIANT_PRICE,
 	graphQLToken: undefined,
 	basePrice: BASE_PACK_PRICE,
 	authError: '',
@@ -182,7 +182,6 @@ export default (state = initialState, action) => {
 				checkoutOptions: action.checkoutOptions,
 				checkoutPrice: action.checkoutPrice,
 				option5Price: action.option5Price,
-				option20Price: action.option20Price,
 				basePrice: action.basePrice,
 			};
 
@@ -547,10 +546,7 @@ export const updateCheckoutOptions = (checkoutOptions, fontName) => (
 		type: CHANGE_CHECKOUT_ORDER,
 		checkoutOptions: [...checkoutOptions],
 		checkoutPrice,
-		option5Price:
-			Math.round(fx.convert(5, {from: 'USD', to: currency}) * 2) / 2 - 0.01,
-		option20Price:
-			Math.round(fx.convert(-20, {from: 'USD', to: currency}) * 2) / 2 - 0.01,
+		option5Price: BASE_VARIANT_PRICE,
 		basePrice:
 			Math.round(fx.convert(basePrice, {from: 'USD', to: currency}) * 2) / 2 -
 			0.01,

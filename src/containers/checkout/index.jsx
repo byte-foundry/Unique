@@ -11,6 +11,8 @@ import {createFontVariants} from '../../data/font';
 import {setErrorPayment} from '../../data/ui';
 import {ReactComponent as OtfLogo} from './otf.svg';
 
+import {BASE_VARIANT_PRICE} from '../../data/constants';
+
 import './Checkout.css';
 
 class Checkout extends React.Component {
@@ -42,22 +44,7 @@ class Checkout extends React.Component {
 					dbName: 'baseFont',
 					visible: true,
 					styleName: defaultThicknessName,
-				},
-				{
-					name: (
-						<FormattedMessage
-							id="CheckoutView.LaunchDiscountOption"
-							defaultMessage="Launch discount"
-							description="Launch discount"
-						/>
-					),
-					class: 'discount',
-					dbName: 'launchDiscount',
-					type: 'discount',
-					price: -20,
-					selected: true,
-					visible: false,
-				},
+				}
 			],
 			defaultThicknessName,
 		};
@@ -115,7 +102,7 @@ class Checkout extends React.Component {
 				type: 'font',
 				dbName: 'italicOption',
 				fontName: decodeURI(option.name),
-				price: 5,
+				price: BASE_VARIANT_PRICE,
 				selected: false,
 				visible: true,
 			});

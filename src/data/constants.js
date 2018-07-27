@@ -17,7 +17,8 @@ export const GRAPHQL_API =
 	process.env.REACT_APP_UNIQUE_ENV === 'production'
 		? 'https://api.graph.cool/simple/v1/prototypo'
 		: 'https://api.graph.cool/simple/v1/prototypo-new-dev';
-export const BASE_PACK_PRICE = 35.0;
+export const BASE_PACK_PRICE = 5.0;
+export const BASE_VARIANT_PRICE = 2.0;
 export const AWS_URL = `https://${
 	process.env.REACT_APP_UNIQUE_ENV === 'production'
 		? 'e4jpj60rk8'
