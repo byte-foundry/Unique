@@ -6,6 +6,8 @@ import {bindActionCreators} from 'redux';
 import {push} from 'react-router-redux';
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
+import fx from 'money';
+
 import {updateCheckoutOptions} from '../../data/user';
 import {createFontVariants} from '../../data/font';
 import {setErrorPayment} from '../../data/ui';
@@ -95,6 +97,8 @@ class Checkout extends React.Component {
 		const filteredSelectedOption = selectedOptions.filter(
 			(e) => e.type !== 'font',
 		);
+    fx.rates = this.props.currencyRates.rates;
+    fx.base = this.props.currencyRates.base;
 		newProps.possibleVariants.forEach((option) => {
 			filteredSelectedOption.push({
 				name: option.variant,
@@ -102,7 +106,7 @@ class Checkout extends React.Component {
 				type: 'font',
 				dbName: 'italicOption',
 				fontName: decodeURI(option.name),
-				price: BASE_VARIANT_PRICE,
+				price: Math.round(fx.convert(BASE_VARIANT_PRICE, {from: 'USD', to: this.props.currency}) * 2) / 2,
 				selected: false,
 				visible: true,
 			});
@@ -208,6 +212,8 @@ const mapStateToProps = (state) => ({
 	possibleVariants: state.font.possibleVariants,
 	choicesMade: state.font.choicesMade,
 	steps: state.font.currentPreset.steps,
+  currency: state.ui.currency,
+  currencyRates: state.ui.currencyRates,
 	familyName: state.user.currentProject.name,
 	fontName:
 		state.font.currentPreset.variant.family.name +

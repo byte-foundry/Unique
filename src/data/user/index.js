@@ -530,8 +530,9 @@ export const updateCheckoutOptions = (checkoutOptions, fontName) => (
 	const {currencyRates, currency} = getState().ui;
 	fx.rates = currencyRates.rates;
 	fx.base = currencyRates.base;
-	let price = BASE_PACK_PRICE;
-	let basePrice = BASE_PACK_PRICE;
+	let basePrice = Math.round(fx.convert(BASE_PACK_PRICE, {from: 'USD', to: currency}) * 2) / 2 -
+			0.01;
+	let price = basePrice;
 	checkoutOptions.forEach((option) => {
 		if (option.selected) {
 			price += option.price;
@@ -540,16 +541,13 @@ export const updateCheckoutOptions = (checkoutOptions, fontName) => (
 			}
 		}
 	});
-	const checkoutPrice =
-		Math.round(fx.convert(price, {from: 'USD', to: currency}) * 2) / 2 - 0.01;
+	const checkoutPrice = price;
 	dispatch({
 		type: CHANGE_CHECKOUT_ORDER,
 		checkoutOptions: [...checkoutOptions],
 		checkoutPrice,
-		option5Price: BASE_VARIANT_PRICE,
-		basePrice:
-			Math.round(fx.convert(basePrice, {from: 'USD', to: currency}) * 2) / 2 -
-			0.01,
+		option5Price:
+      Math.round(fx.convert(BASE_VARIANT_PRICE, {from: 'USD', to: currency}) * 2) / 2,
 		fontName,
 	});
 	/* global fbq */

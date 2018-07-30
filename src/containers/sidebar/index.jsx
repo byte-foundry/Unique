@@ -154,7 +154,6 @@ Sidebar.propTypes = {
 	currency: PropTypes.string.isRequired,
 	locale_full: PropTypes.string.isRequired,
 	option5Price: PropTypes.number.isRequired,
-	basePrice: PropTypes.number.isRequired,
 	userFontName: PropTypes.string,
 	errorPayment: PropTypes.bool.isRequired,
 };
@@ -169,7 +168,6 @@ const mapStateToProps = (state) => ({
 	step: state.font.step,
 	choicesMade: state.font.choicesMade,
 	checkoutPrice: state.user.checkoutPrice,
-	basePrice: state.user.basePrice,
 	checkoutOptions: state.user.checkoutOptions,
 	locale_full: state.ui.locale_full,
 	currency: state.ui.currency,
