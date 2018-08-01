@@ -90,6 +90,41 @@
     "defaultMessage": "Woo"
   },
   {
+    "id": "Auth.SignInHeader1",
+    "description": "Sign in header message",
+    "defaultMessage": "So, we meet again"
+  },
+  {
+    "id": "Auth.SignInHeader2",
+    "description": "Sign in header message",
+    "defaultMessage": "Welcome back"
+  },
+  {
+    "id": "Auth.SignInHeader3",
+    "description": "Sign in header message",
+    "defaultMessage": "It’s you again!"
+  },
+  {
+    "id": "Auth.SignInHeader4",
+    "description": "Sign in header message",
+    "defaultMessage": "Why hello there"
+  },
+  {
+    "id": "Auth.SignInHeader5",
+    "description": "Sign in header message",
+    "defaultMessage": "Good to have you back"
+  },
+  {
+    "id": "Auth.SignInHeader6",
+    "description": "Sign in header message",
+    "defaultMessage": "Yay, you’re back!"
+  },
+  {
+    "id": "Auth.SignInHeader7",
+    "description": "Sign in header message",
+    "defaultMessage": "It hasn’t been the same without you here"
+  },
+  {
     "id": "Auth.ResetHeader",
     "description": "Sign in header message if reset password",
     "defaultMessage": "Don't worry, everything is under control"
@@ -98,11 +133,6 @@
     "id": "Auth.SignInHeaderBoughtFont",
     "description": "Sign in header message if font bought",
     "defaultMessage": "Thank you!"
-  },
-  {
-    "id": "Auth.SignInHeader",
-    "description": "Sign in header message",
-    "defaultMessage": "Welcome back"
   },
   {
     "id": "Auth.ResetMessage",

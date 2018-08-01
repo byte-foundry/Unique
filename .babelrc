@@ -1,8 +1,11 @@
 {
-    "presets": ["react-app"],
-    "plugins": [
-        [ "react-intl", {
-            "messagesDir": "src/data/intl"
-        }]
-    ]
+	"presets": ["react-app"],
+	"plugins": [
+		[
+			"react-intl",
+			{
+				"messagesDir": "src/data/intl"
+			}
+		]
+	]
 }
