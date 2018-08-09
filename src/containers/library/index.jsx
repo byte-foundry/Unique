@@ -133,6 +133,25 @@ class Library extends React.Component {
 											)}
 										</FormattedMessage>
 										<FormattedMessage
+											id="Library.buyAction"
+											defaultMessage="Buy"
+											description="Library buy project button"
+										>
+											{(text) => (
+												<Button
+													onClick={() =>
+														this.props.loadProject(
+                              project.id,
+                              '/app/checkout',
+														)
+													}
+													label={text}
+													mode="full"
+													className="action-buy"
+												/>
+											)}
+										</FormattedMessage>
+										<FormattedMessage
 											id="Library.openAction"
 											defaultMessage="Open"
 											description="Library open project button"
@@ -142,7 +161,6 @@ class Library extends React.Component {
 													onClick={() =>
 														this.props.loadProject(
 															project.id,
-															decodeURI(project.name),
 														)
 													}
 													label={text}
