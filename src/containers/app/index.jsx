@@ -139,24 +139,34 @@ class App extends React.Component {
 				<Banner />
 				{!this.props.location.pathname.includes('/app/auth') && (
 					<header className="App-header">
-						<h1 className="App-logo-wrapper">
-							<Logo
-								onClick={() => {
-									this.props.location.pathname === '/app'
-										? this.props.goToLanding()
-										: this.props.goToHome();
-								}}
-							/>
-						</h1>
-						{this.props.templateDown && (
-							<p className="error-message">
-								<FormattedMessage
-									id="App.LoadingError"
-									defaultMessage="It looks like something went wrong on our end... Could you reload the page and try again? If it still does not work, please contact us using the in-app chat."
-									description="Loading page error message"
-								/>
-							</p>
-						)}
+            <div className="App-logo-wrapper">
+              <h1>
+                <Logo
+                  onClick={() => {
+                    this.props.location.pathname === '/app'
+                      ? this.props.goToLanding()
+                      : this.props.goToHome();
+                  }}
+                />
+              </h1>
+              {this.props.templateDown ? (
+                <p className="loading-message error-message">
+                  <FormattedMessage
+                    id="App.LoadingError"
+                    defaultMessage="It looks like something went wrong on our end... Could you reload the page and try again? If it still does not work, please contact us using the in-app chat."
+                    description="Loading page error message"
+                  />
+                </p>
+              ) : (
+                <p className="loading-message">
+                  <FormattedMessage
+                    id="App.Loading"
+                    defaultMessage="Please wait a few seconds while our technology is generating dozens of customizable font templates."
+                    description="Loading message"
+                  />
+                </p>
+              )}
+            </div>
 					</header>
 				)}
 				<div
