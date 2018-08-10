@@ -3,5 +3,10 @@
     "id": "App.LoadingError",
     "description": "Loading page error message",
     "defaultMessage": "It looks like something went wrong on our end... Could you reload the page and try again? If it still does not work, please contact us using the in-app chat."
+  },
+  {
+    "id": "App.Loading",
+    "description": "Loading message",
+    "defaultMessage": "Please wait a few seconds while our technology is generating dozens of customizable font templates."
   }
 ]
