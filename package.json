@@ -66,7 +66,7 @@
     "lint": "npm run lint:files -- --list-different",
     "format": "npm run lint -- --write",
     "precommit": "lint-staged",
-    "extract-messages": "set NODE_ENV=production&& babel ./src >NUL"
+    "extract-messages": "set NODE_ENV=production&& babel ./src > /dev/null"
   },
   "browserslist": {
     "development": [
