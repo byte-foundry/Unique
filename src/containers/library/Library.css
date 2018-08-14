@@ -78,24 +78,19 @@
 
 .Library .project .actions {
   margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.Library .project .actions::after {
-  display: block;
-  clear: both;
-  content: "";
+.Library .project .actions .Button {
+  margin-left: auto;
 }
 
-.Library .project .actions .action-open {
-  display: inline-block;
-  float: right;
-}
-.Library .project .actions .action-delete{
-  display: inline-block;
+.Library .project .actions .action-delete {
   border-bottom: none;
-  float: left;
   color: #b8b5c0;
 }
+
 .Library .project .actions .action-delete:hover {
     color: black;
 }

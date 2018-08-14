@@ -162,7 +162,7 @@ export default (state = initialState, action) => {
 	}
 };
 
-export const selectFont = (font, step) => (dispatch, getState) => {
+export const selectFont = (font, step, redirectTo = '/app/specimen') => (dispatch, getState) => {
 	/* global Intercom */
 	/* global fbq */
 	/* global ga */
@@ -371,7 +371,7 @@ export const selectFont = (font, step) => (dispatch, getState) => {
 		if (!step || choicesMade.length < selectedFont.steps.length) {
 			dispatch(push('/app/customize'));
 		} else {
-			dispatch(push('/app/specimen'));
+			dispatch(push(redirectTo));
 		}
 	});
 };
@@ -416,7 +416,7 @@ export const updateSubset = () => (dispatch, getState) => {
 
 export const cleanData = () => (dispatch, getState) => {
 	const {currentPreset} = getState().font;
-	const {fonts} = getState().createdFonts;
+  const {fonts} = getState().createdFonts;
 	fonts[
 		`${currentPreset.variant.family.name}${currentPreset.variant.name}`
 	].changeParams(
@@ -1221,10 +1221,10 @@ export const reloadFonts = () => (dispatch, getState) => {
 	dispatch(selectFont(currentPreset, step));
 };
 
-export const loadProject = (loadedProjectID) => (dispatch, getState) => {
+export const loadProject = (loadedProjectID, redirectTo = '/app/specimen') => (dispatch, getState) => {
 	const {currentProject: {id: projectId}, graphQLToken} = getState().user;
 	if (projectId === loadedProjectID) {
-		dispatch(push('/app/specimen'));
+		dispatch(push(redirectTo));
 	} else {
 		dispatch(setUnstable());
 		// fetch preset and project infos
@@ -1234,9 +1234,12 @@ export const loadProject = (loadedProjectID) => (dispatch, getState) => {
 			},
 		});
 		client.request(getUserProject(loadedProjectID)).then((data) => {
-			const {choicesMade, preset, bought, id, name} = data.UniqueProject;
-			const baseValues = preset.baseValues;
-			const currentPreset = preset;
+      const {choicesMade, preset, bought, id, name} = data.UniqueProject;
+      const baseValues = preset.baseValues;
+      const {importedPresets} = getState().presets;
+      const currentPreset = importedPresets.find(
+        fullPreset => fullPreset.id === preset.id,
+      );
 			currentPreset.steps.forEach((step) => {
 				step.choices.forEach((choice) => {
 					if (!choice.name) {
@@ -1265,7 +1268,7 @@ export const loadProject = (loadedProjectID) => (dispatch, getState) => {
 				bought,
 			});
 			dispatch(updateProjectInfos(id, name, bought));
-			dispatch(reloadFonts(false));
+      dispatch(selectFont(currentPreset, step, redirectTo));
 		});
 	}
 };
