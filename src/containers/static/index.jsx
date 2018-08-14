@@ -1,18 +1,18 @@
-import React from "react";
-import { withRouter, Link } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
+import React from 'react';
+import { withRouter, Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
-import LanguageSelect from "../../components/languageSelect";
+import LanguageSelect from '../../components/languageSelect';
 
-import { ReactComponent as FacebookLogo } from "./facebook.svg";
-import { ReactComponent as TwitterLogo } from "./twitter.svg";
-import { ReactComponent as InstagramLogo } from "./instagram.svg";
+import { ReactComponent as FacebookLogo } from './facebook.svg';
+import { ReactComponent as TwitterLogo } from './twitter.svg';
+import { ReactComponent as InstagramLogo } from './instagram.svg';
 
-import { setLocale } from "../../data/ui";
-import { push } from "react-router-redux";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import "./Static.css";
+import { setLocale } from '../../data/ui';
+import { push } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import './Static.css';
 
 const Static = props => (
   <div className="Static">
@@ -31,7 +31,7 @@ const Static = props => (
             </Link>
             <p
               onClick={() => {
-                window.Intercom("show");
+                window.Intercom('show');
               }}
             >
               <FormattedMessage
@@ -83,7 +83,7 @@ const Static = props => (
             locale={props.locale}
           />
           <div className="credits float-right">
-            {new Date().getFullYear()} -{" "}
+            {new Date().getFullYear()} -{' '}
             <FormattedMessage
               id="Landing.footerCopyright"
               defaultMessage="Unique © Powered by "
@@ -106,15 +106,15 @@ const Static = props => (
 
 const mapStateToProps = state => ({
   isBlackOnWhite: state.user.isBlackOnWhite,
-  locale: state.ui.locale
+  locale: state.ui.locale,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      goToApp: () => push("/app"),
-      setLocale
+      goToApp: () => push('/app'),
+      setLocale,
     },
-    dispatch
+    dispatch,
   );
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Static));

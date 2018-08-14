@@ -8,6 +8,10 @@ import Modal from 'react-responsive-modal';
 import { push } from 'react-router-redux';
 import { FormattedMessage } from 'react-intl';
 import unorphan from 'unorphan';
+import html2canvas from 'html2canvas';
+import Jimp from 'jimp';
+
+import { GRAPHQL_API_FILE } from '../../data/constants';
 import './SpecimenView.css';
 import Button from '../../components/button/';
 import ContentEditable from '../../components/contentEditable';
@@ -31,6 +35,38 @@ class SpecimenView extends React.Component {
     this.specimenViewWrapper.focus();
     window.scrollTo(0, 0);
     unorphan('h1, h2, h3, p, span');
+    setTimeout(() => {
+      html2canvas(document.body).then(async (canvas) => {
+        const imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+        const image = new Jimp(canvas.width, canvas.height);
+        image.scan(0, 0, canvas.width, canvas.height, function (x, y, idx) {
+          this.bitmap.data[idx + 0] = imageData.data[idx + 0];
+          this.bitmap.data[idx + 1] = imageData.data[idx + 1];
+          this.bitmap.data[idx + 2] = imageData.data[idx + 2];
+          this.bitmap.data[idx + 3] = imageData.data[idx + 3];
+        });
+        image.quality(50);
+        image.resize(500, Jimp.AUTO);
+        image.getBuffer(Jimp.MIME_JPEG, async (err, imageBuffer) => {
+          const imageBlob = new Blob([imageBuffer], { type: 'image/jpg' });
+          const imageFile = new File([imageBlob], 'screencap.jpg');
+
+          const formData = new FormData();
+
+          formData.append('data', imageFile);
+          const response = await fetch(GRAPHQL_API_FILE, {
+            method: 'POST',
+            body: formData,
+          });
+          if (response.status === 200) {
+            const data = await response.json();
+            if (data.url) {
+              console.log(data.url);
+            }
+          }
+        });
+      });
+    }, 2000);
   }
   storeOrAuthenticate() {
     if (this.state.fontName !== '') {
@@ -341,7 +377,7 @@ class SpecimenView extends React.Component {
                         ga('send', 'event', 'Specimen', 'Click', 'Download1');
                       }
                       if (this.state.fontName) {
-                        this.props.goToCheckout(this.state.fontName);                        
+                        this.props.goToCheckout(this.state.fontName);
                       } else {
                         this.setState({
                           isModalOpened: true,
@@ -369,7 +405,7 @@ class SpecimenView extends React.Component {
                         ga('send', 'event', 'Specimen', 'Click', 'SaveButton');
                       }
                       if (this.state.fontName) {
-                        this.props.storeProject(this.state.fontName);                        
+                        this.props.storeProject(this.state.fontName);
                       } else {
                         this.setState({
                           isModalOpened: true,
@@ -478,12 +514,12 @@ class SpecimenView extends React.Component {
                       <Button
                         className="button-download"
                         onClick={() => {
-                          /* global ga */   
+                          /* global ga */
                           if (typeof ga === 'function') {
                             ga('send', 'event', 'Specimen', 'Click', 'Download2');
                           }
                           if (this.state.fontName) {
-                            this.props.goToCheckout(this.state.fontName);                                                   
+                            this.props.goToCheckout(this.state.fontName);
                           } else {
                             this.setState({
                               isModalOpened: true,
@@ -599,7 +635,7 @@ class SpecimenView extends React.Component {
                       ga('send', 'event', 'Specimen', 'Click', 'Download3');
                     }
                     if (this.state.fontName) {
-                      this.props.goToCheckout(this.state.fontName);                      
+                      this.props.goToCheckout(this.state.fontName);
                     } else {
                       this.setState({
                         isModalOpened: true,

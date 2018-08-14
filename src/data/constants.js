@@ -14,13 +14,20 @@ export const S3_URL =
 export const DEFAULT_UI_WORD = 'Hamburgefonstiv ABC 123';
 export const DEFAULT_UI_GLYPH = 'g';
 export const GRAPHQL_API = process.env.REACT_APP_UNIQUE_ENV === 'production'
-  ? 'https://api.graph.cool/simple/v1/prototypo'
-  : 'https://api.graph.cool/simple/v1/prototypo-new-dev';
+  ? 'https://api.graph.cool/simple/v1/prototypo-new-dev'
+  : 'https://api.graph.cool/simple/v1/prototypo';
+export const GRAPHQL_API_FILE = process.env.REACT_APP_UNIQUE_ENV === 'production'
+  ? 'https://api.graph.cool/file/v1/prototypo-new-dev'
+  : 'https://api.graph.cool/file/v1/prototypo';
 export const BASE_PACK_PRICE = 35.0;
 export const AWS_URL = `https://${
-  process.env.REACT_APP_UNIQUE_ENV === 'production' ? 'e4jpj60rk8' : 'tc1b6vq6o8'
+  process.env.REACT_APP_UNIQUE_ENV === 'production'
+    ? 'tc1b6vq6o8'
+    : 'e4jpj60rk8'
 }.execute-api.eu-west-1.amazonaws.com/${
-  process.env.REACT_APP_UNIQUE_ENV === 'production' ? 'prod' : 'dev'
+  process.env.REACT_APP_UNIQUE_ENV === 'production'
+    ? 'dev'
+    : 'prod'
 }`;
 export const TWITTER_REQUEST_TOKEN_URL = `${AWS_URL}/auth/twitter/requestToken`;
 export const FACEBOOK_APP_ID =
