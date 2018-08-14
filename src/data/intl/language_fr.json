@@ -2,6 +2,7 @@
 	"404.Subtitle": "La page que vous recherchez n'existe pas :(",
 	"404.Title": "Page non trouvée",
 	"404.homeButton": "Accueil",
+  "App.Loading": "Merci de patienter quelques secondes pendant que notre technologie génère des dizaines de modèles de polices personnalisables.",
 	"App.LoadingError": "Oups, il semblerait que quelque chose se soit mal passé... Pourriez-vous recharger la page et réessayer? Si cela ne marche toujours pas, merci de nous contacter via le chat de l'application.",
 	"App.errorPayment": "Quelque chose ne s'est pas bien passé durant le processus de paiement. Ne vous inquiétez pas, vous n'avez pas été débité. Réessayer ou essayer une autre carte. Si cela échoue encore, merci de nous contacter!",
 	"App.finishAction": "Finir",
