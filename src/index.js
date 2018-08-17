@@ -68,7 +68,7 @@ injectTapEventPlugin();
 const Index = (props) => (
 	<IntlProvider
 		locale={props.locale}
-		messages={messages[props.locale] ? messages[props.locale] : messages.def}
+		messages={messages[props.locale] ? messages[props.locale] : messages.en}
 	>
 		<ConnectedRouter history={history}>
 			<Switch>
