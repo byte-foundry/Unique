@@ -162,10 +162,11 @@ export default (state = initialState, action) => {
 	}
 };
 
-export const selectFont = (font, step, redirectTo = '/app/specimen') => (dispatch, getState) => {
+export const loadFont = (f, step, redirectTo = '/app/specimen') => (dispatch, getState) => {
 	/* global Intercom */
 	/* global fbq */
 	/* global ga */
+	const font = f || getState().presets.loadedPreset;
 	try {
 		Intercom('trackEvent', 'unique-selected-font', {
 			unique_preset: font.variant.family.name,
@@ -1218,7 +1219,7 @@ export const resetSliderFont = () => (dispatch, getState) => {
 
 export const reloadFonts = () => (dispatch, getState) => {
 	const {currentPreset, step} = getState().font;
-	dispatch(selectFont(currentPreset, step));
+	dispatch(loadFont(currentPreset, step));
 };
 
 export const loadProject = (loadedProjectID, redirectTo = '/app/specimen') => (dispatch, getState) => {
@@ -1268,7 +1269,7 @@ export const loadProject = (loadedProjectID, redirectTo = '/app/specimen') => (d
 				bought,
 			});
 			dispatch(updateProjectInfos(id, name, bought));
-      dispatch(selectFont(currentPreset, step, redirectTo));
+      dispatch(loadFont(currentPreset, step, redirectTo));
 		});
 	}
 };

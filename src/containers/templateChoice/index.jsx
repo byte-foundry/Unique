@@ -12,7 +12,8 @@ import {Shortcuts} from 'react-shortcuts';
 import './TemplateChoice.css';
 import Template from '../../components/template/';
 
-import {selectFont, cleanData} from '../../data/font';
+import {cleanData} from '../../data/font';
+import {getPreset} from '../../data/presets';
 import {isDblTouchTap} from '../../data/constants';
 
 const isMostSelected = (presets, font) => {
@@ -73,7 +74,7 @@ class TemplateChoice extends React.Component {
 				}
 			case 'CHOICE_SELECT':
 				if (this.state.templateIndex !== -1 && !this.props.isLoading) {
-					this.props.selectFont(this.props.presets[this.state.templateIndex]);
+					this.props.getPreset(this.props.presets[this.state.templateIndex].id);
 				}
 				break;
 			case 'STEP_BACK':
@@ -134,9 +135,7 @@ class TemplateChoice extends React.Component {
 											}`}
 											onClick={() => {
 												if (this.state.templateIndex >= 0) {
-													this.props.selectFont(
-														this.props.presets[this.state.templateIndex],
-													);
+													this.props.getPreset(this.props.presets[this.state.templateIndex].id)
 												}
 											}}
 										>
@@ -166,9 +165,7 @@ class TemplateChoice extends React.Component {
 														}`}
 														onClick={() => {
 															if (this.state.templateIndex >= 0) {
-																this.props.selectFont(
-																	this.props.presets[this.state.templateIndex],
-																);
+																this.props.getPreset(this.props.presets[this.state.templateIndex].id)
 															}
 														}}
 													>
@@ -207,11 +204,11 @@ class TemplateChoice extends React.Component {
 											font={font}
 											onClick={() => this.setState({templateIndex: index})}
 											onDoubleClick={() =>
-												this.props.selectFont(this.props.presets[index])
+												this.props.getPreset(this.props.presets[index].id)
 											}
 											onTouchTap={(e) => {
 												if (isDblTouchTap(e)) {
-													this.props.selectFont(this.props.presets[index]);
+													this.props.getPreset(this.props.presets[index].id);
 												} else {
 													this.setState({templateIndex: index});
 												}
@@ -235,7 +232,17 @@ class TemplateChoice extends React.Component {
 								))}
 							</FlipMove>
 						</div>
-						{this.props.isLoading ? <h2>Loading font...</h2> : false}
+						{(this.props.isLoading || this.props.isPresetLoading) ? (
+							<div className="template-loading">
+								<div className="sk-wave">
+									<div className="sk-rect sk-rect1" />
+									<div className="sk-rect sk-rect2" />
+									<div className="sk-rect sk-rect3" />
+									<div className="sk-rect sk-rect4" />
+									<div className="sk-rect sk-rect5" />
+								</div>
+							</div>
+						) : false}
 					</div>
 				</div>
 			</Shortcuts>
@@ -245,19 +252,21 @@ class TemplateChoice extends React.Component {
 
 const mapStateToProps = (state) => ({
 	presets: state.presets.filteredPresets,
-	isLoading: state.font.isLoading,
+	isFontLoading: state.font.isLoading,
+	isPresetLoading: state.presets.isLoading,
 	chosenWord: state.user.chosenWord,
 	currentParams: state.font.currentParams,
 });
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
-		{selectFont, redirectToHome: () => push('/app/'), cleanData},
+		{getPreset, redirectToHome: () => push('/app/'), cleanData},
 		dispatch,
 	);
 
 TemplateChoice.propTypes = {
-	selectFont: PropTypes.func.isRequired,
-	isLoading: PropTypes.bool.isRequired,
+	getPreset: PropTypes.func.isRequired,
+	isFontLoading: PropTypes.bool.isRequired,
+	isPresetLoading: PropTypes.bool.isRequired,
 	redirectToHome: PropTypes.func.isRequired,
 	chosenWord: PropTypes.string,
 	cleanData: PropTypes.func.isRequired,

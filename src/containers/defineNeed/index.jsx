@@ -233,10 +233,11 @@ class DefineNeed extends React.Component {
 											.then((data) => {
 												this.props.setFetchingPresets(false);
 												this.props.importPresets(
-													data.getAllUniquePresets.presets,
+													data.allPresets,
 												);
 											})
-											.catch(() => {
+											.catch((e) => {
+												console.log(e)
 												this.props.setErrorPresets(true);
 												this.props.setFetchingPresets(false);
 											});

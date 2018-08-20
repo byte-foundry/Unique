@@ -57,7 +57,7 @@ class App extends React.Component {
 		request(GRAPHQL_API, getAllPresets)
 			.then((data) => {
 				props.setFetchingPresets(false);
-				props.importPresets(data.getAllUniquePresets.presets);
+				props.importPresets(data.allPresets);
 			})
 			.catch(() => {
 				props.setErrorPresets(true);
