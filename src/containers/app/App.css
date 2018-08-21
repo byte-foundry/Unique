@@ -221,6 +221,10 @@
   animation: none;
 }
 
+.loaded .App-header .loading-message {
+  display: none;
+}
+
 .loaded .App-loader-wrapper {
   animation: animLoadedLoader 0.5s cubic-bezier(0.7, 0, 0.3, 1) forwards;
 }
