@@ -4,7 +4,7 @@ import mergeWith from 'lodash.mergewith';
 import uniq from 'lodash.uniq';
 import {push} from 'react-router-redux';
 import {request, GraphQLClient} from 'graphql-request';
-import {loadPresets} from '../presets';
+import {loadPresets, getPreset} from '../presets';
 import {setUnstable, setStable} from '../ui';
 import {updateProjectInfos, resetCheckout, STORE_PROJECTS} from '../user';
 import {GRAPHQL_API} from '../constants';
@@ -15,6 +15,7 @@ import {
 	getSpecialChoiceSelectedCount,
 	getUserProject,
 	getUserProjects,
+	getPresetQuery,
 } from '../queries';
 
 export const SELECT_FONT_REQUESTED = 'font/SELECT_FONT_REQUESTED';
@@ -162,7 +163,7 @@ export default (state = initialState, action) => {
 	}
 };
 
-export const loadFont = (f, step, redirectTo = '/app/specimen') => (dispatch, getState) => {
+export const loadFont = (f, s, redirectTo = '/app/specimen') => (dispatch, getState) => {
 	/* global Intercom */
 	/* global fbq */
 	/* global ga */
@@ -349,6 +350,8 @@ export const loadFont = (f, step, redirectTo = '/app/specimen') => (dispatch, ge
 				updateSelectedCount('Preset', font.id, data.Preset.selected + 1),
 			),
 		);
+
+		const step = s || choicesMade.length || undefined;
 
 		// All set, ready to customize
 		dispatch({
@@ -965,7 +968,6 @@ export const getArrayBuffer = (name, familyName, styleName, subset) => (
 	dispatch({
 		type: 'font/GET_ARRAY_BUFFER',
 	});
-	console.log(name);
 	return new Promise((resolve) => {
 		fonts[name || fontName]
 			.getArrayBuffer({
@@ -1237,39 +1239,44 @@ export const loadProject = (loadedProjectID, redirectTo = '/app/specimen') => (d
 		client.request(getUserProject(loadedProjectID)).then((data) => {
       const {choicesMade, preset, bought, id, name} = data.UniqueProject;
       const baseValues = preset.baseValues;
-      const {importedPresets} = getState().presets;
-      const currentPreset = importedPresets.find(
-        fullPreset => fullPreset.id === preset.id,
-      );
-			currentPreset.steps.forEach((step) => {
-				step.choices.forEach((choice) => {
-					if (!choice.name) {
-						choice.name = step.defaultStepName;
-					}
-				});
-			});
-			const step = currentPreset.steps.length;
-			const currentParams = {};
-			choicesMade.forEach((choice, index) => {
-				if (choice !== null) {
-					Object.keys(choice).forEach((key) => {
-						if (key !== 'name') {
-							currentParams[key] = choicesMade[index][key];
+			const {importedPresets} = getState().presets;
+			
+			request(
+				GRAPHQL_API,
+				getPresetQuery(preset.id)).then((data) => {
+					const currentPreset = data.getComputedPreset.preset;
+					dispatch(getPreset(preset.id));
+					currentPreset.steps.forEach((step) => {
+						step.choices.forEach((choice) => {
+							if (!choice.name) {
+								choice.name = step.defaultStepName;
+							}
+						});
+					});
+					const step = currentPreset.steps.length;
+					const currentParams = {};
+					choicesMade.forEach((choice, index) => {
+						if (choice !== null) {
+							Object.keys(choice).forEach((key) => {
+								if (key !== 'name') {
+									currentParams[key] = choicesMade[index][key];
+								}
+							});
 						}
 					});
-				}
-			});
-			dispatch({
-				type: LOAD_FONT_DATA,
-				currentPreset,
-				currentParams,
-				baseValues,
-				step,
-				choicesMade,
-				bought,
-			});
-			dispatch(updateProjectInfos(id, name, bought));
-      dispatch(loadFont(currentPreset, step, redirectTo));
+					dispatch({
+						type: LOAD_FONT_DATA,
+						currentPreset,
+						currentParams,
+						baseValues,
+						step,
+						choicesMade,
+						bought,
+					});
+					dispatch(updateProjectInfos(id, name, bought));
+					dispatch(loadFont(currentPreset, step, redirectTo));
+				},
+			);
 		});
 	}
 };
