@@ -1,17 +1,24 @@
 import {templateNames} from 'prototypo-library';
 import {push} from 'react-router-redux';
+import {request} from 'graphql-request';
 import {setUnstable, setStable} from '../ui';
 import {storeCreatedFont, createPrototypoFactory} from '../createdFonts';
-import {clearFontIsLoading} from '../font';
+import {clearFontIsLoading, loadFont} from '../font';
+import {GRAPHQL_API} from '../constants';
+import {getPresetQuery} from '../queries';
 
 export const IMPORT_PRESETS_REQUESTED = 'presets/IMPORT_PRESETS_REQUESTED';
 export const IMPORT_PRESETS = 'presets/IMPORT_PRESETS';
 export const LOAD_PRESETS_REQUESTED = 'presets/LOAD_PRESETS_REQUESTED';
 export const LOAD_PRESETS = 'presets/LOAD_PRESETS';
+export const LOAD_PRESET_REQUESTED = 'presets/LOAD_PRESET_REQUESTED';
+export const LOAD_PRESET = 'presets/LOAD_PRESET';
+
 const initialState = {
 	filteredPresets: [],
 	importedPresets: [],
 	loadedPresetsName: [],
+	loadedPreset: undefined,
 	isLoading: false,
 };
 
@@ -31,12 +38,25 @@ export default (state = initialState, action) => {
 				isLoading: true,
 			};
 
+		case LOAD_PRESET_REQUESTED:
+			return {
+				...state,
+				isLoading: true,
+			};
+
 		case LOAD_PRESETS:
 			return {
 				...state,
 				isLoading: false,
 				loadedPresetsName: action.loadedPresetsName,
 				filteredPresets: action.filteredPresets,
+			};
+
+		case LOAD_PRESET:
+			return {
+				...state,
+				isLoading: false,
+				loadedPreset: action.preset,
 			};
 
 		case IMPORT_PRESETS_REQUESTED:
@@ -71,6 +91,7 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
 		dispatch(setUnstable());
 	}
 	const {importedPresets, isLoading} = getState().presets;
+	console.log(importedPresets);
 	const {need} = getState().font;
 	if (isLoading) return;
 	dispatch({
@@ -126,6 +147,23 @@ export const loadPresets = (reloading = false) => (dispatch, getState) => {
 		dispatch(push('/app/select'));
 		dispatch(setStable());
 	});
+};
+
+export const getPreset = (id) => (dispatch) => {
+	dispatch({
+		type: LOAD_PRESET_REQUESTED,
+	});
+	request(
+		GRAPHQL_API,
+		getPresetQuery(id)).then((data) => {
+			console.log(data);
+			dispatch({
+				type: LOAD_PRESET,
+				preset: data.getComputedPreset.preset,
+			});
+			dispatch(loadFont());
+		},
+	);
 };
 
 export const reloadPresets = () => (dispatch) => {

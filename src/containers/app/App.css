@@ -47,14 +47,18 @@
   cursor: default;
 }
 
+.App .App-header .loading-message {
+  margin: 0 auto;
+  min-width: 100px;
+  max-width: 680px;
+  width: 50%;
+  text-align: center;
+  color: #fff;
+  font-size: 25px;
+}
+
 .App .App-header .error-message {
-  position: absolute;
-  bottom: 30px;
   font-size: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  max-width: 550px;
 }
 
 .App-logo-wrapper {
@@ -215,6 +219,10 @@
 .loaded .App-logo-wrapper .letter-11 {
   opacity: 0;
   animation: none;
+}
+
+.loaded .App-header .loading-message {
+  display: none;
 }
 
 .loaded .App-loader-wrapper {

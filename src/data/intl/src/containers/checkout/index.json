@@ -5,11 +5,6 @@
     "defaultMessage": "Font package"
   },
   {
-    "id": "CheckoutView.LaunchDiscountOption",
-    "description": "Launch discount",
-    "defaultMessage": "Launch discount"
-  },
-  {
     "id": "CheckoutView.title",
     "description": "Checkout view title",
     "defaultMessage": "Create your Unique package:"

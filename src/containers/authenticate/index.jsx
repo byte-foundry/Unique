@@ -36,6 +36,8 @@ class Authenticate extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			happyIndex: Math.floor(Math.random() * 3),
+			welcomeBackMessageIndex: Math.floor(Math.random() * 7),
 			isSignIn: false,
 			isReset: false,
 			isConnecting: false,
@@ -84,6 +86,14 @@ class Authenticate extends React.Component {
 		this.loginTwitter = this.loginTwitter.bind(this);
 		this.resetEmailUser = this.resetEmailUser.bind(this);
 	}
+
+	componentDidMount() {
+		this.setState({
+			happyIndex: Math.floor(Math.random() * 3),
+			welcomeBackMessageIndex: Math.floor(Math.random() * 7),
+		});
+	}
+
 	loginEmailUser() {
 		// todo : loading, errors
 		/*eslint no-useless-escape: 0*/
@@ -989,94 +999,45 @@ class Authenticate extends React.Component {
 			/>,
 		];
 		const welcomeBackMessages = [
-			{
-				id: "Auth.SignInHeader1",
-				defaultMessage: "So, we meet again",
-				description: "Sign in header message",
-				elem: (
-					<FormattedMessage
-						id="Auth.SignInHeader1"
-						defaultMessage="So, we meet again"
-						description="Sign in header message"
-					/>
-				),
-			},
-			{
-				id: "Auth.SignInHeader2",
-				defaultMessage: "Welcome back",
-				description: "Sign in header message",
-				elem: (
-					<FormattedMessage
-						id="Auth.SignInHeader2"
-						defaultMessage="Welcome back"
-						description="Sign in header message"
-					/>
-				),
-			},
-			{
-				id: "Auth.SignInHeader3",
-				defaultMessage: "It’s you again!",
-				description: "Sign in header message",
-				elem: (
-					<FormattedMessage
-						id="Auth.SignInHeader3"
-						defaultMessage="It’s you again!"
-						description="Sign in header message"
-					/>
-				),
-			},
-			{
-				id: "Auth.SignInHeader4",
-				defaultMessage: "Why hello there",
-				description: "Sign in header message",
-				elem: (
-					<FormattedMessage
-						id="Auth.SignInHeader4"
-						defaultMessage="Why hello there"
-						description="Sign in header message"
-					/>
-				),
-			},
-			{
-				id: "Auth.SignInHeader5",
-				defaultMessage: "Good to have you back",
-				description: "Sign in header message",
-				elem: (
-					<FormattedMessage
-						id="Auth.SignInHeader5"
-						defaultMessage="Good to have you back"
-						description="Sign in header message"
-					/>
-				),
-			},
-			{
-				id: "Auth.SignInHeader6",
-				defaultMessage: "Yay, you’re back!",
-				description: "Sign in header message",
-				elem: (
-					<FormattedMessage
-						id="Auth.SignInHeader6"
-						defaultMessage="Yay, you’re back!"
-						description="Sign in header message"
-					/>
-				),
-			},
-			{
-				id: "Auth.SignInHeader7",
-				defaultMessage: "It hasn’t been the same without you here",
-				description: "Sign in header message",
-				elem: (
-					<FormattedMessage
-						id="Auth.SignInHeader7"
-						defaultMessage="It hasn’t been the same without you here"
-						description="Sign in header message"
-					/>
-				),
-			},
+			<FormattedMessage
+				id="Auth.SignInHeader1"
+				defaultMessage="So, we meet again"
+				description="Sign in header message"
+			/>,
+			<FormattedMessage
+				id="Auth.SignInHeader2"
+				defaultMessage="Welcome back"
+				description="Sign in header message"
+			/>,
+			<FormattedMessage
+				id="Auth.SignInHeader3"
+				defaultMessage="It’s you again!"
+				description="Sign in header message"
+			/>,
+			<FormattedMessage
+				id="Auth.SignInHeader4"
+				defaultMessage="Why hello there"
+				description="Sign in header message"
+			/>,
+			<FormattedMessage
+				id="Auth.SignInHeader5"
+				defaultMessage="Good to have you back"
+				description="Sign in header message"
+			/>,
+			<FormattedMessage
+				id="Auth.SignInHeader6"
+				defaultMessage="Yay, you’re back!"
+				description="Sign in header message"
+			/>,
+			<FormattedMessage
+				id="Auth.SignInHeader7"
+				defaultMessage="It hasn’t been the same without you here"
+				description="Sign in header message"
+			/>,
 		];
-		
-		const happyIndex = Math.floor(Math.random() * 2) + 1;
-		const welcomeBackMessageIndex = Math.floor(Math.random() * 6) + 1;
+
+		const {happyIndex, welcomeBackMessageIndex} = this.state;
+
 		switch (this.props.headerMode) {
 			default:
 				if (this.state.isSignIn) {
@@ -1098,11 +1059,7 @@ class Authenticate extends React.Component {
 												description="Sign in header message if font bought"
 											/>
 										) : (
-											<FormattedMessage
-												id={welcomeBackMessages[welcomeBackMessageIndex].id}
-												defaultMessage={welcomeBackMessages[welcomeBackMessageIndex].defaultMessage}
-												description={welcomeBackMessages[welcomeBackMessageIndex].description}
-											/>
+											welcomeBackMessages[welcomeBackMessageIndex]
 										)}
 									</span>
 								)}
@@ -1186,16 +1143,6 @@ class Authenticate extends React.Component {
 		return (
 			<div className="Authenticate">
 				<div className="container">
-					<Close
-						className="closeIcon"
-						onClick={() => {
-							if (this.props.projectBought === 'boughtFont') {
-								this.props.goToHome();
-							} else {
-								this.props.reloadFonts();
-							}
-						}}
-					/>
 					<div className="row">
 						<div className="col-lg-6 left">
 							<Logo />
@@ -1286,8 +1233,8 @@ class Authenticate extends React.Component {
 									<div className="general-error">
 										{this.state.errorMessages.general !== '' && (
 											<FormattedMessage
-                        id={`Auth.${this.state.errorMessages.general}`}
-                        defaultMessage={<FormattedMessage id="Auth.GeneralError" defaultMessage="Woops, something unexpected happened" />}
+												id="Auth.GeneralError"
+												defaultMessage="Woops, something happened"
 												description="Login page general error"
 											/>
 										)}
@@ -1427,5 +1374,8 @@ Authenticate.defaultProps = {
 };
 
 export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(Authenticate),
+	connect(
+		mapStateToProps,
+		mapDispatchToProps,
+	)(Authenticate),
 );

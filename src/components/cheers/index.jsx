@@ -72,7 +72,7 @@ class Cheers extends React.Component {
 	}
 	generateCheer(props) {
 		const {previousChoiceMade, recommandations} = props;
-		if (recommandations.findIndex((e) => e === previousChoiceMade) !== -1) {
+		if (recommandations && recommandations.findIndex((e) => e === previousChoiceMade) !== -1) {
 			this.setState({cheer: shuffleArray(cheers)[0], shouldHideCheer: false});
 		} else {
 			this.setState({cheer: undefined, shouldHideCheer: true});

@@ -1,20 +1,20 @@
 import {push} from 'react-router-redux';
 import {request, GraphQLClient} from 'graphql-request';
 import fx from 'money';
-import {setStable} from '../ui';
+import {setStable, setUnstable} from '../ui';
 import {
 	addProjectToUser,
 	authenticateUser,
 	authenticateFacebookUser,
 	authenticateGoogleUser,
 	authenticateTwitterUser,
-	authenticateAnonymousUser,
 	getPresetExportedCount,
 	updatePresetExportedCount,
 	signupUser,
 	getUserProjects,
 	updateProject,
 	deleteProject,
+  getUserIdAndEmail,
 } from '../queries';
 import {updateSubset, loadLibrary} from '../font';
 import {
@@ -667,29 +667,63 @@ export const signupWithEmail = (
 	});
 };
 
-export const anonymousAuth = () => (dispatch) => {
-	const graphcoolToken = localStorage.getItem('uniqueGraphcoolToken');
-	if (graphcoolToken) {
-		dispatch(loginToGraphCool(graphcoolToken, false));
-	} else {
-		request(GRAPHQL_API, authenticateAnonymousUser)
-			.then((res) => {
-				const {token, id} = res.authenticateAnonymousUser;
-				dispatch({
-					type: CONNECT_TO_GRAPHCOOL,
-					graphQLToken: token,
-					graphqlID: id,
-					anonymous: true,
-				});
-			})
-			.catch((err) => {
-				dispatch({
-					type: LOGIN_ERROR,
-					authError: err.response.errors[0].functionError,
-				});
-			});
-	}
-};
+export const loggedInUser = (location) => (dispatch) => {
+  const accessToken = localStorage.getItem('uniqueGraphcoolToken');
+  if (accessToken) {
+    dispatch(setUnstable());
+    const client = new GraphQLClient(GRAPHQL_API, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    client
+      .request(getUserIdAndEmail)
+      .then((res) => {
+        dispatch(setStable());
+        dispatch({
+          type: STORE_USER_EMAIL,
+          email: res.user.email,
+          graphqlID: res.user.id,
+        });
+        dispatch(push({pathname: location}));
+
+        return client
+          .request(getUserProjects())
+      })
+      .then((res) => {
+        dispatch({
+          type: CONNECT_TO_GRAPHCOOL,
+          email: res.user.email,
+          graphqlID: res.user.id,
+          graphQLToken: accessToken,
+          projects: res.user.uniqueProjects,
+          shouldLogout: false,
+        });
+        /* global Intercom */
+        Intercom('update', {email: res.user.email, occupation: 'unique_user'});
+        Intercom('update', {
+          'job-title': 'unique_user',
+        });
+        Intercom('trackEvent', 'logged-from-unique');
+      })
+      .catch((err) => {
+        dispatch(setStable());
+        localStorage.removeItem('uniqueGraphcoolToken');
+        dispatch({
+          type: STORE_USER_EMAIL,
+          email: undefined,
+          graphqlID: undefined,
+        });
+      });
+  }
+  else {
+    dispatch({
+      type: STORE_USER_EMAIL,
+      email: undefined,
+      graphqlID: undefined,
+    });
+  }
+}
 
 export const loginToGraphCool = (accessToken, shouldRedirect = true) => (
 	dispatch,
@@ -732,7 +766,7 @@ export const loginToGraphCool = (accessToken, shouldRedirect = true) => (
 			});
 			Intercom('trackEvent', 'logged-from-unique');
 			if (shouldRedirect) {
-				dispatch(loadLibrary());
+        dispatch(push({pathname: '/app'}));
 			}
 		})
 		.catch(() => {
