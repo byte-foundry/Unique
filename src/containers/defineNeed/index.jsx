@@ -10,7 +10,7 @@ import {FormattedMessage} from 'react-intl';
 import 'react-tippy/dist/tippy.css';
 import Button from '../../components/button';
 import {defineNeed} from '../../data/font';
-import {storeChosenWord, anonymousAuth} from '../../data/user';
+import {storeChosenWord} from '../../data/user';
 import {importPresets} from '../../data/presets';
 import {GRAPHQL_API} from '../../data/constants';
 import {getAllPresets} from '../../data/queries';
@@ -33,11 +33,6 @@ class DefineNeed extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.toggleLogoNeed = this.toggleLogoNeed.bind(this);
-	}
-	componentWillMount() {
-		if (!this.props.isAuthenticated) {
-			this.props.anonymousAuth();
-		}
 	}
 
 	componentDidMount() {
@@ -306,7 +301,6 @@ const mapDispatchToProps = (dispatch) =>
 			redirectToLanding: () => push('/'),
 			setErrorPresets,
 			setFetchingPresets,
-			anonymousAuth,
 		},
 		dispatch,
 	);
@@ -321,7 +315,6 @@ DefineNeed.propTypes = {
 	setFetchingPresets: PropTypes.func.isRequired,
 	errorPresets: PropTypes.bool.isRequired,
 	fetchingPresets: PropTypes.bool.isRequired,
-	anonymousAuth: PropTypes.func.isRequired,
 };
 
 export default withRouter(

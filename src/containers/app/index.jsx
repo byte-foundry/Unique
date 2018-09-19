@@ -18,6 +18,7 @@ import {
 	switchBlackOnWhite,
 	switchGlyphMode,
 	changeFontSize,
+  loggedInUser,
 } from '../../data/user';
 import {
 	setLocale,
@@ -79,6 +80,10 @@ class App extends React.Component {
 	getChildContext() {
 		return {shortcuts: this.shortcutManager};
 	}
+  componentWillMount() {
+    const location = this.props.location.pathname;
+    this.props.loggedInUser(location);
+  }
 	componentWillReceiveProps(newProps) {
 		if (newProps.shouldLogout) this.props.logout();
 		if (newProps.pathname !== '/app/customize' && !newProps.isBlackOnWhite) {
@@ -137,7 +142,6 @@ class App extends React.Component {
 		return (
 			<main className={`App ${this.props.isLoading ? 'loading' : 'loaded'}`}>
 				<Banner />
-				{!this.props.location.pathname.includes('/app/auth') && (
 					<header className="App-header">
             <div className="App-logo-wrapper">
               <h1>
@@ -168,7 +172,6 @@ class App extends React.Component {
               )}
             </div>
 					</header>
-				)}
 				<div
 					className={`App-content container-fluid ${
 						this.props.isBlackOnWhite ? '' : 'whiteOnBlack'
@@ -192,10 +195,11 @@ class App extends React.Component {
 					<div className="row content-wrapper">
 						<div className="left col-sm-12">
 							<Switch>
-								<Route
+								<ProtectedRoute
+									requirement={() => this.props.isAuthenticated}
 									exact
 									path="/app"
-									render={(props) => <DefineNeed auth={this.auth} {...props} />}
+									component={DefineNeed}
 								/>
 								<Route exact path="/app/restart" component={WelcomeBack} />
 								<ProtectedRoute
@@ -375,6 +379,7 @@ const mapDispatchToProps = (dispatch) =>
 			createPrototypoFactory,
 			toggleTooltips,
 			logout,
+      loggedInUser,
 			getCurrencyRates,
 			switchBlackOnWhite,
 			switchGlyphMode,

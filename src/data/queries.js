@@ -1,3 +1,12 @@
+export const getUserIdAndEmail = `
+  query {
+    user {
+      id
+      email
+    }
+  }
+`
+
 export const getPresetQuery = (id) => `
     query {
         getComputedPreset(id: "${id}") {

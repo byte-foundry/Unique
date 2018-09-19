@@ -1143,16 +1143,6 @@ class Authenticate extends React.Component {
 		return (
 			<div className="Authenticate">
 				<div className="container">
-					<Close
-						className="closeIcon"
-						onClick={() => {
-							if (this.props.projectBought === 'boughtFont') {
-								this.props.goToHome();
-							} else {
-								this.props.reloadFonts();
-							}
-						}}
-					/>
 					<div className="row">
 						<div className="col-lg-6 left">
 							<Logo />
