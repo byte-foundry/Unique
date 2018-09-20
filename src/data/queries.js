@@ -1,9 +1,37 @@
-export const getAllPresets = `
+export const getUserIdAndEmail = `
+  query {
+    user {
+      id
+      email
+    }
+  }
+`
+
+export const getPresetQuery = (id) => `
     query {
-        getAllUniquePresets {
-            presets
+        getComputedPreset(id: "${id}") {
+            preset
           }
     }
+`;
+
+export const getAllPresets = `
+	query {
+		allPresets(filter: {published: true}) {
+			id
+            ownerInitials
+            needs
+            tags
+			variant {
+				name
+				family {
+					name
+				}
+			}
+			template
+			baseValues
+		}
+	}
 `;
 
 export const getUserProject = (id) => `

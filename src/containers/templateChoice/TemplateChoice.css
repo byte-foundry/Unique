@@ -99,6 +99,51 @@
   margin-left: 0px;
 }
 
+
+.TemplateChoice .template-loading .sk-wave {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75px;
+  height: 30px;
+  text-align: center;
+  font-size: 10px;
+}
+.TemplateChoice .template-loading .sk-wave .sk-rect {
+  background-color: #5320ee;
+  height: 100%;
+  width: 10px;
+  margin-right: 5px;
+  display: inline-block;
+  animation: sk-waveStretchDelay 1.2s infinite ease-in-out;
+}
+.TemplateChoice .template-loading .sk-wave .sk-rect1 {
+  animation-delay: -1.2s;
+}
+.TemplateChoice .template-loading .sk-wave .sk-rect2 {
+  animation-delay: -1.1s;
+}
+.TemplateChoice .template-loading .sk-wave .sk-rect3 {
+  animation-delay: -1s;
+}
+.TemplateChoice .template-loading .sk-wave .sk-rect4 {
+  animation-delay: -0.9s;
+}
+.TemplateChoice .template-loading .sk-wave .sk-rect5 {
+  animation-delay: -0.8s;
+}
+
+@keyframes sk-waveStretchDelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+}
+
+
 @media (max-width: 576px) {
   .TemplateChoice .pagination {
     float: none;

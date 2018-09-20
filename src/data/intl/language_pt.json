@@ -2,6 +2,7 @@
 	"404.Subtitle": "A página que procura não se encontra disponível :(",
 	"404.Title": "Página não encontrada",
 	"404.homeButton": "Home",
+  "App.Loading": "Por favor aguarde uns segundos, enquanto a nossa tecnologia gera dezenas de modelos de fontes customizáveis.",
 	"App.LoadingError": "Parece que algo correu mal...Pode por favor atualizar a página e tentar novamente? Se o erro ainda persistir, por favor contacte-nos através do chat da aplicação. ",
 	"App.errorPayment": "Algo correu mal durante o processo de pagamento. Não se preocupe, nada lhe foi debitado. Tente novamente, ou utilize outro cartão. Se o erro persistir, por favor contacte-nos!",
 	"App.finishAction": "Terminar",

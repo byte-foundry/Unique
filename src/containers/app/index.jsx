@@ -18,6 +18,7 @@ import {
 	switchBlackOnWhite,
 	switchGlyphMode,
 	changeFontSize,
+  loggedInUser,
 } from '../../data/user';
 import {
 	setLocale,
@@ -57,7 +58,7 @@ class App extends React.Component {
 		request(GRAPHQL_API, getAllPresets)
 			.then((data) => {
 				props.setFetchingPresets(false);
-				props.importPresets(data.getAllUniquePresets.presets);
+				props.importPresets(data.allPresets);
 			})
 			.catch(() => {
 				props.setErrorPresets(true);
@@ -79,6 +80,10 @@ class App extends React.Component {
 	getChildContext() {
 		return {shortcuts: this.shortcutManager};
 	}
+  componentWillMount() {
+    const location = this.props.location.pathname;
+    this.props.loggedInUser(location);
+  }
 	componentWillReceiveProps(newProps) {
 		if (newProps.shouldLogout) this.props.logout();
 		if (newProps.pathname !== '/app/customize' && !newProps.isBlackOnWhite) {
@@ -137,28 +142,36 @@ class App extends React.Component {
 		return (
 			<main className={`App ${this.props.isLoading ? 'loading' : 'loaded'}`}>
 				<Banner />
-				{!this.props.location.pathname.includes('/app/auth') && (
 					<header className="App-header">
-						<h1 className="App-logo-wrapper">
-							<Logo
-								onClick={() => {
-									this.props.location.pathname === '/app'
-										? this.props.goToLanding()
-										: this.props.goToHome();
-								}}
-							/>
-						</h1>
-						{this.props.templateDown && (
-							<p className="error-message">
-								<FormattedMessage
-									id="App.LoadingError"
-									defaultMessage="It looks like something went wrong on our end... Could you reload the page and try again? If it still does not work, please contact us using the in-app chat."
-									description="Loading page error message"
-								/>
-							</p>
-						)}
+            <div className="App-logo-wrapper">
+              <h1>
+                <Logo
+                  onClick={() => {
+                    this.props.location.pathname === '/app'
+                      ? this.props.goToLanding()
+                      : this.props.goToHome();
+                  }}
+                />
+              </h1>
+              {this.props.templateDown ? (
+                <p className="loading-message error-message">
+                  <FormattedMessage
+                    id="App.LoadingError"
+                    defaultMessage="It looks like something went wrong on our end... Could you reload the page and try again? If it still does not work, please contact us using the in-app chat."
+                    description="Loading page error message"
+                  />
+                </p>
+              ) : (
+                <p className="loading-message">
+                  <FormattedMessage
+                    id="App.Loading"
+                    defaultMessage="Please wait a few seconds while our technology is generating dozens of customizable font templates."
+                    description="Loading message"
+                  />
+                </p>
+              )}
+            </div>
 					</header>
-				)}
 				<div
 					className={`App-content container-fluid ${
 						this.props.isBlackOnWhite ? '' : 'whiteOnBlack'
@@ -182,10 +195,11 @@ class App extends React.Component {
 					<div className="row content-wrapper">
 						<div className="left col-sm-12">
 							<Switch>
-								<Route
+								<ProtectedRoute
+									requirement={() => this.props.isAuthenticated}
 									exact
 									path="/app"
-									render={(props) => <DefineNeed auth={this.auth} {...props} />}
+									component={DefineNeed}
 								/>
 								<Route exact path="/app/restart" component={WelcomeBack} />
 								<ProtectedRoute
@@ -365,6 +379,7 @@ const mapDispatchToProps = (dispatch) =>
 			createPrototypoFactory,
 			toggleTooltips,
 			logout,
+      loggedInUser,
 			getCurrencyRates,
 			switchBlackOnWhite,
 			switchGlyphMode,
