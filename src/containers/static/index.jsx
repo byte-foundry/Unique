@@ -112,7 +112,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
-			goToApp: () => push('/app'),
+			goToApp: () => push('/app/need'),
 			setLocale,
 		},
 		dispatch,

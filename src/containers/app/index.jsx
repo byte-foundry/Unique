@@ -86,14 +86,14 @@ class App extends React.Component {
   }
 	componentWillReceiveProps(newProps) {
 		if (newProps.shouldLogout) this.props.logout();
-		if (newProps.pathname !== '/app/customize' && !newProps.isBlackOnWhite) {
+		if (!newProps.pathname.includes('/app/customize') && !newProps.isBlackOnWhite) {
 			newProps.switchBlackOnWhite();
 		}
 	}
 	hasSelectedFont() {
 		if (
 			this.props.selectedFont !== '' &&
-			(this.props.pathname === '/app/customize' ||
+			(this.props.pathname.includes('/app/customize') ||
 				this.props.pathname === '/app/specimen') &&
 			!(typeof this.props.selectedFontLoaded === 'object')
 		) {
@@ -198,7 +198,7 @@ class App extends React.Component {
 								<ProtectedRoute
 									requirement={() => this.props.isAuthenticated}
 									exact
-									path="/app"
+									path="/app/need"
 									component={DefineNeed}
 								/>
 								<Route exact path="/app/restart" component={WelcomeBack} />
@@ -250,7 +250,7 @@ class App extends React.Component {
 											: '12 col-md-12'
 									} col-lg-2 ${
 										this.props.isBlackOnWhite ||
-										this.props.location.pathname !== '/app/customize'
+										!this.props.location.pathname.includes('/app/customize')
 											? ''
 											: 'whiteOnBlack'
 									}`}
@@ -374,7 +374,7 @@ const mapDispatchToProps = (dispatch) =>
 			reloadPresets,
 			reloadFonts,
 			setLocale,
-			goToHome: () => push('/app'),
+			goToHome: () => push('/app/need'),
 			goToLanding: () => push('/'),
 			createPrototypoFactory,
 			toggleTooltips,

@@ -485,7 +485,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
-      goToApp: () => push({pathname: '/app/auth'}),
+      goToApp: () => push({pathname: '/app/need'}),
 			createPrototypoFactory,
 			loadLibrary,
 			goToAuth: () => push({pathname: '/app/auth'}),

@@ -21,7 +21,8 @@ export default class ContentEditable extends React.Component {
 				contentEditable: !this.props.disabled,
 				dangerouslySetInnerHTML: {__html: html},
 				onFocus: this.onFocus,
-				spellCheck: false,
+        spellCheck: false,
+        'data-hj-whitelist': true,
 			},
 			this.props.children,
 		);

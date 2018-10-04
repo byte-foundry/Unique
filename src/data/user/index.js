@@ -216,6 +216,7 @@ export const storeProject = (fontName, {bought = false, noRedirect} = {}) => (
 	dispatch,
 	getState,
 ) => {
+  console.log(noRedirect)
 	const {currentPreset, choicesMade, need} = getState().font;
 	const {
 		currentProject: {id: projectId},
@@ -766,7 +767,7 @@ export const loginToGraphCool = (accessToken, shouldRedirect = true) => (
 			});
 			Intercom('trackEvent', 'logged-from-unique');
 			if (shouldRedirect) {
-        dispatch(push({pathname: '/app'}));
+        dispatch(push({pathname: '/app/need'}));
 			}
 		})
 		.catch(() => {

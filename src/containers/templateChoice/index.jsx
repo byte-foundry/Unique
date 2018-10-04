@@ -259,7 +259,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
-		{getPreset, redirectToHome: () => push('/app/'), cleanData},
+		{getPreset, redirectToHome: () => push('/app/need'), cleanData},
 		dispatch,
 	);
 
