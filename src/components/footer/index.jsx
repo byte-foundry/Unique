@@ -33,14 +33,14 @@ class Footer extends React.Component {
 								setLocale={this.props.setLocale}
 								locale={this.props.locale}
 							/>
-							{this.props.pathname === '/app/customize' && (
+							{this.props.pathname.includes('/app/customize') && (
 								<ShortcutsHelper
 									shouldShowTooltips={this.props.shouldShowTooltips}
 									toggleTooltips={this.props.toggleTooltips}
 									isBlackOnWhite={this.props.isBlackOnWhite}
 								/>
 							)}
-							{this.props.pathname === '/app/customize' && (
+							{this.props.pathname.includes('/app/customize') && (
 								<FontControls
 									shouldShowTooltips={this.props.shouldShowTooltips}
 									switchGlyphMode={this.props.switchGlyphMode}

@@ -109,7 +109,10 @@ const onToken = (
 						},
 					},
 					callback,
-				);
+        );
+        try {
+          window.hj('trigger', 'success_payment');
+				} catch (e) {}
 			})
 			.catch((err) => {
 				setStable();
@@ -118,7 +121,8 @@ const onToken = (
 				/* global fbq */
 				/* global ga */
 				try {
-					Intercom('trackEvent', 'unique-error-checkout', err);
+          Intercom('trackEvent', 'unique-error-checkout', err);
+          window.hj('trigger', 'error_payment');
 					ga('send', 'event', 'Checkout', 'Stripe', 'error');
 				} catch (e) {}
 			});

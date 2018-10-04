@@ -189,7 +189,7 @@ export const loadFont = (f, s, redirectTo = '/app/specimen') => (dispatch, getSt
 		selectedFont,
 	});
 	if (!selectedFont.variant) {
-		dispatch(push('/app/'));
+		dispatch(push('/app/need'));
 		return;
 	}
 	const selectedFontName = `${selectedFont.variant.family.name}${
@@ -373,7 +373,7 @@ export const loadFont = (f, s, redirectTo = '/app/specimen') => (dispatch, getSt
 			dispatch(goToStep(step || 1));
 		}
 		if (!step || choicesMade.length < selectedFont.steps.length) {
-			dispatch(push('/app/customize'));
+			dispatch(push(`/app/customize/?p:${selectedFont.variant.family.name}`));
 		} else {
 			dispatch(push(redirectTo));
 		}
@@ -761,7 +761,7 @@ export const goToStep = (step, fromSpecimen) => (dispatch, getState) => {
 			dispatch(
 				updateValues(step, fromSpecimen || step === currentPreset.steps.length),
 			);
-			if (fromSpecimen) dispatch(push('/app/customize'));
+			if (fromSpecimen) dispatch(push(`/app/customize/?p:${currentPreset.variant.family.name}`));
 			break;
 	}
 };
@@ -1240,7 +1240,7 @@ export const loadProject = (loadedProjectID, redirectTo = '/app/specimen') => (d
       const {choicesMade, preset, bought, id, name} = data.UniqueProject;
       const baseValues = preset.baseValues;
 			const {importedPresets} = getState().presets;
-			
+
 			request(
 				GRAPHQL_API,
 				getPresetQuery(preset.id)).then((data) => {

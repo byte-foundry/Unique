@@ -25,7 +25,10 @@ class SpecimenView extends React.Component {
 		this.onFocus = this.onFocus.bind(this);
 		this.onBlur = this.onBlur.bind(this);
 		this.onKeyDown = this.onKeyDown.bind(this);
-		this.storeOrAuthenticate = this.storeOrAuthenticate.bind(this);
+    this.storeOrAuthenticate = this.storeOrAuthenticate.bind(this);
+    try {
+      window.hj('trigger', 'editing_done');
+    } catch (e) {}
 	}
 	componentDidMount() {
 		this.specimenViewWrapper.focus();

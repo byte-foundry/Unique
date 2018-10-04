@@ -32,7 +32,7 @@ class LanguageSelect extends React.Component {
 							this.props.pathname === '/faq' ||
 							this.props.pathname === '/tos' ||
 							(!this.props.isBlackOnWhite &&
-								this.props.pathname === '/app/customize')
+								this.props.pathname.includes('/app/customize'))
 								? 'black'
 								: 'white',
 					}}
@@ -56,14 +56,14 @@ class LanguageSelect extends React.Component {
 												this.props.pathname === '/app/auth' ||
 												this.props.pathname === '/' ||
 												(!this.props.isBlackOnWhite &&
-													this.props.pathname === '/app/customize')
+													this.props.pathname.includes('/app/customize'))
 													? 'white'
 													: 'black',
 											color:
 												this.props.pathname === '/app/auth' ||
 												this.props.pathname === '/' ||
 												(!this.props.isBlackOnWhite &&
-													this.props.pathname === '/app/customize')
+													this.props.pathname.includes('/app/customize'))
 													? 'black'
 													: 'white',
 										}}

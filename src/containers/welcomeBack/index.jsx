@@ -91,7 +91,7 @@ class WelcomeBack extends React.Component {
 const mapDispatchToProps = (dispatch) =>
 	bindActionCreators(
 		{
-			redirectToHome: () => push('/app/'),
+			redirectToHome: () => push('/app/need'),
 			redirectToLocation: (location) => push(location),
 		},
 		dispatch,
